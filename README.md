@@ -1,3 +1,8 @@
+# stuyactivities.org
+The front-end for the new StuyActivities site.
+
+Vectors provided generously by [Icons8](https://icons8.com/ouch) :heart:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
