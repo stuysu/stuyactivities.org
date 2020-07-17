@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { triggerLoginDialog } from "../auth/LoginDialog";
+import AppContext from "../context/AppContext";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -21,6 +23,8 @@ const useStyles = makeStyles(theme => ({
 
 const NavBar = ({ setDrawerOpen }) => {
 	const classes = useStyles();
+
+	const context = React.useContext(AppContext);
 
 	return (
 		<div className={classes.root}>
@@ -38,7 +42,12 @@ const NavBar = ({ setDrawerOpen }) => {
 					<Typography variant="h6" className={classes.title}>
 						StuyActivities
 					</Typography>
-					<Button color="inherit">Login</Button>
+
+					{!context.signedIn && (
+						<Button color="inherit" onClick={triggerLoginDialog}>
+							Login
+						</Button>
+					)}
 				</Toolbar>
 			</AppBar>
 		</div>

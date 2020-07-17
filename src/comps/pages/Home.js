@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 const Home = () => {
 	return (
 		<div>
-			<Typography h1>Welcome home!</Typography>
+			<Typography variant={"h1"}>Welcome home!</Typography>
 			<Helmet>
 				<title>Home | StuyActivities</title>
 			</Helmet>

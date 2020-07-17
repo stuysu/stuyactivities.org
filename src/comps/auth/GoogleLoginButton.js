@@ -2,8 +2,9 @@ import React from "react";
 import GoogleLogin from "react-google-login";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
-import { GOOGLE_CLIENT_ID } from "../constants";
-import AppContext from "./context/AppContext";
+import { GOOGLE_CLIENT_ID } from "../../constants";
+import AppContext from "../context/AppContext";
+import Typography from "@material-ui/core/Typography";
 
 const LOGIN_WITH_GOOGLE = gql`
 	mutation loginWithGoogle($token: String!) {
@@ -15,7 +16,7 @@ const LOGIN_WITH_GOOGLE = gql`
 	}
 `;
 
-const GoogleLoginButton = () => {
+const GoogleLoginButton = ({ className, setPage }) => {
 	const [loginWithGoogle, { error, data, loading }] = useMutation(
 		LOGIN_WITH_GOOGLE
 	);
@@ -41,13 +42,24 @@ const GoogleLoginButton = () => {
 	);
 
 	return (
-		<GoogleLogin
-			clientId={GOOGLE_CLIENT_ID}
-			buttonText="Login with Google"
-			onSuccess={attemptLogin}
-			onFailure={console.log}
-			disabled={loading}
-		/>
+		<div>
+			<GoogleLogin
+				clientId={GOOGLE_CLIENT_ID}
+				buttonText="Login with Google"
+				onSuccess={attemptLogin}
+				onFailure={console.log}
+				disabled={loading}
+				className={className}
+			/>
+
+			{error && (
+				<Typography color={"error"} display={"block"}>
+					{error?.graphQLErrors?.[0]?.message ||
+						error?.message ||
+						"Unknown error"}
+				</Typography>
+			)}
+		</div>
 	);
 };
 
