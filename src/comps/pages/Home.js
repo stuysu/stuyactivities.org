@@ -1,8 +1,16 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
-	return <Typography h1>Welcome home!</Typography>;
+	return (
+		<div>
+			<Typography h1>Welcome home!</Typography>
+			<Helmet>
+				<title>Home | StuyActivities</title>
+			</Helmet>
+		</div>
+	);
 };
 
 export default Home;
