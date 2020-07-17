@@ -1,36 +1,48 @@
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import AppContext from "./AppContext";
 
 const basicInfo = gql`
 	query {
 		signedInUser {
+			name
 			firstName
 			lastName
 			email
+			picture
+			grade
 		}
 	}
 `;
+
+const logoutQuery = gql`
+	mutation {
+		logout
+	}
+`;
+
 const AppProvider = props => {
 	const { loading, data, error, refetch } = useQuery(basicInfo);
 
-	let value = {
-		signedIn: false,
-		refetch,
+	const [performLogout] = useMutation(logoutQuery);
+
+	const logout = async () => {
+		await performLogout();
+		await refetch();
 	};
 
-	console.log(data);
+	let value = {
+		signedIn: false,
+		refetch
+	};
 
 	if (data?.signedInUser) {
-		const { firstName, lastName, email } = data.signedInUser;
-
 		value = {
 			signedIn: true,
-			firstName,
-			lastName,
-			email,
 			refetch,
+			logout,
+			...data.signedInUser
 		};
 	}
 

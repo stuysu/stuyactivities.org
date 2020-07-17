@@ -8,6 +8,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { triggerLoginDialog } from "../auth/LoginDialog";
 import AppContext from "../context/AppContext";
+import { AccountCircle } from "@material-ui/icons";
+import Avatar from "@material-ui/core/Avatar";
+import NavAvatar from "./NavAvatar";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -43,7 +46,9 @@ const NavBar = ({ setDrawerOpen }) => {
 						StuyActivities
 					</Typography>
 
-					{!context.signedIn && (
+					{context.signedIn ? (
+						<NavAvatar />
+					) : (
 						<Button color="inherit" onClick={triggerLoginDialog}>
 							Login
 						</Button>
