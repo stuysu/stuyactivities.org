@@ -11,6 +11,8 @@ import Slide from "@material-ui/core/Slide";
 import Landing from "./pages/Landing";
 import Student from "./pages/Student";
 import Button from "@material-ui/core/Button";
+import Teacher from "./pages/Teacher";
+import Forgot from "./pages/Forgot";
 
 const useStyles = makeStyles(theme => ({
 	appBar: {
@@ -40,11 +42,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function LoginDialog() {
+const LoginDialog = () => {
 	const classes = useStyles();
 	const [open, setOpen] = React.useState(false);
 	// page can be "landing", "student", "teacher", "forgot", "unrecognized"
-	const [page, setPage] = React.useState("student");
+	const [page, setPage] = React.useState("landing");
+
+	const [authToken, setAuthToken] = React.useState(null);
 
 	React.useEffect(() => {
 		const openDialog = () => {
@@ -90,9 +94,23 @@ export default function LoginDialog() {
 					{page === "landing" && (
 						<Landing setPage={setPage} handleClose={handleClose} />
 					)}
-					{page === "student" && <Student setPage={setPage} />}
+					{page === "student" && (
+						<Student
+							setPage={setPage}
+							setAuthToken={setAuthToken}
+						/>
+					)}
+					{page === "teacher" && (
+						<Teacher
+							setPage={setPage}
+							setAuthToken={setAuthToken}
+						/>
+					)}
+					{page === "forgot" && <Forgot setPage={setPage} />}
 				</div>
 			</Dialog>
 		</div>
 	);
-}
+};
+
+export default LoginDialog;

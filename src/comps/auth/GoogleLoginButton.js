@@ -16,7 +16,7 @@ const LOGIN_WITH_GOOGLE = gql`
 	}
 `;
 
-const GoogleLoginButton = ({ className, setPage }) => {
+const GoogleLoginButton = ({ className, setPage, setAuthToken }) => {
 	const [loginWithGoogle, { error, data, loading }] = useMutation(
 		LOGIN_WITH_GOOGLE
 	);
@@ -25,6 +25,11 @@ const GoogleLoginButton = ({ className, setPage }) => {
 	const possibleUnknownError = error?.graphQLErrors?.some(
 		er => er?.extensions?.code === "POSSIBLE_UNKNOWN_USER"
 	);
+
+	if (possibleUnknownError) {
+		setAuthToken(token);
+		setPage("unrecognized");
+	}
 
 	const context = React.useContext(AppContext);
 

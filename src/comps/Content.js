@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Navigation from "./ui/Navigation";
 import LoginDialog from "./auth/LoginDialog";
 import AppContext from "./context/AppContext";
+import Catalog from "./pages/Catalog";
 
 const Content = () => {
 	const context = React.useContext(AppContext);
@@ -17,6 +18,7 @@ const Content = () => {
 			{!context.signedIn && <LoginDialog />}
 			<Switch>
 				<Route path={"/"} component={Home} exact />
+				<Route path={"/organizations"} component={Catalog} />
 			</Switch>
 		</div>
 	);

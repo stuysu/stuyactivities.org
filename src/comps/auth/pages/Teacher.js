@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import StudentVector from "../../../img/vectors/clip-student-thinking-about-mathematics.svg";
+import TeacherVector from "../../../img/vectors/clip-teacher.svg";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import GoogleLoginButton from "../GoogleLoginButton";
@@ -28,14 +28,10 @@ const useStyles = makeStyles(theme => ({
 	},
 	backButtonContainer: {
 		textAlign: "left"
-	},
-	googleButton: {
-		scale: 1.1,
-		margin: theme.spacing(3)
 	}
 }));
 
-const Student = ({ setPage, setAuthToken }) => {
+const Teacher = ({ setPage, setAuthToken }) => {
 	const classes = useStyles();
 	const [credentials, setCredentials] = React.useState(false);
 
@@ -48,47 +44,45 @@ const Student = ({ setPage, setAuthToken }) => {
 						variant={"outlined"}
 						onClick={() => setPage("landing")}
 					>
-						&lt;- I'm not a student
+						&lt;- I'm not a teacher
 					</Button>
 				</div>
 
 				<img
-					src={StudentVector}
+					src={TeacherVector}
 					alt={"Person walking through door"}
 					className={classes.defaultVector}
 				/>
 				<Typography variant={"h4"} className={classes.heading}>
-					Student Login
+					Teacher Login
 				</Typography>
 
 				<Typography variant={"subtitle1"}>
-					It's recommended that you sign in with Google, but you may
-					also sign in with an email and password if you wish.
+					If this is your first time logging in, you might need to
+					reset your password.
 				</Typography>
+				<Typography variant={"subtitle1"}>
+					Click "I forgot my password" to do so.
+				</Typography>
+
+				<Typography variant={"subtitle1"}>
+					Your email address is the one ending in @schools.nyc.gov
+				</Typography>
+
+				<Typography>
+					If you've linked a Google account to your StuyActivities
+					account in the past, you may use it to sign in as well.
+				</Typography>
+
+				<CredentialsLogin type={"teachers"} setPage={setPage} />
 
 				<GoogleLoginButton
 					className={classes.googleButton}
 					setAuthToken={setAuthToken}
 					setPage={setPage}
 				/>
-				<br />
-				{!credentials && (
-					<Button
-						// variant={"outlined"}
-						className={classes.credentialsButton}
-						onClick={() => setCredentials(true)}
-						color={"secondary"}
-						variant={"outlined"}
-					>
-						Login With Credentials
-					</Button>
-				)}
-
-				{credentials && (
-					<CredentialsLogin type={"students"} setPage={setPage} />
-				)}
 			</div>
 		</FlexCenter>
 	);
 };
-export default Student;
+export default Teacher;
