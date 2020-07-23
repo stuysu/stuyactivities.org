@@ -16,7 +16,8 @@ import Forgot from "./pages/Forgot";
 
 const useStyles = makeStyles(theme => ({
 	appBar: {
-		position: "relative"
+		position: "relative",
+		boxShadow: "none"
 	},
 	title: {
 		marginLeft: theme.spacing(2),
@@ -44,7 +45,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const LoginDialog = () => {
 	const classes = useStyles();
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = React.useState(true);
 	// page can be "landing", "student", "teacher", "forgot", "unrecognized"
 	const [page, setPage] = React.useState("landing");
 

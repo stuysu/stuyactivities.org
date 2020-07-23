@@ -5,18 +5,18 @@ import { ThemeProvider as Provider, createMuiTheme } from "@material-ui/core";
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: "#EF5350",
+			main: "#546de5",
 			contrastText: "#fff"
 		},
 		secondary: {
 			// light: "#ff7961",
-			main: "#7287F9",
+			main: "#e66767",
 			// dark: "#ba000d",
 			contrastText: "#fff"
 		}
 	},
 	typography: {
-		fontFamily: `"Raleway", sans-serif`
+		fontFamily: `'Roboto Condensed', sans-serif`
 	}
 });
 

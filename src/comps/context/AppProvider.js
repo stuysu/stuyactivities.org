@@ -5,7 +5,7 @@ import AppContext from "./AppContext";
 
 const basicInfo = gql`
 	query {
-		signedInUser {
+		authenticatedUser {
 			name
 			firstName
 			lastName
@@ -37,12 +37,12 @@ const AppProvider = props => {
 		refetch
 	};
 
-	if (data?.signedInUser) {
+	if (data?.authenticatedUser) {
 		value = {
 			signedIn: true,
 			refetch,
 			logout,
-			...data.signedInUser
+			...data.authenticatedUser
 		};
 	}
 

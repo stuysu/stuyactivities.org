@@ -44,7 +44,7 @@ const Student = ({ setPage, setAuthToken }) => {
 			<div className={classes.contentContainer}>
 				<div className={classes.backButtonContainer}>
 					<Button
-						color={"primary"}
+						color={"secondary"}
 						variant={"outlined"}
 						onClick={() => setPage("landing")}
 					>
@@ -77,7 +77,7 @@ const Student = ({ setPage, setAuthToken }) => {
 						// variant={"outlined"}
 						className={classes.credentialsButton}
 						onClick={() => setCredentials(true)}
-						color={"secondary"}
+						color={"primary"}
 						variant={"outlined"}
 					>
 						Login With Credentials
