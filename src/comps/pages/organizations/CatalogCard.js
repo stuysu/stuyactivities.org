@@ -15,14 +15,14 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function CatalogCard({ name, picture, url, charter }) {
+export default function CatalogCard({ name, url, charter }) {
 	const classes = useStyles();
 	return (
 		<Grid item xs={4}>
 			<Card className={classes.card}>
 				<CardActionArea onClick={() => (window.location.href = url)}>
 					<CardMedia
-						image={picture}
+						image={charter.picture}
 						title={name + "'s picture"}
 						style={{ height: 140 }}
 					/>
