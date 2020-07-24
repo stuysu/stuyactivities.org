@@ -62,7 +62,7 @@ const Teacher = ({ setPage, setAuthToken }) => {
 					reset your password.
 				</Typography>
 				<Typography variant={"subtitle1"}>
-					Click "I forgot my password" to do so.
+					Click "I forgot my password" at the bottom to do so.
 				</Typography>
 
 				<Typography variant={"subtitle1"}>

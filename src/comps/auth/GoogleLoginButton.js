@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 
 const LOGIN_WITH_GOOGLE = gql`
 	mutation loginWithGoogle($token: String!) {
-		login(with: { googleOAuthToken: $token }) {
+		login(googleToken: $token) {
 			name
 			email
 			hasPassword
