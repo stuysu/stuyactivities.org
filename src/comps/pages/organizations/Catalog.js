@@ -60,9 +60,9 @@ const QUERY = gql`
 		) {
 			name
 			url
-			picture
 			active
 			charter {
+				picture
 				mission
 				meetingFrequency
 				commitmentLevel
