@@ -45,7 +45,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const LoginDialog = () => {
 	const classes = useStyles();
-	const [open, setOpen] = React.useState(true);
+	const [open, setOpen] = React.useState(false);
 	// page can be "landing", "student", "teacher", "forgot", "unrecognized"
 	const [page, setPage] = React.useState("landing");
 

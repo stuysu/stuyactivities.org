@@ -4,8 +4,8 @@ import Home from "./pages/Home";
 import Navigation from "./ui/Navigation";
 import LoginDialog from "./auth/LoginDialog";
 import AppContext from "./context/AppContext";
-import Catalog from "./pages/Orgs/Catalog";
-import Charter from "./pages/Charter";
+import Catalog from "./pages/organizations/Catalog";
+import Charter from "./pages/organizations/Charter";
 
 const Content = () => {
 	const context = React.useContext(AppContext);
