@@ -14,13 +14,15 @@ import {
 	CardContent,
 	CardActionArea,
 	Accordion,
-	AccordionSummary
+	AccordionSummary,
+	Switch
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql } from "@apollo/client";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import CatalogCard from "./CatalogCard";
+import CatalogListCard from "./CatalogListCard";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -81,6 +83,7 @@ const Catalog = () => {
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
 	const [meetingFrequency, setMeetingFrequency] = React.useState([1, 20]);
+	const [listView, setListView] = React.useState(false);
 
 	const { error, data, refetch } = useQuery(QUERY, {
 		variables: {
@@ -277,11 +280,13 @@ const Catalog = () => {
 						>
 							Catalog
 						</Typography>
-						<br />
 					</Grid>
-					{data?.organizations?.map(org => (
-						<CatalogCard {...org} />
-					))}
+					<Grid item xs={12}>
+							<FormControlLabel control={<Switch checked={listView} onChange={e => setListView(e.target.checked)}/>} label="List View"/>
+					</Grid>
+					{data?.organizations?.map(org =>
+							listView ? <CatalogListCard {...org} /> : <CatalogCard {...org} />
+					)}
 				</Grid>
 			</Grid>
 		</div>
