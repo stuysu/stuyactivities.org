@@ -282,7 +282,12 @@ const Catalog = () => {
 						</Typography>
 					</Grid>
 					<Grid item xs={12}>
-							<FormControlLabel control={<Switch checked={listView} onChange={e => setListView(e.target.checked)}/>} label="List View"/>
+						<Typography>
+							Grid View
+							<Switch checked={listView} onChange={e => setListView(e.target.checked)}/>
+							List View
+						</Typography>
+						{/*<FormControlLabel control={<Switch checked={listView} onChange={e => setListView(e.target.checked)}/>} label="List View"/>*/}
 					</Grid>
 					{data?.organizations?.map(org =>
 							listView ? <CatalogListCard {...org} /> : <CatalogCard {...org} />
