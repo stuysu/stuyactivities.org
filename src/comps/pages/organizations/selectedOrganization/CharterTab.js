@@ -40,6 +40,7 @@ const QUERY = gql`
 
 export default function CharterTab(charter) {
 	const url = useParams().url;
+	const classes = useStyles();
 
 	const { data, loading, error } = useQuery(QUERY, { variables: { url } });
 
@@ -54,7 +55,7 @@ export default function CharterTab(charter) {
 	return (
 		<Grid container spacing={2}>
 			<Grid item xs={1} />
-			<Grid item xs={10} className={useStyles.root}>
+			<Grid item xs={10} className={classes.root}>
 				<Typography variant={"h3"}>{data.organization.name}</Typography>
 			</Grid>
 			<Grid item xs={1} />
