@@ -17,9 +17,14 @@ const LOGIN_WITH_GOOGLE = gql`
 `;
 
 const GoogleLoginButton = ({ className, setPage, setAuthToken }) => {
-	const [loginWithGoogle, { error, data, loading }] = useMutation(
-		LOGIN_WITH_GOOGLE
-	);
+	const [
+		loginWithGoogle,
+		{
+			error,
+			// data,
+			loading
+		}
+	] = useMutation(LOGIN_WITH_GOOGLE);
 	const [token, setToken] = React.useState("");
 
 	const possibleUnknownError = error?.graphQLErrors?.some(

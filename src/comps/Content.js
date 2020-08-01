@@ -4,8 +4,6 @@ import Home from "./pages/Home";
 import Navigation from "./ui/Navigation";
 import LoginDialog from "./auth/LoginDialog";
 import AppContext from "./context/AppContext";
-import Catalog from "./pages/organizations/Catalog";
-import Charter from "./pages/organizations/Charter";
 import OrgsRouter from "./pages/OrgsRouter";
 
 const Content = () => {
