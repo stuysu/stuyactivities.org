@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
+import { client } from "../../../context/ApolloProvider";
 
 const useStyles = makeStyles({
 	root: {
@@ -42,7 +43,10 @@ export default function CharterTab(charter) {
 	const url = useParams().url;
 	const classes = useStyles();
 
-	const { data, loading, error } = useQuery(QUERY, { variables: { url } });
+	const { data, loading, error } = useQuery(QUERY, {
+		variables: { url },
+		client
+	});
 
 	if (loading) {
 		return <p>Loading</p>;
