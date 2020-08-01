@@ -2,6 +2,11 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import Dropzone from "react-dropzone";
+import Avatar from "@material-ui/core/Avatar";
+import Checkbox from "@material-ui/core/Checkbox";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 // const numSteps = 3;
 
@@ -37,6 +42,44 @@ export default class Charter extends React.Component {
 			>
 				<Typography variant={"h4"}>Let's get started</Typography>
 				<br />
+				<Dropzone
+					onDrop={acceptedFiles =>
+						this.setState({ file: acceptedFiles[0] })
+					}
+				>
+					{({ getRootProps, getInputProps }) => {
+						return this.state.file ? (
+							<img
+								style={{
+									width: "200px"
+								}}
+								src={window.URL.createObjectURL(
+									this.state.file
+								)}
+								alt={"picture"}
+							/>
+						) : (
+							<section>
+								<div {...getRootProps()}>
+									<input {...getInputProps()} />
+									<Avatar
+										style={{
+											width: "200px",
+											height: "200px",
+											cursor: "pointer"
+										}}
+									>
+										ORG
+									</Avatar>
+								</div>
+							</section>
+						);
+					}}
+				</Dropzone>
+
+				<br />
+				<br />
+
 				<TextField
 					color={"secondary"}
 					fullWidth
@@ -47,15 +90,22 @@ export default class Charter extends React.Component {
 				/>
 				<br />
 				<br />
-				<TextField
-					color={"secondary"}
-					fullWidth
-					variant={"outlined"}
-					value={this.state.url || ""}
-					onChange={ev => this.setState({ url: ev.target.value })}
-					label="Organization Url"
-					// error={data.organization}
-				/>
+				<div>
+					<span
+						style={{ verticalAlign: "middle", paddingTop: "30px" }}
+					>
+						https://stuyactivities.org/organizations/
+					</span>
+					&nbsp;
+					<TextField
+						color={"secondary"}
+						variant={"outlined"}
+						value={this.state.url || ""}
+						onChange={ev => this.setState({ url: ev.target.value })}
+						label="Url"
+						// error={data.organization}
+					/>
+				</div>
 				<br />
 				<br />
 
@@ -232,6 +282,18 @@ export default class Charter extends React.Component {
 				<br />
 				<br />
 
+				<p>Select up to 3 tags that represent your organization</p>
+				<Checkbox label={"arts and crafts"}>Arts and Crafts</Checkbox>
+				<br />
+				<br />
+
+				<p>What is the commitment level of your organization?</p>
+				<Select>
+					<MenuItem value={10}>Ten</MenuItem>
+					<MenuItem value={20}>Twenty</MenuItem>
+					<MenuItem value={30}>Thirty</MenuItem>
+				</Select>
+
 				<Button
 					variant={"contained"}
 					color={"primary"}
@@ -239,6 +301,7 @@ export default class Charter extends React.Component {
 				>
 					Submit
 				</Button>
+
 				<br />
 				<br />
 			</div>
