@@ -1,38 +1,20 @@
 import React from "react";
-import {useParams} from "react-router-dom";
-import {Grid, Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import {gql} from "@apollo/client";
+import { useParams } from "react-router-dom";
+import { Grid, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { gql, useQuery } from "@apollo/client";
 
 const useStyles = makeStyles({
 	root: {
-		textAlign: 'center',
-		margin: '1em, 0'
-
+		textAlign: "center",
+		margin: "1em, 0"
 	}
-
 });
 
 const QUERY = gql`
-	query Organizations (
-		$keyword: String
-		$tags: [String]
-		$commitmentLevels: [String]
-		$meetingDays: [String]
-		$min: Int
-		$max: Int
-	) {
-		organizations (
-			keyword: $keyword
-			tags: $tags
-			commitmentLevels: $commitmentLevels
-			meetingDays: $meetingDays
-			meetingFrequency: { min: $min, max: $max }
-			limit: 50
-			offset: 0
-		) {
+	query Organization($url: String) {
+		organization(url: $url) {
 			name
-			url
 			active
 			charter {
 				picture
@@ -40,9 +22,10 @@ const QUERY = gql`
 				meetingFrequency
 				commitmentLevel
 			}
-		}
-		tags {
-			name
+			# You might also want to use the tags
+			tags {
+				name
+			}
 		}
 	}
 `;
@@ -58,16 +41,23 @@ const QUERY = gql`
 export default function CharterTab(charter) {
 	const url = useParams().url;
 
+	const { data, loading, error } = useQuery(QUERY, { variables: { url } });
+
+	if (loading) {
+		return <p>Loading</p>;
+	}
+
+	if (error) {
+		return <p>{error.message}</p>;
+	}
+
 	return (
 		<Grid container spacing={2}>
-			<Grid item xs={1}/>
+			<Grid item xs={1} />
 			<Grid item xs={10} className={useStyles.root}>
-				<Typography variant={"h3"}>
-					NAME
-				</Typography>
-
+				<Typography variant={"h3"}>{data.organization.name}</Typography>
 			</Grid>
-			<Grid item xs={1}/>
+			<Grid item xs={1} />
 		</Grid>
 	);
 }
