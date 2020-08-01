@@ -1,16 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import BasicInfoForm from "./charter/BasicInfoForm";
 import TextField from "@material-ui/core/TextField";
 
-const numSteps = 3;
+// const numSteps = 3;
 
 export const CharterFormContext = React.createContext({});
 
@@ -28,6 +21,7 @@ export default class Charter extends React.Component {
 	limitWords(input, limit = 400) {
 		return input?.split(" ").splice(0, limit).join(" ");
 	}
+
 	onSubmit() {
 		console.log(this.state);
 	}

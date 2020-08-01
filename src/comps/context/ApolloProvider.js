@@ -4,7 +4,7 @@ import { ApolloProvider as Provider } from "@apollo/react-hooks";
 
 export const client = new ApolloClient({
 	uri: "https://staging.stuyactivities.org/graphql",
-	credentials: "include",
+	credentials: "include"
 });
 
 const ApolloProvider = props => {

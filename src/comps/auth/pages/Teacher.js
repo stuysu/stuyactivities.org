@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 
 const Teacher = ({ setPage, setAuthToken }) => {
 	const classes = useStyles();
-	const [credentials, setCredentials] = React.useState(false);
+	// const [credentials, setCredentials] = React.useState(false);
 
 	return (
 		<FlexCenter>
