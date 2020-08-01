@@ -289,9 +289,9 @@ export default class Charter extends React.Component {
 
 				<p>What is the commitment level of your organization?</p>
 				<Select>
-					<MenuItem value={10}>Ten</MenuItem>
-					<MenuItem value={20}>Twenty</MenuItem>
-					<MenuItem value={30}>Thirty</MenuItem>
+					<MenuItem value={10}>Low </MenuItem>
+					<MenuItem value={20}>Medium</MenuItem>
+					<MenuItem value={30}>High</MenuItem>
 				</Select>
 
 				<Button
