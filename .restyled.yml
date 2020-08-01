@@ -1,0 +1,5 @@
+restylers:
+  - name: prettier
+    include:
+      - '**/*.js'
+      - '**/*.yml'
