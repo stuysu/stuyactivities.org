@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	shrink: {
 		"white-space": "no-wrap"
+	},
+	hyphenate: {
+		"overflow-wrap": "break-word"
 	}
 }));
 
@@ -45,7 +48,7 @@ export default function CatalogCard({ name, url, charter }) {
 					<CardContent className={classes.grow}>
 						<Grid container spacing={1}>
 							<Grid item xs={3}>
-								<Typography variant={"h5"} gutterBottom>
+								<Typography variant={"h5"} gutterBottom className={classes.hyphenate}>
 									{name}
 								</Typography>
 							</Grid>

@@ -36,6 +36,14 @@ const useStyles = makeStyles(theme => ({
 	},
 	card: {
 		margin: theme.spacing(1)
+	},
+	sticky: {
+		position: "sticky",
+		padding: theme.spacing(2),
+		"top": 0
+	},
+	bigGrid: {
+		"align-items": "flex-start"
 	}
 }));
 const QUERY = gql`
@@ -128,12 +136,12 @@ const Catalog = () => {
 
 	return (
 		<div className={classes.root}>
-			<Grid container>
+			<Grid container className={classes.bigGrid}>
 				<Grid
 					item
 					xs={3}
 					direction={"column"}
-					className={classes.bigChild}
+					className={classes.sticky}
 				>
 					<Typography className={classes.filterChild} variant={"h4"}>
 						Filters
