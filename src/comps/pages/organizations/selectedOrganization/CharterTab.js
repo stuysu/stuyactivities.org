@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import {
 	Grid,
@@ -9,12 +9,7 @@ import {
 	Box,
 	IconButton
 } from "@material-ui/core";
-import {
-	Info,
-	Description,
-	Person,
-	ArrowBack
-} from "@material-ui/icons";
+import { Info, Description, Person, ArrowBack } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
 import { client } from "../../../context/ApolloProvider";
@@ -25,10 +20,10 @@ const useStyles = makeStyles({
 		width: "100%"
 	},
 	body: {
-		textAlign: 'center'
+		textAlign: "center"
 	},
 	name: {
-		marginTop: '1em'
+		marginTop: "1em"
 	},
 	tabBox: {
 		marginTop: "1.6em"
@@ -36,14 +31,13 @@ const useStyles = makeStyles({
 	charterInfoElement: {
 		paddingBottom: "2em",
 		paddingTop: "0.5em",
-		textAlign: "left",
+		textAlign: "left"
 	},
 	backButton: {
-		top: '2%',
-		left: '50%',
-		marginTop: '1em'
+		top: "2%",
+		left: "50%",
+		marginTop: "1em"
 	}
-	
 });
 
 //tab panels
@@ -70,13 +64,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
 	children: PropTypes.node,
 	index: PropTypes.any.isRequired,
-	value: PropTypes.any.isRequired,
+	value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
 	return {
 		id: `simple-tab-${index}`,
-		'aria-controls': `simple-tabpanel-${index}`,
+		"aria-controls": `simple-tabpanel-${index}`
 	};
 }
 
@@ -126,10 +120,17 @@ const CharterTab = () => {
 	return (
 		<Grid container spacing={2} className={classes.root}>
 			<Grid item xs={1}>
-				<IconButton className={classes.backButton} href={"/organizations"}><ArrowBack /></IconButton>
+				<IconButton
+					className={classes.backButton}
+					href={"/organizations"}
+				>
+					<ArrowBack />
+				</IconButton>
 			</Grid>
 			<Grid item xs={10} className={classes.body}>
-				<Typography variant={"h3"} className={classes.name}>{data.organization.name}</Typography>
+				<Typography variant={"h3"} className={classes.name}>
+					{data.organization.name}
+				</Typography>
 				<Tabs
 					value={value}
 					onChange={handleChange}
@@ -139,28 +140,37 @@ const CharterTab = () => {
 					aria-label="icon tabs example"
 				>
 					<Tab icon={<Info />} aria-label="phone" {...a11yProps(0)} />
-					<Tab icon={<Description />} aria-label="favorite" {...a11yProps(1)} />
-					<Tab icon={<Person />} aria-label="person" {...a11yProps(2)} />
+					<Tab
+						icon={<Description />}
+						aria-label="favorite"
+						{...a11yProps(1)}
+					/>
+					<Tab
+						icon={<Person />}
+						aria-label="person"
+						{...a11yProps(2)}
+					/>
 				</Tabs>
 				<TabPanel value={value} index={0}>
 					<div className={classes.tabBox}>
-						<div className={classes.charterInfoElement}>{data.organization.charter.mission}</div>
+						<div className={classes.charterInfoElement}>
+							{data.organization.charter.mission}
+						</div>
 						<b>What is the purpose of this activity?</b>
-						<div className={classes.charterInfoElement}>{data.organization.charter.purpose}</div>
+						<div className={classes.charterInfoElement}>
+							{data.organization.charter.purpose}
+						</div>
 						<b>How does this activity benefit Stuyvesant?</b>
-						<div className={classes.charterInfoElement}>{data.organization.charter.benefit}</div>
+						<div className={classes.charterInfoElement}>
+							{data.organization.charter.benefit}
+						</div>
 					</div>
-
 				</TabPanel>
 				<TabPanel value={value} index={1}>
-					<div className={classes.tabBox}>
-						Club Postings
-					</div>
+					<div className={classes.tabBox}>Club Postings</div>
 				</TabPanel>
 				<TabPanel value={value} index={2}>
-					<div className={classes.tabBox}>
-						Club Members
-					</div>
+					<div className={classes.tabBox}>Club Members</div>
 				</TabPanel>
 			</Grid>
 			<Grid item xs={1} />

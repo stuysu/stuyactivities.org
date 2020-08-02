@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 const QUERY = gql`
-	query Organizations (
+	query Organizations(
 		$keyword: String
 		$tags: [String]
 		$commitmentLevels: [String]
@@ -47,7 +47,7 @@ const QUERY = gql`
 		$min: Int
 		$max: Int
 	) {
-		organizations (
+		organizations(
 			keyword: $keyword
 			tags: $tags
 			commitmentLevels: $commitmentLevels
