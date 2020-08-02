@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Catalog from "./organizations/Catalog";
 import Charter from "./organizations/Charter";
 import SelectedOrgRouter from "./organizations/selectedOrganization/SelectedOrgRouter";

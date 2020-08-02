@@ -23,7 +23,12 @@ const logoutQuery = gql`
 `;
 
 const AppProvider = props => {
-	const { loading, data, error, refetch } = useQuery(basicInfo);
+	const {
+		// loading,
+		// error,
+		data,
+		refetch
+	} = useQuery(basicInfo);
 
 	const [performLogout] = useMutation(logoutQuery);
 

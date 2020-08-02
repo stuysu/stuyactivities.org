@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
 	cardRoot: {
-		margin: theme.spacing(1),
+		margin: theme.spacing(1)
 	},
 	card: {
 		display: "flex",
@@ -21,10 +21,10 @@ const useStyles = makeStyles(theme => ({
 		minHeight: 75
 	},
 	grow: {
-		width: "100%",
+		width: "100%"
 	},
 	shrink: {
-		"white-space": "no-wrap",
+		"white-space": "no-wrap"
 	}
 }));
 
@@ -33,7 +33,10 @@ export default function CatalogCard({ name, url, charter }) {
 	return (
 		<Grid item xs={12}>
 			<Card className={classes.cardRoot}>
-				<CardActionArea className={classes.card} onClick={() => (window.location.href = url)}>
+				<CardActionArea
+					className={classes.card}
+					onClick={() => (window.location.href = url)}
+				>
 					<CardMedia
 						image={charter.picture}
 						title={name + "'s picture"}
@@ -56,7 +59,8 @@ export default function CatalogCard({ name, url, charter }) {
 									Commitment Level: {charter.commitmentLevel}
 								</Typography>
 								<Typography variant={"body2"}>
-									Meeting Frequency: {charter.meetingFrequency} days/month
+									Meeting Frequency:{" "}
+									{charter.meetingFrequency} days/month
 								</Typography>
 							</Grid>
 						</Grid>

@@ -10,7 +10,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import Landing from "./pages/Landing";
 import Student from "./pages/Student";
-import Button from "@material-ui/core/Button";
 import Teacher from "./pages/Teacher";
 import Forgot from "./pages/Forgot";
 
@@ -49,7 +48,10 @@ const LoginDialog = () => {
 	// page can be "landing", "student", "teacher", "forgot", "unrecognized"
 	const [page, setPage] = React.useState("landing");
 
-	const [authToken, setAuthToken] = React.useState(null);
+	const [
+		// authToken,
+		setAuthToken
+	] = React.useState(null);
 
 	React.useEffect(() => {
 		const openDialog = () => {

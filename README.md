@@ -1,4 +1,5 @@
 # stuyactivities.org
+
 The front-end for the new StuyActivities site.
 
 Vectors provided generously by [Icons8](https://icons8.com/ouch) :heart:

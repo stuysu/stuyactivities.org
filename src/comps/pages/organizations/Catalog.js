@@ -1,26 +1,22 @@
 import React from "react";
 import {
-	Grid,
-	TextField,
-	FormControl,
-	FormGroup,
-	FormLabel,
-	FormControlLabel,
-	Checkbox,
-	Slider,
-	Typography,
-	Card,
-	CardMedia,
-	CardContent,
-	CardActionArea,
 	Accordion,
 	AccordionSummary,
-	Switch
+	Checkbox,
+	FormControl,
+	FormControlLabel,
+	FormGroup,
+	FormLabel,
+	Grid,
+	Slider,
+	Switch,
+	TextField,
+	Typography
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql } from "@apollo/client";
-import { useQuery, useLazyQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import CatalogCard from "./CatalogCard";
 import CatalogListCard from "./CatalogListCard";
 
@@ -85,7 +81,11 @@ const Catalog = () => {
 	const [meetingFrequency, setMeetingFrequency] = React.useState([1, 20]);
 	const [listView, setListView] = React.useState(false);
 
-	const { error, data, refetch } = useQuery(QUERY, {
+	const {
+		error,
+		data
+		// refetch
+	} = useQuery(QUERY, {
 		variables: {
 			keyword,
 			tags,
@@ -284,13 +284,20 @@ const Catalog = () => {
 					<Grid item xs={12}>
 						<Typography>
 							Grid View
-							<Switch checked={listView} onChange={e => setListView(e.target.checked)}/>
+							<Switch
+								checked={listView}
+								onChange={e => setListView(e.target.checked)}
+							/>
 							List View
 						</Typography>
 						{/*<FormControlLabel control={<Switch checked={listView} onChange={e => setListView(e.target.checked)}/>} label="List View"/>*/}
 					</Grid>
 					{data?.organizations?.map(org =>
-							listView ? <CatalogListCard {...org} /> : <CatalogCard {...org} />
+						listView ? (
+							<CatalogListCard {...org} />
+						) : (
+							<CatalogCard {...org} />
+						)
 					)}
 				</Grid>
 			</Grid>
