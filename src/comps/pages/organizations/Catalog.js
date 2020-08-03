@@ -44,15 +44,12 @@ const QUERY = gql`
 		$tags: [String]
 		$commitmentLevels: [String]
 		$meetingDays: [String]
-		$min: Int
-		$max: Int
 	) {
 		organizations(
 			keyword: $keyword
 			tags: $tags
 			commitmentLevels: $commitmentLevels
 			meetingDays: $meetingDays
-			meetingFrequency: { min: $min, max: $max }
 			limit: 50
 			offset: 0
 		) {
@@ -62,7 +59,6 @@ const QUERY = gql`
 			charter {
 				picture
 				mission
-				meetingFrequency
 				commitmentLevel
 			}
 		}
@@ -78,7 +74,6 @@ const Catalog = () => {
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
-	const [meetingFrequency, setMeetingFrequency] = React.useState([1, 20]);
 	const [listView, setListView] = React.useState(false);
 
 	const {
@@ -90,9 +85,7 @@ const Catalog = () => {
 			keyword,
 			tags,
 			commitmentLevels,
-			meetingDays,
-			min: meetingFrequency[0],
-			max: meetingFrequency[1]
+			meetingDays
 		}
 	});
 	if (error) return <p>There was an error loading this page</p>;
@@ -249,20 +242,20 @@ const Catalog = () => {
 						</Accordion>
 					</FormControl>
 					<br />
-					<FormControl className={classes.filterChild}>
-						<Typography id="freqText" gutterBottom>
-							Meeting Frequency (days/month)
-						</Typography>
-						<Slider
-							value={meetingFrequency}
-							min={1}
-							max={20}
-							valueLabelDisplay="auto"
-							onChange={(ev, vals) => setMeetingFrequency(vals)}
-							marks={true}
-						/>
-					</FormControl>
-					<br />
+					{/*<FormControl className={classes.filterChild}>*/}
+					{/*	<Typography id="freqText" gutterBottom>*/}
+					{/*		Meeting Frequency (days/month)*/}
+					{/*	</Typography>*/}
+					{/*	<Slider*/}
+					{/*		value={meetingFrequency}*/}
+					{/*		min={1}*/}
+					{/*		max={20}*/}
+					{/*		valueLabelDisplay="auto"*/}
+					{/*		onChange={(ev, vals) => setMeetingFrequency(vals)}*/}
+					{/*		marks={true}*/}
+					{/*	/>*/}
+					{/*</FormControl>*/}
+					{/*<br />*/}
 				</Grid>
 				<Grid
 					container
