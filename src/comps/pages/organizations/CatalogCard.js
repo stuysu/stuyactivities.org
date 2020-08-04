@@ -22,7 +22,7 @@ export default function CatalogCard({ name, url, charter }) {
 			<Card className={classes.card}>
 				<CardActionArea
 					onClick={() =>
-						(window.location.href = "/organizations/" + url)
+						(window.location.href = url)
 					}
 				>
 					<CardMedia
