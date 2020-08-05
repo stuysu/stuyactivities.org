@@ -8,7 +8,6 @@ import {
 	FormGroup,
 	FormLabel,
 	Grid,
-	Slider,
 	Switch,
 	TextField,
 	Typography
@@ -53,6 +52,7 @@ const QUERY = gql`
 			limit: 50
 			offset: 0
 		) {
+			id
 			name
 			url
 			active
@@ -63,6 +63,7 @@ const QUERY = gql`
 			}
 		}
 		tags {
+			id
 			name
 		}
 	}
@@ -122,12 +123,7 @@ const Catalog = () => {
 	return (
 		<div className={classes.root}>
 			<Grid container>
-				<Grid
-					item
-					xs={3}
-					direction={"column"}
-					className={classes.bigChild}
-				>
+				<Grid item xs={3} className={classes.bigChild}>
 					<Typography className={classes.filterChild} variant={"h4"}>
 						Filters
 					</Typography>
@@ -153,6 +149,7 @@ const Catalog = () => {
 							<FormGroup>
 								{data?.tags?.map(tag => (
 									<FormControlLabel
+										key={tag.id}
 										control={
 											<Checkbox
 												checked={tags.includes(
@@ -185,6 +182,7 @@ const Catalog = () => {
 							<FormGroup>
 								{["Low", "Medium", "High"].map(level => (
 									<FormControlLabel
+										key={level}
 										control={
 											<Checkbox
 												checked={commitmentLevels.includes(
@@ -223,6 +221,7 @@ const Catalog = () => {
 									"Friday"
 								].map(day => (
 									<FormControlLabel
+										key={day}
 										control={
 											<Checkbox
 												checked={meetingDays.includes(
@@ -287,9 +286,9 @@ const Catalog = () => {
 					</Grid>
 					{data?.organizations?.map(org =>
 						listView ? (
-							<CatalogListCard {...org} />
+							<CatalogListCard key={org.id} {...org} />
 						) : (
-							<CatalogCard {...org} />
+							<CatalogCard key={org.id} {...org} />
 						)
 					)}
 				</Grid>
