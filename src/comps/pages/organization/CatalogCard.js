@@ -20,11 +20,7 @@ export default function CatalogCard({ name, url, charter }) {
 	return (
 		<Grid item xs={4}>
 			<Card className={classes.card}>
-				<CardActionArea
-					onClick={() =>
-						(window.location.href = url)
-					}
-				>
+				<CardActionArea onClick={() => (window.location.href = url)}>
 					<CardMedia
 						image={charter.picture}
 						title={name + "'s picture"}
