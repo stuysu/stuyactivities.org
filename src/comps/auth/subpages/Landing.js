@@ -1,12 +1,16 @@
 import React from "react";
-import SignInVector from "../../../img/vectors/clip-sign-in.svg";
+import SignInVector from "../../../img/vectors/clip-internet-security.svg";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import AuthContext from "../AuthContext";
 
 const useStyles = makeStyles(theme => ({
 	userTypeButton: {
-		margin: theme.spacing(3),
+		marginRight: theme.spacing(3),
+		marginLeft: theme.spacing(3),
+		marginTop: theme.spacing(2),
+		marginBottom: theme.spacing(2),
 		fontSize: "1rem"
 	},
 	heading: {
@@ -20,26 +24,33 @@ const useStyles = makeStyles(theme => ({
 		marginTop: theme.spacing(2)
 	},
 	cancelLogin: {
-		marginTop: "50px",
+		marginTop: "5%",
 		textDecoration: "underline",
 		cursor: "pointer"
 	}
 }));
 
-const Landing = ({ setPage, handleClose }) => {
+const Landing = () => {
 	const classes = useStyles();
+
+	const authContext = React.useContext(AuthContext);
 
 	return (
 		<div>
 			<img
 				src={SignInVector}
-				alt={"Person walking through door"}
+				alt={"Two people unlocking a computer with a key"}
 				className={classes.defaultVector}
 			/>
 			<Typography variant={"h4"} className={classes.heading}>
 				Let's get you signed in
 			</Typography>
-
+			<Typography variant={"subtitle1"}>
+				Your session will expire 30 days after the last time you access
+				StuyActivities.
+				<br /> You can end your session anytime by logging out.
+			</Typography>
+			<br />
 			<Typography variant={"subtitle1"}>
 				Are you signing in as a:
 			</Typography>
@@ -48,7 +59,7 @@ const Landing = ({ setPage, handleClose }) => {
 				variant={"contained"}
 				className={classes.userTypeButton}
 				color={"secondary"}
-				onClick={() => setPage("student")}
+				onClick={() => authContext.set({ page: "student" })}
 			>
 				Student
 			</Button>
@@ -56,11 +67,14 @@ const Landing = ({ setPage, handleClose }) => {
 				variant={"contained"}
 				className={classes.userTypeButton}
 				color={"secondary"}
-				onClick={() => setPage("teacher")}
+				onClick={() => authContext.set({ page: "teacher" })}
 			>
 				Teacher
 			</Button>
-			<p className={classes.cancelLogin} onClick={handleClose}>
+			<p
+				className={classes.cancelLogin}
+				onClick={authContext.handleClose}
+			>
 				No thanks, I don't want to sign in.
 			</p>
 		</div>
