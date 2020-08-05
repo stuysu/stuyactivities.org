@@ -5,50 +5,45 @@ import { useMutation } from "@apollo/react-hooks";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import AppContext from "../context/AppContext";
 import Typography from "@material-ui/core/Typography";
+import AuthContext from "./AuthContext";
 
 const LOGIN_WITH_GOOGLE = gql`
 	mutation loginWithGoogle($token: String!) {
 		login(googleToken: $token) {
 			name
 			email
-			hasPassword
 		}
 	}
 `;
 
-const GoogleLoginButton = ({ className, setPage, setAuthToken }) => {
-	const [
-		loginWithGoogle,
-		{
-			error,
-			// data,
-			loading
-		}
-	] = useMutation(LOGIN_WITH_GOOGLE);
-	const [token, setToken] = React.useState("");
-
-	const possibleUnknownError = error?.graphQLErrors?.some(
-		er => er?.extensions?.code === "POSSIBLE_UNKNOWN_USER"
+const GoogleLoginButton = ({ className }) => {
+	const [loginWithGoogle, { error, loading }] = useMutation(
+		LOGIN_WITH_GOOGLE
 	);
 
-	if (possibleUnknownError) {
-		setAuthToken(token);
-		setPage("unrecognized");
-	}
+	const authContext = React.useContext(AuthContext);
 
 	const context = React.useContext(AppContext);
 
 	const attemptLogin = React.useCallback(
-		data => {
-			setToken(data.idToken);
+		async data => {
+			try {
+				await loginWithGoogle({ variables: { token: data.tokenId } });
+				context.refetch();
+			} catch (er) {
+				const possibleUnknownUserError = er?.graphQLErrors?.some(
+					er => er?.extensions?.code === "POSSIBLE_UNKNOWN_USER"
+				);
 
-			loginWithGoogle({ variables: { token: data.tokenId } })
-				.then(context.refetch)
-				.catch(er => {
-					console.log(JSON.parse(JSON.stringify(er)));
-				});
+				if (possibleUnknownUserError) {
+					authContext.set({
+						page: "unrecognized",
+						unrecognizedEmail: data?.profileObj?.email
+					});
+				}
+			}
 		},
-		[loginWithGoogle, context]
+		[loginWithGoogle, context, authContext]
 	);
 
 	return (

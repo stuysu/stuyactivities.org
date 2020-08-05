@@ -8,7 +8,6 @@ import {
 	FormGroup,
 	FormLabel,
 	Grid,
-	Slider,
 	Switch,
 	TextField,
 	Typography
@@ -44,29 +43,27 @@ const QUERY = gql`
 		$tags: [String]
 		$commitmentLevels: [String]
 		$meetingDays: [String]
-		$min: Int
-		$max: Int
 	) {
 		organizations(
 			keyword: $keyword
 			tags: $tags
 			commitmentLevels: $commitmentLevels
 			meetingDays: $meetingDays
-			meetingFrequency: { min: $min, max: $max }
 			limit: 50
 			offset: 0
 		) {
+			id
 			name
 			url
 			active
 			charter {
 				picture
 				mission
-				meetingFrequency
 				commitmentLevel
 			}
 		}
 		tags {
+			id
 			name
 		}
 	}
@@ -78,7 +75,6 @@ const Catalog = () => {
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
-	const [meetingFrequency, setMeetingFrequency] = React.useState([1, 20]);
 	const [listView, setListView] = React.useState(false);
 
 	const {
@@ -90,9 +86,7 @@ const Catalog = () => {
 			keyword,
 			tags,
 			commitmentLevels,
-			meetingDays,
-			min: meetingFrequency[0],
-			max: meetingFrequency[1]
+			meetingDays
 		}
 	});
 	if (error) return <p>There was an error loading this page</p>;
@@ -129,12 +123,7 @@ const Catalog = () => {
 	return (
 		<div className={classes.root}>
 			<Grid container>
-				<Grid
-					item
-					xs={3}
-					direction={"column"}
-					className={classes.bigChild}
-				>
+				<Grid item xs={3} className={classes.bigChild}>
 					<Typography className={classes.filterChild} variant={"h4"}>
 						Filters
 					</Typography>
@@ -160,6 +149,7 @@ const Catalog = () => {
 							<FormGroup>
 								{data?.tags?.map(tag => (
 									<FormControlLabel
+										key={tag.id}
 										control={
 											<Checkbox
 												checked={tags.includes(
@@ -192,6 +182,7 @@ const Catalog = () => {
 							<FormGroup>
 								{["Low", "Medium", "High"].map(level => (
 									<FormControlLabel
+										key={level}
 										control={
 											<Checkbox
 												checked={commitmentLevels.includes(
@@ -230,6 +221,7 @@ const Catalog = () => {
 									"Friday"
 								].map(day => (
 									<FormControlLabel
+										key={day}
 										control={
 											<Checkbox
 												checked={meetingDays.includes(
@@ -249,20 +241,20 @@ const Catalog = () => {
 						</Accordion>
 					</FormControl>
 					<br />
-					<FormControl className={classes.filterChild}>
-						<Typography id="freqText" gutterBottom>
-							Meeting Frequency (days/month)
-						</Typography>
-						<Slider
-							value={meetingFrequency}
-							min={1}
-							max={20}
-							valueLabelDisplay="auto"
-							onChange={(ev, vals) => setMeetingFrequency(vals)}
-							marks={true}
-						/>
-					</FormControl>
-					<br />
+					{/*<FormControl className={classes.filterChild}>*/}
+					{/*	<Typography id="freqText" gutterBottom>*/}
+					{/*		Meeting Frequency (days/month)*/}
+					{/*	</Typography>*/}
+					{/*	<Slider*/}
+					{/*		value={meetingFrequency}*/}
+					{/*		min={1}*/}
+					{/*		max={20}*/}
+					{/*		valueLabelDisplay="auto"*/}
+					{/*		onChange={(ev, vals) => setMeetingFrequency(vals)}*/}
+					{/*		marks={true}*/}
+					{/*	/>*/}
+					{/*</FormControl>*/}
+					{/*<br />*/}
 				</Grid>
 				<Grid
 					container
@@ -294,9 +286,9 @@ const Catalog = () => {
 					</Grid>
 					{data?.organizations?.map(org =>
 						listView ? (
-							<CatalogListCard {...org} />
+							<CatalogListCard key={org.id} {...org} />
 						) : (
-							<CatalogCard {...org} />
+							<CatalogCard key={org.id} {...org} />
 						)
 					)}
 				</Grid>
