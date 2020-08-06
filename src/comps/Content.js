@@ -4,8 +4,8 @@ import Home from "./pages/Home";
 import Navigation from "./ui/Navigation";
 import AuthDialog from "./auth/AuthDialog";
 import OrgRouter from "./pages/OrgRouter";
-import Catalog from "./pages/organization/Catalog";
-import Charter from "./pages/organization/Charter";
+import Catalog from "./pages/catalog/Catalog";
+import Charter from "./pages/charter/Charter";
 
 const Content = () => {
 	return (

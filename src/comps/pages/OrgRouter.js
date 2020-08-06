@@ -7,7 +7,8 @@ import { client } from "../context/ApolloProvider";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
 import Loading from "../ui/Loading";
-import CharterTab from "./organization/selectedOrganization/CharterTab";
+import CharterTab from "./organization/CharterTab";
+import Overview from "./organization/Overview";
 
 const QUERY = gql`
 	query Organization($url: String!) {
@@ -56,7 +57,7 @@ const OrgRouter = ({ match, history }) => {
 		<div>
 			{data.organization.name}
 			<Switch>
-				<Route path={match.path} component={CharterTab} />
+				<Route path={match.path} component={Overview} />
 				<Route path={match.path + "/charter"} component={CharterTab} />
 			</Switch>
 		</div>
