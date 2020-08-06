@@ -53,10 +53,6 @@ const QUERY = gql`
 				commitmentLevel
 			}
 		}
-		tags {
-			id
-			name
-		}
 	}
 `;
 
@@ -103,11 +99,7 @@ const Catalog = () => {
 							Filters
 						</Typography>
 						<SearchBox set={setKeyword} value={keyword} />
-						<TagsFilter
-							tags={tags}
-							setTags={setTags}
-							allTags={data?.tags || []}
-						/>
+						<TagsFilter tags={tags} setTags={setTags} />
 						<CommitmentFilter
 							commitmentLevels={commitmentLevels}
 							setCommitmentLevels={setCommitmentLevels}
