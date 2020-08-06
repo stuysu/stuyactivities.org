@@ -49,18 +49,11 @@ export default function CatalogCard({ name, url, charter }) {
 									</Typography>
 								</Grid>
 								<Grid item xs={6}>
-									<Typography>
-										Mission Statement: {charter.mission}
-									</Typography>
+									<Typography>{charter.mission}</Typography>
 								</Grid>
 								<Grid item xs={3}>
 									<Typography variant={"body2"}>
-										Commitment Level:{" "}
-										{charter.commitmentLevel}
-									</Typography>
-									<Typography variant={"body2"}>
-										Meeting Frequency:{" "}
-										{charter.meetingFrequency} days/month
+										{charter.commitmentLevel} Commitment
 									</Typography>
 								</Grid>
 							</Grid>

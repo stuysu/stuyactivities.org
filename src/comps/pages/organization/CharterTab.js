@@ -1,103 +1,64 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import {
-	Grid,
-	Typography,
-	Tabs,
-	Tab,
-	Box,
-	IconButton
-} from "@material-ui/core";
-import { Info, Description, Person, ArrowBack } from "@material-ui/icons";
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
 import { client } from "../../context/ApolloProvider";
 
 //styles
 const useStyles = makeStyles({
-	name: {
-		marginTop: "1em"
+	tabName: {
+		textAlign: "center"
 	},
-	tabBox: {
-		marginTop: "1.6em"
+	charterQuestion: {
+		marginBottom: "0.5rem"
 	},
-	charterInfoElement: {
-		paddingBottom: "2em",
-		paddingTop: "0.5em",
-		textAlign: "left"
+	charterAnswer: {
+		marginBottom: "1.5rem"
 	},
-	backButton: {
-		textAlign: "left"
+	charterContainer: {
+		padding: "1rem"
 	}
 });
 
-//tab panels
-function TabPanel(props) {
-	const { children, value, index, ...other } = props;
-
-	return (
-		<div
-			role="tabpanel"
-			hidden={value !== index}
-			id={`simple-tabpanel-${index}`}
-			aria-labelledby={`simple-tab-${index}`}
-			{...other}
-		>
-			{value === index && (
-				<Box p={3}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
-		</div>
-	);
-}
-
-TabPanel.propTypes = {
-	children: PropTypes.node,
-	index: PropTypes.any.isRequired,
-	value: PropTypes.any.isRequired
-};
-
-function a11yProps(index) {
-	return {
-		id: `simple-tab-${index}`,
-		"aria-controls": `simple-tabpanel-${index}`
-	};
-}
-
 const QUERY = gql`
-	query Organization($url: String) {
-		organization(url: $url) {
-			name
-			active
-			charter {
-				picture
-				mission
-				purpose
-				benefit
-				commitmentLevel
-			}
-			# You might also want to use the tags
-			tags {
-				name
-			}
+	query Charter($orgUrl: String) {
+		charter(orgUrl: $orgUrl) {
+			picture
+			mission
+			purpose
+			benefit
+			appointmentProcedures
+			uniqueness
+			meetingSchedule
+			meetingDays
+			commitmentLevel
+			extra
 		}
 	}
 `;
 
-const CharterTab = () => {
-	const params = useParams();
-	const url = params.orgUrl;
+const CharterQuestion = ({ question, answer }) => {
 	const classes = useStyles();
-	const [value, setValue] = React.useState(0);
 
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
+	return (
+		<div>
+			<Typography variant={"h6"} className={classes.charterQuestion}>
+				{question}
+			</Typography>
+			<Typography variant={"body1"} className={classes.charterAnswer}>
+				{answer}
+			</Typography>
+		</div>
+	);
+};
+
+const CharterTab = () => {
+	const { orgUrl } = useParams();
+	const classes = useStyles();
 
 	const { data, loading, error } = useQuery(QUERY, {
-		variables: { url },
+		variables: { orgUrl },
 		client
 	});
 
@@ -111,62 +72,26 @@ const CharterTab = () => {
 
 	return (
 		<div>
-			<IconButton className={classes.backButton}>
-				<ArrowBack />
-			</IconButton>
-			<Grid container spacing={2} className={classes.root}>
-				<Grid item xs={10} className={classes.body}>
-					<Typography variant={"h3"} className={classes.name}>
-						{data.organization.name}
-					</Typography>
-					<Tabs
-						value={value}
-						onChange={handleChange}
-						variant="fullWidth"
-						indicatorColor="primary"
-						textColor="primary"
-						aria-label="icon tabs example"
-					>
-						<Tab
-							icon={<Info />}
-							aria-label="phone"
-							{...a11yProps(0)}
-						/>
-						<Tab
-							icon={<Description />}
-							aria-label="favorite"
-							{...a11yProps(1)}
-						/>
-						<Tab
-							icon={<Person />}
-							aria-label="person"
-							{...a11yProps(2)}
-						/>
-					</Tabs>
-					<TabPanel value={value} index={0}>
-						<div className={classes.tabBox}>
-							<div className={classes.charterInfoElement}>
-								{data.organization.charter.mission}
-							</div>
-							<b>What is the purpose of this activity?</b>
-							<div className={classes.charterInfoElement}>
-								{data.organization.charter.purpose}
-							</div>
-							<b>How does this activity benefit Stuyvesant?</b>
-							<div className={classes.charterInfoElement}>
-								{data.organization.charter.benefit}
-							</div>
-						</div>
-					</TabPanel>
-					<TabPanel value={value} index={1}>
-						<div className={classes.tabBox}>Club Postings</div>
-					</TabPanel>
-					<TabPanel value={value} index={2}>
-						<div className={classes.tabBox}>Club Members</div>
-					</TabPanel>
-				</Grid>
-				<Grid item xs={1} />
-			</Grid>
+			<Typography variant={"h5"} className={classes.tabName}>
+				Charter
+			</Typography>
+
+			<div className={classes.charterContainer}>
+				<CharterQuestion
+					question={"Mission Statement: "}
+					answer={data?.charter?.mission}
+				/>
+
+				<CharterQuestion
+					question={"What is the purpose of this activity?"}
+					answer={data?.charter?.purpose}
+				/>
+
+				<CharterQuestion
+					question={"How does this activity benefit Stuyvesant?"}
+					answer={data?.charter?.benefit}
+				/>
+			</div>
 		</div>
 	);
 };

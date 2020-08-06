@@ -8,7 +8,6 @@ import {
 	FormGroup,
 	FormLabel,
 	Grid,
-	Switch,
 	TextField,
 	Typography
 } from "@material-ui/core";
@@ -18,6 +17,8 @@ import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
 import CatalogCard from "./CatalogCard";
 import CatalogListCard from "./CatalogListCard";
+import { List, ViewComfy } from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -35,6 +36,10 @@ const useStyles = makeStyles(theme => ({
 	},
 	card: {
 		margin: theme.spacing(1)
+	},
+	filterContainer: {
+		position: "sticky",
+		top: "32px"
 	}
 }));
 const QUERY = gql`
@@ -123,143 +128,156 @@ const Catalog = () => {
 	return (
 		<div className={classes.root}>
 			<Grid container>
-				<Grid item xs={3} className={classes.bigChild}>
-					<Typography className={classes.filterChild} variant={"h4"}>
-						Filters
-					</Typography>
-					<FormControl className={classes.filterChild}>
-						<TextField
-							name="keyword"
-							label="Search"
-							variant="outlined"
-							fullWidth={true}
-							value={keyword}
-							onChange={ev => setKeyword(ev.target.value)}
-						/>
-					</FormControl>
-					<br />
-					<FormControl
-						component="fieldset"
-						className={classes.filterChild}
-					>
-						<Accordion>
-							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<FormLabel component="legend">Tags</FormLabel>
-							</AccordionSummary>
-							<FormGroup>
-								{data?.tags?.map(tag => (
-									<FormControlLabel
-										key={tag.id}
-										control={
-											<Checkbox
-												checked={tags.includes(
-													tag.name
-												)}
-												onChange={() =>
-													toggleTag(tag.name)
-												}
-												value={tag.name}
-											/>
-										}
-										label={tag.name}
-										className={classes.accordionChild}
-									/>
-								))}
-							</FormGroup>
-						</Accordion>
-					</FormControl>
-					<br />
-					<FormControl
-						component="fieldset"
-						className={classes.filterChild}
-					>
-						<Accordion>
-							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<FormLabel component="legend">
-									Commitment Level
-								</FormLabel>
-							</AccordionSummary>
-							<FormGroup>
-								{["Low", "Medium", "High"].map(level => (
-									<FormControlLabel
-										key={level}
-										control={
-											<Checkbox
-												checked={commitmentLevels.includes(
-													level
-												)}
-												onChange={() =>
-													toggleCommitmentLevel(level)
-												}
-												value={level}
-											/>
-										}
-										label={level}
-										className={classes.accordionChild}
-									/>
-								))}
-							</FormGroup>
-						</Accordion>
-					</FormControl>
-					<br />
-					<FormControl
-						component="fieldset"
-						className={classes.filterChild}
-					>
-						<Accordion>
-							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								<FormLabel component="legend">
-									Meeting Days
-								</FormLabel>
-							</AccordionSummary>
-							<FormGroup>
-								{[
-									"Monday",
-									"Tuesday",
-									"Wednesday",
-									"Thursday",
-									"Friday"
-								].map(day => (
-									<FormControlLabel
-										key={day}
-										control={
-											<Checkbox
-												checked={meetingDays.includes(
-													day
-												)}
-												onChange={() =>
-													toggleMeetingDay(day)
-												}
-												value={day}
-											/>
-										}
-										label={day}
-										className={classes.accordionChild}
-									/>
-								))}
-							</FormGroup>
-						</Accordion>
-					</FormControl>
-					<br />
-					{/*<FormControl className={classes.filterChild}>*/}
-					{/*	<Typography id="freqText" gutterBottom>*/}
-					{/*		Meeting Frequency (days/month)*/}
-					{/*	</Typography>*/}
-					{/*	<Slider*/}
-					{/*		value={meetingFrequency}*/}
-					{/*		min={1}*/}
-					{/*		max={20}*/}
-					{/*		valueLabelDisplay="auto"*/}
-					{/*		onChange={(ev, vals) => setMeetingFrequency(vals)}*/}
-					{/*		marks={true}*/}
-					{/*	/>*/}
-					{/*</FormControl>*/}
-					{/*<br />*/}
+				<Grid
+					item
+					xs={12}
+					sm={12}
+					md={3}
+					lg={3}
+					xl={2}
+					className={classes.bigChild}
+				>
+					<div className={classes.filterContainer}>
+						<Typography
+							className={classes.filterChild}
+							variant={"h4"}
+						>
+							Filters
+						</Typography>
+						<FormControl className={classes.filterChild}>
+							<TextField
+								name="keyword"
+								label="Search"
+								variant="outlined"
+								fullWidth={true}
+								value={keyword}
+								onChange={ev => setKeyword(ev.target.value)}
+							/>
+						</FormControl>
+						<br />
+						<FormControl
+							component="fieldset"
+							className={classes.filterChild}
+						>
+							<Accordion>
+								<AccordionSummary
+									expandIcon={<ExpandMoreIcon />}
+								>
+									<FormLabel component="legend">
+										Tags
+									</FormLabel>
+								</AccordionSummary>
+								<FormGroup>
+									{data?.tags?.map(tag => (
+										<FormControlLabel
+											key={tag.id}
+											control={
+												<Checkbox
+													checked={tags.includes(
+														tag.name
+													)}
+													onChange={() =>
+														toggleTag(tag.name)
+													}
+													value={tag.name}
+												/>
+											}
+											label={tag.name}
+											className={classes.accordionChild}
+										/>
+									))}
+								</FormGroup>
+							</Accordion>
+						</FormControl>
+						<br />
+						<FormControl
+							component="fieldset"
+							className={classes.filterChild}
+						>
+							<Accordion>
+								<AccordionSummary
+									expandIcon={<ExpandMoreIcon />}
+								>
+									<FormLabel component="legend">
+										Commitment Level
+									</FormLabel>
+								</AccordionSummary>
+								<FormGroup>
+									{["Low", "Medium", "High"].map(level => (
+										<FormControlLabel
+											key={level}
+											control={
+												<Checkbox
+													checked={commitmentLevels.includes(
+														level
+													)}
+													onChange={() =>
+														toggleCommitmentLevel(
+															level
+														)
+													}
+													value={level}
+												/>
+											}
+											label={level}
+											className={classes.accordionChild}
+										/>
+									))}
+								</FormGroup>
+							</Accordion>
+						</FormControl>
+						<br />
+						<FormControl
+							component="fieldset"
+							className={classes.filterChild}
+						>
+							<Accordion>
+								<AccordionSummary
+									expandIcon={<ExpandMoreIcon />}
+								>
+									<FormLabel component="legend">
+										Meeting Days
+									</FormLabel>
+								</AccordionSummary>
+								<FormGroup>
+									{[
+										"Monday",
+										"Tuesday",
+										"Wednesday",
+										"Thursday",
+										"Friday"
+									].map(day => (
+										<FormControlLabel
+											key={day}
+											control={
+												<Checkbox
+													checked={meetingDays.includes(
+														day
+													)}
+													onChange={() =>
+														toggleMeetingDay(day)
+													}
+													value={day}
+												/>
+											}
+											label={day}
+											className={classes.accordionChild}
+										/>
+									))}
+								</FormGroup>
+							</Accordion>
+						</FormControl>
+						<br />
+					</div>
 				</Grid>
 				<Grid
 					container
 					item
-					xs={9}
+					xs={12}
+					sm={12}
+					md={9}
+					lg={9}
+					xl={10}
 					className={classes.bigChild}
 					alignContent={"flex-start"}
 					alignItems={"flex-start"}
@@ -272,17 +290,9 @@ const Catalog = () => {
 						>
 							Catalog
 						</Typography>
-					</Grid>
-					<Grid item xs={12}>
-						<Typography>
-							Grid View
-							<Switch
-								checked={listView}
-								onChange={e => setListView(e.target.checked)}
-							/>
-							List View
-						</Typography>
-						{/*<FormControlLabel control={<Switch checked={listView} onChange={e => setListView(e.target.checked)}/>} label="List View"/>*/}
+						<IconButton onClick={() => setListView(prev => !prev)}>
+							{listView ? <List /> : <ViewComfy />}
+						</IconButton>
 					</Grid>
 					{data?.organizations?.map(org =>
 						listView ? (

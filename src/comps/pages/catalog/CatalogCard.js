@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 export default function CatalogCard({ name, url, charter }) {
 	const classes = useStyles();
 	return (
-		<Grid item xs={4}>
+		<Grid item xs={12} sm={6} xl={3} lg={3} md={6}>
 			<Card className={classes.card}>
 				<UnstyledLink to={`/${url}`}>
 					<CardActionArea>
@@ -32,15 +32,9 @@ export default function CatalogCard({ name, url, charter }) {
 							<Typography variant={"h5"} gutterBottom>
 								{name}
 							</Typography>
-							<Typography>
-								Mission Statement: {charter.mission}
-							</Typography>
+							<Typography>{charter.mission}</Typography>
 							<Typography variant={"body2"}>
-								Commitment Level: {charter.commitmentLevel}
-							</Typography>
-							<Typography variant={"body2"}>
-								Meeting Frequency: {charter.meetingFrequency}{" "}
-								days/month
+								Commitment: {charter.commitmentLevel}
 							</Typography>
 						</CardContent>
 					</CardActionArea>
