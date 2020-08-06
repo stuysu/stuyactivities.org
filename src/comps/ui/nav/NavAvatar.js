@@ -1,5 +1,5 @@
 import React from "react";
-import AppContext from "../context/AppContext";
+import AppContext from "../../context/AppContext";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";

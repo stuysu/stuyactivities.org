@@ -1,5 +1,5 @@
 import React from "react";
-import { CharterFormContext } from "../organization/Charter";
+import { CharterFormContext } from "./Charter";
 import { gql } from "apollo-boost";
 
 const URL_QUERY = gql`
