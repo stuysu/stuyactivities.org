@@ -9,6 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
 import AppContext from "../../context/AppContext";
 import NavAvatar from "./NavAvatar";
+import UnstyledLink from "../UnstyledLink";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -41,7 +42,7 @@ const NavBar = ({ setDrawerOpen }) => {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" className={classes.title}>
-						StuyActivities
+						<UnstyledLink to={"/"}>StuyActivities</UnstyledLink>
 					</Typography>
 
 					{context.signedIn ? (
