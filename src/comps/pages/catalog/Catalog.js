@@ -1,17 +1,5 @@
 import React from "react";
-import {
-	Accordion,
-	AccordionSummary,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel,
-	Grid,
-	TextField,
-	Typography
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
