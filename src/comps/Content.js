@@ -6,6 +6,7 @@ import AuthDialog from "./auth/AuthDialog";
 import OrgRouter from "./pages/organization/OrgRouter";
 import Catalog from "./pages/catalog/Catalog";
 import Charter from "./pages/charter/Charter";
+import TokenLogin from "./pages/TokenLogin";
 
 const Content = () => {
 	return (
@@ -19,6 +20,7 @@ const Content = () => {
 				<Route path={"/"} component={Home} exact />
 				<Route path={"/catalog"} component={Catalog} exact />
 				<Route path={"/charter"} component={Charter} exact />
+				<Route path={"/token/:token"} component={TokenLogin} exact />
 				<Route path={"/:orgUrl"} component={OrgRouter} />
 			</Switch>
 		</div>
