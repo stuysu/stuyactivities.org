@@ -11,8 +11,23 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
 import arrayToggle from "../../../../utils/arrayToggle";
 import useFilterStyles from "./useFilterStyles";
+import { useQuery } from "@apollo/client";
+import { client } from "../../../context/ApolloProvider";
 
-export default function TagsFilter({ allTags, tags, setTags }) {
+const QUERY = gql`
+	query {
+		tags {
+			id
+			name
+		}
+	}
+`;
+
+export default function TagsFilter({ tags, setTags }) {
+	const { data } = useQuery(QUERY, { client });
+
+	const allTags = data?.tags || [];
+
 	const toggleTag = tag => {
 		const newTags = arrayToggle(tag, tags);
 		setTags(newTags);
