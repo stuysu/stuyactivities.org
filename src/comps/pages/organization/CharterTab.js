@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 		paddingTop: "0.5rem",
 		position: "sticky",
 		top: 0,
-		background: "white",
+		background: theme.palette.background.default,
 		width: "100%",
 		color: theme.palette.primary.main
 	},

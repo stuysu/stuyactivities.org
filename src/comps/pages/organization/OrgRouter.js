@@ -68,7 +68,7 @@ const OrgRouter = ({ match, history }) => {
 		return <Loading fullscreen />;
 	}
 
-	if (!data.organization) {
+	if (!data?.organization) {
 		return <p>We couldn't find that url :(</p>;
 	}
 
