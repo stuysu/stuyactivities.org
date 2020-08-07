@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
-import Navigation from "./ui/Navigation";
+import Navigation from "./ui/nav/Navigation";
 import AuthDialog from "./auth/AuthDialog";
 import OrgRouter from "./pages/OrgRouter";
 import Catalog from "./pages/organization/Catalog";

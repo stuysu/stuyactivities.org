@@ -24,6 +24,7 @@ const FullScreenWrapper = ({ children }) => {
 
 class AuthDialog extends React.Component {
 	static contextType = AppContext;
+
 	constructor(props, context) {
 		super(props, context);
 
