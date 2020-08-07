@@ -4,14 +4,22 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
 import { client } from "../../context/ApolloProvider";
+import capitalizeString from "../../../utils/capitalizeString";
 
 //styles
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	tabName: {
 		textAlign: "center"
+		// color: theme.palette.secondary.main
 	},
 	charterQuestion: {
-		marginBottom: "0.5rem"
+		paddingBottom: "0.5rem",
+		paddingTop: "0.5rem",
+		position: "sticky",
+		top: 0,
+		background: "white",
+		width: "100%",
+		color: theme.palette.primary.main
 	},
 	charterAnswer: {
 		marginBottom: "1.5rem"
@@ -19,7 +27,7 @@ const useStyles = makeStyles({
 	charterContainer: {
 		padding: "1rem"
 	}
-});
+}));
 
 const QUERY = gql`
 	query Charter($orgUrl: String) {
@@ -72,7 +80,7 @@ const CharterTab = () => {
 
 	return (
 		<div>
-			<Typography variant={"h5"} className={classes.tabName}>
+			<Typography variant={"h4"} className={classes.tabName}>
 				Charter
 			</Typography>
 
@@ -80,6 +88,19 @@ const CharterTab = () => {
 				<CharterQuestion
 					question={"Mission Statement: "}
 					answer={data?.charter?.mission}
+				/>
+
+				<CharterQuestion
+					question={"What days does this organization meet?"}
+					answer={capitalizeString(
+						data?.charter?.meetingDays?.join(", "),
+						true
+					)}
+				/>
+
+				<CharterQuestion
+					question={"What is the meeting schedule?"}
+					answer={data?.charter?.meetingSchedule}
 				/>
 
 				<CharterQuestion
@@ -91,6 +112,23 @@ const CharterTab = () => {
 					question={"How does this activity benefit Stuyvesant?"}
 					answer={data?.charter?.benefit}
 				/>
+
+				<CharterQuestion
+					question={"How does this activity appoint leaders?"}
+					answer={data?.charter?.appointmentProcedures}
+				/>
+
+				<CharterQuestion
+					question={"What makes this activity unique?"}
+					answer={data?.charter?.uniqueness}
+				/>
+
+				{Boolean(data?.charter?.extra) && (
+					<CharterQuestion
+						question={"Anything else?"}
+						answer={data?.charter?.extra}
+					/>
+				)}
 			</div>
 		</div>
 	);

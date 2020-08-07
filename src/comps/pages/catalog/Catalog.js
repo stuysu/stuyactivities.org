@@ -1,17 +1,5 @@
 import React from "react";
-import {
-	Accordion,
-	AccordionSummary,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel,
-	Grid,
-	TextField,
-	Typography
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
@@ -19,6 +7,10 @@ import CatalogCard from "./CatalogCard";
 import CatalogListCard from "./CatalogListCard";
 import { List, ViewComfy } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
+import SearchBox from "./filters/SearchBox";
+import TagsFilter from "./filters/TagsFilter";
+import CommitmentFilter from "./filters/CommitmentFilter";
+import MeetingDaysFilter from "./filters/MeetingDaysFilter";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -26,13 +18,6 @@ const useStyles = makeStyles(theme => ({
 	},
 	bigChild: {
 		padding: theme.spacing(2)
-	},
-	filterChild: {
-		padding: theme.spacing(1),
-		width: "100%"
-	},
-	accordionChild: {
-		"padding-left": theme.spacing(1)
 	},
 	card: {
 		margin: theme.spacing(1)
@@ -42,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 		top: "32px"
 	}
 }));
+
 const QUERY = gql`
 	query Organizations(
 		$keyword: String
@@ -73,6 +59,7 @@ const QUERY = gql`
 		}
 	}
 `;
+
 const Catalog = () => {
 	const classes = useStyles();
 
@@ -96,35 +83,6 @@ const Catalog = () => {
 	});
 	if (error) return <p>There was an error loading this page</p>;
 
-	// Returns a new array containing val, if it didn't before or with val removed otherwise
-	const arrayToggle = (val, arr) => {
-		const newArray = [...arr];
-		const valIndex = arr.indexOf(val);
-
-		if (valIndex === -1) {
-			newArray.push(val);
-		} else {
-			newArray.splice(valIndex, 1);
-		}
-
-		return newArray;
-	};
-
-	const toggleTag = tag => {
-		const newTags = arrayToggle(tag, tags);
-		setTags(newTags);
-	};
-
-	const toggleCommitmentLevel = level => {
-		const newLevels = arrayToggle(level, commitmentLevels);
-		setCommitmentLevels(newLevels);
-	};
-
-	const toggleMeetingDay = day => {
-		const newDays = arrayToggle(day, meetingDays);
-		setMeetingDays(newDays);
-	};
-
 	return (
 		<div className={classes.root}>
 			<Grid container>
@@ -144,130 +102,20 @@ const Catalog = () => {
 						>
 							Filters
 						</Typography>
-						<FormControl className={classes.filterChild}>
-							<TextField
-								name="keyword"
-								label="Search"
-								variant="outlined"
-								fullWidth={true}
-								value={keyword}
-								onChange={ev => setKeyword(ev.target.value)}
-							/>
-						</FormControl>
-						<br />
-						<FormControl
-							component="fieldset"
-							className={classes.filterChild}
-						>
-							<Accordion>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-								>
-									<FormLabel component="legend">
-										Tags
-									</FormLabel>
-								</AccordionSummary>
-								<FormGroup>
-									{data?.tags?.map(tag => (
-										<FormControlLabel
-											key={tag.id}
-											control={
-												<Checkbox
-													checked={tags.includes(
-														tag.name
-													)}
-													onChange={() =>
-														toggleTag(tag.name)
-													}
-													value={tag.name}
-												/>
-											}
-											label={tag.name}
-											className={classes.accordionChild}
-										/>
-									))}
-								</FormGroup>
-							</Accordion>
-						</FormControl>
-						<br />
-						<FormControl
-							component="fieldset"
-							className={classes.filterChild}
-						>
-							<Accordion>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-								>
-									<FormLabel component="legend">
-										Commitment Level
-									</FormLabel>
-								</AccordionSummary>
-								<FormGroup>
-									{["Low", "Medium", "High"].map(level => (
-										<FormControlLabel
-											key={level}
-											control={
-												<Checkbox
-													checked={commitmentLevels.includes(
-														level
-													)}
-													onChange={() =>
-														toggleCommitmentLevel(
-															level
-														)
-													}
-													value={level}
-												/>
-											}
-											label={level}
-											className={classes.accordionChild}
-										/>
-									))}
-								</FormGroup>
-							</Accordion>
-						</FormControl>
-						<br />
-						<FormControl
-							component="fieldset"
-							className={classes.filterChild}
-						>
-							<Accordion>
-								<AccordionSummary
-									expandIcon={<ExpandMoreIcon />}
-								>
-									<FormLabel component="legend">
-										Meeting Days
-									</FormLabel>
-								</AccordionSummary>
-								<FormGroup>
-									{[
-										"Monday",
-										"Tuesday",
-										"Wednesday",
-										"Thursday",
-										"Friday"
-									].map(day => (
-										<FormControlLabel
-											key={day}
-											control={
-												<Checkbox
-													checked={meetingDays.includes(
-														day
-													)}
-													onChange={() =>
-														toggleMeetingDay(day)
-													}
-													value={day}
-												/>
-											}
-											label={day}
-											className={classes.accordionChild}
-										/>
-									))}
-								</FormGroup>
-							</Accordion>
-						</FormControl>
-						<br />
+						<SearchBox set={setKeyword} value={keyword} />
+						<TagsFilter
+							tags={tags}
+							setTags={setTags}
+							allTags={data?.tags || []}
+						/>
+						<CommitmentFilter
+							commitmentLevels={commitmentLevels}
+							setCommitmentLevels={setCommitmentLevels}
+						/>
+						<MeetingDaysFilter
+							meetingDays={meetingDays}
+							setMeetingDays={setMeetingDays}
+						/>
 					</div>
 				</Grid>
 				<Grid
