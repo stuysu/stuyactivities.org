@@ -21,8 +21,12 @@ const Content = () => {
 				<Route path={"/"} component={Home} exact />
 				<Route path={"/catalog"} component={Catalog} exact />
 				<Route path={"/charter"} component={Charter} exact />
-				<Route path={"/admin/approvals/:url"} component={SpecificApproval} />
-				<Route path={"/admin/approvals"} component={Approvals} /> {/* temp change to test, sorry abir :( */}
+				<Route
+					path={"/admin/approvals/:url"}
+					component={SpecificApproval}
+				/>
+				<Route path={"/admin/approvals"} component={Approvals} />{" "}
+				{/* temp change to test, sorry abir :( */}
 				<Route path={"/:orgUrl"} component={OrgRouter} />
 			</Switch>
 		</div>
