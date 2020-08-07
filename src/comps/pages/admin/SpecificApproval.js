@@ -79,14 +79,14 @@ const QUERY = gql`
 	}
 `;
 const APPROVE = gql`
-	mutation Approve($charterEditID: Int!, $fields: [String]!) {
+	mutation Approve($charterEditID: Int!, $fields: [String!]!) {
 		approveCharterFields(charterEditId: $charterEditID, fields: $fields) {
 			id
 		}
 	}
 `;
 const REJECT = gql`
-	mutation Reject($charterEditID: Int!, $fields: [String]!) {
+	mutation Reject($charterEditID: Int!, $fields: [String!]!) {
 		rejectCharterFields(charterEditId: $charterEditID, fields: $fields) {
 			id
 		}
