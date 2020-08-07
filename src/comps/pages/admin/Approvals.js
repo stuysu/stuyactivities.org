@@ -1,18 +1,12 @@
 import React from "react";
 import {
 	makeStyles,
-	useTheme,
 	Typography,
 	Card,
 	CardMedia,
 	CardContent,
 	CardActionArea,
-	Dialog,
-	DialogContent,
-	DialogActions,
 	Button,
-	DialogTitle,
-	DialogContentText,
 	CardActions
 } from "@material-ui/core";
 import { gql } from "@apollo/client";

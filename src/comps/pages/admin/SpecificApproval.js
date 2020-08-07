@@ -1,7 +1,6 @@
 import React from "react";
 import {
 	makeStyles,
-	useTheme,
 	Typography,
 	Card,
 	CardContent,
@@ -11,7 +10,6 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogActions,
-	TextField,
 	Switch,
 	FormControlLabel
 } from "@material-ui/core";
