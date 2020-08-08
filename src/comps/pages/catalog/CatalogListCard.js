@@ -15,7 +15,6 @@ const useStyles = makeStyles(() => ({
 	item: {
 		width: "100%",
 		float: "left"
-
 	}
 }));
 
@@ -34,27 +33,27 @@ export default function CatalogCard({ name, url, charter }) {
 							<Avatar src={charter.picture} />
 						</ListItemAvatar>
 						<ListItemText
-							 primary={
-							 	<React.Fragment>
-								    <Typography variant={"h5"}>
-									    {name}
-								    </Typography>
-							    </React.Fragment>
-							 }
-							 secondary={
-								 <React.Fragment>
-									 <Typography variant={"body1"}>
-										 {charter.mission}
-										 <br/>
-										 {"Commitment Level: " + charter.commitmentLevel}
-									 </Typography>
-								 </React.Fragment>
-							 }
+							primary={
+								<React.Fragment>
+									<Typography variant={"h5"}>
+										{name}
+									</Typography>
+								</React.Fragment>
+							}
+							secondary={
+								<React.Fragment>
+									<Typography variant={"body1"}>
+										{charter.mission}
+										<br />
+										{"Commitment Level: " +
+											charter.commitmentLevel}
+									</Typography>
+								</React.Fragment>
+							}
 						/>
 					</ListItemLink>
 				</Paper>
 			</List>
 		</Grid>
-
 	);
 }
