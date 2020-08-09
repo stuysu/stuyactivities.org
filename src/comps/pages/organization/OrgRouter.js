@@ -14,6 +14,7 @@ import Grid from "@material-ui/core/Grid";
 
 import OrgNavPanel from "./OrgNavPanel";
 import BackButton from "../../ui/BackButton";
+import MembersTab from "./MembersTab";
 
 const useStyles = makeStyles(theme => ({
 	contentContainer: {
@@ -103,6 +104,10 @@ const OrgRouter = ({ match, history }) => {
 							<Route
 								path={match.path + "/charter"}
 								component={CharterTab}
+							/>
+							<Route
+								path={match.path + "/members"}
+								component={MembersTab}
 							/>
 						</Switch>
 					</Grid>
