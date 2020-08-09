@@ -13,6 +13,7 @@ import arrayToggle from "../../../../utils/arrayToggle";
 import useFilterStyles from "./useFilterStyles";
 import { useQuery } from "@apollo/client";
 import { client } from "../../../context/ApolloProvider";
+import { gql } from "apollo-boost";
 
 const QUERY = gql`
 	query {

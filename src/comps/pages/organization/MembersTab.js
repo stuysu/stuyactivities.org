@@ -1,7 +1,7 @@
 import React from "react";
 
 const MembersTab = () => {
-	return <div></div>;
+	return <div>Members</div>;
 };
 
 export default MembersTab;

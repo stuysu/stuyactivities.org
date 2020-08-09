@@ -98,7 +98,7 @@ const Catalog = () => {
 						>
 							Filters
 						</Typography>
-						<SearchBox set={setKeyword} value={keyword} />
+						<SearchBox setKeyword={setKeyword} keyword={keyword} />
 						<TagsFilter tags={tags} setTags={setTags} />
 						<CommitmentFilter
 							commitmentLevels={commitmentLevels}
