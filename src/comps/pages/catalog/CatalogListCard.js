@@ -23,39 +23,38 @@ function ListItemLink(props) {
 	return <ListItem button component="a" {...props} />;
 }
 
-
 export default function CatalogCard({ name, url, charter }) {
 	const classes = useStyles();
 	return (
 		<Grid item xs={12}>
 			<List>
 				<Paper className={classes.item}>
-          <UnstyledLink to={`/${url}`}>
-					<ListItemLink>
-						<ListItemAvatar>
-							<Avatar src={charter.picture} />
-						</ListItemAvatar>
-						<ListItemText
-							primary={
-								<React.Fragment>
-									<Typography variant={"h5"}>
-										{name}
-									</Typography>
-								</React.Fragment>
-							}
-							secondary={
-								<React.Fragment>
-									<Typography variant={"body1"}>
-										{charter.mission}
-										<br />
-										{"Commitment Level: " +
-											charter.commitmentLevel}
-									</Typography>
-								</React.Fragment>
-							}
-						/>
-					</ListItemLink>
-          </UnstyledLink>
+					<UnstyledLink to={`/${url}`}>
+						<ListItemLink>
+							<ListItemAvatar>
+								<Avatar src={charter.picture} />
+							</ListItemAvatar>
+							<ListItemText
+								primary={
+									<React.Fragment>
+										<Typography variant={"h5"}>
+											{name}
+										</Typography>
+									</React.Fragment>
+								}
+								secondary={
+									<React.Fragment>
+										<Typography variant={"body1"}>
+											{charter.mission}
+											<br />
+											{"Commitment Level: " +
+												charter.commitmentLevel}
+										</Typography>
+									</React.Fragment>
+								}
+							/>
+						</ListItemLink>
+					</UnstyledLink>
 				</Paper>
 			</List>
 		</Grid>
