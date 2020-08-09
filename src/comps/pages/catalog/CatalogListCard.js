@@ -55,7 +55,7 @@ export default function CatalogCard({ name, url, charter }) {
 							}
 						/>
 					</ListItemLink>
-          </UnstyledLink />
+          </UnstyledLink>
 				</Paper>
 			</List>
 		</Grid>
