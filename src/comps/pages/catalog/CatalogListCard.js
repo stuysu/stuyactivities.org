@@ -19,10 +19,6 @@ const useStyles = makeStyles(() => ({
 	}
 }));
 
-function ListItemLink(props) {
-	return <ListItem button component="a" {...props} />;
-}
-
 export default function CatalogCard({ name, url, charter }) {
 	const classes = useStyles();
 	return (
@@ -30,7 +26,7 @@ export default function CatalogCard({ name, url, charter }) {
 			<List>
 				<Paper className={classes.item}>
 					<UnstyledLink to={`/${url}`}>
-						<ListItemLink>
+						<ListItem>
 							<ListItemAvatar>
 								<Avatar src={charter.picture} />
 							</ListItemAvatar>
@@ -53,7 +49,7 @@ export default function CatalogCard({ name, url, charter }) {
 									</React.Fragment>
 								}
 							/>
-						</ListItemLink>
+						</ListItem>
 					</UnstyledLink>
 				</Paper>
 			</List>
