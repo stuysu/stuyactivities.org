@@ -15,7 +15,7 @@ const Content = () => {
 		<div>
 			<Navigation />
 			<AuthDialog />
-    
+
 			<Switch>
 				<Route path={"/"} component={Home} exact />
 				<Route path={"/catalog"} component={Catalog} exact />
