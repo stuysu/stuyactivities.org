@@ -10,6 +10,7 @@ import {
 	Paper
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import UnstyledLink from "../../ui/UnstyledLink";
 
 const useStyles = makeStyles(() => ({
 	item: {
@@ -22,13 +23,15 @@ function ListItemLink(props) {
 	return <ListItem button component="a" {...props} />;
 }
 
+
 export default function CatalogCard({ name, url, charter }) {
 	const classes = useStyles();
 	return (
 		<Grid item xs={12}>
 			<List>
 				<Paper className={classes.item}>
-					<ListItemLink href={`/${url}`}>
+          <UnstyledLink to={`/${url}`}>
+					<ListItemLink>
 						<ListItemAvatar>
 							<Avatar src={charter.picture} />
 						</ListItemAvatar>
@@ -52,6 +55,7 @@ export default function CatalogCard({ name, url, charter }) {
 							}
 						/>
 					</ListItemLink>
+          </UnstyledLink />
 				</Paper>
 			</List>
 		</Grid>
