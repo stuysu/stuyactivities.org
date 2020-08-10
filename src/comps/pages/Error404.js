@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 const QUERY = gql`
 	query SimilarOrganizations($keyword: String!) {
 		organizations(keyword: $keyword, limit: 3) {
+			id
 			name
 			charter {
 				picture
@@ -85,24 +86,24 @@ const Error404 = () => {
 					/>
 				</FlexCenter>
 
-				<Typography paragraph className={classes.safeMargin}>
-					Maybe you meant to check out one of these activities?
-				</Typography>
-				{data && (
-					<Grid container justify={"center"}>
-						{data.organizations.map(org => (
-							<CatalogCard
-								xl={3}
-								lg={3}
-								md={3}
-								sm={6}
-								xs={12}
-								name={org.name}
-								url={org.url}
-								charter={org.charter}
-							/>
-						))}
-					</Grid>
+				{Boolean(data?.organizations?.length) && (
+					<>
+						<Typography paragraph className={classes.safeMargin}>
+							Maybe you meant to check out one of these
+							activities?
+						</Typography>
+						<Grid container justify={"center"}>
+							{data.organizations.map(org => (
+								<Grid item xl={3} lg={3} md={3} sm={6} xs={12}>
+									<CatalogCard
+										name={org.name}
+										url={org.url}
+										charter={org.charter}
+									/>
+								</Grid>
+							))}
+						</Grid>
+					</>
 				)}
 			</div>
 		</div>

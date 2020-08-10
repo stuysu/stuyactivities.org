@@ -25,6 +25,15 @@ const useStyles = makeStyles(theme => ({
 	filterContainer: {
 		position: "sticky",
 		top: "32px"
+	},
+	catalogHeading: {
+		position: "relative",
+		padding: "1rem"
+	},
+	displayTypeIcon: {
+		position: "absolute",
+		right: "1rem",
+		top: "1rem"
 	}
 }));
 
@@ -111,7 +120,6 @@ const Catalog = () => {
 					</div>
 				</Grid>
 				<Grid
-					container
 					item
 					xs={12}
 					sm={12}
@@ -123,24 +131,31 @@ const Catalog = () => {
 					alignItems={"flex-start"}
 					justify={"space-around"}
 				>
-					<Grid item xs={12}>
+					<div className={classes.catalogHeading}>
 						<Typography
 							variant={"h4"}
 							className={classes.filterChild}
 						>
 							Catalog
 						</Typography>
-						<IconButton onClick={() => setListView(prev => !prev)}>
+						<IconButton
+							className={classes.displayTypeIcon}
+							onClick={() => setListView(prev => !prev)}
+						>
 							{listView ? <List /> : <ViewComfy />}
 						</IconButton>
+					</div>
+					<Grid container>
+						{data?.organizations?.map(org =>
+							listView ? (
+								<CatalogListCard key={org.id} {...org} />
+							) : (
+								<Grid item xs={12} sm={6} xl={3} lg={3} md={6}>
+									<CatalogCard key={org.id} {...org} />
+								</Grid>
+							)
+						)}
 					</Grid>
-					{data?.organizations?.map(org =>
-						listView ? (
-							<CatalogListCard key={org.id} {...org} />
-						) : (
-							<CatalogCard key={org.id} {...org} />
-						)
-					)}
 				</Grid>
 			</Grid>
 		</div>
