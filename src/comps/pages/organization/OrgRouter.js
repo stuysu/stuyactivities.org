@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import OrgNavPanel from "./OrgNavPanel";
 import BackButton from "../../ui/BackButton";
 import MembersTab from "./MembersTab";
+import Error404 from "../Error404";
 
 const useStyles = makeStyles(theme => ({
 	contentContainer: {
@@ -70,13 +71,13 @@ const OrgRouter = ({ match, history }) => {
 	}
 
 	if (!data?.organization) {
-		return <p>We couldn't find that url :(</p>;
+		return <Error404 />;
 	}
 
 	return (
 		<div>
 			<Helmet>
-				<title>{data?.organization?.name} | StuyActivities </title>
+				<title>{data?.organization?.name} | StuyActivities</title>
 			</Helmet>
 
 			<div className={classes.contentContainer}>
