@@ -11,6 +11,7 @@ import SearchBox from "./filters/SearchBox";
 import TagsFilter from "./filters/TagsFilter";
 import CommitmentFilter from "./filters/CommitmentFilter";
 import MeetingDaysFilter from "./filters/MeetingDaysFilter";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -22,18 +23,21 @@ const useStyles = makeStyles(theme => ({
 	card: {
 		margin: theme.spacing(1)
 	},
+	filterHeading: {
+		paddingLeft: theme.spacing(1)
+	},
 	filterContainer: {
 		position: "sticky",
 		top: "32px"
 	},
 	catalogHeading: {
 		position: "relative",
-		padding: "1rem"
+		padding: theme.spacing(1)
 	},
 	displayTypeIcon: {
 		position: "absolute",
-		right: "1rem",
-		top: "1rem"
+		right: theme.spacing(1),
+		top: theme.spacing(1)
 	}
 }));
 
@@ -90,6 +94,17 @@ const Catalog = () => {
 
 	return (
 		<div className={classes.root}>
+			<Helmet>
+				<title>Catalog | StuyActivities</title>
+
+				<meta
+					property="og:description"
+					content={
+						"Look through and find activities at Stuyvesant High School."
+					}
+				/>
+			</Helmet>
+
 			<Grid container>
 				<Grid
 					item
@@ -102,7 +117,7 @@ const Catalog = () => {
 				>
 					<div className={classes.filterContainer}>
 						<Typography
-							className={classes.filterChild}
+							className={classes.filterHeading}
 							variant={"h4"}
 						>
 							Filters
