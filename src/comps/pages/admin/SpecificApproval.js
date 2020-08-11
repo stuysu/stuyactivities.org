@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	grow: {
 		width: "100%"
-	},
+	}
 }));
 
 const QUERY = gql`
@@ -148,10 +148,16 @@ const SpecificApproval = props => {
 	});
 	React.useEffect(() => {
 		if (!loading && fetchData?.organization) {
-			console.log(fetchData.organization.charterApprovalMessages)
+			console.log(fetchData.organization.charterApprovalMessages);
 			//fetchData is read-only, so we need to copy the object---this is the only way I can think of doing it without JSON.parse(JSON.stringify())
-			const newData = {...fetchData, organization: {...fetchData.organization, charter: {...fetchData.charter}}}
-			console.log(newData.organization.charterApprovalMessages)
+			const newData = {
+				...fetchData,
+				organization: {
+					...fetchData.organization,
+					charter: { ...fetchData.charter }
+				}
+			};
+			console.log(newData.organization.charterApprovalMessages);
 			if (newData.organization.charter.meetingDays) {
 				newData.organization.charter.meetingDays = newData.organization.charter.meetingDays.join(
 					", "
@@ -247,10 +253,10 @@ const SpecificApproval = props => {
 	};
 
 	const changeComments = () => {
-		console.log("ran")
-		setSkip(false)
-		refetch()
-	}
+		console.log("ran");
+		setSkip(false);
+		refetch();
+	};
 	return (
 		<div className={classes.root}>
 			<Typography variant={"h3"} className={classes.title}>
@@ -258,7 +264,8 @@ const SpecificApproval = props => {
 			</Typography>
 			<Grid container spacing={4} className={classes.container}>
 				<Grid item xs={7} className={classes.margin}>
-					{Object.keys(data.organization.charterEdits).length === 0 ? (
+					{Object.keys(data.organization.charterEdits).length ===
+					0 ? (
 						<div>
 							<Typography>
 								You've dealt with all of the changes!
@@ -269,11 +276,13 @@ const SpecificApproval = props => {
 						</div>
 					) : (
 						<FormControlLabel
-							style={{height: 41.9833}}
+							style={{ height: 41.9833 }}
 							control={
 								<Switch
 									checked={showDifference}
-									onChange={e => setShowDifference(e.target.checked)}
+									onChange={e =>
+										setShowDifference(e.target.checked)
+									}
 									color="primary"
 								/>
 							}
@@ -289,10 +298,13 @@ const SpecificApproval = props => {
 											variant={"h5"}
 											className={classes.grow}
 										>
-											Changes by {edit.submittingUser.name}
+											Changes by{" "}
+											{edit.submittingUser.name}
 										</Typography>
 										<Button
-											onClick={() => approveallPopup(edit.id)}
+											onClick={() =>
+												approveallPopup(edit.id)
+											}
 											style={{ "white-space": "nowrap" }}
 											color="primary"
 										>
@@ -308,9 +320,8 @@ const SpecificApproval = props => {
 												{showDifference ? (
 													<DiffComponent
 														old={
-															data.organization.charter[
-																field
-															]
+															data.organization
+																.charter[field]
 														}
 														next={edit[field]}
 													/>
@@ -355,7 +366,11 @@ const SpecificApproval = props => {
 					))}
 				</Grid>
 				<Grid item xs={5} className={classes.margin}>
-					<Comments comments={data.organization.charterApprovalMessages} changeComments={changeComments} orgId={data.organization.id}/>
+					<Comments
+						comments={data.organization.charterApprovalMessages}
+						changeComments={changeComments}
+						orgId={data.organization.id}
+					/>
 				</Grid>
 			</Grid>
 			<Dialog open={dialogOptions.open} fullWidth={true} maxWidth={"md"}>
