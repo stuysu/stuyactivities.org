@@ -8,7 +8,7 @@ import {
 	Button
 } from "@material-ui/core";
 import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 
 const ADDCOMMENT = gql`
 	mutation AddComment($orgId: Int!, $message: String!) {
