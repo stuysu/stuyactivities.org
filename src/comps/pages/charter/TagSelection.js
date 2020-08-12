@@ -6,10 +6,9 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import arrayToggle from "../../../utils/arrayToggle";
 import Chip from "@material-ui/core/Chip";
-import { Typography } from "@material-ui/core";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles(theme => ({
 	tagInput: {
@@ -17,6 +16,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	tagChip: {
 		marginRight: theme.spacing(1)
+	},
+	select: {
+		width: "100%"
 	}
 }));
 
@@ -29,12 +31,13 @@ const QUERY = gql`
 	}
 `;
 
-const TagSelection = () => {
+const TagSelection = ({ className }) => {
 	const classes = useStyles();
 	const { data } = useQuery(QUERY);
 	const charterContext = React.useContext(CharterFormContext);
 	const tags = data?.tags || [];
 	const tagMap = {};
+	const [open, setOpen] = React.useState(false);
 
 	tags.forEach(tag => {
 		tagMap[tag.id] = tag;
@@ -47,58 +50,68 @@ const TagSelection = () => {
 	}, [charterContext]);
 
 	const handleSelect = ev => {
-		if (charterContext?.tags?.length < 3) {
-			const newTag = Number(ev.target.value);
-			const newTags = arrayToggle(newTag, charterContext.tags);
-			charterContext.set({ tags: newTags });
+		if (ev.target.value.length <= 3) {
+			charterContext.set({ tags: ev.target.value });
+			charterContext.setError("tags", false);
 		}
-	};
-
-	const removeTag = tagId => {
-		const newTags = arrayToggle(tagId, charterContext.tags);
-		charterContext.set({ tags: newTags });
+		setOpen(false);
 	};
 
 	return (
 		<div>
-			<FormControl className={classes.tagInput}>
+			<FormControl variant={"outlined"} className={className}>
 				<InputLabel>Select Tags</InputLabel>
 				<Select
-					native
-					value={""}
+					variant={"outlined"}
+					className={classes.select}
+					fullWidth
+					multiple
+					label={"Select Tags"}
+					value={charterContext?.tags || []}
 					onChange={handleSelect}
-					disabled={charterContext?.tags?.length >= 3}
+					open={open}
+					onOpen={() => setOpen(true)}
+					onClose={() => setOpen(false)}
+					error={Boolean(charterContext?.errors?.tags)}
+					renderValue={selected => {
+						return (
+							<div>
+								{selected.map(tag => {
+									return (
+										<Chip
+											key={tag}
+											className={classes.tagChip}
+											label={tagMap[tag]?.name}
+											color="primary"
+										/>
+									);
+								})}
+							</div>
+						);
+					}}
 				>
-					<option aria-label="None" value="" disabled />
-					{tags
-						.filter(tag => !charterContext.tags.includes(tag.id))
-						.map(tag => {
-							return (
-								<option key={tag.id} value={tag.id}>
-									{tag.name}
-								</option>
-							);
-						})}
+					{tags?.map(tag => (
+						<MenuItem key={tag.id} value={tag.id}>
+							{charterContext?.tags?.includes(tag.id) ? (
+								<b>{tag.name}</b>
+							) : (
+								tag.name
+							)}
+						</MenuItem>
+					))}
 				</Select>
 				<FormHelperText>
+					{charterContext?.errors?.tags && (
+						<span>
+							{charterContext?.errors?.tags}
+							<br />
+						</span>
+					)}
 					{charterContext?.tags?.length >= 3
 						? "3 Tags selected. To select another, you must remove one first"
 						: "Select up to 3 tags that best represent your activity"}
 				</FormHelperText>
 			</FormControl>
-
-			<br />
-			{charterContext?.tags?.map(tag => {
-				return (
-					<Chip
-						key={tag}
-						className={classes.tagChip}
-						label={tagMap[tag]?.name}
-						onDelete={() => removeTag(tag)}
-						color="primary"
-					/>
-				);
-			})}
 		</div>
 	);
 };
