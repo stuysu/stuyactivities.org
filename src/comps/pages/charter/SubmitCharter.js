@@ -87,7 +87,7 @@ const SubmitCharter = () => {
 	}
 
 	const onSubmit = () => {
-		submit().catch(console.log);
+		submit().then(window.sessionStorage.clear).catch(console.log);
 	};
 
 	return (

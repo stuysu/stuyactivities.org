@@ -16,7 +16,8 @@ const useStyles = makeStyles({
 		marginBottom: "1rem"
 	},
 	keywords: {
-		marginBottom: "2rem"
+		marginBottom: "2rem",
+		marginTop: "1.5rem"
 	}
 });
 
