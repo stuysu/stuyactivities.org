@@ -22,7 +22,7 @@
 		"react-google-login": "^5.1.21",
 		"react-helmet": "^6.1.0",
 		"react-router-dom": "^5.2.0",
-		"react-scripts": "3.4.1",
+		"react-scripts": "3.4.2",
 		"react-window": "^1.8.5"
 	},
 	"scripts": {
