@@ -55,6 +55,13 @@ const Confirm = () => {
 					/>
 				</ListItem>
 
+				<ListItem>
+					<ListItemText
+						primary={"Keywords"}
+						secondary={form?.keywords?.join(", ")}
+					/>
+				</ListItem>
+
 				{form.picture && (
 					<ListItem>
 						<ListItemText

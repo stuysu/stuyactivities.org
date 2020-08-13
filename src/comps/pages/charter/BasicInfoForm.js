@@ -68,12 +68,12 @@ const BasicInfoForm = () => {
 					"Choose up to 3 keywords relating to your club that will help it show up in search results."
 				}
 				onAdd={chip =>
-					form.keywords.length < 3 &&
+					(form?.keywords || []).length < 3 &&
 					form.set({
 						keywords: arrayToggle(chip, form.keywords || [])
 					})
 				}
-				onDelete={(chip, index) =>
+				onDelete={chip =>
 					form.set({ keywords: arrayToggle(chip, form.keywords) })
 				}
 				chipRenderer={chip => {
@@ -85,9 +85,9 @@ const BasicInfoForm = () => {
 						/>
 					);
 				}}
-				allowDuplicates={false}
+				// allowDuplicates={false}
 				variant={"outlined"}
-				newChipKeys={["Enter", "Tab", " "]}
+				newChipKeys={["Enter", "Tab", " ", ","]}
 				className={classes.keywords}
 			/>
 
