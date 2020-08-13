@@ -13,6 +13,8 @@ import AddLeaders from "./AddLeaders";
 import BeforeYouStart from "./BeforeYouStart";
 import Confirm from "./Confirm";
 import BackButton from "../../ui/BackButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import SubmitCharter from "./SubmitCharter";
 
 // const numSteps = 3;
 
@@ -42,6 +44,25 @@ export default class Charter extends React.Component {
 		appointmentProcedures: { minWords: 150 },
 		uniqueness: { minWords: 75 }
 	};
+
+	componentWillUnmount() {
+		window.sessionStorage.setItem(
+			"charterForm",
+			JSON.stringify(this.state)
+		);
+	}
+
+	componentDidMount() {
+		const storedVal = window.sessionStorage.getItem("charterForm");
+
+		if (storedVal) {
+			this.setState(JSON.parse(storedVal));
+		}
+
+		window.onbeforeunload = () => {
+			this.componentWillUnmount();
+		};
+	}
 
 	constructor(props, context) {
 		super(props, context);
@@ -130,6 +151,10 @@ export default class Charter extends React.Component {
 				}));
 			}
 		};
+		this.hasErrors = () =>
+			Object.keys(this.state.errors).some(
+				field => this.state.errors[field]
+			);
 	}
 
 	render() {
@@ -143,7 +168,7 @@ export default class Charter extends React.Component {
 					<div
 						style={{
 							width: "1200px",
-							maxWidth: "90vw",
+							maxWidth: "95vw",
 							marginTop: "2rem"
 						}}
 					>
@@ -154,6 +179,7 @@ export default class Charter extends React.Component {
 						>
 							Chartering A New Activity
 						</Typography>
+
 						<Stepper
 							activeStep={this.state.activeStep}
 							orientation="vertical"
@@ -210,13 +236,32 @@ export default class Charter extends React.Component {
 								paddingBottom: "2rem"
 							}}
 						>
-							<Button
-								color={"secondary"}
-								variant={"contained"}
-								onClick={this.nextStep}
-							>
-								Next
-							</Button>
+							{this.state.activeStep < 4 && (
+								<Tooltip
+									disableHoverListener={
+										this.state.activeStep !== 3 ||
+										!this.hasErrors()
+									}
+									title={
+										"You need to fix the issues with your submission before you can continue"
+									}
+								>
+									<span>
+										<Button
+											color={"secondary"}
+											variant={"contained"}
+											onClick={this.nextStep}
+											disabled={
+												this.state.activeStep === 3 &&
+												this.hasErrors()
+											}
+										>
+											Next
+										</Button>
+									</span>
+								</Tooltip>
+							)}
+							{this.state.activeStep >= 4 && <SubmitCharter />}
 							&nbsp;
 							<Button onClick={this.previousStep}>Back</Button>
 						</div>

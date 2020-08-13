@@ -6,12 +6,17 @@ import UrlSelection from "./UrlSelection";
 import { makeStyles } from "@material-ui/core/styles";
 import PictureUpload from "./PictureUpload";
 import CommitmentLevel from "./CommitmentLevel";
-import { Grid } from "@material-ui/core";
+import { Chip, Grid } from "@material-ui/core";
+import ChipInput from "material-ui-chip-input";
+import arrayToggle from "../../../utils/arrayToggle";
 
 const useStyles = makeStyles({
 	select: {
 		width: "100%",
 		marginBottom: "1rem"
+	},
+	keywords: {
+		marginBottom: "2rem"
 	}
 });
 
@@ -53,7 +58,38 @@ const BasicInfoForm = () => {
 					<TagSelection className={classes.select} />
 				</Grid>
 			</Grid>
-			<br />
+
+			<ChipInput
+				fullWidth={true}
+				value={form?.keywords || []}
+				label={"Keywords"}
+				helperText={
+					"Choose up to 3 keywords relating to your club that will help it show up in search results."
+				}
+				onAdd={chip =>
+					form.keywords.length < 3 &&
+					form.set({
+						keywords: arrayToggle(chip, form.keywords || [])
+					})
+				}
+				onDelete={(chip, index) =>
+					form.set({ keywords: arrayToggle(chip, form.keywords) })
+				}
+				chipRenderer={chip => {
+					return (
+						<Chip
+							key={chip.value}
+							label={chip.value}
+							color="primary"
+						/>
+					);
+				}}
+				allowDuplicates={false}
+				variant={"outlined"}
+				newChipKeys={["Enter", "Tab", " "]}
+				className={classes.keywords}
+			/>
+
 			<PictureUpload />
 		</>
 	);

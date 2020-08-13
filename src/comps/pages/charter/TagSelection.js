@@ -50,6 +50,7 @@ const TagSelection = ({ className }) => {
 	}, [charterContext]);
 
 	const handleSelect = ev => {
+		console.log(ev.target.value);
 		if (ev.target.value.length <= 3) {
 			charterContext.set({ tags: ev.target.value });
 			charterContext.setError("tags", false);
@@ -79,9 +80,9 @@ const TagSelection = ({ className }) => {
 								{selected.map(tag => {
 									return (
 										<Chip
-											key={tag}
+											key={tag.id}
 											className={classes.tagChip}
-											label={tagMap[tag]?.name}
+											label={tag?.name}
 											color="primary"
 										/>
 									);
@@ -91,8 +92,10 @@ const TagSelection = ({ className }) => {
 					}}
 				>
 					{tags?.map(tag => (
-						<MenuItem key={tag.id} value={tag.id}>
-							{charterContext?.tags?.includes(tag.id) ? (
+						<MenuItem key={tag.id} value={tag}>
+							{charterContext?.tags?.some(
+								t => t.id === tag.id
+							) ? (
 								<b>{tag.name}</b>
 							) : (
 								tag.name
