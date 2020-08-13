@@ -18,6 +18,10 @@ const useStyles = makeStyles({
 	keywords: {
 		marginBottom: "2rem",
 		marginTop: "1.5rem"
+	},
+	chip: {
+		marginRight: "0.5rem",
+		marginBottom: "0.5rem"
 	}
 });
 
@@ -65,26 +69,32 @@ const BasicInfoForm = () => {
 				value={form?.keywords || []}
 				label={"Keywords"}
 				helperText={
-					"Choose up to 3 keywords relating to your club that will help it show up in search results."
+					"Choose up to 3 keywords relating to your activity. They will not be publicly visible but they will help your activity show up in search results. This can be things like alternate names or acronyms."
 				}
-				onAdd={chip =>
-					(form?.keywords || []).length < 3 &&
-					form.set({
-						keywords: arrayToggle(chip, form.keywords || [])
-					})
-				}
+				onAdd={chip => {
+					if ((form?.keywords || []).length < 3) {
+						form.set({
+							keywords: arrayToggle(chip, form.keywords || [])
+						});
+					}
+				}}
 				onDelete={chip =>
 					form.set({ keywords: arrayToggle(chip, form.keywords) })
 				}
 				chipRenderer={chip => {
-					return (
-						<Chip
-							key={chip.value}
-							label={chip.value}
-							color="primary"
-						/>
-					);
+					if (chip.value) {
+						return (
+							<Chip
+								key={chip.value}
+								label={chip.value}
+								color="primary"
+								className={classes.chip}
+							/>
+						);
+					}
+					return null;
 				}}
+				error={form.errors?.keywords}
 				// allowDuplicates={false}
 				variant={"outlined"}
 				newChipKeys={["Enter", "Tab", " ", ","]}

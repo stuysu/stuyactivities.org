@@ -53,10 +53,11 @@ const AddLeaders = () => {
 
 	return (
 		<div>
-			<Typography>
-				If your club has any leaders or faculty advisors, add them here
+			<Typography paragraph>
+				Your club must have at least one other leader and/or a faculty
+				advisor. Please be mindful that clubs without faculty advisors
+				will be limited in their abilities.
 			</Typography>
-			<br />
 			<Autocomplete
 				options={options}
 				value={null}

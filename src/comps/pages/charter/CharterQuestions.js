@@ -51,7 +51,7 @@ const CharterQuestions = () => {
 				name={"appointmentProcedures"}
 				label={"Appointment Procedures"}
 				helperText={
-					"Are there any specific protocols members are expected to follow? What is the policy for transfer of leadership between school years?"
+					"What are the leadership positions and how are they appointed? Are there any specific protocols members are expected to follow? What is the policy for transfer of leadership between school years?"
 				}
 				maxWords={400}
 				minWords={150}

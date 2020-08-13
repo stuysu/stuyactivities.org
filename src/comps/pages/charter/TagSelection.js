@@ -50,7 +50,6 @@ const TagSelection = ({ className }) => {
 	}, [charterContext]);
 
 	const handleSelect = ev => {
-		console.log(ev.target.value);
 		if (ev.target.value.length <= 3) {
 			charterContext.set({ tags: ev.target.value });
 			charterContext.setError("tags", false);
