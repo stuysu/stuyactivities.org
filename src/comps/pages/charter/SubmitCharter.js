@@ -68,7 +68,7 @@ const SubmitCharter = () => {
 			meetingSchedule: form.meetingSchedule,
 			meetingDays: form.meetingDays,
 			commitmentLevel: form.commitmentLevel,
-			keywords: form.keywords,
+			keywords: form.keywords.filter(Boolean),
 			extra: form.extra,
 			picture: form.picture
 		}

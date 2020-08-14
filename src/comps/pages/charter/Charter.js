@@ -65,7 +65,8 @@ export default class Charter extends React.Component {
 		benefit: { minWords: 200 },
 		appointmentProcedures: { minWords: 150 },
 		uniqueness: { minWords: 75 },
-		meetingSchedule: { minChars: 50 }
+		meetingSchedule: { minChars: 50 },
+		meetingDays: {}
 	};
 
 	constructor(props, context) {
@@ -122,7 +123,7 @@ export default class Charter extends React.Component {
 					? false
 					: "You must select at least one tag";
 
-				errors.keywords = this.state?.keywords?.length
+				errors.keywords = this.state?.keywords?.filter(Boolean).length
 					? false
 					: "You must specify at least one keyword";
 			}
@@ -235,7 +236,8 @@ export default class Charter extends React.Component {
 												"name",
 												"url",
 												"commitmentLevel",
-												"tags"
+												"tags",
+												"keywords"
 											].some(
 												field =>
 													this.state.errors[field]
