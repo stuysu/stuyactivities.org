@@ -1,18 +1,26 @@
 import React from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import AppContext from "./AppContext";
+import UserContext from "./UserContext";
 
 const basicInfo = gql`
 	query {
 		authenticatedUser {
-			userId: id
+			id
 			name
 			firstName
 			lastName
 			email
 			picture
 			grade
+			memberships {
+				role
+				organization {
+					name
+					url
+				}
+				adminPrivileges
+			}
 		}
 	}
 `;
@@ -23,7 +31,7 @@ const logoutQuery = gql`
 	}
 `;
 
-const AppProvider = props => {
+const UserProvider = props => {
 	const {
 		// loading,
 		// error,
@@ -53,10 +61,10 @@ const AppProvider = props => {
 	}
 
 	return (
-		<AppContext.Provider value={value}>
+		<UserContext.Provider value={value}>
 			{props.children}
-		</AppContext.Provider>
+		</UserContext.Provider>
 	);
 };
 
-export default AppProvider;
+export default UserProvider;
