@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import AppContext from "../../context/AppContext";
+import UserContext from "../../context/UserContext";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -55,7 +55,7 @@ const StylesWrapper = ({ children }) => {
 };
 
 export default class Charter extends React.Component {
-	static contextType = AppContext;
+	static contextType = UserContext;
 
 	static numSteps = 5;
 

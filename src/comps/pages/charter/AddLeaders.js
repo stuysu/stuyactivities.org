@@ -11,7 +11,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import AppContext from "../../context/AppContext";
+import UserContext from "../../context/UserContext";
 import { Close } from "@material-ui/icons";
 
 const useStyles = makeStyles({
@@ -40,14 +40,14 @@ const AddLeaders = () => {
 	const classes = useStyles();
 	const [keyword, setKeyword] = React.useState("");
 	const { data, loading } = useQuery(QUERY, { variables: { keyword } });
-	const context = React.useContext(AppContext);
+	const userContext = React.useContext(UserContext);
 
 	const form = React.useContext(CharterFormContext);
 
 	const options =
 		data?.users?.filter(
 			user =>
-				user.id !== context.userId &&
+				user.id !== userContext.id &&
 				!form?.leaders?.some(leader => leader.id === user.id)
 		) || [];
 

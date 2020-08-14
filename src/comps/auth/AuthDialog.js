@@ -5,7 +5,7 @@ import Slide from "@material-ui/core/Slide";
 import AuthContext from "./AuthContext";
 import AuthContent from "./AuthContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import AppContext from "../context/AppContext";
+import UserContext from "../context/UserContext";
 
 const loginDialogEmitter = new EventEmitter();
 
@@ -23,7 +23,7 @@ const FullScreenWrapper = ({ children }) => {
 };
 
 class AuthDialog extends React.Component {
-	static contextType = AppContext;
+	static contextType = UserContext;
 
 	constructor(props, context) {
 		super(props, context);

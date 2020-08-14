@@ -1,5 +1,5 @@
 import React from "react";
-import AppContext from "../../context/AppContext";
+import UserContext from "../../context/UserContext";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 const NavAvatar = () => {
 	const classes = useStyles();
 
-	const context = React.useContext(AppContext);
+	const user = React.useContext(UserContext);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
 
@@ -40,12 +40,10 @@ const NavAvatar = () => {
 				color="inherit"
 				onClick={handleMenu}
 			>
-				{context.picture ? (
-					<Avatar alt={context.name} src={context.picture} />
+				{user.picture ? (
+					<Avatar alt={user.name} src={user.picture} />
 				) : (
-					<Avatar>
-						{context.firstName[0] + context.lastName[0]}
-					</Avatar>
+					<Avatar>{user.firstName[0] + user.lastName[0]}</Avatar>
 				)}
 			</IconButton>
 
@@ -58,7 +56,7 @@ const NavAvatar = () => {
 				className={classes.menu}
 			>
 				<MenuItem onClick={handleClose}>My Account</MenuItem>
-				<MenuItem onClick={context.logout}>Log Out</MenuItem>
+				<MenuItem onClick={user.logout}>Log Out</MenuItem>
 			</Menu>
 		</div>
 	);

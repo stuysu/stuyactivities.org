@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
-import AppContext from "../../context/AppContext";
+import UserContext from "../../context/UserContext";
 import NavAvatar from "./NavAvatar";
 import UnstyledLink from "../UnstyledLink";
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 const NavBar = ({ setDrawerOpen }) => {
 	const classes = useStyles();
 
-	const context = React.useContext(AppContext);
+	const user = React.useContext(UserContext);
 
 	return (
 		<div className={classes.root}>
@@ -45,7 +45,7 @@ const NavBar = ({ setDrawerOpen }) => {
 						<UnstyledLink to={"/"}>StuyActivities</UnstyledLink>
 					</Typography>
 
-					{context.signedIn ? (
+					{user.signedIn ? (
 						<NavAvatar />
 					) : (
 						<Button color="inherit" onClick={triggerLoginDialog}>
