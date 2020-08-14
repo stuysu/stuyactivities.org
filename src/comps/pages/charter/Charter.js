@@ -133,6 +133,10 @@ export default class Charter extends React.Component {
 						? false
 						: "Fails to meet requirements";
 				});
+
+				if (!this.state?.meetingDays?.length) {
+					errors.meetingDays = "You must select at least one day.";
+				}
 			}
 
 			this.setState({ errors });

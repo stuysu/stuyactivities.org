@@ -93,7 +93,10 @@ const CharterQuestions = () => {
 				rows={3}
 			/>
 
-			<Typography paragraph>
+			<Typography
+				paragraph
+				color={Boolean(form.errors.meetingDays) ? "error" : undefined}
+			>
 				What days do you plan to hold meetings? (select all that apply)
 				*
 			</Typography>
@@ -109,14 +112,18 @@ const CharterQuestions = () => {
 											checked={form?.meetingDays?.includes(
 												day
 											)}
-											onChange={() =>
+											onChange={() => {
+												form.setError(
+													"meetingDays",
+													false
+												);
 												form.set({
 													meetingDays: arrayToggle(
 														day,
 														form.meetingDays || []
 													)
-												})
-											}
+												});
+											}}
 										/>
 									}
 									label={capitalizeString(day)}
