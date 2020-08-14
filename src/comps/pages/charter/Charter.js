@@ -15,22 +15,44 @@ import Confirm from "./Confirm";
 import BackButton from "../../ui/BackButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import SubmitCharter from "./SubmitCharter";
+import { makeStyles } from "@material-ui/core/styles";
+import textValidator from "../../../utils/textValidator";
 
 // const numSteps = 3;
 
-const textValidator = (text, requirements) => {
-	if (requirements.minChars) {
-		return text?.length > requirements.minChars;
-	}
-
-	if (requirements.minWords) {
-		return text?.split(" ").filter(Boolean).length > requirements.minWords;
-	}
-
-	return true;
-};
-
 export const CharterFormContext = React.createContext({});
+
+const useStyles = makeStyles(theme => ({
+	container: {
+		width: "1200px",
+		maxWidth: "95vw",
+		marginTop: "2rem"
+	},
+	navigationButtons: {
+		paddingTop: "1rem",
+		zIndex: 3,
+		paddingLeft: "1rem",
+		paddingBottom: "1rem",
+		position: "sticky",
+		bottom: 0,
+		background: theme.palette.background.default
+	},
+	stepper: {
+		background: theme.palette.background.default
+	},
+	stepLabel: {
+		cursor: "pointer"
+	},
+	backButton: {
+		marginLeft: "1rem",
+		marginBottom: theme.spacing(2)
+	}
+}));
+
+const StylesWrapper = ({ children }) => {
+	const classes = useStyles();
+	return children(classes);
+};
 
 export default class Charter extends React.Component {
 	static contextType = AppContext;
@@ -172,111 +194,142 @@ export default class Charter extends React.Component {
 		}
 
 		return (
-			<CharterFormContext.Provider value={this.state}>
-				<FlexCenter>
-					<div
-						style={{
-							width: "1200px",
-							maxWidth: "95vw",
-							marginTop: "2rem"
-						}}
-					>
-						<BackButton to={"/"} label={"Back To Home"} />
-						<Typography
-							variant={"h4"}
-							style={{ textAlign: "center" }}
-						>
-							Chartering A New Activity
-						</Typography>
+			<StylesWrapper>
+				{classes => (
+					<CharterFormContext.Provider value={this.state}>
+						<FlexCenter>
+							<div className={classes.container}>
+								<BackButton
+									to={"/"}
+									label={"Back To Home"}
+									className={classes.backButton}
+								/>
+								<Typography
+									variant={"h4"}
+									style={{ textAlign: "center" }}
+								>
+									Chartering A New Activity
+								</Typography>
 
-						<Stepper
-							activeStep={this.state.activeStep}
-							orientation="vertical"
-						>
-							<Step>
-								<StepLabel>Before you start</StepLabel>
-								<StepContent>
-									<BeforeYouStart />
-								</StepContent>
-							</Step>
-							<Step>
-								<StepLabel
-									error={[
-										"name",
-										"url",
-										"commitmentLevel",
-										"tags"
-									].some(field => this.state.errors[field])}
+								<Stepper
+									className={classes.stepper}
+									activeStep={this.state.activeStep}
+									orientation="vertical"
 								>
-									Basic Info
-								</StepLabel>
-								<StepContent>
-									<BasicInfoForm />
-								</StepContent>
-							</Step>
-							<Step>
-								<StepLabel
-									error={Object.keys(
-										Charter.charterRequirementMap
-									).some(field => this.state.errors[field])}
-								>
-									Charter Information
-								</StepLabel>
-								<StepContent>
-									<CharterQuestions />
-								</StepContent>
-							</Step>
-							<Step>
-								<StepLabel>Leaders</StepLabel>
-								<StepContent>
-									<AddLeaders />
-								</StepContent>
-							</Step>
-							<Step>
-								<StepLabel>Confirm</StepLabel>
-								<StepContent>
-									<Confirm />
-								</StepContent>
-							</Step>
-						</Stepper>
-						<div
-							style={{
-								paddingLeft: "1rem",
-								paddingBottom: "2rem"
-							}}
-						>
-							{this.state.activeStep < 4 && (
-								<Tooltip
-									disableHoverListener={
-										this.state.activeStep !== 3 ||
-										!this.hasErrors()
-									}
-									title={
-										"You need to fix the issues with your submission before you can continue"
-									}
-								>
-									<span>
-										<Button
-											color={"secondary"}
-											variant={"contained"}
-											onClick={this.nextStep}
-											disabled={
-												this.state.activeStep === 3 &&
-												this.hasErrors()
+									<Step>
+										<StepLabel
+											className={classes.stepLabel}
+											onClick={() =>
+												this.setState({ activeStep: 0 })
 											}
 										>
-											Next
-										</Button>
-									</span>
-								</Tooltip>
-							)}
-							{this.state.activeStep >= 4 && <SubmitCharter />}
-							&nbsp;
-							<Button onClick={this.previousStep}>Back</Button>
-						</div>
-					</div>
-				</FlexCenter>
-			</CharterFormContext.Provider>
+											Before you start
+										</StepLabel>
+										<StepContent>
+											<BeforeYouStart />
+										</StepContent>
+									</Step>
+									<Step>
+										<StepLabel
+											error={[
+												"name",
+												"url",
+												"commitmentLevel",
+												"tags"
+											].some(
+												field =>
+													this.state.errors[field]
+											)}
+											className={classes.stepLabel}
+											onClick={() =>
+												this.setState({ activeStep: 1 })
+											}
+										>
+											Basic Info
+										</StepLabel>
+										<StepContent>
+											<BasicInfoForm />
+										</StepContent>
+									</Step>
+									<Step>
+										<StepLabel
+											error={Object.keys(
+												Charter.charterRequirementMap
+											).some(
+												field =>
+													this.state.errors[field]
+											)}
+											className={classes.stepLabel}
+											onClick={() =>
+												this.setState({ activeStep: 2 })
+											}
+										>
+											Charter Information
+										</StepLabel>
+										<StepContent>
+											<CharterQuestions />
+										</StepContent>
+									</Step>
+									<Step>
+										<StepLabel
+											className={classes.stepLabel}
+											onClick={() =>
+												this.setState({ activeStep: 3 })
+											}
+										>
+											Leaders
+										</StepLabel>
+										<StepContent>
+											<AddLeaders />
+										</StepContent>
+									</Step>
+									<Step>
+										<StepLabel>Confirm</StepLabel>
+										<StepContent>
+											<Confirm />
+										</StepContent>
+									</Step>
+								</Stepper>
+								<div className={classes.navigationButtons}>
+									{this.state.activeStep < 4 && (
+										<Tooltip
+											disableHoverListener={
+												this.state.activeStep !== 3 ||
+												!this.hasErrors()
+											}
+											title={
+												"You need to fix the issues with your submission before you can continue"
+											}
+										>
+											<span>
+												<Button
+													color={"secondary"}
+													variant={"contained"}
+													onClick={this.nextStep}
+													disabled={
+														this.state
+															.activeStep === 3 &&
+														this.hasErrors()
+													}
+												>
+													Next
+												</Button>
+											</span>
+										</Tooltip>
+									)}
+									{this.state.activeStep >= 4 && (
+										<SubmitCharter />
+									)}
+									&nbsp;
+									<Button onClick={this.previousStep}>
+										Back
+									</Button>
+								</div>
+							</div>
+						</FlexCenter>
+					</CharterFormContext.Provider>
+				)}
+			</StylesWrapper>
 		);
 	}
 }
