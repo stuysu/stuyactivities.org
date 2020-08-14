@@ -70,7 +70,7 @@ const BasicInfoForm = () => {
 				label={"Keywords"}
 				required
 				helperText={
-					"Choose between 1 to 3 keywords relating to your activity. They will not be publicly visible but they will help your activity show up in search results. This can be things like alternate names or acronyms. For example, the Student Union might add 'SU' as a keyword."
+					"Choose between 1 to 3 keywords relating to your activity. They will not be publicly visible but they will help your activity show up in search results. This can be things like alternate names or acronyms. For example, the Student Union might add 'SU' as a keyword. Separate your entries with the spacebar, enter button, or with commas."
 				}
 				onAdd={chip => {
 					if (
