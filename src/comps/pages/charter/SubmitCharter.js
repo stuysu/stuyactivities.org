@@ -4,6 +4,7 @@ import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/client";
 import { CharterFormContext } from "./Charter";
 import { Redirect } from "react-router-dom";
+import { cache } from "../../context/ApolloProvider";
 
 const MUTATION = gql`
 	mutation CreateOrg(
@@ -87,7 +88,13 @@ const SubmitCharter = () => {
 	}
 
 	const onSubmit = () => {
-		submit().then(window.sessionStorage.clear).catch(console.log);
+		cache
+			.reset()
+			.then(() => submit())
+			.then(() => {
+				window.sessionStorage.clear();
+			})
+			.catch(console.log);
 	};
 
 	return (

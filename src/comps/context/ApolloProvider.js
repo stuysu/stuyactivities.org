@@ -4,10 +4,12 @@ import { InMemoryCache } from "@apollo/client";
 
 import { ApolloProvider as Provider } from "@apollo/react-hooks";
 
+export const cache = new InMemoryCache();
+
 export const client = new ApolloClient({
 	uri: "https://staging.stuyactivities.org/graphql",
 	credentials: "include",
-	cache: new InMemoryCache()
+	cache
 });
 
 const ApolloProvider = props => {
