@@ -1,20 +1,20 @@
 import React from "react";
 import {
-	makeStyles,
-	Typography,
+	Button,
 	Card,
 	CardContent,
-	Button,
 	Dialog,
-	DialogTitle,
+	DialogActions,
 	DialogContent,
 	DialogContentText,
-	DialogActions,
+	DialogTitle,
+	FormControlLabel,
+	makeStyles,
 	Switch,
-	FormControlLabel
+	Typography
 } from "@material-ui/core";
 import { gql } from "@apollo/client";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 //import Diff from "diff"
 const Diff = require("diff");
 

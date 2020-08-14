@@ -6,6 +6,7 @@ import AppContext from "./AppContext";
 const basicInfo = gql`
 	query {
 		authenticatedUser {
+			userId: id
 			name
 			firstName
 			lastName
