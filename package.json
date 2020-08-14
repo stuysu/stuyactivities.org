@@ -8,9 +8,9 @@
 		"@material-ui/core": "^4.11.0",
 		"@material-ui/icons": "^4.9.1",
 		"@material-ui/lab": "^4.0.0-alpha.56",
-		"@testing-library/jest-dom": "^5.11.2",
+		"@testing-library/jest-dom": "^5.11.3",
 		"@testing-library/react": "^10.4.8",
-		"@testing-library/user-event": "^12.1.0",
+		"@testing-library/user-event": "^12.1.1",
 		"apollo-boost": "^0.4.9",
 		"apollo-cache-inmemory": "^1.6.6",
 		"apollo-cache-persist": "^0.1.1",
@@ -25,7 +25,7 @@
 		"react-google-login": "^5.1.21",
 		"react-helmet": "^6.1.0",
 		"react-router-dom": "^5.2.0",
-		"react-scripts": "3.4.1",
+		"react-scripts": "3.4.3",
 		"react-window": "^1.8.5"
 	},
 	"scripts": {
