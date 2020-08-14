@@ -23,7 +23,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
 const useStyles = makeStyles(theme => ({
 	list: {
-		width: 300
+		width: 250
 	},
 	avatar: {
 		width: "100px",
@@ -91,7 +91,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItem>
 				</UnstyledLink>
 
-				<ListSubheader>Explore</ListSubheader>
+				<ListSubheader disableSticky>Explore</ListSubheader>
 				<UnstyledLink to={"/catalog"}>
 					<ListItem button>
 						<ListItemIcon>
@@ -112,7 +112,9 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				</ListItem>
 				{user.signedIn && user.memberships?.length > 0 && (
 					<>
-						<ListSubheader>My Activities</ListSubheader>
+						<ListSubheader disableSticky>
+							My Activities
+						</ListSubheader>
 						{user.memberships?.map(membership => (
 							<UnstyledLink
 								to={`/${membership?.organization?.url}`}
@@ -137,26 +139,24 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</>
 				)}
 
-				<div className={classes.footer}>
-					<ListSubheader>Info</ListSubheader>
-					<UnstyledLink to={"/about"}>
-						<ListItem button>
-							<ListItemIcon>
-								<Info />
-							</ListItemIcon>
-							<ListItemText primary={"About"} />
-						</ListItem>
-					</UnstyledLink>
+				<ListSubheader disableSticky>Info</ListSubheader>
+				<UnstyledLink to={"/about"}>
+					<ListItem button>
+						<ListItemIcon>
+							<Info />
+						</ListItemIcon>
+						<ListItemText primary={"About"} />
+					</ListItem>
+				</UnstyledLink>
 
-					<UnstyledLink to={"/rules"}>
-						<ListItem button>
-							<ListItemIcon>
-								<Gavel />
-							</ListItemIcon>
-							<ListItemText primary={"Rules"} />
-						</ListItem>
-					</UnstyledLink>
-				</div>
+				<UnstyledLink to={"/rules"}>
+					<ListItem button>
+						<ListItemIcon>
+							<Gavel />
+						</ListItemIcon>
+						<ListItemText primary={"Rules"} />
+					</ListItem>
+				</UnstyledLink>
 			</List>
 		</Drawer>
 	);
