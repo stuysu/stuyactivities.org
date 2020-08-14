@@ -10,7 +10,6 @@ import SULogo from "./../../../img/su-logo512.png";
 import UserContext from "../../context/UserContext";
 import {
 	Archive,
-	ArtTrack,
 	EmojiSymbols,
 	Gavel,
 	Home,
@@ -21,11 +20,10 @@ import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 const useStyles = makeStyles(theme => ({
 	list: {
-		width: 250
+		width: 300
 	},
 	avatar: {
 		width: "100px",
@@ -139,24 +137,26 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</>
 				)}
 
-				<ListSubheader>Info</ListSubheader>
-				<UnstyledLink to={"/about"}>
-					<ListItem button>
-						<ListItemIcon>
-							<Info />
-						</ListItemIcon>
-						<ListItemText primary={"About"} />
-					</ListItem>
-				</UnstyledLink>
+				<div className={classes.footer}>
+					<ListSubheader>Info</ListSubheader>
+					<UnstyledLink to={"/about"}>
+						<ListItem button>
+							<ListItemIcon>
+								<Info />
+							</ListItemIcon>
+							<ListItemText primary={"About"} />
+						</ListItem>
+					</UnstyledLink>
 
-				<UnstyledLink to={"/rules"}>
-					<ListItem button>
-						<ListItemIcon>
-							<Gavel />
-						</ListItemIcon>
-						<ListItemText primary={"Rules"} />
-					</ListItem>
-				</UnstyledLink>
+					<UnstyledLink to={"/rules"}>
+						<ListItem button>
+							<ListItemIcon>
+								<Gavel />
+							</ListItemIcon>
+							<ListItemText primary={"Rules"} />
+						</ListItem>
+					</UnstyledLink>
+				</div>
 			</List>
 		</Drawer>
 	);
