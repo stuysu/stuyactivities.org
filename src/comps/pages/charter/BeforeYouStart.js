@@ -26,11 +26,11 @@ const BeforeYouStart = () => {
 				two weeks for SU Clubs & Pubs Administrators to review your
 				charter. Unless there are any issues with your charter (i.e.
 				lack of compliance with the rules or unclear submissions) the SU
-				Admins will approve it. Once you have received these approvals,
-				your club will appear in the StuyActivities Catalog, and you can
-				begin adding members and scheduling meetings. If you have any
-				questions or concerns regarding the chartering process, please
-				reach out to us at clubpub@stuysu.org. Happy chartering!
+				Admins will approve it. Once your activity is approved, it will
+				appear in the StuyActivities Catalog, and you can begin adding
+				members and scheduling meetings. If you have any questions or
+				concerns regarding the chartering process, please reach out to
+				us at clubpub@stuysu.org. Happy chartering!
 			</Typography>
 		</div>
 	);

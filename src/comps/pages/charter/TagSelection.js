@@ -59,7 +59,7 @@ const TagSelection = ({ className }) => {
 
 	return (
 		<div>
-			<FormControl variant={"outlined"} className={className}>
+			<FormControl variant={"outlined"} required className={className}>
 				<InputLabel>Select Tags</InputLabel>
 				<Select
 					variant={"outlined"}

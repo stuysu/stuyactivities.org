@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 		marginBottom: "1rem"
 	},
 	keywords: {
-		marginBottom: "2rem",
+		marginBottom: "2.5rem",
 		marginTop: "1.5rem"
 	},
 	chip: {
@@ -68,8 +68,9 @@ const BasicInfoForm = () => {
 				fullWidth={true}
 				value={form?.keywords || []}
 				label={"Keywords"}
+				required
 				helperText={
-					"Choose up to 3 keywords relating to your activity. They will not be publicly visible but they will help your activity show up in search results. This can be things like alternate names or acronyms."
+					"Choose between 1 to 3 keywords relating to your activity. They will not be publicly visible but they will help your activity show up in search results. This can be things like alternate names or acronyms. For example, the Student Union might add 'SU' as a keyword."
 				}
 				onAdd={chip => {
 					if ((form?.keywords || []).length < 3) {

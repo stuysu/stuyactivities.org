@@ -102,7 +102,7 @@ export default class Charter extends React.Component {
 		this.beforeStepChange = () => {
 			const errors = { ...this.state.errors };
 
-			if (this.state.activeStep === 1) {
+			if (this.state.activeStep >= 1) {
 				errors.name = this.state?.name?.trim()
 					? false
 					: "You must provide a name for your activity";
@@ -124,7 +124,7 @@ export default class Charter extends React.Component {
 					: "You must specify at least one keyword";
 			}
 
-			if (this.state.activeStep === 2) {
+			if (this.state.activeStep >= 2) {
 				Object.keys(Charter.charterRequirementMap).forEach(field => {
 					errors[field] = textValidator(
 						this.state[field],
@@ -204,7 +204,7 @@ export default class Charter extends React.Component {
 										"tags"
 									].some(field => this.state.errors[field])}
 								>
-									Basic Info:
+									Basic Info
 								</StepLabel>
 								<StepContent>
 									<BasicInfoForm />

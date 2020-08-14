@@ -54,9 +54,12 @@ const AddLeaders = () => {
 	return (
 		<div>
 			<Typography paragraph>
-				Your club must have at least one other leader and/or a faculty
-				advisor. Please be mindful that clubs without faculty advisors
-				will be limited in their abilities.
+				Your Activity must have at least one other student leader. Your
+				Activity must also have a Faculty Advisor if it wishes to host
+				meetings in Stuyvesant past 5:00 pm, host guest speakers at
+				Stuyvesant, have in-person events, meeting, field trips, etc.
+				outside of Stuyvesant, or request funding from the Student
+				Union.
 			</Typography>
 			<Autocomplete
 				options={options}
@@ -98,6 +101,7 @@ const AddLeaders = () => {
 				renderInput={params => (
 					<TextField
 						{...params}
+						required={true}
 						label="Find User"
 						variant="outlined"
 						value={keyword}

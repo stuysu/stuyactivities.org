@@ -71,6 +71,7 @@ const CharterQuestions = () => {
 
 			<SmartCharterQuestion
 				name={"extra"}
+				required={false}
 				label={
 					"What additional things would you like to share about your activity?"
 				}
@@ -85,6 +86,7 @@ const CharterQuestions = () => {
 			<SmartCharterQuestion
 				name={"meetingSchedule"}
 				label={"What's your activity's meeting schedule?"}
+				helperText={`Something like "Our meeting schedule varies throughout the year, but we meet at least once a month and up to 3 times in the Spring."`}
 				minChars={50}
 				maxChars={1000}
 				multiline
@@ -93,6 +95,7 @@ const CharterQuestions = () => {
 
 			<Typography paragraph>
 				What days do you plan to hold meetings? (select all that apply)
+				*
 			</Typography>
 
 			<Grid container spacing={3}>

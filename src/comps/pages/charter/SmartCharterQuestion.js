@@ -18,6 +18,7 @@ const SmartCharterQuestion = ({
 	className,
 	multiline,
 	fullWidth,
+	required,
 	rows,
 	label,
 	helperText
@@ -87,6 +88,7 @@ const SmartCharterQuestion = ({
 			<TextField
 				onBlur={onBlur}
 				label={label}
+				required={required ?? true}
 				error={Boolean(form.errors[name])}
 				fullWidth={fullWidth ?? true}
 				helperText={
