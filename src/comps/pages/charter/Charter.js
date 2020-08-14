@@ -68,25 +68,6 @@ export default class Charter extends React.Component {
 		meetingSchedule: { minChars: 50 }
 	};
 
-	componentWillUnmount() {
-		window.sessionStorage.setItem(
-			"charterForm",
-			JSON.stringify(this.state)
-		);
-	}
-
-	componentDidMount() {
-		const storedVal = window.sessionStorage.getItem("charterForm");
-
-		if (storedVal) {
-			this.setState(JSON.parse(storedVal));
-		}
-
-		window.onbeforeunload = () => {
-			this.componentWillUnmount();
-		};
-	}
-
 	constructor(props, context) {
 		super(props, context);
 
@@ -186,6 +167,25 @@ export default class Charter extends React.Component {
 			Object.keys(this.state.errors).some(
 				field => this.state.errors[field]
 			) || !this.state?.leaders?.length;
+	}
+
+	componentWillUnmount() {
+		window.sessionStorage.setItem(
+			"charterForm",
+			JSON.stringify(this.state)
+		);
+	}
+
+	componentDidMount() {
+		const storedVal = window.sessionStorage.getItem("charterForm");
+
+		if (storedVal) {
+			this.setState(JSON.parse(storedVal));
+		}
+
+		window.onbeforeunload = () => {
+			this.componentWillUnmount();
+		};
 	}
 
 	render() {
