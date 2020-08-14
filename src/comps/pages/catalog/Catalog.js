@@ -13,6 +13,15 @@ import CommitmentFilter from "./filters/CommitmentFilter";
 import MeetingDaysFilter from "./filters/MeetingDaysFilter";
 import { Helmet } from "react-helmet";
 
+import scubaNotFound from "./../../../img/vectors/scuba-diver-not-found.svg";
+import cherryNotFound from "./../../../img/vectors/cherry-page-not-found.svg";
+import foggNotFound from "./../../../img/vectors/fogg-page-not-found.svg";
+
+import Button from "@material-ui/core/Button";
+import UnstyledLink from "../../ui/UnstyledLink";
+
+const errorImages = [scubaNotFound, cherryNotFound, foggNotFound];
+
 const useStyles = makeStyles(theme => ({
 	root: {
 		flexGrow: 1
@@ -38,6 +47,15 @@ const useStyles = makeStyles(theme => ({
 		position: "absolute",
 		right: theme.spacing(1),
 		top: theme.spacing(1)
+	},
+	defaultVector: {
+		width: "400px",
+		maxWidth: "80vw",
+		maxHeight: "30vh",
+		marginBottom: "1rem"
+	},
+	notFoundContainer: {
+		textAlign: "center"
 	}
 }));
 
@@ -72,7 +90,7 @@ const QUERY = gql`
 const Catalog = () => {
 	const classes = useStyles();
 
-	const [keyword, setKeyword] = React.useState("");
+	const [keyword, setKeyword] = React.useState("aaaaaaaaaa");
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
@@ -142,9 +160,6 @@ const Catalog = () => {
 					lg={9}
 					xl={10}
 					className={classes.bigChild}
-					alignContent={"flex-start"}
-					alignItems={"flex-start"}
-					justify={"space-around"}
 				>
 					<div className={classes.catalogHeading}>
 						<Typography
@@ -160,7 +175,44 @@ const Catalog = () => {
 							{listView ? <List /> : <ViewComfy />}
 						</IconButton>
 					</div>
-					<Grid container>
+
+					{data?.organizations?.length === 0 && (
+						<div className={classes.notFoundContainer}>
+							<img
+								src={
+									errorImages[
+										Math.floor(
+											Math.random() * errorImages.length
+										)
+									]
+								}
+								alt={"A Cute Not Found Vector"}
+								className={classes.defaultVector}
+							/>
+							<Typography paragraph>
+								We couldn't find any activities matching that
+								criteria.
+							</Typography>
+
+							<Typography paragraph>
+								If you feel there ought to be, maybe you should
+								start one!
+							</Typography>
+
+							<UnstyledLink to={"/charter"}>
+								<Button variant={"contained"} color={"primary"}>
+									Create Activity
+								</Button>
+							</UnstyledLink>
+						</div>
+					)}
+
+					<Grid
+						container
+						alignContent={"flex-start"}
+						alignItems={"flex-start"}
+						justify={"space-around"}
+					>
 						{data?.organizations?.map(org =>
 							listView ? (
 								<CatalogListCard key={org.id} {...org} />
