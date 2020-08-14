@@ -8,11 +8,22 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import SULogo from "./../../../img/su-logo512.png";
 import UserContext from "../../context/UserContext";
-import { Home, PowerSettingsNew } from "@material-ui/icons";
+import {
+	Archive,
+	ArtTrack,
+	EmojiSymbols,
+	Gavel,
+	Home,
+	Info,
+	PowerSettingsNew
+} from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	list: {
 		width: 250
 	},
@@ -22,8 +33,12 @@ const useStyles = makeStyles({
 	},
 	avatarContainer: {
 		padding: "1rem"
+	},
+	ul: {
+		backgroundColor: "inherit",
+		paddingLeft: 0
 	}
-});
+}));
 
 const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 	const user = useContext(UserContext);
@@ -75,6 +90,71 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 							<Home />
 						</ListItemIcon>
 						<ListItemText primary={"Home"} />
+					</ListItem>
+				</UnstyledLink>
+
+				<ListSubheader>Explore</ListSubheader>
+				<UnstyledLink to={"/catalog"}>
+					<ListItem button>
+						<ListItemIcon>
+							<EmojiSymbols />
+						</ListItemIcon>
+						<ListItemText primary={"Catalog"} />
+					</ListItem>
+				</UnstyledLink>
+
+				<ListItem
+					button
+					onClick={() => window.open("https://stuyactivities.org")}
+				>
+					<ListItemIcon>
+						<Archive />
+					</ListItemIcon>
+					<ListItemText primary={"Archive"} />
+				</ListItem>
+				{user.signedIn && user.memberships?.length > 0 && (
+					<>
+						<ListSubheader>My Activities</ListSubheader>
+						{user.memberships?.map(membership => (
+							<UnstyledLink
+								to={`/${membership?.organization?.url}`}
+							>
+								<ListItem button>
+									<ListItemAvatar>
+										<Avatar
+											alt={membership?.organization?.name}
+											src={
+												membership?.organization
+													?.charter?.picture
+											}
+										/>
+									</ListItemAvatar>
+									<ListItemText
+										primary={membership?.organization?.name}
+										secondary={membership?.role}
+									/>
+								</ListItem>
+							</UnstyledLink>
+						))}
+					</>
+				)}
+
+				<ListSubheader>Info</ListSubheader>
+				<UnstyledLink to={"/about"}>
+					<ListItem button>
+						<ListItemIcon>
+							<Info />
+						</ListItemIcon>
+						<ListItemText primary={"About"} />
+					</ListItem>
+				</UnstyledLink>
+
+				<UnstyledLink to={"/rules"}>
+					<ListItem button>
+						<ListItemIcon>
+							<Gavel />
+						</ListItemIcon>
+						<ListItemText primary={"Rules"} />
 					</ListItem>
 				</UnstyledLink>
 			</List>

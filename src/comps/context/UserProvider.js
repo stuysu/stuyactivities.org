@@ -18,6 +18,9 @@ const basicInfo = gql`
 				organization {
 					name
 					url
+					charter {
+						picture
+					}
 				}
 				adminPrivileges
 			}
