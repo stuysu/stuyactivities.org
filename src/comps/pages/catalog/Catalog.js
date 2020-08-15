@@ -11,6 +11,16 @@ import SearchBox from "./filters/SearchBox";
 import TagsFilter from "./filters/TagsFilter";
 import CommitmentFilter from "./filters/CommitmentFilter";
 import MeetingDaysFilter from "./filters/MeetingDaysFilter";
+import { Helmet } from "react-helmet";
+
+import scubaNotFound from "./../../../img/vectors/scuba-diver-not-found.svg";
+import cherryNotFound from "./../../../img/vectors/cherry-page-not-found.svg";
+import foggNotFound from "./../../../img/vectors/fogg-page-not-found.svg";
+
+import Button from "@material-ui/core/Button";
+import UnstyledLink from "../../ui/UnstyledLink";
+
+const errorImages = [scubaNotFound, cherryNotFound, foggNotFound];
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -22,9 +32,30 @@ const useStyles = makeStyles(theme => ({
 	card: {
 		margin: theme.spacing(1)
 	},
+	filterHeading: {
+		paddingLeft: theme.spacing(1)
+	},
 	filterContainer: {
 		position: "sticky",
 		top: "32px"
+	},
+	catalogHeading: {
+		position: "relative",
+		padding: theme.spacing(1)
+	},
+	displayTypeIcon: {
+		position: "absolute",
+		right: theme.spacing(1),
+		top: theme.spacing(1)
+	},
+	defaultVector: {
+		width: "400px",
+		maxWidth: "80vw",
+		maxHeight: "30vh",
+		marginBottom: "1rem"
+	},
+	notFoundContainer: {
+		textAlign: "center"
 	}
 }));
 
@@ -59,7 +90,7 @@ const QUERY = gql`
 const Catalog = () => {
 	const classes = useStyles();
 
-	const [keyword, setKeyword] = React.useState("");
+	const [keyword, setKeyword] = React.useState("aaaaaaaaaa");
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
@@ -81,6 +112,17 @@ const Catalog = () => {
 
 	return (
 		<div className={classes.root}>
+			<Helmet>
+				<title>Catalog | StuyActivities</title>
+
+				<meta
+					property="og:description"
+					content={
+						"Look through and find activities at Stuyvesant High School."
+					}
+				/>
+			</Helmet>
+
 			<Grid container>
 				<Grid
 					item
@@ -93,7 +135,7 @@ const Catalog = () => {
 				>
 					<div className={classes.filterContainer}>
 						<Typography
-							className={classes.filterChild}
+							className={classes.filterHeading}
 							variant={"h4"}
 						>
 							Filters
@@ -111,7 +153,6 @@ const Catalog = () => {
 					</div>
 				</Grid>
 				<Grid
-					container
 					item
 					xs={12}
 					sm={12}
@@ -119,28 +160,69 @@ const Catalog = () => {
 					lg={9}
 					xl={10}
 					className={classes.bigChild}
-					alignContent={"flex-start"}
-					alignItems={"flex-start"}
-					justify={"space-around"}
 				>
-					<Grid item xs={12}>
+					<div className={classes.catalogHeading}>
 						<Typography
 							variant={"h4"}
 							className={classes.filterChild}
 						>
 							Catalog
 						</Typography>
-						<IconButton onClick={() => setListView(prev => !prev)}>
+						<IconButton
+							className={classes.displayTypeIcon}
+							onClick={() => setListView(prev => !prev)}
+						>
 							{listView ? <List /> : <ViewComfy />}
 						</IconButton>
-					</Grid>
-					{data?.organizations?.map(org =>
-						listView ? (
-							<CatalogListCard key={org.id} {...org} />
-						) : (
-							<CatalogCard key={org.id} {...org} />
-						)
+					</div>
+
+					{data?.organizations?.length === 0 && (
+						<div className={classes.notFoundContainer}>
+							<img
+								src={
+									errorImages[
+										Math.floor(
+											Math.random() * errorImages.length
+										)
+									]
+								}
+								alt={"A Cute Not Found Vector"}
+								className={classes.defaultVector}
+							/>
+							<Typography paragraph>
+								We couldn't find any activities matching that
+								criteria.
+							</Typography>
+
+							<Typography paragraph>
+								If you feel there ought to be, maybe you should
+								start one!
+							</Typography>
+
+							<UnstyledLink to={"/charter"}>
+								<Button variant={"contained"} color={"primary"}>
+									Create Activity
+								</Button>
+							</UnstyledLink>
+						</div>
 					)}
+
+					<Grid
+						container
+						alignContent={"flex-start"}
+						alignItems={"flex-start"}
+						justify={"space-around"}
+					>
+						{data?.organizations?.map(org =>
+							listView ? (
+								<CatalogListCard key={org.id} {...org} />
+							) : (
+								<Grid item xs={12} sm={6} xl={3} lg={3} md={6}>
+									<CatalogCard key={org.id} {...org} />
+								</Grid>
+							)
+						)}
+					</Grid>
 				</Grid>
 			</Grid>
 		</div>

@@ -1,14 +1,14 @@
 import React from "react";
-import AppContext from "./context/AppContext";
+import UserContext from "./context/UserContext";
 
 function CurrentUser() {
-	const context = React.useContext(AppContext);
+	const user = React.useContext(UserContext);
 
-	if (!context.signedIn) {
+	if (!user.signedIn) {
 		return <p>not signed in</p>;
 	}
 
-	return <div>Hi there {context.firstName}!</div>;
+	return <div>Hi there {user.firstName}!</div>;
 }
 
 export default CurrentUser;

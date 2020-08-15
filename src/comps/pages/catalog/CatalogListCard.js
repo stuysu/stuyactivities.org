@@ -1,13 +1,13 @@
 import React from "react";
 import {
-	Grid,
-	Typography,
-	List,
-	ListItemAvatar,
-	ListItem,
-	ListItemText,
 	Avatar,
-	Paper
+	Grid,
+	List,
+	ListItem,
+	ListItemAvatar,
+	ListItemText,
+	Paper,
+	Typography
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
