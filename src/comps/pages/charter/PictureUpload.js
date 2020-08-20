@@ -28,7 +28,6 @@ const PictureUpload = () => {
 	const [error, setError] = React.useState(null);
 
 	const handleChange = ev => {
-		console.log(ev.target.files[0]);
 		const file = ev.target.files[0];
 
 		// 5 Megabytes
