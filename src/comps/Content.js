@@ -7,7 +7,7 @@ import OrgRouter from "./pages/organization/OrgRouter";
 import Catalog from "./pages/catalog/Catalog";
 import Charter from "./pages/charter/Charter";
 import TokenLogin from "./pages/TokenLogin";
-import Approvals from "./pages/admin/Approvals";
+import AdminMain from "./pages/admin/AdminMain";
 import SpecificApproval from "./pages/admin/SpecificApproval";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
@@ -49,8 +49,7 @@ const Content = () => {
 					path={"/admin/approvals/:url"}
 					component={SpecificApproval}
 				/>
-				<Route path={"/admin/approvals"} component={Approvals} />
-				{/* temp change to test, sorry abir :( */}
+				<Route path={"/admin"} component={AdminMain} />
 				<Route path={"/:orgUrl"} component={OrgRouter} />
 			</Switch>
 		</div>

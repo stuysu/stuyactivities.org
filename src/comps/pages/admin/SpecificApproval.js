@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { gql } from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import UserContext from "../../context/UserContext";
 //import Diff from "diff"
 const Diff = require("diff");
 
@@ -131,6 +132,7 @@ const SpecificApproval = props => {
 
 	const [approveQuery] = useMutation(APPROVE);
 	const [rejectQuery] = useMutation(REJECT);
+	const user = React.useContext(UserContext);
 
 	const { data: fetchData, error, loading } = useQuery(QUERY, {
 		variables: { url: props.match.params.url },
@@ -138,12 +140,14 @@ const SpecificApproval = props => {
 	});
 	React.useEffect(() => {
 		if (!loading && fetchData?.organization) {
-			if (fetchData.organization.charter.meetingDays) {
-				fetchData.organization.charter.meetingDays = fetchData.organization.charter.meetingDays.join(
+			//need to make a copy because fetchData is read-only
+			const newData = {organization: {...fetchData.organization, charter: {...fetchData.organization.charter, meetingDays: fetchData.organization.charter.meetingDays.slice(0)}}}
+			if (newData.organization.charter.meetingDays) {
+				newData.organization.charter.meetingDays = newData.organization.charter.meetingDays.join(
 					", "
 				);
 			}
-			fetchData.organization.charterEdits = fetchData.organization.charterEdits.map(
+			newData.organization.charterEdits = newData.organization.charterEdits.map(
 				edit => {
 					if (edit.alteredFields.includes("meetingDays")) {
 						return {
@@ -154,10 +158,13 @@ const SpecificApproval = props => {
 					return edit;
 				}
 			);
-			setData(fetchData);
+			setData(newData);
 			setSkip(true);
 		}
 	}, [loading, fetchData]);
+	if (!user?.adminRoles?.map(e => e.role).includes("charters")) {
+		return <p>You do not have the proper admin role to access this page!</p>;
+	}
 	if (error) return <p>There was an error fetching data</p>;
 	if (loading || !data?.organization) return <p>Loading</p>;
 

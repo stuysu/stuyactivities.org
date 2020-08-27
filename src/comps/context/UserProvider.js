@@ -24,6 +24,9 @@ const basicInfo = gql`
 				}
 				adminPrivileges
 			}
+			adminRoles {
+				role
+			}
 		}
 	}
 `;

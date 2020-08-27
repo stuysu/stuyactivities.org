@@ -6,7 +6,7 @@ import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { Dashboard, Description, Person } from "@material-ui/icons";
+import { Dashboard, Description, Person, Settings } from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -76,6 +76,15 @@ const OrgNavPanel = ({ match, organization }) => {
 					to={match.path + "/members"}
 					icon={<Person />}
 				/>
+				{
+					organization.membership?.adminPrivileges ?
+						<TabItem
+							label={"Admin Panel"}
+							to={match.path + "/admin"}
+							icon={<Settings />}
+						/> :
+						""
+				}
 			</List>
 		</div>
 	);
