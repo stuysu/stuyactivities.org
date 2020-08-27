@@ -1,20 +1,26 @@
-import React from "react"
+import React from "react";
 
 import Members from "./AdminPanelTabs/Members";
-import Requests from "./AdminPanelTabs/Requests"
+import Requests from "./AdminPanelTabs/Requests";
 
-import Tabbed from "../../ui/Tabbed"
-export default function AdminPanel({match, history}) {
+import Tabbed from "../../ui/Tabbed";
+export default function AdminPanel({ match, history }) {
 	const tabs = [
-		{name: "Members", url: "/members", component: Members},
-		{name: "Membership Requests", url: "/requests", component: Requests},
-		{name: "Meetings", url: "/meetings", component: () => <p>Meetings</p>},
-		{name: "Edit Charter", url: "/editCharter", component: () => <p>Edit Charter</p>},
-		{name: "Strikes", url: "/strikes", component: () => <p>Strikes</p>}
-	]
-	return (
-		<Tabbed match={match} history={history} tabs={tabs}/>
-	)
+		{ name: "Members", url: "/members", component: Members },
+		{ name: "Membership Requests", url: "/requests", component: Requests },
+		{
+			name: "Meetings",
+			url: "/meetings",
+			component: () => <p>Meetings</p>
+		},
+		{
+			name: "Edit Charter",
+			url: "/editCharter",
+			component: () => <p>Edit Charter</p>
+		},
+		{ name: "Strikes", url: "/strikes", component: () => <p>Strikes</p> }
+	];
+	return <Tabbed match={match} history={history} tabs={tabs} />;
 }
 
 /*

@@ -141,7 +141,17 @@ const SpecificApproval = props => {
 	React.useEffect(() => {
 		if (!loading && fetchData?.organization) {
 			//need to make a copy because fetchData is read-only
-			const newData = {organization: {...fetchData.organization, charter: {...fetchData.organization.charter, meetingDays: fetchData.organization.charter.meetingDays.slice(0)}}}
+			const newData = {
+				organization: {
+					...fetchData.organization,
+					charter: {
+						...fetchData.organization.charter,
+						meetingDays: fetchData.organization.charter.meetingDays.slice(
+							0
+						)
+					}
+				}
+			};
 			if (newData.organization.charter.meetingDays) {
 				newData.organization.charter.meetingDays = newData.organization.charter.meetingDays.join(
 					", "
@@ -163,7 +173,9 @@ const SpecificApproval = props => {
 		}
 	}, [loading, fetchData]);
 	if (!user?.adminRoles?.map(e => e.role).includes("charters")) {
-		return <p>You do not have the proper admin role to access this page!</p>;
+		return (
+			<p>You do not have the proper admin role to access this page!</p>
+		);
 	}
 	if (error) return <p>There was an error fetching data</p>;
 	if (loading || !data?.organization) return <p>Loading</p>;
