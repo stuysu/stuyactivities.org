@@ -181,7 +181,9 @@ export default class Charter extends React.Component {
 		const storedVal = window.sessionStorage.getItem("charterForm");
 
 		if (storedVal) {
-			this.setState(JSON.parse(storedVal));
+			const data = JSON.parse(storedVal);
+			data.picture = null;
+			this.setState(data);
 		}
 
 		window.onbeforeunload = () => {

@@ -15,12 +15,11 @@ import { Helmet } from "react-helmet";
 
 import scubaNotFound from "./../../../img/vectors/scuba-diver-not-found.svg";
 import cherryNotFound from "./../../../img/vectors/cherry-page-not-found.svg";
-import foggNotFound from "./../../../img/vectors/fogg-page-not-found.svg";
 
 import Button from "@material-ui/core/Button";
 import UnstyledLink from "../../ui/UnstyledLink";
 
-const errorImages = [scubaNotFound, cherryNotFound, foggNotFound];
+const errorImages = [scubaNotFound, cherryNotFound];
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -90,7 +89,7 @@ const QUERY = gql`
 const Catalog = () => {
 	const classes = useStyles();
 
-	const [keyword, setKeyword] = React.useState("aaaaaaaaaa");
+	const [keyword, setKeyword] = React.useState("");
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
