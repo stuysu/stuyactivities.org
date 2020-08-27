@@ -51,9 +51,11 @@ const Approvals = () => {
 	const classes = useStyles();
 	const user = React.useContext(UserContext);
 	const { loading, error, data } = useQuery(QUERY);
-	console.log(user)
+	console.log(user);
 	if (!user?.adminRoles?.map(e => e.role).includes("charters")) {
-		return <p>You do not have the proper admin role to access this page!</p>;
+		return (
+			<p>You do not have the proper admin role to access this page!</p>
+		);
 	}
 	console.log(error);
 	if (error)
