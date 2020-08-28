@@ -16,6 +16,9 @@ const useStyles = makeStyles(() => ({
 	item: {
 		width: "100%",
 		float: "left"
+	},
+	avatar: {
+		height: "20%"
 	}
 }));
 
@@ -28,7 +31,7 @@ export default function CatalogCard({ name, url, charter }) {
 					<UnstyledLink to={`/${url}`}>
 						<ListItem>
 							<ListItemAvatar>
-								<Avatar src={charter.picture} />
+								<Avatar src={charter.picture} variant={"square"} className={classes.avatar}/>
 							</ListItemAvatar>
 							<ListItemText
 								primary={
