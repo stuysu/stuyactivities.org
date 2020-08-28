@@ -9,19 +9,21 @@ import {
 	DialogContentText,
 	DialogTitle,
 	FormControlLabel,
+	Grid,
 	makeStyles,
 	Switch,
 	Typography
 } from "@material-ui/core";
+import Comments from "./Comments";
 import { gql } from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import UserContext from "../../context/UserContext";
 //import Diff from "diff"
 const Diff = require("diff");
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		"max-width": theme.breakpoints.width("md"),
-		margin: "auto" //possible TODO: make a standard class for centering things
+		padding: theme.spacing(2)
 	},
 	title: {
 		"text-align": "center",
@@ -45,6 +47,7 @@ const useStyles = makeStyles(theme => ({
 const QUERY = gql`
 	query Organization($url: String) {
 		organization(url: $url) {
+			id
 			name
 			charter {
 				picture
@@ -74,6 +77,13 @@ const QUERY = gql`
 				commitmentLevel
 				extra
 				alteredFields
+			}
+			charterApprovalMessages {
+				message
+				user {
+					name
+				}
+				auto
 			}
 		}
 	}
@@ -131,19 +141,33 @@ const SpecificApproval = props => {
 
 	const [approveQuery] = useMutation(APPROVE);
 	const [rejectQuery] = useMutation(REJECT);
+	const user = React.useContext(UserContext);
 
-	const { data: fetchData, error, loading } = useQuery(QUERY, {
+	const { data: fetchData, error, loading, refetch } = useQuery(QUERY, {
 		variables: { url: props.match.params.url },
+		fetchPolicy: "no-cache",
 		skip
 	});
 	React.useEffect(() => {
 		if (!loading && fetchData?.organization) {
-			if (fetchData.organization.charter.meetingDays) {
-				fetchData.organization.charter.meetingDays = fetchData.organization.charter.meetingDays.join(
+			//need to make a copy because fetchData is read-only
+			const newData = {
+				organization: {
+					...fetchData.organization,
+					charter: {
+						...fetchData.organization.charter,
+						meetingDays: fetchData.organization.charter.meetingDays.slice(
+							0
+						)
+					}
+				}
+			};
+			if (newData.organization.charter.meetingDays) {
+				newData.organization.charter.meetingDays = newData.organization.charter.meetingDays.join(
 					", "
 				);
 			}
-			fetchData.organization.charterEdits = fetchData.organization.charterEdits.map(
+			newData.organization.charterEdits = newData.organization.charterEdits.map(
 				edit => {
 					if (edit.alteredFields.includes("meetingDays")) {
 						return {
@@ -154,12 +178,17 @@ const SpecificApproval = props => {
 					return edit;
 				}
 			);
-			setData(fetchData);
+			setData(newData);
 			setSkip(true);
 		}
 	}, [loading, fetchData]);
+	if (!user?.adminRoles?.map(e => e.role).includes("charters")) {
+		return (
+			<p>You do not have the proper admin role to access this page!</p>
+		);
+	}
 	if (error) return <p>There was an error fetching data</p>;
-	if (loading || !data?.organization) return <p>Loading</p>;
+	if (!data?.organization) return <p>Loading</p>;
 
 	const individualPopup = (id, changeTo, action) => {
 		setDialogOptions({
@@ -231,106 +260,128 @@ const SpecificApproval = props => {
 		setData(data);
 		setDialogOptions({ ...dialogOptions, open: false });
 	};
-	//TODO: FIND CHARTER EDITS BY ID AND NOT USERNAME!!!!!!!!!!!
+
+	const changeComments = () => {
+		console.log("ran");
+		setSkip(false);
+		refetch();
+	};
 	return (
 		<div className={classes.root}>
 			<Typography variant={"h3"} className={classes.title}>
 				Charter Changes for {data.organization.name}
 			</Typography>
-			{Object.keys(data.organization.charterEdits).length === 0 ? (
-				<div>
-					<Typography>
-						You've dealt with all of the changes!
-					</Typography>
-					<Button href="/admin/approvals" color="primary">
-						Back
-					</Button>
-				</div>
-			) : (
-				<FormControlLabel
-					control={
-						<Switch
-							checked={showDifference}
-							onChange={e => setShowDifference(e.target.checked)}
-							color="primary"
-						/>
-					}
-					label="Show Differences"
-				/>
-			)}
-			{data.organization.charterEdits.map(edit => (
-				<div>
-					<Card className={classes.card}>
-						<CardContent>
-							<div className={classes.flex}>
-								<Typography
-									variant={"h5"}
-									className={classes.grow}
-								>
-									Changes by {edit.submittingUser.name}
-								</Typography>
-								<Button
-									onClick={() => approveallPopup(edit.id)}
-									style={{ "white-space": "nowrap" }}
+			<Grid container spacing={4} className={classes.container}>
+				<Grid item xs={7} className={classes.margin}>
+					{Object.keys(data.organization.charterEdits).length ===
+					0 ? (
+						<div>
+							<Typography>
+								You've dealt with all of the changes!
+							</Typography>
+							<Button href="/admin/approvals" color="primary">
+								Back
+							</Button>
+						</div>
+					) : (
+						<FormControlLabel
+							style={{ height: 41.9833 }}
+							control={
+								<Switch
+									checked={showDifference}
+									onChange={e =>
+										setShowDifference(e.target.checked)
+									}
 									color="primary"
-								>
-									Approve All
-								</Button>
-							</div>
-							{edit.alteredFields.map(field => (
-								<div className={classes.flex}>
-									<div className={classes.grow}>
-										<Typography variant={"h6"}>
-											Change to {field}:
+								/>
+							}
+							label="Show Differences"
+						/>
+					)}
+					{data.organization.charterEdits.map(edit => (
+						<div>
+							<Card className={classes.card}>
+								<CardContent>
+									<div className={classes.flex}>
+										<Typography
+											variant={"h5"}
+											className={classes.grow}
+										>
+											Changes by{" "}
+											{edit.submittingUser.name}
 										</Typography>
-										{showDifference ? (
-											<DiffComponent
-												old={
-													data.organization.charter[
-														field
-													]
-												}
-												next={edit[field]}
-											/>
-										) : (
-											<Typography>
-												{edit[field]}
-											</Typography>
-										)}
-									</div>
-									<div>
 										<Button
 											onClick={() =>
-												individualPopup(
-													edit.id,
-													field,
-													"reject"
-												)
+												approveallPopup(edit.id)
 											}
+											style={{ "white-space": "nowrap" }}
 											color="primary"
 										>
-											Reject
-										</Button>
-										<br />
-										<Button
-											onClick={() =>
-												individualPopup(
-													edit.id,
-													field,
-													"approve"
-												)
-											}
-											color="primary"
-										>
-											Approve
+											Approve All
 										</Button>
 									</div>
-								</div>
-							))}
-						</CardContent>
-					</Card>
-				</div>
-			))}
+									{edit.alteredFields.map(field => (
+										<div className={classes.flex}>
+											<div className={classes.grow}>
+												<Typography variant={"h6"}>
+													Change to {field}:
+												</Typography>
+												{showDifference ? (
+													<DiffComponent
+														old={
+															data.organization
+																.charter[field]
+														}
+														next={edit[field]}
+													/>
+												) : (
+													<Typography>
+														{edit[field]}
+													</Typography>
+												)}
+											</div>
+											<div>
+												<Button
+													onClick={() =>
+														individualPopup(
+															edit.id,
+															field,
+															"reject"
+														)
+													}
+													color="primary"
+												>
+													Reject
+												</Button>
+												<br />
+												<Button
+													onClick={() =>
+														individualPopup(
+															edit.id,
+															field,
+															"approve"
+														)
+													}
+													color="primary"
+												>
+													Approve
+												</Button>
+											</div>
+										</div>
+									))}
+								</CardContent>
+							</Card>
+						</div>
+					))}
+				</Grid>
+				<Grid item xs={5} className={classes.margin}>
+					<Comments
+						comments={data.organization.charterApprovalMessages}
+						changeComments={changeComments}
+						orgId={data.organization.id}
+					/>
+				</Grid>
+			</Grid>
 			<Dialog open={dialogOptions.open} fullWidth={true} maxWidth={"md"}>
 				{dialogOptions.action === "approve all" ? (
 					<DialogTitle>

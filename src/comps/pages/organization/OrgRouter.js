@@ -17,6 +17,8 @@ import BackButton from "../../ui/BackButton";
 import MembersTab from "./MembersTab";
 import Error404 from "../Error404";
 
+import AdminPanel from "./AdminPanel";
+
 const useStyles = makeStyles(theme => ({
 	contentContainer: {
 		padding: "2.5vw",
@@ -35,6 +37,9 @@ const QUERY = gql`
 			url
 			charter {
 				picture
+			}
+			membership {
+				adminPrivileges
 			}
 		}
 	}
@@ -109,6 +114,10 @@ const OrgRouter = ({ match, history }) => {
 							<Route
 								path={match.path + "/members"}
 								component={MembersTab}
+							/>
+							<Route
+								path={match.path + "/admin"}
+								component={AdminPanel}
 							/>
 						</Switch>
 					</Grid>
