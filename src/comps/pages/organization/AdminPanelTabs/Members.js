@@ -1,14 +1,14 @@
 import React from "react";
 import {
-	TableContainer,
+	Button,
+	makeStyles,
 	Paper,
 	Table,
-	TableHead,
-	TableRow,
-	TableCell,
 	TableBody,
-	makeStyles,
-	Button
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow
 } from "@material-ui/core";
 import { gql, useQuery } from "@apollo/client";
 

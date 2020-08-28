@@ -4,6 +4,7 @@ import Members from "./AdminPanelTabs/Members";
 import Requests from "./AdminPanelTabs/Requests";
 
 import Tabbed from "../../ui/Tabbed";
+
 export default function AdminPanel({ match, history }) {
 	const tabs = [
 		{ name: "Members", url: "/members", component: Members },
