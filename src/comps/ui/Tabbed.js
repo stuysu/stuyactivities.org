@@ -1,6 +1,6 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-import { Tabs, Tab } from "@material-ui/core";
+import { Route, Switch } from "react-router-dom";
+import { Tab, Tabs } from "@material-ui/core";
 
 /** Tabs are [{url: ..., name: ..., component: ...}, ...] **/
 
