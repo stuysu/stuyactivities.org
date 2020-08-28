@@ -1,22 +1,24 @@
 import React from "react";
 import {
-	makeStyles,
-	Typography,
+	Button,
 	Card,
 	CardContent,
-	Button,
 	Dialog,
-	DialogTitle,
+	DialogActions,
 	DialogContent,
 	DialogContentText,
-	DialogActions,
+	DialogTitle,
+	FormControlLabel,
+	makeStyles,
 	Switch,
 	FormControlLabel,
-	Grid
+	Grid,
+  Typography
 } from "@material-ui/core";
-import { gql } from "@apollo/client";
-import { useQuery, useMutation } from "@apollo/react-hooks";
 import Comments from "./Comments";
+import { gql } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import UserContext from "../../context/UserContext";
 //import Diff from "diff"
 const Diff = require("diff");
 
@@ -140,6 +142,7 @@ const SpecificApproval = props => {
 
 	const [approveQuery] = useMutation(APPROVE);
 	const [rejectQuery] = useMutation(REJECT);
+	const user = React.useContext(UserContext);
 
 	const { data: fetchData, error, loading, refetch } = useQuery(QUERY, {
 		variables: { url: props.match.params.url },
@@ -148,16 +151,18 @@ const SpecificApproval = props => {
 	});
 	React.useEffect(() => {
 		if (!loading && fetchData?.organization) {
-			console.log(fetchData.organization.charterApprovalMessages);
-			//fetchData is read-only, so we need to copy the object---this is the only way I can think of doing it without JSON.parse(JSON.stringify())
+			//need to make a copy because fetchData is read-only
 			const newData = {
-				...fetchData,
 				organization: {
 					...fetchData.organization,
-					charter: { ...fetchData.charter }
+					charter: {
+						...fetchData.organization.charter,
+						meetingDays: fetchData.organization.charter.meetingDays.slice(
+							0
+						)
+					}
 				}
 			};
-			console.log(newData.organization.charterApprovalMessages);
 			if (newData.organization.charter.meetingDays) {
 				newData.organization.charter.meetingDays = newData.organization.charter.meetingDays.join(
 					", "
@@ -178,6 +183,11 @@ const SpecificApproval = props => {
 			setSkip(true);
 		}
 	}, [loading, fetchData]);
+	if (!user?.adminRoles?.map(e => e.role).includes("charters")) {
+		return (
+			<p>You do not have the proper admin role to access this page!</p>
+		);
+	}
 	if (error) return <p>There was an error fetching data</p>;
 	if (!data?.organization) return <p>Loading</p>;
 

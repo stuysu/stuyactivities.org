@@ -15,6 +15,9 @@ import Grid from "@material-ui/core/Grid";
 import OrgNavPanel from "./OrgNavPanel";
 import BackButton from "../../ui/BackButton";
 import MembersTab from "./MembersTab";
+import Error404 from "../Error404";
+
+import AdminPanel from "./AdminPanel";
 
 const useStyles = makeStyles(theme => ({
 	contentContainer: {
@@ -34,6 +37,9 @@ const QUERY = gql`
 			url
 			charter {
 				picture
+			}
+			membership {
+				adminPrivileges
 			}
 		}
 	}
@@ -70,13 +76,13 @@ const OrgRouter = ({ match, history }) => {
 	}
 
 	if (!data?.organization) {
-		return <p>We couldn't find that url :(</p>;
+		return <Error404 />;
 	}
 
 	return (
 		<div>
 			<Helmet>
-				<title>{data?.organization?.name} | StuyActivities </title>
+				<title>{data?.organization?.name} | StuyActivities</title>
 			</Helmet>
 
 			<div className={classes.contentContainer}>
@@ -108,6 +114,10 @@ const OrgRouter = ({ match, history }) => {
 							<Route
 								path={match.path + "/members"}
 								component={MembersTab}
+							/>
+							<Route
+								path={match.path + "/admin"}
+								component={AdminPanel}
 							/>
 						</Switch>
 					</Grid>

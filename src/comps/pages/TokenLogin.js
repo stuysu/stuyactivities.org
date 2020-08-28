@@ -11,7 +11,7 @@ import ghost from "./../../img/vectors/hugo-ghost.svg";
 import LinkGoogleAccount from "../auth/LinkGoogleAccount";
 import BackButton from "../ui/BackButton";
 import Loading from "../ui/Loading";
-import AppContext from "../context/AppContext";
+import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles({
 	contentContainer: {
@@ -44,7 +44,7 @@ const MUTATION = gql`
 
 const TokenLogin = () => {
 	const classes = useStyles();
-	const context = React.useContext(AppContext);
+	const user = React.useContext(UserContext);
 	const { token } = useParams();
 
 	const [login, { error, data }] = useMutation(MUTATION, {
@@ -54,9 +54,9 @@ const TokenLogin = () => {
 
 	const attemptLogin = React.useCallback(() => {
 		login()
-			.then(() => context.refetch())
+			.then(() => user.refetch())
 			.catch(e => {});
-	}, [context, login]);
+	}, [user, login]);
 
 	React.useEffect(attemptLogin, []);
 

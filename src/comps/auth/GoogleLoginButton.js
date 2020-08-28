@@ -3,7 +3,7 @@ import GoogleLogin from "react-google-login";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/react-hooks";
 import { GOOGLE_CLIENT_ID } from "../../constants";
-import AppContext from "../context/AppContext";
+import UserContext from "../context/UserContext";
 import Typography from "@material-ui/core/Typography";
 import AuthContext from "./AuthContext";
 
@@ -23,13 +23,13 @@ const GoogleLoginButton = ({ className }) => {
 
 	const authContext = React.useContext(AuthContext);
 
-	const context = React.useContext(AppContext);
+	const user = React.useContext(UserContext);
 
 	const attemptLogin = React.useCallback(
 		async data => {
 			try {
 				await loginWithGoogle({ variables: { token: data.tokenId } });
-				context.refetch();
+				user.refetch();
 			} catch (er) {
 				const possibleUnknownUserError = er?.graphQLErrors?.some(
 					er => er?.extensions?.code === "POSSIBLE_UNKNOWN_USER"
@@ -43,7 +43,7 @@ const GoogleLoginButton = ({ className }) => {
 				}
 			}
 		},
-		[loginWithGoogle, context, authContext]
+		[loginWithGoogle, user, authContext]
 	);
 
 	return (

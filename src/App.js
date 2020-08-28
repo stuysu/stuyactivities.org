@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 import ApolloProvider from "./comps/context/ApolloProvider";
-import AppProvider from "./comps/context/AppProvider";
+import UserProvider from "./comps/context/UserProvider";
 import ThemeProvider from "./comps/context/ThemeProvider";
 import { BrowserRouter } from "react-router-dom";
 import Content from "./comps/Content";
@@ -12,9 +12,9 @@ function App() {
 		<ApolloProvider>
 			<ThemeProvider>
 				<BrowserRouter>
-					<AppProvider>
+					<UserProvider>
 						<Content />
-					</AppProvider>
+					</UserProvider>
 				</BrowserRouter>
 			</ThemeProvider>
 		</ApolloProvider>
