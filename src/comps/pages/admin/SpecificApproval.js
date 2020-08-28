@@ -8,12 +8,11 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	FormControlLabel,
 	makeStyles,
 	Switch,
 	FormControlLabel,
 	Grid,
-  Typography
+	Typography
 } from "@material-ui/core";
 import Comments from "./Comments";
 import { gql } from "@apollo/client";
