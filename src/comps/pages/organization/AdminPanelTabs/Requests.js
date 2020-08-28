@@ -1,14 +1,14 @@
 import React from "react";
 import {
-	TableContainer,
+	Button,
+	makeStyles,
 	Paper,
 	Table,
-	TableHead,
-	TableRow,
-	TableCell,
 	TableBody,
-	makeStyles,
-	Button
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow
 } from "@material-ui/core";
 import { gql, useQuery } from "@apollo/client";
 
@@ -58,8 +58,11 @@ export default function Members({ match }) {
 					{data?.membershipRequests?.map(request => (
 						<TableRow>
 							<TableCell>
-								{request.userApproval ? "Incoming" : "Outgoing"
-								/* assumes if both adminApproval and userApproval are set it is removed. If userApproval is false, then adminApproval must be true */
+								{
+									request.userApproval
+										? "Incoming"
+										: "Outgoing"
+									/* assumes if both adminApproval and userApproval are set it is removed. If userApproval is false, then adminApproval must be true */
 								}
 							</TableCell>
 							<TableCell>{request.user.name}</TableCell>

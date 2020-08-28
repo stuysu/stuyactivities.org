@@ -8,10 +8,10 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	makeStyles,
-	Switch,
 	FormControlLabel,
 	Grid,
+	makeStyles,
+	Switch,
 	Typography
 } from "@material-ui/core";
 import Comments from "./Comments";
