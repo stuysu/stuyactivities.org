@@ -43,14 +43,6 @@ const QUERY = gql`
 	}
 `;
 
-const REJECT_MUTATION = gql`
-	mutation RejectMembershipRequest($requestId: Int!) {
-		rejectMembershipRequest(requestId: $requestId) {
-			id
-		}
-	}
-`;
-
 const APPROVE_MUTATION = gql`
 	mutation ApproveMembershipRequest($requestId: Int!) {
 		approveMembershipRequest(requestId: $requestId) {
@@ -61,9 +53,7 @@ const APPROVE_MUTATION = gql`
 
 const DELETE_MUTATION = gql`
 	mutation DeleteMembershipRequest($requestId: Int!) {
-		deleteMembershipRequest(requestId: $requestId) {
-			id
-		}
+		deleteMembershipRequest(requestId: $requestId)
 	}
 `;
 
@@ -73,7 +63,6 @@ export default function Members({ match }) {
 		variables: { url: match.params.orgUrl }
 	});
 	const [approveMutation] = useMutation(APPROVE_MUTATION);
-	const [rejectMutation] = useMutation(REJECT_MUTATION);
 	const [deleteMutation] = useMutation(DELETE_MUTATION);
 	const [rejectingRequest, setRejectingRequest] = React.useState({});
 	if (data?.membershipRequests?.length === 0) {
@@ -163,7 +152,7 @@ export default function Members({ match }) {
 			)}
 			<RequestList requests={outgoingRequests} />
 			<Dialog
-				open={rejectingRequest?.id}
+				open={rejectingRequest?.id !== undefined}
 				onClose={() => setRejectingRequest({})}
 			>
 				<DialogTitle>
@@ -181,19 +170,14 @@ export default function Members({ match }) {
 						Cancel
 					</Button>
 					<Button
-						onClick={() =>
-							rejectingRequest.userApproval
-								? rejectMutation({
-										variables: {
-											requestId: rejectingRequest.id
-										}
-								  })
-								: deleteMutation({
-										variables: {
-											requestId: rejectingRequest.id
-										}
-								  })
-						}
+						onClick={() => {
+							deleteMutation({
+								variables: {
+									requestId: rejectingRequest.id
+								}
+							});
+							setRejectingRequest({});
+						}}
 						color="primary"
 					>
 						{rejectingRequest.userApproval ? "Reject" : "Delete"}
