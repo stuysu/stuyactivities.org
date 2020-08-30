@@ -5,5 +5,4 @@ export const GOOGLE_CLIENT_ID =
 export const PUBLIC_URL = process.env.PUBLIC_URL;
 
 export const GRAPHQL_URI =
-	process.env.REACT_APP_GRAPHQL_URI ||
-	"https://staging.stuyactivities.org/graphql";
+	process.env.REACT_APP_GRAPHQL_URI || "https://stuyactivities.org/graphql";

@@ -13,6 +13,8 @@ const basicInfo = gql`
 			email
 			picture
 			grade
+			fourDigitId
+			isFaculty
 			memberships {
 				role
 				organization {

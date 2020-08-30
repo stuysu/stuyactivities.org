@@ -65,22 +65,24 @@ export default function Comments({ orgId, comments, changeComments }) {
 					</Button>
 				</CardContent>
 			</Card>
-			{//First map reverses---can't use .reverse() because comments is read-only
-			comments
-				.map((_, i) => comments[comments.length - 1 - i])
-				.map(comment => (
-					<Card className={classes.card}>
-						<CardContent>
-							<Typography variant={"h6"}>
-								{comment.user.name}{" "}
-								{comment.auto
-									? "(automatically generated)"
-									: ""}
-							</Typography>
-							<Typography>{comment.message}</Typography>
-						</CardContent>
-					</Card>
-				))}
+			{
+				//First map reverses---can't use .reverse() because comments is read-only
+				comments
+					.map((_, i) => comments[comments.length - 1 - i])
+					.map(comment => (
+						<Card className={classes.card}>
+							<CardContent>
+								<Typography variant={"h6"}>
+									{comment.user.name}{" "}
+									{comment.auto
+										? "(automatically generated)"
+										: ""}
+								</Typography>
+								<Typography>{comment.message}</Typography>
+							</CardContent>
+						</Card>
+					))
+			}
 		</div>
 	);
 }
