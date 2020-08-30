@@ -9,6 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SULogo from "./../../../img/su-logo512.png";
 import UserContext from "../../context/UserContext";
 import {
+	AddCircleOutlined,
 	Archive,
 	EmojiSymbols,
 	Gavel,
@@ -38,6 +39,14 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
+const gradeLabels = {
+	9: "Freshman",
+	10: "Sophomore",
+	11: "Junior",
+	12: "Senior",
+	13: "Alumni"
+};
+
 const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 	const user = useContext(UserContext);
 	const location = useLocation();
@@ -60,6 +69,16 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<Avatar src={user.picture} className={classes.avatar} />
 						<Typography variant={"h6"}>{user?.name}</Typography>
 						<Typography variant={"body2"}>{user?.email}</Typography>
+						{Boolean(user?.fourDigitId) && (
+							<Typography variant={"body2"}>
+								Four Digit ID: {user?.fourDigitId}
+							</Typography>
+						)}
+						<Typography variant={"body2"}>
+							{user?.isFaculty
+								? "Faculty"
+								: gradeLabels[user?.grade]}
+						</Typography>
 					</div>
 				) : (
 					<div>
@@ -110,7 +129,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItemIcon>
 					<ListItemText primary={"Archive"} />
 				</ListItem>
-				{user.signedIn && user.memberships?.length > 0 && (
+				{user.signedIn && (
 					<>
 						<ListSubheader disableSticky>
 							My Activities
@@ -136,6 +155,14 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 								</ListItem>
 							</UnstyledLink>
 						))}
+						<UnstyledLink to={"/charter"}>
+							<ListItem button>
+								<ListItemIcon>
+									<AddCircleOutlined />
+								</ListItemIcon>
+								<ListItemText primary={"Create New Activity"} />
+							</ListItem>
+						</UnstyledLink>
 					</>
 				)}
 

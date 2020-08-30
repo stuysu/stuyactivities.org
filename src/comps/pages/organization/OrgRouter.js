@@ -30,16 +30,24 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
+export const OrgContext = React.createContext({});
+
 const QUERY = gql`
 	query Organization($url: String!) {
 		organization(url: $url) {
+			id
 			name
 			url
 			charter {
 				picture
 			}
 			membership {
+				id
+				role
 				adminPrivileges
+			}
+			membershipRequest {
+				id
 			}
 		}
 	}
@@ -80,50 +88,52 @@ const OrgRouter = ({ match, history }) => {
 	}
 
 	return (
-		<div>
-			<Helmet>
-				<title>{data?.organization?.name} | StuyActivities</title>
-			</Helmet>
+		<OrgContext.Provider value={data.organization}>
+			<div>
+				<Helmet>
+					<title>{data?.organization?.name} | StuyActivities</title>
+				</Helmet>
 
-			<div className={classes.contentContainer}>
-				<BackButton
-					className={classes.backButton}
-					label={"Back to Catalog"}
-					to={"/catalog"}
-				/>
+				<div className={classes.contentContainer}>
+					<BackButton
+						className={classes.backButton}
+						label={"Back to Catalog"}
+						to={"/catalog"}
+					/>
 
-				<Grid container spacing={1}>
-					<Grid item xs={12} sm={12} xl={2} md={3} lg={2}>
-						<OrgNavPanel
-							match={match}
-							organization={data.organization}
-						/>
+					<Grid container spacing={1}>
+						<Grid item xs={12} sm={12} xl={2} md={3} lg={2}>
+							<OrgNavPanel
+								match={match}
+								organization={data.organization}
+							/>
+						</Grid>
+
+						<Grid item lg={10} md={9} xl={10} sm={12}>
+							<Switch>
+								<Route
+									path={match.path}
+									component={Overview}
+									exact
+								/>
+								<Route
+									path={match.path + "/charter"}
+									component={CharterTab}
+								/>
+								<Route
+									path={match.path + "/members"}
+									component={MembersTab}
+								/>
+								<Route
+									path={match.path + "/admin"}
+									component={AdminPanel}
+								/>
+							</Switch>
+						</Grid>
 					</Grid>
-
-					<Grid item lg={10} md={9} xl={10} sm={12}>
-						<Switch>
-							<Route
-								path={match.path}
-								component={Overview}
-								exact
-							/>
-							<Route
-								path={match.path + "/charter"}
-								component={CharterTab}
-							/>
-							<Route
-								path={match.path + "/members"}
-								component={MembersTab}
-							/>
-							<Route
-								path={match.path + "/admin"}
-								component={AdminPanel}
-							/>
-						</Switch>
-					</Grid>
-				</Grid>
+				</div>
 			</div>
-		</div>
+		</OrgContext.Provider>
 	);
 };
 
