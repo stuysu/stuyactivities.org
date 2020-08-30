@@ -63,7 +63,11 @@ export default function Members({ match }) {
 		variables: { url: match.params.orgUrl }
 	});
 	const [approveMutation] = useMutation(APPROVE_MUTATION);
-	const [deleteMutation] = useMutation(DELETE_MUTATION);
+	const [deleteMutation] = useMutation(DELETE_MUTATION, {
+		update(cache) {
+			cache.reset();
+		}
+	});
 	const [rejectingRequest, setRejectingRequest] = React.useState({});
 	if (data?.membershipRequests?.length === 0) {
 		return (

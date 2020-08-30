@@ -68,7 +68,7 @@ const ALTER_MUTATION = gql`
 `;
 
 const REMOVE_MUTATION = gql`
-	mutation RemoveMembership($membershipId: Int!, $notify: notify) {
+	mutation RemoveMembership($membershipId: Int!, $notify: Boolean) {
 		deleteMembership(membershipId: $membershipId, notify: $notify)
 	}
 `;
@@ -79,7 +79,11 @@ export default function Members({ match }) {
 		variables: { url: match.params.orgUrl }
 	});
 	const [alterMutation] = useMutation(ALTER_MUTATION);
-	const [removeMutation] = useMutation(REMOVE_MUTATION);
+	const [removeMutation] = useMutation(REMOVE_MUTATION, {
+		update(cache) {
+			cache.reset();
+		}
+	});
 	const [editingMembership, setEditingMembership] = React.useState({});
 	const [removingMembership, setRemovingMembership] = React.useState({});
 	const [role, setRole] = React.useState("");
