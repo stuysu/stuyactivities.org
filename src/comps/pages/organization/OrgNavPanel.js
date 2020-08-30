@@ -9,6 +9,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { Dashboard, Description, Person, Settings } from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles(theme => ({
 	avatar: {
@@ -46,6 +47,7 @@ const TabItem = ({ to, label, icon, exact = true }) => {
 
 const OrgNavPanel = ({ match, organization }) => {
 	const classes = useStyles();
+	console.log(organization);
 
 	return (
 		<div className={classes.stickyContainer}>
@@ -83,6 +85,17 @@ const OrgNavPanel = ({ match, organization }) => {
 						exact={false}
 						to={match.path + "/admin"}
 						icon={<Settings />}
+					/>
+				)}
+
+				{!(
+					organization.membership || organization.membershipRequest
+				) && (
+					<TabItem
+						label={"Request to Join"}
+						exact={false}
+						to={match.path + "/request"}
+						icon={<AddIcon />}
 					/>
 				)}
 			</List>

@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import OrgNavPanel from "./OrgNavPanel";
 import BackButton from "../../ui/BackButton";
 import MembersTab from "./MembersTab";
+import RequestToJoin from "./RequestToJoin";
 import Error404 from "../Error404";
 
 import AdminPanel from "./AdminPanel";
@@ -127,6 +128,10 @@ const OrgRouter = ({ match, history }) => {
 								<Route
 									path={match.path + "/admin"}
 									component={AdminPanel}
+								/>
+								<Route
+									path={match.path + "/request"}
+									component={RequestToJoin}
 								/>
 							</Switch>
 						</Grid>
