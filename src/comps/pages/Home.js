@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
-		minHeight: "100vh",
+		minHeight: "80vh",
 		paddingRight: "2rem",
 		paddingLeft: "2rem",
 		flexDirection: "column",
