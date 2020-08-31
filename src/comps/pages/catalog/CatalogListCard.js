@@ -11,9 +11,6 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
-import red from "@material-ui/core/colors/red";
-import yellow from "@material-ui/core/colors/yellow";
-import green from "@material-ui/core/colors/green";
 import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles(() => ({
@@ -41,7 +38,11 @@ export default function CatalogCard({ name, url, charter }) {
 					<UnstyledLink to={`/${url}`}>
 						<ListItem>
 							<ListItemAvatar>
-								<Avatar src={charter.picture} variant={"square"} className={classes.avatar}/>
+								<Avatar
+									src={charter.picture}
+									variant={"square"}
+									className={classes.avatar}
+								/>
 							</ListItemAvatar>
 							<ListItemText
 								primary={
@@ -57,7 +58,10 @@ export default function CatalogCard({ name, url, charter }) {
 											{charter.mission}
 											<br />
 											<Chip
-												label={charter.commitmentLevel + " commitment"}
+												label={
+													charter.commitmentLevel +
+													" commitment"
+												}
 												size={"small"}
 												className={classes.chip}
 											/>
@@ -65,7 +69,6 @@ export default function CatalogCard({ name, url, charter }) {
 									</React.Fragment>
 								}
 							/>
-
 						</ListItem>
 					</UnstyledLink>
 				</Paper>
