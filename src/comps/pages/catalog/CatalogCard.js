@@ -19,15 +19,18 @@ const useStyles = makeStyles( theme => ({
 	},
 	redChip: {
 		backgroundColor: red[500],
-		color: red[50]
+		color: red[50],
+		marginTop: "0.3rem"
 	},
 	yellowChip: {
 		backgroundColor: yellow[700],
-		color: yellow[50]
+		color: yellow[50],
+		marginTop: "0.3rem"
 	},
 	greenChip: {
 		backgroundColor: green[500],
-		color: green[50]
+		color: green[50],
+		marginTop: "0.3rem"
 	}
 }));
 

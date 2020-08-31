@@ -3,7 +3,6 @@ import Typography from "@material-ui/core/Typography";
 import { Helmet } from "react-helmet";
 import {makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import userEvent from "@testing-library/user-event";
 import UserContext from "../context/UserContext";
 import {triggerLoginDialog} from "../auth/AuthDialog";
 
@@ -13,6 +12,13 @@ const useStyles  = makeStyles( () => ({
 		left: "50%",
 		transform: "translate(-50%, -50%)",
 		position: "absolute"
+	},
+	centerContainerSignedIn: {
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		position: "absolute",
+		textAlign: "center"
 	},
 	link: {
 		textDecoration: "none",
@@ -34,7 +40,10 @@ const Home = () => {
 				<title>Home | StuyActivities</title>
 			</Helmet>
 			{user.signedIn ? (
-				<Typography variant={"h1"}>Welcome Back!</Typography>
+				<div className={classes.centerContainer}>
+					<Typography variant={"h1"}>Welcome back, {user.firstName}!</Typography>
+					<Button variant="outlined" color="primary" className={classes.button} href="/catalog">Browse Activities</Button>
+				</div>
 			) : (
 				<div className={classes.centerContainer}>
 					<Typography variant={"h4"}>Welcome to StuyActivities v2!</Typography>
