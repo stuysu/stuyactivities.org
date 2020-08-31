@@ -26,29 +26,13 @@ const useStyles = makeStyles(() => ({
 		height: "20%",
 		marginRight: "18px"
 	},
-	redChip: {
-		backgroundColor: red[500],
-		color: red[50],
-		marginTop: "0.3rem"
-	},
-	yellowChip: {
-		backgroundColor: yellow[700],
-		color: yellow[50],
-		marginTop: "0.3rem"
-	},
-	greenChip: {
-		backgroundColor: green[500],
-		color: green[50],
+	chip: {
 		marginTop: "0.3rem"
 	}
 }));
 
 export default function CatalogCard({ name, url, charter }) {
 	const classes = useStyles();
-	let chipColor;
-	charter.commitmentLevel === "high" ? chipColor = classes.redChip
-		: charter.commitmentLevel === "medium" ? chipColor = classes.yellowChip
-		: chipColor = classes.greenChip;
 
 	return (
 		<Grid item xs={12}>
@@ -75,7 +59,7 @@ export default function CatalogCard({ name, url, charter }) {
 											<Chip
 												label={charter.commitmentLevel + " commitment"}
 												size={"small"}
-												className={chipColor}
+												className={classes.chip}
 											/>
 										</Typography>
 									</React.Fragment>
