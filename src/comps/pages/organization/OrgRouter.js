@@ -18,6 +18,7 @@ import MembersTab from "./MembersTab";
 import Error404 from "../Error404";
 
 import AdminPanel from "./AdminPanel";
+import Join from "./Join";
 
 const useStyles = makeStyles(theme => ({
 	contentContainer: {
@@ -39,6 +40,7 @@ const QUERY = gql`
 			name
 			url
 			charter {
+				mission
 				picture
 			}
 			membership {
@@ -48,6 +50,12 @@ const QUERY = gql`
 			}
 			membershipRequest {
 				id
+				role
+				userMessage
+				adminApproval
+				adminMessage
+				userApproval
+				createdAt
 			}
 		}
 	}
@@ -57,7 +65,7 @@ const OrgRouter = ({ match, history }) => {
 	const classes = useStyles();
 	const url = match.params.orgUrl;
 
-	const { data, loading } = useQuery(QUERY, {
+	const { data, loading, refetch } = useQuery(QUERY, {
 		variables: { url },
 		client
 	});
@@ -88,10 +96,21 @@ const OrgRouter = ({ match, history }) => {
 	}
 
 	return (
-		<OrgContext.Provider value={data.organization}>
+		<OrgContext.Provider value={{ ...data.organization, refetch }}>
 			<div>
 				<Helmet>
 					<title>{data?.organization?.name} | StuyActivities</title>
+					<meta
+						property="og:description"
+						content={
+							data?.organization?.charter?.mission ||
+							`${data?.organization?.name} - An activity at Stuyvesant High School`
+						}
+					/>
+					<meta
+						property="og:image"
+						content={data?.organization?.charter?.picture}
+					/>
 				</Helmet>
 
 				<div className={classes.contentContainer}>
@@ -127,6 +146,10 @@ const OrgRouter = ({ match, history }) => {
 								<Route
 									path={match.path + "/admin"}
 									component={AdminPanel}
+								/>
+								<Route
+									path={match.path + "/join"}
+									component={Join}
 								/>
 							</Switch>
 						</Grid>

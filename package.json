@@ -19,6 +19,8 @@
 		"diff": "^4.0.2",
 		"graphql": "^15.3.0",
 		"material-ui-chip-input": "^1.1.0",
+		"moment": "^2.27.0",
+		"moment-timezone": "^0.5.31",
 		"prettier": "^2.1.0",
 		"prop-types": "latest",
 		"react": "^16.13.1",

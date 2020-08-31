@@ -15,12 +15,14 @@ import {
 	Gavel,
 	Home,
 	Info,
+	LockOpen,
 	PowerSettingsNew
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import { triggerLoginDialog } from "../../auth/AuthDialog";
 
 const useStyles = makeStyles(theme => ({
 	list: {
@@ -92,12 +94,19 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				)}
 			</div>
 			<List className={classes.list}>
-				{user.signedIn && (
-					<ListItem button>
+				{user.signedIn ? (
+					<ListItem button onClick={() => user.logout()}>
 						<ListItemIcon>
 							<PowerSettingsNew />
 						</ListItemIcon>
 						<ListItemText primary={"Sign Out"} />
+					</ListItem>
+				) : (
+					<ListItem button onClick={() => triggerLoginDialog()}>
+						<ListItemIcon>
+							<LockOpen />
+						</ListItemIcon>
+						<ListItemText primary={"Sign In"} />
 					</ListItem>
 				)}
 
