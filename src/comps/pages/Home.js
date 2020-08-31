@@ -5,8 +5,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import UserContext from "../context/UserContext";
 import { triggerLoginDialog } from "../auth/AuthDialog";
+import { Link } from "react-router-dom";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
 	centerContainer: {
 		top: "50%",
 		left: "50%",
@@ -22,7 +23,7 @@ const useStyles = makeStyles(() => ({
 	},
 	link: {
 		textDecoration: "none",
-		color: "blue"
+		color: theme.palette.secondary.main
 	},
 	button: {
 		marginTop: "1rem",
@@ -68,13 +69,13 @@ const Home = () => {
 						start a new Activity or manage an Activity that you are
 						a leader of, please login. If you want to learn more,
 						you can visit our{" "}
-						<a href="/about" className={classes.link}>
+						<Link to={"/about"} className={classes.link}>
 							about
-						</a>{" "}
+						</Link>{" "}
 						and{" "}
-						<a href="/rules" className={classes.link}>
+						<Link to="/rules" className={classes.link}>
 							rules
-						</a>{" "}
+						</Link>{" "}
 						pages.
 					</Typography>
 					<Button
