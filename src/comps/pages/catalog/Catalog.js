@@ -6,7 +6,6 @@ import { useQuery } from "@apollo/react-hooks";
 import CatalogCard from "./CatalogCard";
 import CatalogListCard from "./CatalogListCard";
 import { List, ViewComfy } from "@material-ui/icons";
-import IconButton from "@material-ui/core/IconButton";
 import SearchBox from "./filters/SearchBox";
 import TagsFilter from "./filters/TagsFilter";
 import CommitmentFilter from "./filters/CommitmentFilter";
@@ -18,6 +17,8 @@ import cherryNotFound from "./../../../img/vectors/cherry-page-not-found.svg";
 
 import Button from "@material-ui/core/Button";
 import UnstyledLink from "../../ui/UnstyledLink";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import ToggleButton from "@material-ui/lab/ToggleButton";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
@@ -93,7 +94,7 @@ const Catalog = () => {
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
-	const [listView, setListView] = React.useState(false);
+	const [listView, setListView] = React.useState("card");
 
 	const {
 		error,
@@ -108,6 +109,13 @@ const Catalog = () => {
 		}
 	});
 	if (error) return <p>There was an error loading this page</p>;
+
+	//toggle list view
+	const handleListView = (event, newListView) => {
+		if (newListView !== null) {
+			setListView(newListView);
+		}
+	};
 
 	return (
 		<div className={classes.root}>
@@ -167,12 +175,20 @@ const Catalog = () => {
 						>
 							Catalog
 						</Typography>
-						<IconButton
+						<ToggleButtonGroup
+							value={listView}
+							exclusive
+							onChange={handleListView}
+							aria-label={"toggle list view"}
 							className={classes.displayTypeIcon}
-							onClick={() => setListView(prev => !prev)}
 						>
-							{listView ? <List /> : <ViewComfy />}
-						</IconButton>
+							<ToggleButton value="card" aria-label="card view">
+								<ViewComfy />
+							</ToggleButton>
+							<ToggleButton value="list" aria-label="list view">
+								<List />
+							</ToggleButton>
+						</ToggleButtonGroup>
 					</div>
 
 					{data?.organizations?.length === 0 && (
@@ -213,7 +229,7 @@ const Catalog = () => {
 						justify={"space-around"}
 					>
 						{data?.organizations?.map(org =>
-							listView ? (
+							listView === "list" ? (
 								<CatalogListCard key={org.id} {...org} />
 							) : (
 								<Grid item xs={12} sm={6} xl={3} lg={3} md={6}>

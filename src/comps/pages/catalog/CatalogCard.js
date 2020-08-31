@@ -8,10 +8,14 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles(theme => ({
 	card: {
 		margin: theme.spacing(1)
+	},
+	chip: {
+		marginTop: "0.3rem"
 	}
 }));
 
@@ -31,9 +35,11 @@ export default function CatalogCard({ name, url, charter }) {
 							{name}
 						</Typography>
 						<Typography>{charter.mission}</Typography>
-						<Typography variant={"body2"}>
-							Commitment: {charter.commitmentLevel}
-						</Typography>
+						<Chip
+							label={charter.commitmentLevel + " commitment"}
+							size={"small"}
+							className={classes.chip}
+						/>
 					</CardContent>
 				</CardActionArea>
 			</UnstyledLink>
