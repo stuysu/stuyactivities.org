@@ -69,7 +69,11 @@ export default function Members({ match }) {
 		}
 	});
 	const [rejectingRequest, setRejectingRequest] = React.useState({});
-	if (data?.membershipRequests?.length === 0) {
+	if (
+		data?.membershipRequests?.filter(
+			request => !request.userApproval || !request.adminApproval
+		)?.length === 0
+	) {
 		return (
 			<Typography variant="h5">
 				No outgoing or incoming requests at this time
@@ -80,11 +84,13 @@ export default function Members({ match }) {
 		outgoingRequests = [];
 	//would use filter, but forEach prevents going through array twice
 	if (data?.membershipRequests) {
-		data.membershipRequests.forEach(request =>
-			request.userApproval
-				? incomingRequests.push(request)
-				: outgoingRequests.push(request)
-		);
+		data.membershipRequests.forEach(request => {
+			if (!request.userApproval || !request.adminApproval) {
+				request.userApproval
+					? incomingRequests.push(request)
+					: outgoingRequests.push(request);
+			}
+		});
 	}
 	const RequestList = ({ requests }) => {
 		return (
@@ -123,7 +129,11 @@ export default function Members({ match }) {
 						<ListItemSecondaryAction>
 							{request.userApproval ? (
 								<IconButton
-									onClick={() => approveMutation(request.id)}
+									onClick={() =>
+										approveMutation({
+											variables: { requestId: request.id }
+										})
+									}
 								>
 									<CheckIcon />
 								</IconButton>
