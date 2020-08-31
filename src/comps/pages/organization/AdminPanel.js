@@ -4,6 +4,7 @@ import Members from "./AdminPanelTabs/Members";
 import Requests from "./AdminPanelTabs/Requests";
 
 import Tabbed from "../../ui/Tabbed";
+import Meetings from "./AdminPanelTabs/Meetings";
 
 export default function AdminPanel({ match, history }) {
 	const tabs = [
@@ -12,7 +13,7 @@ export default function AdminPanel({ match, history }) {
 		{
 			name: "Meetings",
 			url: "/meetings",
-			component: () => <p>Meetings</p>
+			component: Meetings
 		},
 		{
 			name: "Edit Charter",

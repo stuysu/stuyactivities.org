@@ -76,14 +76,14 @@ const OrgNavPanel = ({ match, organization }) => {
 					to={match.path + "/members"}
 					icon={<Person />}
 				/>
-				{organization.membership?.adminPrivileges ? (
+
+				{organization.membership?.adminPrivileges && (
 					<TabItem
 						label={"Admin Panel"}
+						exact={false}
 						to={match.path + "/admin"}
 						icon={<Settings />}
 					/>
-				) : (
-					""
 				)}
 			</List>
 		</div>
