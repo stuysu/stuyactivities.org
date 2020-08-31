@@ -17,6 +17,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import SubmitCharter from "./SubmitCharter";
 import { makeStyles } from "@material-ui/core/styles";
 import textValidator from "../../../utils/textValidator";
+import SignInRequired from "../../ui/SignInRequired";
 
 // const numSteps = 3;
 
@@ -193,7 +194,7 @@ export default class Charter extends React.Component {
 
 	render() {
 		if (!this.context.signedIn) {
-			return <p>You need to be signed in to charter a new club.</p>;
+			return <SignInRequired />;
 		}
 
 		return (

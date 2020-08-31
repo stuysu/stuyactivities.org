@@ -67,7 +67,7 @@ const Changes = () => {
 						edit.alteredFields.includes(field)
 					)[field];
 			});
-			form.set(mostRecentFields);
+			// form.set(mostRecentFields);
 		}
 	}, [data, form]);
 
