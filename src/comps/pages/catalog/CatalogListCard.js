@@ -18,7 +18,9 @@ const useStyles = makeStyles(() => ({
 		float: "left"
 	},
 	avatar: {
-		height: "20%"
+		width: "50px",
+		height: "20%",
+		marginRight: "18px"
 	}
 }));
 
