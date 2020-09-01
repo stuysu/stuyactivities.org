@@ -231,8 +231,16 @@ const Catalog = () => {
 							listView === "list" ? (
 								<CatalogListCard key={org.id} {...org} />
 							) : (
-								<Grid item xs={12} sm={6} xl={3} lg={3} md={6}>
-									<CatalogCard key={org.id} {...org} />
+								<Grid
+									item
+									xs={12}
+									sm={6}
+									xl={3}
+									lg={3}
+									md={6}
+									key={org.id}
+								>
+									<CatalogCard {...org} />
 								</Grid>
 							)
 						)}
