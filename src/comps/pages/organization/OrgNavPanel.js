@@ -72,20 +72,31 @@ const OrgNavPanel = ({ match }) => {
 				{org?.name}
 			</Typography>
 
-			{memberStatus !== "member" ? (
-				<UnstyledLink to={joinPath}>
-					<Button color={"secondary"} fullWidth>
-						{memberStatus === "none" && "Request To Join"}
-						{memberStatus === "invited" && "Accept Invitation"}
-						{memberStatus === "requested" && "Requested"}
-					</Button>
-				</UnstyledLink>
+			{org.active ? (
+				memberStatus !== "member" ? (
+					<UnstyledLink to={joinPath}>
+						<Button color={"secondary"} fullWidth>
+							{memberStatus === "none" && "Request To Join"}
+							{memberStatus === "invited" && "Accept Invitation"}
+							{memberStatus === "requested" && "Requested"}
+						</Button>
+					</UnstyledLink>
+				) : (
+					<Typography
+						variant={"subtitle2"}
+						style={{ color: "grey", textAlign: "center" }}
+					>
+						Member
+					</Typography>
+				)
 			) : (
 				<Typography
 					variant={"subtitle2"}
 					style={{ color: "grey", textAlign: "center" }}
 				>
-					Member
+					Activity Pending Approval
+					<br />
+					Content On This Page Is Incomplete
 				</Typography>
 			)}
 

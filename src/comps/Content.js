@@ -13,9 +13,16 @@ import Rules from "./pages/Rules";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
 import About from "./pages/About";
+import ReactGA from "react-ga";
+
+ReactGA.initialize("UA-119929576-2");
 
 const Content = () => {
 	const location = useLocation();
+
+	React.useEffect(() => {
+		ReactGA.pageview(location.pathname + location.search);
+	}, [location]);
 
 	return (
 		<div>

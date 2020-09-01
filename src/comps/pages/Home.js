@@ -8,6 +8,8 @@ import { triggerLoginDialog } from "../auth/AuthDialog";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import clip from "./../../img/vectors/clip-choosing-the-occupation.svg";
+import UnstyledLink from "../ui/UnstyledLink";
+
 
 const useStyles = makeStyles(theme => ({
 	layout: {
@@ -61,6 +63,14 @@ const Home = () => {
 										variant="outlined"
 										color="primary"
 										className={classes.button}
+										href="/charter"
+									>
+										Create Activity / Recharter
+									</Button>
+									<Button
+										variant="outlined"
+										color="primary"
+										className={classes.button}
 										href="/catalog"
 									>
 										Browse Activities
@@ -99,14 +109,15 @@ const Home = () => {
 									>
 										Login
 									</Button>
-									<Button
-										variant="outlined"
-										color="primary"
-										className={classes.button}
-										href="/catalog"
-									>
-										Browse Activities
-									</Button>
+									<UnstyledLink to={"/catalog"}>
+										<Button
+											variant="outlined"
+											color="primary"
+											className={classes.button}
+										>
+											Browse Activities
+										</Button>
+									</UnstyledLink>
 								</div>
 							)}
 						</main>
