@@ -21,7 +21,7 @@ const MUTATION = gql`
 		$meetingDays: [String!]
 		$commitmentLevel: String!
 		$keywords: [String!]
-		$extra: String!
+		$extra: String
 		$picture: Upload
 	) {
 		createOrganization(
