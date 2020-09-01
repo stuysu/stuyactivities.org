@@ -26,8 +26,11 @@ export default function Rules() {
 			<Typography paragraph>
 				If you are experiencing technical issues or difficulties
 				regarding the StuyActivities website, please contact us at
-				help@stuyactivities.org<sup></sup>. All other Activity-related
-				issues may be emailed to clubpub@stuysu.org.<sup></sup>
+				<a href="mailto:help@stuyactivities.org">
+					help@stuyactivities.org
+				</a>
+				<sup></sup>. All other Activity-related issues may be emailed to{" "}
+				<a href="clubpub@stuysu.org">clubpub@stuysu.org</a>.<sup></sup>
 				<sup></sup>
 				<sup></sup>
 			</Typography>
@@ -160,11 +163,13 @@ export default function Rules() {
 							<li>
 								Have the registered Activity faculty advisor
 								(not the Activity leaders) email
-								clubpub@stuysu.org, the COSA (Mr. Polazzo) and
-								the Assistant Principal (Mr. Moran) at least one
-								week in advance with the Subject: “Activity
-								Meeting Outside of School Premises: [ACTIVITY
-								NAME]”
+								<a href="mailto:clubpub@stuysu.org">
+									clubpub@stuysu.org
+								</a>
+								, the COSA (Mr. Polazzo) and the Assistant
+								Principal (Mr. Moran) at least one week in
+								advance with the Subject: “Activity Meeting
+								Outside of School Premises: [ACTIVITY NAME]”
 							</li>
 							<li>
 								The email should detail the date, location,
@@ -174,12 +179,17 @@ export default function Rules() {
 							</li>
 							<li>
 								Mr. Polazzo can be reached at
-								MPolazz@schools.nyc.gov and be found in Room
-								260.
+								<a href="mailto:MPolazz@schools.nyc.gov">
+									MPolazz@schools.nyc.gov
+								</a>{" "}
+								and be found in Room 260.
 							</li>
 							<li>
 								Mr. Moran can be reached at
-								BMoran@schools.nyc.gov and be found in Room 103.
+								<a href="mailto:BMoran@schools.nyc.gov">
+									BMoran@schools.nyc.gov
+								</a>{" "}
+								and be found in Room 103.
 							</li>
 						</ul>
 						<ul>
@@ -243,11 +253,14 @@ export default function Rules() {
 					</li>
 					<li>
 						If an Activity needs a long-term booking of a specific
-						room, its leaders must email clubpub@stuysu.org with the
-						Subject: “Long Term Room Reservation: [ACTIVITY NAME]”,
-						detailing the reason(s) for why this reservation is
-						necessary. Long term reservations will be handled by the
-						SU Clubs &amp; Pubs Department and approved on a
+						room, its leaders must email{" "}
+						<a href="mailto:clubpub@stuysu.org">
+							clubpub@stuysu.org
+						</a>{" "}
+						with the Subject: “Long Term Room Reservation: [ACTIVITY
+						NAME]”, detailing the reason(s) for why this reservation
+						is necessary. Long term reservations will be handled by
+						the SU Clubs &amp; Pubs Department and approved on a
 						case-by-case basis.
 					</li>
 					<li>
@@ -278,15 +291,24 @@ export default function Rules() {
 						<ul>
 							<li>
 								The registered Activity faculty advisor (not the
-								Activity leaders) must email clubpub@stuysu.org,
-								the Student Union COSA, Mr. Polazzo, and the
+								Activity leaders) must email{" "}
+								<a href="mailto:clubpub@stuysu.org">
+									clubpub@stuysu.org
+								</a>
+								, the Student Union COSA, Mr. Polazzo, and the
 								Assistant Principal, Mr. Moran, at least one
 								week in advance with the Subject: “[NAME OF
 								FACILITY] Reservation: [ACTIVITY NAME]. Mr.
 								Polazzo can be reached at
-								MPolazz@schools.nyc.gov and be found in Room
-								260. Mr. Moran can be reached at
-								BMoran@schools.nyc.gov and be found in Room 103.
+								<a href="mailto:MPolazz@schools.nyc.gov">
+									MPolazz@schools.nyc.gov
+								</a>{" "}
+								and be found in Room, 260. Mr. Moran can be
+								reached at
+								<a href="mailto:BMoran@schools.nyc.gov">
+									BMoran@schools.nyc.gov
+								</a>{" "}
+								and be found in Room 103.
 							</li>
 							<li>
 								The email should detail the reason for reserving
@@ -351,12 +373,18 @@ export default function Rules() {
 						refusal of the Activity’s funding request. If there are
 						extenuating circumstances preventing an Activity’s
 						leader(s) or Faculty Advisor from attending the meeting,
-						an email must be sent to clubpub@stuysu.org and
-						budget@stuysu.org prior to the scheduled meeting time
-						detailing the excuse. The Student Union will decide upon
-						further action on a case-by-case basis and reserves the
-						right to refuse an additional meeting if the excuse is
-						not valid.
+						an email must be sent to{" "}
+						<a href="mailto:clubpub@stuysu.org">
+							clubpub@stuysu.org
+						</a>{" "}
+						and
+						<a href="mailto:budget@stuysu.org">
+							budget@stuysu.org
+						</a>{" "}
+						prior to the scheduled meeting time detailing the
+						excuse. The Student Union will decide upon further
+						action on a case-by-case basis and reserves the right to
+						refuse an additional meeting if the excuse is not valid.
 					</li>
 					<li>
 						When an Activity requests funding from the Student
@@ -369,11 +397,14 @@ export default function Rules() {
 								reimbursements from the Student Union up to the
 								amount allocated (not including tax). Activities
 								must save all of their receipts and submit
-								original copies to the SU Budget Department
-								(budget@stuysu.org). Two weeks after submission,
-								the Activity should go to Room 103 to pick up
-								the reimbursement check from Ms. Caruzo (the
-								school treasurer). The Budget Department cannot
+								original copies to the SU Budget Department (
+								<a href="mailto:budget@stuysu.org">
+									budget@stuysu.org
+								</a>
+								). Two weeks after submission, the Activity
+								should go to Room 103 to pick up the
+								reimbursement check from Ms. Caruzo (the school
+								treasurer). The Budget Department cannot
 								reimburse taxes, so it is suggested that the
 								Activity use the school’s tax-exempt form. If
 								granted money by the SU, the Budget Department
