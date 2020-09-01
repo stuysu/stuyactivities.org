@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import UserContext from "../context/UserContext";
 import { triggerLoginDialog } from "../auth/AuthDialog";
 import { Link } from "react-router-dom";
+import UnstyledLink from "../ui/UnstyledLink";
 
 const useStyles = makeStyles(theme => ({
 	layout: {
@@ -50,6 +51,14 @@ const Home = () => {
 								variant="outlined"
 								color="primary"
 								className={classes.button}
+								href="/charter"
+							>
+								Create Activity / Recharter
+							</Button>
+							<Button
+								variant="outlined"
+								color="primary"
+								className={classes.button}
 								href="/catalog"
 							>
 								Browse Activities
@@ -88,14 +97,15 @@ const Home = () => {
 							>
 								Login
 							</Button>
-							<Button
-								variant="outlined"
-								color="primary"
-								className={classes.button}
-								href="/catalog"
-							>
-								Browse Activities
-							</Button>
+							<UnstyledLink to={"/catalog"}>
+								<Button
+									variant="outlined"
+									color="primary"
+									className={classes.button}
+								>
+									Browse Activities
+								</Button>
+							</UnstyledLink>
 						</div>
 					)}
 				</main>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { Tab, Tabs } from "@material-ui/core";
 
 /** Tabs are [{url: ..., name: ..., component: ...}, ...] **/
@@ -24,7 +24,7 @@ export default function Tabbed({ match, history, tabs }) {
 			<Switch>
 				<Route
 					path={match.path}
-					component={() => <div>Please choose a tab</div>}
+					component={() => <Redirect to={"/stuysu/admin/members"} />}
 					exact
 				/>
 				{tabs.map(e => (

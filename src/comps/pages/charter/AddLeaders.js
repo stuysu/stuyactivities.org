@@ -59,7 +59,8 @@ const AddLeaders = () => {
 				meetings in Stuyvesant past 5:00 pm, host guest speakers at
 				Stuyvesant, have in-person events, meeting, field trips, etc.
 				outside of Stuyvesant, or request funding from the Student
-				Union.
+				Union. When you charter your role will be "creator" but once
+				your organization is approved you will be able to change it.
 			</Typography>
 			<Autocomplete
 				options={options}

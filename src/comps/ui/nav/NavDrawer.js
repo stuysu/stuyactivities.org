@@ -131,7 +131,11 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 
 				<ListItem
 					button
-					onClick={() => window.open("https://stuyactivities.org")}
+					onClick={() =>
+						window.open(
+							"https://docs.google.com/spreadsheets/d/1zXnAbnR3uq0a1bJxKKefP1xShE6ovyJX2k9bl_qkEco/edit?usp=sharing"
+						)
+					}
 				>
 					<ListItemIcon>
 						<Archive />

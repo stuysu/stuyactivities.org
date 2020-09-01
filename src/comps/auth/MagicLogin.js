@@ -94,7 +94,7 @@ export default function MagicLogin() {
 							<span role={"img"} aria-label={"sparkles"}>
 								&#10024;
 							</span>
-							&nbsp; Send Me A Magic Sign In Link &nbsp;
+							&nbsp; Send Magic Sign In Link &nbsp;
 							<span role={"img"} aria-label={"sparkles"}>
 								&#10024;
 							</span>

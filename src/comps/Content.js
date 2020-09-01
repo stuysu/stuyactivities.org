@@ -12,9 +12,17 @@ import SpecificApproval from "./pages/admin/SpecificApproval";
 import Rules from "./pages/Rules";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
+import About from "./pages/About";
+import ReactGA from "react-ga";
+
+ReactGA.initialize("UA-119929576-2");
 
 const Content = () => {
 	const location = useLocation();
+
+	React.useEffect(() => {
+		ReactGA.pageview(location.pathname + location.search);
+	}, [location]);
 
 	return (
 		<div>
@@ -52,6 +60,7 @@ const Content = () => {
 				/>
 				<Route path={"/admin"} component={AdminMain} />
 				<Route path={"/rules"} component={Rules} />
+				<Route path={"/about"} component={About} />
 				<Route path={"/:orgUrl"} component={OrgRouter} />
 			</Switch>
 		</div>
