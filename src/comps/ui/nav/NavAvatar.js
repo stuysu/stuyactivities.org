@@ -34,15 +34,15 @@ const NavAvatar = () => {
 
 	return (
 		<div>
-			<IconButton
-				aria-label="account of current user"
-				aria-controls={menuId}
-				aria-haspopup="true"
-				color="inherit"
-				onClick={handleMenu}
-			>
-				<Help />
-			</IconButton>
+			{/*<IconButton*/}
+			{/*	aria-label="account of current user"*/}
+			{/*	aria-controls={menuId}*/}
+			{/*	aria-haspopup="true"*/}
+			{/*	color="inherit"*/}
+			{/*	onClick={handleMenu}*/}
+			{/*>*/}
+			{/*	<Help />*/}
+			{/*</IconButton>*/}
 
 			<Menu
 				id={menuId}
