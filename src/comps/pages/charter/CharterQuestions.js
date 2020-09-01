@@ -13,6 +13,10 @@ const CharterQuestions = () => {
 
 	return (
 		<div>
+			<p>
+				Please remember to write your answers in third person point of
+				view.
+			</p>
 			<SmartCharterQuestion
 				label={"Activity Mission"}
 				helperText={

@@ -54,6 +54,7 @@ const Content = () => {
 				/>
 				<Route path={"/admin"} component={AdminMain} />
 				<Route path={"/rules"} component={Rules} />
+				<Route path={"/about"} component={About} />
 				<Route path={"/:orgUrl"} component={OrgRouter} />
 			</Switch>
 		</div>
