@@ -1,11 +1,12 @@
 import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
+import BackButton from "../ui/BackButton";
 
 const useStyles = makeStyles(theme => ({
 	main: {
-		maxWidth: "60em",
+		maxWidth: "1200px",
 		margin: "auto",
-		padding: theme.spacing(1)
+		padding: "2rem"
 	}
 }));
 
@@ -13,14 +14,15 @@ export default function Rules() {
 	const classes = useStyles();
 	return (
 		<div className={classes.main}>
+			<BackButton to={"/"} label={"Back To Home"} />
 			<Typography
-				variant={"h2"}
+				variant={"h3"}
 				color="primary"
 				style={{ textAlign: "center" }}
 			>
 				Rules
 			</Typography>
-			<Typography variant={"h4"} color="primary">
+			<Typography variant={"h5"} color="primary">
 				Basics
 			</Typography>
 			<Typography paragraph>
@@ -28,11 +30,9 @@ export default function Rules() {
 				regarding the StuyActivities website, please contact us at
 				<a href="mailto:help@stuyactivities.org">
 					help@stuyactivities.org
-				</a>
+				</a>{" "}
 				<sup></sup>. All other Activity-related issues may be emailed to{" "}
-				<a href="clubpub@stuysu.org">clubpub@stuysu.org</a>.<sup></sup>
-				<sup></sup>
-				<sup></sup>
+				<a href="clubpub@stuysu.org">clubpub@stuysu.org</a>.
 			</Typography>
 			<Typography>
 				<ol>
@@ -47,10 +47,8 @@ export default function Rules() {
 						<a href="https://stuyactivities.org">
 							www.StuyActivities.org
 						</a>
-						)<sup></sup>
-						<sup></sup>. All Activity leaders will receive an email
-						when their charter has been fully approved and is in the
-						catalog.
+						). All Activity leaders will receive an email when their
+						charter has been fully approved and is in the catalog.
 					</li>
 					<li>
 						All Activities must have at least two leaders (i.e. two
@@ -108,11 +106,11 @@ export default function Rules() {
 						Department of Education{" "}
 						<a href="https://www.schools.nyc.gov/docs/default-source/default-document-library/a-601-english">
 							Chancellor’s Regulation A-601
-						</a>
+						</a>{" "}
 						. Any Activity that violates this regulation or other{" "}
 						<a href="https://www.schools.nyc.gov/about-us/policies/chancellors-regulations">
 							Chancellor’s Regulations
-						</a>
+						</a>{" "}
 						&nbsp;will face suspension and revocation of their
 						charter.
 					</li>
@@ -120,14 +118,14 @@ export default function Rules() {
 						All Activities must adhere to the{" "}
 						<a href="https://stuy.enschool.org/apps/pages/index.jsp?uREC_ID=126635&type=d">
 							Stuyvesant Code of Conduct
-						</a>
+						</a>{" "}
 						&nbsp;and other school policies. Any Activity that
 						violates these regulations will face suspension and
 						revocation of their charter.
 					</li>
 				</ol>
 			</Typography>
-			<Typography variant={"h4"} color="primary">
+			<Typography variant={"h5"} color="primary">
 				Meetings
 			</Typography>
 			<Typography paragraph>
@@ -165,7 +163,7 @@ export default function Rules() {
 								(not the Activity leaders) email
 								<a href="mailto:clubpub@stuysu.org">
 									clubpub@stuysu.org
-								</a>
+								</a>{" "}
 								, the COSA (Mr. Polazzo) and the Assistant
 								Principal (Mr. Moran) at least one week in
 								advance with the Subject: “Activity Meeting
@@ -226,7 +224,7 @@ export default function Rules() {
 					</li>
 				</ol>
 			</Typography>
-			<Typography variant={"h4"} color="primary">
+			<Typography variant={"h5"} color="primary">
 				Room Reservations and Usage
 			</Typography>
 			<Typography paragraph>
@@ -294,7 +292,7 @@ export default function Rules() {
 								Activity leaders) must email{" "}
 								<a href="mailto:clubpub@stuysu.org">
 									clubpub@stuysu.org
-								</a>
+								</a>{" "}
 								, the Student Union COSA, Mr. Polazzo, and the
 								Assistant Principal, Mr. Moran, at least one
 								week in advance with the Subject: “[NAME OF
@@ -326,7 +324,7 @@ export default function Rules() {
 					</li>
 				</ol>
 			</Typography>
-			<Typography variant={"h4"} color="primary">
+			<Typography variant={"h5"} color="primary">
 				Funding
 			</Typography>
 			<Typography>
@@ -400,7 +398,7 @@ export default function Rules() {
 								original copies to the SU Budget Department (
 								<a href="mailto:budget@stuysu.org">
 									budget@stuysu.org
-								</a>
+								</a>{" "}
 								). Two weeks after submission, the Activity
 								should go to Room 103 to pick up the
 								reimbursement check from Ms. Caruzo (the school
@@ -438,7 +436,7 @@ export default function Rules() {
 								Budget Department (
 								<a href="mailto:budget@stuysu.org">
 									budget@stuysu.org
-								</a>
+								</a>{" "}
 								) within seven days of purchase.
 							</li>
 							<li>

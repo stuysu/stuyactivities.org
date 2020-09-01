@@ -1,5 +1,4 @@
 import React from "react";
-import { gql } from "@apollo/client";
 import { OrgContext } from "./OrgRouter";
 import FlexCenter from "../../ui/FlexCenter";
 import { Grid, Typography } from "@material-ui/core";
@@ -7,9 +6,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import TextField from "@material-ui/core/TextField";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import { Close } from "@material-ui/icons";
 import Card from "@material-ui/core/Card";
 import ReactMarkdown from "react-markdown";
 import moment from "moment-timezone";
