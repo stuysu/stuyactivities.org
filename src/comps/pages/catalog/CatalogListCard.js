@@ -11,16 +11,26 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles(() => ({
 	item: {
 		width: "100%",
 		float: "left"
+	},
+	avatar: {
+		width: "50px",
+		height: "20%",
+		marginRight: "18px"
+	},
+	chip: {
+		marginTop: "0.3rem"
 	}
 }));
 
 export default function CatalogCard({ name, url, charter }) {
 	const classes = useStyles();
+
 	return (
 		<Grid item xs={12}>
 			<List>
@@ -28,7 +38,11 @@ export default function CatalogCard({ name, url, charter }) {
 					<UnstyledLink to={`/${url}`}>
 						<ListItem>
 							<ListItemAvatar>
-								<Avatar src={charter.picture} />
+								<Avatar
+									src={charter.picture}
+									variant={"square"}
+									className={classes.avatar}
+								/>
 							</ListItemAvatar>
 							<ListItemText
 								primary={
@@ -43,8 +57,14 @@ export default function CatalogCard({ name, url, charter }) {
 										<Typography variant={"body1"}>
 											{charter.mission}
 											<br />
-											{"Commitment Level: " +
-												charter.commitmentLevel}
+											<Chip
+												label={
+													charter.commitmentLevel +
+													" commitment"
+												}
+												size={"small"}
+												className={classes.chip}
+											/>
 										</Typography>
 									</React.Fragment>
 								}

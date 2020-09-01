@@ -18,6 +18,8 @@ import MembersTab from "./MembersTab";
 import Error404 from "../Error404";
 
 import AdminPanel from "./AdminPanel";
+import Join from "./Join";
+import UserContext from "../../context/UserContext";
 
 const useStyles = makeStyles(theme => ({
 	contentContainer: {
@@ -32,32 +34,59 @@ const useStyles = makeStyles(theme => ({
 
 export const OrgContext = React.createContext({});
 
-const QUERY = gql`
-	query Organization($url: String!) {
-		organization(url: $url) {
-			id
-			name
-			url
-			charter {
-				picture
-			}
-			membership {
+const getQuery = signedIn => {
+	return gql`
+		query Organization($url: String!) {
+			organization(url: $url) {
 				id
-				role
-				adminPrivileges
-			}
-			membershipRequest {
-				id
+				name
+				url
+				charter {
+					mission
+					meetingSchedule
+					picture
+				}
+				leaders: memberships(onlyLeaders: true) {
+					user {
+						name
+						${signedIn ? "email" : ""}
+						picture
+					}
+					role
+				}
+				upcomingMeetings {
+					id
+					title
+					description
+					start
+					end
+				}
+				membership {
+					id
+					role
+					adminPrivileges
+				}
+				membershipRequest {
+					id
+					role
+					userMessage
+					adminApproval
+					adminMessage
+					userApproval
+					createdAt
+				}
 			}
 		}
-	}
-`;
+	`;
+};
 
 const OrgRouter = ({ match, history }) => {
+	const user = React.useContext(UserContext);
+
 	const classes = useStyles();
 	const url = match.params.orgUrl;
 
-	const { data, loading } = useQuery(QUERY, {
+	const { data, loading, refetch } = useQuery(getQuery(user.signedIn), {
 		variables: { url },
 		client
 	});
@@ -88,10 +117,21 @@ const OrgRouter = ({ match, history }) => {
 	}
 
 	return (
-		<OrgContext.Provider value={data.organization}>
+		<OrgContext.Provider value={{ ...data.organization, refetch }}>
 			<div>
 				<Helmet>
 					<title>{data?.organization?.name} | StuyActivities</title>
+					<meta
+						property="og:description"
+						content={
+							data?.organization?.charter?.mission ||
+							`${data?.organization?.name} - An activity at Stuyvesant High School`
+						}
+					/>
+					<meta
+						property="og:image"
+						content={data?.organization?.charter?.picture}
+					/>
 				</Helmet>
 
 				<div className={classes.contentContainer}>
@@ -127,6 +167,10 @@ const OrgRouter = ({ match, history }) => {
 								<Route
 									path={match.path + "/admin"}
 									component={AdminPanel}
+								/>
+								<Route
+									path={match.path + "/join"}
+									component={Join}
 								/>
 							</Switch>
 						</Grid>

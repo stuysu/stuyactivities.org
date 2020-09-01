@@ -48,9 +48,9 @@ export default function TagsFilter({ tags, setTags }) {
 							key={tag.id}
 							control={
 								<Checkbox
-									checked={tags.includes(tag.name)}
-									onChange={() => toggleTag(tag.name)}
-									value={tag.name}
+									checked={tags.includes(tag.id)}
+									onChange={() => toggleTag(tag.id)}
+									value={tag.id}
 								/>
 							}
 							label={tag.name}
