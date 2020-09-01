@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
 import About from "./pages/About";
 import ReactGA from "react-ga";
+import suLogo from "./../img/su-logo512.png";
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -39,10 +40,7 @@ const Content = () => {
 						"An app to help students navigate the clubs and organizations at Stuyvesant High School."
 					}
 				/>
-				<meta
-					property="og:image"
-					content={PUBLIC_URL + "/img/logo512.png"}
-				/>
+				<meta property="og:image" content={suLogo} />
 				<title>StuyActivities</title>
 			</Helmet>
 

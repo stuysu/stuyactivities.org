@@ -17,7 +17,7 @@ import BackButton from "../../ui/BackButton";
 import MembersTab from "./MembersTab";
 import Error404 from "../Error404";
 
-import AdminPanel from "./AdminPanel";
+import AdminRouter from "./AdminRouter";
 import Join from "./Join";
 import UserContext from "../../context/UserContext";
 
@@ -166,7 +166,7 @@ const OrgRouter = ({ match, history }) => {
 								/>
 								<Route
 									path={match.path + "/admin"}
-									component={AdminPanel}
+									component={AdminRouter}
 								/>
 								<Route
 									path={match.path + "/join"}
