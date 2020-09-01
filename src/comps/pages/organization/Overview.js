@@ -22,12 +22,25 @@ const Overview = () => {
 				<Typography variant={"h6"} color={"primary"}>
 					Mission:
 				</Typography>
-				<Typography paragraph>{org.charter.mission}</Typography>
+				<Typography paragraph>
+					{!org.active && !org.charter.mission && (
+						<span style={{ color: "grey" }}>
+							This response is pending approval
+						</span>
+					)}
+					{org.charter.mission}
+				</Typography>
 				<Typography variant={"h6"} color={"primary"}>
 					Meeting Schedule:
 				</Typography>
-				<Typography paragraph>{org.charter.meetingSchedule}</Typography>
-				<br />
+				<Typography paragraph>
+					{!org.active && !org.charter.meetingSchedule && (
+						<span style={{ color: "grey" }}>
+							This response is pending approval
+						</span>
+					)}
+					{org.charter.meetingSchedule}
+				</Typography>
 
 				<Typography variant={"h6"} color={"primary"}>
 					Leaders{" "}
@@ -65,6 +78,12 @@ const Overview = () => {
 					Upcoming Meetings
 				</Typography>
 				<br />
+				{!org.upcomingMeetings?.length && (
+					<span style={{ color: "grey" }}>
+						There currently are no upcoming meetings scheduled.
+					</span>
+				)}
+
 				<Grid>
 					{org.upcomingMeetings.map(meeting => {
 						const start = new Date(Number(meeting.start));

@@ -80,7 +80,7 @@ const CharterQuestions = () => {
 					"What additional things would you like to share about your activity?"
 				}
 				helperText={
-					"(Optional) This information will be public, so if it’s private or a question for the Clubs and Pubs department, please let us know at clubpubs@stuysu.org."
+					"(Optional) This information will be public, so if it’s private or a question for the Clubs and Pubs department, please let us know at clubpub@stuysu.org."
 				}
 				maxChars={1000}
 				multiline
