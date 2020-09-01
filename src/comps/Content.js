@@ -11,6 +11,7 @@ import AdminMain from "./pages/admin/AdminMain";
 import SpecificApproval from "./pages/admin/SpecificApproval";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
+import About from "./pages/About";
 
 const Content = () => {
 	const location = useLocation();
@@ -44,6 +45,7 @@ const Content = () => {
 				<Route path={"/"} component={Home} exact />
 				<Route path={"/catalog"} component={Catalog} exact />
 				<Route path={"/charter"} component={Charter} exact />
+				<Route path={"/about"} component={About} exact />
 				<Route path={"/token/:token"} component={TokenLogin} exact />
 				<Route
 					path={"/admin/approvals/:url"}
