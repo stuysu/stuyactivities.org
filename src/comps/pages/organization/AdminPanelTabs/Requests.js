@@ -152,30 +152,6 @@ export default function Members({ match }) {
 		);
 	};
 	return (
-<<<<<<< HEAD
-		<TableContainer component={Paper} className={classes.margin}>
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell>Type</TableCell>
-						<TableCell>Name</TableCell>
-						<TableCell>Email</TableCell>
-						<TableCell>Requested Role</TableCell>
-						<TableCell>Requested Admin?</TableCell>
-						<TableCell>Request Message</TableCell>
-						<TableCell>Actions</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{data?.membershipRequests?.map(request => (
-						<TableRow>
-							<TableCell>
-								{
-									request.userApproval
-										? "Incoming"
-										: "Outgoing"
-									/* assumes if both adminApproval and userApproval are set it is removed. If userApproval is false, then adminApproval must be true */
-=======
 		<div className={classes.margin}>
 			{incomingRequests.length > 0 ? (
 				<Typography variant="h5">Incoming Requests</Typography>
@@ -212,7 +188,6 @@ export default function Members({ match }) {
 							deleteMutation({
 								variables: {
 									requestId: rejectingRequest.id
->>>>>>> f11c31e7d59b8d4a13f3a04d7c855e3969bc97cc
 								}
 							});
 							setRejectingRequest({});
