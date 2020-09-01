@@ -1,20 +1,20 @@
 import React from "react";
 import {
-	makeStyles,
+	Avatar,
+	Button,
+	Dialog,
+	DialogActions,
+	DialogTitle,
+	Grid,
+	IconButton,
 	List,
 	ListItem,
 	ListItemAvatar,
-	Avatar,
-	Grid,
-	Typography,
 	ListItemSecondaryAction,
-	IconButton,
-	Dialog,
-	DialogTitle,
-	DialogActions,
-	Button
+	makeStyles,
+	Typography
 } from "@material-ui/core";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 

@@ -9,6 +9,7 @@ import Charter from "./pages/charter/Charter";
 import TokenLogin from "./pages/TokenLogin";
 import AdminMain from "./pages/admin/AdminMain";
 import SpecificApproval from "./pages/admin/SpecificApproval";
+import Rules from "./pages/Rules";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
 
@@ -50,6 +51,7 @@ const Content = () => {
 					component={SpecificApproval}
 				/>
 				<Route path={"/admin"} component={AdminMain} />
+				<Route path={"/rules"} component={Rules} />
 				<Route path={"/:orgUrl"} component={OrgRouter} />
 			</Switch>
 		</div>

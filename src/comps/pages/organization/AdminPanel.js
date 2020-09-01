@@ -4,23 +4,21 @@ import Members from "./AdminPanelTabs/Members";
 import Requests from "./AdminPanelTabs/Requests";
 
 import Tabbed from "../../ui/Tabbed";
-import Meetings from "./AdminPanelTabs/Meetings";
-import EditCharter from "./AdminPanelTabs/EditCharter";
 
 export default function AdminPanel({ match, history }) {
 	const tabs = [
 		{ name: "Members", url: "/members", component: Members },
-		{ name: "Membership Requests", url: "/requests", component: Requests },
+		{ name: "Membership Requests", url: "/requests", component: Requests }
 		// {
 		// 	name: "Meetings",
 		// 	url: "/meetings",
 		// 	component: Meetings
 		// },
-		{
-			name: "Edit Charter",
-			url: "/editCharter",
-			component: () => <EditCharter />
-		}
+		// {
+		// 	name: "Edit Charter",
+		// 	url: "/editCharter",
+		// 	component: () => <EditCharter />
+		// }
 		// { name: "Strikes", url: "/strikes", component: () => <p>Strikes</p> }
 	];
 	return <Tabbed match={match} history={history} tabs={tabs} />;

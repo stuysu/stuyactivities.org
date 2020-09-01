@@ -226,7 +226,6 @@ const Catalog = () => {
 						container
 						alignContent={"flex-start"}
 						alignItems={"flex-start"}
-						justify={"space-around"}
 					>
 						{data?.organizations?.map(org =>
 							listView === "list" ? (
