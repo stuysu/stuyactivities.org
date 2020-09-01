@@ -4,8 +4,6 @@ import Members from "./AdminPanelTabs/Members";
 import Requests from "./AdminPanelTabs/Requests";
 
 import Tabbed from "../../ui/Tabbed";
-import Meetings from "./AdminPanelTabs/Meetings";
-import EditCharter from "./AdminPanelTabs/EditCharter";
 
 export default function AdminPanel({ match, history }) {
 	const tabs = [

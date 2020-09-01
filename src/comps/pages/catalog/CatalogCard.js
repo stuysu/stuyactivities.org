@@ -28,7 +28,7 @@ export default function CatalogCard({ name, url, charter }) {
 					<CardMedia
 						image={charter.picture}
 						title={name + "'s picture"}
-						style={{ height: 140 }}
+						style={{ height: 180 }}
 					/>
 					<CardContent>
 						<Typography variant={"h5"} gutterBottom>

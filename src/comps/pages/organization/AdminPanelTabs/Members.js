@@ -1,25 +1,25 @@
 import React from "react";
 import {
-	makeStyles,
+	Avatar,
+	Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	FormControlLabel,
+	Grid,
+	IconButton,
 	List,
 	ListItem,
 	ListItemAvatar,
-	Avatar,
-	Grid,
-	Typography,
 	ListItemSecondaryAction,
-	IconButton,
-	Dialog,
-	DialogTitle,
-	DialogContent,
+	makeStyles,
+	Switch,
 	TextField,
-	DialogActions,
-	Button,
-	FormControlLabel,
-	Switch
+	Typography
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 
 const useStyles = makeStyles(theme => ({
 	margin: {
