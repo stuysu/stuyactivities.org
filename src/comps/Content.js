@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Navigation from "./ui/nav/Navigation";
 import AuthDialog from "./auth/AuthDialog";
@@ -59,6 +59,15 @@ const Content = () => {
 				<Route path={"/admin"} component={AdminMain} />
 				<Route path={"/rules"} component={Rules} />
 				<Route path={"/about"} component={About} />
+
+				<Route path={"/organizations/:orgUrl"}>
+					<Redirect
+						to={window.location.pathname.replace(
+							"/organizations/",
+							"/"
+						)}
+					/>
+				</Route>
 				<Route path={"/:orgUrl"} component={OrgRouter} />
 			</Switch>
 		</div>

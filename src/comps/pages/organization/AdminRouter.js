@@ -30,15 +30,16 @@ export default function AdminRouter({ match, history }) {
 	const [selectedTabIndex, setSelectedTabIndex] = React.useState(0);
 
 	React.useEffect(() => {
-		const isCorrectTab = location.pathname.startsWith(
-			tabs[selectedTabIndex].path
+		const isCorrectIndex = location.pathname.startsWith(
+			tabs[selectedTabIndex]?.path
 		);
 
-		if (!isCorrectTab) {
-			setSelectedTabIndex(
-				tabs.findIndex(tab => location.pathname.startsWith(tab.path)) ||
-					0
+		if (!isCorrectIndex) {
+			const correctIndex = tabs.findIndex(tab =>
+				location.pathname.startsWith(tab.path)
 			);
+
+			setSelectedTabIndex(correctIndex !== -1 ? correctIndex : 0);
 		}
 	}, [location, selectedTabIndex, tabs]);
 

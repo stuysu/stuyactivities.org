@@ -149,6 +149,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						</ListSubheader>
 						{user.memberships?.map(membership => (
 							<UnstyledLink
+								key={membership.id}
 								to={`/${membership?.organization?.url}`}
 							>
 								<ListItem button>

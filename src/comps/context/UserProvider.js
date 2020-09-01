@@ -16,8 +16,10 @@ const basicInfo = gql`
 			fourDigitId
 			isFaculty
 			memberships {
+				id
 				role
 				organization {
+					id
 					name
 					url
 					charter {
@@ -27,6 +29,7 @@ const basicInfo = gql`
 				adminPrivileges
 			}
 			adminRoles {
+				id
 				role
 			}
 		}
