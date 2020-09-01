@@ -48,7 +48,9 @@ const getQuery = signedIn => {
 					picture
 				}
 				leaders: memberships(onlyLeaders: true) {
+					id
 					user {
+						id
 						name
 						${signedIn ? "email" : ""}
 						picture

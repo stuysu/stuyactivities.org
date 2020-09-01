@@ -7,13 +7,18 @@ import ThemeProvider from "./comps/context/ThemeProvider";
 import { BrowserRouter } from "react-router-dom";
 import Content from "./comps/Content";
 
+import ErrorBoundary from "@honeybadger-io/react";
+import honeybadger from "./utils/honeybadger";
+
 function App() {
 	return (
 		<ApolloProvider>
 			<ThemeProvider>
 				<BrowserRouter>
 					<UserProvider>
-						<Content />
+						<ErrorBoundary honeybadger={honeybadger}>
+							<Content />
+						</ErrorBoundary>
 					</UserProvider>
 				</BrowserRouter>
 			</ThemeProvider>

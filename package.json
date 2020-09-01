@@ -5,6 +5,7 @@
 	"dependencies": {
 		"@apollo/client": "^3.1.4",
 		"@apollo/react-hooks": "^4.0.0",
+		"@honeybadger-io/react": "0.0.7",
 		"@material-ui/core": "^4.11.0",
 		"@material-ui/icons": "^4.9.1",
 		"@material-ui/lab": "^4.0.0-alpha.56",
@@ -18,6 +19,7 @@
 		"apollo-upload-client": "^14.1.1",
 		"diff": "^4.0.2",
 		"graphql": "^15.3.0",
+		"honeybadger-js": "^2.2.2",
 		"material-ui-chip-input": "^1.1.0",
 		"moment": "^2.27.0",
 		"moment-timezone": "^0.5.31",
