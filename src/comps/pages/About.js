@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import FlexCenter from "../ui/FlexCenter";
 import Typography from "@material-ui/core/Typography";
 import { Helmet } from "react-helmet";
 import Grid from "@material-ui/core/Grid";
