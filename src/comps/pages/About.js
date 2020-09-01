@@ -10,11 +10,14 @@ const useStyles = makeStyles(() => ({
 		justifyContent: "center",
 		alignItems: "center",
 		minHeight: "80vh",
-		paddingRight: "2rem",
-		paddingLeft: "2rem",
+		padding: "2rem",
 		flexDirection: "column",
 		maxWidth: "1200px",
 		margin: "auto"
+	},
+	link: {
+		textDecoration: "none",
+		color: "blue"
 	}
 }));
 
@@ -50,7 +53,9 @@ const About = () => {
 					reservation system, calendars (overall, club specific and
 					personalized to members) and member notification system to
 					help leaders to organize meetings and keep all their members
-					informed.
+					informed. This website is open source, so those interested in contributing may do so <a
+					href="https://github.com/stuysu/stuyactivities.org" className={classes.link} target={"_blank"}>here (frontend)</a> and <a
+					href="https://github.com/stuysu/api.stuyactivities.org" className={classes.link} target={"_blank"}>here (backend)</a>.
 				</Typography>
 				<Typography variant={"h6"}>
 					This site wouldn't be possible without the help of:

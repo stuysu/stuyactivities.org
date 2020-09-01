@@ -54,7 +54,7 @@ const Home = () => {
 						<main>
 							{user.signedIn ? (
 								<div>
-									<Typography variant={"h1"}>
+									<Typography variant={"h2"}>
 										Welcome back, {user.firstName}!
 									</Typography>
 									<Button
