@@ -50,6 +50,14 @@ const Home = () => {
 								variant="outlined"
 								color="primary"
 								className={classes.button}
+								href="/charter"
+							>
+								Create Activity / Recharter
+							</Button>
+							<Button
+								variant="outlined"
+								color="primary"
+								className={classes.button}
 								href="/catalog"
 							>
 								Browse Activities

@@ -12,6 +12,7 @@ import SpecificApproval from "./pages/admin/SpecificApproval";
 import Rules from "./pages/Rules";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
+import About from "./pages/About";
 
 const Content = () => {
 	const location = useLocation();
@@ -52,6 +53,7 @@ const Content = () => {
 				/>
 				<Route path={"/admin"} component={AdminMain} />
 				<Route path={"/rules"} component={Rules} />
+				<Route path={"/about"} component={About} />
 				<Route path={"/:orgUrl"} component={OrgRouter} />
 			</Switch>
 		</div>
