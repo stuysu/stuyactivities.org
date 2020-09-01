@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import FlexCenter from "../ui/FlexCenter";
 import Typography from "@material-ui/core/Typography";
 import { Helmet } from "react-helmet";
 import Grid from "@material-ui/core/Grid";
@@ -9,6 +8,15 @@ const useStyles = makeStyles(() => ({
 	centerContainer: {
 		textAlign: "center",
 		margin: "2rem"
+	},
+	ul: {
+		listStyleType: "none",
+		textAlign: "center",
+		padding: "0"
+	},
+	li: {
+		fontSize: "1.2rem",
+		textAlign: "center"
 	}
 }));
 
@@ -55,11 +63,31 @@ const About = () => {
 						<Typography variant={"h6"}>This site wouldn't be possible without the help of:</Typography>
 						<Grid container>
 							<Grid item xs={12} md={6}>
-								<ul>
-									<li></li>
+								<ul className={classes.ul}>
+									<li className={classes.li}>Julian Giordano, SU Vice President ‘19-’20</li>
+									<li className={classes.li}>Abir Taheer, SU IT ‘19-’20</li>
+									<li className={classes.li}>Victor Veytsman, SU IT ‘19-’20</li>
+									<li className={classes.li}>Ethan Shan, SU IT ‘19-’20</li>
+									<li className={classes.li}>Theo Kubovy-Weiss, SU Exec ‘19-’20</li>
+									<li className={classes.li}>Neve Diaz-Carr, SU Exec ‘19-’20</li>
+									<li className={classes.li}>Aaron Wang, SU Exec ‘19-’20</li>
+									<li className={classes.li}>Shivali Korgaonkar, SU External ‘19-’20</li>
 								</ul>
 							</Grid>
-							<Grid item xs={12} md={6}></Grid>
+							<Grid item xs={12} md={6}>
+								<ul className={classes.ul}>
+									<li className={classes.li}>William Wang, SU President ’18-’19</li>
+									<li className={classes.li}>Vishwaa Sofat, SU Vice President ’18-’19</li>
+									<li className={classes.li}>Gilvir Gill, SU IT ’17-’18; Stuyvesant ’18</li>
+									<li className={classes.li}>Ivan Galakhov, SU IT ’18-’19</li>
+									<li className={classes.li}>Alwin Peng, SU IT ’18-’19</li>
+									<li className={classes.li}>Jesse Hall, SU IT ’18-’19</li>
+									<li className={classes.li}>Abir Taheer, SU IT ’18’19</li>
+									<li className={classes.li}>Elizabeth Avakov, SU Clubs & Pubs ’18-’19</li>
+									<li className={classes.li}>Gordon Ebanks, SU Clubs & Pubs ’18-’19</li>
+									<li className={classes.li}>Joshua Weiner, SU SLT '18-'19</li>
+								</ul>
+							</Grid>
 						</Grid>
 					</div>
 				</Grid>

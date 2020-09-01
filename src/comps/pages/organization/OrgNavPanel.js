@@ -1,6 +1,6 @@
 import React from "react";
 import FlexCenter from "../../ui/FlexCenter";
-import { Avatar, Typography } from "@material-ui/core";
+import { Avatar, Button, Typography } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
@@ -9,6 +9,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { Dashboard, Description, Person, Settings } from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
+import { OrgContext } from "./OrgRouter";
 
 const useStyles = makeStyles(theme => ({
 	avatar: {
@@ -44,20 +45,49 @@ const TabItem = ({ to, label, icon, exact = true }) => {
 	);
 };
 
-const OrgNavPanel = ({ match, organization }) => {
+const OrgNavPanel = ({ match }) => {
 	const classes = useStyles();
+
+	const org = React.useContext(OrgContext);
+
+	let memberStatus = org.membership ? "member" : "none";
+
+	if (memberStatus === "none" && org.membershipRequest) {
+		memberStatus = org.membershipRequest.adminApproval
+			? "invited"
+			: "requested";
+	}
+
+	const joinPath = generatePath(match.path + "/join", match.params);
 
 	return (
 		<div className={classes.stickyContainer}>
 			<FlexCenter>
 				<Avatar
 					className={classes.avatar}
-					src={organization?.charter?.picture}
+					src={org?.charter?.picture}
 				/>
 			</FlexCenter>
 			<Typography className={classes.orgName} variant={"h5"}>
-				{organization?.name}
+				{org?.name}
 			</Typography>
+
+			{memberStatus !== "member" ? (
+				<UnstyledLink to={joinPath}>
+					<Button color={"secondary"} fullWidth>
+						{memberStatus === "none" && "Request To Join"}
+						{memberStatus === "invited" && "Accept Invitation"}
+						{memberStatus === "requested" && "Requested"}
+					</Button>
+				</UnstyledLink>
+			) : (
+				<Typography
+					variant={"subtitle2"}
+					style={{ color: "grey", textAlign: "center" }}
+				>
+					Member
+				</Typography>
+			)}
 
 			<hr />
 			<List component="nav" aria-label="main mailbox folders">
@@ -76,14 +106,14 @@ const OrgNavPanel = ({ match, organization }) => {
 					to={match.path + "/members"}
 					icon={<Person />}
 				/>
-				{organization.membership?.adminPrivileges ? (
+
+				{org.membership?.adminPrivileges && (
 					<TabItem
 						label={"Admin Panel"}
+						exact={false}
 						to={match.path + "/admin"}
 						icon={<Settings />}
 					/>
-				) : (
-					""
 				)}
 			</List>
 		</div>

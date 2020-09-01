@@ -9,17 +9,20 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SULogo from "./../../../img/su-logo512.png";
 import UserContext from "../../context/UserContext";
 import {
+	AddCircleOutlined,
 	Archive,
 	EmojiSymbols,
 	Gavel,
 	Home,
 	Info,
+	LockOpen,
 	PowerSettingsNew
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import { triggerLoginDialog } from "../../auth/AuthDialog";
 
 const useStyles = makeStyles(theme => ({
 	list: {
@@ -37,6 +40,14 @@ const useStyles = makeStyles(theme => ({
 		paddingLeft: 0
 	}
 }));
+
+const gradeLabels = {
+	9: "Freshman",
+	10: "Sophomore",
+	11: "Junior",
+	12: "Senior",
+	13: "Alumni"
+};
 
 const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 	const user = useContext(UserContext);
@@ -60,6 +71,16 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<Avatar src={user.picture} className={classes.avatar} />
 						<Typography variant={"h6"}>{user?.name}</Typography>
 						<Typography variant={"body2"}>{user?.email}</Typography>
+						{Boolean(user?.fourDigitId) && (
+							<Typography variant={"body2"}>
+								Four Digit ID: {user?.fourDigitId}
+							</Typography>
+						)}
+						<Typography variant={"body2"}>
+							{user?.isFaculty
+								? "Faculty"
+								: gradeLabels[user?.grade]}
+						</Typography>
 					</div>
 				) : (
 					<div>
@@ -73,12 +94,19 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				)}
 			</div>
 			<List className={classes.list}>
-				{user.signedIn && (
-					<ListItem button>
+				{user.signedIn ? (
+					<ListItem button onClick={() => user.logout()}>
 						<ListItemIcon>
 							<PowerSettingsNew />
 						</ListItemIcon>
 						<ListItemText primary={"Sign Out"} />
+					</ListItem>
+				) : (
+					<ListItem button onClick={() => triggerLoginDialog()}>
+						<ListItemIcon>
+							<LockOpen />
+						</ListItemIcon>
+						<ListItemText primary={"Sign In"} />
 					</ListItem>
 				)}
 
@@ -110,7 +138,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItemIcon>
 					<ListItemText primary={"Archive"} />
 				</ListItem>
-				{user.signedIn && user.memberships?.length > 0 && (
+				{user.signedIn && (
 					<>
 						<ListSubheader disableSticky>
 							My Activities
@@ -136,6 +164,14 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 								</ListItem>
 							</UnstyledLink>
 						))}
+						<UnstyledLink to={"/charter"}>
+							<ListItem button>
+								<ListItemIcon>
+									<AddCircleOutlined />
+								</ListItemIcon>
+								<ListItemText primary={"Create New Activity"} />
+							</ListItem>
+						</UnstyledLink>
 					</>
 				)}
 
