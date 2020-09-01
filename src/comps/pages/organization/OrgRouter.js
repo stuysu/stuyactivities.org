@@ -39,6 +39,7 @@ const getQuery = signedIn => {
 		query Organization($url: String!) {
 			organization(url: $url) {
 				id
+				active
 				name
 				url
 				charter {
