@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
 import { client } from "../../context/ApolloProvider";
 import capitalizeString from "../../../utils/capitalizeString";
-import { OrgContext } from "./OrgRouter";
+import { OrgContext } from "../../../pages/org";
 
 //styles
 const useStyles = makeStyles(theme => ({

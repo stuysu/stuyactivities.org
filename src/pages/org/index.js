@@ -1,25 +1,25 @@
 import React from "react";
 import { generatePath, Route, Switch } from "react-router-dom";
 
-import { client } from "../../context/ApolloProvider";
+import { client } from "../../comps/context/ApolloProvider";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
-import Loading from "../../ui/Loading";
-import CharterTab from "./CharterTab";
-import Overview from "./Overview";
+import Loading from "../../comps/ui/Loading";
+import CharterTab from "../../comps/pages/organization/CharterTab";
+import Overview from "../../comps/pages/organization/Overview";
 import { Helmet } from "react-helmet";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Grid from "@material-ui/core/Grid";
 
-import OrgNavPanel from "./OrgNavPanel";
-import BackButton from "../../ui/BackButton";
-import MembersTab from "./MembersTab";
+import OrgNavPanel from "../../comps/pages/organization/OrgNavPanel";
+import BackButton from "../../comps/ui/BackButton";
+import MembersTab from "../../comps/pages/organization/MembersTab";
 import Error404 from "../Error404";
 
-import AdminRouter from "./AdminRouter";
-import Join from "./Join";
-import UserContext from "../../context/UserContext";
+import OrgAdminRouter from "./admin";
+import Join from "../../comps/pages/organization/Join";
+import UserContext from "../../comps/context/UserContext";
 
 const useStyles = makeStyles(theme => ({
 	contentContainer: {
@@ -169,7 +169,7 @@ const OrgRouter = ({ match, history }) => {
 								/>
 								<Route
 									path={match.path + "/admin"}
-									component={AdminRouter}
+									component={OrgAdminRouter}
 								/>
 								<Route
 									path={match.path + "/join"}

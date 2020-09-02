@@ -1,24 +1,24 @@
 import React from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
-import Navigation from "./ui/nav/Navigation";
-import AuthDialog from "./auth/AuthDialog";
-import OrgRouter from "./pages/organization/OrgRouter";
-import Catalog from "./pages/catalog/Catalog";
-import Charter from "./pages/charter/Charter";
-import TokenLogin from "./pages/TokenLogin";
-import AdminMain from "./pages/admin/AdminMain";
-import SpecificApproval from "./pages/admin/SpecificApproval";
-import Rules from "./pages/Rules";
+import Home from "./Home";
+import Navigation from "../comps/ui/nav/Navigation";
+import AuthDialog from "../comps/auth/AuthDialog";
+import OrgRouter from "./org";
+import Catalog from "./Catalog";
+import Charter from "./Charter";
+import TokenLogin from "./TokenLogin";
+import AdminMain from "./admin";
+import SpecificApproval from "../comps/pages/admin/SpecificApproval";
+import Rules from "./Rules";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
-import About from "./pages/About";
+import About from "./About";
 import ReactGA from "react-ga";
-import suLogo from "./../img/su-logo512.png";
+import suLogo from "../img/su-logo512.png";
 
 ReactGA.initialize("UA-119929576-2");
 
-const Content = () => {
+const Pages = () => {
 	const location = useLocation();
 
 	React.useEffect(() => {
@@ -74,4 +74,4 @@ const Content = () => {
 	);
 };
 
-export default Content;
+export default Pages;

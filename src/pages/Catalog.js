@@ -3,20 +3,20 @@ import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
-import CatalogCard from "./CatalogCard";
-import CatalogListCard from "./CatalogListCard";
+import CatalogCard from "../comps/pages/catalog/CatalogCard";
+import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
 import { List, ViewComfy } from "@material-ui/icons";
-import SearchBox from "./filters/SearchBox";
-import TagsFilter from "./filters/TagsFilter";
-import CommitmentFilter from "./filters/CommitmentFilter";
-import MeetingDaysFilter from "./filters/MeetingDaysFilter";
+import SearchBox from "../comps/pages/catalog/filters/SearchBox";
+import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
+import CommitmentFilter from "../comps/pages/catalog/filters/CommitmentFilter";
+import MeetingDaysFilter from "../comps/pages/catalog/filters/MeetingDaysFilter";
 import { Helmet } from "react-helmet";
 
-import scubaNotFound from "./../../../img/vectors/scuba-diver-not-found.svg";
-import cherryNotFound from "./../../../img/vectors/cherry-page-not-found.svg";
+import scubaNotFound from "../img/vectors/scuba-diver-not-found.svg";
+import cherryNotFound from "../img/vectors/cherry-page-not-found.svg";
 
 import Button from "@material-ui/core/Button";
-import UnstyledLink from "../../ui/UnstyledLink";
+import UnstyledLink from "../comps/ui/UnstyledLink";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 

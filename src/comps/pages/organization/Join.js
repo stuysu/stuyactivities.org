@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { OrgContext } from "./OrgRouter";
+import { OrgContext } from "../../../pages/org";
 import joinVector from "./../../../img/vectors/undraw_join.svg";
 import TextField from "@material-ui/core/TextField";
 import { gql, useMutation } from "@apollo/client";

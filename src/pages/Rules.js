@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import BackButton from "../ui/BackButton";
+import BackButton from "../comps/ui/BackButton";
 
 const useStyles = makeStyles(theme => ({
 	main: {

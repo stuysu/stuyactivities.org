@@ -1,7 +1,7 @@
 import React from "react";
 
-import Members from "./AdminPanelTabs/Members";
-import Requests from "./AdminPanelTabs/Requests";
+import Members from "../../../comps/pages/organization/AdminPanelTabs/Members";
+import Requests from "../../../comps/pages/organization/AdminPanelTabs/Requests";
 
 import { Tab, Tabs } from "@material-ui/core";
 import {
@@ -12,7 +12,7 @@ import {
 	useLocation
 } from "react-router-dom";
 
-export default function AdminRouter({ match, history }) {
+export default function OrgAdminRouter({ match, history }) {
 	const actualMatch = generatePath(match.path, match.params);
 	const location = useLocation();
 

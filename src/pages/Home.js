@@ -3,10 +3,10 @@ import Typography from "@material-ui/core/Typography";
 import { Helmet } from "react-helmet";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import UserContext from "../context/UserContext";
-import { triggerLoginDialog } from "../auth/AuthDialog";
+import UserContext from "../comps/context/UserContext";
+import { triggerLoginDialog } from "../comps/auth/AuthDialog";
 import { Link } from "react-router-dom";
-import UnstyledLink from "../ui/UnstyledLink";
+import UnstyledLink from "../comps/ui/UnstyledLink";
 
 const useStyles = makeStyles(theme => ({
 	layout: {

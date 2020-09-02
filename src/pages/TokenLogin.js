@@ -2,16 +2,16 @@ import React from "react";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { client } from "../context/ApolloProvider";
-import FlexCenter from "../ui/FlexCenter";
+import { client } from "../comps/context/ApolloProvider";
+import FlexCenter from "../comps/ui/FlexCenter";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import handstandVector from "./../../img/vectors/clip-dancer.svg";
-import ghost from "./../../img/vectors/hugo-ghost.svg";
-import LinkGoogleAccount from "../auth/LinkGoogleAccount";
-import BackButton from "../ui/BackButton";
-import Loading from "../ui/Loading";
-import UserContext from "../context/UserContext";
+import handstandVector from "../img/vectors/clip-dancer.svg";
+import ghost from "../img/vectors/hugo-ghost.svg";
+import LinkGoogleAccount from "../comps/auth/LinkGoogleAccount";
+import BackButton from "../comps/ui/BackButton";
+import Loading from "../comps/ui/Loading";
+import UserContext from "../comps/context/UserContext";
 
 const useStyles = makeStyles({
 	contentContainer: {

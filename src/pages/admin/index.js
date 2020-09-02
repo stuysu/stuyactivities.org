@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import Tabbed from "../../ui/Tabbed";
-import Approvals from "./Approvals";
+import Tabbed from "../../comps/ui/Tabbed";
+import Approvals from "../../comps/pages/admin/Approvals";
 
 const useStyles = makeStyles(theme => ({
 	root: {
