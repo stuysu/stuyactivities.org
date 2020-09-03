@@ -6,7 +6,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import SULogo from "./../../../img/su-logo512.png";
+import Logo from "./../../../img/logo512.png";
 import UserContext from "../../context/UserContext";
 import {
 	AddCircleOutlined,
@@ -85,7 +85,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				) : (
 					<div>
 						<img
-							src={SULogo}
+							src={Logo}
 							className={classes.avatar}
 							alt={"Student Union Logo"}
 						/>

@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
-import { client } from "../../context/ApolloProvider";
-import capitalizeString from "../../../utils/capitalizeString";
-import { OrgContext } from "../../../pages/org";
+import { client } from "../../comps/context/ApolloProvider";
+import capitalizeString from "../../utils/capitalizeString";
+import { OrgContext } from "./index";
 
 //styles
 const useStyles = makeStyles(theme => ({
@@ -69,7 +69,7 @@ const CharterQuestion = ({ question, answer }) => {
 	);
 };
 
-const CharterTab = () => {
+const Charter = () => {
 	const { orgUrl } = useParams();
 	const classes = useStyles();
 
@@ -142,4 +142,4 @@ const CharterTab = () => {
 	);
 };
 
-export default CharterTab;
+export default Charter;

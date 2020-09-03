@@ -27,11 +27,11 @@ export default function Rules() {
 			</Typography>
 			<Typography paragraph>
 				If you are experiencing technical issues or difficulties
-				regarding the StuyActivities website, please contact us at
+				regarding the StuyActivities website, please contact us at{" "}
 				<a href="mailto:help@stuyactivities.org">
 					help@stuyactivities.org
-				</a>{" "}
-				<sup></sup>. All other Activity-related issues may be emailed to{" "}
+				</a>
+				. All other Activity-related issues may be emailed to{" "}
 				<a href="clubpub@stuysu.org">clubpub@stuysu.org</a>.
 			</Typography>
 			<Typography>
@@ -106,11 +106,11 @@ export default function Rules() {
 						Department of Education{" "}
 						<a href="https://www.schools.nyc.gov/docs/default-source/default-document-library/a-601-english">
 							Chancellor’s Regulation A-601
-						</a>{" "}
+						</a>
 						. Any Activity that violates this regulation or other{" "}
 						<a href="https://www.schools.nyc.gov/about-us/policies/chancellors-regulations">
 							Chancellor’s Regulations
-						</a>{" "}
+						</a>
 						&nbsp;will face suspension and revocation of their
 						charter.
 					</li>
@@ -118,7 +118,7 @@ export default function Rules() {
 						All Activities must adhere to the{" "}
 						<a href="https://stuy.enschool.org/apps/pages/index.jsp?uREC_ID=126635&type=d">
 							Stuyvesant Code of Conduct
-						</a>{" "}
+						</a>
 						&nbsp;and other school policies. Any Activity that
 						violates these regulations will face suspension and
 						revocation of their charter.
@@ -160,10 +160,10 @@ export default function Rules() {
 						<ul>
 							<li>
 								Have the registered Activity faculty advisor
-								(not the Activity leaders) email
+								(not the Activity leaders) email{" "}
 								<a href="mailto:clubpub@stuysu.org">
 									clubpub@stuysu.org
-								</a>{" "}
+								</a>
 								, the COSA (Mr. Polazzo) and the Assistant
 								Principal (Mr. Moran) at least one week in
 								advance with the Subject: “Activity Meeting
@@ -176,14 +176,14 @@ export default function Rules() {
 								event.
 							</li>
 							<li>
-								Mr. Polazzo can be reached at
+								Mr. Polazzo can be reached at{" "}
 								<a href="mailto:MPolazz@schools.nyc.gov">
 									MPolazz@schools.nyc.gov
 								</a>{" "}
 								and be found in Room 260.
 							</li>
 							<li>
-								Mr. Moran can be reached at
+								Mr. Moran can be reached at{" "}
 								<a href="mailto:BMoran@schools.nyc.gov">
 									BMoran@schools.nyc.gov
 								</a>{" "}
@@ -254,7 +254,7 @@ export default function Rules() {
 						room, its leaders must email{" "}
 						<a href="mailto:clubpub@stuysu.org">
 							clubpub@stuysu.org
-						</a>{" "}
+						</a>
 						with the Subject: “Long Term Room Reservation: [ACTIVITY
 						NAME]”, detailing the reason(s) for why this reservation
 						is necessary. Long term reservations will be handled by
@@ -292,17 +292,17 @@ export default function Rules() {
 								Activity leaders) must email{" "}
 								<a href="mailto:clubpub@stuysu.org">
 									clubpub@stuysu.org
-								</a>{" "}
+								</a>
 								, the Student Union COSA, Mr. Polazzo, and the
 								Assistant Principal, Mr. Moran, at least one
 								week in advance with the Subject: “[NAME OF
 								FACILITY] Reservation: [ACTIVITY NAME]. Mr.
-								Polazzo can be reached at
+								Polazzo can be reached at{" "}
 								<a href="mailto:MPolazz@schools.nyc.gov">
 									MPolazz@schools.nyc.gov
 								</a>{" "}
 								and be found in Room, 260. Mr. Moran can be
-								reached at
+								reached at{" "}
 								<a href="mailto:BMoran@schools.nyc.gov">
 									BMoran@schools.nyc.gov
 								</a>{" "}
@@ -375,10 +375,8 @@ export default function Rules() {
 						<a href="mailto:clubpub@stuysu.org">
 							clubpub@stuysu.org
 						</a>{" "}
-						and
-						<a href="mailto:budget@stuysu.org">
-							budget@stuysu.org
-						</a>{" "}
+						and{" "}
+						<a href="mailto:budget@stuysu.org">budget@stuysu.org</a>{" "}
 						prior to the scheduled meeting time detailing the
 						excuse. The Student Union will decide upon further
 						action on a case-by-case basis and reserves the right to
@@ -398,7 +396,7 @@ export default function Rules() {
 								original copies to the SU Budget Department (
 								<a href="mailto:budget@stuysu.org">
 									budget@stuysu.org
-								</a>{" "}
+								</a>
 								). Two weeks after submission, the Activity
 								should go to Room 103 to pick up the
 								reimbursement check from Ms. Caruzo (the school
@@ -425,7 +423,7 @@ export default function Rules() {
 						rules:
 						<ul>
 							<li>
-								Activity leaders &nbsp;are expected to cooperate
+								Activity leaders&nbsp;are expected to cooperate
 								with the SU Budget Department.
 							</li>
 							<li>
@@ -436,7 +434,7 @@ export default function Rules() {
 								Budget Department (
 								<a href="mailto:budget@stuysu.org">
 									budget@stuysu.org
-								</a>{" "}
+								</a>
 								) within seven days of purchase.
 							</li>
 							<li>

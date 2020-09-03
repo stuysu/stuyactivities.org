@@ -7,14 +7,12 @@ import OrgRouter from "./org";
 import Catalog from "./Catalog";
 import Charter from "./Charter";
 import TokenLogin from "./TokenLogin";
-import AdminMain from "./admin";
-import SpecificApproval from "../comps/pages/admin/SpecificApproval";
+import AdminRouter from "./admin";
 import Rules from "./Rules";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
 import About from "./About";
 import ReactGA from "react-ga";
-import suLogo from "../img/su-logo512.png";
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -40,7 +38,11 @@ const Pages = () => {
 						"An app to help students navigate the clubs and organizations at Stuyvesant High School."
 					}
 				/>
-				<meta property="og:image" content={suLogo} />
+				<meta
+					property="og:image"
+					content={PUBLIC_URL + "/img/logo192.png"}
+				/>
+				<meta property={"og:title"} content={"StuyActivities"} />
 				<title>StuyActivities</title>
 			</Helmet>
 
@@ -52,11 +54,7 @@ const Pages = () => {
 				<Route path={"/catalog"} component={Catalog} exact />
 				<Route path={"/charter"} component={Charter} exact />
 				<Route path={"/token/:token"} component={TokenLogin} exact />
-				<Route
-					path={"/admin/approvals/:url"}
-					component={SpecificApproval}
-				/>
-				<Route path={"/admin"} component={AdminMain} />
+				<Route path={"/admin"} component={AdminRouter} />
 				<Route path={"/rules"} component={Rules} />
 				<Route path={"/about"} component={About} />
 
