@@ -14,10 +14,10 @@ import {
 	Switch,
 	Typography
 } from "@material-ui/core";
-import Comments from "./Comments";
+import Comments from "../../../comps/pages/admin/Comments";
 import { gql } from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../../comps/context/UserContext";
 //import Diff from "diff"
 const Diff = require("diff");
 
@@ -125,7 +125,7 @@ const DiffComponent = ({ old, next }) => {
 	);
 };
 
-const SpecificApproval = props => {
+const OrgApprovals = props => {
 	const classes = useStyles();
 
 	const [data, setData] = React.useState({});
@@ -425,4 +425,4 @@ const SpecificApproval = props => {
 	);
 };
 
-export default SpecificApproval;
+export default OrgApprovals;

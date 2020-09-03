@@ -2,19 +2,18 @@ import React from "react";
 
 import Members from "../../../comps/pages/organization/AdminPanelTabs/Members";
 import Requests from "../../../comps/pages/organization/AdminPanelTabs/Requests";
+import { generatePath, Redirect, Route, Switch } from "react-router-dom";
+import RouteTabs from "../../../comps/ui/RouteTabs";
+import UserContext from "../../../comps/context/UserContext";
+import SignInRequired from "../../../comps/ui/SignInRequired";
 
-import { Tab, Tabs } from "@material-ui/core";
-import {
-	generatePath,
-	Redirect,
-	Route,
-	Switch,
-	useLocation
-} from "react-router-dom";
-
-export default function OrgAdminRouter({ match, history }) {
+export default function OrgAdminRouter({ match }) {
 	const actualMatch = generatePath(match.path, match.params);
-	const location = useLocation();
+	const user = React.useContext(UserContext);
+
+	if (!user.signedIn) {
+		return <SignInRequired />;
+	}
 
 	const tabs = [
 		{
@@ -27,36 +26,9 @@ export default function OrgAdminRouter({ match, history }) {
 		}
 	];
 
-	const [selectedTabIndex, setSelectedTabIndex] = React.useState(0);
-
-	React.useEffect(() => {
-		const isCorrectIndex = location.pathname.startsWith(
-			tabs[selectedTabIndex]?.path
-		);
-
-		if (!isCorrectIndex) {
-			const correctIndex = tabs.findIndex(tab =>
-				location.pathname.startsWith(tab.path)
-			);
-
-			setSelectedTabIndex(correctIndex !== -1 ? correctIndex : 0);
-		}
-	}, [location, selectedTabIndex, tabs]);
-
 	return (
 		<div>
-			<Tabs value={selectedTabIndex}>
-				{tabs.map((tab, index) => (
-					<Tab
-						key={tab.path}
-						label={tab.label}
-						onClick={() => {
-							setSelectedTabIndex(index);
-							history.push(tab.path);
-						}}
-					/>
-				))}
-			</Tabs>
+			<RouteTabs tabs={tabs} />
 
 			<Switch>
 				<Route path={match.path + "/members"} component={Members} />

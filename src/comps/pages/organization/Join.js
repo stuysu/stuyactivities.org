@@ -8,12 +8,15 @@ import { gql, useMutation } from "@apollo/client";
 import { cache } from "../../context/ApolloProvider";
 
 import moment from "moment-timezone";
+import UserContext from "../../context/UserContext";
+import SignInRequired from "../../ui/SignInRequired";
+
+// import musicBand from "./../../../img/vectors/pablita-music-band.svg";
 
 //styles
 const useStyles = makeStyles(theme => ({
 	tabName: {
 		textAlign: "center"
-		// color: theme.palette.secondary.main
 	},
 	charterAnswer: {
 		marginBottom: "1.5rem"
@@ -47,6 +50,7 @@ const CreateRequest = () => {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	const [message, setMessage] = React.useState("");
+	const user = React.useContext(UserContext);
 
 	const [submit, { error }] = useMutation(CREATE, {
 		variables: {
@@ -54,6 +58,10 @@ const CreateRequest = () => {
 			orgId: org.id
 		}
 	});
+
+	if (!user.signedIn) {
+		return <SignInRequired />;
+	}
 
 	const onSubmit = () => {
 		submit()

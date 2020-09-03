@@ -15,7 +15,7 @@ const SignInRequired = () => {
 					style={{ width: "400px", maxWidth: "80vw" }}
 				/>
 				<Typography paragraph style={{ textAlign: "center" }}>
-					You need to be signed in to access that page.
+					You need to be signed in to access this page.
 				</Typography>
 				<FlexCenter>
 					<Button
