@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import FlexCenter from "../../../ui/FlexCenter";
+import FlexCenter from "../../../comps/ui/FlexCenter";
 import Button from "@material-ui/core/Button";
 
 const Meetings = ({ match }) => {

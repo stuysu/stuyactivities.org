@@ -1,14 +1,14 @@
 import React from "react";
-import { CharterFormContext } from "../../../../pages/Charter";
-import SmartCharterQuestion from "../../charter/SmartCharterQuestion";
+import { CharterFormContext } from "../../Charter";
+import SmartCharterQuestion from "../../../comps/pages/charter/SmartCharterQuestion";
 import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import arrayToggle from "../../../../utils/arrayToggle";
-import capitalizeString from "../../../../utils/capitalizeString";
+import arrayToggle from "../../../utils/arrayToggle";
+import capitalizeString from "../../../utils/capitalizeString";
 import { gql, useQuery } from "@apollo/client";
-import { OrgContext } from "../../../../pages/org";
+import { OrgContext } from "../index";
 
 const QUERY = gql`
 	query($id: Int!) {

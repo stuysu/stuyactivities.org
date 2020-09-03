@@ -1,6 +1,6 @@
 import React from "react";
-import { OrgContext } from "../../../pages/org";
-import FlexCenter from "../../ui/FlexCenter";
+import { OrgContext } from "./index";
+import FlexCenter from "../../comps/ui/FlexCenter";
 import { Grid, Typography } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";

@@ -5,8 +5,8 @@ import { client } from "../../comps/context/ApolloProvider";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
 import Loading from "../../comps/ui/Loading";
-import CharterTab from "../../comps/pages/organization/CharterTab";
-import Overview from "../../comps/pages/organization/Overview";
+import Charter from "./Charter";
+import Overview from "./Overview";
 import { Helmet } from "react-helmet";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -14,11 +14,11 @@ import Grid from "@material-ui/core/Grid";
 
 import OrgNavPanel from "../../comps/pages/organization/OrgNavPanel";
 import BackButton from "../../comps/ui/BackButton";
-import MembersTab from "../../comps/pages/organization/MembersTab";
+import Members from "./Members";
 import Error404 from "../Error404";
 
 import OrgAdminRouter from "./admin";
-import Join from "../../comps/pages/organization/Join";
+import Join from "./Join";
 import UserContext from "../../comps/context/UserContext";
 
 const useStyles = makeStyles(theme => ({
@@ -161,11 +161,11 @@ const OrgRouter = ({ match, history }) => {
 								/>
 								<Route
 									path={match.path + "/charter"}
-									component={CharterTab}
+									component={Charter}
 								/>
 								<Route
 									path={match.path + "/members"}
-									component={MembersTab}
+									component={Members}
 								/>
 								<Route
 									path={match.path + "/admin"}

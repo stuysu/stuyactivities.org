@@ -1,7 +1,7 @@
 import React from "react";
 
-import Members from "../../../comps/pages/organization/AdminPanelTabs/Members";
-import Requests from "../../../comps/pages/organization/AdminPanelTabs/Requests";
+import Members from "./Members";
+import Requests from "./MemberRequests";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
 import RouteTabs from "../../../comps/ui/RouteTabs";
 import UserContext from "../../../comps/context/UserContext";

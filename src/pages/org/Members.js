@@ -1,8 +1,8 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { OrgContext } from "../../../pages/org";
+import { OrgContext } from "./index";
 import { Typography } from "@material-ui/core";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../comps/context/UserContext";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
@@ -22,7 +22,7 @@ const getQuery = signedIn => {
 	`;
 };
 
-const MembersTab = () => {
+const Members = () => {
 	const org = React.useContext(OrgContext);
 	const user = React.useContext(UserContext);
 
@@ -66,4 +66,4 @@ const MembersTab = () => {
 	);
 };
 
-export default MembersTab;
+export default Members;
