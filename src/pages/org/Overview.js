@@ -19,9 +19,11 @@ const Overview = () => {
 				<Typography variant={"h4"} style={{ textAlign: "center" }}>
 					Overview
 				</Typography>
+
 				<Typography variant={"h6"} color={"primary"}>
 					Mission:
 				</Typography>
+
 				<Typography paragraph>
 					{!org.active && !org.charter.mission && (
 						<span style={{ color: "grey" }}>
@@ -30,9 +32,11 @@ const Overview = () => {
 					)}
 					{org.charter.mission}
 				</Typography>
+
 				<Typography variant={"h6"} color={"primary"}>
 					Meeting Schedule:
 				</Typography>
+
 				<Typography paragraph>
 					{!org.active && !org.charter.meetingSchedule && (
 						<span style={{ color: "grey" }}>
@@ -45,6 +49,7 @@ const Overview = () => {
 				<Typography variant={"h6"} color={"primary"}>
 					Leaders{" "}
 				</Typography>
+
 				<List>
 					{org.leaders.map(membership => {
 						return (
@@ -78,6 +83,7 @@ const Overview = () => {
 					Upcoming Meetings
 				</Typography>
 				<br />
+
 				{!org.upcomingMeetings?.length && (
 					<span style={{ color: "grey" }}>
 						There currently are no upcoming meetings scheduled.
@@ -86,14 +92,11 @@ const Overview = () => {
 
 				<Grid>
 					{org.upcomingMeetings.map(meeting => {
-						const start = new Date(Number(meeting.start));
-						const end = new Date(Number(meeting.end));
-
-						const formattedStart = moment(start)
+						const formattedStart = moment(meeting.start)
 							.tz("America/New_York")
 							.format("dddd, MMMM Do YYYY, h:mm a");
 
-						const formattedEnd = moment(end)
+						const formattedEnd = moment(meeting.end)
 							.tz("America/New_York")
 							.format("dddd, MMMM Do YYYY, h:mm a");
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import { Redirect, generatePath, Switch, Route } from "react-router-dom";
+import { generatePath, Redirect, Route, Switch } from "react-router-dom";
 import RouteTabs from "../../comps/ui/RouteTabs";
 import Approvals from "./approvals";
 import UserContext from "../../comps/context/UserContext";

@@ -17,6 +17,7 @@ import {
 import { gql, useMutation, useQuery } from "@apollo/client";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
+import { OrgContext } from "../index";
 
 const useStyles = makeStyles(theme => ({
 	margin: {
@@ -25,8 +26,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const QUERY = gql`
-	query MembershipRequests($url: String!) {
-		membershipRequests(orgUrl: $url) {
+	query MembershipRequests($orgId: Int!) {
+		membershipRequests(orgId: $orgId) {
 			id
 			user {
 				name
@@ -59,8 +60,9 @@ const DELETE_MUTATION = gql`
 
 export default function Members({ match }) {
 	const classes = useStyles();
+	const org = React.useContext(OrgContext);
 	const { data } = useQuery(QUERY, {
-		variables: { url: match.params.orgUrl }
+		variables: { orgId: org.id }
 	});
 	const [approveMutation] = useMutation(APPROVE_MUTATION);
 	const [deleteMutation] = useMutation(DELETE_MUTATION, {
