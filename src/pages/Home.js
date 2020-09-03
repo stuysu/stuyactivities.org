@@ -36,6 +36,12 @@ const useStyles = makeStyles(theme => ({
 		width: "100%",
 		maxWidth: "80vw",
 		maxHeight: "40vh"
+	},
+	main: {
+		display: "flex",
+		justifyContent: "center",
+		height: "100%",
+		alignItems: "center"
 	}
 }));
 
@@ -54,7 +60,7 @@ const Home = () => {
 						<img src={clip} alt="" className={classes.homeImg} />
 					</Grid>
 					<Grid item xs={12} md={7}>
-						<main>
+						<main className={classes.main}>
 							{user.signedIn ? (
 								<div>
 									<Typography variant={"h2"}>
