@@ -53,9 +53,26 @@ const About = () => {
 					reservation system, calendars (overall, club specific and
 					personalized to members) and member notification system to
 					help leaders to organize meetings and keep all their members
-					informed. This website is open source, so those interested in contributing may do so <a
-					href="https://github.com/stuysu/stuyactivities.org" className={classes.link} target={"_blank"} rel={"noopener noreferrer"}>here (frontend)</a> and <a
-					href="https://github.com/stuysu/api.stuyactivities.org" className={classes.link} target={"_blank"} rel={"noopener noreferrer"}>here (backend)</a>.
+					informed. This website is open source, so those interested
+					in contributing may do so{" "}
+					<a
+						href="https://github.com/stuysu/stuyactivities.org"
+						className={classes.link}
+						target={"_blank"}
+						rel={"noopener noreferrer"}
+					>
+						here (frontend)
+					</a>{" "}
+					and{" "}
+					<a
+						href="https://github.com/stuysu/api.stuyactivities.org"
+						className={classes.link}
+						target={"_blank"}
+						rel={"noopener noreferrer"}
+					>
+						here (backend)
+					</a>
+					.
 				</Typography>
 				<Typography variant={"h6"}>
 					This site wouldn't be possible without the help of:

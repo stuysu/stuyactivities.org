@@ -10,7 +10,6 @@ import Grid from "@material-ui/core/Grid";
 import clip from "./../img/vectors/clip-choosing-the-occupation.svg";
 import UnstyledLink from "../comps/ui/UnstyledLink";
 
-
 const useStyles = makeStyles(theme => ({
 	layout: {
 		display: "flex",
@@ -49,7 +48,7 @@ const Home = () => {
 			<div className={classes.layout}>
 				<Grid container>
 					<Grid item xs={12} md={3}>
-						<img src={clip} alt="" className={classes.homeImg}/>
+						<img src={clip} alt="" className={classes.homeImg} />
 					</Grid>
 					<Grid item xs={12} md={2} />
 					<Grid item xs={12} md={7}>
@@ -83,20 +82,28 @@ const Home = () => {
 									</Typography>
 									<br />
 									<Typography>
-										This site was created to assist students and
-										faculty with the process of browsing, joining,
-										creating and managing clubs & publications
-										("Activities") at Stuyvesant High School. All
-										activities must submit a new charter each year
-										to continue operating. In order to start a new
-										Activity or manage an Activity that you are a
-										leader of, please login. If you want to learn
-										more, you can visit our{" "}
-										<Link to={"/about"} className={classes.link}>
+										This site was created to assist students
+										and faculty with the process of
+										browsing, joining, creating and managing
+										clubs & publications ("Activities") at
+										Stuyvesant High School. All activities
+										must submit a new charter each year to
+										continue operating. In order to start a
+										new Activity or manage an Activity that
+										you are a leader of, please login. If
+										you want to learn more, you can visit
+										our{" "}
+										<Link
+											to={"/about"}
+											className={classes.link}
+										>
 											about
 										</Link>{" "}
 										and{" "}
-										<Link to="/rules" className={classes.link}>
+										<Link
+											to="/rules"
+											className={classes.link}
+										>
 											rules
 										</Link>{" "}
 										pages.
