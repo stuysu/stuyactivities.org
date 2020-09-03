@@ -30,7 +30,8 @@ export default function Rules() {
 				regarding the StuyActivities website, please contact us at{" "}
 				<a href="mailto:help@stuyactivities.org">
 					help@stuyactivities.org
-				</a>. All other Activity-related issues may be emailed to{" "}
+				</a>
+				. All other Activity-related issues may be emailed to{" "}
 				<a href="clubpub@stuysu.org">clubpub@stuysu.org</a>.
 			</Typography>
 			<Typography>
@@ -375,9 +376,7 @@ export default function Rules() {
 							clubpub@stuysu.org
 						</a>{" "}
 						and{" "}
-						<a href="mailto:budget@stuysu.org">
-							budget@stuysu.org
-						</a>{" "}
+						<a href="mailto:budget@stuysu.org">budget@stuysu.org</a>{" "}
 						prior to the scheduled meeting time detailing the
 						excuse. The Student Union will decide upon further
 						action on a case-by-case basis and reserves the right to
