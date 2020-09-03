@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../../comps/context/UserContext";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -37,6 +37,7 @@ const useStyles = makeStyles(theme => ({
 const QUERY = gql`
 	query {
 		organizationsWithPendingCharters {
+			id
 			name
 			url
 			charter {
@@ -51,7 +52,6 @@ const Approvals = () => {
 	const classes = useStyles();
 	const user = React.useContext(UserContext);
 	const { loading, error, data } = useQuery(QUERY);
-	console.log(user);
 	if (!user?.adminRoles?.some(e => e.role === "charters")) {
 		return (
 			<p>You do not have the proper admin role to access this page!</p>
@@ -68,7 +68,7 @@ const Approvals = () => {
 				Charter Approvals
 			</Typography>
 			{data.organizationsWithPendingCharters.map((org, index) => (
-				<div>
+				<div key={org.id}>
 					<Card className={classes.cardRoot}>
 						<CardActionArea
 							className={classes.card}
