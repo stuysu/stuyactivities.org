@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { gql } from "apollo-boost";
 import { useMutation } from "@apollo/client";
-import { CharterFormContext } from "./Charter";
+import { CharterFormContext } from "../../../pages/Charter";
 import { Redirect } from "react-router-dom";
 import { cache } from "../../context/ApolloProvider";
 

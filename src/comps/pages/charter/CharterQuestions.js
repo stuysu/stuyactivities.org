@@ -4,7 +4,7 @@ import { Typography } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
-import { CharterFormContext } from "./Charter";
+import { CharterFormContext } from "../../../pages/Charter";
 import arrayToggle from "../../../utils/arrayToggle";
 import capitalizeString from "../../../utils/capitalizeString";
 
@@ -80,7 +80,7 @@ const CharterQuestions = () => {
 					"What additional things would you like to share about your activity?"
 				}
 				helperText={
-					"(Optional) This information will be public, so if it’s private or a question for the Clubs and Pubs department, please let us know at clubpubs@stuysu.org."
+					"(Optional) This information will be public, so if it’s private or a question for the Clubs and Pubs department, please let us know at clubpub@stuysu.org."
 				}
 				maxChars={1000}
 				multiline

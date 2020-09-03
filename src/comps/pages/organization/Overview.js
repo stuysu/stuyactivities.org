@@ -1,5 +1,5 @@
 import React from "react";
-import { OrgContext } from "./OrgRouter";
+import { OrgContext } from "../../../pages/org";
 import FlexCenter from "../../ui/FlexCenter";
 import { Grid, Typography } from "@material-ui/core";
 import List from "@material-ui/core/List";
@@ -22,12 +22,25 @@ const Overview = () => {
 				<Typography variant={"h6"} color={"primary"}>
 					Mission:
 				</Typography>
-				<Typography paragraph>{org.charter.mission}</Typography>
+				<Typography paragraph>
+					{!org.active && !org.charter.mission && (
+						<span style={{ color: "grey" }}>
+							This response is pending approval
+						</span>
+					)}
+					{org.charter.mission}
+				</Typography>
 				<Typography variant={"h6"} color={"primary"}>
 					Meeting Schedule:
 				</Typography>
-				<Typography paragraph>{org.charter.meetingSchedule}</Typography>
-				<br />
+				<Typography paragraph>
+					{!org.active && !org.charter.meetingSchedule && (
+						<span style={{ color: "grey" }}>
+							This response is pending approval
+						</span>
+					)}
+					{org.charter.meetingSchedule}
+				</Typography>
 
 				<Typography variant={"h6"} color={"primary"}>
 					Leaders{" "}
@@ -65,6 +78,12 @@ const Overview = () => {
 					Upcoming Meetings
 				</Typography>
 				<br />
+				{!org.upcomingMeetings?.length && (
+					<span style={{ color: "grey" }}>
+						There currently are no upcoming meetings scheduled.
+					</span>
+				)}
+
 				<Grid>
 					{org.upcomingMeetings.map(meeting => {
 						const start = new Date(Number(meeting.start));
@@ -79,7 +98,15 @@ const Overview = () => {
 							.format("dddd, MMMM Do YYYY, h:mm a");
 
 						return (
-							<Grid item xs={12} sm={6} md={6} lg={4} xl={4}>
+							<Grid
+								item
+								xs={12}
+								sm={6}
+								md={6}
+								lg={4}
+								xl={4}
+								key={meeting.id}
+							>
 								<Card style={{ padding: "1rem" }}>
 									<Typography
 										variant={"h6"}

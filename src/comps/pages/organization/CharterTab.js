@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
 import { client } from "../../context/ApolloProvider";
 import capitalizeString from "../../../utils/capitalizeString";
+import { OrgContext } from "../../../pages/org";
 
 //styles
 const useStyles = makeStyles(theme => ({
@@ -49,12 +50,19 @@ const QUERY = gql`
 const CharterQuestion = ({ question, answer }) => {
 	const classes = useStyles();
 
+	const org = React.useContext(OrgContext);
+
 	return (
 		<div>
 			<Typography variant={"h6"} className={classes.charterQuestion}>
 				{question}
 			</Typography>
 			<Typography variant={"body1"} className={classes.charterAnswer}>
+				{!org.active && !answer && (
+					<span style={{ color: "grey" }}>
+						This response is pending approval
+					</span>
+				)}
 				{answer}
 			</Typography>
 		</div>

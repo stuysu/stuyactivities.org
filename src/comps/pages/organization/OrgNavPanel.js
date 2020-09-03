@@ -9,7 +9,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { Dashboard, Description, Person, Settings } from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
-import { OrgContext } from "./OrgRouter";
+import { OrgContext } from "../../../pages/org";
 
 const useStyles = makeStyles(theme => ({
 	avatar: {
