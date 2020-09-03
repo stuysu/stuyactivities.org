@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
 		paddingLeft: "2rem",
 		flexDirection: "column",
 		maxWidth: "1200px",
-		margin: "auto"
+		margin: "auto",
+		textAlign: "center"
 	},
 
 	link: {
@@ -32,6 +33,8 @@ const useStyles = makeStyles(theme => ({
 		marginRight: "1rem"
 	},
 	homeImg: {
+		width: "100%",
+		maxWidth: "80vw",
 		maxHeight: "40vh"
 	}
 }));
@@ -46,11 +49,10 @@ const Home = () => {
 				<title>Home | StuyActivities</title>
 			</Helmet>
 			<div className={classes.layout}>
-				<Grid container>
-					<Grid item xs={12} md={3}>
+				<Grid container justify={"center"} spacing={4}>
+					<Grid item xs={12} md={5}>
 						<img src={clip} alt="" className={classes.homeImg} />
 					</Grid>
-					<Grid item xs={12} md={2} />
 					<Grid item xs={12} md={7}>
 						<main>
 							{user.signedIn ? (
@@ -62,17 +64,17 @@ const Home = () => {
 										variant="outlined"
 										color="primary"
 										className={classes.button}
-										href="/charter"
+										href="/catalog"
 									>
-										Create Activity / Recharter
+										Browse Activities
 									</Button>
 									<Button
 										variant="outlined"
 										color="primary"
 										className={classes.button}
-										href="/catalog"
+										href="/charter"
 									>
-										Browse Activities
+										Create Activity / Recharter
 									</Button>
 								</div>
 							) : (

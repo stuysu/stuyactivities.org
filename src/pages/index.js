@@ -53,7 +53,6 @@ const Pages = () => {
 				<Route path={"/"} component={Home} exact />
 				<Route path={"/catalog"} component={Catalog} exact />
 				<Route path={"/charter"} component={Charter} exact />
-				<Route path={"/about"} component={About} exact />
 				<Route path={"/token/:token"} component={TokenLogin} exact />
 				<Route path={"/admin"} component={AdminRouter} />
 				<Route path={"/rules"} component={Rules} />
