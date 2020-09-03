@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { OrgContext } from "./OrgRouter";
+import { OrgContext } from "../../../pages/org";
 import { Typography } from "@material-ui/core";
 import UserContext from "../../context/UserContext";
 import ListItem from "@material-ui/core/ListItem";

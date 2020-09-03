@@ -1,6 +1,6 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { CharterFormContext } from "./Charter";
+import { CharterFormContext } from "../../../pages/Charter";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
 
@@ -11,6 +11,8 @@ const QUERY = gql`
 		}
 	}
 `;
+
+const urlRegex = new RegExp(/^[a-zA-Z0-9-]+$/);
 
 const UrlSelection = ({ className }) => {
 	const form = React.useContext(CharterFormContext);
@@ -31,7 +33,12 @@ const UrlSelection = ({ className }) => {
 				value={form?.url || ""}
 				required
 				onChange={ev => {
-					form.set({ url: ev.target.value });
+					const safeUrl = ev.target.value
+						.split("")
+						.filter(i => urlRegex.test(i))
+						.join("");
+
+					form.set({ url: safeUrl });
 					form.setError("url", false);
 				}}
 				helperText={
