@@ -4,3 +4,7 @@
 	max-height: 25vh;
 	margin: 0.5rem;
 }
+
+.contentContainer {
+    padding: 2rem;
+}

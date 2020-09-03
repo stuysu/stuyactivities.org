@@ -24,6 +24,10 @@ export default function OrgAdminRouter({ match }) {
 		{
 			path: actualMatch + "/requests",
 			label: "Member Requests"
+		},
+		{
+			path: actualMatch + "/charter-edits",
+			label: "Charter Edits"
 		}
 	];
 

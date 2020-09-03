@@ -23,8 +23,7 @@ import UserContext from "../../comps/context/UserContext";
 
 const useStyles = makeStyles(theme => ({
 	contentContainer: {
-		padding: "2.5vw",
-		paddingTop: "2.5vh",
+		padding: "2rem",
 		width: "100%"
 	},
 	backButton: {
@@ -153,29 +152,31 @@ const OrgRouter = ({ match, history }) => {
 						</Grid>
 
 						<Grid item lg={10} md={9} xl={10} sm={12}>
-							<Switch>
-								<Route
-									path={match.path}
-									component={Overview}
-									exact
-								/>
-								<Route
-									path={match.path + "/charter"}
-									component={Charter}
-								/>
-								<Route
-									path={match.path + "/members"}
-									component={Members}
-								/>
-								<Route
-									path={match.path + "/admin"}
-									component={OrgAdminRouter}
-								/>
-								<Route
-									path={match.path + "/join"}
-									component={Join}
-								/>
-							</Switch>
+							<div className={classes.contentContainer}>
+								<Switch>
+									<Route
+										path={match.path}
+										component={Overview}
+										exact
+									/>
+									<Route
+										path={match.path + "/charter"}
+										component={Charter}
+									/>
+									<Route
+										path={match.path + "/members"}
+										component={Members}
+									/>
+									<Route
+										path={match.path + "/admin"}
+										component={OrgAdminRouter}
+									/>
+									<Route
+										path={match.path + "/join"}
+										component={Join}
+									/>
+								</Switch>
+							</div>
 						</Grid>
 					</Grid>
 				</div>
