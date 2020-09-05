@@ -219,7 +219,8 @@ export default function Members({ match }) {
 						onClick={() => edit(editingMembership)}
 						color="primary"
 						disabled={
-							adminPrivileges === editingMembership.adminPrivileges && 
+							adminPrivileges ===
+								editingMembership.adminPrivileges &&
 							editingMembership.role === role
 						}
 					>
