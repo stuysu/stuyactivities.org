@@ -201,12 +201,6 @@ export default function Members({ match }) {
 					/>
 				</DialogContent>
 				<DialogActions>
-					<Button
-						onClick={() => edit(editingMembership)}
-						color="primary"
-					>
-						Edit
-					</Button>
 					{user.id !== editingMembership.user?.id && (
 						<Button
 							onClick={() => openRemoveDialog(editingMembership)}
@@ -220,6 +214,16 @@ export default function Members({ match }) {
 						color="primary"
 					>
 						Cancel
+					</Button>
+					<Button
+						onClick={() => edit(editingMembership)}
+						color="primary"
+						disabled={
+							adminPrivileges === editingMembership.adminPrivileges && 
+							editingMembership.role === role
+						}
+					>
+						Save
 					</Button>
 				</DialogActions>
 			</Dialog>
