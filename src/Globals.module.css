@@ -8,3 +8,9 @@
 .contentContainer {
     padding: 2rem;
 }
+
+@media (max-width: 800px){
+    .contentContainer {
+        padding: 0.5rem;
+    }
+}

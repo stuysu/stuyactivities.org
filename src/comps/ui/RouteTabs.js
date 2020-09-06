@@ -1,11 +1,12 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { Tab, Tabs } from "@material-ui/core";
+import { Tab, Tabs, useMediaQuery } from "@material-ui/core";
 
 const RouteTabs = ({ tabs }) => {
 	const [selectedTabIndex, setSelectedTabIndex] = React.useState(0);
 	const location = useLocation();
 	const history = useHistory();
+	const isMobile = useMediaQuery("max-width: 800px");
 
 	React.useEffect(() => {
 		const isCorrectIndex = location.pathname.startsWith(
@@ -22,7 +23,10 @@ const RouteTabs = ({ tabs }) => {
 
 	return (
 		<div>
-			<Tabs value={selectedTabIndex}>
+			<Tabs
+				value={selectedTabIndex}
+				scrollButtons={isMobile ? "on" : "auto"}
+			>
 				{tabs.map((tab, index) => (
 					<Tab
 						key={tab.path}

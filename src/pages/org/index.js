@@ -21,11 +21,9 @@ import OrgAdminRouter from "./admin";
 import Join from "./Join";
 import UserContext from "../../comps/context/UserContext";
 
+import styles from "./../../Globals.module.css";
+
 const useStyles = makeStyles(theme => ({
-	contentContainer: {
-		padding: "2rem",
-		width: "100%"
-	},
 	backButton: {
 		marginBottom: theme.spacing(5)
 	}
@@ -136,7 +134,7 @@ const OrgRouter = ({ match, history }) => {
 					/>
 				</Helmet>
 
-				<div className={classes.contentContainer}>
+				<div className={styles.contentContainer}>
 					<BackButton
 						className={classes.backButton}
 						label={"Back to Catalog"}
@@ -151,7 +149,7 @@ const OrgRouter = ({ match, history }) => {
 							/>
 						</Grid>
 
-						<Grid item lg={10} md={9} xl={10} sm={12}>
+						<Grid item lg={10} md={9} xl={10} sm={12} xs={12}>
 							<div className={classes.contentContainer}>
 								<Switch>
 									<Route

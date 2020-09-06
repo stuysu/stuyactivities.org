@@ -389,7 +389,7 @@ class CharterEditForm extends React.Component {
 								<div
 									style={{
 										width: "1000px",
-										maxWidth: "100%"
+										maxWidth: "90%"
 									}}
 								>
 									<Typography>
