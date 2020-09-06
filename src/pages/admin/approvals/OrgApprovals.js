@@ -61,7 +61,6 @@ const QUERY = gql`
 				meetingDays
 				commitmentLevel
 				extra
-				alteredFields
 				keywords
 			}
 			charterEdits {
