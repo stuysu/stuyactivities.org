@@ -19,6 +19,7 @@ const SmartCharterQuestion = ({
 	multiline,
 	fullWidth,
 	required,
+	onBlur,
 	rows,
 	label,
 	helperText
@@ -26,7 +27,7 @@ const SmartCharterQuestion = ({
 	const classes = useStyles();
 	const form = React.useContext(CharterFormContext);
 
-	const onBlur = () => {
+	const onFocusOut = () => {
 		let isValid = true;
 		if (minChars) {
 			if (form[name]?.length < minChars) {
@@ -41,6 +42,10 @@ const SmartCharterQuestion = ({
 		}
 
 		form.setError(name, isValid ? false : "Requirements not met");
+
+		if (onBlur) {
+			onBlur();
+		}
 	};
 
 	const onChange = ev => {
@@ -86,7 +91,7 @@ const SmartCharterQuestion = ({
 	return (
 		<div className={className}>
 			<TextField
-				onBlur={onBlur}
+				onBlur={onFocusOut}
 				label={label}
 				required={required ?? true}
 				error={Boolean(form.errors[name])}
