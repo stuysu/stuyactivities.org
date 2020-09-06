@@ -7,6 +7,7 @@ import RouteTabs from "../../../comps/ui/RouteTabs";
 import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
 import CharterEdits from "./CharterEdits";
+import Meetings from "./Meetings";
 
 export default function OrgAdminRouter({ match }) {
 	const actualMatch = generatePath(match.path, match.params);
@@ -28,6 +29,10 @@ export default function OrgAdminRouter({ match }) {
 		{
 			path: actualMatch + "/charter-edits",
 			label: "Charter Edits"
+		},
+		{
+			path: actualMatch + "/meetings",
+			label: "Meetings"
 		}
 	];
 
@@ -42,6 +47,7 @@ export default function OrgAdminRouter({ match }) {
 					path={match.path + "/charter-edits"}
 					component={CharterEdits}
 				/>
+				<Route path={match.path + "/meetings"} component={Meetings} />
 				<Route path={match.path}>
 					<Redirect to={actualMatch + "/members"} />
 				</Route>
