@@ -8,6 +8,7 @@ import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
 import CharterEdits from "./CharterEdits";
 import Meetings from "./Meetings";
+import { Group, GroupAdd, GroupWork, ListAlt } from "@material-ui/icons";
 
 export default function OrgAdminRouter({ match }) {
 	const actualMatch = generatePath(match.path, match.params);
@@ -20,19 +21,23 @@ export default function OrgAdminRouter({ match }) {
 	const tabs = [
 		{
 			path: actualMatch + "/members",
-			label: "Members"
+			label: "Members",
+			icon: <Group />
 		},
 		{
 			path: actualMatch + "/requests",
-			label: "Member Requests"
+			label: "Member Requests",
+			icon: <GroupAdd />
 		},
 		{
 			path: actualMatch + "/charter-edits",
-			label: "Charter Edits"
+			label: "Charter",
+			icon: <ListAlt />
 		},
 		{
 			path: actualMatch + "/meetings",
-			label: "Meetings"
+			label: "Meetings",
+			icon: <GroupWork />
 		}
 	];
 

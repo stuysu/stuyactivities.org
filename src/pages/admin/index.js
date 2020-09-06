@@ -6,6 +6,7 @@ import Approvals from "./approvals";
 import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import OrgApprovals from "./approvals/OrgApprovals";
+import { AssignmentTurnedIn, LiveHelp } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -29,12 +30,14 @@ export default function AdminRouter({ match }) {
 		{
 			label: "Charter Approvals",
 			role: "charters",
-			path: actualPath + "/approvals"
+			path: actualPath + "/approvals",
+			icon: <AssignmentTurnedIn />
 		},
 		{
 			label: "Help Requests",
 			role: "helpRequests",
-			path: actualPath + "/help"
+			path: actualPath + "/help",
+			icon: <LiveHelp />
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 

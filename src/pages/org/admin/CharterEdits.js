@@ -621,32 +621,38 @@ const ApprovalMessages = () => {
 const CharterEdits = () => {
 	const org = React.useContext(OrgContext);
 	const { data } = useQuery(QUERY, { variables: { orgId: org.id } });
+	const [latestChanges, setLatestChanges] = React.useState({});
 
-	const latestChanges = {};
+	React.useEffect(() => {
+		const newChanges = {};
+		if (data) {
+			data.charterEdits.forEach(edit => {
+				edit.alteredFields.forEach(field => {
+					const shouldUpdate =
+						!newChanges[field] ||
+						newChanges[field]?.createdAt < new Date(edit.createdAt);
 
-	if (data) {
-		data.charterEdits.forEach(edit => {
-			edit.alteredFields.forEach(field => {
-				const shouldUpdate =
-					!latestChanges[field] ||
-					latestChanges[field].createdAt < new Date(edit.createdAt);
-
-				if (shouldUpdate) {
-					latestChanges[field] = {
-						submittingUser: edit.submittingUser,
-						value: edit[field],
-						status: edit.status,
-						createdAt: new Date(edit.createdAt)
-					};
-				}
+					if (shouldUpdate) {
+						newChanges[field] = {
+							submittingUser: edit.submittingUser,
+							value: edit[field],
+							status: edit.status,
+							createdAt: new Date(edit.createdAt)
+						};
+					} else {
+						console.log("shouldn't update");
+					}
+				});
 			});
-		});
-	}
+
+			setLatestChanges(newChanges);
+		}
+	}, [data]);
 
 	return (
 		<div>
 			<Card style={{ padding: "0.5rem" }}>
-				<h2 style={{ textAlign: "center" }}>Charter Edits:</h2>
+				<h2 style={{ textAlign: "center" }}>Edit Charter:</h2>
 				<CharterEditForm latestChanges={latestChanges} org={org} />
 			</Card>
 			<br />
