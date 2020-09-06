@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	Avatar,
 	Button,
 	Card,
 	CardContent,
@@ -77,6 +78,7 @@ const QUERY = gql`
 				commitmentLevel
 				extra
 				alteredFields
+				status
 			}
 			charterApprovalMessages {
 				message
@@ -298,81 +300,173 @@ const OrgApprovals = props => {
 							label="Show Differences"
 						/>
 					)}
-					{data.organization.charterEdits.map(edit => (
-						<div>
-							<Card className={classes.card}>
-								<CardContent>
-									<div className={classes.flex}>
-										<Typography
-											variant={"h5"}
-											className={classes.grow}
-										>
-											Changes by{" "}
-											{edit.submittingUser.name}
-										</Typography>
-										<Button
-											onClick={() =>
-												approveallPopup(edit.id)
-											}
-											style={{ "white-space": "nowrap" }}
-											color="primary"
-										>
-											Approve All
-										</Button>
-									</div>
-									{edit.alteredFields.map(field => (
-										<div className={classes.flex}>
-											<div className={classes.grow}>
-												<Typography variant={"h6"}>
-													Change to {field}:
+					{data.organization.charterEdits
+						.filter(e => e.status === "pending")
+						.map(edit => {
+							return (
+								<div>
+									<Card className={classes.card}>
+										<CardContent>
+											<div className={classes.flex}>
+												<Typography
+													variant={"h5"}
+													className={classes.grow}
+												>
+													Changes by{" "}
+													{edit.submittingUser.name}
 												</Typography>
-												{showDifference ? (
-													<DiffComponent
-														old={
-															data.organization
-																.charter[field]
-														}
-														next={edit[field]}
-													/>
-												) : (
-													<Typography>
-														{edit[field]}
-													</Typography>
-												)}
-											</div>
-											<div>
 												<Button
 													onClick={() =>
-														individualPopup(
-															edit.id,
-															field,
-															"reject"
-														)
+														approveallPopup(edit.id)
 													}
+													style={{
+														"white-space": "nowrap"
+													}}
 													color="primary"
 												>
-													Reject
-												</Button>
-												<br />
-												<Button
-													onClick={() =>
-														individualPopup(
-															edit.id,
-															field,
-															"approve"
-														)
-													}
-													color="primary"
-												>
-													Approve
+													Approve All
 												</Button>
 											</div>
-										</div>
-									))}
-								</CardContent>
-							</Card>
-						</div>
-					))}
+											{edit.alteredFields.map(field => {
+												if (field === "picture") {
+													return (
+														<div
+															className={
+																classes.flex
+															}
+														>
+															<div
+																className={
+																	classes.grow
+																}
+															>
+																<Typography
+																	variant={
+																		"h6"
+																	}
+																>
+																	Change to{" "}
+																	{field}:
+																</Typography>
+																<Avatar
+																	src={
+																		edit.picture
+																	}
+																	style={{
+																		width:
+																			"200px",
+																		height:
+																			"200px"
+																	}}
+																/>
+															</div>
+															<div>
+																<Button
+																	onClick={() =>
+																		individualPopup(
+																			edit.id,
+																			field,
+																			"reject"
+																		)
+																	}
+																	color="primary"
+																>
+																	Reject
+																</Button>
+																<br />
+																<Button
+																	onClick={() =>
+																		individualPopup(
+																			edit.id,
+																			field,
+																			"approve"
+																		)
+																	}
+																	color="primary"
+																>
+																	Approve
+																</Button>
+															</div>
+														</div>
+													);
+												}
+
+												let old =
+													data.organization.charter[
+														field
+													];
+
+												if (Array.isArray(old)) {
+													old = old.join(", ");
+												}
+
+												let val = edit[field];
+
+												if (Array.isArray(val)) {
+													val = val.join(", ");
+												}
+
+												return (
+													<div
+														className={classes.flex}
+													>
+														<div
+															className={
+																classes.grow
+															}
+														>
+															<Typography
+																variant={"h6"}
+															>
+																Change to{" "}
+																{field}:
+															</Typography>
+															{showDifference ? (
+																<DiffComponent
+																	old={old}
+																	next={val}
+																/>
+															) : (
+																<Typography>
+																	{val}
+																</Typography>
+															)}
+														</div>
+														<div>
+															<Button
+																onClick={() =>
+																	individualPopup(
+																		edit.id,
+																		field,
+																		"reject"
+																	)
+																}
+																color="primary"
+															>
+																Reject
+															</Button>
+															<br />
+															<Button
+																onClick={() =>
+																	individualPopup(
+																		edit.id,
+																		field,
+																		"approve"
+																	)
+																}
+																color="primary"
+															>
+																Approve
+															</Button>
+														</div>
+													</div>
+												);
+											})}
+										</CardContent>
+									</Card>
+								</div>
+							);
+						})}
 				</Grid>
 				<Grid item xs={5} className={classes.margin}>
 					<Comments
