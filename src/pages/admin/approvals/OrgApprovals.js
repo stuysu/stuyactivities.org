@@ -61,6 +61,8 @@ const QUERY = gql`
 				meetingDays
 				commitmentLevel
 				extra
+				alteredFields
+				keywords
 			}
 			charterEdits {
 				id
@@ -79,6 +81,7 @@ const QUERY = gql`
 				extra
 				alteredFields
 				status
+				keywords
 			}
 			charterApprovalMessages {
 				message
@@ -394,13 +397,13 @@ const OrgApprovals = props => {
 												let old =
 													data.organization.charter[
 														field
-													];
+													] || "";
 
 												if (Array.isArray(old)) {
 													old = old.join(", ");
 												}
 
-												let val = edit[field];
+												let val = edit[field] || "";
 
 												if (Array.isArray(val)) {
 													val = val.join(", ");
