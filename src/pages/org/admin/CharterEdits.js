@@ -3,59 +3,18 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import Card from "@material-ui/core/Card";
-import styles from "./../../../Globals.module.css";
-import { Avatar, Button, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Avatar, Button } from "@material-ui/core";
+// import { makeStyles } from "@material-ui/core/styles";
 import capitalizeString from "../../../utils/capitalizeString";
 import Typography from "@material-ui/core/Typography";
 import { CharterFormContext } from "../../Charter";
-import { Close } from "@material-ui/icons";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import SmartCharterQuestion from "../../../comps/pages/charter/SmartCharterQuestion";
 import TextField from "@material-ui/core/TextField";
 import arrayToggle from "../../../utils/arrayToggle";
-import Dialog from "@material-ui/core/Dialog";
 import { cache } from "../../../comps/context/ApolloProvider";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-
-const useStyles = makeStyles({
-	orgAvatar: {
-		width: "200px",
-		height: "200px"
-	},
-	card: {
-		borderTop: props => {
-			if (props.status === "pending") {
-				return `1rem solid lightgrey`;
-			}
-
-			if (props.status === "approved") {
-				return `1rem solid green`;
-			}
-
-			if (props.status === "rejected") {
-				return `1rem solid red`;
-			}
-		}
-	},
-	status: {
-		color: props => {
-			if (props.status === "pending") {
-				return `grey`;
-			}
-
-			if (props.status === "approved") {
-				return `green`;
-			}
-
-			if (props.status === "rejected") {
-				return `red`;
-			}
-		}
-	}
-});
 
 const QUERY = gql`
 	query($orgId: Int!) {
