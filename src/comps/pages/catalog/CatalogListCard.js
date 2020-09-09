@@ -40,7 +40,6 @@ export default function CatalogCard({ name, url, charter }) {
 							<ListItemAvatar>
 								<Avatar
 									src={charter.picture}
-									variant={"square"}
 									className={classes.avatar}
 								/>
 							</ListItemAvatar>

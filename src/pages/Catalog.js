@@ -78,6 +78,9 @@ const QUERY = gql`
 			name
 			url
 			active
+			tags {
+				name
+			}
 			charter {
 				picture
 				mission
