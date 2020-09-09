@@ -22,12 +22,17 @@ const RouteTabs = ({ tabs }) => {
 
 	return (
 		<div>
-			<Tabs value={selectedTabIndex}>
+			<Tabs
+				value={selectedTabIndex}
+				scrollButtons={"on"}
+				variant={"scrollable"}
+			>
 				{tabs.map((tab, index) => (
 					<Tab
 						key={tab.path}
 						label={tab.label}
 						value={index}
+						icon={tab.icon}
 						onClick={() => {
 							setSelectedTabIndex(index);
 							history.push(tab.path);
