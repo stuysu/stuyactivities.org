@@ -19,26 +19,18 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function TagList(props) {
-	const tag = props.tag;
-	const listItems = tag.map((tag) =>
+function Tag({name}) {
+	return (
 		<Chip
-			label={tag.name}
+			label={name}
 			size={"small"}
 			style={{ height: 150 }}
 		/>
-	);
-	return (
-		{listItems}
 	);
 }
 
 export default function CatalogCard({ name, url, charter, tags }) {
 	const classes = useStyles();
-	const tag = [];
-	for (let i in tags) {
-		tag.push(i);
-	};
 
 	return (
 		<Card className={classes.card}>
@@ -59,7 +51,9 @@ export default function CatalogCard({ name, url, charter, tags }) {
 							size={"small"}
 							className={classes.chip}
 						/>
-						<TagList tag={tag} />
+						{tags.map(tag => (
+							<Tag name={tag.name} key={tag.id} />
+						))}
 					</CardContent>
 				</CardActionArea>
 			</UnstyledLink>
