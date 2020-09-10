@@ -1,6 +1,6 @@
 import React from "react";
 import {
-	Avatar,
+	Avatar, CardContent,
 	Grid,
 	List,
 	ListItem,
@@ -12,6 +12,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
 import Chip from "@material-ui/core/Chip";
+import capitalizeString from "../../../utils/capitalizeString";
 
 const useStyles = makeStyles(() => ({
 	item: {
@@ -24,11 +25,24 @@ const useStyles = makeStyles(() => ({
 		marginRight: "18px"
 	},
 	chip: {
-		marginTop: "0.3rem"
+		marginTop: "0.3rem",
+		marginRight: "5px"
 	}
 }));
 
-export default function CatalogCard({ name, url, charter }) {
+function Tag({name}) {
+	const classes = useStyles();
+
+	return (
+		<Chip
+			label={name}
+			size={"small"}
+			className={classes.chip}
+		/>
+	);
+}
+
+export default function CatalogCard({ name, url, charter, tags }) {
 	const classes = useStyles();
 
 	return (
@@ -57,13 +71,13 @@ export default function CatalogCard({ name, url, charter }) {
 											{charter.mission}
 											<br />
 											<Chip
-												label={
-													charter.commitmentLevel +
-													" commitment"
-												}
+												label={capitalizeString(charter.commitmentLevel) + " Commitment"}
 												size={"small"}
 												className={classes.chip}
 											/>
+											{tags.map(tag => (
+												<Tag name={tag.name} key={tag.id} />
+											))}
 										</Typography>
 									</React.Fragment>
 								}

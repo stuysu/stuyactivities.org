@@ -9,22 +9,26 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
 import Chip from "@material-ui/core/Chip";
+import capitalizeString from "../../../utils/capitalizeString";
 
 const useStyles = makeStyles(theme => ({
 	card: {
 		margin: theme.spacing(1)
 	},
 	chip: {
-		marginTop: "0.3rem"
+		marginTop: "0.3rem",
+		marginRight: "5px"
 	}
 }));
 
 function Tag({name}) {
+	const classes = useStyles();
+
 	return (
 		<Chip
 			label={name}
 			size={"small"}
-			style={{ height: 150 }}
+			className={classes.chip}
 		/>
 	);
 }
@@ -47,7 +51,7 @@ export default function CatalogCard({ name, url, charter, tags }) {
 						</Typography>
 						<Typography>{charter.mission}</Typography>
 						<Chip
-							label={charter.commitmentLevel + " commitment"}
+							label={capitalizeString(charter.commitmentLevel) + " Commitment"}
 							size={"small"}
 							className={classes.chip}
 						/>
