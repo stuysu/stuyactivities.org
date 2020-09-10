@@ -1,19 +1,16 @@
 import React from "react";
 import { gql } from "@apollo/client";
 import { makeStyles } from "@material-ui/core/styles";
-import { Helmet } from "react-helmet";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
 import CatalogListCard from "../../comps/pages/catalog/CatalogListCard";
 import { Grid } from "@material-ui/core";
-import CatalogCard from "../../comps/pages/catalog/CatalogCard";
+import {useQuery} from "@apollo/react-hooks";
 
 const useStyles = makeStyles(() => ({}));
 
 const QUERY = gql`
 	query Organizations($keyword: String) {
-		organization(keyword: $keyword, limit: 50) {
+		organizations(keyword: $keyword, limit: 50) {
 			id
 			name
 			strikes
@@ -21,18 +18,27 @@ const QUERY = gql`
 	}
 `;
 
-const GIVE = gql`
-	mutation createStrike($orgId: Int) {
-		createStrike(orgId: $orgId) {
-			weight
-			reason
-		}
-	}
-`;
+// const GIVE = gql`
+// 	mutation createStrike($orgId: Int) {
+// 		createStrike(orgId: $orgId) {
+// 			weight
+// 			reason
+// 		}
+// 	}
+// `;
 
 const Strikes = () => {
 	const classes = useStyles();
 	const [keyword, setKeyword] = React.useState("");
+
+	const {
+		error,
+		data
+		// refetch
+	} = useQuery(QUERY, {
+		variables: {keyword}
+	});
+	if (error) return <p>There was an error loading this page</p>;
 
 	return (
 		<div>

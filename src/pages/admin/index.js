@@ -5,6 +5,7 @@ import RouteTabs from "../../comps/ui/RouteTabs";
 import Approvals from "./approvals";
 import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
+import Strikes from "./Strikes";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -34,8 +35,13 @@ export default function AdminRouter({ match }) {
 			label: "Help Requests",
 			role: "helpRequests",
 			path: actualPath + "/help"
+		},
+		{
+			label: "Strikes",
+			path: actualPath + "/strikes"
 		}
-	].filter(tab => adminRoles.some(row => tab.role === row.role));
+		];
+	// ].filter(tab => adminRoles.some(row => tab.role === row.role));
 
 	if (!tabs.length) {
 		return <p>You don't have access to this page</p>;
@@ -48,6 +54,7 @@ export default function AdminRouter({ match }) {
 
 			<Switch>
 				<Route path={match.path + "/approvals"} component={Approvals} />
+				<Route path={match.path + "/strikes"} component={Strikes} />
 				<Route path={match.path + "/help"} component={Approvals} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
