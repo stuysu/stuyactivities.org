@@ -21,16 +21,10 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function Tag({name}) {
+function Tag({ name }) {
 	const classes = useStyles();
 
-	return (
-		<Chip
-			label={name}
-			size={"small"}
-			className={classes.chip}
-		/>
-	);
+	return <Chip label={name} size={"small"} className={classes.chip} />;
 }
 
 export default function CatalogCard({ name, url, charter, tags }) {
@@ -51,7 +45,10 @@ export default function CatalogCard({ name, url, charter, tags }) {
 						</Typography>
 						<Typography>{charter.mission}</Typography>
 						<Chip
-							label={capitalizeString(charter.commitmentLevel) + " Commitment"}
+							label={
+								capitalizeString(charter.commitmentLevel) +
+								" Commitment"
+							}
 							size={"small"}
 							className={classes.chip}
 						/>

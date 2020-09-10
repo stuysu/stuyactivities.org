@@ -34,7 +34,9 @@ const About = () => {
 
 				<meta
 					property="og:description"
-					content={"An app designed by the Stuyvesant Student Union to help students navigate the extracurricular organizations at Stuyvesant High School."}
+					content={
+						"An app designed by the Stuyvesant Student Union to help students navigate the extracurricular organizations at Stuyvesant High School."
+					}
 				/>
 			</Helmet>
 			<div className={classes.layout}>
@@ -74,8 +76,14 @@ const About = () => {
 							React App
 						</Link>{" "}
 						bootstrapped with <code>create-react-app</code> and we
-						use <Link href={"https://material-ui.com/"} target={"_blank"}>Material UI</Link> for
-						styling and theming. The backend is a NodeJS express
+						use{" "}
+						<Link
+							href={"https://material-ui.com/"}
+							target={"_blank"}
+						>
+							Material UI
+						</Link>{" "}
+						for styling and theming. The backend is a NodeJS express
 						server that serves an{" "}
 						<Link
 							href={"https://www.apollographql.com/"}
