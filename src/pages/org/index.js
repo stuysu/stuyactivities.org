@@ -7,6 +7,7 @@ import { useQuery } from "@apollo/client";
 import Loading from "../../comps/ui/Loading";
 import Charter from "./Charter";
 import Overview from "./Overview";
+import Meetings from "./Meetings";
 import { Helmet } from "react-helmet";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -55,6 +56,13 @@ const getQuery = signedIn => {
 					role
 				}
 				upcomingMeetings {
+					id
+					title
+					description
+					start
+					end
+				}
+				meetings {
 					id
 					title
 					description
@@ -172,6 +180,10 @@ const OrgRouter = ({ match, history }) => {
 									<Route
 										path={match.path + "/join"}
 										component={Join}
+									/>
+									<Route
+										path={match.path + "/meetings"}
+										component={Meetings}
 									/>
 								</Switch>
 							</div>
