@@ -16,7 +16,7 @@
 		"apollo-cache-inmemory": "^1.6.6",
 		"apollo-cache-persist": "^0.1.1",
 		"apollo-client": "^2.6.10",
-		"apollo-upload-client": "^14.1.1",
+		"apollo-upload-client": "^14.1.2",
 		"diff": "^4.0.2",
 		"graphql": "^15.3.0",
 		"honeybadger-js": "^2.2.2",
