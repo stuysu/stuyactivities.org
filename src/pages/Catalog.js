@@ -71,7 +71,6 @@ const QUERY = gql`
 			tags: $tags
 			commitmentLevels: $commitmentLevels
 			meetingDays: $meetingDays
-			limit: 50
 			offset: 0
 		) {
 			id
