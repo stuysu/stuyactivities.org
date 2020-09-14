@@ -19,7 +19,6 @@ import Button from "@material-ui/core/Button";
 import UnstyledLink from "../comps/ui/UnstyledLink";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
-import Loading from "../comps/ui/Loading";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
@@ -94,8 +93,7 @@ const Catalog = () => {
 
 	const {
 		error,
-		data,
-		loading
+		data
 		// refetch
 	} = useQuery(QUERY, {
 		variables: {
