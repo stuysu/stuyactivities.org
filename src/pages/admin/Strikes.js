@@ -1,34 +1,46 @@
 import React from "react";
-import { gql } from "@apollo/client";
-import { makeStyles } from "@material-ui/core/styles";
+import {gql, useMutation} from "@apollo/client";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
-import CatalogListCard from "../../comps/pages/catalog/CatalogListCard";
 import { Grid } from "@material-ui/core";
 import {useQuery} from "@apollo/react-hooks";
-
-const useStyles = makeStyles(() => ({}));
+import StrikeCard, {StrikeFormContext} from "../../comps/pages/admin/StrikeCard";
+import {client} from "../../comps/context/ApolloProvider";
 
 const QUERY = gql`
 	query Organizations($keyword: String) {
 		organizations(keyword: $keyword, limit: 50) {
 			id
 			name
-			strikes
+			url
+			active
+			tags {
+				name
+			}
+			charter {
+				picture
+				mission
+				commitmentLevel
+			}
 		}
 	}
 `;
 
-// const GIVE = gql`
-// 	mutation createStrike($orgId: Int) {
-// 		createStrike(orgId: $orgId) {
-// 			weight
-// 			reason
-// 		}
-// 	}
-// `;
+const MUTATION = gql`
+	mutation createStrike(
+		$orgId: Int
+		$weight: Int!
+		$reason: String!
+	) {
+		createStrike(
+			orgId: $orgId
+			weight: $weight
+			reason: $reason
+		)
+	}
+`;
 
 const Strikes = () => {
-	const classes = useStyles();
+	const form = React.useContext(StrikeFormContext);
 	const [keyword, setKeyword] = React.useState("");
 
 	const {
@@ -36,8 +48,16 @@ const Strikes = () => {
 		data
 		// refetch
 	} = useQuery(QUERY, {
-		variables: {keyword}
+		variables: {keyword},
+		client
 	});
+
+	const [submit] = useMutation(MUTATION, {
+		variables: {
+
+		}
+	});
+
 	if (error) return <p>There was an error loading this page</p>;
 
 	return (
@@ -49,7 +69,7 @@ const Strikes = () => {
 				alignItems={"flex-start"}
 			>
 				{data?.organizations?.map(org => (
-					<CatalogListCard key={org.id} {...org} />
+					<StrikeCard key={org.id} {...org} />
 				))}
 			</Grid>
 		</div>
