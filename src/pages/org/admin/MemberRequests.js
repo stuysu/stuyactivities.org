@@ -61,26 +61,22 @@ const DELETE_MUTATION = gql`
 export default function Members({ match }) {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
-	const { data } = useQuery(QUERY, {
+	const { data, refetch } = useQuery(QUERY, {
 		variables: { orgId: org.id }
 	});
-	const [approveMutation] = useMutation(APPROVE_MUTATION);
+	const [approveMutation] = useMutation(APPROVE_MUTATION, {
+		update(cache) {
+			cache.reset().then(() => refetch());
+		}
+	});
 	const [deleteMutation] = useMutation(DELETE_MUTATION, {
 		update(cache) {
-			cache.reset();
+			cache.reset().then(() => refetch());
 		}
 	});
 	const [rejectingRequest, setRejectingRequest] = React.useState({});
-	if (
-		data?.membershipRequests?.filter(
-			request => !request.userApproval || !request.adminApproval
-		)?.length === 0
-	) {
-		return (
-			<Typography variant="h5">
-				No outgoing or incoming requests at this time
-			</Typography>
-		);
+	if (data?.membershipRequests?.filter(request => !request.userApproval || !request.adminApproval)?.length === 0) {
+		return <Typography variant="h5">No outgoing or incoming requests at this time</Typography>;
 	}
 	const incomingRequests = [],
 		outgoingRequests = [];
@@ -88,9 +84,7 @@ export default function Members({ match }) {
 	if (data?.membershipRequests) {
 		data.membershipRequests.forEach(request => {
 			if (!request.userApproval || !request.adminApproval) {
-				request.userApproval
-					? incomingRequests.push(request)
-					: outgoingRequests.push(request);
+				request.userApproval ? incomingRequests.push(request) : outgoingRequests.push(request);
 			}
 		});
 	}
@@ -105,26 +99,16 @@ export default function Members({ match }) {
 						<Grid container alignItems={"center"}>
 							<Grid item xl={4} lg={4} md={6} sm={6} xs={12}>
 								<Typography>{request.user.name}</Typography>
-								<Typography
-									color={"textSecondary"}
-									variant={"subtitle2"}
-								>
+								<Typography color={"textSecondary"} variant={"subtitle2"}>
 									{request.user.email}
 								</Typography>
 							</Grid>
 							<Grid item xl={8} lg={8} md={6} sm={6} xs={12}>
 								<Typography>
-									Desired Role: "{request.role}"{" "}
-									{request.adminPrivileges
-										? "(wants admin)"
-										: ""}
+									Desired Role: "{request.role}" {request.adminPrivileges ? "(wants admin)" : ""}
 								</Typography>
 								<Typography>
-									Message: "
-									{request.userApproval
-										? request.userMessage
-										: request.adminMessage}
-									"
+									Message: "{request.userApproval ? request.userMessage : request.adminMessage}"
 								</Typography>
 							</Grid>
 						</Grid>
@@ -142,9 +126,7 @@ export default function Members({ match }) {
 							) : (
 								""
 							)}
-							<IconButton
-								onClick={() => setRejectingRequest(request)}
-							>
+							<IconButton onClick={() => setRejectingRequest(request)}>
 								<CloseIcon />
 							</IconButton>
 						</ListItemSecondaryAction>
@@ -155,34 +137,18 @@ export default function Members({ match }) {
 	};
 	return (
 		<div className={classes.margin}>
-			{incomingRequests.length > 0 ? (
-				<Typography variant="h5">Incoming Requests</Typography>
-			) : (
-				""
-			)}
+			{incomingRequests.length > 0 ? <Typography variant="h5">Incoming Requests</Typography> : ""}
 			<RequestList requests={incomingRequests} />
-			{outgoingRequests.length > 0 ? (
-				<Typography variant="h5">Outgoing Requests</Typography>
-			) : (
-				""
-			)}
+			{outgoingRequests.length > 0 ? <Typography variant="h5">Outgoing Requests</Typography> : ""}
 			<RequestList requests={outgoingRequests} />
-			<Dialog
-				open={rejectingRequest?.id !== undefined}
-				onClose={() => setRejectingRequest({})}
-			>
+			<Dialog open={rejectingRequest?.id !== undefined} onClose={() => setRejectingRequest({})}>
 				<DialogTitle>
 					Are you sure you want to{" "}
-					{rejectingRequest?.userApproval
-						? "reject the request from "
-						: "delete the request to"}{" "}
+					{rejectingRequest?.userApproval ? "reject the request from " : "delete the request to"}{" "}
 					{rejectingRequest?.user?.name}?
 				</DialogTitle>
 				<DialogActions>
-					<Button
-						onClick={() => setRejectingRequest({})}
-						color="primary"
-					>
+					<Button onClick={() => setRejectingRequest({})} color="primary">
 						Cancel
 					</Button>
 					<Button
