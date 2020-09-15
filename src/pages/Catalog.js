@@ -125,7 +125,7 @@ const Catalog = () => {
 		<div className={classes.root}>
 			<Helmet>
 				<title>Catalog | StuyActivities</title>
-
+				<meta property="og:title" content="Catalog | StuyActivities" />
 				<meta
 					property="og:description"
 					content={"Look through and find activities at Stuyvesant High School."}
