@@ -15,6 +15,8 @@ import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
 import { cache } from "../../../comps/context/ApolloProvider";
 
+import Linkify from "linkifyjs/react";
+
 const CREATE_MESSAGE_MUTATION = gql`
 	mutation($orgId: Int!, $message: String!) {
 		createCharterApprovalMessage(orgId: $orgId, message: $message) {
@@ -83,10 +85,18 @@ const ApprovalMessages = ({ organization, refetch }) => {
 										<p
 											style={{
 												fontStyle: message?.auto ? "italic" : "normal",
-												color: message?.auto ? "grey" : "black"
+												color: message?.auto ? "grey" : "black",
+												overflowWrap: "anywhere"
 											}}
 										>
-											{message?.message}
+											<Linkify
+												properties={{
+													target: "_blank",
+													style: { color: "red", fontWeight: "bold" }
+												}}
+											>
+												{message?.message}
+											</Linkify>
 										</p>
 									</div>
 								</div>
