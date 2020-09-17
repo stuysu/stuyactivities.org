@@ -24,7 +24,7 @@
 		"material-ui-chip-input": "^1.1.0",
 		"moment": "^2.28.0",
 		"moment-timezone": "^0.5.31",
-		"prettier": "^2.1.1",
+		"prettier": "^2.1.2",
 		"prop-types": "latest",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
