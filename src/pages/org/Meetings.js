@@ -20,9 +20,7 @@ export default function Meetings() {
 			<Typography variant={"h4"}>Upcoming Meetings</Typography>
 			<br />
 			{!org.upcomingMeetings?.length ? (
-				<span style={{ color: "grey" }}>
-					There currently are no upcoming meetings scheduled.
-				</span>
+				<span style={{ color: "grey" }}>There currently are no upcoming meetings scheduled.</span>
 			) : (
 				<MeetingCards meetings={org.upcomingMeetings} />
 			)}
@@ -30,9 +28,7 @@ export default function Meetings() {
 			<Typography variant={"h4"}>All Meetings</Typography>
 			<br />
 			{!org.meetings?.length ? (
-				<span style={{ color: "grey" }}>
-					There are no meetings scheduled.
-				</span>
+				<span style={{ color: "grey" }}>There are no meetings scheduled.</span>
 			) : (
 				<FullCalendar
 					plugins={[dayGridPlugin, listPlugin]}
