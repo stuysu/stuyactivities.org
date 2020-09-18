@@ -59,13 +59,7 @@ const CREATE_MUTATION = gql`
 		$start: DateTime!
 		$end: DateTime!
 	) {
-		createMeeting(
-			orgUrl: $orgUrl
-			title: $title
-			description: $description
-			start: $start
-			end: $end
-		) {
+		createMeeting(orgUrl: $orgUrl, title: $title, description: $description, start: $start, end: $end) {
 			id
 			title
 			description
@@ -82,20 +76,8 @@ const REMOVE_MUTATION = gql`
 `;
 
 const EDIT_MUTATION = gql`
-	mutation AlterMeeting(
-		$id: Int!
-		$title: String
-		$description: String
-		$start: DateTime
-		$end: DateTime
-	) {
-		alterMeeting(
-			meetingId: $id
-			title: $title
-			description: $description
-			start: $start
-			end: $end
-		) {
+	mutation AlterMeeting($id: Int!, $title: String, $description: String, $start: DateTime, $end: DateTime) {
+		alterMeeting(meetingId: $id, title: $title, description: $description, start: $start, end: $end) {
 			id
 			title
 			description
@@ -133,11 +115,7 @@ const Main = ({ match }) => {
 								}
 							`
 						});
-						if (
-							existingMeetings.some(
-								ref => readField("id", ref) === createMeeting.id
-							)
-						) {
+						if (existingMeetings.some(ref => readField("id", ref) === createMeeting.id)) {
 							return existingMeetings;
 						} else {
 							return [...existingMeetings, newMeetingRef];
@@ -169,9 +147,7 @@ const Main = ({ match }) => {
 				id: cache.identify(org),
 				fields: {
 					meetings(existingMeetings = [], { readField }) {
-						return existingMeetings.filter(
-							ref => removingMeeting.id !== readField("id", ref)
-						);
+						return existingMeetings.filter(ref => removingMeeting.id !== readField("id", ref));
 					}
 				}
 			});
@@ -181,10 +157,7 @@ const Main = ({ match }) => {
 		<div className={classes.margin}>
 			<Grid container>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-					<Typography
-						variant={"h4"}
-						className={classes.newMeetingTitle}
-					>
+					<Typography variant={"h4"} className={classes.newMeetingTitle}>
 						New Meeting
 					</Typography>
 					<MeetingForm submit={create} key={formKey} />
@@ -199,34 +172,19 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(
-											meeting.start
-										).format(
+										secondary={`${moment(meeting.start).format(
 											"dddd, MMMM Do YYYY, h:mm a"
-										)} to ${moment(meeting.end).format(
-											"h:mm a"
-										)}`}
+										)} to ${moment(meeting.end).format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
-											to={
-												generatePath(
-													match.path,
-													match.params
-												) +
-												"/edit/" +
-												meeting.id
-											}
+											to={generatePath(match.path, match.params) + "/edit/" + meeting.id}
 										>
 											<IconButton>
 												<Edit />
 											</IconButton>
 										</UnstyledLink>
-										<IconButton
-											onClick={() =>
-												setRemovingMeeting(meeting)
-											}
-										>
+										<IconButton onClick={() => setRemovingMeeting(meeting)}>
 											<Close />
 										</IconButton>
 									</ListItemSecondaryAction>
@@ -237,13 +195,8 @@ const Main = ({ match }) => {
 				</Grid>
 			</Grid>
 
-			<Dialog
-				open={removingMeeting?.id !== undefined}
-				onClose={() => setRemovingMeeting({})}
-			>
-				<DialogTitle>
-					Are you sure you want to remove {removingMeeting?.title}?
-				</DialogTitle>
+			<Dialog open={removingMeeting?.id !== undefined} onClose={() => setRemovingMeeting({})}>
+				<DialogTitle>Are you sure you want to remove {removingMeeting?.title}?</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
 						Description:
@@ -252,18 +205,10 @@ const Main = ({ match }) => {
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button
-						onClick={() => setRemovingMeeting({})}
-						color="primary"
-					>
+					<Button onClick={() => setRemovingMeeting({})} color="primary">
 						Cancel
 					</Button>
-					<Button
-						onClick={() =>
-							removeMutation({ variables: removingMeeting })
-						}
-						color="primary"
-					>
+					<Button onClick={() => removeMutation({ variables: removingMeeting })} color="primary">
 						Remove
 					</Button>
 				</DialogActions>
@@ -275,9 +220,7 @@ const Main = ({ match }) => {
 const EditPage = ({ match }) => {
 	const org = React.useContext(OrgContext);
 	const classes = useStyles();
-	const editingMeeting = org?.meetings?.find(
-		meeting => meeting.id === Number(match.params.meetingId)
-	);
+	const editingMeeting = org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
 	const [editMutation] = useMutation(EDIT_MUTATION, {
 		update(cache, { data: { alterMeeting } }) {
 			cache.modify({
@@ -285,9 +228,7 @@ const EditPage = ({ match }) => {
 				fields: {
 					meetings(existingMeetings = [], { readField }) {
 						existingMeetings[
-							existingMeetings.findIndex(
-								meeting => match.params.meetingId === meeting.id
-							)
+							existingMeetings.findIndex(meeting => match.params.meetingId === meeting.id)
 						] = alterMeeting;
 						return existingMeetings;
 					}
@@ -316,10 +257,7 @@ const EditPage = ({ match }) => {
 			/>
 			<Grid container justify={"center"} className={classes.margin}>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-					<Typography
-						variant={"h4"}
-						className={classes.newMeetingTitle}
-					>
+					<Typography variant={"h4"} className={classes.newMeetingTitle}>
 						Edit Meeting
 					</Typography>
 					<MeetingForm submit={edit} meeting={editingMeeting} />
@@ -332,10 +270,7 @@ const EditPage = ({ match }) => {
 const Meetings = ({ match }) => {
 	return (
 		<Switch>
-			<Route
-				path={match.path + "/edit/:meetingId"}
-				component={EditPage}
-			/>
+			<Route path={match.path + "/edit/:meetingId"} component={EditPage} />
 			<Route path={match.path} component={Main} />
 		</Switch>
 	);
