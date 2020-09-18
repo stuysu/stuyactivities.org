@@ -7,6 +7,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import MeetingCards from "../../comps/pages/organization/MeetingCards";
+import Link from "@material-ui/core/Link";
+import Linkify from "linkifyjs/react";
 
 const Overview = () => {
 	const org = React.useContext(OrgContext);

@@ -153,6 +153,7 @@ const OrgRouter = ({ match, history }) => {
 									<Route path={match.path + "/members"} component={Members} />
 									<Route path={match.path + "/admin"} component={OrgAdminRouter} />
 									<Route path={match.path + "/join"} component={Join} />
+									<Route path={match.path + "/meetings"} component={Meetings} />
 								</Switch>
 							</div>
 						</Grid>
