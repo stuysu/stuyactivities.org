@@ -60,18 +60,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const QUERY = gql`
-	query Organizations(
-		$keyword: String
-		$tags: [Int!]
-		$commitmentLevels: [String!]
-		$meetingDays: [String!]
-	) {
+	query Organizations($keyword: String, $tags: [Int!], $commitmentLevels: [String!], $meetingDays: [String!]) {
 		organizations(
 			keyword: $keyword
 			tags: $tags
 			commitmentLevels: $commitmentLevels
 			meetingDays: $meetingDays
-			limit: 50
 			offset: 0
 		) {
 			id
@@ -90,6 +84,7 @@ const QUERY = gql`
 const Catalog = () => {
 	const classes = useStyles();
 
+	const [organizations, setOrganizations] = React.useState([]);
 	const [keyword, setKeyword] = React.useState("");
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
@@ -108,7 +103,16 @@ const Catalog = () => {
 			meetingDays
 		}
 	});
-	if (error) return <p>There was an error loading this page</p>;
+
+	React.useEffect(() => {
+		if (data) {
+			setOrganizations(data.organizations);
+		}
+	}, [data]);
+
+	if (error) {
+		return <p>There was an error loading this page</p>;
+	}
 
 	//toggle list view
 	const handleListView = (event, newListView) => {
@@ -121,30 +125,17 @@ const Catalog = () => {
 		<div className={classes.root}>
 			<Helmet>
 				<title>Catalog | StuyActivities</title>
-
+				<meta property="og:title" content="Catalog | StuyActivities" />
 				<meta
 					property="og:description"
-					content={
-						"Look through and find activities at Stuyvesant High School."
-					}
+					content={"Look through and find activities at Stuyvesant High School."}
 				/>
 			</Helmet>
 
 			<Grid container>
-				<Grid
-					item
-					xs={12}
-					sm={12}
-					md={3}
-					lg={3}
-					xl={2}
-					className={classes.bigChild}
-				>
+				<Grid item xs={12} sm={12} md={3} lg={3} xl={2} className={classes.bigChild}>
 					<div className={classes.filterContainer}>
-						<Typography
-							className={classes.filterHeading}
-							variant={"h4"}
-						>
+						<Typography className={classes.filterHeading} variant={"h4"}>
 							Filters
 						</Typography>
 						<SearchBox setKeyword={setKeyword} keyword={keyword} />
@@ -153,26 +144,12 @@ const Catalog = () => {
 							commitmentLevels={commitmentLevels}
 							setCommitmentLevels={setCommitmentLevels}
 						/>
-						<MeetingDaysFilter
-							meetingDays={meetingDays}
-							setMeetingDays={setMeetingDays}
-						/>
+						<MeetingDaysFilter meetingDays={meetingDays} setMeetingDays={setMeetingDays} />
 					</div>
 				</Grid>
-				<Grid
-					item
-					xs={12}
-					sm={12}
-					md={9}
-					lg={9}
-					xl={10}
-					className={classes.bigChild}
-				>
+				<Grid item xs={12} sm={12} md={9} lg={9} xl={10} className={classes.bigChild}>
 					<div className={classes.catalogHeading}>
-						<Typography
-							variant={"h4"}
-							className={classes.filterChild}
-						>
+						<Typography variant={"h4"} className={classes.filterChild}>
 							Catalog
 						</Typography>
 						<ToggleButtonGroup
@@ -191,27 +168,17 @@ const Catalog = () => {
 						</ToggleButtonGroup>
 					</div>
 
-					{data?.organizations?.length === 0 && (
+					{organizations.length === 0 && (
 						<div className={classes.notFoundContainer}>
 							<img
-								src={
-									errorImages[
-										Math.floor(
-											Math.random() * errorImages.length
-										)
-									]
-								}
+								src={errorImages[Math.floor(Math.random() * errorImages.length)]}
 								alt={"A Cute Not Found Vector"}
 								className={classes.defaultVector}
 							/>
-							<Typography paragraph>
-								We couldn't find any activities matching that
-								criteria.
-							</Typography>
+							<Typography paragraph>We couldn't find any activities matching that criteria.</Typography>
 
 							<Typography paragraph>
-								If you feel there ought to be, maybe you should
-								start one!
+								If you feel there ought to be, maybe you should start one!
 							</Typography>
 
 							<UnstyledLink to={"/charter"}>
@@ -222,24 +189,12 @@ const Catalog = () => {
 						</div>
 					)}
 
-					<Grid
-						container
-						alignContent={"flex-start"}
-						alignItems={"flex-start"}
-					>
-						{data?.organizations?.map(org =>
+					<Grid container alignContent={"flex-start"} alignItems={"flex-start"}>
+						{organizations.map(org =>
 							listView === "list" ? (
 								<CatalogListCard key={org.id} {...org} />
 							) : (
-								<Grid
-									item
-									xs={12}
-									sm={6}
-									xl={3}
-									lg={3}
-									md={6}
-									key={org.id}
-								>
+								<Grid item xs={12} sm={6} xl={3} lg={3} md={6} key={org.id}>
 									<CatalogCard {...org} />
 								</Grid>
 							)

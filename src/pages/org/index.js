@@ -107,10 +107,7 @@ const OrgRouter = ({ match, history }) => {
 			if (actualOrgUrl && match.params.orgUrl !== actualOrgUrl) {
 				const params = { ...match.params, orgUrl: actualOrgUrl };
 
-				const realPath = window.location.pathname.replace(
-					match.url,
-					generatePath(match.path, params)
-				);
+				const realPath = window.location.pathname.replace(match.url, generatePath(match.path, params));
 				history.push(realPath);
 			}
 		}
@@ -129,6 +126,7 @@ const OrgRouter = ({ match, history }) => {
 			<div>
 				<Helmet>
 					<title>{data?.organization?.name} | StuyActivities</title>
+					<meta property="og:title" content={`${data?.organization?.name} | StuyActivities`} />
 					<meta
 						property="og:description"
 						content={
@@ -136,55 +134,25 @@ const OrgRouter = ({ match, history }) => {
 							`${data?.organization?.name} - An activity at Stuyvesant High School`
 						}
 					/>
-					<meta
-						property="og:image"
-						content={data?.organization?.charter?.picture}
-					/>
+					<meta property="og:image" content={data?.organization?.charter?.picture} />
 				</Helmet>
 
 				<div className={styles.contentContainer}>
-					<BackButton
-						className={classes.backButton}
-						label={"Back to Catalog"}
-						to={"/catalog"}
-					/>
+					<BackButton className={classes.backButton} label={"Back to Catalog"} to={"/catalog"} />
 
 					<Grid container spacing={1}>
 						<Grid item xs={12} sm={12} xl={2} md={3} lg={2}>
-							<OrgNavPanel
-								match={match}
-								organization={data.organization}
-							/>
+							<OrgNavPanel match={match} organization={data.organization} />
 						</Grid>
 
 						<Grid item lg={10} md={9} xl={10} sm={12} xs={12}>
 							<div className={classes.contentContainer}>
 								<Switch>
-									<Route
-										path={match.path}
-										component={Overview}
-										exact
-									/>
-									<Route
-										path={match.path + "/charter"}
-										component={Charter}
-									/>
-									<Route
-										path={match.path + "/members"}
-										component={Members}
-									/>
-									<Route
-										path={match.path + "/admin"}
-										component={OrgAdminRouter}
-									/>
-									<Route
-										path={match.path + "/join"}
-										component={Join}
-									/>
-									<Route
-										path={match.path + "/meetings"}
-										component={Meetings}
-									/>
+									<Route path={match.path} component={Overview} exact />
+									<Route path={match.path + "/charter"} component={Charter} />
+									<Route path={match.path + "/members"} component={Members} />
+									<Route path={match.path + "/admin"} component={OrgAdminRouter} />
+									<Route path={match.path + "/join"} component={Join} />
 								</Switch>
 							</div>
 						</Grid>

@@ -24,9 +24,7 @@ const Overview = () => {
 
 				<Typography paragraph>
 					{!org.active && !org.charter.mission && (
-						<span style={{ color: "grey" }}>
-							This response is pending approval
-						</span>
+						<span style={{ color: "grey" }}>This response is pending approval</span>
 					)}
 					{org.charter.mission}
 				</Typography>
@@ -37,11 +35,22 @@ const Overview = () => {
 
 				<Typography paragraph>
 					{!org.active && !org.charter.meetingSchedule && (
-						<span style={{ color: "grey" }}>
-							This response is pending approval
-						</span>
+						<span style={{ color: "grey" }}>This response is pending approval</span>
 					)}
-					{org.charter.meetingSchedule}
+					<Linkify
+						options={{
+							tagName: "span",
+							format: function (value, type) {
+								return (
+									<Link href={value} target={"_blank"} color={"secondary"}>
+										{value}
+									</Link>
+								);
+							}
+						}}
+					>
+						{org.charter.meetingSchedule}
+					</Linkify>
 				</Typography>
 
 				<Typography variant={"h6"} color={"primary"}>
@@ -56,19 +65,11 @@ const Overview = () => {
 									<Avatar src={membership.user.picture} />
 								</ListItemAvatar>
 								<span>
-									<Typography>
-										{membership.user.name}
-									</Typography>
-									<Typography
-										color={"textSecondary"}
-										variant={"subtitle2"}
-									>
+									<Typography>{membership.user.name}</Typography>
+									<Typography color={"textSecondary"} variant={"subtitle2"}>
 										{membership.role}
 									</Typography>
-									<Typography
-										color={"textSecondary"}
-										variant={"subtitle2"}
-									>
+									<Typography color={"textSecondary"} variant={"subtitle2"}>
 										{membership.user.email}
 									</Typography>
 								</span>
@@ -83,9 +84,7 @@ const Overview = () => {
 				<br />
 
 				{!org.upcomingMeetings?.length && (
-					<span style={{ color: "grey" }}>
-						There currently are no upcoming meetings scheduled.
-					</span>
+					<span style={{ color: "grey" }}>There currently are no upcoming meetings scheduled.</span>
 				)}
 
 				<MeetingCards meetings={org.upcomingMeetings} />
