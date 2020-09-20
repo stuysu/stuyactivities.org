@@ -93,7 +93,7 @@ const Catalog = () => {
 	const [meetingDays, setMeetingDays] = React.useState([]);
 	const [listView, setListView] = React.useState("card");
 
-	const seed = React.createRef(Math.floor(Math.random() * 1000));
+	const [seed] = React.useState(Math.floor(Math.random() * 1000));
 
 	const {
 		error,
@@ -112,7 +112,7 @@ const Catalog = () => {
 	React.useEffect(() => {
 		if (data) {
 			const orgsWithoutSU = data.organizations.filter(org => org.url !== "stuysu");
-			shuffleArray(orgsWithoutSU, seed.current);
+			shuffleArray(orgsWithoutSU, seed);
 			if (orgsWithoutSU.length !== data.organizations.length) {
 				orgsWithoutSU.unshift(data.organizations.find(org => org.url === "stuysu"));
 			}
