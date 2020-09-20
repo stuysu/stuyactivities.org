@@ -1,14 +1,10 @@
 import React from "react";
-import {
-	Card,
-	CardActionArea,
-	CardContent,
-	CardMedia,
-	Typography
-} from "@material-ui/core";
+import { Card, CardActionArea, CardContent, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
 import Chip from "@material-ui/core/Chip";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import capitalizeString from "../../../utils/capitalizeString";
 
 const useStyles = makeStyles(theme => ({
 	card: {
@@ -19,27 +15,34 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function CatalogCard({ name, url, charter }) {
+export default function CatalogCard({ name, url, tags, charter }) {
 	const classes = useStyles();
 	return (
 		<Card className={classes.card}>
 			<UnstyledLink to={`/${url}`}>
 				<CardActionArea>
-					<CardMedia
-						image={charter.picture}
-						title={name + "'s picture"}
-						style={{ height: 180 }}
+					<LazyLoadImage
+						alt={name}
+						height={180}
+						src={charter.picture}
+						width={"100%"}
+						style={{ objectFit: "cover" }}
 					/>
 					<CardContent>
 						<Typography variant={"h5"} gutterBottom>
 							{name}
 						</Typography>
 						<Typography>{charter.mission}</Typography>
-						<Chip
-							label={charter.commitmentLevel + " commitment"}
-							size={"small"}
-							className={classes.chip}
-						/>
+						<Grid container spacing={1}>
+							<Grid item>
+								<Chip label={capitalizeString(charter.commitmentLevel + " Commitment")} />
+							</Grid>
+							{tags.map(tag => (
+								<Grid item key={tag.id}>
+									<Chip key={tag.id} label={tag.name} />
+								</Grid>
+							))}
+						</Grid>
 					</CardContent>
 				</CardActionArea>
 			</UnstyledLink>

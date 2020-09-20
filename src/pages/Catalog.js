@@ -5,7 +5,7 @@ import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
-import { List, ViewComfy } from "@material-ui/icons";
+import { List as ListIcon, ViewComfy } from "@material-ui/icons";
 import SearchBox from "../comps/pages/catalog/filters/SearchBox";
 import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
 import CommitmentFilter from "../comps/pages/catalog/filters/CommitmentFilter";
@@ -21,6 +21,7 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import Loading from "../comps/ui/Loading";
 import shuffleArray from "../utils/shuffleArray";
+import List from "@material-ui/core/List";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
@@ -79,6 +80,10 @@ const QUERY = gql`
 				mission
 				commitmentLevel
 			}
+			tags {
+				id
+				name
+			}
 		}
 	}
 `;
@@ -89,7 +94,7 @@ const Catalog = () => {
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
-	const [listView, setListView] = React.useState("card");
+	const [listView, setListView] = React.useState(false);
 
 	const [seed] = React.useState(Math.floor(Math.random() * 1000));
 
@@ -116,13 +121,6 @@ const Catalog = () => {
 	if (organizations?.length !== (data?.organizations || []).length) {
 		organizations.unshift(data?.organizations?.find(org => org.url === "stuysu"));
 	}
-
-	//toggle list view
-	const handleListView = (event, newListView) => {
-		if (newListView !== null) {
-			setListView(newListView);
-		}
-	};
 
 	return (
 		<div className={classes.root}>
@@ -158,15 +156,15 @@ const Catalog = () => {
 						<ToggleButtonGroup
 							value={listView}
 							exclusive
-							onChange={handleListView}
+							onChange={() => setListView(!listView)}
 							aria-label={"toggle list view"}
 							className={classes.displayTypeIcon}
 						>
-							<ToggleButton value="card" aria-label="card view">
+							<ToggleButton value={false} aria-label="card view">
 								<ViewComfy />
 							</ToggleButton>
-							<ToggleButton value="list" aria-label="list view">
-								<List />
+							<ToggleButton value={true} aria-label="list view">
+								<ListIcon />
 							</ToggleButton>
 						</ToggleButtonGroup>
 					</div>
@@ -197,17 +195,21 @@ const Catalog = () => {
 								</div>
 							)}
 
-							<Grid container alignContent={"flex-start"} alignItems={"flex-start"}>
-								{organizations.map(org =>
-									listView === "list" ? (
+							{listView ? (
+								<List>
+									{organizations.map(org => (
 										<CatalogListCard key={org.id} {...org} />
-									) : (
-										<Grid item xs={12} sm={6} xl={3} lg={3} md={6} key={org.id}>
+									))}
+								</List>
+							) : (
+								<Grid container alignContent={"flex-start"} alignItems={"flex-start"}>
+									{organizations.map(org => (
+										<Grid item key={org.id} xs={12} sm={6} xl={3} lg={3} md={6}>
 											<CatalogCard {...org} />
 										</Grid>
-									)
-								)}
-							</Grid>
+									))}
+								</Grid>
+							)}
 						</>
 					)}
 				</Grid>

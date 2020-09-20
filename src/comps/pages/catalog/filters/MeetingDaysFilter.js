@@ -27,13 +27,7 @@ export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
 					<FormLabel component="legend">Meeting Days</FormLabel>
 				</AccordionSummary>
 				<FormGroup>
-					{[
-						"Monday",
-						"Tuesday",
-						"Wednesday",
-						"Thursday",
-						"Friday"
-					].map(day => (
+					{["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(day => (
 						<FormControlLabel
 							key={day}
 							control={

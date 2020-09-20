@@ -12,10 +12,7 @@ import React from "react";
 import useFilterStyles from "./useFilterStyles";
 import arrayToggle from "../../../../utils/arrayToggle";
 
-export default function CommitmentFilter({
-	commitmentLevels,
-	setCommitmentLevels
-}) {
+export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels }) {
 	const classes = useFilterStyles();
 
 	const toggleCommitmentLevel = level => {
@@ -36,9 +33,7 @@ export default function CommitmentFilter({
 							control={
 								<Checkbox
 									checked={commitmentLevels.includes(level)}
-									onChange={() =>
-										toggleCommitmentLevel(level)
-									}
+									onChange={() => toggleCommitmentLevel(level)}
 									value={level}
 								/>
 							}
