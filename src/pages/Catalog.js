@@ -19,6 +19,8 @@ import Button from "@material-ui/core/Button";
 import UnstyledLink from "../comps/ui/UnstyledLink";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
+import Loading from "../comps/ui/Loading";
+import shuffleArray from "../utils/shuffleArray";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
@@ -91,10 +93,13 @@ const Catalog = () => {
 	const [meetingDays, setMeetingDays] = React.useState([]);
 	const [listView, setListView] = React.useState("card");
 
+	const seed = React.createRef(Math.floor(Math.random() * 1000));
+
 	const {
 		error,
-		data
+		data,
 		// refetch
+		loading
 	} = useQuery(QUERY, {
 		variables: {
 			keyword,
@@ -106,9 +111,19 @@ const Catalog = () => {
 
 	React.useEffect(() => {
 		if (data) {
-			setOrganizations(data.organizations);
+			const orgsWithoutSU = data.organizations.filter(org => org.url !== "stuysu");
+			shuffleArray(orgsWithoutSU, seed.current);
+			if (orgsWithoutSU.length !== data.organizations.length) {
+				orgsWithoutSU.unshift(data.organizations.find(org => org.url === "stuysu"));
+			}
+
+			setOrganizations(orgsWithoutSU);
 		}
-	}, [data]);
+	}, [data, seed]);
+
+	if (loading || data.organizations.length !== organizations.length) {
+		return <Loading />;
+	}
 
 	if (error) {
 		return <p>There was an error loading this page</p>;
