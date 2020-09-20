@@ -40,7 +40,7 @@ export default function AdminRouter({ match }) {
 			label: "Strikes",
 			path: actualPath + "/strikes"
 		}
-		];
+	];
 	// ].filter(tab => adminRoles.some(row => tab.role === row.role));
 
 	if (!tabs.length) {

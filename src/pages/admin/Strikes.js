@@ -1,14 +1,14 @@
 import React from "react";
-import {gql, useMutation} from "@apollo/client";
+import { gql } from "@apollo/client";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
 import { Grid } from "@material-ui/core";
-import {useQuery} from "@apollo/react-hooks";
-import StrikeCard, {StrikeFormContext} from "../../comps/pages/admin/StrikeCard";
-import {client} from "../../comps/context/ApolloProvider";
+import { useQuery } from "@apollo/react-hooks";
+import StrikeCard from "../../comps/pages/admin/StrikeCard";
+import { client } from "../../comps/context/ApolloProvider";
 
 const QUERY = gql`
 	query Organizations($keyword: String) {
-		organizations(keyword: $keyword, limit: 50) {
+		organizations(keyword: $keyword, limit: 20) {
 			id
 			name
 			url
@@ -25,22 +25,7 @@ const QUERY = gql`
 	}
 `;
 
-const MUTATION = gql`
-	mutation createStrike(
-		$orgId: Int
-		$weight: Int!
-		$reason: String!
-	) {
-		createStrike(
-			orgId: $orgId
-			weight: $weight
-			reason: $reason
-		)
-	}
-`;
-
 const Strikes = () => {
-	const form = React.useContext(StrikeFormContext);
 	const [keyword, setKeyword] = React.useState("");
 
 	const {
@@ -48,14 +33,8 @@ const Strikes = () => {
 		data
 		// refetch
 	} = useQuery(QUERY, {
-		variables: {keyword},
+		variables: { keyword },
 		client
-	});
-
-	const [submit] = useMutation(MUTATION, {
-		variables: {
-
-		}
 	});
 
 	if (error) return <p>There was an error loading this page</p>;

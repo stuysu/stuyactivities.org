@@ -16,7 +16,8 @@ import {
 	Home,
 	Info,
 	LockOpen,
-	PowerSettingsNew
+	PowerSettingsNew,
+	AccountBox
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
@@ -198,6 +199,19 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Rules"} />
 					</ListItem>
 				</UnstyledLink>
+
+				{user?.adminRoles > 0 ? (
+					<UnstyledLink to={"/admin"}>
+						<ListItem button>
+							<ListItemIcon>
+								<AccountBox />
+							</ListItemIcon>
+							<ListItemText primary={"Admin Panel"} />
+						</ListItem>
+					</UnstyledLink>
+				) : (
+					<></>
+				)}
 			</List>
 		</Drawer>
 	);
