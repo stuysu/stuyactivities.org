@@ -60,6 +60,10 @@ const useStyles = makeStyles(theme => ({
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center"
+	},
+	modalBtn: {
+		marginTop: "8px",
+		marginRight: "5px"
 	}
 }));
 
@@ -99,7 +103,6 @@ export default function StrikeCard({ name, id, charter, url }) {
 	}
 
 	const handleSubmit = evt => {
-		setOpenModal(false);
 		evt.preventDefault();
 		cache
 			.reset()
@@ -115,10 +118,20 @@ export default function StrikeCard({ name, id, charter, url }) {
 			<Typography>
 				Are you sure you want to submit this strike?
 			</Typography>
-			<Button variant={"contained"} onClick={setOpenModal(false)}>
+			<Button
+				variant={"contained"}
+				onClick={() => setOpenModal(false)}
+				className={classes.modalBtn}
+			>
 				Cancel
 			</Button>
-			<Button variant={"contained"} type={"submit"} color={"primary"}>
+			<Button
+				variant={"contained"}
+				type={"submit"}
+				color={"primary"}
+				onClick={() => setOpenModal(false)}
+				className={classes.modalBtn}
+			>
 				Submit
 			</Button>
 		</div>
@@ -194,14 +207,14 @@ export default function StrikeCard({ name, id, charter, url }) {
 										color="primary"
 										className={classes.submit}
 										disabled={loading}
-										onClick={setOpenModal(true)}
+										onClick={() => setOpenModal(true)}
 									>
 										Submit
 									</Button>
 								)}
 								<Modal
 									open={openModal}
-									onClose={setOpenModal(false)}
+									onClose={() => setOpenModal(false)}
 									className={classes.modal}
 								>
 									{submitModal}

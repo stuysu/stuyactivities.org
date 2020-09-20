@@ -5,6 +5,7 @@ import { Grid } from "@material-ui/core";
 import { useQuery } from "@apollo/react-hooks";
 import StrikeCard from "../../comps/pages/admin/StrikeCard";
 import { client } from "../../comps/context/ApolloProvider";
+import UserContext from "../../comps/context/UserContext";
 
 const QUERY = gql`
 	query Organizations($keyword: String) {
@@ -37,6 +38,13 @@ const Strikes = () => {
 		client
 	});
 
+	const user = React.useContext(UserContext);
+
+	if (!user?.adminRoles?.map(e => e.role).includes("strikes")) {
+		return (
+			<p>You do not have the proper admin role to access this page!</p>
+		);
+	}
 	if (error) return <p>There was an error loading this page</p>;
 
 	return (

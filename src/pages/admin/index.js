@@ -38,10 +38,10 @@ export default function AdminRouter({ match }) {
 		},
 		{
 			label: "Strikes",
+			role: "strikes",
 			path: actualPath + "/strikes"
 		}
-	];
-	// ].filter(tab => adminRoles.some(row => tab.role === row.role));
+	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
 	if (!tabs.length) {
 		return <p>You don't have access to this page</p>;

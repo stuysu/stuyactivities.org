@@ -200,7 +200,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItem>
 				</UnstyledLink>
 
-				{user?.adminRoles > 0 ? (
+				{user?.adminRoles !== undefined || {} ? (
 					<UnstyledLink to={"/admin"}>
 						<ListItem button>
 							<ListItemIcon>
