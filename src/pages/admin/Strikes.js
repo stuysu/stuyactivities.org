@@ -8,7 +8,7 @@ import { client } from "../../comps/context/ApolloProvider";
 
 const QUERY = gql`
 	query Organizations($keyword: String) {
-		organizations(keyword: $keyword, limit: 20) {
+		organizations(keyword: $keyword, limit: 50) {
 			id
 			name
 			url

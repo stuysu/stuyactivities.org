@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
 	Avatar,
 	Grid,
@@ -64,12 +64,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MUTATION = gql`
-	mutation createStrike($orgId: Int, $weight: Int!, $reason: String!) {
-		createStrike(orgId: $orgId, weight: $weight, reason: $reason)
+	mutation createStrike(
+		$orgId: Int
+		$orgUrl: String
+		$weight: Int!
+		$reason: String!
+	) {
+		createStrike(
+			orgId: $orgId
+			orgUrl: $orgUrl
+			weight: $weight
+			reason: $reason
+		)
 	}
 `;
 
-export default function StrikeCard({ name, id, charter }) {
+export default function StrikeCard({ name, id, charter, url }) {
 	const classes = useStyles();
 	const [openModal, setOpenModal] = React.useState(false);
 	const [reason, setReason] = React.useState("");
@@ -78,6 +88,7 @@ export default function StrikeCard({ name, id, charter }) {
 	const [submit, { data, loading, error }] = useMutation(MUTATION, {
 		variables: {
 			orgId: id,
+			orgUrl: url,
 			weight: weight,
 			reason: reason
 		}
@@ -88,6 +99,7 @@ export default function StrikeCard({ name, id, charter }) {
 	}
 
 	const handleSubmit = evt => {
+		setOpenModal(false);
 		evt.preventDefault();
 		cache
 			.reset()
