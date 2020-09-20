@@ -85,8 +85,6 @@ const QUERY = gql`
 
 const Catalog = () => {
 	const classes = useStyles();
-
-	const [organizations, setOrganizations] = React.useState([]);
 	const [keyword, setKeyword] = React.useState("");
 	const [tags, setTags] = React.useState([]);
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
@@ -109,24 +107,14 @@ const Catalog = () => {
 		}
 	});
 
-	React.useEffect(() => {
-		if (data) {
-			const orgsWithoutSU = data.organizations.filter(org => org.url !== "stuysu");
-			shuffleArray(orgsWithoutSU, seed);
-			if (orgsWithoutSU.length !== data.organizations.length) {
-				orgsWithoutSU.unshift(data.organizations.find(org => org.url === "stuysu"));
-			}
-
-			setOrganizations(orgsWithoutSU);
-		}
-	}, [data, seed]);
-
-	if (loading || data.organizations.length !== organizations.length) {
-		return <Loading />;
-	}
-
 	if (error) {
 		return <p>There was an error loading this page</p>;
+	}
+
+	const organizations = data?.organizations?.filter(org => org.url !== "stuysu") || [];
+	shuffleArray(organizations, seed);
+	if (organizations?.length !== (data?.organizations || []).length) {
+		organizations.unshift(data?.organizations?.find(org => org.url === "stuysu"));
 	}
 
 	//toggle list view
@@ -182,39 +170,46 @@ const Catalog = () => {
 							</ToggleButton>
 						</ToggleButtonGroup>
 					</div>
+					{loading ? (
+						<Loading />
+					) : (
+						<>
+							{organizations.length === 0 && (
+								<div className={classes.notFoundContainer}>
+									<img
+										src={errorImages[Math.floor(Math.random() * errorImages.length)]}
+										alt={"A Cute Not Found Vector"}
+										className={classes.defaultVector}
+									/>
+									<Typography paragraph>
+										We couldn't find any activities matching that criteria.
+									</Typography>
 
-					{organizations.length === 0 && (
-						<div className={classes.notFoundContainer}>
-							<img
-								src={errorImages[Math.floor(Math.random() * errorImages.length)]}
-								alt={"A Cute Not Found Vector"}
-								className={classes.defaultVector}
-							/>
-							<Typography paragraph>We couldn't find any activities matching that criteria.</Typography>
+									<Typography paragraph>
+										If you feel there ought to be, maybe you should start one!
+									</Typography>
 
-							<Typography paragraph>
-								If you feel there ought to be, maybe you should start one!
-							</Typography>
+									<UnstyledLink to={"/charter"}>
+										<Button variant={"contained"} color={"primary"}>
+											Create Activity
+										</Button>
+									</UnstyledLink>
+								</div>
+							)}
 
-							<UnstyledLink to={"/charter"}>
-								<Button variant={"contained"} color={"primary"}>
-									Create Activity
-								</Button>
-							</UnstyledLink>
-						</div>
+							<Grid container alignContent={"flex-start"} alignItems={"flex-start"}>
+								{organizations.map(org =>
+									listView === "list" ? (
+										<CatalogListCard key={org.id} {...org} />
+									) : (
+										<Grid item xs={12} sm={6} xl={3} lg={3} md={6} key={org.id}>
+											<CatalogCard {...org} />
+										</Grid>
+									)
+								)}
+							</Grid>
+						</>
 					)}
-
-					<Grid container alignContent={"flex-start"} alignItems={"flex-start"}>
-						{organizations.map(org =>
-							listView === "list" ? (
-								<CatalogListCard key={org.id} {...org} />
-							) : (
-								<Grid item xs={12} sm={6} xl={3} lg={3} md={6} key={org.id}>
-									<CatalogCard {...org} />
-								</Grid>
-							)
-						)}
-					</Grid>
 				</Grid>
 			</Grid>
 		</div>
