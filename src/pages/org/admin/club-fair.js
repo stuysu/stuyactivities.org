@@ -4,6 +4,9 @@ import { OrgContext } from "../index";
 import Loading from "../../../comps/ui/Loading";
 import layout from "./../../../styles/Layout.module.css";
 import Switch from "@material-ui/core/Switch";
+import CheckBox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { Button } from "@material-ui/core";
 
 const RESPONSE = gql`
 	query($orgId: Int!) {
@@ -31,6 +34,7 @@ const ALTER_RESPONSE = gql`
 const ClubFair = () => {
 	const org = React.useContext(OrgContext);
 	const { data, loading } = useQuery(RESPONSE, { variables: { orgId: org.id }, fetchPolicy: "network-only" });
+	const [isAttending, setIsAttending] = React.useState(null);
 
 	const [alter, { loading: loadingAltered }] = useMutation(ALTER_RESPONSE, {
 		variables: {
@@ -39,6 +43,12 @@ const ClubFair = () => {
 		}
 	});
 
+	React.useEffect(() => {
+		if (typeof data?.clubFairResponse?.isAttending === "boolean" && typeof isAttending !== "boolean") {
+			setIsAttending(data?.clubFairResponse?.isAttending);
+		}
+	}, [data, isAttending]);
+
 	if (loading) {
 		return <Loading />;
 	}
@@ -46,24 +56,57 @@ const ClubFair = () => {
 	return (
 		<div className={layout.container}>
 			<main className={layout.main}>
-				<h2>Your club has not submitted the availability form.</h2>
-				<div style={{ display: "flex" }}>
-					<p style={{ flexGrow: 1 }}>Can your club be at the club fair?</p>
-					<Switch
-						checked={data?.clubFairResponse?.isAttending}
-						onChange={() => {
-							alter({
-								variables: {
-									orgId: org.id,
-									isAttending: !data?.clubFairResponse?.isAttending,
-									meetingLink: null
-								}
-							});
-						}}
-						disabled={loadingAltered}
-						inputProps={{ "aria-label": "secondary checkbox" }}
+				<h2>Clubs & Pubs Fair Sign Up</h2>
+				<p style={{ flexGrow: 1 }}>
+					The Clubs & Pubs Fair will begin on September 29th and continue for multiple days (excluding the
+					weekend). Each day will be devoted to a specific category of clubs (ie. Art, Academic Services,
+					Sports, etc.). On their category’s day, club leaders will give a brief 1-2 minute presentation about
+					their club through a Zoom webinar to all students. After each club has presented, the Zoom webinar
+					will end, and students will be able to go to StuyActivities, find specific clubs they want to learn
+					more about, and attend those clubs’ individual Zoom “breakout rooms.” Students will be able to go to
+					as many club “rooms” as they like. The entire event will last from 4pm to 6pm each day.
+				</p>
+
+				<p>
+					Please complete the survey below to sign up to present at the Clubs & Pubs Fair. This form will be
+					closed on Tuesday, September 22nd at 11:59pm. By answering yes to the following question, you are
+					confirming that leaders from your club will be available to participate on any day of the fair (we
+					won’t know which day your club is presenting on until after we review submissions and split clubs
+					into different categories).
+				</p>
+				<div>
+					<FormControlLabel
+						control={
+							<CheckBox
+								checked={isAttending ?? data?.clubFairResponse?.isAttending ?? false}
+								disabled={loadingAltered}
+								onChange={() => {
+									setIsAttending(!Boolean(isAttending ?? data?.clubFairResponse?.isAttending));
+								}}
+							/>
+						}
+						label={
+							"Yes, at least one leader from my club will be able to present on any of the days of the clubs & pubs fair."
+						}
 					/>
 				</div>
+				<br />
+				<Button
+					disabled={data?.clubFairResponse?.isAttending === isAttending}
+					variant={"contained"}
+					color={"primary"}
+					onClick={() => {
+						alter({
+							variables: {
+								orgId: org.id,
+								meetingLink: null,
+								isAttending
+							}
+						});
+					}}
+				>
+					Save Response
+				</Button>
 			</main>
 		</div>
 	);
