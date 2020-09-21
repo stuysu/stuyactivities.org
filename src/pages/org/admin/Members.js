@@ -16,7 +16,8 @@ import {
 	makeStyles,
 	Switch,
 	TextField,
-	Typography
+	Typography,
+	Snackbar
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import { gql, useMutation, useQuery } from "@apollo/client";
@@ -124,8 +125,18 @@ export default function Members({ match }) {
 			}
 		});
 	};
+
+	const [snackBarOpen, setSnackBarOpen] = React.useState(false)
+	const emailList = data?.memberships?.map(membership => membership.user.email).join(", ")
+	const copy = () => {
+		navigator.clipboard.writeText(emailList).then(() => setSnackBarOpen(true))
+	}
 	return (
 		<div className={classes.margin}>
+			<div style={{display:"flex"}}>
+				<Button onClick={copy} color={"primary"}>Copy</Button>
+				<TextField style={{flexGrow: 1}} InputLabelProps={{ shrink: true }} fullWidth variant={"outlined"} label={"Email List"} disabled={true} value={emailList}/>
+			</div>
 			<List>
 				{data?.memberships?.map(membership => (
 					<ListItem>
@@ -265,6 +276,7 @@ export default function Members({ match }) {
 					</Button>
 				</DialogActions>
 			</Dialog>
+			<Snackbar open={snackBarOpen} autoHideDuration={1000} onClose={() => setSnackBarOpen(false)} message="Copied email list to clipboard!"></Snackbar>
 		</div>
 	);
 }
