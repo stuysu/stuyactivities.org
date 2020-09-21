@@ -3,7 +3,6 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
 import Loading from "../../../comps/ui/Loading";
 import layout from "./../../../styles/Layout.module.css";
-import Switch from "@material-ui/core/Switch";
 import CheckBox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Button } from "@material-ui/core";
