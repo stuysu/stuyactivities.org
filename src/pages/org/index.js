@@ -75,6 +75,10 @@ const getQuery = signedIn => {
 					userApproval
 					createdAt
 				}
+				joinInstructions {
+					instructions
+					buttonEnabled
+				}
 			}
 		}
 	`;

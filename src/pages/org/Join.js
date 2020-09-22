@@ -80,20 +80,24 @@ const CreateRequest = () => {
 				/>
 			</div>
 
-			<p>Do you want to add a note to your request?</p>
-			<TextField
-				multiline
-				rows={3}
-				variant={"outlined"}
-				label={"Optional Note"}
-				className={classes.note}
-				value={message}
-				onChange={ev => setMessage(ev.target.value)}
-			/>
-			<br />
-			<Button color={"primary"} variant={"contained"} onClick={onSubmit}>
-				Submit Request
-			</Button>
+			<p>{org?.joinInstructions?.instructions ? "Join instructions: " + org.joinInstructions.instructions : "Do you want to add a note to your request?"}</p>
+			{(org?.joinInstructions === null || org?.joinInstructions.buttonEnabled) && 
+			<>
+				<TextField
+					multiline
+					rows={3}
+					variant={"outlined"}
+					label={"Optional Note"}
+					className={classes.note}
+					value={message}
+					onChange={ev => setMessage(ev.target.value)}
+				/>
+				<br />
+				<Button color={"primary"} variant={"contained"} onClick={onSubmit}>
+					Submit Request
+				</Button>
+			</>
+			}
 			{error && (
 				<Typography paragraph color={"error"}>
 					{error.graphQLErrors[0]?.message || error.message}
