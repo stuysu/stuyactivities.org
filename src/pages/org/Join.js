@@ -73,31 +73,31 @@ const CreateRequest = () => {
 	return (
 		<>
 			<div>
-				<img
-					src={joinVector}
-					alt={"Friends helping each other up a window."}
-					className={classes.vector}
-				/>
+				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
 			</div>
 
-			<p>{org?.joinInstructions?.instructions ? "Join instructions: " + org.joinInstructions.instructions : "Do you want to add a note to your request?"}</p>
-			{(org?.joinInstructions === null || org?.joinInstructions.buttonEnabled) && 
-			<>
-				<TextField
-					multiline
-					rows={3}
-					variant={"outlined"}
-					label={"Optional Note"}
-					className={classes.note}
-					value={message}
-					onChange={ev => setMessage(ev.target.value)}
-				/>
-				<br />
-				<Button color={"primary"} variant={"contained"} onClick={onSubmit}>
-					Submit Request
-				</Button>
-			</>
-			}
+			<p>
+				{org?.joinInstructions?.instructions
+					? "Join instructions: " + org.joinInstructions.instructions
+					: "Do you want to add a note to your request?"}
+			</p>
+			{(org?.joinInstructions === null || org?.joinInstructions.buttonEnabled) && (
+				<>
+					<TextField
+						multiline
+						rows={3}
+						variant={"outlined"}
+						label={"Optional Note"}
+						className={classes.note}
+						value={message}
+						onChange={ev => setMessage(ev.target.value)}
+					/>
+					<br />
+					<Button color={"primary"} variant={"contained"} onClick={onSubmit}>
+						Submit Request
+					</Button>
+				</>
+			)}
 			{error && (
 				<Typography paragraph color={"error"}>
 					{error.graphQLErrors[0]?.message || error.message}
@@ -127,18 +127,12 @@ const ExistingRequest = () => {
 	return (
 		<>
 			<div>
-				<img
-					src={joinVector}
-					alt={"Friends helping each other up a window."}
-					className={classes.vector}
-				/>
+				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
 			</div>
 
 			<p>
 				You've requested to join this club on{" "}
-				{moment(
-					new Date(Number(org.membershipRequest.createdAt))
-				).format("dddd, MMMM Do YYYY, h:mm a")}
+				{moment(new Date(Number(org.membershipRequest.createdAt))).format("dddd, MMMM Do YYYY, h:mm a")}
 			</p>
 			{Boolean(org?.membershipRequest?.userMessage) && (
 				<p>
@@ -174,15 +168,12 @@ const AcceptRequest = () => {
 	const org = React.useContext(OrgContext);
 	const classes = useStyles();
 
-	const [acceptRequest, { error, loading: loadingAccept }] = useMutation(
-		ACCEPT,
-		{
-			variables: { requestId: org.membershipRequest.id },
-			update: cache => {
-				cache.reset().then(() => org.refetch());
-			}
+	const [acceptRequest, { error, loading: loadingAccept }] = useMutation(ACCEPT, {
+		variables: { requestId: org.membershipRequest.id },
+		update: cache => {
+			cache.reset().then(() => org.refetch());
 		}
-	);
+	});
 
 	const [rejectRequest, { loading: loadingDelete }] = useMutation(DELETE, {
 		variables: { requestId: org.membershipRequest.id },
@@ -194,16 +185,9 @@ const AcceptRequest = () => {
 	return (
 		<>
 			<div>
-				<img
-					src={joinVector}
-					alt={"Friends helping each other up a window."}
-					className={classes.vector}
-				/>
+				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
 			</div>
-			<p>
-				You've been invited to join this club as a{" "}
-				{org.membershipRequest.role}
-			</p>
+			<p>You've been invited to join this club as a {org.membershipRequest.role}</p>
 			<Button
 				disabled={loadingDelete || loadingAccept}
 				color={"secondary"}
@@ -213,11 +197,7 @@ const AcceptRequest = () => {
 				Accept
 			</Button>
 			&nbsp; &nbsp; &nbsp;
-			<Button
-				color={"primary"}
-				disabled={loadingAccept || loadingDelete}
-				onClick={rejectRequest}
-			>
+			<Button color={"primary"} disabled={loadingAccept || loadingDelete} onClick={rejectRequest}>
 				Reject
 			</Button>
 			{error && (
@@ -241,12 +221,8 @@ const Join = ({ match }) => {
 
 			<div className={classes.tabContainer}>
 				{!org.membership && !org.membershipRequest && <CreateRequest />}
-				{!org.membership &&
-					org.membershipRequest &&
-					org.membershipRequest.userApproval && <ExistingRequest />}
-				{!org.membership &&
-					org.membershipRequest &&
-					org.membershipRequest.adminApproval && <AcceptRequest />}
+				{!org.membership && org.membershipRequest && org.membershipRequest.userApproval && <ExistingRequest />}
+				{!org.membership && org.membershipRequest && org.membershipRequest.adminApproval && <AcceptRequest />}
 				{org.membership && <p>You're a member of this activity :)</p>}
 			</div>
 		</div>
