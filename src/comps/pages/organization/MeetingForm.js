@@ -1,5 +1,14 @@
 import React from "react";
-import { FormControlLabel, Switch, makeStyles, TextField, Grid, InputAdornment, Typography, Button } from "@material-ui/core";
+import {
+	FormControlLabel,
+	Switch,
+	makeStyles,
+	TextField,
+	Grid,
+	InputAdornment,
+	Typography,
+	Button
+} from "@material-ui/core";
 import { CalendarToday, Schedule } from "@material-ui/icons";
 import SimpleMDE from "react-simplemde-editor";
 
@@ -29,7 +38,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {} }) => {
 			? `${new Date(meeting.end).getHours()}:${String(new Date(meeting.end).getMinutes()).padStart(2, "0")}`
 			: "17:00"
 	);
-	const [checked, setChecked] = React.useState(false)
+	const [checked, setChecked] = React.useState(false);
 	return (
 		<div>
 			<TextField
@@ -101,7 +110,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {} }) => {
 			</Typography>
 			<SimpleMDE value={description} onChange={value => setDescription(value)} />
 			<FormControlLabel
-				control={<Switch checked={checked} onChange={e => setChecked(e.target.checked)}/>}
+				control={<Switch checked={checked} onChange={e => setChecked(e.target.checked)} />}
 				label={checkboxText}
 			/>
 			<Button
