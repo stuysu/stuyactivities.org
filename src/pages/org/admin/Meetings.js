@@ -14,7 +14,8 @@ import {
 	DialogTitle,
 	DialogContent,
 	DialogContentText,
-	DialogActions
+	DialogActions,
+	Snackbar
 } from "@material-ui/core";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 import BackButton from "../../../comps/ui/BackButton";
@@ -58,8 +59,9 @@ const CREATE_MUTATION = gql`
 		$description: String!
 		$start: DateTime!
 		$end: DateTime!
+		$notifyFaculty: Boolean
 	) {
-		createMeeting(orgUrl: $orgUrl, title: $title, description: $description, start: $start, end: $end) {
+		createMeeting(orgUrl: $orgUrl, title: $title, description: $description, start: $start, end: $end, notifyFaculty: $notifyFaculty) {
 			id
 			title
 			description
@@ -76,8 +78,8 @@ const REMOVE_MUTATION = gql`
 `;
 
 const EDIT_MUTATION = gql`
-	mutation AlterMeeting($id: Int!, $title: String, $description: String, $start: DateTime, $end: DateTime) {
-		alterMeeting(meetingId: $id, title: $title, description: $description, start: $start, end: $end) {
+	mutation AlterMeeting($id: Int!, $title: String, $description: String, $start: DateTime, $end: DateTime, $notifyMembers: Boolean) {
+		alterMeeting(meetingId: $id, title: $title, description: $description, start: $start, end: $end, notifyMembers: $notifyMembers) {
 			id
 			title
 			description
@@ -125,14 +127,15 @@ const Main = ({ match }) => {
 			});
 		}
 	});
-	const create = ({ title, description, date, startTime, endTime }) => {
+	const create = ({ title, description, date, startTime, endTime, checked }) => {
 		createMutation({
 			variables: {
 				orgUrl: match.params.orgUrl,
 				title,
 				description: description || "",
-				start: new Date(`${date} ${startTime}`),
-				end: new Date(`${date} ${endTime}`)
+				start: new Date(`${date} ${startTime}`).toISOString(),
+				end: new Date(`${date} ${endTime}`).toISOString(),
+				notifyFaculty: checked
 			}
 		});
 	};
@@ -160,7 +163,7 @@ const Main = ({ match }) => {
 					<Typography variant={"h4"} className={classes.newMeetingTitle}>
 						New Meeting
 					</Typography>
-					<MeetingForm submit={create} key={formKey} />
+					<MeetingForm submit={create} key={formKey} buttonText={"Create"} checkboxText={"Notify faculty members?"}/>
 				</Grid>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
 					<Typography variant={"h4"} style={{ textAlign: "center" }}>
@@ -220,6 +223,8 @@ const Main = ({ match }) => {
 const EditPage = ({ match }) => {
 	const org = React.useContext(OrgContext);
 	const classes = useStyles();
+	//Use snackbar since edit has no other visible effects
+	const [snackbarOpen, setSnackbarOpen] = React.useState(false)
 	const editingMeeting = org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
 	const [editMutation] = useMutation(EDIT_MUTATION, {
 		update(cache, { data: { alterMeeting } }) {
@@ -227,23 +232,36 @@ const EditPage = ({ match }) => {
 				id: cache.identify(org),
 				fields: {
 					meetings(existingMeetings = [], { readField }) {
-						existingMeetings[
-							existingMeetings.findIndex(meeting => match.params.meetingId === meeting.id)
-						] = alterMeeting;
-						return existingMeetings;
+						const alteredMeetingRef = cache.writeFragment({
+							data: alterMeeting,
+							fragment: gql`
+								fragment AlteredMeeting on Meeting {
+									id
+									title
+									description
+									start
+									end
+								}
+							`
+						})
+						return [...existingMeetings.filter(ref => readField("id", ref) !== alterMeeting.id), alteredMeetingRef]
 					}
 				}
 			});
+		},
+		onCompleted() {
+			setSnackbarOpen(true)
 		}
 	});
-	const edit = ({ title, description, date, startTime, endTime }) => {
+	const edit = ({ title, description, date, startTime, endTime, checked }) => {
 		editMutation({
 			variables: {
-				meetingId: match.params.meetingId,
+				id: Number(match.params.meetingId),
 				title,
 				description: description || "",
-				start: new Date(`${date} ${startTime}`),
-				end: new Date(`${date} ${endTime}`)
+				start: new Date(`${date} ${startTime}`).toISOString(),
+				end: new Date(`${date} ${endTime}`).toISOString(),
+				notifyMembers: checked
 			}
 		});
 	};
@@ -256,13 +274,14 @@ const EditPage = ({ match }) => {
 				to={generatePath("/" + match.params.orgUrl + "/admin/meetings")}
 			/>
 			<Grid container justify={"center"} className={classes.margin}>
-				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
 					<Typography variant={"h4"} className={classes.newMeetingTitle}>
 						Edit Meeting
 					</Typography>
-					<MeetingForm submit={edit} meeting={editingMeeting} />
+					<MeetingForm submit={edit} meeting={editingMeeting} buttonText={"Edit"} checkboxText={"Notify club members?"} />
 				</Grid>
 			</Grid>
+			<Snackbar autoHideDuration={1000} open={snackbarOpen} onClose={() => setSnackbarOpen(false)} message={"Meeting Edited!"}/>
 		</div>
 	);
 };

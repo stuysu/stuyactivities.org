@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, TextField, Grid, InputAdornment, Typography, Button } from "@material-ui/core";
+import { FormControlLabel, Switch, makeStyles, TextField, Grid, InputAdornment, Typography, Button } from "@material-ui/core";
 import { CalendarToday, Schedule } from "@material-ui/icons";
 import SimpleMDE from "react-simplemde-editor";
 
@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const MeetingForm = ({ submit, meeting = {} }) => {
+const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {} }) => {
 	const classes = useStyles();
 	const [title, setTitle] = React.useState(meeting.title || "");
 	const [description, setDescription] = React.useState(meeting.description || "");
@@ -22,13 +22,14 @@ const MeetingForm = ({ submit, meeting = {} }) => {
 		`${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, "0")}-${startDate.getDate()}`
 	);
 	const [startTime, setStartTime] = React.useState(
-		meeting.start ? `${startDate.getHours() + 1}:${String(startDate.getMinutes()).padStart(2, "0")}` : "15:00"
+		meeting.start ? `${startDate.getHours()}:${String(startDate.getMinutes()).padStart(2, "0")}` : "15:00"
 	);
 	const [endTime, setEndTime] = React.useState(
 		meeting.end
-			? `${new Date(meeting.end).getHours() + 1}:${String(new Date(meeting.end).getMinutes()).padStart(2, "0")}`
+			? `${new Date(meeting.end).getHours()}:${String(new Date(meeting.end).getMinutes()).padStart(2, "0")}`
 			: "17:00"
 	);
+	const [checked, setChecked] = React.useState(false)
 	return (
 		<div>
 			<TextField
@@ -99,12 +100,16 @@ const MeetingForm = ({ submit, meeting = {} }) => {
 				Description
 			</Typography>
 			<SimpleMDE value={description} onChange={value => setDescription(value)} />
+			<FormControlLabel
+				control={<Switch checked={checked} onChange={e => setChecked(e.target.checked)}/>}
+				label={checkboxText}
+			/>
 			<Button
-				onClick={() => submit({ title, description, date, startTime, endTime })}
+				onClick={() => submit({ title, description, date, startTime, endTime, checked })}
 				color={"primary"}
 				variant="contained"
 			>
-				Create
+				{buttonText}
 			</Button>
 		</div>
 	);
