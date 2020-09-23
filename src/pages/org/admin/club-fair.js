@@ -35,7 +35,7 @@ const ClubFair = () => {
 	const { data, loading } = useQuery(RESPONSE, { variables: { orgId: org.id }, fetchPolicy: "network-only" });
 	const [isAttending, setIsAttending] = React.useState(null);
 
-	const [alter, { loading: loadingAltered }] = useMutation(ALTER_RESPONSE, {
+	const [alter] = useMutation(ALTER_RESPONSE, {
 		variables: {
 			orgId: org.id,
 			meetingLink: null
@@ -78,7 +78,7 @@ const ClubFair = () => {
 						control={
 							<CheckBox
 								checked={isAttending ?? data?.clubFairResponse?.isAttending ?? false}
-								disabled={loadingAltered}
+								disabled={true}
 								onChange={() => {
 									setIsAttending(!Boolean(isAttending ?? data?.clubFairResponse?.isAttending));
 								}}
@@ -88,10 +88,11 @@ const ClubFair = () => {
 							"Yes, at least one leader from my club will be able to present on any of the days of the clubs & pubs fair."
 						}
 					/>
+					<p style={{ color: "grey" }}>It is past the deadline to change your response</p>
 				</div>
 				<br />
 				<Button
-					disabled={data?.clubFairResponse?.isAttending === isAttending}
+					disabled={true}
 					variant={"contained"}
 					color={"primary"}
 					onClick={() => {
