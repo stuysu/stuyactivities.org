@@ -19,7 +19,7 @@
 		"apollo-upload-client": "^14.1.2",
 		"diff": "^4.0.2",
 		"graphql": "^15.3.0",
-		"honeybadger-js": "^2.2.2",
+		"honeybadger-js": "^2.3.0",
 		"linkifyjs": "^2.1.9",
 		"material-ui-chip-input": "^1.1.0",
 		"moment": "^2.28.0",
