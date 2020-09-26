@@ -37,7 +37,7 @@ export default function AdminRouter({ match }) {
 		{
 			label: "Help Requests",
 			role: "helpRequests",
-      path: actualPath + "/help",
+			path: actualPath + "/help",
 			icon: <LiveHelp />
 		},
 		{
@@ -60,7 +60,7 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/approvals"} component={Approvals} exact />
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
 				<Route path={match.path + "/help"} component={Approvals} />
-        <Route path={match.path + "/strikes"} component={Strikes} />
+				<Route path={match.path + "/strikes"} component={Strikes} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>

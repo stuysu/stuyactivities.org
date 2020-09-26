@@ -68,18 +68,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MUTATION = gql`
-	mutation createStrike(
-		$orgId: Int
-		$orgUrl: String
-		$weight: Int!
-		$reason: String!
-	) {
-		createStrike(
-			orgId: $orgId
-			orgUrl: $orgUrl
-			weight: $weight
-			reason: $reason
-		)
+	mutation createStrike($orgId: Int, $orgUrl: String, $weight: Int!, $reason: String!) {
+		createStrike(orgId: $orgId, orgUrl: $orgUrl, weight: $weight, reason: $reason)
 	}
 `;
 
@@ -115,14 +105,8 @@ export default function StrikeCard({ name, id, charter, url }) {
 
 	const submitModal = (
 		<div className={classes.paper}>
-			<Typography>
-				Are you sure you want to submit this strike?
-			</Typography>
-			<Button
-				variant={"contained"}
-				onClick={() => setOpenModal(false)}
-				className={classes.modalBtn}
-			>
+			<Typography>Are you sure you want to submit this strike?</Typography>
+			<Button variant={"contained"} onClick={() => setOpenModal(false)} className={classes.modalBtn}>
 				Cancel
 			</Button>
 			<Button
@@ -148,21 +132,11 @@ export default function StrikeCard({ name, id, charter, url }) {
 							id="panel1a-header"
 							className={classes.actionButton}
 						>
-							<Avatar
-								src={charter.picture}
-								className={classes.avatar}
-							/>
-							<Typography className={classes.heading}>
-								{name}
-							</Typography>
+							<Avatar src={charter.picture} className={classes.avatar} />
+							<Typography className={classes.heading}>{name}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
-							<form
-								onSubmit={handleSubmit}
-								className={classes.form}
-								noValidate
-								autoComplete={"off"}
-							>
+							<form onSubmit={handleSubmit} className={classes.form} noValidate autoComplete={"off"}>
 								<TextField
 									label="Reason"
 									multiline
@@ -172,18 +146,9 @@ export default function StrikeCard({ name, id, charter, url }) {
 									value={reason}
 									onChange={e => setReason(e.target.value)}
 								/>
-								<FormControl
-									variant="outlined"
-									className={classes.select}
-								>
+								<FormControl variant="outlined" className={classes.select}>
 									<InputLabel>Weight</InputLabel>
-									<Select
-										value={weight}
-										onChange={e =>
-											setWeight(e.target.value)
-										}
-										label="Weight"
-									>
+									<Select value={weight} onChange={e => setWeight(e.target.value)} label="Weight">
 										<MenuItem value={0}>0</MenuItem>
 										<MenuItem value={1}>1</MenuItem>
 										<MenuItem value={2}>2</MenuItem>
@@ -212,11 +177,7 @@ export default function StrikeCard({ name, id, charter, url }) {
 										Submit
 									</Button>
 								)}
-								<Modal
-									open={openModal}
-									onClose={() => setOpenModal(false)}
-									className={classes.modal}
-								>
+								<Modal open={openModal} onClose={() => setOpenModal(false)} className={classes.modal}>
 									{submitModal}
 								</Modal>
 							</form>
