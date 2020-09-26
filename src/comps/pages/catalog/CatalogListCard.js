@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 	avatar: {
 		marginRight: "18px",
 		width: theme.spacing(8),
-		height: theme.spacing(8),
+		height: theme.spacing(8)
 	},
 	chip: {
 		marginTop: "0.3rem",

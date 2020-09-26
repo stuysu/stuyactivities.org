@@ -14,7 +14,6 @@ const useFilterStyles = makeStyles(theme => ({
 	tag: {
 		margin: "3px"
 	}
-
 }));
 
 export default useFilterStyles;
