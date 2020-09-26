@@ -32,8 +32,8 @@ const About = () => {
 			<Helmet>
 				<title>About | StuyActivities</title>
 				<meta property="og:title" content="About | StuyActivities" />
-        <meta 
-          property="og:description"
+				<meta
+					property="og:description"
 					content={
 						"An app designed by the Stuyvesant Student Union to help students navigate the extracurricular organizations at Stuyvesant High School."
 					}

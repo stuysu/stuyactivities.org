@@ -41,20 +41,14 @@ const Strikes = () => {
 	const user = React.useContext(UserContext);
 
 	if (!user?.adminRoles?.map(e => e.role).includes("strikes")) {
-		return (
-			<p>You do not have the proper admin role to access this page!</p>
-		);
+		return <p>You do not have the proper admin role to access this page!</p>;
 	}
 	if (error) return <p>There was an error loading this page</p>;
 
 	return (
 		<div>
 			<SearchBox setKeyword={setKeyword} keyword={keyword} />
-			<Grid
-				container
-				alignContent={"flex-start"}
-				alignItems={"flex-start"}
-			>
+			<Grid container alignContent={"flex-start"} alignItems={"flex-start"}>
 				{data?.organizations?.map(org => (
 					<StrikeCard key={org.id} {...org} />
 				))}
