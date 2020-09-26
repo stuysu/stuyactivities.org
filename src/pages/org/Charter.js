@@ -6,6 +6,8 @@ import { gql, useQuery } from "@apollo/client";
 import { client } from "../../comps/context/ApolloProvider";
 import capitalizeString from "../../utils/capitalizeString";
 import { OrgContext } from "./index";
+import Linkify from "linkifyjs/react";
+import Link from "@material-ui/core/Link";
 
 //styles
 const useStyles = makeStyles(theme => ({
@@ -58,12 +60,21 @@ const CharterQuestion = ({ question, answer }) => {
 				{question}
 			</Typography>
 			<Typography variant={"body1"} className={classes.charterAnswer}>
-				{!org.active && !answer && (
-					<span style={{ color: "grey" }}>
-						This response is pending approval
-					</span>
-				)}
-				{answer}
+				{!org.active && !answer && <span style={{ color: "grey" }}>This response is pending approval</span>}
+				<Linkify
+					options={{
+						tagName: "span",
+						format: function (value, type) {
+							return (
+								<Link href={value} target={"_blank"} color={"secondary"}>
+									{value}
+								</Link>
+							);
+						}
+					}}
+				>
+					{answer}
+				</Linkify>
 			</Typography>
 		</div>
 	);
@@ -93,28 +104,16 @@ const Charter = () => {
 			</Typography>
 
 			<div className={classes.charterContainer}>
-				<CharterQuestion
-					question={"Mission Statement: "}
-					answer={data?.charter?.mission}
-				/>
+				<CharterQuestion question={"Mission Statement: "} answer={data?.charter?.mission} />
 
 				<CharterQuestion
 					question={"What days does this organization meet?"}
-					answer={capitalizeString(
-						data?.charter?.meetingDays?.join(", "),
-						true
-					)}
+					answer={capitalizeString(data?.charter?.meetingDays?.join(", "), true)}
 				/>
 
-				<CharterQuestion
-					question={"What is the meeting schedule?"}
-					answer={data?.charter?.meetingSchedule}
-				/>
+				<CharterQuestion question={"What is the meeting schedule?"} answer={data?.charter?.meetingSchedule} />
 
-				<CharterQuestion
-					question={"What is the purpose of this activity?"}
-					answer={data?.charter?.purpose}
-				/>
+				<CharterQuestion question={"What is the purpose of this activity?"} answer={data?.charter?.purpose} />
 
 				<CharterQuestion
 					question={"How does this activity benefit Stuyvesant?"}
@@ -126,16 +125,10 @@ const Charter = () => {
 					answer={data?.charter?.appointmentProcedures}
 				/>
 
-				<CharterQuestion
-					question={"What makes this activity unique?"}
-					answer={data?.charter?.uniqueness}
-				/>
+				<CharterQuestion question={"What makes this activity unique?"} answer={data?.charter?.uniqueness} />
 
 				{Boolean(data?.charter?.extra) && (
-					<CharterQuestion
-						question={"Anything else?"}
-						answer={data?.charter?.extra}
-					/>
+					<CharterQuestion question={"Anything else?"} answer={data?.charter?.extra} />
 				)}
 			</div>
 		</div>

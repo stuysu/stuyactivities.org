@@ -12,6 +12,7 @@ import {
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
 import UserContext from "../../../comps/context/UserContext";
+import UnstyledLink from "../../../comps/ui/UnstyledLink";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -70,35 +71,32 @@ const Approvals = () => {
 			{data.organizationsWithPendingCharters.map((org, index) => (
 				<div key={org.id}>
 					<Card className={classes.cardRoot}>
-						<CardActionArea
-							className={classes.card}
-							href={"/admin/approvals/" + org.url}
-						>
-							<CardMedia
-								image={org.charter.picture}
-								style={{
-									width: 150,
-									height: 150,
-									flexShrink: 0
-								}}
-								title={org.name + "'s picture"}
-							/>
-							<CardContent>
-								<Typography variant={"h5"}>
-									{org.name}
-								</Typography>
-								<Typography variant={"body1"}>
-									{org.charter.mission}
-								</Typography>
-							</CardContent>
-						</CardActionArea>
+						<UnstyledLink to={"/admin/approvals/" + org.url}>
+							<CardActionArea className={classes.card}>
+								<CardMedia
+									image={org.charter.picture}
+									style={{
+										width: 150,
+										height: 150,
+										flexShrink: 0
+									}}
+									title={org.name + "'s picture"}
+								/>
+								<CardContent>
+									<Typography variant={"h5"}>
+										{org.name}
+									</Typography>
+									<Typography variant={"body1"}>
+										{org.charter.mission}
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+						</UnstyledLink>
+
 						<CardActions>
-							<Button
-								href={"/admin/approvals/" + org.url}
-								color="primary"
-							>
-								View
-							</Button>
+							<UnstyledLink to={"/admin/approvals/" + org.url}>
+								<Button color="primary">View</Button>
+							</UnstyledLink>
 						</CardActions>
 					</Card>
 				</div>

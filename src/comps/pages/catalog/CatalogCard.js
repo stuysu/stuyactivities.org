@@ -1,14 +1,9 @@
 import React from "react";
-import {
-	Card,
-	CardActionArea,
-	CardContent,
-	CardMedia,
-	Typography
-} from "@material-ui/core";
+import { Card, CardActionArea, CardContent, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
 import Chip from "@material-ui/core/Chip";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
 
 const useStyles = makeStyles(theme => ({
@@ -23,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 function Tag({ name }) {
 	const classes = useStyles();
-
+  
 	return <Chip label={name} size={"small"} className={classes.chip} />;
 }
 
@@ -34,10 +29,12 @@ export default function CatalogCard({ name, url, charter, tags }) {
 		<Card className={classes.card}>
 			<UnstyledLink to={`/${url}`}>
 				<CardActionArea>
-					<CardMedia
-						image={charter.picture}
-						title={name + "'s picture"}
-						style={{ height: 180 }}
+					<LazyLoadImage
+						alt={name}
+						height={180}
+						src={charter.picture}
+						width={"100%"}
+						style={{ objectFit: "cover" }}
 					/>
 					<CardContent>
 						<Typography variant={"h5"} gutterBottom>

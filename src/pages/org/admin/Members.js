@@ -20,6 +20,7 @@ import {
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import UserContext from "../../../comps/context/UserContext";
 
 const useStyles = makeStyles(theme => ({
 	margin: {
@@ -32,6 +33,7 @@ const QUERY = gql`
 		memberships(orgUrl: $url) {
 			id
 			user {
+				id
 				name
 				email
 				picture
@@ -57,6 +59,7 @@ const ALTER_MUTATION = gql`
 		) {
 			id
 			user {
+				id
 				name
 				email
 				picture
@@ -75,6 +78,7 @@ const REMOVE_MUTATION = gql`
 
 export default function Members({ match }) {
 	const classes = useStyles();
+	const user = React.useContext(UserContext);
 	const { data } = useQuery(QUERY, {
 		variables: { url: match.params.orgUrl }
 	});
@@ -171,23 +175,25 @@ export default function Members({ match }) {
 						value={role}
 						onChange={e => setRole(e.target.value)}
 					/>
-					<FormControlLabel
-						control={
-							<Switch
-								checked={adminPrivileges}
-								onChange={e =>
-									setAdminPrivileges(e.target.value)
-								}
-								color="primary"
-							/>
-						}
-						label="Admin Privileges"
-					/>
+					{user.id !== editingMembership.user?.id && (
+						<FormControlLabel
+							control={
+								<Switch
+									checked={adminPrivileges}
+									onChange={e =>
+										setAdminPrivileges(e.target.checked)
+									}
+									color="primary"
+								/>
+							}
+							label="Admin Privileges"
+						/>
+					)}
 					<FormControlLabel
 						control={
 							<Switch
 								checked={notify}
-								onChange={e => setNotify(e.target.value)}
+								onChange={e => setNotify(e.target.checked)}
 								color="primary"
 							/>
 						}
@@ -195,23 +201,30 @@ export default function Members({ match }) {
 					/>
 				</DialogContent>
 				<DialogActions>
-					<Button
-						onClick={() => edit(editingMembership)}
-						color="primary"
-					>
-						Edit
-					</Button>
-					<Button
-						onClick={() => openRemoveDialog(editingMembership)}
-						color="primary"
-					>
-						Remove
-					</Button>
+					{user.id !== editingMembership.user?.id && (
+						<Button
+							onClick={() => openRemoveDialog(editingMembership)}
+							color="primary"
+						>
+							Remove
+						</Button>
+					)}
 					<Button
 						onClick={() => setEditingMembership({})}
 						color="primary"
 					>
 						Cancel
+					</Button>
+					<Button
+						onClick={() => edit(editingMembership)}
+						color="primary"
+						disabled={
+							adminPrivileges ===
+								editingMembership.adminPrivileges &&
+							editingMembership.role === role
+						}
+					>
+						Save
 					</Button>
 				</DialogActions>
 			</Dialog>
@@ -228,7 +241,9 @@ export default function Members({ match }) {
 						control={
 							<Switch
 								checked={removeNotify}
-								onChange={e => setRemoveNotify(e.target.value)}
+								onChange={e =>
+									setRemoveNotify(e.target.checked)
+								}
 								color="primary"
 							/>
 						}
