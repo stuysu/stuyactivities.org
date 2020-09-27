@@ -28,7 +28,7 @@
 		"prop-types": "latest",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"react-dropzone": "^11.1.0",
+		"react-dropzone": "^11.2.0",
 		"react-ga": "^3.1.2",
 		"react-google-login": "^5.1.21",
 		"react-helmet": "^6.1.0",
