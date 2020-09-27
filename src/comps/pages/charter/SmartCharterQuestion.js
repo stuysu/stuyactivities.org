@@ -56,11 +56,7 @@ const SmartCharterQuestion = ({
 
 		if (maxWords) {
 			let words = value.split(" ");
-			words = words
-				.filter(
-					(val, index) => Boolean(val) || index === words.length - 1
-				)
-				.slice(0, maxWords);
+			words = words.filter((val, index) => Boolean(val) || index === words.length - 1).slice(0, maxWords);
 			value = words.join(" ");
 		}
 
@@ -106,17 +102,13 @@ const SmartCharterQuestion = ({
 						)}
 						{Boolean(wordsReq) && (
 							<>
-								{wordsReq} Currently{" "}
-								{form[name]?.split(" ").filter(Boolean)
-									.length || 0}{" "}
-								words
+								{wordsReq} Currently {form[name]?.split(" ").filter(Boolean).length || 0} words
 								<br />
 							</>
 						)}
 						{Boolean(charsReq) && (
 							<>
-								{charsReq} Currently {form[name]?.length || 0}{" "}
-								characters.
+								{charsReq} Currently {form[name]?.length || 0} characters.
 							</>
 						)}
 					</>

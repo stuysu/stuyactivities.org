@@ -68,21 +68,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MUTATION = gql`
-	mutation createStrike($orgId: Int, $orgUrl: String, $weight: Int!, $reason: String!) {
-		createStrike(orgId: $orgId, orgUrl: $orgUrl, weight: $weight, reason: $reason)
+	mutation createStrike($orgId: Int, $weight: Int!, $reason: String!) {
+		createStrike(orgId: $orgId, weight: $weight, reason: $reason) {
+			weight
+			reason
+		}
 	}
 `;
 
-export default function StrikeCard({ name, id, charter, url }) {
+export default function StrikeCard({ name, id, charter }) {
 	const classes = useStyles();
 	const [openModal, setOpenModal] = React.useState(false);
 	const [reason, setReason] = React.useState("");
 	const [weight, setWeight] = React.useState("");
 
-	const [submit, { data, loading, error }] = useMutation(MUTATION, {
+	const [submit, { loading, error }] = useMutation(MUTATION, {
 		variables: {
 			orgId: id,
-			orgUrl: url,
 			weight: weight,
 			reason: reason
 		}
@@ -170,9 +172,10 @@ export default function StrikeCard({ name, id, charter, url }) {
 									<Button
 										variant="contained"
 										color="primary"
+										type={"submit"}
 										className={classes.submit}
 										disabled={loading}
-										onClick={() => setOpenModal(true)}
+										onClick={handleSubmit}
 									>
 										Submit
 									</Button>

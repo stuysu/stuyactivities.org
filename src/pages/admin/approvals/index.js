@@ -54,13 +54,10 @@ const Approvals = () => {
 	const user = React.useContext(UserContext);
 	const { loading, error, data } = useQuery(QUERY);
 	if (!user?.adminRoles?.some(e => e.role === "charters")) {
-		return (
-			<p>You do not have the proper admin role to access this page!</p>
-		);
+		return <p>You do not have the proper admin role to access this page!</p>;
 	}
 	console.log(error);
-	if (error)
-		return <p>There was an error fetching the charters: {error.message}</p>;
+	if (error) return <p>There was an error fetching the charters: {error.message}</p>;
 	if (loading || !data) return <p>Loading</p>;
 	console.log(error, data);
 	return (
@@ -83,12 +80,8 @@ const Approvals = () => {
 									title={org.name + "'s picture"}
 								/>
 								<CardContent>
-									<Typography variant={"h5"}>
-										{org.name}
-									</Typography>
-									<Typography variant={"body1"}>
-										{org.charter.mission}
-									</Typography>
+									<Typography variant={"h5"}>{org.name}</Typography>
+									<Typography variant={"body1"}>{org.charter.mission}</Typography>
 								</CardContent>
 							</CardActionArea>
 						</UnstyledLink>

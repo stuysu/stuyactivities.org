@@ -45,18 +45,8 @@ const QUERY = gql`
 `;
 
 const ALTER_MUTATION = gql`
-	mutation AlterMembership(
-		$membershipId: Int!
-		$adminPrivileges: Boolean
-		$role: String
-		$notify: Boolean
-	) {
-		alterMembership(
-			membershipId: $membershipId
-			adminPrivileges: $adminPrivileges
-			role: $role
-			notify: $notify
-		) {
+	mutation AlterMembership($membershipId: Int!, $adminPrivileges: Boolean, $role: String, $notify: Boolean) {
+		alterMembership(membershipId: $membershipId, adminPrivileges: $adminPrivileges, role: $role, notify: $notify) {
 			id
 			user {
 				id
@@ -135,39 +125,26 @@ export default function Members({ match }) {
 						<Grid container alignItems={"center"}>
 							<Grid item xl={4} lg={4} md={6} sm={6} xs={12}>
 								<Typography>{membership.user.name}</Typography>
-								<Typography
-									color={"textSecondary"}
-									variant={"subtitle2"}
-								>
+								<Typography color={"textSecondary"} variant={"subtitle2"}>
 									{membership.user.email}
 								</Typography>
 							</Grid>
 							<Grid item xl={8} lg={8} md={6} sm={6} xs={12}>
 								<Typography>
-									Role: "{membership.role}"{" "}
-									{membership.adminPrivileges
-										? "(admin)"
-										: ""}
+									Role: "{membership.role}" {membership.adminPrivileges ? "(admin)" : ""}
 								</Typography>
 							</Grid>
 						</Grid>
 						<ListItemSecondaryAction>
-							<IconButton
-								onClick={() => openEditDialog(membership)}
-							>
+							<IconButton onClick={() => openEditDialog(membership)}>
 								<EditIcon />
 							</IconButton>
 						</ListItemSecondaryAction>
 					</ListItem>
 				))}
 			</List>
-			<Dialog
-				open={editingMembership.user !== undefined}
-				onClose={() => setEditingMembership({})}
-			>
-				<DialogTitle>
-					Edit or remove {editingMembership.user?.name}'s membership
-				</DialogTitle>
+			<Dialog open={editingMembership.user !== undefined} onClose={() => setEditingMembership({})}>
+				<DialogTitle>Edit or remove {editingMembership.user?.name}'s membership</DialogTitle>
 				<DialogContent>
 					<TextField
 						fullWidth
@@ -180,9 +157,7 @@ export default function Members({ match }) {
 							control={
 								<Switch
 									checked={adminPrivileges}
-									onChange={e =>
-										setAdminPrivileges(e.target.checked)
-									}
+									onChange={e => setAdminPrivileges(e.target.checked)}
 									color="primary"
 								/>
 							}
@@ -191,59 +166,39 @@ export default function Members({ match }) {
 					)}
 					<FormControlLabel
 						control={
-							<Switch
-								checked={notify}
-								onChange={e => setNotify(e.target.checked)}
-								color="primary"
-							/>
+							<Switch checked={notify} onChange={e => setNotify(e.target.checked)} color="primary" />
 						}
 						label="Send an e-mail notification?"
 					/>
 				</DialogContent>
 				<DialogActions>
 					{user.id !== editingMembership.user?.id && (
-						<Button
-							onClick={() => openRemoveDialog(editingMembership)}
-							color="primary"
-						>
+						<Button onClick={() => openRemoveDialog(editingMembership)} color="primary">
 							Remove
 						</Button>
 					)}
-					<Button
-						onClick={() => setEditingMembership({})}
-						color="primary"
-					>
+					<Button onClick={() => setEditingMembership({})} color="primary">
 						Cancel
 					</Button>
 					<Button
 						onClick={() => edit(editingMembership)}
 						color="primary"
 						disabled={
-							adminPrivileges ===
-								editingMembership.adminPrivileges &&
-							editingMembership.role === role
+							adminPrivileges === editingMembership.adminPrivileges && editingMembership.role === role
 						}
 					>
 						Save
 					</Button>
 				</DialogActions>
 			</Dialog>
-			<Dialog
-				open={removingMembership.user !== undefined}
-				onClose={() => setRemovingMembership({})}
-			>
-				<DialogTitle>
-					Are you sure you want to remove{" "}
-					{removingMembership.user?.name}'s membership?
-				</DialogTitle>
+			<Dialog open={removingMembership.user !== undefined} onClose={() => setRemovingMembership({})}>
+				<DialogTitle>Are you sure you want to remove {removingMembership.user?.name}'s membership?</DialogTitle>
 				<DialogContent>
 					<FormControlLabel
 						control={
 							<Switch
 								checked={removeNotify}
-								onChange={e =>
-									setRemoveNotify(e.target.checked)
-								}
+								onChange={e => setRemoveNotify(e.target.checked)}
 								color="primary"
 							/>
 						}
@@ -251,16 +206,10 @@ export default function Members({ match }) {
 					/>
 				</DialogContent>
 				<DialogActions>
-					<Button
-						onClick={() => setRemovingMembership({})}
-						color="primary"
-					>
+					<Button onClick={() => setRemovingMembership({})} color="primary">
 						Cancel
 					</Button>
-					<Button
-						onClick={() => remove(removingMembership)}
-						color="primary"
-					>
+					<Button onClick={() => remove(removingMembership)} color="primary">
 						Yes
 					</Button>
 				</DialogActions>

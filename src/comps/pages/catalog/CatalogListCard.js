@@ -24,13 +24,16 @@ export default function CatalogCard({ name, url, tags, charter }) {
 						/>
 					</ListItemAvatar>
 					<div>
-						<Typography>{name}</Typography>
-						<Typography color={"textSecondary"} variant={"subtitle2"}>
+						<Typography style={{ paddingBottom: "3px" }}>{name}</Typography>
+						<Typography color={"textSecondary"} variant={"subtitle2"} style={{ paddingBottom: "4px" }}>
 							{charter.mission}
 						</Typography>
 						<Grid container spacing={1}>
 							<Grid item>
-								<Chip label={capitalizeString(charter.commitmentLevel + " Commitment")} />
+								<Chip
+									label={capitalizeString(charter.commitmentLevel + " Commitment")}
+									size={"small"}
+								/>
 							</Grid>
 							{tags.map(tag => (
 								<Grid item key={tag.id}>

@@ -12,10 +12,7 @@ const Meetings = ({ match }) => {
 				style={{ width: "300px", maxWidth: "70vw" }}
 				alt={"This part of the page is under construction"}
 			/>
-			<p>
-				We're currently working on this page but we expect to have it up
-				sometime this week.
-			</p>
+			<p>We're currently working on this page but we expect to have it up sometime this week.</p>
 		</div>
 	);
 };

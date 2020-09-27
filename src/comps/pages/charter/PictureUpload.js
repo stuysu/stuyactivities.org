@@ -45,9 +45,7 @@ const PictureUpload = () => {
 
 	return (
 		<div>
-			<Typography>
-				Upload a picture for your organization (optional)
-			</Typography>
+			<Typography>Upload a picture for your organization (optional)</Typography>
 
 			<input
 				ref={inputRef}
@@ -57,11 +55,7 @@ const PictureUpload = () => {
 				onChange={handleChange}
 			/>
 
-			<Button
-				variant={"outlined"}
-				color={"secondary"}
-				onClick={() => inputRef.current.click()}
-			>
+			<Button variant={"outlined"} color={"secondary"} onClick={() => inputRef.current.click()}>
 				+ Upload Picture
 			</Button>
 			{error && <Typography color={"error"}>{error?.message}</Typography>}
