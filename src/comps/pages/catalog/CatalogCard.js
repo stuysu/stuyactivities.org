@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardActionArea, CardContent, Grid, Typography } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
 import Chip from "@material-ui/core/Chip";
