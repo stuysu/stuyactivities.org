@@ -99,12 +99,7 @@ const SubmitCharter = () => {
 
 	return (
 		<>
-			<Button
-				color={"secondary"}
-				variant={"contained"}
-				onClick={onSubmit}
-				disabled={loading}
-			>
+			<Button color={"secondary"} variant={"contained"} onClick={onSubmit} disabled={loading}>
 				Submit
 			</Button>
 		</>

@@ -8,25 +8,17 @@ const RouteTabs = ({ tabs }) => {
 	const history = useHistory();
 
 	React.useEffect(() => {
-		const isCorrectIndex = location.pathname.startsWith(
-			tabs[selectedTabIndex]?.path
-		);
+		const isCorrectIndex = location.pathname.startsWith(tabs[selectedTabIndex]?.path);
 
 		if (!isCorrectIndex) {
-			const correctIndex = tabs.findIndex(tab =>
-				location.pathname.startsWith(tab.path)
-			);
+			const correctIndex = tabs.findIndex(tab => location.pathname.startsWith(tab.path));
 			setSelectedTabIndex(~correctIndex ? correctIndex : 0);
 		}
 	}, [location.pathname, selectedTabIndex, tabs]);
 
 	return (
 		<div>
-			<Tabs
-				value={selectedTabIndex}
-				scrollButtons={"on"}
-				variant={"scrollable"}
-			>
+			<Tabs value={selectedTabIndex} scrollButtons={"on"} variant={"scrollable"}>
 				{tabs.map((tab, index) => (
 					<Tab
 						key={tab.path}

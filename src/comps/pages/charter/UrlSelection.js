@@ -54,10 +54,7 @@ const UrlSelection = ({ className }) => {
 				}
 				onBlur={() => {
 					if (Boolean(data?.organization)) {
-						form.setError(
-							"url",
-							"There's already an activity at that url."
-						);
+						form.setError("url", "There's already an activity at that url.");
 					}
 				}}
 				error={Boolean(form?.errors?.url)}

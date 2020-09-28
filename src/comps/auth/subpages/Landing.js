@@ -46,14 +46,11 @@ const Landing = () => {
 				Let's get you signed in
 			</Typography>
 			<Typography variant={"subtitle1"}>
-				Your session will expire 30 days after the last time you access
-				StuyActivities.
+				Your session will expire 30 days after the last time you access StuyActivities.
 				<br /> You can end your session anytime by logging out.
 			</Typography>
 			<br />
-			<Typography variant={"subtitle1"}>
-				Are you signing in as a:
-			</Typography>
+			<Typography variant={"subtitle1"}>Are you signing in as a:</Typography>
 
 			<Button
 				variant={"contained"}
@@ -71,10 +68,7 @@ const Landing = () => {
 			>
 				Teacher
 			</Button>
-			<p
-				className={classes.cancelLogin}
-				onClick={authContext.handleClose}
-			>
+			<p className={classes.cancelLogin} onClick={authContext.handleClose}>
 				No thanks, I don't want to sign in.
 			</p>
 		</div>

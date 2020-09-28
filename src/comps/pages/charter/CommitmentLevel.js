@@ -19,11 +19,7 @@ const CommitmentLevel = ({ className }) => {
 
 	return (
 		<div>
-			<FormControl
-				variant={"outlined"}
-				className={classes.commitmentLevel}
-				required
-			>
+			<FormControl variant={"outlined"} className={classes.commitmentLevel} required>
 				<InputLabel>Commitment Level</InputLabel>
 				<Select
 					fullWidth

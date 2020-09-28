@@ -46,16 +46,10 @@ const Members = () => {
 						</ListItemAvatar>
 						<span>
 							<Typography>{membership.user.name}</Typography>
-							<Typography
-								color={"textSecondary"}
-								variant={"subtitle2"}
-							>
+							<Typography color={"textSecondary"} variant={"subtitle2"}>
 								{membership.role}
 							</Typography>
-							<Typography
-								color={"textSecondary"}
-								variant={"subtitle2"}
-							>
+							<Typography color={"textSecondary"} variant={"subtitle2"}>
 								{membership.user.email}
 							</Typography>
 						</span>

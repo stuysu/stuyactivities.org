@@ -92,13 +92,7 @@ const TagSelection = ({ className }) => {
 				>
 					{tags?.map(tag => (
 						<MenuItem key={tag.id} value={tag}>
-							{charterContext?.tags?.some(
-								t => t.id === tag.id
-							) ? (
-								<b>{tag.name}</b>
-							) : (
-								tag.name
-							)}
+							{charterContext?.tags?.some(t => t.id === tag.id) ? <b>{tag.name}</b> : tag.name}
 						</MenuItem>
 					))}
 				</Select>
