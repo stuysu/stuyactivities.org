@@ -6,13 +6,9 @@ import BackButton from "../comps/ui/BackButton";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { Divider, Grid, Link, ListItem, ListItemAvatar } from "@material-ui/core";
+import { Link } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
-import UnstyledLink from "../comps/ui/UnstyledLink";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import Chip from "@material-ui/core/Chip";
-import capitalizeString from "../utils/capitalizeString";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
