@@ -13,6 +13,7 @@ import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
 import About from "./About";
 import ReactGA from "react-ga";
+import ClubPubFair from "./ClubPubFair";
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -49,6 +50,7 @@ const Pages = () => {
 				<Route path={"/admin"} component={AdminRouter} />
 				<Route path={"/rules"} component={Rules} />
 				<Route path={"/about"} component={About} />
+				<Route path={"/clubpubfair"} component={ClubPubFair} />
 
 				<Route path={"/organizations/:orgUrl"}>
 					<Redirect to={window.location.pathname.replace("/organizations/", "/")} />

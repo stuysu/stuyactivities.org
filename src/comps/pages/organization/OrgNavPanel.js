@@ -31,9 +31,7 @@ const TabItem = ({ to, label, icon, exact = true }) => {
 	const renderedUrl = generatePath(to, params);
 	const routeMatchesUrl = useRouteMatch(to);
 
-	const isSelected = exact
-		? routeMatchesUrl?.isExact
-		: Boolean(routeMatchesUrl);
+	const isSelected = exact ? routeMatchesUrl?.isExact : Boolean(routeMatchesUrl);
 
 	return (
 		<UnstyledLink to={renderedUrl}>
@@ -53,9 +51,7 @@ const OrgNavPanel = ({ match }) => {
 	let memberStatus = org.membership ? "member" : "none";
 
 	if (memberStatus === "none" && org.membershipRequest) {
-		memberStatus = org.membershipRequest.adminApproval
-			? "invited"
-			: "requested";
+		memberStatus = org.membershipRequest.adminApproval ? "invited" : "requested";
 	}
 
 	const joinPath = generatePath(match.path + "/join", match.params);
@@ -63,10 +59,7 @@ const OrgNavPanel = ({ match }) => {
 	return (
 		<div className={classes.stickyContainer}>
 			<FlexCenter>
-				<Avatar
-					className={classes.avatar}
-					src={org?.charter?.picture}
-				/>
+				<Avatar className={classes.avatar} src={org?.charter?.picture} />
 			</FlexCenter>
 			<Typography className={classes.orgName} variant={"h5"}>
 				{org?.name}
@@ -82,18 +75,12 @@ const OrgNavPanel = ({ match }) => {
 						</Button>
 					</UnstyledLink>
 				) : (
-					<Typography
-						variant={"subtitle2"}
-						style={{ color: "grey", textAlign: "center" }}
-					>
+					<Typography variant={"subtitle2"} style={{ color: "grey", textAlign: "center" }}>
 						Member
 					</Typography>
 				)
 			) : (
-				<Typography
-					variant={"subtitle2"}
-					style={{ color: "grey", textAlign: "center" }}
-				>
+				<Typography variant={"subtitle2"} style={{ color: "grey", textAlign: "center" }}>
 					Activity Pending Approval
 					<br />
 					Content On This Page Is Incomplete
@@ -102,29 +89,12 @@ const OrgNavPanel = ({ match }) => {
 
 			<hr />
 			<List component="nav" aria-label="main mailbox folders">
-				<TabItem
-					label={"Overview"}
-					to={match.path}
-					icon={<Dashboard />}
-				/>
-				<TabItem
-					label={"Charter"}
-					to={match.path + "/charter"}
-					icon={<Description />}
-				/>
-				<TabItem
-					label={"Members"}
-					to={match.path + "/members"}
-					icon={<Person />}
-				/>
+				<TabItem label={"Overview"} to={match.path} icon={<Dashboard />} />
+				<TabItem label={"Charter"} to={match.path + "/charter"} icon={<Description />} />
+				<TabItem label={"Members"} to={match.path + "/members"} icon={<Person />} />
 
 				{org.membership?.adminPrivileges && (
-					<TabItem
-						label={"Admin Panel"}
-						exact={false}
-						to={match.path + "/admin"}
-						icon={<Settings />}
-					/>
+					<TabItem label={"Admin Panel"} exact={false} to={match.path + "/admin"} icon={<Settings />} />
 				)}
 			</List>
 		</div>

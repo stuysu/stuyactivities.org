@@ -71,11 +71,7 @@ const UserProvider = props => {
 		};
 	}
 
-	return (
-		<UserContext.Provider value={value}>
-			{props.children}
-		</UserContext.Provider>
-	);
+	return <UserContext.Provider value={value}>{props.children}</UserContext.Provider>;
 };
 
 export default UserProvider;
