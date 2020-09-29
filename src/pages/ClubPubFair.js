@@ -17,8 +17,8 @@ function TabPanel(props) {
 		<div
 			role="tabpanel"
 			hidden={value !== index}
-			id={`simple-tabpanel-${index}`}
-			aria-labelledby={`simple-tab-${index}`}
+			id={`scrollable-auto-tabpanel-${index}`}
+			aria-labelledby={`scrollable-auto-tab-${index}`}
 			{...other}
 		>
 			{value === index && (
@@ -38,8 +38,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
 	return {
-		id: `simple-tab-${index}`,
-		"aria-controls": `simple-tabpanel-${index}`
+		id: `scrollable-auto-tab-${index}`,
+		"aria-controls": `scrollable-auto-tabpanel-${index}`
 	};
 }
 
@@ -145,7 +145,14 @@ const ClubPubFair = () => {
 					</Typography>
 					<Typography paragraph>**NOTE: You must register with your stuy.edu email.</Typography>
 					<Paper square>
-						<Tabs value={tab} indicatorColor="primary" textColor="primary" onChange={handleChange}>
+						<Tabs
+							value={tab}
+							indicatorColor="primary"
+							textColor="primary"
+							onChange={handleChange}
+							variant="scrollable"
+							scrollButtons="auto"
+						>
 							<Tab label="Day 1 Tue., Sep. 29" {...a11yProps(0)} />
 							<Tab label="Day 2 Wed., Sep. 30" {...a11yProps(1)} />
 							<Tab label="Day 3 Thu., Oct. 1" {...a11yProps(2)} />
