@@ -106,16 +106,20 @@ const ClubPubFair = () => {
 						meetings are found below, and they are organized based on when each club presents. If you have
 						any questions or concerns, please reach out to us at events@stuysu.org. Enjoy the fair!
 					</Typography>
-					<Typography paragraph>
-						Webinar Link:{" "}
-						<Link
-							href={"https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ"}
-							target={"_blank"}
-							rel={"noopener noreferrer"}
-						>
-							Webinar Link
-						</Link>
-					</Typography>
+					<div style={{ width: "100%", whiteSpace: "noWrap" }}>
+						<Typography paragraph>
+							Webinar Link:{" "}
+							<Link
+								href={"https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ"}
+								target={"_blank"}
+								rel={"noopener noreferrer"}
+							>
+								<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
+									https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ
+								</Box>
+							</Link>
+						</Typography>
+					</div>
 					<Typography paragraph>**NOTE: You must register with your stuy.edu email.</Typography>
 					<Paper square>
 						<Tabs
