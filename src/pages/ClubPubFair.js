@@ -9,6 +9,8 @@ import Tab from "@material-ui/core/Tab";
 import { Link, Divider, ListItem } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
+import UserContext from "../comps/context/UserContext";
+import SignInRequired from "../comps/ui/SignInRequired";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -65,10 +67,15 @@ const useStyles = makeStyles(() => ({
 const ClubPubFair = () => {
 	const classes = useStyles();
 	const [tab, setTab] = React.useState(0);
+	const user = React.useContext(UserContext);
 
 	const handleChange = (event, newTab) => {
 		setTab(newTab);
 	};
+
+	if (!user.signedIn) {
+		return <SignInRequired />;
+	}
 
 	return (
 		<div>
@@ -231,20 +238,20 @@ const ClubPubFair = () => {
 										</Link>
 									</Typography>
 									<Typography style={{ paddingBottom: "3px" }}>
-										Meeting code: 826 5457 4324
+										Meeting code: 817 7767 2654
 									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: mgfg</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: XB3ei6</Typography>
 									<Typography>
 										Meeting Link:{" "}
 										<Link
 											href={
-												"https://us02web.zoom.us/j/82654574324?pwd=OHF3R2FDOENrYUtPMThMeFFtejdYdz09"
+												"https://us02web.zoom.us/j/81777672654?pwd=Mmp2dzEzcXkraXRKNTJ4UnJhKzFBdz09"
 											}
 											style={{ paddingBottom: "3px" }}
 											color={"secondary"}
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://us02web.zoom.us/j/82654574324?pwd=OHF3R2FDOENrYUtPMThMeFFtejdYdz09
+												https://us02web.zoom.us/j/81777672654?pwd=Mmp2dzEzcXkraXRKNTJ4UnJhKzFBdz09
 											</Box>
 										</Link>
 									</Typography>
@@ -456,13 +463,13 @@ const ClubPubFair = () => {
 										Meeting Link:{" "}
 										<Link
 											href={
-												"https://us02web.zoom.us/j/85681786407?pwd=Zk5zaml6YkdhS21tanYwbWxNMVB1QT09"
+												"https://us02web.zoom.us/j/85681786407?pwd=bFJYMk5PMDRhTXhoRm9jdFlSOWcxQT09"
 											}
 											style={{ paddingBottom: "3px" }}
 											color={"secondary"}
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://us02web.zoom.us/j/85681786407?pwd=Zk5zaml6YkdhS21tanYwbWxNMVB1QT09
+												https://us02web.zoom.us/j/85681786407?pwd=bFJYMk5PMDRhTXhoRm9jdFlSOWcxQT09
 											</Box>
 										</Link>
 									</Typography>
@@ -2917,6 +2924,32 @@ const ClubPubFair = () => {
 							<ListItem style={{ padding: "1rem" }}>
 								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
 									<Typography style={{ paddingBottom: "3px" }}>
+										<Link href={"https://stuyactivities.org/stuyspec"} color={"secondary"}>
+											Stuyvesant Spectator
+										</Link>
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>
+										Meeting code: 977 2880 8375
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: StuySpec</Typography>
+									<Typography>
+										Meeting Link:{" "}
+										<Link
+											href={"https://zoom.us/j/97728808375?pwd=YkJ5RTBUd1B0SmVSTFFsODZUUG0wUT09"}
+											style={{ paddingBottom: "3px" }}
+											color={"secondary"}
+										>
+											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
+												https://zoom.us/j/97728808375?pwd=YkJ5RTBUd1B0SmVSTFFsODZUUG0wUT09
+											</Box>
+										</Link>
+									</Typography>
+								</div>
+							</ListItem>
+							<Divider />
+							<ListItem style={{ padding: "1rem" }}>
+								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
+									<Typography style={{ paddingBottom: "3px" }}>
 										<Link href={"https://stuyactivities.org/gamedevs"} color={"secondary"}>
 											Stuyvesant Game Devs
 										</Link>
@@ -3657,24 +3690,6 @@ const ClubPubFair = () => {
 							<ListItem style={{ padding: "1rem" }}>
 								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
 									<Typography style={{ paddingBottom: "3px" }}>
-										<Link href={"https://stuyactivities.org/StuyOrigami"} color={"secondary"}>
-											StuyOrigami
-										</Link>
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Meeting code: </Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: </Typography>
-									<Typography>
-										Meeting Link:{" "}
-										<Link href={""} style={{ paddingBottom: "3px" }} color={"secondary"}>
-											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden"></Box>
-										</Link>
-									</Typography>
-								</div>
-							</ListItem>
-							<Divider />
-							<ListItem style={{ padding: "1rem" }}>
-								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
-									<Typography style={{ paddingBottom: "3px" }}>
 										<Link href={"https://stuyactivities.org/cartoonclub"} color={"secondary"}>
 											Cartoon Club
 										</Link>
@@ -3718,32 +3733,6 @@ const ClubPubFair = () => {
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
 												https://zoom.us/j/97058565540?pwd=cTNXU3grYjF2dmtNSkFOMkxjaSt4Zz09
-											</Box>
-										</Link>
-									</Typography>
-								</div>
-							</ListItem>
-							<Divider />
-							<ListItem style={{ padding: "1rem" }}>
-								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
-									<Typography style={{ paddingBottom: "3px" }}>
-										<Link href={"https://stuyactivities.org/stuyspec"} color={"secondary"}>
-											Stuyvesant Spectator
-										</Link>
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>
-										Meeting code: 977 2880 8375
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: StuySpec</Typography>
-									<Typography>
-										Meeting Link:{" "}
-										<Link
-											href={"https://zoom.us/j/97728808375?pwd=YkJ5RTBUd1B0SmVSTFFsODZUUG0wUT09"}
-											style={{ paddingBottom: "3px" }}
-											color={"secondary"}
-										>
-											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://zoom.us/j/97728808375?pwd=YkJ5RTBUd1B0SmVSTFFsODZUUG0wUT09
 											</Box>
 										</Link>
 									</Typography>
