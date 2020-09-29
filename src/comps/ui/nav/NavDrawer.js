@@ -16,7 +16,9 @@ import {
 	Home,
 	Info,
 	LockOpen,
-	PowerSettingsNew
+	PowerSettingsNew,
+	AccountBox,
+	EmojiFlags
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
@@ -130,6 +132,16 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItemIcon>
 					<ListItemText primary={"Archive"} />
 				</ListItem>
+
+				<UnstyledLink to={"/clubpubfair"}>
+					<ListItem button>
+						<ListItemIcon>
+							<EmojiFlags />
+						</ListItemIcon>
+						<ListItemText primary={"Clubs & Pubs Fair"} />
+					</ListItem>
+				</UnstyledLink>
+
 				{user.signedIn && (
 					<>
 						<ListSubheader disableSticky>My Activities</ListSubheader>
@@ -178,8 +190,22 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Rules"} />
 					</ListItem>
 				</UnstyledLink>
+
+				{user?.adminRoles !== undefined || {} ? (
+					<UnstyledLink to={"/admin"}>
+						<ListItem button>
+							<ListItemIcon>
+								<AccountBox />
+							</ListItemIcon>
+							<ListItemText primary={"Admin Panel"} />
+						</ListItem>
+					</UnstyledLink>
+				) : (
+					<></>
+				)}
 			</List>
 		</Drawer>
 	);
 };
 export default NavDrawer;
+
