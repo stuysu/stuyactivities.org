@@ -9,6 +9,8 @@ import Tab from "@material-ui/core/Tab";
 import { Link, Divider, ListItem } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
+import UserContext from "../comps/context/UserContext";
+import SignInRequired from "../comps/ui/SignInRequired";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -65,10 +67,15 @@ const useStyles = makeStyles(() => ({
 const ClubPubFair = () => {
 	const classes = useStyles();
 	const [tab, setTab] = React.useState(0);
+	const user = React.useContext(UserContext);
 
 	const handleChange = (event, newTab) => {
 		setTab(newTab);
 	};
+
+	if (!user.signedIn) {
+		return <SignInRequired />;
+	}
 
 	return (
 		<div>
