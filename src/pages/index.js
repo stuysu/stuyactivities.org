@@ -49,6 +49,7 @@ const Pages = () => {
 				<Route path={"/admin"} component={AdminRouter} />
 				<Route path={"/rules"} component={Rules} />
 				<Route path={"/about"} component={About} />
+				<Route path={"/clubpubfair"} component={ClubPubFair} />
 
 				<Route path={"/organizations/:orgUrl"}>
 					<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
