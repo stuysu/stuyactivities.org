@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardActionArea, CardContent, Grid, Typography } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
 import Chip from "@material-ui/core/Chip";
@@ -11,12 +11,20 @@ const useStyles = makeStyles(theme => ({
 		margin: theme.spacing(1)
 	},
 	chip: {
-		marginTop: "0.3rem"
+		marginTop: "0.3rem",
+		marginRight: "5px"
 	}
 }));
 
-export default function CatalogCard({ name, url, tags, charter }) {
+function Tag({ name }) {
 	const classes = useStyles();
+
+	return <Chip label={name} size={"small"} className={classes.chip} />;
+}
+
+export default function CatalogCard({ name, url, charter, tags }) {
+	const classes = useStyles();
+
 	return (
 		<Card className={classes.card}>
 			<UnstyledLink to={`/${url}`}>
@@ -33,16 +41,14 @@ export default function CatalogCard({ name, url, tags, charter }) {
 							{name}
 						</Typography>
 						<Typography>{charter.mission}</Typography>
-						<Grid container spacing={1}>
-							<Grid item>
-								<Chip label={capitalizeString(charter.commitmentLevel + " Commitment")} />
-							</Grid>
-							{tags.map(tag => (
-								<Grid item key={tag.id}>
-									<Chip key={tag.id} label={tag.name} />
-								</Grid>
-							))}
-						</Grid>
+						<Chip
+							label={capitalizeString(charter.commitmentLevel) + " Commitment"}
+							size={"small"}
+							className={classes.chip}
+						/>
+						{tags.map(tag => (
+							<Tag name={tag.name} key={tag.id} />
+						))}
 					</CardContent>
 				</CardActionArea>
 			</UnstyledLink>
