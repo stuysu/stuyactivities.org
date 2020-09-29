@@ -48,32 +48,33 @@ function a11yProps(index) {
 	};
 }
 
-function ClubCard() {
-	Papa.parse("../../comps/pages/clubPubFair/Day 1.csv", {
-		// step: function (row) {
-		// 	return (
-		// 		<div>
-		// 			<ListItem style={{ padding: "1rem" }}>
-		// 				<div>
-		// 					<Typography style={{ paddingBottom: "3px" }}>{row[0]}</Typography>
-		// 					<Typography style={{ paddingBottom: "3px" }}>Meeting code: {row[4]}</Typography>
-		// 					<Typography style={{ paddingBottom: "3px" }}>Passcode: {row[5]}</Typography>
-		// 					<Link href={row[6]} style={{ paddingBottom: "3px" }} color={"secondary"}>
-		// 						Meeting Link: {row[6]}
-		// 					</Link>
-		// 				</div>
-		// 			</ListItem>
-		//
-		// 			<Divider />
-		// 		</div>
-		// 	);
-		// },
-		complete: function (results) {
-			console.log(results);
-		}
-	});
-	return <div>Hello</div>;
-}
+// function ClubCard() {
+// 	Papa.parse("../../comps/pages/clubPubFair/Day 1.csv", {
+// 		step: function (row) {
+// 			return (
+// 				<div>
+// 					<ListItem style={{ padding: "1rem" }}>
+// 						<div>
+// 							<Typography style={{ paddingBottom: "3px" }}>{row[0]}</Typography>
+// 							<Typography style={{ paddingBottom: "3px" }}>Meeting code: {row[4]}</Typography>
+// 							<Typography style={{ paddingBottom: "3px" }}>Passcode: {row[5]}</Typography>
+// 							<Link href={row[6]} style={{ paddingBottom: "3px" }} color={"secondary"}>
+// 								Meeting Link: {row[6]}
+// 							</Link>
+// 						</div>
+// 					</ListItem>
+//
+// 					<Divider />
+// 				</div>
+// 			);
+// 		},
+// 		complete: function (results) {
+// 			console.log(results);
+// 		}
+// 	});
+// 	return <div>Hello</div>;
+// }
+
 
 const useStyles = makeStyles(() => ({
 	layout: {
