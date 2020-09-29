@@ -238,20 +238,20 @@ const ClubPubFair = () => {
 										</Link>
 									</Typography>
 									<Typography style={{ paddingBottom: "3px" }}>
-										Meeting code: 826 5457 4324
+										Meeting code: 817 7767 2654
 									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: mgfg</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: XB3ei6</Typography>
 									<Typography>
 										Meeting Link:{" "}
 										<Link
 											href={
-												"https://us02web.zoom.us/j/82654574324?pwd=OHF3R2FDOENrYUtPMThMeFFtejdYdz09"
+												"https://us02web.zoom.us/j/81777672654?pwd=Mmp2dzEzcXkraXRKNTJ4UnJhKzFBdz09"
 											}
 											style={{ paddingBottom: "3px" }}
 											color={"secondary"}
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://us02web.zoom.us/j/82654574324?pwd=OHF3R2FDOENrYUtPMThMeFFtejdYdz09
+												https://us02web.zoom.us/j/81777672654?pwd=Mmp2dzEzcXkraXRKNTJ4UnJhKzFBdz09
 											</Box>
 										</Link>
 									</Typography>
