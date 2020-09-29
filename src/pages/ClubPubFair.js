@@ -79,7 +79,8 @@ const useStyles = makeStyles(() => ({
 		padding: "2rem",
 		flexDirection: "column",
 		maxWidth: "1200px",
-		margin: "auto"
+		margin: "auto",
+		width: "100%"
 	},
 
 	title: {
@@ -107,7 +108,7 @@ const ClubPubFair = () => {
 				/>
 			</Helmet>
 			<div className={classes.layout}>
-				<main>
+				<main style={{ width: "100%" }}>
 					<BackButton to={"/"} label={"Back To Home"} />
 					<Typography variant={"h4"} className={classes.title}>
 						Virtual Clubs & Pubs Fair 2020
@@ -139,7 +140,7 @@ const ClubPubFair = () => {
 							target={"_blank"}
 							rel={"noopener noreferrer"}
 						>
-							https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ
+							Webinar Link
 						</Link>
 					</Typography>
 					<Typography paragraph>**NOTE: You must register with your stuy.edu email.</Typography>
@@ -154,25 +155,25 @@ const ClubPubFair = () => {
 							<Tab label="Day 7 Wed., Oct. 7" {...a11yProps(6)} />
 						</Tabs>
 						<TabPanel value={tab} index={0}>
-							Day 1
+							Coming soon!
 						</TabPanel>
 						<TabPanel value={tab} index={1}>
-							Day 2
+							Coming soon!
 						</TabPanel>
 						<TabPanel value={tab} index={2}>
-							Day 3
+							Coming soon!
 						</TabPanel>
 						<TabPanel value={tab} index={3}>
-							Day 4
+							Coming soon!
 						</TabPanel>
 						<TabPanel value={tab} index={4}>
-							Day 5
+							Coming soon!
 						</TabPanel>
 						<TabPanel value={tab} index={5}>
-							Day 6
+							Coming soon!
 						</TabPanel>
 						<TabPanel value={tab} index={6}>
-							Day 7
+							Coming soon!
 						</TabPanel>
 					</Paper>
 				</main>
