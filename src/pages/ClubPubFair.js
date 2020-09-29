@@ -458,7 +458,7 @@ const ClubPubFair = () => {
 									<Typography style={{ paddingBottom: "3px" }}>
 										Meeting code: 856 8178 6407
 									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: 6xFqTe</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: 6XFqTe</Typography>
 									<Typography>
 										Meeting Link:{" "}
 										<Link
