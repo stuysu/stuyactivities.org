@@ -458,18 +458,18 @@ const ClubPubFair = () => {
 									<Typography style={{ paddingBottom: "3px" }}>
 										Meeting code: 856 8178 6407
 									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: 6XFqTe</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: 6xFqTe</Typography>
 									<Typography>
 										Meeting Link:{" "}
 										<Link
 											href={
-												"https://us02web.zoom.us/j/85681786407?pwd=Zk5zaml6YkdhS21tanYwbWxNMVB1QT09"
+												"https://us02web.zoom.us/j/85681786407?pwd=bFJYMk5PMDRhTXhoRm9jdFlSOWcxQT09"
 											}
 											style={{ paddingBottom: "3px" }}
 											color={"secondary"}
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://us02web.zoom.us/j/85681786407?pwd=Zk5zaml6YkdhS21tanYwbWxNMVB1QT09
+												https://us02web.zoom.us/j/85681786407?pwd=bFJYMk5PMDRhTXhoRm9jdFlSOWcxQT09
 											</Box>
 										</Link>
 									</Typography>
