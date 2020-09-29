@@ -19,7 +19,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 import { gql, useMutation } from "@apollo/client";
 import { cache } from "../../context/ApolloProvider";
-import Modal from "@material-ui/core/Modal";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles(theme => ({
 	item: {
@@ -49,21 +50,6 @@ const useStyles = makeStyles(theme => ({
 		marginLeft: "8px",
 		height: "56px",
 		width: "auto"
-	},
-	paper: {
-		backgroundColor: theme.palette.background.paper,
-		border: "2px solid #000",
-		boxShadow: theme.shadows[5],
-		padding: theme.spacing(2, 4, 3)
-	},
-	modal: {
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center"
-	},
-	modalBtn: {
-		marginTop: "8px",
-		marginRight: "5px"
 	}
 }));
 
@@ -78,7 +64,7 @@ const MUTATION = gql`
 
 export default function StrikeCard({ name, id, charter }) {
 	const classes = useStyles();
-	const [openModal, setOpenModal] = React.useState(false);
+	const [open, setOpen] = React.useState(false);
 	const [reason, setReason] = React.useState("");
 	const [weight, setWeight] = React.useState("");
 
@@ -99,29 +85,12 @@ export default function StrikeCard({ name, id, charter }) {
 		cache
 			.reset()
 			.then(() => submit())
+			.then(() => setOpen(true))
 			.then(() => {
 				window.sessionStorage.clear();
 			})
 			.catch(console.log);
 	};
-
-	const submitModal = (
-		<div className={classes.paper}>
-			<Typography>Are you sure you want to submit this strike?</Typography>
-			<Button variant={"contained"} onClick={() => setOpenModal(false)} className={classes.modalBtn}>
-				Cancel
-			</Button>
-			<Button
-				variant={"contained"}
-				type={"submit"}
-				color={"primary"}
-				onClick={() => setOpenModal(false)}
-				className={classes.modalBtn}
-			>
-				Submit
-			</Button>
-		</div>
-	);
 
 	return (
 		<Grid item xs={12}>
@@ -180,12 +149,14 @@ export default function StrikeCard({ name, id, charter }) {
 										Submit
 									</Button>
 								)}
-								<Modal open={openModal} onClose={() => setOpenModal(false)} className={classes.modal}>
-									{submitModal}
-								</Modal>
 							</form>
 						</AccordionDetails>
 					</Accordion>
+					<Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
+						<Alert onClose={() => setOpen(false)} severity="success">
+							Strike successfully submitted!
+						</Alert>
+					</Snackbar>
 				</Paper>
 			</List>
 		</Grid>

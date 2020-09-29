@@ -7,7 +7,7 @@ import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
-import { AssignmentTurnedIn, LiveHelp } from "@material-ui/icons";
+import { AssignmentTurnedIn, LiveHelp, SmsFailed } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -43,7 +43,8 @@ export default function AdminRouter({ match }) {
 		{
 			label: "Strikes",
 			role: "strikes",
-			path: actualPath + "/strikes"
+			path: actualPath + "/strikes",
+			icon: <SmsFailed />
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
