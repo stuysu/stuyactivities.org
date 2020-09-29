@@ -2924,6 +2924,32 @@ const ClubPubFair = () => {
 							<ListItem style={{ padding: "1rem" }}>
 								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
 									<Typography style={{ paddingBottom: "3px" }}>
+										<Link href={"https://stuyactivities.org/stuyspec"} color={"secondary"}>
+											Stuyvesant Spectator
+										</Link>
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>
+										Meeting code: 977 2880 8375
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: StuySpec</Typography>
+									<Typography>
+										Meeting Link:{" "}
+										<Link
+											href={"https://zoom.us/j/97728808375?pwd=YkJ5RTBUd1B0SmVSTFFsODZUUG0wUT09"}
+											style={{ paddingBottom: "3px" }}
+											color={"secondary"}
+										>
+											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
+												https://zoom.us/j/97728808375?pwd=YkJ5RTBUd1B0SmVSTFFsODZUUG0wUT09
+											</Box>
+										</Link>
+									</Typography>
+								</div>
+							</ListItem>
+							<Divider />
+							<ListItem style={{ padding: "1rem" }}>
+								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
+									<Typography style={{ paddingBottom: "3px" }}>
 										<Link href={"https://stuyactivities.org/gamedevs"} color={"secondary"}>
 											Stuyvesant Game Devs
 										</Link>
@@ -3664,24 +3690,6 @@ const ClubPubFair = () => {
 							<ListItem style={{ padding: "1rem" }}>
 								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
 									<Typography style={{ paddingBottom: "3px" }}>
-										<Link href={"https://stuyactivities.org/StuyOrigami"} color={"secondary"}>
-											StuyOrigami
-										</Link>
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Meeting code: </Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: </Typography>
-									<Typography>
-										Meeting Link:{" "}
-										<Link href={""} style={{ paddingBottom: "3px" }} color={"secondary"}>
-											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden"></Box>
-										</Link>
-									</Typography>
-								</div>
-							</ListItem>
-							<Divider />
-							<ListItem style={{ padding: "1rem" }}>
-								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
-									<Typography style={{ paddingBottom: "3px" }}>
 										<Link href={"https://stuyactivities.org/cartoonclub"} color={"secondary"}>
 											Cartoon Club
 										</Link>
@@ -3725,32 +3733,6 @@ const ClubPubFair = () => {
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
 												https://zoom.us/j/97058565540?pwd=cTNXU3grYjF2dmtNSkFOMkxjaSt4Zz09
-											</Box>
-										</Link>
-									</Typography>
-								</div>
-							</ListItem>
-							<Divider />
-							<ListItem style={{ padding: "1rem" }}>
-								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
-									<Typography style={{ paddingBottom: "3px" }}>
-										<Link href={"https://stuyactivities.org/stuyspec"} color={"secondary"}>
-											Stuyvesant Spectator
-										</Link>
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>
-										Meeting code: 977 2880 8375
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: StuySpec</Typography>
-									<Typography>
-										Meeting Link:{" "}
-										<Link
-											href={"https://zoom.us/j/97728808375?pwd=YkJ5RTBUd1B0SmVSTFFsODZUUG0wUT09"}
-											style={{ paddingBottom: "3px" }}
-											color={"secondary"}
-										>
-											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://zoom.us/j/97728808375?pwd=YkJ5RTBUd1B0SmVSTFFsODZUUG0wUT09
 											</Box>
 										</Link>
 									</Typography>
