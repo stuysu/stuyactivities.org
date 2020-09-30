@@ -233,6 +233,34 @@ const ClubPubFair = () => {
 							<ListItem style={{ padding: "1rem" }}>
 								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
 									<Typography style={{ paddingBottom: "3px" }}>
+										<Link href={"https://stuyactivities.org/mathgoalsforgirls"} color={"secondary"}>
+											Math Goals for Girls
+										</Link>
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>
+										Meeting code: 817 7767 2654
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: XB3ei6</Typography>
+									<Typography>
+										Meeting Link:{" "}
+										<Link
+											href={
+												"https://us02web.zoom.us/j/81777672654?pwd=Mmp2dzEzcXkraXRKNTJ4UnJhKzFBdz09"
+											}
+											style={{ paddingBottom: "3px" }}
+											color={"secondary"}
+										>
+											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
+												https://us02web.zoom.us/j/81777672654?pwd=Mmp2dzEzcXkraXRKNTJ4UnJhKzFBdz09
+											</Box>
+										</Link>
+									</Typography>
+								</div>
+							</ListItem>
+							<Divider />
+							<ListItem style={{ padding: "1rem" }}>
+								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
+									<Typography style={{ paddingBottom: "3px" }}>
 										<Link href={"https://stuyactivities.org/StuyMath"} color={"secondary"}>
 											StuyMath
 										</Link>
@@ -414,6 +442,34 @@ const ClubPubFair = () => {
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
 												https://zoom.us/j/95457070563?pwd=WlFWMlpBR3RWd3F3bC9PMDNDQjhpdz09
+											</Box>
+										</Link>
+									</Typography>
+								</div>
+							</ListItem>
+							<Divider />
+							<ListItem style={{ padding: "1rem" }}>
+								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
+									<Typography style={{ paddingBottom: "3px" }}>
+										<Link href={"https://stuyactivities.org/stuyresearchclub"} color={"secondary"}>
+											Stuyvesant Research Club
+										</Link>
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>
+										Meeting code: 856 8178 6407
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: 6XFqTe</Typography>
+									<Typography>
+										Meeting Link:{" "}
+										<Link
+											href={
+												"https://us02web.zoom.us/j/85681786407?pwd=bFJYMk5PMDRhTXhoRm9jdFlSOWcxQT09"
+											}
+											style={{ paddingBottom: "3px" }}
+											color={"secondary"}
+										>
+											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
+												https://us02web.zoom.us/j/85681786407?pwd=bFJYMk5PMDRhTXhoRm9jdFlSOWcxQT09
 											</Box>
 										</Link>
 									</Typography>
