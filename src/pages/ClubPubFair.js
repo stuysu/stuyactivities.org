@@ -66,7 +66,7 @@ const useStyles = makeStyles(() => ({
 
 const ClubPubFair = () => {
 	const classes = useStyles();
-	const [tab, setTab] = React.useState(0);
+	const [tab, setTab] = React.useState(1);
 	const user = React.useContext(UserContext);
 
 	const handleChange = (event, newTab) => {
@@ -137,7 +137,7 @@ const ClubPubFair = () => {
 							variant="scrollable"
 							scrollButtons="auto"
 						>
-							<Tab label="Day 1 Tue., Sep. 29" {...a11yProps(0)} />
+							<Tab label="Day 1 Tue., Sep. 29" {...a11yProps(0)} disabled />
 							<Tab label="Day 2 Wed., Sep. 30" {...a11yProps(1)} />
 							<Tab label="Day 3 Thu., Oct. 1" {...a11yProps(2)} />
 							<Tab label="Day 4 Fri., Oct. 2" {...a11yProps(3)} />
@@ -224,34 +224,6 @@ const ClubPubFair = () => {
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
 												https://us02web.zoom.us/j/84101012829?pwd=Z3gyU2dZTWFPcVJvMFBoZzYraVRhUT09
-											</Box>
-										</Link>
-									</Typography>
-								</div>
-							</ListItem>
-							<Divider />
-							<ListItem style={{ padding: "1rem" }}>
-								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
-									<Typography style={{ paddingBottom: "3px" }}>
-										<Link href={"https://stuyactivities.org/mathgoalsforgirls"} color={"secondary"}>
-											Math Goals for Girls
-										</Link>
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>
-										Meeting code: 817 7767 2654
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: XB3ei6</Typography>
-									<Typography>
-										Meeting Link:{" "}
-										<Link
-											href={
-												"https://us02web.zoom.us/j/81777672654?pwd=Mmp2dzEzcXkraXRKNTJ4UnJhKzFBdz09"
-											}
-											style={{ paddingBottom: "3px" }}
-											color={"secondary"}
-										>
-											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://us02web.zoom.us/j/81777672654?pwd=Mmp2dzEzcXkraXRKNTJ4UnJhKzFBdz09
 											</Box>
 										</Link>
 									</Typography>
@@ -442,34 +414,6 @@ const ClubPubFair = () => {
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
 												https://zoom.us/j/95457070563?pwd=WlFWMlpBR3RWd3F3bC9PMDNDQjhpdz09
-											</Box>
-										</Link>
-									</Typography>
-								</div>
-							</ListItem>
-							<Divider />
-							<ListItem style={{ padding: "1rem" }}>
-								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
-									<Typography style={{ paddingBottom: "3px" }}>
-										<Link href={"https://stuyactivities.org/stuyresearchclub"} color={"secondary"}>
-											Stuyvesant Research Club
-										</Link>
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>
-										Meeting code: 856 8178 6407
-									</Typography>
-									<Typography style={{ paddingBottom: "3px" }}>Passcode: 6XFqTe</Typography>
-									<Typography>
-										Meeting Link:{" "}
-										<Link
-											href={
-												"https://us02web.zoom.us/j/85681786407?pwd=bFJYMk5PMDRhTXhoRm9jdFlSOWcxQT09"
-											}
-											style={{ paddingBottom: "3px" }}
-											color={"secondary"}
-										>
-											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://us02web.zoom.us/j/85681786407?pwd=bFJYMk5PMDRhTXhoRm9jdFlSOWcxQT09
 											</Box>
 										</Link>
 									</Typography>
@@ -2264,6 +2208,62 @@ const ClubPubFair = () => {
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
 												https://zoom.us/j/96418745097?pwd=VjVvai8zTTFvMGxsa0FGK1k3ZkVPUT09
+											</Box>
+										</Link>
+									</Typography>
+								</div>
+							</ListItem>
+							<Divider />
+							<ListItem style={{ padding: "1rem" }}>
+								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
+									<Typography style={{ paddingBottom: "3px" }}>
+										<Link href={"https://stuyactivities.org/stuyresearchclub"} color={"secondary"}>
+											Stuyvesant Research Club
+										</Link>
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>
+										Meeting code: 815 4903 2239
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: research</Typography>
+									<Typography>
+										Meeting Link:{" "}
+										<Link
+											href={
+												"https://us02web.zoom.us/j/81549032239?pwd=UTJpc3N4VEFqamdIT09pVnp6VTFEQT09"
+											}
+											style={{ paddingBottom: "3px" }}
+											color={"secondary"}
+										>
+											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
+												https://us02web.zoom.us/j/81549032239?pwd=UTJpc3N4VEFqamdIT09pVnp6VTFEQT09
+											</Box>
+										</Link>
+									</Typography>
+								</div>
+							</ListItem>
+							<Divider />
+							<ListItem style={{ padding: "1rem" }}>
+								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
+									<Typography style={{ paddingBottom: "3px" }}>
+										<Link href={"https://stuyactivities.org/mathgoalsforgirls"} color={"secondary"}>
+											Math Goals for Girls
+										</Link>
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>
+										Meeting code: 820 5977 2940
+									</Typography>
+									<Typography style={{ paddingBottom: "3px" }}>Passcode: mgfg</Typography>
+									<Typography>
+										Meeting Link:{" "}
+										<Link
+											href={
+												"https://us02web.zoom.us/j/82059772940?pwd=WHoxdEVnRXNuYnpiWFgxS2xIblpIdz09"
+											}
+											style={{ paddingBottom: "3px" }}
+											color={"secondary"}
+										>
+											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
+												https://us02web.zoom.us/j/82059772940?pwd=WHoxdEVnRXNuYnpiWFgxS2xIblpIdz09
 											</Box>
 										</Link>
 									</Typography>
