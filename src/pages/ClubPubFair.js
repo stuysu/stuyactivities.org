@@ -11,8 +11,6 @@ import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import useTheme from "@material-ui/core/styles/useTheme";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -70,8 +68,6 @@ const ClubPubFair = () => {
 	const classes = useStyles();
 	const [tab, setTab] = React.useState(2);
 	const user = React.useContext(UserContext);
-	const theme = useTheme();
-	const mobile = useMediaQuery(theme.breakpoints.up("sm"));
 
 	const handleChange = (event, newTab) => {
 		setTab(newTab);
@@ -117,21 +113,22 @@ const ClubPubFair = () => {
 						meetings are found below, and they are organized based on when each club presents. If you have
 						any questions or concerns, please reach out to us at events@stuysu.org. Enjoy the fair!
 					</Typography>
-					<div style={{ width: "100%", whiteSpace: "noWrap" }}>
-						<Typography paragraph>
-							Webinar Link:{" "}
-							<Link
-								href={"https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ"}
-								target={"_blank"}
-								rel={"noopener noreferrer"}
-							>
-								<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-									https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ
-								</Box>
-							</Link>
-						</Typography>
-					</div>
 					<Typography paragraph>**NOTE: You must register with your stuy.edu email.</Typography>
+
+					<div style={{ width: "100%", whiteSpace: "noWrap", textAlign: "center" }}>
+						<iframe
+							src="https://www.youtube.com/embed/jUzq1VHeVLE"
+							frameBorder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowFullScreen
+							title="Day 1 Video"
+							style={{
+								width: "500px",
+								maxWidth: "100%",
+								height: "280px"
+							}}
+						/>
+					</div>
 					<Paper square>
 						<Tabs
 							value={tab}
@@ -149,29 +146,6 @@ const ClubPubFair = () => {
 							<Tab label="Day 6 Tues, Oct. 6" {...a11yProps(5)} />
 							<Tab label="Day 7 Wed., Oct. 7" {...a11yProps(6)} />
 						</Tabs>
-						<TabPanel value={tab} index={0}>
-							{mobile ? (
-								<iframe
-									width="100%"
-									height="600px"
-									src="https://www.youtube.com/embed/jUzq1VHeVLE"
-									frameBorder="0"
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-									allowFullScreen
-									title="Day 1 Video"
-								/>
-							) : (
-								<iframe
-									width="100%"
-									height="250px"
-									src="https://www.youtube.com/embed/jUzq1VHeVLE"
-									frameBorder="0"
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-									allowFullScreen
-									title="Day 1 Video"
-								/>
-							)}
-						</TabPanel>
 						<TabPanel value={tab} index={1}>
 							<ListItem style={{ padding: "1rem" }}>
 								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
