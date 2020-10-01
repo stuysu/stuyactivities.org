@@ -141,7 +141,7 @@ const ClubPubFair = () => {
 							variant="scrollable"
 							scrollButtons="auto"
 						>
-							<Tab label="Day 1 Tue., Sep. 29" {...a11yProps(0)} />
+							<Tab label="Day 1 Tue., Sep. 29" {...a11yProps(0)} disabled />
 							<Tab label="Day 2 Wed., Sep. 30" {...a11yProps(1)} disabled />
 							<Tab label="Day 3 Thu., Oct. 1" {...a11yProps(2)} />
 							<Tab label="Day 4 Fri., Oct. 2" {...a11yProps(3)} />
