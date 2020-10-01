@@ -911,18 +911,20 @@ const ClubPubFair = () => {
 										</Link>
 									</Typography>
 									<Typography style={{ paddingBottom: "3px" }}>
-										Meeting code: 968 7378 7310
+										Meeting code: 873 0472 6716
 									</Typography>
 									<Typography style={{ paddingBottom: "3px" }}>Passcode: malong</Typography>
 									<Typography>
 										Meeting Link:{" "}
 										<Link
-											href={"https://zoom.us/j/96873787310?pwd=dE9GVys2cXQ1cHBGOGhxVnFabnhsZz09"}
+											href={
+												"https://us02web.zoom.us/j/87304726716?pwd=ZlB2NSt3WDczVys0bGxsdUQvdkM2QT09"
+											}
 											style={{ paddingBottom: "3px" }}
 											color={"secondary"}
 										>
 											<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-												https://zoom.us/j/96873787310?pwd=dE9GVys2cXQ1cHBGOGhxVnFabnhsZz09
+												https://us02web.zoom.us/j/87304726716?pwd=ZlB2NSt3WDczVys0bGxsdUQvdkM2QT09
 											</Box>
 										</Link>
 									</Typography>
