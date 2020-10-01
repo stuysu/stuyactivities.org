@@ -132,7 +132,7 @@ const ExistingRequest = () => {
 
 			<p>
 				You've requested to join this club on{" "}
-				{moment(new Date(Number(org.membershipRequest.createdAt))).format("dddd, MMMM Do YYYY, h:mm a")}
+				{moment(new Date(org.membershipRequest.createdAt)).format("dddd, MMMM Do YYYY, h:mm a")}
 			</p>
 			{Boolean(org?.membershipRequest?.userMessage) && (
 				<p>

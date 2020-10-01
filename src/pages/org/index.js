@@ -65,6 +65,7 @@ const getQuery = signedIn => {
 					id
 					role
 					adminPrivileges
+					createdAt
 				}
 				membershipRequest {
 					id
