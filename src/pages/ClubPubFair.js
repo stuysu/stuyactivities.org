@@ -11,8 +11,6 @@ import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import useTheme from "@material-ui/core/styles/useTheme";
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -70,8 +68,6 @@ const ClubPubFair = () => {
 	const classes = useStyles();
 	const [tab, setTab] = React.useState(3);
 	const user = React.useContext(UserContext);
-	const theme = useTheme();
-	const mobile = useMediaQuery(theme.breakpoints.up("sm"));
 
 	const handleChange = (event, newTab) => {
 		setTab(newTab);
