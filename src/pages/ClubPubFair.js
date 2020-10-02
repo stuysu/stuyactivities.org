@@ -113,22 +113,20 @@ const ClubPubFair = () => {
 						meetings are found below, and they are organized based on when each club presents. If you have
 						any questions or concerns, please reach out to us at events@stuysu.org. Enjoy the fair!
 					</Typography>
+					<Typography>
+						Meeting Link:{" "}
+						<Link
+							href={"https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ"}
+							style={{ paddingBottom: "3px" }}
+							color={"primary"}
+						>
+							<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
+								https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ
+							</Box>
+						</Link>
+					</Typography>
 					<Typography paragraph>**NOTE: You must register with your stuy.edu email.</Typography>
 
-					<div style={{ width: "100%", whiteSpace: "noWrap", textAlign: "center" }}>
-						<iframe
-							src="https://www.youtube.com/embed/jUzq1VHeVLE"
-							frameBorder="0"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-							allowFullScreen
-							title="Day 1 Video"
-							style={{
-								width: "500px",
-								maxWidth: "100%",
-								height: "280px"
-							}}
-						/>
-					</div>
 					<Paper square>
 						<Tabs
 							value={tab}
