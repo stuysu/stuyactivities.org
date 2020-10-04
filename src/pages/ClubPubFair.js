@@ -66,7 +66,9 @@ const useStyles = makeStyles(() => ({
 
 const ClubPubFair = () => {
 	const classes = useStyles();
-	const [tab, setTab] = React.useState(3);
+
+	const dateOffset = Math.ceil((new Date() - new Date("2020-10-05T20:00:00")) / (1000 * 60 * 60 * 24));
+	const [tab, setTab] = React.useState(5 + (dateOffset < 3 ? dateOffset : 3));
 	const user = React.useContext(UserContext);
 
 	const handleChange = (event, newTab) => {
