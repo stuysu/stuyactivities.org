@@ -54,9 +54,8 @@ export default function Comments({ orgId, comments, changeComments }) {
 					</Button>
 				</CardContent>
 			</Card>
-			{
-				//First map reverses---can't use .reverse() because comments is read-only
-				comments
+			{//First map reverses---can't use .reverse() because comments is read-only
+			comments
 				.map((_, i) => comments[comments.length - 1 - i])
 				.map(comment => (
 					<Card className={classes.card}>
@@ -67,8 +66,7 @@ export default function Comments({ orgId, comments, changeComments }) {
 							<Typography>{comment.message}</Typography>
 						</CardContent>
 					</Card>
-				))
-			}
+				))}
 		</div>
 	);
 }
