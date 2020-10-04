@@ -1,14 +1,14 @@
 import React from "react";
 import { OrgContext } from "./index";
 import FlexCenter from "../../comps/ui/FlexCenter";
-import { Grid, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import Card from "@material-ui/core/Card";
-import ReactMarkdown from "react-markdown";
-import moment from "moment-timezone";
+import MeetingCards from "../../comps/pages/organization/MeetingCards";
+import Link from "@material-ui/core/Link";
+import Linkify from "linkifyjs/react";
 
 const Overview = () => {
 	const org = React.useContext(OrgContext);
@@ -26,9 +26,7 @@ const Overview = () => {
 
 				<Typography paragraph>
 					{!org.active && !org.charter.mission && (
-						<span style={{ color: "grey" }}>
-							This response is pending approval
-						</span>
+						<span style={{ color: "grey" }}>This response is pending approval</span>
 					)}
 					{org.charter.mission}
 				</Typography>
@@ -39,11 +37,22 @@ const Overview = () => {
 
 				<Typography paragraph>
 					{!org.active && !org.charter.meetingSchedule && (
-						<span style={{ color: "grey" }}>
-							This response is pending approval
-						</span>
+						<span style={{ color: "grey" }}>This response is pending approval</span>
 					)}
-					{org.charter.meetingSchedule}
+					<Linkify
+						options={{
+							tagName: "span",
+							format: function (value, type) {
+								return (
+									<Link href={value} target={"_blank"} color={"secondary"}>
+										{value}
+									</Link>
+								);
+							}
+						}}
+					>
+						{org.charter.meetingSchedule}
+					</Linkify>
 				</Typography>
 
 				<Typography variant={"h6"} color={"primary"}>
@@ -58,19 +67,11 @@ const Overview = () => {
 									<Avatar src={membership.user.picture} />
 								</ListItemAvatar>
 								<span>
-									<Typography>
-										{membership.user.name}
-									</Typography>
-									<Typography
-										color={"textSecondary"}
-										variant={"subtitle2"}
-									>
+									<Typography>{membership.user.name}</Typography>
+									<Typography color={"textSecondary"} variant={"subtitle2"}>
 										{membership.role}
 									</Typography>
-									<Typography
-										color={"textSecondary"}
-										variant={"subtitle2"}
-									>
+									<Typography color={"textSecondary"} variant={"subtitle2"}>
 										{membership.user.email}
 									</Typography>
 								</span>
@@ -85,48 +86,10 @@ const Overview = () => {
 				<br />
 
 				{!org.upcomingMeetings?.length && (
-					<span style={{ color: "grey" }}>
-						There currently are no upcoming meetings scheduled.
-					</span>
+					<span style={{ color: "grey" }}>There currently are no upcoming meetings scheduled.</span>
 				)}
 
-				<Grid>
-					{org.upcomingMeetings.map(meeting => {
-						const formattedStart = moment(meeting.start)
-							.tz("America/New_York")
-							.format("dddd, MMMM Do YYYY, h:mm a");
-
-						const formattedEnd = moment(meeting.end)
-							.tz("America/New_York")
-							.format("dddd, MMMM Do YYYY, h:mm a");
-
-						return (
-							<Grid
-								item
-								xs={12}
-								sm={6}
-								md={6}
-								lg={4}
-								xl={4}
-								key={meeting.id}
-							>
-								<Card style={{ padding: "1rem" }}>
-									<Typography
-										variant={"h6"}
-										color={"secondary"}
-									>
-										{meeting.title}
-									</Typography>
-									<p>Starts: {formattedStart}</p>
-									<p>Ends: {formattedEnd}</p>
-									<ReactMarkdown
-										source={meeting.description}
-									/>
-								</Card>
-							</Grid>
-						);
-					})}
-				</Grid>
+				<MeetingCards meetings={org.upcomingMeetings} />
 			</div>
 		</FlexCenter>
 	);

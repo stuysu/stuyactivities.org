@@ -44,11 +44,7 @@ const BasicInfoForm = () => {
 						}}
 						error={Boolean(form?.errors?.name)}
 						required
-						helperText={
-							form?.errors?.name && (
-								<span>{form?.errors?.name}</span>
-							)
-						}
+						helperText={form?.errors?.name && <span>{form?.errors?.name}</span>}
 						fullWidth
 					/>
 				</Grid>
@@ -73,28 +69,16 @@ const BasicInfoForm = () => {
 					"Choose between 1 to 3 keywords relating to your activity. They will not be publicly visible but they will help your activity show up in search results. This can be things like alternate names or acronyms. For example, the Student Union might add 'SU' as a keyword. Separate your entries with the spacebar, enter button, or with commas."
 				}
 				onAdd={chip => {
-					if (
-						chip &&
-						(form?.keywords || [])?.filter(Boolean).length < 3
-					) {
+					if (chip && (form?.keywords || [])?.filter(Boolean).length < 3) {
 						form.set({
 							keywords: arrayToggle(chip, form.keywords || [])
 						});
 					}
 				}}
-				onDelete={chip =>
-					form.set({ keywords: arrayToggle(chip, form.keywords) })
-				}
+				onDelete={chip => form.set({ keywords: arrayToggle(chip, form.keywords) })}
 				chipRenderer={chip => {
 					if (chip.value) {
-						return (
-							<Chip
-								key={chip.value}
-								label={chip.value}
-								color="primary"
-								className={classes.chip}
-							/>
-						);
+						return <Chip key={chip.value} label={chip.value} color="primary" className={classes.chip} />;
 					}
 					return null;
 				}}

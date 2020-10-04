@@ -45,12 +45,7 @@ const AuthContent = () => {
 					<Typography variant="h6" className={classes.title}>
 						Login To StuyActivities
 					</Typography>
-					<IconButton
-						edge="end"
-						color="inherit"
-						onClick={authContext.handleClose}
-						aria-label="close"
-					>
+					<IconButton edge="end" color="inherit" onClick={authContext.handleClose} aria-label="close">
 						<CloseIcon />
 					</IconButton>
 				</Toolbar>

@@ -16,7 +16,9 @@ import {
 	Home,
 	Info,
 	LockOpen,
-	PowerSettingsNew
+	PowerSettingsNew,
+	AccountBox,
+	EmojiFlags
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
@@ -60,11 +62,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 	}, [location, setDrawerOpen]);
 
 	return (
-		<Drawer
-			anchor={"left"}
-			open={drawerOpen}
-			onClose={() => setDrawerOpen(false)}
-		>
+		<Drawer anchor={"left"} open={drawerOpen} onClose={() => setDrawerOpen(false)}>
 			<div className={classes.avatarContainer}>
 				{user.signedIn ? (
 					<div>
@@ -72,23 +70,15 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<Typography variant={"h6"}>{user?.name}</Typography>
 						<Typography variant={"body2"}>{user?.email}</Typography>
 						{Boolean(user?.fourDigitId) && (
-							<Typography variant={"body2"}>
-								Four Digit ID: {user?.fourDigitId}
-							</Typography>
+							<Typography variant={"body2"}>Four Digit ID: {user?.fourDigitId}</Typography>
 						)}
 						<Typography variant={"body2"}>
-							{user?.isFaculty
-								? "Faculty"
-								: gradeLabels[user?.grade]}
+							{user?.isFaculty ? "Faculty" : gradeLabels[user?.grade]}
 						</Typography>
 					</div>
 				) : (
 					<div>
-						<img
-							src={Logo}
-							className={classes.avatar}
-							alt={"Student Union Logo"}
-						/>
+						<img src={Logo} className={classes.avatar} alt={"Student Union Logo"} />
 						<Typography variant={"h6"}>StuyActivities</Typography>
 					</div>
 				)}
@@ -142,24 +132,30 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItemIcon>
 					<ListItemText primary={"Archive"} />
 				</ListItem>
+
 				{user.signedIn && (
 					<>
-						<ListSubheader disableSticky>
-							My Activities
-						</ListSubheader>
+						<UnstyledLink to={"/clubpubfair"}>
+							<ListItem button>
+								<ListItemIcon>
+									<EmojiFlags />
+								</ListItemIcon>
+								<ListItemText primary={"Clubs & Pubs Fair"} />
+							</ListItem>
+						</UnstyledLink>
+					</>
+				)}
+
+				{user.signedIn && (
+					<>
+						<ListSubheader disableSticky>My Activities</ListSubheader>
 						{user.memberships?.map(membership => (
-							<UnstyledLink
-								key={membership.id}
-								to={`/${membership?.organization?.url}`}
-							>
+							<UnstyledLink key={membership.id} to={`/${membership?.organization?.url}`}>
 								<ListItem button>
 									<ListItemAvatar>
 										<Avatar
 											alt={membership?.organization?.name}
-											src={
-												membership?.organization
-													?.charter?.picture
-											}
+											src={membership?.organization?.charter?.picture}
 										/>
 									</ListItemAvatar>
 									<ListItemText
@@ -198,6 +194,19 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Rules"} />
 					</ListItem>
 				</UnstyledLink>
+
+				{user?.adminRoles !== undefined || {} ? (
+					<UnstyledLink to={"/admin"}>
+						<ListItem button>
+							<ListItemIcon>
+								<AccountBox />
+							</ListItemIcon>
+							<ListItemText primary={"Admin Panel"} />
+						</ListItem>
+					</UnstyledLink>
+				) : (
+					<></>
+				)}
 			</List>
 		</Drawer>
 	);

@@ -7,6 +7,12 @@ const useFilterStyles = makeStyles(theme => ({
 	},
 	accordionChild: {
 		"padding-left": theme.spacing(1)
+	},
+	tagContainer: {
+		padding: theme.spacing(1)
+	},
+	tag: {
+		margin: "3px"
 	}
 }));
 

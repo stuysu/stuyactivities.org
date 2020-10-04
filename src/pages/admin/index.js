@@ -51,15 +51,8 @@ export default function AdminRouter({ match }) {
 			<RouteTabs tabs={tabs} />
 
 			<Switch>
-				<Route
-					path={match.path + "/approvals"}
-					component={Approvals}
-					exact
-				/>
-				<Route
-					path={match.path + "/approvals/:url"}
-					component={OrgApprovals}
-				/>
+				<Route path={match.path + "/approvals"} component={Approvals} exact />
+				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
 				<Route path={match.path + "/help"} component={Approvals} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />

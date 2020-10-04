@@ -16,6 +16,12 @@ import arrayToggle from "../../../utils/arrayToggle";
 import { cache } from "../../../comps/context/ApolloProvider";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
+import Linkify from "linkifyjs/react";
+import Link from "@material-ui/core/Link";
+
+// THIS FILE IS UNCOMFORTABLY HUGE
+// TODO WHEN WE HAVE MORE TIME: EXPORT CODE INTO SEPARATE COMPONENTS
+
 const QUERY = gql`
 	query($orgId: Int!) {
 		charter(orgId: $orgId) {
@@ -121,12 +127,7 @@ const SaveButton = ({ disabled }) => {
 	};
 
 	return (
-		<Button
-			onClick={onClick}
-			color={"primary"}
-			variant={"contained"}
-			disabled={disabled || loading}
-		>
+		<Button onClick={onClick} color={"primary"} variant={"contained"} disabled={disabled || loading}>
 			Save Changes
 		</Button>
 	);
@@ -180,8 +181,7 @@ class CharterEditForm extends React.Component {
 		{
 			name: "benefit",
 			label: "Activity Benefit",
-			helperText:
-				"How will this activity benefit the Stuyvesant community? ",
+			helperText: "How will this activity benefit the Stuyvesant community? ",
 			minWords: 200,
 			maxWords: 400,
 			multiline: true,
@@ -209,8 +209,7 @@ class CharterEditForm extends React.Component {
 		{
 			name: "extra",
 			required: false,
-			label:
-				"What additional things would you like to share about your activity?",
+			label: "What additional things would you like to share about your activity?",
 			helperText:
 				"(Optional) This information will be public, so if it’s private or a question for the Clubs and Pubs department, please let us know at clubpub@stuysu.org.",
 			maxChars: 1000,
@@ -230,10 +229,7 @@ class CharterEditForm extends React.Component {
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		const newResponseFields = Object.keys(this.props.latestChanges);
-		if (
-			newResponseFields.length !==
-			Object.keys(prevProps.latestChanges).length
-		) {
+		if (newResponseFields.length !== Object.keys(prevProps.latestChanges).length) {
 			const responses = {};
 			newResponseFields.forEach(field => {
 				responses[field] = this.props.latestChanges[field].value;
@@ -255,10 +251,7 @@ class CharterEditForm extends React.Component {
 		}
 
 		if (!file.type.startsWith("image/")) {
-			this.setError(
-				"picture",
-				"The file uploaded must be a valid picture"
-			);
+			this.setError("picture", "The file uploaded must be a valid picture");
 			return;
 		}
 
@@ -289,29 +282,19 @@ class CharterEditForm extends React.Component {
 							<Typography>
 								Picture -{" "}
 								{this.state.editing.includes("picture") ? (
-									<span style={{ color: "#7f8c8d" }}>
-										Editing
-									</span>
+									<span style={{ color: "#7f8c8d" }}>Editing</span>
 								) : (
 									<span
 										style={{
 											color:
-												this.props.latestChanges
-													?.picture?.status ===
-												"approved"
+												this.props.latestChanges?.picture?.status === "approved"
 													? "#27ae60"
-													: this.props.latestChanges
-															?.picture
-															?.status ===
-													  "denied"
+													: this.props.latestChanges?.picture?.status === "denied"
 													? "#e74c3c"
 													: "#7f8c8d"
 										}}
 									>
-										{capitalizeString(
-											this.props.latestChanges?.picture
-												?.status || "Not Submitted"
-										)}
+										{capitalizeString(this.props.latestChanges?.picture?.status || "Not Submitted")}
 									</span>
 								)}
 							</Typography>
@@ -320,12 +303,8 @@ class CharterEditForm extends React.Component {
 								style={{ width: "200px", height: "200px" }}
 								src={
 									this.state.editing.includes("picture")
-										? window.URL.createObjectURL(
-												this.state.picture
-										  )
-										: this.props.latestChanges?.picture
-												?.value ||
-										  this.props.org.charter.picture
+										? window.URL.createObjectURL(this.state.picture)
+										: this.props.latestChanges?.picture?.value || this.props.org.charter.picture
 								}
 							/>
 							<input
@@ -340,13 +319,9 @@ class CharterEditForm extends React.Component {
 									onClick={() => {
 										this.setState({
 											picture:
-												this.props.latestChanges
-													?.picture?.value ||
+												this.props.latestChanges?.picture?.value ||
 												this.props.org.charter.picture,
-											editing: arrayToggle(
-												"picture",
-												this.state.editing
-											)
+											editing: arrayToggle("picture", this.state.editing)
 										});
 									}}
 									color={"secondary"}
@@ -354,11 +329,7 @@ class CharterEditForm extends React.Component {
 									Clear Uploaded Pic
 								</Button>
 							) : (
-								<Button
-									onClick={this.changePic}
-									color={"secondary"}
-									variant={"outlined"}
-								>
+								<Button onClick={this.changePic} color={"secondary"} variant={"outlined"}>
 									Upload New Picture
 								</Button>
 							)}
@@ -366,13 +337,9 @@ class CharterEditForm extends React.Component {
 					</ListItem>
 
 					{CharterEditForm.questions.map(question => {
-						const isEditing = this.state.editing.includes(
-							question.name
-						);
+						const isEditing = this.state.editing.includes(question.name);
 
-						const status =
-							this.props.latestChanges[question.name]?.status ||
-							"Not Submitted";
+						const status = this.props.latestChanges[question.name]?.status || "Not Submitted";
 
 						let statusColor = "#7f8c8d";
 
@@ -395,9 +362,7 @@ class CharterEditForm extends React.Component {
 									<Typography>
 										{question.label} -{" "}
 										{isEditing ? (
-											<span style={{ color: "#7f8c8d" }}>
-												Editing
-											</span>
+											<span style={{ color: "#7f8c8d" }}>Editing</span>
 										) : (
 											<span
 												style={{
@@ -415,27 +380,17 @@ class CharterEditForm extends React.Component {
 											fullWidth
 											onBlur={() => {
 												if (
-													this.props.latestChanges[
-														question.name
-													]?.value?.trim() ===
-													this.state[
-														question.name
-													]?.trim()
+													this.props.latestChanges[question.name]?.value?.trim() ===
+													this.state[question.name]?.trim()
 												) {
 													this.setState({
-														editing: arrayToggle(
-															question.name,
-															this.state.editing
-														)
+														editing: arrayToggle(question.name, this.state.editing)
 													});
 												}
 											}}
 										/>
 									) : (
-										<Typography
-											color={"textSecondary"}
-											variant={"subtitle2"}
-										>
+										<Typography color={"textSecondary"} variant={"subtitle2"}>
 											{this.state[question.name]}
 										</Typography>
 									)}
@@ -445,10 +400,7 @@ class CharterEditForm extends React.Component {
 										<Button
 											onClick={() =>
 												this.setState({
-													editing: [
-														...this.state.editing,
-														question.name
-													]
+													editing: [...this.state.editing, question.name]
 												})
 											}
 										>
@@ -466,9 +418,7 @@ class CharterEditForm extends React.Component {
 						disabled={
 							!this.state.editing.length ||
 							!this.state.editing.some(
-								field =>
-									this.state[field] !==
-									this.props.latestChanges[field]?.value
+								field => this.state[field] !== this.props.latestChanges[field]?.value
 							)
 						}
 					/>
@@ -546,46 +496,51 @@ const ApprovalMessages = () => {
 				ref={messageRef}
 			>
 				<List>
-					{data?.organization?.charterApprovalMessages?.map(
-						message => {
-							return (
-								<ListItem>
-									<ListItemAvatar>
-										<Avatar src={message?.user?.picture} />
-									</ListItemAvatar>
-									<div>
-										<p
-											style={{
-												color: message?.auto
-													? "grey"
-													: "black"
-											}}
-										>
-											{message?.user?.name} -{" "}
-											{message?.auto
-												? "Automatic Message"
-												: message?.user?.adminRoles
-														?.length
-												? "ClubPub Team"
-												: "Organization Admin"}
-										</p>
-										<p
-											style={{
-												fontStyle: message?.auto
-													? "italic"
-													: "normal",
-												color: message?.auto
-													? "grey"
-													: "black"
+					{data?.organization?.charterApprovalMessages?.map(message => {
+						return (
+							<ListItem>
+								<ListItemAvatar>
+									<Avatar src={message?.user?.picture} />
+								</ListItemAvatar>
+								<div>
+									<p
+										style={{
+											color: message?.auto ? "grey" : "black"
+										}}
+									>
+										{message?.user?.name} -{" "}
+										{message?.auto
+											? "Automatic Message"
+											: message?.user?.adminRoles?.length
+											? "ClubPub Team"
+											: "Organization Admin"}
+									</p>
+									<p
+										style={{
+											fontStyle: message?.auto ? "italic" : "normal",
+											color: message?.auto ? "grey" : "black",
+											overflowWrap: "anywhere"
+										}}
+									>
+										<Linkify
+											options={{
+												tagName: "span",
+												format: function (value) {
+													return (
+														<Link href={value} target={"_blank"}>
+															{value}
+														</Link>
+													);
+												}
 											}}
 										>
 											{message?.message}
-										</p>
-									</div>
-								</ListItem>
-							);
-						}
-					)}
+										</Linkify>
+									</p>
+								</div>
+							</ListItem>
+						);
+					})}
 				</List>
 				<div
 					style={{
@@ -605,11 +560,7 @@ const ApprovalMessages = () => {
 						style={{ flexGrow: 1 }}
 					/>
 					&nbsp;
-					<Button
-						variant={"contained"}
-						color={"secondary"}
-						onClick={onSubmit}
-					>
+					<Button variant={"contained"} color={"secondary"} onClick={onSubmit}>
 						Send
 					</Button>
 				</div>
@@ -628,9 +579,7 @@ const CharterEdits = () => {
 		if (data) {
 			data.charterEdits.forEach(edit => {
 				edit.alteredFields.forEach(field => {
-					const shouldUpdate =
-						!newChanges[field] ||
-						newChanges[field]?.createdAt < new Date(edit.createdAt);
+					const shouldUpdate = !newChanges[field] || newChanges[field]?.createdAt < new Date(edit.createdAt);
 
 					if (shouldUpdate) {
 						newChanges[field] = {

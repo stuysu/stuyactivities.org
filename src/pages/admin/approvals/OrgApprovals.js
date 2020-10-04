@@ -1,52 +1,138 @@
 import React from "react";
-import {
-	Avatar,
-	Button,
-	Card,
-	CardContent,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogContentText,
-	DialogTitle,
-	FormControlLabel,
-	Grid,
-	makeStyles,
-	Switch,
-	Typography
-} from "@material-ui/core";
-import Comments from "../../../comps/pages/admin/Comments";
-import { gql } from "@apollo/client";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import UserContext from "../../../comps/context/UserContext";
-//import Diff from "diff"
-const Diff = require("diff");
+import { gql, useMutation, useQuery } from "@apollo/client";
+import BackButton from "../../../comps/ui/BackButton";
+import layout from "./../../../styles/Layout.module.css";
+import Loading from "../../../comps/ui/Loading";
+import { Button, Divider, Grid, Typography } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import moment from "moment-timezone";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import capitalizeString from "../../../utils/capitalizeString";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import TextField from "@material-ui/core/TextField";
+import { cache } from "../../../comps/context/ApolloProvider";
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		padding: theme.spacing(2)
-	},
-	title: {
-		"text-align": "center",
-		margin: theme.spacing(2)
-	},
-	flex: {
-		display: "flex",
-		"align-items": "flex-start",
-		"justify-content": "flex-start",
-		padding: theme.spacing(1)
-	},
-	card: {
-		"margin-top": theme.spacing(1),
-		"margin-bottom": theme.spacing(1)
-	},
-	grow: {
-		width: "100%"
+import Linkify from "linkifyjs/react";
+
+const CREATE_MESSAGE_MUTATION = gql`
+	mutation($orgId: Int!, $message: String!) {
+		createCharterApprovalMessage(orgId: $orgId, message: $message) {
+			id
+		}
 	}
-}));
+`;
 
-const QUERY = gql`
-	query Organization($url: String) {
+const ApprovalMessages = ({ organization, refetch }) => {
+	const [message, setMessage] = React.useState("");
+
+	const [submitMessage] = useMutation(CREATE_MESSAGE_MUTATION, {
+		variables: { message, orgId: organization.id }
+	});
+	const messageRef = React.createRef();
+
+	React.useEffect(() => {
+		messageRef.current.scrollTop = messageRef.current.scrollHeight;
+	}, [messageRef]);
+
+	const onSubmit = () => {
+		submitMessage()
+			.then(() => cache.reset())
+			.then(() => refetch())
+			.then(() => setMessage(""));
+	};
+
+	return (
+		<>
+			<h3>Messages:</h3>
+			<div
+				style={{
+					width: "100%",
+					borderRadius: "10px",
+					border: "solid 2px black",
+					maxHeight: "350px",
+					position: "relative",
+					overflow: "auto"
+				}}
+				ref={messageRef}
+			>
+				<List>
+					{organization?.charterApprovalMessages?.map(message => {
+						return (
+							<ListItem>
+								<ListItemAvatar>
+									<Avatar src={message?.user?.picture} />
+								</ListItemAvatar>
+								<div style={{ display: "flex" }}>
+									<div style={{ flexGrow: 1 }}>
+										<p
+											style={{
+												color: message?.auto ? "grey" : "black"
+											}}
+										>
+											{message?.user?.name} -{" "}
+											{message?.auto
+												? "Automatic Message"
+												: message?.user?.adminRoles?.length
+												? "ClubPub Team"
+												: "Organization Admin"}{" "}
+											<span style={{ color: "grey" }}>
+												({moment(message.createdAt).format("MM/DD/YY h:mma")})
+											</span>
+										</p>
+										<p
+											style={{
+												fontStyle: message?.auto ? "italic" : "normal",
+												color: message?.auto ? "grey" : "black",
+												overflowWrap: "anywhere"
+											}}
+										>
+											<Linkify
+												properties={{
+													target: "_blank",
+													style: { color: "red", fontWeight: "bold" }
+												}}
+											>
+												{message?.message}
+											</Linkify>
+										</p>
+									</div>
+								</div>
+							</ListItem>
+						);
+					})}
+				</List>
+				<div
+					style={{
+						position: "sticky",
+						bottom: 0,
+						padding: "1rem",
+						background: "white",
+						verticalAlign: "middle",
+						display: "flex"
+					}}
+				>
+					<TextField
+						value={message}
+						onChange={ev => setMessage(ev.target.value)}
+						variant={"outlined"}
+						placeholder={"Message for StuyActivities Admins"}
+						style={{ flexGrow: 1 }}
+					/>
+					&nbsp;
+					<Button variant={"contained"} color={"secondary"} onClick={onSubmit}>
+						Send
+					</Button>
+				</div>
+			</div>
+		</>
+	);
+};
+
+const ORG_QUERY = gql`
+	query($url: String!) {
 		organization(url: $url) {
 			id
 			name
@@ -60,15 +146,21 @@ const QUERY = gql`
 				meetingSchedule
 				meetingDays
 				commitmentLevel
-				extra
 				keywords
+				extra
+				updatedAt
 			}
+
 			charterEdits {
 				id
-				submittingUser {
-					name
-				}
 				picture
+				submittingUser {
+					id
+					name
+					email
+				}
+				status
+				createdAt
 				mission
 				purpose
 				benefit
@@ -79,444 +171,273 @@ const QUERY = gql`
 				commitmentLevel
 				extra
 				alteredFields
-				status
 				keywords
 			}
-			charterApprovalMessages {
-				message
+			memberships(onlyLeaders: true) {
+				role
 				user {
 					name
+					email
+					isFaculty
+					picture
+				}
+			}
+			membershipRequests {
+				role
+				user {
+					name
+					email
+					isFaculty
+					picture
+				}
+				userApproval
+			}
+			charterApprovalMessages {
+				id
+				message
+				user {
+					id
+					name
+					email
+					adminRoles {
+						role
+					}
 				}
 				auto
+				createdAt
 			}
 		}
 	}
 `;
-const APPROVE = gql`
-	mutation Approve($charterEditID: Int!, $fields: [String!]!) {
-		approveCharterFields(charterEditId: $charterEditID, fields: $fields) {
+
+const APPROVE_MUTATION = gql`
+	mutation($editId: Int!, $fields: [String!]!) {
+		approveCharterFields(charterEditId: $editId, fields: $fields) {
 			id
-		}
-	}
-`;
-const REJECT = gql`
-	mutation Reject($charterEditID: Int!, $fields: [String!]!) {
-		rejectCharterFields(charterEditId: $charterEditID, fields: $fields) {
-			id
+			alteredFields
 		}
 	}
 `;
 
-const DiffComponent = ({ old, next }) => {
-	old = old === null ? "" : old;
-	next = next === null ? "" : next;
-	return (
-		<Typography>
-			{Diff.diffSentences(old, next).map(part => (
-				<span
-					style={{
-						background: part.added
-							? "lightgreen"
-							: part.removed
-							? "salmon"
-							: ""
-					}}
-				>
-					{part.value}
-				</span>
-			))}
-		</Typography>
-	);
-};
-
-const OrgApprovals = props => {
-	const classes = useStyles();
-
-	const [data, setData] = React.useState({});
-	const [dialogOptions, setDialogOptions] = React.useState({
-		open: false,
-		user: "",
-		changeTo: "",
-		change: "",
-		action: "reject"
-	});
-	const [showDifference, setShowDifference] = React.useState(false);
-	const [skip, setSkip] = React.useState(false);
-
-	const [approveQuery] = useMutation(APPROVE);
-	const [rejectQuery] = useMutation(REJECT);
-	const user = React.useContext(UserContext);
-
-	const { data: fetchData, error, loading, refetch } = useQuery(QUERY, {
-		variables: { url: props.match.params.url },
-		fetchPolicy: "no-cache",
-		skip
-	});
-	React.useEffect(() => {
-		if (!loading && fetchData?.organization) {
-			//need to make a copy because fetchData is read-only
-			const newData = {
-				organization: {
-					...fetchData.organization,
-					charter: {
-						...fetchData.organization.charter,
-						meetingDays: fetchData.organization.charter.meetingDays.slice(
-							0
-						)
-					}
-				}
-			};
-			if (newData.organization.charter.meetingDays) {
-				newData.organization.charter.meetingDays = newData.organization.charter.meetingDays.join(
-					", "
-				);
-			}
-			newData.organization.charterEdits = newData.organization.charterEdits.map(
-				edit => {
-					if (edit.alteredFields.includes("meetingDays")) {
-						return {
-							...edit,
-							meetingDays: edit.meetingDays.join(", ")
-						};
-					}
-					return edit;
-				}
-			);
-			setData(newData);
-			setSkip(true);
+const REJECT_MUTATION = gql`
+	mutation($editId: Int!, $fields: [String!]!) {
+		rejectCharterFields(charterEditId: $editId, fields: $fields) {
+			id
+			alteredFields
 		}
-	}, [loading, fetchData]);
-	if (!user?.adminRoles?.map(e => e.role).includes("charters")) {
+	}
+`;
+
+const OrgApprovals = ({ match }) => {
+	const { data, refetch, loading } = useQuery(ORG_QUERY, {
+		variables: { url: match.params.url }
+	});
+
+	const [approve] = useMutation(APPROVE_MUTATION, { update: cache => cache.reset().then(() => refetch()) });
+	const [reject] = useMutation(REJECT_MUTATION, { update: cache => cache.reset().then(() => refetch()) });
+
+	if (loading) {
+		return <Loading />;
+	}
+
+	if (!data?.organization) {
 		return (
-			<p>You do not have the proper admin role to access this page!</p>
+			<div className={layout.container}>
+				<main className={layout.main}>
+					<p>There are no organizations with that url</p>
+					<BackButton to={"/admin/approvals"} label={"Back to Approvals"} />
+				</main>
+			</div>
 		);
 	}
-	if (error) return <p>There was an error fetching data</p>;
-	if (!data?.organization) return <p>Loading</p>;
 
-	const individualPopup = (id, changeTo, action) => {
-		setDialogOptions({
-			id,
-			open: true,
-			user: data.organization.charterEdits.find(e => e.id === id)
-				.submittingUser.name,
-			changeTo,
-			change: data.organization.charterEdits.find(e => e.id === id)[
-				changeTo
-			],
-			action
-		});
-	};
-	const closePopup = () => {
-		setDialogOptions({ ...dialogOptions, open: false });
-	};
-	const approveallPopup = id => {
-		setDialogOptions({
-			id,
-			open: true,
-			user: data.organization.charterEdits.find(e => e.id === id)
-				.submittingUser.name,
-			changeTo: "",
-			change: "",
-			action: "approve all"
-		});
-	};
-	const performAction = (id, user, changeTo, action) => {
-		const charterEditIndex = data.organization.charterEdits.findIndex(
-			e => e.id === id
-		);
-		if (action === "approve all") {
-			approveQuery({
-				variables: {
-					charterEditID: id,
-					fields:
-						data.organization.charterEdits[charterEditIndex]
-							.alteredFields
-				}
-			});
-			data.organization.charterEdits.splice(charterEditIndex, 1);
-		} else {
-			if (action === "approve") {
-				approveQuery({
-					variables: { charterEditID: id, fields: [changeTo] }
-				});
-			} else {
-				rejectQuery({
-					variables: { charterEditID: id, fields: [changeTo] }
-				});
-			}
-			delete data.organization.charterEdits[charterEditIndex][changeTo];
-			data.organization.charterEdits[
-				charterEditIndex
-			].alteredFields.splice(
-				data.organization.charterEdits[
-					charterEditIndex
-				].alteredFields.indexOf(changeTo),
-				1
-			);
-			if (
-				data.organization.charterEdits[charterEditIndex].alteredFields
-					.length < 1
-			) {
-				data.organization.charterEdits.splice(charterEditIndex, 1);
-			}
-		}
-		setData(data);
-		setDialogOptions({ ...dialogOptions, open: false });
-	};
-
-	const changeComments = () => {
-		console.log("ran");
-		setSkip(false);
-		refetch();
-	};
 	return (
-		<div className={classes.root}>
-			<Typography variant={"h3"} className={classes.title}>
-				Charter Changes for {data.organization.name}
-			</Typography>
-			<Grid container spacing={4} className={classes.container}>
-				<Grid item xs={7} className={classes.margin}>
-					{Object.keys(data.organization.charterEdits).length ===
-					0 ? (
-						<div>
-							<Typography>
-								You've dealt with all of the changes!
-							</Typography>
-							<Button href="/admin/approvals" color="primary">
-								Back
-							</Button>
-						</div>
-					) : (
-						<FormControlLabel
-							style={{ height: 41.9833 }}
-							control={
-								<Switch
-									checked={showDifference}
-									onChange={e =>
-										setShowDifference(e.target.checked)
-									}
-									color="primary"
-								/>
-							}
-							label="Show Differences"
-						/>
-					)}
+		<div>
+			<h2>Charter Approvals For {data.organization.name}</h2>
+			<Grid container spacing={5}>
+				<Grid item lg={8}>
 					{data.organization.charterEdits
-						.filter(e => e.status === "pending")
+						.filter(edit => edit.status === "pending")
 						.map(edit => {
 							return (
-								<div>
-									<Card className={classes.card}>
-										<CardContent>
-											<div className={classes.flex}>
-												<Typography
-													variant={"h5"}
-													className={classes.grow}
-												>
-													Changes by{" "}
-													{edit.submittingUser.name}
-												</Typography>
-												<Button
-													onClick={() =>
-														approveallPopup(edit.id)
-													}
-													style={{
-														"white-space": "nowrap"
-													}}
-													color="primary"
-												>
-													Approve All
-												</Button>
-											</div>
-											{edit.alteredFields.map(field => {
-												if (field === "picture") {
-													return (
+								<Card
+									style={{
+										padding: "0.5rem",
+										position: "relative"
+									}}
+								>
+									<div style={{ display: "flex" }}>
+										<h3 style={{ flexGrow: 1 }}>
+											Changes Proposed By: {edit.submittingUser.name} ({edit.submittingUser.email}
+											)
+										</h3>
+										<div>
+											<Button
+												variant={"outlined"}
+												color={"secondary"}
+												onClick={() =>
+													window.confirm("Are you sure you want to reject all changes") &&
+													reject({
+														variables: { fields: edit.alteredFields, editId: edit.id }
+													})
+												}
+											>
+												Reject All
+											</Button>
+											&nbsp; &nbsp; &nbsp;
+											<Button
+												variant={"contained"}
+												color={"primary"}
+												onClick={() =>
+													window.confirm("Are you sure you want to approve all changes") &&
+													approve({
+														variables: { fields: edit.alteredFields, editId: edit.id }
+													})
+												}
+											>
+												Approve All
+											</Button>
+										</div>
+									</div>
+									<p>Proposed at: {moment(edit.createdAt).format("dddd, MMMM Do YYYY, h:mm a")}</p>
+									<List>
+										{edit.alteredFields.map((field, index) => {
+											let value = edit[field];
+
+											if (Array.isArray(value)) {
+												value = value.join(", ");
+											}
+
+											return (
+												<>
+													<ListItem>
 														<div
-															className={
-																classes.flex
-															}
+															style={{
+																maxWidth: "80%"
+															}}
 														>
-															<div
-																className={
-																	classes.grow
-																}
-															>
-																<Typography
-																	variant={
-																		"h6"
-																	}
-																>
-																	Change to{" "}
-																	{field}:
-																</Typography>
+															<h4>{capitalizeString(field)}</h4>
+															{field === "picture" ? (
 																<Avatar
-																	src={
-																		edit.picture
-																	}
+																	src={value}
 																	style={{
-																		width:
-																			"200px",
-																		height:
-																			"200px"
+																		width: 200,
+																		height: 200
 																	}}
 																/>
-															</div>
-															<div>
-																<Button
-																	onClick={() =>
-																		individualPopup(
-																			edit.id,
-																			field,
-																			"reject"
-																		)
-																	}
-																	color="primary"
-																>
-																	Reject
-																</Button>
-																<br />
-																<Button
-																	onClick={() =>
-																		individualPopup(
-																			edit.id,
-																			field,
-																			"approve"
-																		)
-																	}
-																	color="primary"
-																>
-																	Approve
-																</Button>
-															</div>
-														</div>
-													);
-												}
-
-												let old =
-													data.organization.charter[
-														field
-													] || "";
-
-												if (Array.isArray(old)) {
-													old = old.join(", ");
-												}
-
-												let val = edit[field] || "";
-
-												if (Array.isArray(val)) {
-													val = val.join(", ");
-												}
-
-												return (
-													<div
-														className={classes.flex}
-													>
-														<div
-															className={
-																classes.grow
-															}
-														>
-															<Typography
-																variant={"h6"}
-															>
-																Change to{" "}
-																{field}:
-															</Typography>
-															{showDifference ? (
-																<DiffComponent
-																	old={old}
-																	next={val}
-																/>
 															) : (
-																<Typography>
-																	{val}
-																</Typography>
+																<p>{value}</p>
 															)}
 														</div>
-														<div>
+														<ListItemSecondaryAction>
 															<Button
+																variant={"outlined"}
+																color={"secondary"}
 																onClick={() =>
-																	individualPopup(
-																		edit.id,
-																		field,
-																		"reject"
-																	)
+																	window.confirm(
+																		"Are you sure you want to reject " + field
+																	) &&
+																	reject({
+																		variables: { fields: [field], editId: edit.id }
+																	})
 																}
-																color="primary"
 															>
 																Reject
 															</Button>
 															<br />
+															<br />
 															<Button
+																variant={"contained"}
+																color={"primary"}
 																onClick={() =>
-																	individualPopup(
-																		edit.id,
-																		field,
-																		"approve"
-																	)
+																	window.confirm(
+																		"Are you sure you want to approve " + field
+																	) &&
+																	approve({
+																		variables: { fields: [field], editId: edit.id }
+																	})
 																}
-																color="primary"
 															>
 																Approve
 															</Button>
-														</div>
-													</div>
-												);
-											})}
-										</CardContent>
-									</Card>
-								</div>
+														</ListItemSecondaryAction>
+													</ListItem>
+													{index + 1 < edit.alteredFields.length && <Divider />}
+												</>
+											);
+										})}
+									</List>
+								</Card>
 							);
 						})}
 				</Grid>
-				<Grid item xs={5} className={classes.margin}>
-					<Comments
-						comments={data.organization.charterApprovalMessages}
-						changeComments={changeComments}
-						orgId={data.organization.id}
-					/>
+				<Grid item lg={4}>
+					<Card
+						style={{
+							height: "250px",
+							padding: "0.5rem",
+							paddingTop: 0,
+							overflow: "auto",
+							position: "relative"
+						}}
+					>
+						<h3
+							style={{
+								position: "sticky",
+								top: 0,
+								background: "white",
+								zIndex: 100
+							}}
+						>
+							Club Leaders:
+						</h3>
+						<List>
+							{data.organization.memberships.map(mem => (
+								<ListItem key={mem.id} button>
+									<ListItemAvatar>
+										<Avatar src={mem.user.picture} />
+									</ListItemAvatar>
+									<div>
+										<Typography>{mem.user.name}</Typography>
+										<Typography color={"textSecondary"} variant={"subtitle2"}>
+											{mem.user.email}
+										</Typography>
+									</div>
+								</ListItem>
+							))}
+						</List>
+
+						<h3
+							style={{
+								position: "sticky",
+								top: 0,
+								background: "white",
+								zIndex: 100
+							}}
+						>
+							Pending Leader Requests:
+						</h3>
+						<List>
+							{data.organization.membershipRequests
+								.filter(mem => !mem.userApproval)
+								.map(mem => (
+									<ListItem key={mem.id} button>
+										<ListItemAvatar>
+											<Avatar src={mem.user.picture} />
+										</ListItemAvatar>
+										<div>
+											<Typography>{mem.user.name}</Typography>
+											<Typography color={"textSecondary"} variant={"subtitle2"}>
+												{mem.user.email}
+											</Typography>
+										</div>
+									</ListItem>
+								))}
+						</List>
+					</Card>
+					<ApprovalMessages organization={data.organization} refetch={refetch} />
 				</Grid>
 			</Grid>
-			<Dialog open={dialogOptions.open} fullWidth={true} maxWidth={"md"}>
-				{dialogOptions.action === "approve all" ? (
-					<DialogTitle>
-						Are you sure you want to approve all of{" "}
-						{dialogOptions.user}'s changes?
-					</DialogTitle>
-				) : (
-					<div>
-						<DialogTitle>
-							Are you sure you want to {dialogOptions.action}{" "}
-							{dialogOptions.user}'s change to{" "}
-							{dialogOptions.changeTo}?
-						</DialogTitle>
-						<DialogContent>
-							<DialogContentText>
-								Proposed change: {dialogOptions.change}
-							</DialogContentText>
-						</DialogContent>
-					</div>
-				)}
-				<DialogActions>
-					<Button onClick={closePopup} color="primary">
-						Cancel
-					</Button>
-					<Button
-						onClick={() =>
-							performAction(
-								dialogOptions.id,
-								dialogOptions.user,
-								dialogOptions.changeTo,
-								dialogOptions.action
-							)
-						}
-						color="primary"
-					>
-						{dialogOptions.action}
-					</Button>
-				</DialogActions>
-			</Dialog>
 		</div>
 	);
 };

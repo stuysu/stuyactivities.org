@@ -29,30 +29,19 @@ const Unrecognized = () => {
 
 	return (
 		<div>
-			<img
-				src={FallingInSpace}
-				alt={"Astronaut falling in space"}
-				className={classes.defaultVector}
-			/>
+			<img src={FallingInSpace} alt={"Astronaut falling in space"} className={classes.defaultVector} />
 			<Typography variant={"h4"} className={classes.heading}>
 				Ouch!
 			</Typography>
 
 			<Typography variant={"subtitle1"}>
-				Your email{" "}
-				{authContext.unrecognizedEmail && (
-					<b>{authContext.unrecognizedEmail}</b>
-				)}{" "}
-				seems like it could belong to a stuy student or teacher, but
-				you're not in the database. If you feel this is a mistake,
-				please send us an email at it@stuysu.org with your name, osis
-				and grade (if applicable) or what department you teach.
+				Your email {authContext.unrecognizedEmail && <b>{authContext.unrecognizedEmail}</b>} seems like it could
+				belong to a stuy student or teacher, but you're not in the database. If you feel this is a mistake,
+				please send us an email at it@stuysu.org with your name, osis and grade (if applicable) or what
+				department you teach.
 			</Typography>
 
-			<p
-				className={classes.retryLogin}
-				onClick={() => authContext.set({ page: "landing" })}
-			>
+			<p className={classes.retryLogin} onClick={() => authContext.set({ page: "landing" })}>
 				I want to try signing in again.
 			</p>
 		</div>

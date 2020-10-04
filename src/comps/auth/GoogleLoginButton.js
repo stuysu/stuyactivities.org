@@ -17,9 +17,7 @@ const LOGIN_WITH_GOOGLE = gql`
 `;
 
 const GoogleLoginButton = ({ className }) => {
-	const [loginWithGoogle, { error, loading }] = useMutation(
-		LOGIN_WITH_GOOGLE
-	);
+	const [loginWithGoogle, { error, loading }] = useMutation(LOGIN_WITH_GOOGLE);
 
 	const authContext = React.useContext(AuthContext);
 
@@ -59,9 +57,7 @@ const GoogleLoginButton = ({ className }) => {
 
 			{error && (
 				<Typography color={"error"} display={"block"}>
-					{error?.graphQLErrors?.[0]?.message ||
-						error?.message ||
-						"Unknown error"}
+					{error?.graphQLErrors?.[0]?.message || error?.message || "Unknown error"}
 				</Typography>
 			)}
 		</div>

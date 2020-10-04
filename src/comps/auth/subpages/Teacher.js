@@ -38,20 +38,14 @@ const Teacher = ({ setPage, setAuthToken }) => {
 	return (
 		<div>
 			<div className={classes.backButtonContainer}>
-				<Button
-					color={"primary"}
-					variant={"outlined"}
-					onClick={() => authContext.set({ page: "landing" })}
-				>
+				<Button color={"primary"} variant={"outlined"} onClick={() => authContext.set({ page: "landing" })}>
 					&lt;- I'm not a teacher
 				</Button>
 			</div>
 
 			<img
 				src={TeacherVector}
-				alt={
-					"A teacher holding a lightbulb in one hand with sparks coming out of the other"
-				}
+				alt={"A teacher holding a lightbulb in one hand with sparks coming out of the other"}
 				className={classes.defaultVector}
 			/>
 			<Typography variant={"h4"} className={classes.heading}>
@@ -61,19 +55,15 @@ const Teacher = ({ setPage, setAuthToken }) => {
 			<FlexCenter>
 				<div className={classes.textContainer}>
 					<Typography variant={"subtitle1"}>
-						If you've linked your StuyActivities account to a Google
-						account in the past you can use that.
+						If you've linked your StuyActivities account to a Google account in the past you can use that.
 					</Typography>
 					<br />
 					<Typography variant={"subtitle1"}>
-						Enter your @schools.nyc.gov email below and you'll
-						receive a link that will automatically sign you in.
+						Enter your @schools.nyc.gov email below and you'll receive a link that will automatically sign
+						you in.
 					</Typography>
 					<br />
-					<Typography>
-						* Make sure to check your spam if you can't find the
-						email
-					</Typography>
+					<Typography>* Make sure to check your spam if you can't find the email</Typography>
 				</div>
 			</FlexCenter>
 			<MagicLogin />

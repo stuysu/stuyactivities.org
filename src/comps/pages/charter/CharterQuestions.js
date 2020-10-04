@@ -13,15 +13,10 @@ const CharterQuestions = () => {
 
 	return (
 		<div>
-			<p>
-				Please remember to write your answers in third person point of
-				view.
-			</p>
+			<p>Please remember to write your answers in third person point of view.</p>
 			<SmartCharterQuestion
 				label={"Activity Mission"}
-				helperText={
-					"A quick blurb of what this organization is all about"
-				}
+				helperText={"A quick blurb of what this organization is all about"}
 				name={"mission"}
 				maxChars={150}
 				minChars={20}
@@ -42,9 +37,7 @@ const CharterQuestions = () => {
 			<SmartCharterQuestion
 				name={"benefit"}
 				label={"Activity Benefit"}
-				helperText={
-					"How will this activity benefit the Stuyvesant community? "
-				}
+				helperText={"How will this activity benefit the Stuyvesant community? "}
 				minWords={200}
 				maxWords={400}
 				multiline
@@ -76,9 +69,7 @@ const CharterQuestions = () => {
 			<SmartCharterQuestion
 				name={"extra"}
 				required={false}
-				label={
-					"What additional things would you like to share about your activity?"
-				}
+				label={"What additional things would you like to share about your activity?"}
 				helperText={
 					"(Optional) This information will be public, so if it’s private or a question for the Clubs and Pubs department, please let us know at clubpub@stuysu.org."
 				}
@@ -97,45 +88,31 @@ const CharterQuestions = () => {
 				rows={3}
 			/>
 
-			<Typography
-				paragraph
-				color={Boolean(form.errors.meetingDays) ? "error" : undefined}
-			>
-				What days do you plan to hold meetings? (select all that apply)
-				*
+			<Typography paragraph color={Boolean(form.errors.meetingDays) ? "error" : undefined}>
+				What days do you plan to hold meetings? (select all that apply) *
 			</Typography>
 
 			<Grid container spacing={3}>
-				{["monday", "tuesday", "wednesday", "thursday", "friday"].map(
-					day => {
-						return (
-							<Grid item key={day}>
-								<FormControlLabel
-									control={
-										<Checkbox
-											checked={form?.meetingDays?.includes(
-												day
-											)}
-											onChange={() => {
-												form.setError(
-													"meetingDays",
-													false
-												);
-												form.set({
-													meetingDays: arrayToggle(
-														day,
-														form.meetingDays || []
-													)
-												});
-											}}
-										/>
-									}
-									label={capitalizeString(day)}
-								/>
-							</Grid>
-						);
-					}
-				)}
+				{["monday", "tuesday", "wednesday", "thursday", "friday"].map(day => {
+					return (
+						<Grid item key={day}>
+							<FormControlLabel
+								control={
+									<Checkbox
+										checked={form?.meetingDays?.includes(day)}
+										onChange={() => {
+											form.setError("meetingDays", false);
+											form.set({
+												meetingDays: arrayToggle(day, form.meetingDays || [])
+											});
+										}}
+									/>
+								}
+								label={capitalizeString(day)}
+							/>
+						</Grid>
+					);
+				})}
 			</Grid>
 		</div>
 	);

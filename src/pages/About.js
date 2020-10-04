@@ -31,10 +31,12 @@ const About = () => {
 		<div>
 			<Helmet>
 				<title>About | StuyActivities</title>
-
+				<meta property="og:title" content="About | StuyActivities" />
 				<meta
 					property="og:description"
-					content={"About StuyActivities v2"}
+					content={
+						"An app designed by the Stuyvesant Student Union to help students navigate the extracurricular organizations at Stuyvesant High School."
+					}
 				/>
 			</Helmet>
 			<div className={classes.layout}>
@@ -45,75 +47,57 @@ const About = () => {
 					</Typography>
 					<br />
 					<Typography paragraph>
-						This website is made by the Student Union’s IT and Club
-						Pub Departments to allow all students to have resources
-						that would help them run their organizations, clubs and
-						publications.
+						This website is made by the Student Union’s IT and Club Pub Departments to allow all students to
+						have resources that would help them run their organizations, clubs and publications.
 					</Typography>
 					<Typography paragraph>
-						The website hosts a new and improved charter system,
-						which will allow the SU to better understand the
-						activity’s purpose and allow students to full understand
-						the activity, so they can consider if they are
-						interested. The charter questions also create a page for
-						the activity, which can be found on the catalog. The
-						catalog allows students to use different filters to help
-						them narrow down the wide range of activities present at
-						Stuyvesant to the ones they are genuinely interested in.{" "}
+						The website hosts a new and improved charter system, which will allow the SU to better
+						understand the activity’s purpose and allow students to full understand the activity, so they
+						can consider if they are interested. The charter questions also create a page for the activity,
+						which can be found on the catalog. The catalog allows students to use different filters to help
+						them narrow down the wide range of activities present at Stuyvesant to the ones they are
+						genuinely interested in.{" "}
 					</Typography>
 					<Typography paragraph>
-						We also have a room reservation system, Google Calendar
-						integration, member notification system to help leaders
-						to organize meetings and keep all their members informed
-						and will soon be introducing a feature for clubs to
-						share updates with the world.
+						We also have a room reservation system, Google Calendar integration, member notification system
+						to help leaders to organize meetings and keep all their members informed and will soon be
+						introducing a feature for clubs to share updates with the world.
 					</Typography>
 					<Typography paragraph>
 						The front-end is a{" "}
 						<Link href={"https://reactjs.org"} target={"_blank"}>
 							React App
 						</Link>{" "}
-						bootstrapped with <code>create-react-app</code> and we
-						use <Link target={"_blank"}>Material UI</Link> for
-						styling and theming. The backend is a NodeJS express
-						server that serves an{" "}
-						<Link
-							href={"https://www.apollographql.com/"}
-							target={"_blank"}
-						>
+						bootstrapped with <code>create-react-app</code> and we use{" "}
+						<Link target={"_blank"}>Material UI</Link> for styling and theming. The backend is a NodeJS
+						express server that serves an{" "}
+						<Link href={"https://www.apollographql.com/"} target={"_blank"}>
 							Apollo GraphQL
 						</Link>{" "}
 						API. We'd also like to give a huge shout-out to{" "}
 						<Link href={"https://icons8.com"} target={"_blank"}>
 							Icons8
 						</Link>{" "}
-						&#128150; for giving us access to their awesome vectors
-						libraries for our work on StuyActivities.
+						&#128150; for giving us access to their awesome vectors libraries for our work on
+						StuyActivities.
 					</Typography>
 					<Typography paragraph>
-						This website is open source and we welcome everyone to
-						look through the code and submit issues / pull requests.
+						This website is open source and we welcome everyone to look through the code and submit issues /
+						pull requests.
 					</Typography>
 					<Typography paragraph>
 						Front-End:{" "}
-						<Link
-							href="https://github.com/stuysu/stuyactivities.org"
-							target={"_blank"}
-						>
+						<Link href="https://github.com/stuysu/stuyactivities.org" target={"_blank"}>
 							https://github.com/stuysu/stuyactivities.org
 						</Link>
 						<br />
 						Backend:{" "}
-						<Link
-							href="https://github.com/stuysu/api.stuyactivities.org"
-							target={"_blank"}
-						>
+						<Link href="https://github.com/stuysu/api.stuyactivities.org" target={"_blank"}>
 							https://github.com/stuysu/api.stuyactivities.org
 						</Link>
 					</Typography>
 					<Typography variant={"h6"} style={{ textAlign: "center" }}>
-						This site wouldn't be possible without the immense
-						dedication from:
+						This site wouldn't be possible without the immense dedication from:
 					</Typography>
 
 					<Grid container style={{ textAlign: "center" }}>

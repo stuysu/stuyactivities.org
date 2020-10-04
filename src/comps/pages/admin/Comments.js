@@ -1,12 +1,5 @@
 import React from "react";
-import {
-	Button,
-	Card,
-	CardContent,
-	makeStyles,
-	TextField,
-	Typography
-} from "@material-ui/core";
+import { Button, Card, CardContent, makeStyles, TextField, Typography } from "@material-ui/core";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/react-hooks";
 import { cache } from "../../context/ApolloProvider";
@@ -56,11 +49,7 @@ export default function Comments({ orgId, comments, changeComments }) {
 						onChange={e => setMessage(e.target.value)}
 						fullWidth
 					/>
-					<Button
-						color={"primary"}
-						onClick={submitComment}
-						className={classes.button}
-					>
+					<Button color={"primary"} onClick={submitComment} className={classes.button}>
 						Submit
 					</Button>
 				</CardContent>
@@ -73,10 +62,7 @@ export default function Comments({ orgId, comments, changeComments }) {
 						<Card className={classes.card}>
 							<CardContent>
 								<Typography variant={"h6"}>
-									{comment.user.name}{" "}
-									{comment.auto
-										? "(automatically generated)"
-										: ""}
+									{comment.user.name} {comment.auto ? "(automatically generated)" : ""}
 								</Typography>
 								<Typography>{comment.message}</Typography>
 							</CardContent>
