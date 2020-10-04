@@ -7,9 +7,7 @@ import { Tab, Tabs } from "@material-ui/core";
 export default function Tabbed({ match, history, tabs }) {
 	console.log(match);
 	const tabUrls = tabs.map(e => e.url);
-	const [currTab, setCurrTab] = React.useState(
-		tabUrls.findIndex(tab => window.location.href.includes(tab))
-	);
+	const [currTab, setCurrTab] = React.useState(tabUrls.findIndex(tab => window.location.href.includes(tab)));
 	const changeTab = (_, newTab) => {
 		history.push(match.url + tabUrls[newTab]);
 		setCurrTab(newTab);
@@ -22,17 +20,9 @@ export default function Tabbed({ match, history, tabs }) {
 				))}
 			</Tabs>
 			<Switch>
-				<Route
-					path={match.path}
-					component={() => <Redirect to={"/stuysu/admin/members"} />}
-					exact
-				/>
+				<Route path={match.path} component={() => <Redirect to={"/stuysu/admin/members"} />} exact />
 				{tabs.map(e => (
-					<Route
-						path={match.path + e.url}
-						component={e.component}
-						exact
-					/>
+					<Route path={match.path + e.url} component={e.component} exact />
 				))}
 			</Switch>
 		</div>

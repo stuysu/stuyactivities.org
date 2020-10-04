@@ -35,27 +35,17 @@ const Student = () => {
 	return (
 		<div>
 			<div className={classes.backButtonContainer}>
-				<Button
-					color={"primary"}
-					variant={"outlined"}
-					onClick={() => authContext.set({ page: "landing" })}
-				>
+				<Button color={"primary"} variant={"outlined"} onClick={() => authContext.set({ page: "landing" })}>
 					&lt;- I'm not a student
 				</Button>
 			</div>
 
-			<img
-				src={StudentVector}
-				alt={"Person walking through door"}
-				className={classes.defaultVector}
-			/>
+			<img src={StudentVector} alt={"Person walking through door"} className={classes.defaultVector} />
 			<Typography variant={"h4"} className={classes.heading}>
 				Student Login
 			</Typography>
 
-			<Typography variant={"subtitle1"}>
-				Sign in with your @stuy.edu gmail account.
-			</Typography>
+			<Typography variant={"subtitle1"}>Sign in with your @stuy.edu gmail account.</Typography>
 
 			<GoogleLoginButton className={classes.googleButton} />
 		</div>

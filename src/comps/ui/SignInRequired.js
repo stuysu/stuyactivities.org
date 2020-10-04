@@ -18,11 +18,7 @@ const SignInRequired = () => {
 					You need to be signed in to access this page.
 				</Typography>
 				<FlexCenter>
-					<Button
-						color={"secondary"}
-						variant={"contained"}
-						onClick={() => triggerLoginDialog()}
-					>
+					<Button color={"secondary"} variant={"contained"} onClick={() => triggerLoginDialog()}>
 						Sign In
 					</Button>
 				</FlexCenter>
