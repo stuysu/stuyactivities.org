@@ -80,6 +80,14 @@ const Home = () => {
 									>
 										Create Activity / Recharter
 									</Button>
+									<Button
+										variant="contained"
+										color="primary"
+										className={classes.button}
+										href="/clubpubfair"
+									>
+										Clubs & Pubs Fair
+									</Button>
 								</div>
 							) : (
 								<div>

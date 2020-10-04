@@ -133,14 +133,18 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					<ListItemText primary={"Archive"} />
 				</ListItem>
 
-				<UnstyledLink to={"/clubpubfair"}>
-					<ListItem button>
-						<ListItemIcon>
-							<EmojiFlags />
-						</ListItemIcon>
-						<ListItemText primary={"Clubs & Pubs Fair"} />
-					</ListItem>
-				</UnstyledLink>
+				{user.signedIn && (
+					<>
+						<UnstyledLink to={"/clubpubfair"}>
+							<ListItem button>
+								<ListItemIcon>
+									<EmojiFlags />
+								</ListItemIcon>
+								<ListItemText primary={"Clubs & Pubs Fair"} />
+							</ListItem>
+						</UnstyledLink>
+					</>
+				)}
 
 				{user.signedIn && (
 					<>

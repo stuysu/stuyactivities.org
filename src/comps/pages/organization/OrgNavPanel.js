@@ -6,7 +6,7 @@ import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { Dashboard, Description, Person, Settings } from "@material-ui/icons";
+import { Dashboard, Description, Person, Settings, GroupWork } from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import { OrgContext } from "../../../pages/org";
@@ -91,6 +91,7 @@ const OrgNavPanel = ({ match }) => {
 			<List component="nav" aria-label="main mailbox folders">
 				<TabItem label={"Overview"} to={match.path} icon={<Dashboard />} />
 				<TabItem label={"Charter"} to={match.path + "/charter"} icon={<Description />} />
+				<TabItem label={"Meetings"} to={match.path + "/meetings"} icon={<GroupWork />} />
 				<TabItem label={"Members"} to={match.path + "/members"} icon={<Person />} />
 
 				{org.membership?.adminPrivileges && (
