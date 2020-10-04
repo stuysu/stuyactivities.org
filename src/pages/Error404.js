@@ -51,30 +51,19 @@ const Error404 = () => {
 	const { data } = useQuery(QUERY, { variables: { keyword: orgUrl } });
 	const classes = useStyles();
 
-	const [img] = React.useState(
-		error404Imgs[Math.floor(Math.random() * error404Imgs.length)]
-	);
+	const [img] = React.useState(error404Imgs[Math.floor(Math.random() * error404Imgs.length)]);
 
 	return (
 		<div>
 			<Helmet>
 				<meta property="og:type" content={"website"} />
-				<meta
-					property="og:description"
-					content={"We couldn't find that page on StuyActivities."}
-				/>
+				<meta property="og:description" content={"We couldn't find that page on StuyActivities."} />
 				<title>Page Not Found | StuyActivities</title>
 			</Helmet>
 
 			<div className={classes.contentContainer}>
-				<img
-					className={classes.defaultVector}
-					src={img}
-					alt={"Cute page-not-found vector"}
-				/>
-				<Typography variant={"h4"}>
-					We couldn't find that page
-				</Typography>
+				<img className={classes.defaultVector} src={img} alt={"Cute page-not-found vector"} />
+				<Typography variant={"h4"}>We couldn't find that page</Typography>
 
 				<FlexCenter>
 					<BackButton
@@ -89,17 +78,12 @@ const Error404 = () => {
 				{Boolean(data?.organizations?.length) && (
 					<>
 						<Typography paragraph className={classes.safeMargin}>
-							Maybe you meant to check out one of these
-							activities?
+							Maybe you meant to check out one of these activities?
 						</Typography>
 						<Grid container justify={"center"}>
 							{data.organizations.map(org => (
 								<Grid item xl={3} lg={3} md={3} sm={6} xs={12}>
-									<CatalogCard
-										name={org.name}
-										url={org.url}
-										charter={org.charter}
-									/>
+									<CatalogCard name={org.name} url={org.url} charter={org.charter} />
 								</Grid>
 							))}
 						</Grid>

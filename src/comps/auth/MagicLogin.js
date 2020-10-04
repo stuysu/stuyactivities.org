@@ -63,10 +63,7 @@ export default function MagicLogin() {
 						An email has been sent to <b>{email}</b>!
 					</Typography>
 
-					<Typography
-						className={classes.resendText}
-						onClick={() => setSuccess(false)}
-					>
+					<Typography className={classes.resendText} onClick={() => setSuccess(false)}>
 						Click here to resend the email
 					</Typography>
 				</div>
@@ -102,9 +99,7 @@ export default function MagicLogin() {
 					</FlexCenter>
 					{error && (
 						<Typography color={"error"} display={"block"}>
-							{error?.graphQLErrors?.[0]?.message ||
-								error?.message ||
-								"Unknown error"}
+							{error?.graphQLErrors?.[0]?.message || error?.message || "Unknown error"}
 						</Typography>
 					)}
 				</div>

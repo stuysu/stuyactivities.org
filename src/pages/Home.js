@@ -63,9 +63,7 @@ const Home = () => {
 						<main className={classes.main}>
 							{user.signedIn ? (
 								<div>
-									<Typography variant={"h2"}>
-										Welcome back, {user.firstName}!
-									</Typography>
+									<Typography variant={"h2"}>Welcome back, {user.firstName}!</Typography>
 									<Button
 										variant="outlined"
 										color="primary"
@@ -82,36 +80,30 @@ const Home = () => {
 									>
 										Create Activity / Recharter
 									</Button>
+									<Button
+										variant="contained"
+										color="primary"
+										className={classes.button}
+										href="/clubpubfair"
+									>
+										Clubs & Pubs Fair
+									</Button>
 								</div>
 							) : (
 								<div>
-									<Typography variant={"h4"}>
-										Welcome to StuyActivities v2!
-									</Typography>
+									<Typography variant={"h4"}>Welcome to StuyActivities v2!</Typography>
 									<br />
 									<Typography>
-										This site was created to assist students
-										and faculty with the process of
-										browsing, joining, creating and managing
-										clubs & publications ("Activities") at
-										Stuyvesant High School. All activities
-										must submit a new charter each year to
-										continue operating. In order to start a
-										new Activity or manage an Activity that
-										you are a leader of, please login. If
-										you want to learn more, you can visit
-										our{" "}
-										<Link
-											to={"/about"}
-											className={classes.link}
-										>
+										This site was created to assist students and faculty with the process of
+										browsing, joining, creating and managing clubs & publications ("Activities") at
+										Stuyvesant High School. All activities must submit a new charter each year to
+										continue operating. In order to start a new Activity or manage an Activity that
+										you are a leader of, please login. If you want to learn more, you can visit our{" "}
+										<Link to={"/about"} className={classes.link}>
 											about
 										</Link>{" "}
 										and{" "}
-										<Link
-											to="/rules"
-											className={classes.link}
-										>
+										<Link to="/rules" className={classes.link}>
 											rules
 										</Link>{" "}
 										pages.
@@ -125,11 +117,7 @@ const Home = () => {
 										Login
 									</Button>
 									<UnstyledLink to={"/catalog"}>
-										<Button
-											variant="outlined"
-											color="primary"
-											className={classes.button}
-										>
+										<Button variant="outlined" color="primary" className={classes.button}>
 											Browse Activities
 										</Button>
 									</UnstyledLink>

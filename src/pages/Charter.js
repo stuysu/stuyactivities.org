@@ -108,21 +108,13 @@ export default class Charter extends React.Component {
 			const errors = { ...this.state.errors };
 
 			if (this.state.activeStep >= 1) {
-				errors.name = this.state?.name?.trim()
-					? false
-					: "You must provide a name for your activity";
+				errors.name = this.state?.name?.trim() ? false : "You must provide a name for your activity";
 
-				errors.url = this.state?.url?.trim()
-					? errors.url || false
-					: "You must choose a url for your activity";
+				errors.url = this.state?.url?.trim() ? errors.url || false : "You must choose a url for your activity";
 
-				errors.commitmentLevel = this.state.commitmentLevel
-					? false
-					: "You must select a commitment level";
+				errors.commitmentLevel = this.state.commitmentLevel ? false : "You must select a commitment level";
 
-				errors.tags = this.state?.tags?.length
-					? false
-					: "You must select at least one tag";
+				errors.tags = this.state?.tags?.length ? false : "You must select at least one tag";
 
 				errors.keywords = this.state?.keywords?.filter(Boolean).length
 					? false
@@ -131,10 +123,7 @@ export default class Charter extends React.Component {
 
 			if (this.state.activeStep >= 2) {
 				Object.keys(Charter.charterRequirementMap).forEach(field => {
-					errors[field] = textValidator(
-						this.state[field],
-						Charter.charterRequirementMap[field]
-					)
+					errors[field] = textValidator(this.state[field], Charter.charterRequirementMap[field])
 						? false
 						: "Fails to meet requirements";
 				});
@@ -166,16 +155,11 @@ export default class Charter extends React.Component {
 			}
 		};
 		this.hasErrors = () =>
-			Object.keys(this.state.errors).some(
-				field => this.state.errors[field]
-			) || !this.state?.leaders?.length;
+			Object.keys(this.state.errors).some(field => this.state.errors[field]) || !this.state?.leaders?.length;
 	}
 
 	componentWillUnmount() {
-		window.sessionStorage.setItem(
-			"charterForm",
-			JSON.stringify(this.state)
-		);
+		window.sessionStorage.setItem("charterForm", JSON.stringify(this.state));
 	}
 
 	componentDidMount() {
@@ -203,15 +187,8 @@ export default class Charter extends React.Component {
 					<CharterFormContext.Provider value={this.state}>
 						<FlexCenter>
 							<div className={classes.container}>
-								<BackButton
-									to={"/"}
-									label={"Back To Home"}
-									className={classes.backButton}
-								/>
-								<Typography
-									variant={"h4"}
-									style={{ textAlign: "center" }}
-								>
+								<BackButton to={"/"} label={"Back To Home"} className={classes.backButton} />
+								<Typography variant={"h4"} style={{ textAlign: "center" }}>
 									Chartering A New Activity
 								</Typography>
 
@@ -223,9 +200,7 @@ export default class Charter extends React.Component {
 									<Step>
 										<StepLabel
 											className={classes.stepLabel}
-											onClick={() =>
-												this.setState({ activeStep: 0 })
-											}
+											onClick={() => this.setState({ activeStep: 0 })}
 										>
 											Before you start
 										</StepLabel>
@@ -235,20 +210,11 @@ export default class Charter extends React.Component {
 									</Step>
 									<Step>
 										<StepLabel
-											error={[
-												"name",
-												"url",
-												"commitmentLevel",
-												"tags",
-												"keywords"
-											].some(
-												field =>
-													this.state.errors[field]
+											error={["name", "url", "commitmentLevel", "tags", "keywords"].some(
+												field => this.state.errors[field]
 											)}
 											className={classes.stepLabel}
-											onClick={() =>
-												this.setState({ activeStep: 1 })
-											}
+											onClick={() => this.setState({ activeStep: 1 })}
 										>
 											Basic Info
 										</StepLabel>
@@ -258,16 +224,11 @@ export default class Charter extends React.Component {
 									</Step>
 									<Step>
 										<StepLabel
-											error={Object.keys(
-												Charter.charterRequirementMap
-											).some(
-												field =>
-													this.state.errors[field]
+											error={Object.keys(Charter.charterRequirementMap).some(
+												field => this.state.errors[field]
 											)}
 											className={classes.stepLabel}
-											onClick={() =>
-												this.setState({ activeStep: 2 })
-											}
+											onClick={() => this.setState({ activeStep: 2 })}
 										>
 											Charter Information
 										</StepLabel>
@@ -278,9 +239,7 @@ export default class Charter extends React.Component {
 									<Step>
 										<StepLabel
 											className={classes.stepLabel}
-											onClick={() =>
-												this.setState({ activeStep: 3 })
-											}
+											onClick={() => this.setState({ activeStep: 3 })}
 										>
 											Leaders
 										</StepLabel>
@@ -298,10 +257,7 @@ export default class Charter extends React.Component {
 								<div className={classes.navigationButtons}>
 									{this.state.activeStep < 4 && (
 										<Tooltip
-											disableHoverListener={
-												this.state.activeStep !== 3 ||
-												!this.hasErrors()
-											}
+											disableHoverListener={this.state.activeStep !== 3 || !this.hasErrors()}
 											title={
 												"You need to fix the issues with your submission before you can continue"
 											}
@@ -311,24 +267,16 @@ export default class Charter extends React.Component {
 													color={"secondary"}
 													variant={"contained"}
 													onClick={this.nextStep}
-													disabled={
-														this.state
-															.activeStep === 3 &&
-														this.hasErrors()
-													}
+													disabled={this.state.activeStep === 3 && this.hasErrors()}
 												>
 													Next
 												</Button>
 											</span>
 										</Tooltip>
 									)}
-									{this.state.activeStep >= 4 && (
-										<SubmitCharter />
-									)}
+									{this.state.activeStep >= 4 && <SubmitCharter />}
 									&nbsp;
-									<Button onClick={this.previousStep}>
-										Back
-									</Button>
+									<Button onClick={this.previousStep}>Back</Button>
 								</div>
 							</div>
 						</FlexCenter>

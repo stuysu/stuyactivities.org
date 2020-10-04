@@ -4,8 +4,6 @@ export const GOOGLE_CLIENT_ID =
 
 export const PUBLIC_URL = process.env.PUBLIC_URL;
 
-export const GRAPHQL_URI =
-	process.env.REACT_APP_GRAPHQL_URI || "https://stuyactivities.org/graphql";
+export const GRAPHQL_URI = "https://api.stuyactivities.org/graphql";
 
-export const HONEYBADGER_KEY =
-	process.env.REACT_APP_HONEYBADGER_KEY || "020b3acf";
+export const HONEYBADGER_KEY = process.env.REACT_APP_HONEYBADGER_KEY || "020b3acf";

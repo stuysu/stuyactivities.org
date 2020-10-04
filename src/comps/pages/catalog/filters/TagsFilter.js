@@ -1,19 +1,10 @@
-import {
-	Accordion,
-	AccordionSummary,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
 import arrayToggle from "../../../../utils/arrayToggle";
 import useFilterStyles from "./useFilterStyles";
 import { useQuery } from "@apollo/client";
 import { client } from "../../../context/ApolloProvider";
 import { gql } from "apollo-boost";
+import Chip from "@material-ui/core/Chip";
 
 const QUERY = gql`
 	query {
@@ -37,28 +28,20 @@ export default function TagsFilter({ tags, setTags }) {
 	const classes = useFilterStyles();
 
 	return (
-		<FormControl component="fieldset" className={classes.filterChild}>
-			<Accordion>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-					<FormLabel component="legend">Tags</FormLabel>
-				</AccordionSummary>
-				<FormGroup>
-					{allTags.map(tag => (
-						<FormControlLabel
-							key={tag.id}
-							control={
-								<Checkbox
-									checked={tags.includes(tag.id)}
-									onChange={() => toggleTag(tag.id)}
-									value={tag.id}
-								/>
-							}
-							label={tag.name}
-							className={classes.accordionChild}
-						/>
-					))}
-				</FormGroup>
-			</Accordion>
-		</FormControl>
+		<div className={classes.tagContainer}>
+			{allTags.map(tag => (
+				<Chip
+					key={tag.id}
+					label={tag.name}
+					onClick={() => toggleTag(tag.id)}
+					value={tag.id}
+					clickable
+					variant={"outlined"}
+					size={"small"}
+					color={tags.includes(tag.id) ? "secondary" : ""}
+					className={classes.tag}
+				/>
+			))}
+		</div>
 	);
 }

@@ -73,6 +73,7 @@ const getQuery = signedIn => {
 					id
 					role
 					adminPrivileges
+					createdAt
 				}
 				membershipRequest {
 					id
@@ -82,6 +83,10 @@ const getQuery = signedIn => {
 					adminMessage
 					userApproval
 					createdAt
+				}
+				joinInstructions {
+					instructions
+					buttonEnabled
 				}
 			}
 		}

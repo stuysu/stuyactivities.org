@@ -46,21 +46,17 @@ const AddLeaders = () => {
 
 	const options =
 		data?.users?.filter(
-			user =>
-				user.id !== userContext.id &&
-				!form?.leaders?.some(leader => leader.id === user.id)
+			user => user.id !== userContext.id && !form?.leaders?.some(leader => leader.id === user.id)
 		) || [];
 
 	return (
 		<div>
 			<Typography paragraph>
-				Your Activity must have at least one other student leader. Your
-				Activity must also have a Faculty Advisor if it wishes to host
-				meetings in Stuyvesant past 5:00 pm, host guest speakers at
-				Stuyvesant, have in-person events, meeting, field trips, etc.
-				outside of Stuyvesant, or request funding from the Student
-				Union. When you charter your role will be "creator" but once
-				your organization is approved you will be able to change it.
+				Your Activity must have at least one other student leader. Your Activity must also have a Faculty
+				Advisor if it wishes to host meetings in Stuyvesant past 5:00 pm, host guest speakers at Stuyvesant,
+				have in-person events, meeting, field trips, etc. outside of Stuyvesant, or request funding from the
+				Student Union. When you charter your role will be "creator" but once your organization is approved you
+				will be able to change it.
 			</Typography>
 			<Autocomplete
 				options={options}
@@ -74,9 +70,7 @@ const AddLeaders = () => {
 							<span className={classes.smallerText}>
 								{option?.email}
 								<br />
-								{option?.isFaculty
-									? "Faculty"
-									: `Grade ${option?.grade}`}
+								{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
 							</span>
 						</span>
 					</>
@@ -125,9 +119,7 @@ const AddLeaders = () => {
 					};
 
 					const removeLeader = () => {
-						const leaders = form.leaders.filter(
-							(leader, i) => i !== index
-						);
+						const leaders = form.leaders.filter((leader, i) => i !== index);
 						form.set({ leaders });
 					};
 
@@ -139,27 +131,16 @@ const AddLeaders = () => {
 							<Grid container>
 								<Grid item xl={8} lg={8} md={6} sm={6} xs={12}>
 									<Typography>{user.name}</Typography>
-									<Typography
-										color={"textSecondary"}
-										variant={"subtitle2"}
-									>
+									<Typography color={"textSecondary"} variant={"subtitle2"}>
 										{user.email}
 									</Typography>
 								</Grid>
 								<Grid item xl={4} lg={4} md={6} sm={6} xs={12}>
-									<TextField
-										fullWidth
-										label={"Role"}
-										value={user.role}
-										onChange={changeRole}
-									/>
+									<TextField fullWidth label={"Role"} value={user.role} onChange={changeRole} />
 								</Grid>
 							</Grid>
 							<ListItemSecondaryAction>
-								<Close
-									className={classes.removeIcon}
-									onClick={removeLeader}
-								/>
+								<Close className={classes.removeIcon} onClick={removeLeader} />
 							</ListItemSecondaryAction>
 						</ListItem>
 					);

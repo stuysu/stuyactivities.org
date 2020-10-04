@@ -36,8 +36,8 @@ const LinkGoogleAccount = ({ className }) => {
 		return (
 			<div className={className}>
 				<Typography paragraph color={"secondary"}>
-					Your Google account {data?.linkOAuthProvider?.platformEmail}{" "}
-					has been successfully linked to your StuyActivities account!
+					Your Google account {data?.linkOAuthProvider?.platformEmail} has been successfully linked to your
+					StuyActivities account!
 				</Typography>
 			</div>
 		);
@@ -54,9 +54,7 @@ const LinkGoogleAccount = ({ className }) => {
 			<br />
 			{error && (
 				<Typography paragraph color={"error"} className={classes.text}>
-					{error?.graphQLErrors?.[0]?.message ||
-						error?.message ||
-						"Unknown error"}
+					{error?.graphQLErrors?.[0]?.message || error?.message || "Unknown error"}
 				</Typography>
 			)}
 		</div>
