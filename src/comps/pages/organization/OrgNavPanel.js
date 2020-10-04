@@ -1,6 +1,15 @@
 import React from "react";
 import FlexCenter from "../../ui/FlexCenter";
-import { Avatar, Button, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@material-ui/core";
+import {
+	Avatar,
+	Button,
+	Typography,
+	Dialog,
+	DialogTitle,
+	DialogContent,
+	DialogContentText,
+	DialogActions
+} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
@@ -63,20 +72,20 @@ const OrgNavPanel = ({ match }) => {
 
 	const joinPath = generatePath(match.path + "/join", match.params);
 
-	const [leaveOpen, setLeaveOpen] = React.useState(false)
+	const [leaveOpen, setLeaveOpen] = React.useState(false);
 	const [leaveMutation] = useMutation(LEAVE_MUTATION, {
 		update(cache) {
 			cache.reset().then(() => org.refetch());
 		},
 		onCompleted() {
-			setLeaveOpen(false)
+			setLeaveOpen(false);
 		},
 		onError(error) {
-			setLeaveOpen(false)
-			setDialogError(error.message)
+			setLeaveOpen(false);
+			setDialogError(error.message);
 		}
-	})
-	const [dialogError, setDialogError] = React.useState("")
+	});
+	const [dialogError, setDialogError] = React.useState("");
 
 	return (
 		<div className={classes.stickyContainer}>
@@ -125,12 +134,10 @@ const OrgNavPanel = ({ match }) => {
 					<DialogContentText>If you leave, you will have to request to join again</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={() => leaveMutation({variables: {membershipId: org.membership.id}})}>
+					<Button onClick={() => leaveMutation({ variables: { membershipId: org.membership.id } })}>
 						Leave
 					</Button>
-					<Button onClick={() => setLeaveOpen(false)}>
-						Cancel
-					</Button>
+					<Button onClick={() => setLeaveOpen(false)}>Cancel</Button>
 				</DialogActions>
 			</Dialog>
 			<Dialog open={dialogError !== ""} onClose={() => setDialogError("")}>
