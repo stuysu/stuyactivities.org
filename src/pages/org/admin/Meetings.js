@@ -113,11 +113,10 @@ const EDIT_MUTATION = gql`
 const Main = ({ match }) => {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
-
 	//changing the key of a component causes react to remake it
 	//here, we use the key to reset the form when it has been submitted
 	const [formKey, setFormKey] = React.useState(0);
-	const [createMutation] = useMutation(CREATE_MUTATION, {
+	const [createMutation, { loading }] = useMutation(CREATE_MUTATION, {
 		onCompleted() {
 			setFormKey(formKey + 1);
 		},
@@ -189,6 +188,7 @@ const Main = ({ match }) => {
 						key={formKey}
 						buttonText={"Create"}
 						checkboxText={"Notify faculty members?"}
+						isSubmitting={loading}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -252,7 +252,7 @@ const EditPage = ({ match }) => {
 	//Use snackbar since edit has no other visible effects
 	const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 	const editingMeeting = org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
-	const [editMutation] = useMutation(EDIT_MUTATION, {
+	const [editMutation, { loading }] = useMutation(EDIT_MUTATION, {
 		update(cache, { data: { alterMeeting } }) {
 			cache.modify({
 				id: cache.identify(org),
@@ -312,6 +312,7 @@ const EditPage = ({ match }) => {
 						meeting={editingMeeting}
 						buttonText={"Edit"}
 						checkboxText={"Notify club members?"}
+						isSubmitting={loading}
 					/>
 				</Grid>
 			</Grid>

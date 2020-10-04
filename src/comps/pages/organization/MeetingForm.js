@@ -10,7 +10,6 @@ import {
 	Button
 } from "@material-ui/core";
 import { CalendarToday, Schedule } from "@material-ui/icons";
-import SimpleMDE from "react-simplemde-editor";
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {} }) => {
+const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitting }) => {
 	const classes = useStyles();
 	const [title, setTitle] = React.useState(meeting.title || "");
 	const [description, setDescription] = React.useState(meeting.description || "");
@@ -108,15 +107,25 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {} }) => {
 			<Typography variant={"h6"} className={classes.marginBottom}>
 				Description
 			</Typography>
-			<SimpleMDE value={description} onChange={value => setDescription(value)} />
+			<TextField
+				fullWidth
+				outlined
+				variant={"outlined"}
+				multiline
+				rows={5}
+				value={description}
+				onChange={ev => setDescription(ev.target.value)}
+			/>
 			<FormControlLabel
 				control={<Switch checked={checked} onChange={e => setChecked(e.target.checked)} />}
 				label={checkboxText}
 			/>
+			<br />
 			<Button
 				onClick={() => submit({ title, description, date, startTime, endTime, checked })}
 				color={"primary"}
 				variant="contained"
+				disabled={isSubmitting}
 			>
 				{buttonText}
 			</Button>
