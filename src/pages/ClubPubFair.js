@@ -66,7 +66,8 @@ const useStyles = makeStyles(() => ({
 
 const ClubPubFair = () => {
 	const classes = useStyles();
-	const [tab, setTab] = React.useState(4);
+	const dateOffset = Math.ceil((new Date() - new Date("2020-10-05T20:00:00")) / (1000 * 60 * 60 * 24));
+	const [tab, setTab] = React.useState(4 + (dateOffset < 3 ? dateOffset : 3));
 	const user = React.useContext(UserContext);
 
 	const handleChange = (event, newTab) => {
@@ -136,18 +137,55 @@ const ClubPubFair = () => {
 							variant="scrollable"
 							scrollButtons="auto"
 						>
-							<Tab label="Day 1 Tue., Sep. 29" {...a11yProps(0)} disabled />
-							<Tab label="Day 2 Wed., Sep. 30" {...a11yProps(1)} disabled />
-							<Tab label="Day 3 Thu., Oct. 1" {...a11yProps(2)} disabled />
-							<Tab label="Day 4 Fri., Oct. 2" {...a11yProps(3)} disabled />
+							<Tab label="Day 1 Tue., Sep. 29" {...a11yProps(0)} />
+							<Tab label="Day 2 Wed., Sep. 30" {...a11yProps(1)} />
+							<Tab label="Day 3 Thu., Oct. 1" {...a11yProps(2)} />
+							<Tab label="Day 4 Fri., Oct. 2" {...a11yProps(3)} />
 							<Tab label="Day 5 Mon., Oct. 5" {...a11yProps(4)} />
 							<Tab label="Day 6 Tues, Oct. 6" {...a11yProps(5)} />
 							<Tab label="Day 7 Wed., Oct. 7" {...a11yProps(6)} />
 						</Tabs>
-						<TabPanel value={tab} index={0}></TabPanel>
-						<TabPanel value={tab} index={1}></TabPanel>
-						<TabPanel value={tab} index={2}></TabPanel>
-						<TabPanel value={tab} index={3}></TabPanel>
+						<TabPanel value={tab} index={0}>
+							<iframe
+								title={"Day 1"}
+								style={{ width: "100%", height: "40vh" }}
+								src="https://www.youtube.com/embed/jUzq1VHeVLE"
+								frameBorder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+							/>
+						</TabPanel>
+						<TabPanel value={tab} index={1}>
+							<iframe
+								title={"Day 2"}
+								style={{ width: "100%", height: "40vh" }}
+								src="https://www.youtube.com/embed/FMDR5Ga1Q40"
+								frameBorder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+							/>
+						</TabPanel>
+						<TabPanel value={tab} index={2}>
+							<iframe
+								title={"Day 3"}
+								style={{ width: "100%", height: "40vh" }}
+								src="https://www.youtube.com/embed/XSzax-rLHAU"
+								frameBorder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+							/>
+						</TabPanel>
+						<TabPanel value={tab} index={3}>
+							<iframe
+								title={"Day 4"}
+								style={{ width: "100%", height: "40vh" }}
+								src="https://www.youtube.com/embed/WoKEVH7Ozyw"
+								frameBorder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+							/>
+
+						</TabPanel>
 						<TabPanel value={tab} index={4}>
 							<ListItem style={{ padding: "1rem" }}>
 								<div style={{ width: "100%", whiteSpace: "nowrap" }}>
