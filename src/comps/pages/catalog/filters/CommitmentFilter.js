@@ -1,16 +1,8 @@
-import {
-	Accordion,
-	AccordionSummary,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
 import useFilterStyles from "./useFilterStyles";
 import arrayToggle from "../../../../utils/arrayToggle";
+import Chip from "@material-ui/core/Chip";
+import Typography from "@material-ui/core/Typography";
 
 export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels }) {
 	const classes = useFilterStyles();
@@ -21,28 +13,23 @@ export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels
 	};
 
 	return (
-		<FormControl component="fieldset" className={classes.filterChild}>
-			<Accordion>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-					<FormLabel component="legend">Commitment Level</FormLabel>
-				</AccordionSummary>
-				<FormGroup>
-					{["Low", "Medium", "High"].map(level => (
-						<FormControlLabel
-							key={level}
-							control={
-								<Checkbox
-									checked={commitmentLevels.includes(level)}
-									onChange={() => toggleCommitmentLevel(level)}
-									value={level}
-								/>
-							}
-							label={level}
-							className={classes.accordionChild}
-						/>
-					))}
-				</FormGroup>
-			</Accordion>
-		</FormControl>
+		<div className={classes.tagContainer}>
+			<Typography variant={"h6"} style={{ padding: "3px" }}>
+				Commitment Level
+			</Typography>
+			{["Low", "Medium", "High"].map(tag => (
+				<Chip
+					key={tag}
+					label={tag}
+					onClick={() => toggleCommitmentLevel(tag)}
+					value={tag}
+					clickable
+					variant={"outlined"}
+					size={"small"}
+					color={commitmentLevels.includes(tag) ? "secondary" : ""}
+					className={classes.tag}
+				/>
+			))}
+		</div>
 	);
 }
