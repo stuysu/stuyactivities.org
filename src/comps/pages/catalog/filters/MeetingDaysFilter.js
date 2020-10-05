@@ -1,16 +1,8 @@
 import React from "react";
-import {
-	Accordion,
-	AccordionSummary,
-	Checkbox,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-	FormLabel
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import useFilterStyles from "./useFilterStyles";
 import arrayToggle from "../../../../utils/arrayToggle";
+import Chip from "@material-ui/core/Chip";
+import Typography from "@material-ui/core/Typography";
 
 export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
 	const classes = useFilterStyles();
@@ -21,28 +13,23 @@ export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
 	};
 
 	return (
-		<FormControl component="fieldset" className={classes.filterChild}>
-			<Accordion>
-				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-					<FormLabel component="legend">Meeting Days</FormLabel>
-				</AccordionSummary>
-				<FormGroup>
-					{["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(day => (
-						<FormControlLabel
-							key={day}
-							control={
-								<Checkbox
-									checked={meetingDays.includes(day)}
-									onChange={() => toggleMeetingDays(day)}
-									value={day}
-								/>
-							}
-							label={day}
-							className={classes.accordionChild}
-						/>
-					))}
-				</FormGroup>
-			</Accordion>
-		</FormControl>
+		<div className={classes.tagContainer}>
+			<Typography variant={"h6"} style={{ padding: "3px" }}>
+				Meeting Days
+			</Typography>
+			{["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(tag => (
+				<Chip
+					key={tag}
+					label={tag}
+					onClick={() => toggleMeetingDays(tag)}
+					value={tag}
+					clickable
+					variant={"outlined"}
+					size={"small"}
+					color={meetingDays.includes(tag) ? "secondary" : ""}
+					className={classes.tag}
+				/>
+			))}
+		</div>
 	);
 }
