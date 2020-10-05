@@ -1,0 +1,16 @@
+pull_request_rules:
+  - name: automatic merge of dependency updates 🤖
+    conditions:
+        - author~=^dependabot(|-preview)\[bot\]$
+        - "status-success=netlify/stuyactivities/deploy-preview"
+        - base=master
+    actions:
+        merge:
+            method: merge
+            strict: smart
+            priority: low
+  - name: delete head branch after merge
+    conditions:
+        - merged
+    actions:
+        delete_head_branch: {}
