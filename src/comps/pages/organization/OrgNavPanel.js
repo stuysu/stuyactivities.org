@@ -134,10 +134,14 @@ const OrgNavPanel = ({ match }) => {
 					<DialogContentText>If you leave, you will have to request to join again</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={() => leaveMutation({ variables: { membershipId: org.membership.id } })}>
+					<Button onClick={() => setLeaveOpen(false)}>Cancel</Button>
+					<Button
+						onClick={() => leaveMutation({ variables: { membershipId: org.membership.id } })}
+						variant={"contained"}
+						color={"primary"}
+					>
 						Leave
 					</Button>
-					<Button onClick={() => setLeaveOpen(false)}>Cancel</Button>
 				</DialogActions>
 			</Dialog>
 			<Dialog open={dialogError !== ""} onClose={() => setDialogError("")}>
