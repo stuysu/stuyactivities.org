@@ -184,7 +184,6 @@ const ClubPubFair = () => {
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 								allowFullScreen
 							/>
-
 						</TabPanel>
 						<TabPanel value={tab} index={4}>
 							<ListItem style={{ padding: "1rem" }}>
