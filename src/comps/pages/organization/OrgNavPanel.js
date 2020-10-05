@@ -1,6 +1,15 @@
 import React from "react";
 import FlexCenter from "../../ui/FlexCenter";
-import { Avatar, Button, Typography } from "@material-ui/core";
+import {
+	Avatar,
+	Button,
+	Typography,
+	Dialog,
+	DialogTitle,
+	DialogContent,
+	DialogContentText,
+	DialogActions
+} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
@@ -10,6 +19,7 @@ import { Dashboard, Description, Person, Settings, GroupWork } from "@material-u
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import { OrgContext } from "../../../pages/org";
+import { gql, useMutation } from "@apollo/client";
 
 const useStyles = makeStyles(theme => ({
 	avatar: {
@@ -43,6 +53,12 @@ const TabItem = ({ to, label, icon, exact = true }) => {
 	);
 };
 
+const LEAVE_MUTATION = gql`
+	mutation DeleteMembership($membershipId: Int!) {
+		deleteMembership(membershipId: $membershipId)
+	}
+`;
+
 const OrgNavPanel = ({ match }) => {
 	const classes = useStyles();
 
@@ -55,6 +71,21 @@ const OrgNavPanel = ({ match }) => {
 	}
 
 	const joinPath = generatePath(match.path + "/join", match.params);
+
+	const [leaveOpen, setLeaveOpen] = React.useState(false);
+	const [leaveMutation] = useMutation(LEAVE_MUTATION, {
+		update(cache) {
+			cache.reset().then(() => org.refetch());
+		},
+		onCompleted() {
+			setLeaveOpen(false);
+		},
+		onError(error) {
+			setLeaveOpen(false);
+			setDialogError(error.message);
+		}
+	});
+	const [dialogError, setDialogError] = React.useState("");
 
 	return (
 		<div className={classes.stickyContainer}>
@@ -75,9 +106,9 @@ const OrgNavPanel = ({ match }) => {
 						</Button>
 					</UnstyledLink>
 				) : (
-					<Typography variant={"subtitle2"} style={{ color: "grey", textAlign: "center" }}>
-						Member
-					</Typography>
+					<Button color="secondary" onClick={() => setLeaveOpen(true)} fullWidth>
+						Member (Click to Leave)
+					</Button>
 				)
 			) : (
 				<Typography variant={"subtitle2"} style={{ color: "grey", textAlign: "center" }}>
@@ -98,6 +129,28 @@ const OrgNavPanel = ({ match }) => {
 					<TabItem label={"Admin Panel"} exact={false} to={match.path + "/admin"} icon={<Settings />} />
 				)}
 			</List>
+			<Dialog open={leaveOpen} onClose={() => setLeaveOpen(false)}>
+				<DialogTitle>Are you sure you want to leave {org.name}?</DialogTitle>
+				<DialogContent>
+					<DialogContentText>If you leave, you will have to request to join again</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={() => setLeaveOpen(false)}>Cancel</Button>
+					<Button
+						onClick={() => leaveMutation({ variables: { membershipId: org.membership.id } })}
+						variant={"contained"}
+						color={"primary"}
+					>
+						Leave
+					</Button>
+				</DialogActions>
+			</Dialog>
+			<Dialog open={dialogError !== ""} onClose={() => setDialogError("")}>
+				<DialogTitle>Error: {dialogError}</DialogTitle>
+				<DialogActions>
+					<Button onClick={() => setDialogError("")}>Ok</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	);
 };
