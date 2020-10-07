@@ -1,11 +1,8 @@
 import React from "react";
-import {
-	makeStyles,
-	TextField
-} from "@material-ui/core";
+import { makeStyles, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import {gql} from "apollo-boost";
-import {useQuery} from "@apollo/client";
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/client";
 const QUERY = gql`
 	query Users($keyword: String!) {
 		users(keyword: $keyword, limit: 10) {
@@ -22,10 +19,10 @@ const QUERY = gql`
 const useStyles = makeStyles({
 	smallerText: {
 		scale: 0.8
-	},
+	}
 });
 
-const UserSelect = ({onChange, filter}) => {
+const UserSelect = ({ onChange, filter }) => {
 	const classes = useStyles();
 	const [keyword, setKeyword] = React.useState("");
 	const { data, loading } = useQuery(QUERY, { variables: { keyword } });
@@ -63,6 +60,6 @@ const UserSelect = ({onChange, filter}) => {
 				/>
 			)}
 		/>
-	)
-}
-export default UserSelect
+	);
+};
+export default UserSelect;
