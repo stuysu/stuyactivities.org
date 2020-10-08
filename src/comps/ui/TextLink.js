@@ -1,12 +1,24 @@
 import React from "react";
-import UnstyledLink from "./UnstyledLink";
-import { Link } from "@material-ui/core";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import { Link } from "react-router-dom";
 
-const TextLink = ({ to, children, color, target }) => {
+const useStyles = makeStyles(theme => ({
+	link: {
+		textDecoration: "none",
+		color: ({ color }) => (color ? theme.palette[color]?.main : "unset"),
+		"&:hover": {
+			textDecoration: "underline"
+		}
+	}
+}));
+
+const TextLink = ({ to, children, color = "primary", target }) => {
+	const classes = useStyles({ color });
+
 	return (
-		<UnstyledLink to={to} target={target}>
-			<Link color={color}>{children}</Link>
-		</UnstyledLink>
+		<Link to={to} target={target} className={classes.link}>
+			{children}
+		</Link>
 	);
 };
 

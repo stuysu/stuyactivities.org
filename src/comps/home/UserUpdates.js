@@ -67,7 +67,7 @@ const UserUpdates = () => {
 				columnClassName="my-masonry-grid_column"
 			>
 				{data.updates.map(update => (
-					<UpdateCard {...update} />
+					<UpdateCard {...update} key={update.id} />
 				))}
 			</Masonry>
 			{!data.updates.length && (

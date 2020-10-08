@@ -20,6 +20,10 @@ const useStyles = makeStyles({
 		height: 70,
 		width: 70,
 		objectFit: "contain"
+	},
+	anchor: {
+		textDecoration: "none",
+		color: "unset"
 	}
 });
 
@@ -34,10 +38,6 @@ const clampString = (str, len) => {
 function LinkPreview({ title, description, image, url, siteName }) {
 	const classes = useStyles();
 
-	const confirmDialog = async () => {
-		window.open(url);
-	};
-
 	const shortTitle = typeof title === "string" ? clampString(title, 60) : title;
 	const shortDescription = typeof description === "string" ? clampString(description, 115) : description;
 
@@ -45,21 +45,23 @@ function LinkPreview({ title, description, image, url, siteName }) {
 
 	return (
 		<List className={classes.list}>
-			<ListItem onClick={confirmDialog}>
-				<ListItemAvatar>
-					<Avatar alt={title} src={image} />
-				</ListItemAvatar>
-				<ListItemText
-					primary={shortTitle}
-					secondary={
-						<>
-							{shortDescription}
-							<br />
-							{domain}
-						</>
-					}
-				/>
-			</ListItem>
+			<a href={url} className={classes.anchor} target={"_blank"} rel="noopener noreferrer">
+				<ListItem>
+					<ListItemAvatar>
+						<Avatar alt={title} src={image} />
+					</ListItemAvatar>
+					<ListItemText
+						primary={shortTitle}
+						secondary={
+							<>
+								{shortDescription}
+								<br />
+								{domain}
+							</>
+						}
+					/>
+				</ListItem>
+			</a>
 		</List>
 	);
 }
