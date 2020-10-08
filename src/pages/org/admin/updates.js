@@ -308,7 +308,7 @@ const Updates = () => {
 					<Grid container spacing={2}>
 						{org.updates.map(update => (
 							<Grid item xs={12} key={update.id}>
-								<UpdateCard {...update} organization={org} />
+								<UpdateCard {...update} organization={org} showDelete />
 							</Grid>
 						))}
 					</Grid>

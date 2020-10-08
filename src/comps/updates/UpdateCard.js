@@ -13,6 +13,8 @@ import LinkPreview from "./LinkPreview";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
 import MarkdownRenderer from "../ui/MarkdownRenderer";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import UpdateDeleteButton from "./UpdateDeleteButton";
 
 const useStyles = makeStyles({
 	cardContent: {
@@ -38,7 +40,17 @@ const responsive = {
 	}
 };
 
-const UpdateCard = ({ organization, title, content, pictures, links, createdAt, limit = true }) => {
+const UpdateCard = ({
+	id,
+	organization,
+	title,
+	content,
+	pictures,
+	links,
+	createdAt,
+	limit = true,
+	showDelete = false
+}) => {
 	const classes = useStyles();
 
 	const [ignoreLimit, setIgnoreLimit] = useState(false);
@@ -54,17 +66,24 @@ const UpdateCard = ({ organization, title, content, pictures, links, createdAt, 
 	return (
 		<Card>
 			<List>
-				<UnstyledLink to={`/${organization.url}`}>
-					<ListItem>
+				<ListItem>
+					<UnstyledLink to={`/${organization.url}`}>
 						<ListItemAvatar>
 							<Avatar alt={organization?.name} src={organization?.charter?.picture} />
 						</ListItemAvatar>
+					</UnstyledLink>
+					<UnstyledLink to={`/${organization.url}`}>
 						<ListItemText
 							primary={organization?.name}
 							secondary={moment(createdAt).format("dddd, MMMM Do YYYY, h:mm a")}
 						/>
-					</ListItem>
-				</UnstyledLink>
+					</UnstyledLink>
+				</ListItem>
+				{showDelete && (
+					<ListItemSecondaryAction>
+						<UpdateDeleteButton updateId={id} />
+					</ListItemSecondaryAction>
+				)}
 			</List>
 			<div className={classes.cardContent}>
 				<Typography variant={"h5"}>{title}</Typography>
