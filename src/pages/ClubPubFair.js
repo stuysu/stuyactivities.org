@@ -66,8 +66,7 @@ const useStyles = makeStyles(() => ({
 
 const ClubPubFair = () => {
 	const classes = useStyles();
-	const dateOffset = Math.ceil((new Date() - new Date("2020-10-05T20:00:00")) / (1000 * 60 * 60 * 24));
-	const [tab, setTab] = React.useState(4 + (dateOffset < 3 ? dateOffset : 3));
+	const [tab, setTab] = React.useState(1);
 	const user = React.useContext(UserContext);
 
 	const handleChange = (event, newTab) => {
@@ -113,13 +112,13 @@ const ClubPubFair = () => {
 							variant="scrollable"
 							scrollButtons="auto"
 						>
-							<Tab label="Day 1" {...a11yProps(0)} />
-							<Tab label="Day 2" {...a11yProps(1)} />
-							<Tab label="Day 3" {...a11yProps(2)} />
-							<Tab label="Day 4" {...a11yProps(3)} />
-							<Tab label="Day 5" {...a11yProps(4)} />
-							<Tab label="Day 6" {...a11yProps(5)} />
-							<Tab label="Day 7" {...a11yProps(6)} />
+							<Tab label="Day 1: 09/29" {...a11yProps(0)} />
+							<Tab label="Day 2: 09/30" {...a11yProps(1)} />
+							<Tab label="Day 3: 10/01" {...a11yProps(2)} />
+							<Tab label="Day 4: 10/02" {...a11yProps(3)} />
+							<Tab label="Day 5: 10/05" {...a11yProps(4)} />
+							<Tab label="Day 6: 10/06" {...a11yProps(5)} />
+							<Tab label="Day 7: 10/07" {...a11yProps(6)} />
 						</Tabs>
 						<TabPanel value={tab} index={0}>
 							<iframe
