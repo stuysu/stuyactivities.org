@@ -96,38 +96,14 @@ const ClubPubFair = () => {
 					</Typography>
 					<br />
 					<Typography paragraph>
-						Welcome to the 2020 Virtual Clubs & Pubs Fair! The Student Union is excited to present this
-						amazing opportunity for students of all grades to learn about the many activities Stuy has to
-						offer.
+						Welcome to the 2020 Virtual Clubs & Pubs Fair! The Student Union is excited to present this amazing opportunity for students of all grades to learn about the many activities Stuy has to offer.
 					</Typography>
 					<Typography paragraph>
-						The Fair will be taking place virtually over the course of 7 days (from 4-6 pm afterschool from
-						Tue., Sep. 29th through Wed., Oct. 7th) and will feature nearly 150 activities!
+						The Fair took place virtually over the course of 7 days (from 4-6 pm afterschool from Tue., Sep. 29th through Wed., Oct. 7th) and featured nearly 150 activities!
 					</Typography>
 					<Typography paragraph>
-						A different category of ~20 activities with a similar theme (i.e. STEM, sports, arts, culture,
-						academics, etc.) will participate in each day of the fair. Each day will be split into two
-						parts: club presentations and club “breakout” rooms. In the Zoom Webinar, you will be able to
-						hear featured club leaders present some information about their club. We encourage you to take
-						note of the clubs that interest you because, after the webinar, you will have the chance to
-						attend personal Zoom meetings hosted by each club you heard from today. The links to these club
-						meetings are found below, and they are organized based on when each club presents. If you have
-						any questions or concerns, please reach out to us at events@stuysu.org. Enjoy the fair!
+						A different category of ~20 activities with a similar theme (i.e. STEM, sports, arts, culture, academics, etc.) participated in each day of the fair. You can use the tabs below to navigate between the days and watch the video recordings of the 1-2 minute presentations given by each club's leader(s). To learn more about a club, search it up in the Catalog. If you have any questions or concerns, please reach out to us at events@stuysu.org. Enjoy the fair!
 					</Typography>
-					<Typography>
-						Meeting Link:{" "}
-						<Link
-							href={"https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ"}
-							style={{ paddingBottom: "3px" }}
-							color={"primary"}
-						>
-							<Box component={"div"} textOverflow={"ellipsis"} overflow="hidden">
-								https://us02web.zoom.us/webinar/register/WN_KbyoPHqIT8GlurIiKGALPQ
-							</Box>
-						</Link>
-					</Typography>
-					<Typography paragraph>**NOTE: You must register with your stuy.edu email.</Typography>
-
 					<Paper square>
 						<Tabs
 							value={tab}
@@ -137,13 +113,13 @@ const ClubPubFair = () => {
 							variant="scrollable"
 							scrollButtons="auto"
 						>
-							<Tab label="Day 1 Tue., Sep. 29" {...a11yProps(0)} />
-							<Tab label="Day 2 Wed., Sep. 30" {...a11yProps(1)} />
-							<Tab label="Day 3 Thu., Oct. 1" {...a11yProps(2)} />
-							<Tab label="Day 4 Fri., Oct. 2" {...a11yProps(3)} />
-							<Tab label="Day 5 Mon., Oct. 5" {...a11yProps(4)} />
-							<Tab label="Day 6 Tues, Oct. 6" {...a11yProps(5)} />
-							<Tab label="Day 7 Wed., Oct. 7" {...a11yProps(6)} />
+							<Tab label="Day 1" {...a11yProps(0)} />
+							<Tab label="Day 2" {...a11yProps(1)} />
+							<Tab label="Day 3" {...a11yProps(2)} />
+							<Tab label="Day 4" {...a11yProps(3)} />
+							<Tab label="Day 5" {...a11yProps(4)} />
+							<Tab label="Day 6" {...a11yProps(5)} />
+							<Tab label="Day 7" {...a11yProps(6)} />
 						</Tabs>
 						<TabPanel value={tab} index={0}>
 							<iframe
