@@ -1,7 +1,8 @@
 import React from "react";
-import { Typography, Grid, Card } from "@material-ui/core";
+import { Card, Grid, Typography } from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
 import moment from "moment-timezone";
+
 export default function MeetingCards({ meetings }) {
 	return (
 		<Grid container spacing={1}>

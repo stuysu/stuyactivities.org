@@ -1,13 +1,13 @@
 import React from "react";
 import {
+	Avatar,
+	Grid,
+	IconButton,
 	List,
 	ListItem,
 	ListItemAvatar,
-	Avatar,
-	Grid,
-	Typography,
 	ListItemSecondaryAction,
-	IconButton
+	Typography
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";

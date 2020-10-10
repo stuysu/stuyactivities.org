@@ -14,10 +14,10 @@ import {
 	ListItemAvatar,
 	ListItemSecondaryAction,
 	makeStyles,
+	Snackbar,
 	Switch,
 	TextField,
-	Typography,
-	Snackbar
+	Typography
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import { gql, useMutation, useQuery } from "@apollo/client";

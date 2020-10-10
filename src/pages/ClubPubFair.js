@@ -6,7 +6,6 @@ import BackButton from "../comps/ui/BackButton";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { Link, Divider, ListItem } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
 import UserContext from "../comps/context/UserContext";
@@ -95,13 +94,20 @@ const ClubPubFair = () => {
 					</Typography>
 					<br />
 					<Typography paragraph>
-						Welcome to the 2020 Virtual Clubs & Pubs Fair! The Student Union is excited to present this amazing opportunity for students of all grades to learn about the many activities Stuy has to offer.
+						Welcome to the 2020 Virtual Clubs & Pubs Fair! The Student Union is excited to present this
+						amazing opportunity for students of all grades to learn about the many activities Stuy has to
+						offer.
 					</Typography>
 					<Typography paragraph>
-						The Fair took place virtually over the course of 7 days (from 4-6 pm afterschool from Tue., Sep. 29th through Wed., Oct. 7th) and featured nearly 150 activities!
+						The Fair took place virtually over the course of 7 days (from 4-6 pm afterschool from Tue., Sep.
+						29th through Wed., Oct. 7th) and featured nearly 150 activities!
 					</Typography>
 					<Typography paragraph>
-						A different category of ~20 activities with a similar theme (i.e. STEM, sports, arts, culture, academics, etc.) participated in each day of the fair. You can use the tabs below to navigate between the days and watch the video recordings of the 1-2 minute presentations given by each club's leader(s). To learn more about a club, search it up in the Catalog. If you have any questions or concerns, please reach out to us at events@stuysu.org. Enjoy the fair!
+						A different category of ~20 activities with a similar theme (i.e. STEM, sports, arts, culture,
+						academics, etc.) participated in each day of the fair. You can use the tabs below to navigate
+						between the days and watch the video recordings of the 1-2 minute presentations given by each
+						club's leader(s). To learn more about a club, search it up in the Catalog. If you have any
+						questions or concerns, please reach out to us at events@stuysu.org. Enjoy the fair!
 					</Typography>
 					<Paper square>
 						<Tabs

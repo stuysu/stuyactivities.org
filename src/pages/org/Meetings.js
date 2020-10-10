@@ -1,7 +1,7 @@
 import React from "react";
 import { OrgContext } from "./index";
 import MeetingCards from "../../comps/pages/organization/MeetingCards";
-import { Typography, makeStyles } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";

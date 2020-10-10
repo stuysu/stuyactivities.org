@@ -9,16 +9,16 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Logo from "./../../../img/logo512.png";
 import UserContext from "../../context/UserContext";
 import {
+	AccountBox,
 	AddCircleOutlined,
 	Archive,
+	EmojiFlags,
 	EmojiSymbols,
 	Gavel,
 	Home,
 	Info,
 	LockOpen,
-	PowerSettingsNew,
-	AccountBox,
-	EmojiFlags
+	PowerSettingsNew
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";

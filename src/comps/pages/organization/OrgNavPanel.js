@@ -3,19 +3,19 @@ import FlexCenter from "../../ui/FlexCenter";
 import {
 	Avatar,
 	Button,
-	Typography,
 	Dialog,
-	DialogTitle,
+	DialogActions,
 	DialogContent,
 	DialogContentText,
-	DialogActions
+	DialogTitle,
+	Typography
 } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { Dashboard, Description, Person, Settings, GroupWork } from "@material-ui/icons";
+import { Dashboard, Description, GroupWork, Person, Settings } from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import { OrgContext } from "../../../pages/org";
