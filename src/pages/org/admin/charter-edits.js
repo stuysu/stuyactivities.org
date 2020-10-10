@@ -8,7 +8,7 @@ import { Avatar, Button } from "@material-ui/core";
 // import { makeStyles } from "@material-ui/core/styles";
 import capitalizeString from "../../../utils/capitalizeString";
 import Typography from "@material-ui/core/Typography";
-import { CharterFormContext } from "../../Charter";
+import { CharterFormContext } from "../../charter";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import SmartCharterQuestion from "../../../comps/pages/charter/SmartCharterQuestion";
 import TextField from "@material-ui/core/TextField";

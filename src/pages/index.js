@@ -4,16 +4,16 @@ import Home from "./Home";
 import Navigation from "../comps/ui/nav/Navigation";
 import AuthDialog from "../comps/auth/AuthDialog";
 import OrgRouter from "./org";
-import Catalog from "./Catalog";
-import Charter from "./Charter";
-import TokenLogin from "./TokenLogin";
+import Catalog from "./catalog";
+import Charter from "./charter";
+import TokenLogin from "./token";
 import AdminRouter from "./admin";
-import Rules from "./Rules";
+import Rules from "./rules";
 import { Helmet } from "react-helmet";
 import { PUBLIC_URL } from "../constants";
-import About from "./About";
+import About from "./about";
 import ReactGA from "react-ga";
-import ClubPubFair from "./ClubPubFair";
+import ClubPubFair from "./clubpubfair";
 
 ReactGA.initialize("UA-119929576-2");
 
