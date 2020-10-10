@@ -1,19 +1,22 @@
 import React from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import Home from "./Home";
 import Navigation from "../comps/ui/nav/Navigation";
 import AuthDialog from "../comps/auth/AuthDialog";
+import { PUBLIC_URL } from "../constants";
+import { Helmet } from "react-helmet";
+
+// Pages
+import Home from "./Home";
 import OrgRouter from "./org";
 import Catalog from "./catalog";
-import Charter from "./charter";
 import TokenLogin from "./token";
 import AdminRouter from "./admin";
 import Rules from "./rules";
-import { Helmet } from "react-helmet";
-import { PUBLIC_URL } from "../constants";
 import About from "./about";
-import ReactGA from "react-ga";
 import ClubPubFair from "./clubpubfair";
+import Charter from "./charter";
+
+import ReactGA from "react-ga";
 
 ReactGA.initialize("UA-119929576-2");
 
