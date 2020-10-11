@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import {CharterFormContext} from "../../../pages/charter";
-import {makeStyles} from "@material-ui/core/styles";
+import { CharterFormContext } from "../../../pages/charter";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
 	textField: {
@@ -10,20 +10,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SmartCharterQuestion = ({
-	                              name,
-	                              maxWords,
-	                              minWords,
-	                              minChars,
-	                              maxChars,
-	                              className,
-	                              multiline,
-	                              fullWidth,
-	                              required,
-	                              onBlur,
-	                              rows,
-	                              label,
-	                              helperText
-                              }) => {
+	name,
+	maxWords,
+	minWords,
+	minChars,
+	maxChars,
+	className,
+	multiline,
+	fullWidth,
+	required,
+	onBlur,
+	rows,
+	label,
+	helperText
+}) => {
 	const classes = useStyles();
 	const form = React.useContext(CharterFormContext);
 
@@ -61,7 +61,7 @@ const SmartCharterQuestion = ({
 		}
 
 		form.setError(name, false);
-		form.set({[name]: value});
+		form.set({ [name]: value });
 	};
 
 	let wordsReq = "";
@@ -97,13 +97,13 @@ const SmartCharterQuestion = ({
 						{Boolean(helperText) && (
 							<>
 								{helperText}
-								<br/>
+								<br />
 							</>
 						)}
 						{Boolean(wordsReq) && (
 							<>
 								{wordsReq} Currently {form[name]?.split(" ").filter(Boolean).length || 0} words
-								<br/>
+								<br />
 							</>
 						)}
 						{Boolean(charsReq) && (

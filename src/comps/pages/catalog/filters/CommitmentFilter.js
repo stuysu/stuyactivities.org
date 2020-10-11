@@ -4,7 +4,7 @@ import arrayToggle from "../../../../utils/arrayToggle";
 import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
 
-export default function CommitmentFilter({commitmentLevels, setCommitmentLevels}) {
+export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels }) {
 	const classes = useFilterStyles();
 
 	const toggleCommitmentLevel = level => {
@@ -14,7 +14,7 @@ export default function CommitmentFilter({commitmentLevels, setCommitmentLevels}
 
 	return (
 		<div className={classes.tagContainer}>
-			<Typography variant={"h6"} style={{padding: "3px"}}>
+			<Typography variant={"h6"} style={{ padding: "3px" }}>
 				Commitment Level
 			</Typography>
 			{["Low", "Medium", "High"].map(tag => (

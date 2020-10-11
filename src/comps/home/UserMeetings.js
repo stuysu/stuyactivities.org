@@ -1,30 +1,30 @@
-import React, {useContext} from "react";
-import {gql, useQuery} from "@apollo/client";
+import React, { useContext } from "react";
+import { gql, useQuery } from "@apollo/client";
 import UserContext from "../context/UserContext";
 import Loading from "../ui/Loading";
 import Carousel from "react-multi-carousel";
 
 import "react-multi-carousel/lib/styles.css";
 import MeetingCard from "../meetings/MeetingCard";
-import {Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const responsive = {
 	superLargeDesktop: {
 		// the naming can be any, depends on you.
-		breakpoint: {max: 4000, min: 3000},
+		breakpoint: { max: 4000, min: 3000 },
 		items: 3
 	},
 	desktop: {
-		breakpoint: {max: 3000, min: 1024},
+		breakpoint: { max: 3000, min: 1024 },
 		items: 2
 	},
 	tablet: {
-		breakpoint: {max: 1024, min: 464},
+		breakpoint: { max: 1024, min: 464 },
 		items: 1
 	},
 	mobile: {
-		breakpoint: {max: 464, min: 0},
+		breakpoint: { max: 464, min: 0 },
 		items: 1
 	}
 };
@@ -60,7 +60,7 @@ const useStyles = makeStyles({
 const UserMeetings = () => {
 	const classes = useStyles();
 	const user = useContext(UserContext);
-	const {data, loading} = useQuery(QUERY, {variables: {userId: user.id}});
+	const { data, loading } = useQuery(QUERY, { variables: { userId: user.id } });
 
 	if (loading) {
 		return (
@@ -68,7 +68,7 @@ const UserMeetings = () => {
 				<Typography variant={"h3"} color={"primary"}>
 					My Upcoming Meetings:
 				</Typography>
-				<Loading/>
+				<Loading />
 			</div>
 		);
 	}
@@ -80,7 +80,7 @@ const UserMeetings = () => {
 
 			<Carousel responsive={responsive}>
 				{data.meetings.map(meeting => (
-					<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard}/>
+					<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard} />
 				))}
 			</Carousel>
 

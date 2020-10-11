@@ -17,7 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const FullScreenWrapper = ({children}) => {
+const FullScreenWrapper = ({ children }) => {
 	const isMobile = useMediaQuery("(max-width: 800px)");
 	return children(isMobile);
 };
@@ -52,7 +52,7 @@ class AuthDialog extends React.Component {
 
 	dialogOpenListener() {
 		this.setState(state => {
-			const newState = {open: true};
+			const newState = { open: true };
 
 			if (state.page !== "landing" && state.page !== "unrecognized") {
 				newState.page = "landing";
@@ -64,7 +64,7 @@ class AuthDialog extends React.Component {
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		if (this.context.signedIn && this.state.open) {
-			this.setState({open: false});
+			this.setState({ open: false });
 		}
 	}
 
@@ -87,7 +87,7 @@ class AuthDialog extends React.Component {
 							onClose={this.handleClose}
 							TransitionComponent={Transition}
 						>
-							<AuthContent/>
+							<AuthContent />
 						</Dialog>
 					)}
 				</FullScreenWrapper>

@@ -1,18 +1,18 @@
 import React from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
-import {gql} from "apollo-boost";
-import {useQuery} from "@apollo/client";
-import {Grid, Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import {CharterFormContext} from "../../../pages/charter";
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/client";
+import { Grid, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { CharterFormContext } from "../../../pages/charter";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import UserContext from "../../context/UserContext";
-import {Close} from "@material-ui/icons";
+import { Close } from "@material-ui/icons";
 
 const useStyles = makeStyles({
 	smallerText: {
@@ -39,7 +39,7 @@ const QUERY = gql`
 const AddLeaders = () => {
 	const classes = useStyles();
 	const [keyword, setKeyword] = React.useState("");
-	const {data, loading} = useQuery(QUERY, {variables: {keyword}});
+	const { data, loading } = useQuery(QUERY, { variables: { keyword } });
 	const userContext = React.useContext(UserContext);
 
 	const form = React.useContext(CharterFormContext);
@@ -66,10 +66,10 @@ const AddLeaders = () => {
 					<>
 						<span>
 							<span>{option?.name}</span>
-							<br/>
+							<br />
 							<span className={classes.smallerText}>
 								{option?.email}
-								<br/>
+								<br />
 								{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
 							</span>
 						</span>
@@ -86,7 +86,7 @@ const AddLeaders = () => {
 							role: user.isFaculty ? "Faculty Advisor" : "Leader"
 						});
 
-						form.set({leaders: newLeaders});
+						form.set({ leaders: newLeaders });
 						setKeyword("");
 					}
 				}}
@@ -104,7 +104,7 @@ const AddLeaders = () => {
 					/>
 				)}
 			/>
-			<br/>
+			<br />
 
 			<List dense className={classes.root}>
 				{form?.leaders?.map((user, index) => {
@@ -115,18 +115,18 @@ const AddLeaders = () => {
 							}
 							return leader;
 						});
-						form.set({leaders});
+						form.set({ leaders });
 					};
 
 					const removeLeader = () => {
 						const leaders = form.leaders.filter((leader, i) => i !== index);
-						form.set({leaders});
+						form.set({ leaders });
 					};
 
 					return (
 						<ListItem key={user.id} button>
 							<ListItemAvatar>
-								<Avatar src={user.picture}/>
+								<Avatar src={user.picture} />
 							</ListItemAvatar>
 							<Grid container>
 								<Grid item xl={8} lg={8} md={6} sm={6} xs={12}>
@@ -136,11 +136,11 @@ const AddLeaders = () => {
 									</Typography>
 								</Grid>
 								<Grid item xl={4} lg={4} md={6} sm={6} xs={12}>
-									<TextField fullWidth label={"Role"} value={user.role} onChange={changeRole}/>
+									<TextField fullWidth label={"Role"} value={user.role} onChange={changeRole} />
 								</Grid>
 							</Grid>
 							<ListItemSecondaryAction>
-								<Close className={classes.removeIcon} onClick={removeLeader}/>
+								<Close className={classes.removeIcon} onClick={removeLeader} />
 							</ListItemSecondaryAction>
 						</ListItem>
 					);

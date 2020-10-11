@@ -1,5 +1,5 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import StudentVector from "../../../img/vectors/clip-student-thinking-about-mathematics.svg";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -35,19 +35,19 @@ const Student = () => {
 	return (
 		<div>
 			<div className={classes.backButtonContainer}>
-				<Button color={"primary"} variant={"outlined"} onClick={() => authContext.set({page: "landing"})}>
+				<Button color={"primary"} variant={"outlined"} onClick={() => authContext.set({ page: "landing" })}>
 					&lt;- I'm not a student
 				</Button>
 			</div>
 
-			<img src={StudentVector} alt={"Person walking through door"} className={classes.defaultVector}/>
+			<img src={StudentVector} alt={"Person walking through door"} className={classes.defaultVector} />
 			<Typography variant={"h4"} className={classes.heading}>
 				Student Sign In
 			</Typography>
 
 			<Typography variant={"subtitle1"}>Sign in with your @stuy.edu gmail account.</Typography>
 
-			<GoogleLoginButton className={classes.googleButton}/>
+			<GoogleLoginButton className={classes.googleButton} />
 		</div>
 	);
 };

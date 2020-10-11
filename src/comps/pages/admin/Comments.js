@@ -1,8 +1,8 @@
 import React from "react";
-import {Button, Card, CardContent, makeStyles, TextField, Typography} from "@material-ui/core";
-import {gql} from "@apollo/client";
-import {useMutation} from "@apollo/react-hooks";
-import {cache} from "../../context/ApolloProvider";
+import { Button, Card, CardContent, makeStyles, TextField, Typography } from "@material-ui/core";
+import { gql } from "@apollo/client";
+import { useMutation } from "@apollo/react-hooks";
+import { cache } from "../../context/ApolloProvider";
 
 const ADDCOMMENT = gql`
 	mutation AddComment($orgId: Int!, $message: String!) {
@@ -23,14 +23,14 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function Comments({orgId, comments, changeComments}) {
+export default function Comments({ orgId, comments, changeComments }) {
 	const classes = useStyles();
 	const [message, setMessage] = React.useState("");
 	const [addComment] = useMutation(ADDCOMMENT);
 	const submitComment = () => {
 		cache
 			.reset()
-			.then(() => addComment({variables: {orgId, message}}))
+			.then(() => addComment({ variables: { orgId, message } }))
 			.then(() => {
 				setMessage("");
 				window.sessionStorage.clear();
@@ -54,21 +54,19 @@ export default function Comments({orgId, comments, changeComments}) {
 					</Button>
 				</CardContent>
 			</Card>
-			{
-				//First map reverses---can't use .reverse() because comments is read-only
-				comments
-					.map((_, i) => comments[comments.length - 1 - i])
-					.map(comment => (
-						<Card className={classes.card}>
-							<CardContent>
-								<Typography variant={"h6"}>
-									{comment.user.name} {comment.auto ? "(automatically generated)" : ""}
-								</Typography>
-								<Typography>{comment.message}</Typography>
-							</CardContent>
-						</Card>
-					))
-			}
+			{//First map reverses---can't use .reverse() because comments is read-only
+			comments
+				.map((_, i) => comments[comments.length - 1 - i])
+				.map(comment => (
+					<Card className={classes.card}>
+						<CardContent>
+							<Typography variant={"h6"}>
+								{comment.user.name} {comment.auto ? "(automatically generated)" : ""}
+							</Typography>
+							<Typography>{comment.message}</Typography>
+						</CardContent>
+					</Card>
+				))}
 		</div>
 	);
 }

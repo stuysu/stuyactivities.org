@@ -1,10 +1,10 @@
 import React from "react";
-import {gql} from "apollo-boost";
-import {useMutation} from "@apollo/client";
-import {GOOGLE_CLIENT_ID} from "../../constants";
+import { gql } from "apollo-boost";
+import { useMutation } from "@apollo/client";
+import { GOOGLE_CLIENT_ID } from "../../constants";
 import GoogleLogin from "react-google-login";
-import {Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const MUTATION = gql`
 	mutation LinkGoogle($token: String!) {
@@ -20,17 +20,16 @@ const useStyles = makeStyles({
 	}
 });
 
-const LinkGoogleAccount = ({className}) => {
+const LinkGoogleAccount = ({ className }) => {
 	const classes = useStyles();
-	const [linkGoogleAccount, {error, data}] = useMutation(MUTATION);
+	const [linkGoogleAccount, { error, data }] = useMutation(MUTATION);
 	const [success, setSuccess] = React.useState(false);
 
 	const handleGoogleSuccess = async user => {
 		try {
-			await linkGoogleAccount({variables: {token: user.tokenId}});
+			await linkGoogleAccount({ variables: { token: user.tokenId } });
 			setSuccess(true);
-		} catch (e) {
-		}
+		} catch (e) {}
 	};
 
 	if (success) {
@@ -52,7 +51,7 @@ const LinkGoogleAccount = ({className}) => {
 				onFailure={console.log}
 				buttonText={"Link Your Google Account"}
 			/>
-			<br/>
+			<br />
 			{error && (
 				<Typography paragraph color={"error"} className={classes.text}>
 					{error?.graphQLErrors?.[0]?.message || error?.message || "Unknown error"}

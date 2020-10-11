@@ -1,29 +1,29 @@
-import React, {createRef, useCallback, useContext, useEffect, useState} from "react";
+import React, { createRef, useCallback, useContext, useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import {Button, Grid, Typography} from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 
 import layout from "./../../../styles/Layout.module.css";
 import Card from "@material-ui/core/Card";
-import {makeStyles} from "@material-ui/core/styles";
-import {OrgContext} from "../index";
+import { makeStyles } from "@material-ui/core/styles";
+import { OrgContext } from "../index";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import IconButton from "@material-ui/core/IconButton";
-import {AddPhotoAlternate, Close, EmojiEmotionsOutlined} from "@material-ui/icons";
+import { AddPhotoAlternate, Close, EmojiEmotionsOutlined } from "@material-ui/icons";
 import Picker from "emoji-picker-react";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import {useDropzone} from "react-dropzone";
-import {useSnackbar} from "notistack";
+import { useDropzone } from "react-dropzone";
+import { useSnackbar } from "notistack";
 import Carousel from "react-multi-carousel";
 
-import {find} from "linkifyjs";
+import { find } from "linkifyjs";
 import DynamicLinkPreview from "../../../comps/updates/DynamicLinkPreview";
-import {gql, useMutation} from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import UpdateCard from "../../../comps/updates/UpdateCard";
 import moment from "moment-timezone";
 
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 
 const responsive = {
 	desktop: {
-		breakpoint: {max: 4000, min: 0},
+		breakpoint: { max: 4000, min: 0 },
 		items: 1,
 		slidesToSlide: 1
 	}
@@ -90,7 +90,7 @@ const Updates = () => {
 
 	const linkFetchTimeout = createRef();
 
-	const [submit, {loading}] = useMutation(CREATE_UPDATE, {
+	const [submit, { loading }] = useMutation(CREATE_UPDATE, {
 		variables: {
 			orgId: org.id,
 			title,
@@ -146,12 +146,12 @@ const Updates = () => {
 
 			const description = window.prompt("Provide a description for this picture.");
 
-			setPictures(pics => pics.concat({file, description}));
+			setPictures(pics => pics.concat({ file, description }));
 		},
 		[pictures, snackbar]
 	);
 
-	const {getRootProps, getInputProps, open} = useDropzone({
+	const { getRootProps, getInputProps, open } = useDropzone({
 		onDrop,
 		noClick: true,
 		multiple: false,
@@ -167,7 +167,7 @@ const Updates = () => {
 						<List>
 							<ListItem>
 								<ListItemAvatar>
-									<Avatar alt={org?.name} src={org?.charter?.picture}/>
+									<Avatar alt={org?.name} src={org?.charter?.picture} />
 								</ListItemAvatar>
 								<ListItemText
 									primary={org?.name}
@@ -175,7 +175,7 @@ const Updates = () => {
 								/>
 							</ListItem>
 						</List>
-						<input style={{display: "none"}} {...getInputProps()} />
+						<input style={{ display: "none" }} {...getInputProps()} />
 						<div className={classes.cardContent}>
 							<TextField
 								fullWidth
@@ -190,16 +190,16 @@ const Updates = () => {
 								onChange={ev => setTitle(ev.target.value)}
 							/>
 							<IconButton onClick={open}>
-								<AddPhotoAlternate/>
+								<AddPhotoAlternate />
 							</IconButton>
 							<IconButton
 								color={emojiPickerOpen ? "primary" : "default"}
 								onClick={setEmojiPickerOpen.bind(null, !emojiPickerOpen)}
 							>
-								<EmojiEmotionsOutlined/>
+								<EmojiEmotionsOutlined />
 							</IconButton>
 							{emojiPickerOpen && (
-								<div style={{position: "absolute", background: "white", zIndex: 20}}>
+								<div style={{ position: "absolute", background: "white", zIndex: 20 }}>
 									<Picker
 										onEmojiClick={(ev, emoji) => {
 											setContent(content + emoji.emoji);
@@ -244,7 +244,7 @@ const Updates = () => {
 													setPictures(pics);
 												}}
 											>
-												<Close/>
+												<Close />
 											</IconButton>
 											<img
 												src={window.URL.createObjectURL(pic.file)}
@@ -263,12 +263,12 @@ const Updates = () => {
 								</Carousel>
 							)}
 
-							{link !== null && <DynamicLinkPreview url={link}/>}
+							{link !== null && <DynamicLinkPreview url={link} />}
 
 							<Grid component="label" container alignItems="center" spacing={1}>
 								<Grid item>Members Only</Grid>
 								<Grid item>
-									<Switch checked={isPublic} onChange={() => setIsPublic(!isPublic)}/>
+									<Switch checked={isPublic} onChange={() => setIsPublic(!isPublic)} />
 								</Grid>
 								<Grid item>Public</Grid>
 							</Grid>
@@ -308,7 +308,7 @@ const Updates = () => {
 					<Grid container spacing={2}>
 						{org.updates.map(update => (
 							<Grid item xs={12} key={update.id}>
-								<UpdateCard {...update} organization={org}/>
+								<UpdateCard {...update} organization={org} />
 							</Grid>
 						))}
 					</Grid>

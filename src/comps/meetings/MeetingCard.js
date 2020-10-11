@@ -1,14 +1,14 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import {useHistory} from "react-router-dom";
-import {Typography} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { Typography } from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
 import smartTimespan from "../../utils/smartTimespan";
 
@@ -30,12 +30,12 @@ const useStyles = makeStyles({
 	}
 });
 
-const ParagraphTypography = props => <Typography {...props} paragraph/>;
-const LimitedHeadingTypography = ({children, level}) => (
+const ParagraphTypography = props => <Typography {...props} paragraph />;
+const LimitedHeadingTypography = ({ children, level }) => (
 	<Typography variant={`h${level + 4 > 6 ? 6 : level + 4}`}>{children}</Typography>
 );
 
-const MeetingCard = ({id, title, description, start, end, organization, privacy, className}) => {
+const MeetingCard = ({ id, title, description, start, end, organization, privacy, className }) => {
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -53,9 +53,9 @@ const MeetingCard = ({id, title, description, start, end, organization, privacy,
 				<List>
 					<ListItem className={classes.orgHeading}>
 						<ListItemAvatar onClick={navigateToOrg}>
-							<Avatar alt={organization?.name} src={organization?.charter?.picture}/>
+							<Avatar alt={organization?.name} src={organization?.charter?.picture} />
 						</ListItemAvatar>
-						<ListItemText primary={organization?.name} onClick={navigateToOrg}/>
+						<ListItemText primary={organization?.name} onClick={navigateToOrg} />
 					</ListItem>
 				</List>
 			)}

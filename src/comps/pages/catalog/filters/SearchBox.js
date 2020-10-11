@@ -1,8 +1,8 @@
-import {FormControl, TextField} from "@material-ui/core";
+import { FormControl, TextField } from "@material-ui/core";
 import React from "react";
 import useFilterStyles from "./useFilterStyles";
 
-export default function SearchBox({setKeyword, keyword}) {
+export default function SearchBox({ setKeyword, keyword }) {
 	const classes = useFilterStyles();
 
 	return (
