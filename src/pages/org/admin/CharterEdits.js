@@ -8,7 +8,7 @@ import { Avatar, Button } from "@material-ui/core";
 // import { makeStyles } from "@material-ui/core/styles";
 import capitalizeString from "../../../utils/capitalizeString";
 import Typography from "@material-ui/core/Typography";
-import { CharterFormContext } from "../../charter";
+import { CharterFormContext } from "../../Charter";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import SmartCharterQuestion from "../../../comps/pages/charter/SmartCharterQuestion";
 import TextField from "@material-ui/core/TextField";
@@ -483,7 +483,7 @@ const ApprovalMessages = () => {
 
 	return (
 		<>
-			<Typography variant={"h3"}>Comments With The ClubPub Department: </Typography>
+			<h2>Comments With The ClubPub Department: </h2>
 			<div
 				style={{
 					width: "100%",
@@ -601,9 +601,7 @@ const CharterEdits = () => {
 	return (
 		<div>
 			<Card style={{ padding: "0.5rem" }}>
-				<Typography variant={"h2"} align={"center"}>
-					Edit Charter:
-				</Typography>
+				<h2 style={{ textAlign: "center" }}>Edit Charter:</h2>
 				<CharterEditForm latestChanges={latestChanges} org={org} />
 			</Card>
 			<br />

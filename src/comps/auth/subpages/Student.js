@@ -42,7 +42,7 @@ const Student = () => {
 
 			<img src={StudentVector} alt={"Person walking through door"} className={classes.defaultVector} />
 			<Typography variant={"h4"} className={classes.heading}>
-				Student Sign In
+				Student Login
 			</Typography>
 
 			<Typography variant={"subtitle1"}>Sign in with your @stuy.edu gmail account.</Typography>

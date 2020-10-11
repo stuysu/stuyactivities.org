@@ -16,11 +16,11 @@ const Overview = () => {
 	return (
 		<FlexCenter>
 			<div style={{ width: "100%" }}>
-				<Typography variant={"h2"} style={{ textAlign: "center" }}>
+				<Typography variant={"h4"} style={{ textAlign: "center" }}>
 					Overview
 				</Typography>
 
-				<Typography variant={"h5"} color={"primary"}>
+				<Typography variant={"h6"} color={"primary"}>
 					Mission:
 				</Typography>
 
@@ -31,7 +31,7 @@ const Overview = () => {
 					{org.charter.mission}
 				</Typography>
 
-				<Typography variant={"h5"} color={"primary"}>
+				<Typography variant={"h6"} color={"primary"}>
 					Meeting Schedule:
 				</Typography>
 
@@ -55,8 +55,8 @@ const Overview = () => {
 					</Linkify>
 				</Typography>
 
-				<Typography variant={"h5"} color={"primary"}>
-					Leaders
+				<Typography variant={"h6"} color={"primary"}>
+					Leaders{" "}
 				</Typography>
 
 				<List>
@@ -80,7 +80,7 @@ const Overview = () => {
 					})}
 				</List>
 
-				<Typography variant={"h5"} color={"primary"}>
+				<Typography variant={"h6"} color={"primary"}>
 					Upcoming Meetings
 				</Typography>
 				<br />

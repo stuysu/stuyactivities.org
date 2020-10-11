@@ -34,7 +34,7 @@ const Members = () => {
 
 	return (
 		<div>
-			<Typography style={{ textAlign: "center" }} variant={"h2"}>
+			<Typography style={{ textAlign: "center" }} variant={"h4"}>
 				Members
 			</Typography>
 

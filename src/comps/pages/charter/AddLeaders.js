@@ -5,7 +5,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { CharterFormContext } from "../../../pages/charter";
+import { CharterFormContext } from "../../../pages/Charter";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";

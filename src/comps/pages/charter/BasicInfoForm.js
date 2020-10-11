@@ -1,5 +1,5 @@
 import React from "react";
-import { CharterFormContext } from "../../../pages/charter";
+import { CharterFormContext } from "../../../pages/Charter";
 import TextField from "@material-ui/core/TextField";
 import TagSelection from "./TagSelection";
 import UrlSelection from "./UrlSelection";
