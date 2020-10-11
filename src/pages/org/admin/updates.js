@@ -97,7 +97,19 @@ const Updates = () => {
 			notifyMembers,
 			notifyFaculty,
 			type: isPublic ? "public" : "private",
-			links: [link]
+			links: link ? [link] : []
+		},
+		update: cache => {
+			setTitle("");
+			setContent("");
+			setEmojiPickerOpen(false);
+			setIsPublic(true);
+			setNotifyFaculty(false);
+			setNotifyMembers(true);
+			setLink(null);
+			setPictures([]);
+
+			cache.reset().then(() => org.refetch());
 		}
 	});
 
