@@ -88,6 +88,8 @@ const Updates = () => {
 
 	const [pictures, setPictures] = useState([]);
 
+	const linkFetchTimeout = createRef();
+
 	const [submit, { loading }] = useMutation(CREATE_UPDATE, {
 		variables: {
 			orgId: org.id,
@@ -114,14 +116,21 @@ const Updates = () => {
 	});
 
 	useEffect(() => {
-		const links = find(content, "url");
+		if (!linkFetchTimeout.current) {
+			linkFetchTimeout.current = setTimeout(() => {
+				const links = find(content, "url");
+				const href = links[0]?.href || null;
 
-		const href = links[0]?.href || null;
+				if (link !== href) {
+					setLink(href);
+				}
 
-		if (link !== href) {
-			setLink(href);
+				linkFetchTimeout.current = null;
+			}, 300);
+
+			return () => clearTimeout(linkFetchTimeout.current);
 		}
-	}, [content, link]);
+	}, [content, link, linkFetchTimeout]);
 
 	const onDrop = useCallback(
 		acceptedFiles => {

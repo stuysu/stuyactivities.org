@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 		"&:hover": {
 			opacity: 0.9
 		},
-		margin: "0.5rem"
+		margin: "0.5rem 0"
 	},
 	icon: {
 		height: 70,
