@@ -134,31 +134,6 @@ const SaveButton = ({ disabled }) => {
 };
 
 class CharterEditForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.setState = this.setState.bind(this);
-		this.setError = (field, value) => {
-			this.setState(state => {
-				if (state.errors[field] === value) {
-					return null;
-				}
-
-				return { errors: { ...state.errors, [field]: value } };
-			});
-		};
-
-		this.state = {
-			set: this.setState,
-			setError: this.setError,
-			errors: {},
-			editing: []
-		};
-
-		this.picRef = React.createRef();
-		this.handleFileUpload = this.handleFileUpload.bind(this);
-		this.changePic = this.changePic.bind(this);
-	}
-
 	static questions = [
 		{
 			name: "mission",
@@ -226,6 +201,31 @@ class CharterEditForm extends React.Component {
 			rows: 6
 		}
 	];
+
+	constructor(props) {
+		super(props);
+		this.setState = this.setState.bind(this);
+		this.setError = (field, value) => {
+			this.setState(state => {
+				if (state.errors[field] === value) {
+					return null;
+				}
+
+				return { errors: { ...state.errors, [field]: value } };
+			});
+		};
+
+		this.state = {
+			set: this.setState,
+			setError: this.setError,
+			errors: {},
+			editing: []
+		};
+
+		this.picRef = React.createRef();
+		this.handleFileUpload = this.handleFileUpload.bind(this);
+		this.changePic = this.changePic.bind(this);
+	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		const newResponseFields = Object.keys(this.props.latestChanges);

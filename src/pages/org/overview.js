@@ -6,9 +6,10 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import MeetingCards from "../../comps/pages/organization/MeetingCards";
 import Link from "@material-ui/core/Link";
 import Linkify from "linkifyjs/react";
+import Grid from "@material-ui/core/Grid";
+import MeetingCard from "../../comps/meetings/MeetingCard";
 
 const Overview = () => {
 	const org = React.useContext(OrgContext);
@@ -89,7 +90,13 @@ const Overview = () => {
 					<span style={{ color: "grey" }}>There currently are no upcoming meetings scheduled.</span>
 				)}
 
-				<MeetingCards meetings={org.upcomingMeetings} />
+				<Grid container>
+					{org.upcomingMeetings.map(meeting => (
+						<Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+							<MeetingCard {...meeting} />
+						</Grid>
+					))}
+				</Grid>
 			</div>
 		</FlexCenter>
 	);

@@ -24,7 +24,7 @@ const UserHome = () => {
 			<Typography variant={"h1"} className={classes.greeting}>
 				Welcome back, {user.firstName}
 			</Typography>
-			<Grid container spacing={5}>
+			<Grid container>
 				<Grid item xs={12} sm={5} md={4} lg={4} xl={4}>
 					<UserMemberships />
 				</Grid>
