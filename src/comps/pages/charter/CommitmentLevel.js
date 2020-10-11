@@ -2,10 +2,10 @@ import React from "react";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import {FormHelperText} from "@material-ui/core";
+import { FormHelperText } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
-import {CharterFormContext} from "../../../pages/charter";
-import {makeStyles} from "@material-ui/core/styles";
+import { CharterFormContext } from "../../../pages/charter";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
 	commitmentLevel: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles({
 	}
 });
 
-const CommitmentLevel = ({className}) => {
+const CommitmentLevel = ({ className }) => {
 	const form = React.useContext(CharterFormContext);
 	const classes = useStyles();
 
@@ -29,7 +29,7 @@ const CommitmentLevel = ({className}) => {
 					required
 					value={form?.commitmentLevel || ""}
 					onChange={ev => {
-						form.set({commitmentLevel: ev.target.value});
+						form.set({ commitmentLevel: ev.target.value });
 					}}
 					error={Boolean(form?.errors?.commitmentLevel)}
 				>
@@ -41,13 +41,13 @@ const CommitmentLevel = ({className}) => {
 					{form?.errors?.commitmentLevel && (
 						<span>
 							{form?.errors?.commitmentLevel}
-							<br/>
+							<br />
 						</span>
 					)}
 					Low: &lt;= 3 meetings a month
-					<br/>
+					<br />
 					Medium: 4-8 meetings a month
-					<br/>
+					<br />
 					High: 9+ Meetings a month
 				</FormHelperText>
 			</FormControl>

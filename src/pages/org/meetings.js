@@ -1,6 +1,6 @@
 import React from "react";
-import {OrgContext} from "./index";
-import {makeStyles, Typography} from "@material-ui/core";
+import { OrgContext } from "./index";
+import { makeStyles, Typography } from "@material-ui/core";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
@@ -26,7 +26,7 @@ export default function Meetings() {
 				Meetings
 			</Typography>
 			<Typography variant={"h4"}>Upcoming Meetings</Typography>
-			<br/>
+			<br />
 			{org.upcomingMeetings?.length ? (
 				<Grid container>
 					{org.upcomingMeetings.map(meeting => (
@@ -36,11 +36,11 @@ export default function Meetings() {
 					))}
 				</Grid>
 			) : (
-				<span style={{color: "grey"}}>There currently are no upcoming meetings scheduled.</span>
+				<span style={{ color: "grey" }}>There currently are no upcoming meetings scheduled.</span>
 			)}
-			<br/>
+			<br />
 			<Typography variant={"h4"}>All Meetings</Typography>
-			<br/>
+			<br />
 			<div className={classes.calendarContainer}>
 				<FullCalendar
 					plugins={[dayGridPlugin, listPlugin]}

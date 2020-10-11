@@ -5,10 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import TextLink from "../ui/TextLink";
 import ButtonLink from "../ui/ButtonLink";
 
-import {triggerLoginDialog} from "../auth/AuthDialog";
-import {makeStyles} from "@material-ui/core/styles";
+import { triggerLoginDialog } from "../auth/AuthDialog";
+import { makeStyles } from "@material-ui/core/styles";
 import biking from "./../../img/vectors/clip-biking.svg";
-import {Typography} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
 	vector: {
@@ -33,7 +33,7 @@ const UnauthenticatedLanding = () => {
 		<div className={layout.container}>
 			<Grid container alignContent={"center"} alignItems={"center"}>
 				<Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classes.vectorCell}>
-					<img src={biking} alt={"Two people biking"} className={classes.vector}/>
+					<img src={biking} alt={"Two people biking"} className={classes.vector} />
 				</Grid>
 
 				<Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classes.textCell}>

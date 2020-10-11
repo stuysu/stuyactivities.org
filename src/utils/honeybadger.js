@@ -1,5 +1,5 @@
 import Honeybadger from "honeybadger-js";
-import {HONEYBADGER_KEY} from "../constants";
+import { HONEYBADGER_KEY } from "../constants";
 
 const honeybadger = Honeybadger.configure({
 	api_key: HONEYBADGER_KEY,

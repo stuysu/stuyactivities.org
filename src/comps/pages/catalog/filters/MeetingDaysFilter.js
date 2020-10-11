@@ -4,7 +4,7 @@ import arrayToggle from "../../../../utils/arrayToggle";
 import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
 
-export default function MeetingDaysFilter({meetingDays, setMeetingDays}) {
+export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
 	const classes = useFilterStyles();
 
 	const toggleMeetingDays = day => {
@@ -14,7 +14,7 @@ export default function MeetingDaysFilter({meetingDays, setMeetingDays}) {
 
 	return (
 		<div className={classes.tagContainer}>
-			<Typography variant={"h6"} style={{padding: "3px"}}>
+			<Typography variant={"h6"} style={{ padding: "3px" }}>
 				Meeting Days
 			</Typography>
 			{["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(tag => (

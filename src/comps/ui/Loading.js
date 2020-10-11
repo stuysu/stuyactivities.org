@@ -1,6 +1,6 @@
 import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(props => ({
 	loaderParent: {
@@ -14,12 +14,12 @@ const useStyles = makeStyles(props => ({
 	}
 }));
 
-const Loading = ({fullscreen}) => {
-	const classes = useStyles({fullscreen});
+const Loading = ({ fullscreen }) => {
+	const classes = useStyles({ fullscreen });
 
 	return (
 		<div className={classes.loaderParent}>
-			<CircularProgress className={classes.loader}/>
+			<CircularProgress className={classes.loader} />
 		</div>
 	);
 };

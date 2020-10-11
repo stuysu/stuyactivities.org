@@ -1,5 +1,5 @@
 import React from "react";
-import {makeStyles, Typography} from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import BackButton from "../comps/ui/BackButton";
 
 const useStyles = makeStyles(theme => ({
@@ -14,8 +14,8 @@ export default function Rules() {
 	const classes = useStyles();
 	return (
 		<div className={classes.main}>
-			<BackButton to={"/"} label={"Back To Home"}/>
-			<Typography variant={"h4"} color="primary" style={{textAlign: "center"}}>
+			<BackButton to={"/"} label={"Back To Home"} />
+			<Typography variant={"h4"} color="primary" style={{ textAlign: "center" }}>
 				Rules
 			</Typography>
 			<Typography variant={"h5"} color="primary">
@@ -206,8 +206,7 @@ export default function Rules() {
 								The registered Activity faculty advisor (not the Activity leaders) must email{" "}
 								<a href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</a>, the Student Union COSA, Mr.
 								Polazzo, and the Assistant Principal, Mr. Moran, at least one week in advance with the
-								Subject: “[NAME OF FACILITY] Reservation: [ACTIVITY NAME]. Mr. Polazzo can be reached
-								at{" "}
+								Subject: “[NAME OF FACILITY] Reservation: [ACTIVITY NAME]. Mr. Polazzo can be reached at{" "}
 								<a href="mailto:MPolazz@schools.nyc.gov">MPolazz@schools.nyc.gov</a> and be found in
 								Room, 260. Mr. Moran can be reached at{" "}
 								<a href="mailto:BMoran@schools.nyc.gov">BMoran@schools.nyc.gov</a> and be found in Room

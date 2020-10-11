@@ -1,9 +1,9 @@
 import React from "react";
 import arrayToggle from "../../../../utils/arrayToggle";
 import useFilterStyles from "./useFilterStyles";
-import {useQuery} from "@apollo/client";
-import {client} from "../../../context/ApolloProvider";
-import {gql} from "apollo-boost";
+import { useQuery } from "@apollo/client";
+import { client } from "../../../context/ApolloProvider";
+import { gql } from "apollo-boost";
 import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
 
@@ -16,8 +16,8 @@ const QUERY = gql`
 	}
 `;
 
-export default function TagsFilter({tags, setTags}) {
-	const {data} = useQuery(QUERY, {client});
+export default function TagsFilter({ tags, setTags }) {
+	const { data } = useQuery(QUERY, { client });
 
 	const allTags = data?.tags || [];
 
@@ -30,7 +30,7 @@ export default function TagsFilter({tags, setTags}) {
 
 	return (
 		<div className={classes.tagContainer}>
-			<Typography variant={"h6"} style={{padding: "3px"}}>
+			<Typography variant={"h6"} style={{ padding: "3px" }}>
 				Tags
 			</Typography>
 			{allTags.map(tag => (

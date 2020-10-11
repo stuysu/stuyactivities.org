@@ -1,12 +1,12 @@
 import React from "react";
-import {CharterFormContext} from "../../../pages/charter";
+import { CharterFormContext } from "../../../pages/charter";
 import TextField from "@material-ui/core/TextField";
 import TagSelection from "./TagSelection";
 import UrlSelection from "./UrlSelection";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import PictureUpload from "./PictureUpload";
 import CommitmentLevel from "./CommitmentLevel";
-import {Chip, Grid} from "@material-ui/core";
+import { Chip, Grid } from "@material-ui/core";
 import ChipInput from "material-ui-chip-input";
 import arrayToggle from "../../../utils/arrayToggle";
 
@@ -39,7 +39,7 @@ const BasicInfoForm = () => {
 						label={"Activity Name"}
 						value={form?.name || ""}
 						onChange={ev => {
-							form.set({name: ev.target.value});
+							form.set({ name: ev.target.value });
 							form.setError("name", false);
 						}}
 						error={Boolean(form?.errors?.name)}
@@ -50,13 +50,13 @@ const BasicInfoForm = () => {
 				</Grid>
 
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-					<UrlSelection className={classes.bottomMargin}/>
+					<UrlSelection className={classes.bottomMargin} />
 				</Grid>
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-					<CommitmentLevel className={classes.select}/>
+					<CommitmentLevel className={classes.select} />
 				</Grid>
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-					<TagSelection className={classes.select}/>
+					<TagSelection className={classes.select} />
 				</Grid>
 			</Grid>
 
@@ -75,10 +75,10 @@ const BasicInfoForm = () => {
 						});
 					}
 				}}
-				onDelete={chip => form.set({keywords: arrayToggle(chip, form.keywords)})}
+				onDelete={chip => form.set({ keywords: arrayToggle(chip, form.keywords) })}
 				chipRenderer={chip => {
 					if (chip.value) {
-						return <Chip key={chip.value} label={chip.value} color="primary" className={classes.chip}/>;
+						return <Chip key={chip.value} label={chip.value} color="primary" className={classes.chip} />;
 					}
 					return null;
 				}}
@@ -89,7 +89,7 @@ const BasicInfoForm = () => {
 				className={classes.keywords}
 			/>
 
-			<PictureUpload/>
+			<PictureUpload />
 		</>
 	);
 };

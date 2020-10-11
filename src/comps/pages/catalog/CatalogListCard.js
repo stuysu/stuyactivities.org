@@ -1,15 +1,15 @@
 import React from "react";
-import {Divider, Grid, ListItem, ListItemAvatar, Typography} from "@material-ui/core";
+import { Divider, Grid, ListItem, ListItemAvatar, Typography } from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
 import UnstyledLink from "../../ui/UnstyledLink";
 
-export default function CatalogCard({name, url, tags, charter}) {
+export default function CatalogCard({ name, url, tags, charter }) {
 	return (
 		<>
 			<UnstyledLink to={"/" + url}>
-				<ListItem button style={{padding: "1rem"}}>
+				<ListItem button style={{ padding: "1rem" }}>
 					<ListItemAvatar>
 						<LazyLoadImage
 							src={charter.picture}
@@ -24,8 +24,8 @@ export default function CatalogCard({name, url, tags, charter}) {
 						/>
 					</ListItemAvatar>
 					<div>
-						<Typography style={{paddingBottom: "3px"}}>{name}</Typography>
-						<Typography color={"textSecondary"} variant={"subtitle2"} style={{paddingBottom: "4px"}}>
+						<Typography style={{ paddingBottom: "3px" }}>{name}</Typography>
+						<Typography color={"textSecondary"} variant={"subtitle2"} style={{ paddingBottom: "4px" }}>
 							{charter.mission}
 						</Typography>
 						<Grid container spacing={1}>
@@ -37,7 +37,7 @@ export default function CatalogCard({name, url, tags, charter}) {
 							</Grid>
 							{tags.map(tag => (
 								<Grid item key={tag.id}>
-									<Chip key={tag.id} label={tag.name} size={"small"}/>
+									<Chip key={tag.id} label={tag.name} size={"small"} />
 								</Grid>
 							))}
 						</Grid>
@@ -45,7 +45,7 @@ export default function CatalogCard({name, url, tags, charter}) {
 				</ListItem>
 			</UnstyledLink>
 
-			<Divider/>
+			<Divider />
 		</>
 	);
 }

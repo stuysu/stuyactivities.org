@@ -8,7 +8,7 @@ const useStyles = makeStyles({
 	}
 });
 
-const FlexCenter = ({children}) => {
+const FlexCenter = ({ children }) => {
 	const classes = useStyles();
 	return <div className={classes.flexCenter}>{children}</div>;
 };

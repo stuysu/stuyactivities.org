@@ -1,11 +1,11 @@
 import React from "react";
-import {gql, useMutation, useQuery} from "@apollo/client";
-import {OrgContext} from "../index";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import { OrgContext } from "../index";
 import Loading from "../../../comps/ui/Loading";
 import layout from "./../../../styles/Layout.module.css";
 import CheckBox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import {Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 const RESPONSE = gql`
 	query($orgId: Int!) {
@@ -32,7 +32,7 @@ const ALTER_RESPONSE = gql`
 
 const ClubFair = () => {
 	const org = React.useContext(OrgContext);
-	const {data, loading} = useQuery(RESPONSE, {variables: {orgId: org.id}, fetchPolicy: "network-only"});
+	const { data, loading } = useQuery(RESPONSE, { variables: { orgId: org.id }, fetchPolicy: "network-only" });
 	const [isAttending, setIsAttending] = React.useState(null);
 
 	const [alter] = useMutation(ALTER_RESPONSE, {
@@ -49,14 +49,14 @@ const ClubFair = () => {
 	}, [data, isAttending]);
 
 	if (loading) {
-		return <Loading/>;
+		return <Loading />;
 	}
 
 	return (
 		<div className={layout.container}>
 			<main className={layout.main}>
 				<h2>Clubs & Pubs Fair Sign Up</h2>
-				<p style={{flexGrow: 1}}>
+				<p style={{ flexGrow: 1 }}>
 					The Clubs & Pubs Fair will begin on September 29th and continue for multiple days (excluding the
 					weekend). Each day will be devoted to a specific category of clubs (ie. Art, Academic Services,
 					Sports, etc.). On their category’s day, club leaders will give a brief 1-2 minute presentation about
@@ -88,9 +88,9 @@ const ClubFair = () => {
 							"Yes, at least one leader from my club will be able to present on any of the days of the clubs & pubs fair."
 						}
 					/>
-					<p style={{color: "grey"}}>It is past the deadline to change your response</p>
+					<p style={{ color: "grey" }}>It is past the deadline to change your response</p>
 				</div>
-				<br/>
+				<br />
 				<Button
 					disabled={true}
 					variant={"contained"}
