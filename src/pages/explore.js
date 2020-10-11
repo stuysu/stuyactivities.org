@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Typography } from "@material-ui/core";
+import { Typography, useMediaQuery } from "@material-ui/core";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
 import { gql, useQuery } from "@apollo/client";
@@ -77,12 +77,12 @@ const responsive = {
 		slidesToSlide: 2
 	},
 	tablet: {
-		breakpoint: { max: 1024, min: 464 },
+		breakpoint: { max: 1024, min: 600 },
 		items: 2,
 		slidesToSlide: 1
 	},
 	mobile: {
-		breakpoint: { max: 464, min: 0 },
+		breakpoint: { max: 600, min: 0 },
 		items: 1,
 		slidesToSlide: 1
 	}
@@ -98,6 +98,7 @@ const useStyles = makeStyles({
 });
 
 const ExploreContent = () => {
+	const isMobile = useMediaQuery("(max-width: 900px)");
 	const classes = useStyles();
 	const { data, loading } = useQuery(QUERY);
 
@@ -118,7 +119,11 @@ const ExploreContent = () => {
 				))}
 			</Carousel>
 			<Typography variant={"h3"}>Club Updates:</Typography>
-			<Masonry breakpointCols={2} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+			<Masonry
+				breakpointCols={isMobile ? 1 : 2}
+				className="my-masonry-grid"
+				columnClassName="my-masonry-grid_column"
+			>
 				{data.updates.map(update => (
 					<UpdateCard {...update} />
 				))}
@@ -136,7 +141,7 @@ const Explore = () => {
 
 	return (
 		<FlexCenter>
-			<div style={{ width: "1200px", maxWidth: "99vw", paddingTop: "2rem" }}>
+			<div style={{ width: "1200px", maxWidth: "calc(100vw - 2rem)", padding: "1rem" }}>
 				<Typography variant={"h2"} align={"center"}>
 					Explore
 				</Typography>
