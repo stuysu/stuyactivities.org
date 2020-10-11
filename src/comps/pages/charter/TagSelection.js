@@ -1,7 +1,7 @@
 import React from "react";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
-import { CharterFormContext } from "../../../pages/Charter";
+import { CharterFormContext } from "../../../pages/charter";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";

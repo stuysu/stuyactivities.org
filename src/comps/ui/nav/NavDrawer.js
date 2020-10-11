@@ -67,7 +67,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				{user.signedIn ? (
 					<div>
 						<Avatar src={user.picture} className={classes.avatar} />
-						<Typography variant={"h6"}>{user?.name}</Typography>
+						<Typography variant={"h5"}>{user?.name}</Typography>
 						<Typography variant={"body2"}>{user?.email}</Typography>
 						{Boolean(user?.fourDigitId) && (
 							<Typography variant={"body2"}>Four Digit ID: {user?.fourDigitId}</Typography>
