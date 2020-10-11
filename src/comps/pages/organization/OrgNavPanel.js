@@ -28,7 +28,8 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: "1rem"
 	},
 	orgName: {
-		textAlign: "center"
+		textAlign: "center",
+		marginTop: 0
 	},
 	stickyContainer: {
 		position: "sticky",
