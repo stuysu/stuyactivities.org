@@ -24,6 +24,8 @@ import Carousel from "react-multi-carousel";
 import { find } from "linkifyjs";
 import DynamicLinkPreview from "../../../comps/updates/DynamicLinkPreview";
 import { gql, useMutation } from "@apollo/client";
+import UpdateCard from "../../../comps/updates/UpdateCard";
+import moment from "moment-timezone";
 
 const useStyles = makeStyles({
 	cardContent: {
@@ -146,7 +148,10 @@ const Updates = () => {
 								<ListItemAvatar>
 									<Avatar alt={org?.name} src={org?.charter?.picture} />
 								</ListItemAvatar>
-								<ListItemText primary={org?.name} secondary={new Date().toDateString()} />
+								<ListItemText
+									primary={org?.name}
+									secondary={moment(new Date()).format("dddd, MMMM Do YYYY, h:mm a")}
+								/>
 							</ListItem>
 						</List>
 						<input style={{ display: "none" }} {...getInputProps()} />
@@ -194,7 +199,6 @@ const Updates = () => {
 								}
 								onChange={ev => setContent(ev.target.value)}
 							/>
-							{link !== null && <DynamicLinkPreview url={link} />}
 
 							{Boolean(pictures.length) && (
 								<Carousel responsive={responsive} className={classes.picCarousel}>
@@ -237,6 +241,9 @@ const Updates = () => {
 									))}
 								</Carousel>
 							)}
+
+							{link !== null && <DynamicLinkPreview url={link} />}
+
 							<Grid component="label" container alignItems="center" spacing={1}>
 								<Grid item>Members Only</Grid>
 								<Grid item>
@@ -271,16 +278,19 @@ const Updates = () => {
 							</Grid>
 
 							<Button color={"primary"} variant={"contained"} disabled={loading} onClick={submit}>
-								Preview
+								Submit
 							</Button>
 						</div>
 					</Card>
 				</Grid>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-					{/*Put existing updates here*/}
-					<div style={{ width: "100%" }}>
-						<p>Placeholder</p>
-					</div>
+					<Grid container spacing={2}>
+						{org.updates.map(update => (
+							<Grid item xs={12} key={update.id}>
+								<UpdateCard {...update} organization={org} />
+							</Grid>
+						))}
+					</Grid>
 				</Grid>
 			</Grid>
 		</div>

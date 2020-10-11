@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 		"&:hover": {
 			opacity: 0.9
 		},
-		margin: "0.5rem 0"
+		margin: "0.5rem"
 	},
 	icon: {
 		height: 70,
@@ -31,8 +31,8 @@ function LinkPreview({ title, description, image, url, siteName }) {
 	};
 
 	return (
-		<List className={classes.list} onAction={confirmDialog}>
-			<ListItem>
+		<List className={classes.list}>
+			<ListItem onClick={confirmDialog}>
 				<ListItemAvatar>
 					<Avatar alt={title} src={image} />
 				</ListItemAvatar>

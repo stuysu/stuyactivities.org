@@ -54,6 +54,7 @@ const getQuery = signedIn => {
 						id
 						title
 						description
+						url
 						image
 						siteName
 					}
