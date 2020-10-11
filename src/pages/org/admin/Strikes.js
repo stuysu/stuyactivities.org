@@ -31,7 +31,9 @@ export default function Strikes({ match }) {
 			<List>
 				<ListItem>
 					<div>
-						<Typography>{data?.organization?.strikes?.reason}</Typography>
+						<Typography>Reason: {data?.organization?.strikes?.reason}</Typography>
+						<Typography>Weight: {data?.organization?.strikes?.weight}</Typography>
+						<Typography>Date: {data?.organization?.strikes?.createdAt}</Typography>
 					</div>
 				</ListItem>
 			</List>
