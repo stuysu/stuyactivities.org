@@ -5,6 +5,8 @@ import { makeStyles, Typography } from "@material-ui/core";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
+import Grid from "@material-ui/core/Grid";
+import MeetingCard from "../../comps/meetings/MeetingCard";
 
 const useStyles = makeStyles(theme => ({
 	margin: {
@@ -26,10 +28,16 @@ export default function Meetings() {
 			</Typography>
 			<Typography variant={"h4"}>Upcoming Meetings</Typography>
 			<br />
-			{!org.upcomingMeetings?.length ? (
-				<span style={{ color: "grey" }}>There currently are no upcoming meetings scheduled.</span>
+			{org.upcomingMeetings?.length ? (
+				<Grid container>
+					{org.upcomingMeetings.map(meeting => (
+						<Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+							<MeetingCard {...meeting} />
+						</Grid>
+					))}
+				</Grid>
 			) : (
-				<MeetingCards meetings={org.upcomingMeetings} />
+				<span style={{ color: "grey" }}>There currently are no upcoming meetings scheduled.</span>
 			)}
 			<br />
 			<Typography variant={"h4"}>All Meetings</Typography>
