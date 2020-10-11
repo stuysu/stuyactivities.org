@@ -41,7 +41,7 @@ const NavBar = ({ setDrawerOpen }) => {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6" className={classes.title}>
+					<Typography variant="h5" className={classes.title}>
 						<UnstyledLink to={"/"}>StuyActivities</UnstyledLink>
 					</Typography>
 

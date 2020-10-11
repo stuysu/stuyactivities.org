@@ -483,7 +483,7 @@ const ApprovalMessages = () => {
 
 	return (
 		<>
-			<h2>Comments With The ClubPub Department: </h2>
+			<Typography variant={"h3"}>Comments With The ClubPub Department: </Typography>
 			<div
 				style={{
 					width: "100%",
@@ -601,7 +601,9 @@ const CharterEdits = () => {
 	return (
 		<div>
 			<Card style={{ padding: "0.5rem" }}>
-				<h2 style={{ textAlign: "center" }}>Edit Charter:</h2>
+				<Typography variant={"h2"} align={"center"}>
+					Edit Charter:
+				</Typography>
 				<CharterEditForm latestChanges={latestChanges} org={org} />
 			</Card>
 			<br />
