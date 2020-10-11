@@ -49,7 +49,7 @@ const NavBar = ({ setDrawerOpen }) => {
 						<NavAvatar />
 					) : (
 						<Button color="inherit" onClick={triggerLoginDialog}>
-							Login
+							Sign In
 						</Button>
 					)}
 				</Toolbar>
