@@ -45,6 +45,27 @@ const getQuery = signedIn => {
 					meetingSchedule
 					picture
 				}
+				updates {
+					id
+					title
+					content
+					createdAt
+					links {
+						id
+						title
+						description
+						image
+						siteName
+					}
+					pictures {
+						id
+						mimetype
+						description
+						defaultUrl
+						height
+						width
+					}
+				}
 				leaders: memberships(onlyLeaders: true) {
 					id
 					user {
