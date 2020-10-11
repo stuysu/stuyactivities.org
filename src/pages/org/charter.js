@@ -9,6 +9,8 @@ import { OrgContext } from "./index";
 import Linkify from "linkifyjs/react";
 import Link from "@material-ui/core/Link";
 
+import normalize from "normalize-url";
+
 //styles
 const useStyles = makeStyles(theme => ({
 	tabName: {
@@ -56,7 +58,7 @@ const CharterQuestion = ({ question, answer }) => {
 
 	return (
 		<div>
-			<Typography variant={"h6"} className={classes.charterQuestion}>
+			<Typography variant={"h5"} className={classes.charterQuestion}>
 				{question}
 			</Typography>
 			<Typography variant={"body1"} className={classes.charterAnswer}>
@@ -64,12 +66,24 @@ const CharterQuestion = ({ question, answer }) => {
 				<Linkify
 					options={{
 						tagName: "span",
+						defaultProtocol: "http",
 						format: function (value, type) {
-							return (
-								<Link href={value} target={"_blank"} color={"secondary"}>
-									{value}
-								</Link>
-							);
+							if (type === "email") {
+								return (
+									<Link href={`mailto:${value}`} target={"_blank"} color={"primary"}>
+										{value}
+									</Link>
+								);
+							}
+
+							if (type === "url") {
+								return (
+									<Link href={normalize(value)} target={"_blank"} color={"secondary"}>
+										{value}
+									</Link>
+								);
+							}
+							return <span>{value}</span>;
 						}
 					}}
 				>
@@ -99,7 +113,7 @@ const Charter = () => {
 
 	return (
 		<div>
-			<Typography variant={"h4"} className={classes.tabName}>
+			<Typography variant={"h2"} className={classes.tabName}>
 				Charter
 			</Typography>
 
