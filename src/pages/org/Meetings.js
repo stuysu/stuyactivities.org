@@ -9,10 +9,6 @@ import listPlugin from "@fullcalendar/list";
 const useStyles = makeStyles(theme => ({
 	margin: {
 		margin: theme.spacing(1)
-	},
-	calendarContainer: {
-		width: 850,
-		maxWidth: "100%"
 	}
 }));
 
@@ -21,9 +17,6 @@ export default function Meetings() {
 	const org = React.useContext(OrgContext);
 	return (
 		<div className={classes.margin}>
-			<Typography variant={"h2"} align={"center"}>
-				Meetings
-			</Typography>
 			<Typography variant={"h4"}>Upcoming Meetings</Typography>
 			<br />
 			{!org.upcomingMeetings?.length ? (
@@ -34,7 +27,9 @@ export default function Meetings() {
 			<br />
 			<Typography variant={"h4"}>All Meetings</Typography>
 			<br />
-			<div className={classes.calendarContainer}>
+			{!org.meetings?.length ? (
+				<span style={{ color: "grey" }}>There are no meetings scheduled.</span>
+			) : (
 				<FullCalendar
 					plugins={[dayGridPlugin, listPlugin]}
 					headerToolbar={{
@@ -44,7 +39,7 @@ export default function Meetings() {
 					}}
 					events={org.meetings || []}
 				/>
-			</div>
+			)}
 		</div>
 	);
 }

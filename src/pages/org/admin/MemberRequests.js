@@ -68,7 +68,7 @@ const ALTER_JOIN_MUTATION = gql`
 	}
 `;
 
-export default function MemberRequests({ match }) {
+export default function Members({ match }) {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	const { data, refetch } = useQuery(QUERY, {

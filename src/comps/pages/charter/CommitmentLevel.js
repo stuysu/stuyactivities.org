@@ -4,7 +4,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { FormHelperText } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
-import { CharterFormContext } from "../../../pages/charter";
+import { CharterFormContext } from "../../../pages/Charter";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({

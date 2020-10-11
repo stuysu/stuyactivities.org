@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const Teacher = () => {
+const Teacher = ({ setPage, setAuthToken }) => {
 	const classes = useStyles();
 	const authContext = React.useContext(AuthContext);
 
@@ -49,7 +49,7 @@ const Teacher = () => {
 				className={classes.defaultVector}
 			/>
 			<Typography variant={"h4"} className={classes.heading}>
-				Teacher Sign In
+				Teacher Login
 			</Typography>
 
 			<FlexCenter>
