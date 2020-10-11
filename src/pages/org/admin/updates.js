@@ -249,7 +249,7 @@ const Updates = () => {
 								<Grid item>
 									<Switch checked={isPublic} onChange={() => setIsPublic(!isPublic)} />
 								</Grid>
-								<Grid item>Public (requires approval)</Grid>
+								<Grid item>Public</Grid>
 							</Grid>
 
 							<Grid container alignItems={"center"} spacing={2}>
