@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {Card, CardActionArea, CardContent, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
 import Chip from "@material-ui/core/Chip";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
 
 const useStyles = makeStyles(theme => ({
@@ -16,13 +16,13 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function Tag({ name }) {
+function Tag({name}) {
 	const classes = useStyles();
 
-	return <Chip label={name} size={"small"} className={classes.chip} />;
+	return <Chip label={name} size={"small"} className={classes.chip}/>;
 }
 
-export default function CatalogCard({ name, url, charter, tags }) {
+export default function CatalogCard({name, url, charter, tags}) {
 	const classes = useStyles();
 
 	return (
@@ -34,7 +34,7 @@ export default function CatalogCard({ name, url, charter, tags }) {
 						height={180}
 						src={charter.picture}
 						width={"100%"}
-						style={{ objectFit: "cover" }}
+						style={{objectFit: "cover"}}
 					/>
 					<CardContent>
 						<Typography variant={"h5"} gutterBottom>
@@ -47,7 +47,7 @@ export default function CatalogCard({ name, url, charter, tags }) {
 							className={classes.chip}
 						/>
 						{tags.map(tag => (
-							<Tag name={tag.name} key={tag.id} />
+							<Tag name={tag.name} key={tag.id}/>
 						))}
 					</CardContent>
 				</CardActionArea>

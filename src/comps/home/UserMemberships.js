@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import UserContext from "../context/UserContext";
 import UnstyledLink from "../ui/UnstyledLink";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import { Avatar } from "@material-ui/core";
+import {Avatar} from "@material-ui/core";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ButtonLink from "../ui/ButtonLink";
 
@@ -43,7 +43,7 @@ const UserMemberships = () => {
 									src={membership?.organization?.charter?.picture}
 								/>
 							</ListItemAvatar>
-							<ListItemText primary={membership?.organization?.name} secondary={membership?.role} />
+							<ListItemText primary={membership?.organization?.name} secondary={membership?.role}/>
 						</ListItem>
 					</UnstyledLink>
 				))}

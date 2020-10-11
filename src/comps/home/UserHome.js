@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import layout from "./../../styles/Layout.module.css";
 import UserContext from "../context/UserContext";
 import Grid from "@material-ui/core/Grid";
 import UserMemberships from "./UserMemberships";
 import UserMeetings from "./UserMeetings";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
 	greeting: {
@@ -26,10 +26,10 @@ const UserHome = () => {
 			</Typography>
 			<Grid container spacing={5}>
 				<Grid item xs={12} sm={5} md={4} lg={4} xl={4}>
-					<UserMemberships />
+					<UserMemberships/>
 				</Grid>
 				<Grid item xs={12} sm={7} md={8} lg={8} xl={8}>
-					<UserMeetings />
+					<UserMeetings/>
 				</Grid>
 			</Grid>
 		</div>

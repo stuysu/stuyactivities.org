@@ -1,5 +1,5 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
+import {gql, useQuery} from "@apollo/client";
 import Loading from "../ui/Loading";
 import LinkPreview from "./LinkPreview";
 
@@ -15,13 +15,13 @@ const LINK_PREVIEW_QUERY = gql`
 	}
 `;
 
-const DynamicLinkPreview = ({ url }) => {
-	const { data, loading } = useQuery(LINK_PREVIEW_QUERY, {
-		variables: { url }
+const DynamicLinkPreview = ({url}) => {
+	const {data, loading} = useQuery(LINK_PREVIEW_QUERY, {
+		variables: {url}
 	});
 
 	if (loading) {
-		return <Loading />;
+		return <Loading/>;
 	}
 
 	if (!data.linkPreview?.title) {

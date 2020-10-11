@@ -1,8 +1,8 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import { CharterFormContext } from "../../../pages/charter";
+import {makeStyles} from "@material-ui/core/styles";
+import {CharterFormContext} from "../../../pages/charter";
 
 const useStyles = makeStyles(theme => ({
 	fileInput: {
@@ -39,7 +39,7 @@ const PictureUpload = () => {
 			setError(new Error("The uploaded picture must be less than 5MB."));
 		} else {
 			setError(null);
-			form.set({ picture: file });
+			form.set({picture: file});
 		}
 	};
 
@@ -60,7 +60,7 @@ const PictureUpload = () => {
 			</Button>
 			{error && <Typography color={"error"}>{error?.message}</Typography>}
 
-			<br />
+			<br/>
 			{form.picture && (
 				<div>
 					<img
@@ -70,7 +70,7 @@ const PictureUpload = () => {
 					/>
 					<Typography
 						color={"secondary"}
-						onClick={() => form.set({ picture: null })}
+						onClick={() => form.set({picture: null})}
 						className={classes.clearButton}
 					>
 						Clear Uploaded Picture

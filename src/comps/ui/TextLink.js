@@ -1,8 +1,8 @@
 import React from "react";
 import UnstyledLink from "./UnstyledLink";
-import { Link } from "@material-ui/core";
+import {Link} from "@material-ui/core";
 
-const TextLink = ({ to, children, color, target }) => {
+const TextLink = ({to, children, color, target}) => {
 	return (
 		<UnstyledLink to={to} target={target}>
 			<Link color={color}>{children}</Link>

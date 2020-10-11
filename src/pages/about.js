@@ -1,9 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 import Grid from "@material-ui/core/Grid";
-import { Link } from "@material-ui/core";
+import {Link} from "@material-ui/core";
 import BackButton from "../comps/ui/BackButton";
 
 const useStyles = makeStyles(() => ({
@@ -31,7 +31,7 @@ const About = () => {
 		<div>
 			<Helmet>
 				<title>About | StuyActivities</title>
-				<meta property="og:title" content="About | StuyActivities" />
+				<meta property="og:title" content="About | StuyActivities"/>
 				<meta
 					property="og:description"
 					content={
@@ -41,11 +41,11 @@ const About = () => {
 			</Helmet>
 			<div className={classes.layout}>
 				<main>
-					<BackButton to={"/"} label={"Back To Home"} />
+					<BackButton to={"/"} label={"Back To Home"}/>
 					<Typography variant={"h4"} className={classes.title}>
 						About
 					</Typography>
-					<br />
+					<br/>
 					<Typography paragraph>
 						This website is made by the Student Union’s IT and Club Pub Departments to allow all students to
 						have resources that would help them run their organizations, clubs and publications.
@@ -90,17 +90,17 @@ const About = () => {
 						<Link href="https://github.com/stuysu/stuyactivities.org" target={"_blank"}>
 							https://github.com/stuysu/stuyactivities.org
 						</Link>
-						<br />
+						<br/>
 						Backend:{" "}
 						<Link href="https://github.com/stuysu/api.stuyactivities.org" target={"_blank"}>
 							https://github.com/stuysu/api.stuyactivities.org
 						</Link>
 					</Typography>
-					<Typography variant={"h6"} style={{ textAlign: "center" }}>
+					<Typography variant={"h6"} style={{textAlign: "center"}}>
 						This site wouldn't be possible without the immense dedication from:
 					</Typography>
 
-					<Grid container style={{ textAlign: "center" }}>
+					<Grid container style={{textAlign: "center"}}>
 						<Grid item xs={12} sm={6} md={6}>
 							<h2>The StuyActivities 2.0 Team:</h2>
 							<p>Julian Giordano, SU Vice President ‘19-’20</p>

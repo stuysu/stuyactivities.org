@@ -1,11 +1,11 @@
 import React from "react";
-import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/client";
-import { useParams } from "react-router-dom";
-import { client } from "../comps/context/ApolloProvider";
+import {gql} from "apollo-boost";
+import {useMutation} from "@apollo/client";
+import {useParams} from "react-router-dom";
+import {client} from "../comps/context/ApolloProvider";
 import FlexCenter from "../comps/ui/FlexCenter";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 import handstandVector from "../img/vectors/clip-dancer.svg";
 import ghost from "../img/vectors/hugo-ghost.svg";
 import LinkGoogleAccount from "../comps/auth/LinkGoogleAccount";
@@ -45,17 +45,18 @@ const MUTATION = gql`
 const TokenLogin = () => {
 	const classes = useStyles();
 	const user = React.useContext(UserContext);
-	const { token } = useParams();
+	const {token} = useParams();
 
-	const [login, { error, data }] = useMutation(MUTATION, {
-		variables: { token },
+	const [login, {error, data}] = useMutation(MUTATION, {
+		variables: {token},
 		client
 	});
 
 	const attemptLogin = React.useCallback(() => {
 		login()
 			.then(() => user.refetch())
-			.catch(e => {});
+			.catch(e => {
+			});
 	}, [user, login]);
 
 	React.useEffect(attemptLogin, []);
@@ -66,17 +67,18 @@ const TokenLogin = () => {
 		return (
 			<FlexCenter>
 				<div className={classes.contentContainer}>
-					<img src={handstandVector} alt={"A person dancing"} className={classes.defaultVector} />
+					<img src={handstandVector} alt={"A person dancing"} className={classes.defaultVector}/>
 
-					<br />
+					<br/>
 					<Typography variant={"h5"}>You are now signed in as {data?.login?.name}!</Typography>
 
-					<br />
+					<br/>
 					<div>
 						{linkedGoogleAccount ? (
 							<>
 								<Typography paragraph>
-									It looks like you've linked your Google account {linkedGoogleAccount.platformEmail}{" "}
+									It looks like you've linked your Google
+									account {linkedGoogleAccount.platformEmail}{" "}
 									to your StuyActivities account in the past.
 								</Typography>
 								<Typography paragraph>
@@ -89,7 +91,7 @@ const TokenLogin = () => {
 									You can link your Google account to your StuyActivities account to make future
 									logins much easier!
 								</Typography>
-								<LinkGoogleAccount className={classes.googleButton} />
+								<LinkGoogleAccount className={classes.googleButton}/>
 							</div>
 						)}
 					</div>
@@ -115,12 +117,12 @@ const TokenLogin = () => {
 			<FlexCenter>
 				<div className={classes.contentContainer}>
 					<FlexCenter>
-						<img className={classes.defaultVector} src={ghost} alt={"child in a ghost costume"} />
+						<img className={classes.defaultVector} src={ghost} alt={"child in a ghost costume"}/>
 					</FlexCenter>
 					<Typography variant={"subtitle1"} color={"error"}>
 						{errorMessage}
 					</Typography>
-					<BackButton to={"/"} color={"secondary"} label={"Go To The Home Page"} arrow={false} />
+					<BackButton to={"/"} color={"secondary"} label={"Go To The Home Page"} arrow={false}/>
 				</div>
 			</FlexCenter>
 		);
@@ -129,7 +131,7 @@ const TokenLogin = () => {
 	return (
 		<FlexCenter>
 			<div className={classes.contentContainer}>
-				<Loading />
+				<Loading/>
 				<Typography paragraph>Please wait while we sign you in</Typography>
 			</div>
 		</FlexCenter>

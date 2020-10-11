@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Grid, Typography } from "@material-ui/core";
+import {Card, Grid, Typography} from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
 import moment from "moment-timezone";
 
-export default function MeetingCards({ meetings }) {
+export default function MeetingCards({meetings}) {
 	return (
 		<Grid container spacing={1}>
 			{meetings.map(meeting => {
@@ -15,13 +15,13 @@ export default function MeetingCards({ meetings }) {
 
 				return (
 					<Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={meeting.id}>
-						<Card style={{ padding: "1rem" }}>
+						<Card style={{padding: "1rem"}}>
 							<Typography variant={"h6"} color={"secondary"}>
 								{meeting.title}
 							</Typography>
 							<p>Starts: {formattedStart}</p>
 							<p>Ends: {formattedEnd}</p>
-							<ReactMarkdown source={meeting.description} />
+							<ReactMarkdown source={meeting.description}/>
 						</Card>
 					</Grid>
 				);

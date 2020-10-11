@@ -1,10 +1,10 @@
 import React from "react";
 import SmartCharterQuestion from "./SmartCharterQuestion";
-import { Typography } from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
-import { CharterFormContext } from "../../../pages/charter";
+import {CharterFormContext} from "../../../pages/charter";
 import arrayToggle from "../../../utils/arrayToggle";
 import capitalizeString from "../../../utils/capitalizeString";
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
-import { OrgContext } from "./index";
-import { Typography } from "@material-ui/core";
+import {gql, useQuery} from "@apollo/client";
+import {OrgContext} from "./index";
+import {Typography} from "@material-ui/core";
 import UserContext from "../../comps/context/UserContext";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -26,7 +26,7 @@ const Members = () => {
 	const org = React.useContext(OrgContext);
 	const user = React.useContext(UserContext);
 
-	const { data } = useQuery(getQuery(user.signedIn), {
+	const {data} = useQuery(getQuery(user.signedIn), {
 		variables: {
 			orgId: org.id
 		}
@@ -34,7 +34,7 @@ const Members = () => {
 
 	return (
 		<div>
-			<Typography style={{ textAlign: "center" }} variant={"h2"}>
+			<Typography style={{textAlign: "center"}} variant={"h2"}>
 				Members
 			</Typography>
 
@@ -42,7 +42,7 @@ const Members = () => {
 				return (
 					<ListItem key={membership.user.id} button>
 						<ListItemAvatar>
-							<Avatar src={membership.user.picture} />
+							<Avatar src={membership.user.picture}/>
 						</ListItemAvatar>
 						<span>
 							<Typography>{membership.user.name}</Typography>

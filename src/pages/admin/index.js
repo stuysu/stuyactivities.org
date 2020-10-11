@@ -1,12 +1,12 @@
 import React from "react";
-import { makeStyles, Typography } from "@material-ui/core";
-import { generatePath, Redirect, Route, Switch } from "react-router-dom";
+import {makeStyles, Typography} from "@material-ui/core";
+import {generatePath, Redirect, Route, Switch} from "react-router-dom";
 import RouteTabs from "../../comps/ui/RouteTabs";
 import Approvals from "./approvals";
 import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import OrgApprovals from "./approvals/OrgApprovals";
-import { AssignmentTurnedIn, LiveHelp } from "@material-ui/icons";
+import {AssignmentTurnedIn, LiveHelp} from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -14,13 +14,13 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function AdminRouter({ match }) {
+export default function AdminRouter({match}) {
 	const classes = useStyles();
 	const actualPath = generatePath(match.path, match.params);
 	const user = React.useContext(UserContext);
 
 	if (!user.signedIn) {
-		return <SignInRequired />;
+		return <SignInRequired/>;
 	}
 
 	const adminRoles = user?.adminRoles || [];
@@ -31,13 +31,13 @@ export default function AdminRouter({ match }) {
 			label: "Charter Approvals",
 			role: "charters",
 			path: actualPath + "/approvals",
-			icon: <AssignmentTurnedIn />
+			icon: <AssignmentTurnedIn/>
 		},
 		{
 			label: "Help Requests",
 			role: "helpRequests",
 			path: actualPath + "/help",
-			icon: <LiveHelp />
+			icon: <LiveHelp/>
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
@@ -48,14 +48,14 @@ export default function AdminRouter({ match }) {
 	return (
 		<div className={classes.root}>
 			<Typography variant={"h3"}>Admin Panel</Typography>
-			<RouteTabs tabs={tabs} />
+			<RouteTabs tabs={tabs}/>
 
 			<Switch>
-				<Route path={match.path + "/approvals"} component={Approvals} exact />
-				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
-				<Route path={match.path + "/help"} component={Approvals} />
+				<Route path={match.path + "/approvals"} component={Approvals} exact/>
+				<Route path={match.path + "/approvals/:url"} component={OrgApprovals}/>
+				<Route path={match.path + "/help"} component={Approvals}/>
 				<Route path={match.path}>
-					<Redirect to={tabs[0].path} />
+					<Redirect to={tabs[0].path}/>
 				</Route>
 			</Switch>
 		</div>

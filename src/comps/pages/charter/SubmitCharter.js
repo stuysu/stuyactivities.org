@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/client";
-import { CharterFormContext } from "../../../pages/charter";
-import { Redirect } from "react-router-dom";
-import { cache } from "../../context/ApolloProvider";
+import {gql} from "apollo-boost";
+import {useMutation} from "@apollo/client";
+import {CharterFormContext} from "../../../pages/charter";
+import {Redirect} from "react-router-dom";
+import {cache} from "../../context/ApolloProvider";
 
 const MUTATION = gql`
 	mutation CreateOrg(
@@ -51,7 +51,7 @@ const MUTATION = gql`
 const SubmitCharter = () => {
 	const form = React.useContext(CharterFormContext);
 
-	const [submit, { data, loading, error }] = useMutation(MUTATION, {
+	const [submit, {data, loading, error}] = useMutation(MUTATION, {
 		variables: {
 			name: form.name,
 			url: form.url,
@@ -77,14 +77,14 @@ const SubmitCharter = () => {
 
 	const updateError = React.useCallback(() => {
 		if (error) {
-			form.set({ serverError: error });
+			form.set({serverError: error});
 		}
 	}, [error, form]);
 
 	React.useEffect(updateError, [error]);
 
 	if (data?.createOrganization) {
-		return <Redirect to={`/${data?.createOrganization?.url}`} />;
+		return <Redirect to={`/${data?.createOrganization?.url}`}/>;
 	}
 
 	const onSubmit = () => {

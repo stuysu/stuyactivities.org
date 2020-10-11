@@ -2,8 +2,8 @@ import React from "react";
 
 import accessBlocked from "./../../img/vectors/ginger-cat-access-blocked.svg";
 import FlexCenter from "./FlexCenter";
-import { Button, Typography } from "@material-ui/core";
-import { triggerLoginDialog } from "../auth/AuthDialog";
+import {Button, Typography} from "@material-ui/core";
+import {triggerLoginDialog} from "../auth/AuthDialog";
 
 const SignInRequired = () => {
 	return (
@@ -12,9 +12,9 @@ const SignInRequired = () => {
 				<img
 					src={accessBlocked}
 					alt={"Cat in front of a computer"}
-					style={{ width: "400px", maxWidth: "80vw" }}
+					style={{width: "400px", maxWidth: "80vw"}}
 				/>
-				<Typography paragraph style={{ textAlign: "center" }}>
+				<Typography paragraph style={{textAlign: "center"}}>
 					You need to be signed in to access this page.
 				</Typography>
 				<FlexCenter>
@@ -22,7 +22,8 @@ const SignInRequired = () => {
 						Sign In
 					</Button>
 				</FlexCenter>
-			</div>{" "}
+			</div>
+			{" "}
 		</FlexCenter>
 	);
 };

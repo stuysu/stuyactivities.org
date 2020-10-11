@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import TeacherVector from "../../../img/vectors/clip-teacher.svg";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -38,7 +38,7 @@ const Teacher = () => {
 	return (
 		<div>
 			<div className={classes.backButtonContainer}>
-				<Button color={"primary"} variant={"outlined"} onClick={() => authContext.set({ page: "landing" })}>
+				<Button color={"primary"} variant={"outlined"} onClick={() => authContext.set({page: "landing"})}>
 					&lt;- I'm not a teacher
 				</Button>
 			</div>
@@ -57,18 +57,18 @@ const Teacher = () => {
 					<Typography variant={"subtitle1"}>
 						If you've linked your StuyActivities account to a Google account in the past you can use that.
 					</Typography>
-					<br />
+					<br/>
 					<Typography variant={"subtitle1"}>
 						Enter your @schools.nyc.gov email below and you'll receive a link that will automatically sign
 						you in.
 					</Typography>
-					<br />
+					<br/>
 					<Typography>* Make sure to check your spam if you can't find the email</Typography>
 				</div>
 			</FlexCenter>
-			<MagicLogin />
+			<MagicLogin/>
 
-			<GoogleLoginButton />
+			<GoogleLoginButton/>
 		</div>
 	);
 };

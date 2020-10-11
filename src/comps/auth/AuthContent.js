@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import AuthContext from "./AuthContext";
 import Landing from "./subpages/Landing";
 import Student from "./subpages/Student";
@@ -46,16 +46,16 @@ const AuthContent = () => {
 						Login To StuyActivities
 					</Typography>
 					<IconButton edge="end" color="inherit" onClick={authContext.handleClose} aria-label="close">
-						<CloseIcon />
+						<CloseIcon/>
 					</IconButton>
 				</Toolbar>
 			</AppBar>
 			<FlexCenter>
 				<div className={classes.pageContainer}>
-					{authContext.page === "landing" && <Landing />}
-					{authContext.page === "student" && <Student />}
-					{authContext.page === "teacher" && <Teacher />}
-					{authContext.page === "unrecognized" && <Unrecognized />}
+					{authContext.page === "landing" && <Landing/>}
+					{authContext.page === "student" && <Student/>}
+					{authContext.page === "teacher" && <Teacher/>}
+					{authContext.page === "unrecognized" && <Unrecognized/>}
 				</div>
 			</FlexCenter>
 		</div>

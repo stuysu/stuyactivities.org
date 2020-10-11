@@ -1,8 +1,8 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { CharterFormContext } from "../../../pages/charter";
-import { gql } from "apollo-boost";
-import { useQuery } from "@apollo/client";
+import {CharterFormContext} from "../../../pages/charter";
+import {gql} from "apollo-boost";
+import {useQuery} from "@apollo/client";
 
 const QUERY = gql`
 	query Organization($url: String!) {
@@ -14,10 +14,10 @@ const QUERY = gql`
 
 const urlRegex = new RegExp(/^[a-zA-Z0-9-]+$/);
 
-const UrlSelection = ({ className }) => {
+const UrlSelection = ({className}) => {
 	const form = React.useContext(CharterFormContext);
 
-	const { data } = useQuery(QUERY, { variables: { url: form?.url || "" } });
+	const {data} = useQuery(QUERY, {variables: {url: form?.url || ""}});
 
 	React.useEffect(() => {
 		if (data?.organization) {
@@ -38,7 +38,7 @@ const UrlSelection = ({ className }) => {
 						.filter(i => urlRegex.test(i))
 						.join("");
 
-					form.set({ url: safeUrl });
+					form.set({url: safeUrl});
 					form.setError("url", false);
 				}}
 				helperText={
@@ -46,7 +46,7 @@ const UrlSelection = ({ className }) => {
 						https://stuyactivities.org/{form?.url || "<url>"}
 						{form?.errors?.url && (
 							<span>
-								<br />
+								<br/>
 								{form?.errors?.url}
 							</span>
 						)}

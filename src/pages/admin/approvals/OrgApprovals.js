@@ -1,9 +1,9 @@
 import React from "react";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import {gql, useMutation, useQuery} from "@apollo/client";
 import BackButton from "../../../comps/ui/BackButton";
 import layout from "./../../../styles/Layout.module.css";
 import Loading from "../../../comps/ui/Loading";
-import { Button, Divider, Grid, Typography } from "@material-ui/core";
+import {Button, Divider, Grid, Typography} from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import moment from "moment-timezone";
 import List from "@material-ui/core/List";
@@ -13,7 +13,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
-import { cache } from "../../../comps/context/ApolloProvider";
+import {cache} from "../../../comps/context/ApolloProvider";
 
 import Linkify from "linkifyjs/react";
 
@@ -25,11 +25,11 @@ const CREATE_MESSAGE_MUTATION = gql`
 	}
 `;
 
-const ApprovalMessages = ({ organization, refetch }) => {
+const ApprovalMessages = ({organization, refetch}) => {
 	const [message, setMessage] = React.useState("");
 
 	const [submitMessage] = useMutation(CREATE_MESSAGE_MUTATION, {
-		variables: { message, orgId: organization.id }
+		variables: {message, orgId: organization.id}
 	});
 	const messageRef = React.createRef();
 
@@ -63,10 +63,10 @@ const ApprovalMessages = ({ organization, refetch }) => {
 						return (
 							<ListItem>
 								<ListItemAvatar>
-									<Avatar src={message?.user?.picture} />
+									<Avatar src={message?.user?.picture}/>
 								</ListItemAvatar>
-								<div style={{ display: "flex" }}>
-									<div style={{ flexGrow: 1 }}>
+								<div style={{display: "flex"}}>
+									<div style={{flexGrow: 1}}>
 										<p
 											style={{
 												color: message?.auto ? "grey" : "black"
@@ -76,9 +76,9 @@ const ApprovalMessages = ({ organization, refetch }) => {
 											{message?.auto
 												? "Automatic Message"
 												: message?.user?.adminRoles?.length
-												? "ClubPub Team"
-												: "Organization Admin"}{" "}
-											<span style={{ color: "grey" }}>
+													? "ClubPub Team"
+													: "Organization Admin"}{" "}
+											<span style={{color: "grey"}}>
 												({moment(message.createdAt).format("MM/DD/YY h:mma")})
 											</span>
 										</p>
@@ -92,7 +92,7 @@ const ApprovalMessages = ({ organization, refetch }) => {
 											<Linkify
 												properties={{
 													target: "_blank",
-													style: { color: "red", fontWeight: "bold" }
+													style: {color: "red", fontWeight: "bold"}
 												}}
 											>
 												{message?.message}
@@ -119,7 +119,7 @@ const ApprovalMessages = ({ organization, refetch }) => {
 						onChange={ev => setMessage(ev.target.value)}
 						variant={"outlined"}
 						placeholder={"Message for StuyActivities Admins"}
-						style={{ flexGrow: 1 }}
+						style={{flexGrow: 1}}
 					/>
 					&nbsp;
 					<Button variant={"contained"} color={"secondary"} onClick={onSubmit}>
@@ -228,16 +228,16 @@ const REJECT_MUTATION = gql`
 	}
 `;
 
-const OrgApprovals = ({ match }) => {
-	const { data, refetch, loading } = useQuery(ORG_QUERY, {
-		variables: { url: match.params.url }
+const OrgApprovals = ({match}) => {
+	const {data, refetch, loading} = useQuery(ORG_QUERY, {
+		variables: {url: match.params.url}
 	});
 
-	const [approve] = useMutation(APPROVE_MUTATION, { update: cache => cache.reset().then(() => refetch()) });
-	const [reject] = useMutation(REJECT_MUTATION, { update: cache => cache.reset().then(() => refetch()) });
+	const [approve] = useMutation(APPROVE_MUTATION, {update: cache => cache.reset().then(() => refetch())});
+	const [reject] = useMutation(REJECT_MUTATION, {update: cache => cache.reset().then(() => refetch())});
 
 	if (loading) {
-		return <Loading />;
+		return <Loading/>;
 	}
 
 	if (!data?.organization) {
@@ -245,7 +245,7 @@ const OrgApprovals = ({ match }) => {
 			<div className={layout.container}>
 				<main className={layout.main}>
 					<p>There are no organizations with that url</p>
-					<BackButton to={"/admin/approvals"} label={"Back to Approvals"} />
+					<BackButton to={"/admin/approvals"} label={"Back to Approvals"}/>
 				</main>
 			</div>
 		);
@@ -266,8 +266,8 @@ const OrgApprovals = ({ match }) => {
 										position: "relative"
 									}}
 								>
-									<div style={{ display: "flex" }}>
-										<h3 style={{ flexGrow: 1 }}>
+									<div style={{display: "flex"}}>
+										<h3 style={{flexGrow: 1}}>
 											Changes Proposed By: {edit.submittingUser.name} ({edit.submittingUser.email}
 											)
 										</h3>
@@ -278,7 +278,7 @@ const OrgApprovals = ({ match }) => {
 												onClick={() =>
 													window.confirm("Are you sure you want to reject all changes") &&
 													reject({
-														variables: { fields: edit.alteredFields, editId: edit.id }
+														variables: {fields: edit.alteredFields, editId: edit.id}
 													})
 												}
 											>
@@ -291,7 +291,7 @@ const OrgApprovals = ({ match }) => {
 												onClick={() =>
 													window.confirm("Are you sure you want to approve all changes") &&
 													approve({
-														variables: { fields: edit.alteredFields, editId: edit.id }
+														variables: {fields: edit.alteredFields, editId: edit.id}
 													})
 												}
 											>
@@ -338,14 +338,14 @@ const OrgApprovals = ({ match }) => {
 																		"Are you sure you want to reject " + field
 																	) &&
 																	reject({
-																		variables: { fields: [field], editId: edit.id }
+																		variables: {fields: [field], editId: edit.id}
 																	})
 																}
 															>
 																Reject
 															</Button>
-															<br />
-															<br />
+															<br/>
+															<br/>
 															<Button
 																variant={"contained"}
 																color={"primary"}
@@ -354,7 +354,7 @@ const OrgApprovals = ({ match }) => {
 																		"Are you sure you want to approve " + field
 																	) &&
 																	approve({
-																		variables: { fields: [field], editId: edit.id }
+																		variables: {fields: [field], editId: edit.id}
 																	})
 																}
 															>
@@ -362,7 +362,7 @@ const OrgApprovals = ({ match }) => {
 															</Button>
 														</ListItemSecondaryAction>
 													</ListItem>
-													{index + 1 < edit.alteredFields.length && <Divider />}
+													{index + 1 < edit.alteredFields.length && <Divider/>}
 												</>
 											);
 										})}
@@ -395,7 +395,7 @@ const OrgApprovals = ({ match }) => {
 							{data.organization.memberships.map(mem => (
 								<ListItem key={mem.id} button>
 									<ListItemAvatar>
-										<Avatar src={mem.user.picture} />
+										<Avatar src={mem.user.picture}/>
 									</ListItemAvatar>
 									<div>
 										<Typography>{mem.user.name}</Typography>
@@ -423,7 +423,7 @@ const OrgApprovals = ({ match }) => {
 								.map(mem => (
 									<ListItem key={mem.id} button>
 										<ListItemAvatar>
-											<Avatar src={mem.user.picture} />
+											<Avatar src={mem.user.picture}/>
 										</ListItemAvatar>
 										<div>
 											<Typography>{mem.user.name}</Typography>
@@ -435,7 +435,7 @@ const OrgApprovals = ({ match }) => {
 								))}
 						</List>
 					</Card>
-					<ApprovalMessages organization={data.organization} refetch={refetch} />
+					<ApprovalMessages organization={data.organization} refetch={refetch}/>
 				</Grid>
 			</Grid>
 		</div>

@@ -41,4 +41,5 @@ function LinkPreview({ title, description, image, url, siteName }) {
 		</List>
 	);
 }
+
 export default LinkPreview;

@@ -1,7 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 import BackButton from "../comps/ui/BackButton";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
@@ -12,7 +12,7 @@ import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
 
 function TabPanel(props) {
-	const { children, value, index, ...other } = props;
+	const {children, value, index, ...other} = props;
 
 	return (
 		<div
@@ -73,26 +73,26 @@ const ClubPubFair = () => {
 	};
 
 	if (!user.signedIn) {
-		return <SignInRequired />;
+		return <SignInRequired/>;
 	}
 
 	return (
 		<div>
 			<Helmet>
 				<title>Club Pub Fair | StuyActivities</title>
-				<meta property="og:title" content="Club Pub Fair | StuyActivities" />
+				<meta property="og:title" content="Club Pub Fair | StuyActivities"/>
 				<meta
 					property="og:description"
 					content={"A page designed to help students through the Club Pub Fair."}
 				/>
 			</Helmet>
 			<div className={classes.layout}>
-				<main style={{ width: "100%" }}>
-					<BackButton to={"/"} label={"Back To Home"} />
+				<main style={{width: "100%"}}>
+					<BackButton to={"/"} label={"Back To Home"}/>
 					<Typography variant={"h4"} className={classes.title}>
 						Virtual Clubs & Pubs Fair 2020
 					</Typography>
-					<br />
+					<br/>
 					<Typography paragraph>
 						Welcome to the 2020 Virtual Clubs & Pubs Fair! The Student Union is excited to present this
 						amazing opportunity for students of all grades to learn about the many activities Stuy has to
@@ -129,7 +129,7 @@ const ClubPubFair = () => {
 						<TabPanel value={tab} index={0}>
 							<iframe
 								title={"Day 1"}
-								style={{ width: "100%", height: "40vh" }}
+								style={{width: "100%", height: "40vh"}}
 								src="https://www.youtube.com/embed/jUzq1VHeVLE"
 								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -139,7 +139,7 @@ const ClubPubFair = () => {
 						<TabPanel value={tab} index={1}>
 							<iframe
 								title={"Day 2"}
-								style={{ width: "100%", height: "40vh" }}
+								style={{width: "100%", height: "40vh"}}
 								src="https://www.youtube.com/embed/FMDR5Ga1Q40"
 								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -149,7 +149,7 @@ const ClubPubFair = () => {
 						<TabPanel value={tab} index={2}>
 							<iframe
 								title={"Day 3"}
-								style={{ width: "100%", height: "40vh" }}
+								style={{width: "100%", height: "40vh"}}
 								src="https://www.youtube.com/embed/XSzax-rLHAU"
 								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -159,7 +159,7 @@ const ClubPubFair = () => {
 						<TabPanel value={tab} index={3}>
 							<iframe
 								title={"Day 4"}
-								style={{ width: "100%", height: "40vh" }}
+								style={{width: "100%", height: "40vh"}}
 								src="https://www.youtube.com/embed/WoKEVH7Ozyw"
 								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -169,7 +169,7 @@ const ClubPubFair = () => {
 						<TabPanel value={tab} index={4}>
 							<iframe
 								title={"Day 5"}
-								style={{ width: "100%", height: "40vh" }}
+								style={{width: "100%", height: "40vh"}}
 								src="https://www.youtube.com/embed/1VkfT5H2JDE"
 								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -179,7 +179,7 @@ const ClubPubFair = () => {
 						<TabPanel value={tab} index={5}>
 							<iframe
 								title={"Day 6"}
-								style={{ width: "100%", height: "40vh" }}
+								style={{width: "100%", height: "40vh"}}
 								src="https://www.youtube.com/embed/DgRzN-9vDro"
 								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -189,7 +189,7 @@ const ClubPubFair = () => {
 						<TabPanel value={tab} index={6}>
 							<iframe
 								title={"Day 7"}
-								style={{ width: "100%", height: "40vh" }}
+								style={{width: "100%", height: "40vh"}}
 								src="https://www.youtube.com/embed/_QWF0FWo798"
 								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

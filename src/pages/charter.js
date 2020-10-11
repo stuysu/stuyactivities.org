@@ -15,7 +15,7 @@ import Confirm from "../comps/pages/charter/Confirm";
 import BackButton from "../comps/ui/BackButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import SubmitCharter from "../comps/pages/charter/SubmitCharter";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import textValidator from "../utils/textValidator";
 import SignInRequired from "../comps/ui/SignInRequired";
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const StylesWrapper = ({ children }) => {
+const StylesWrapper = ({children}) => {
 	const classes = useStyles();
 	return children(classes);
 };
@@ -61,12 +61,12 @@ export default class Charter extends React.Component {
 	static numSteps = 5;
 
 	static charterRequirementMap = {
-		mission: { minChars: 20 },
-		purpose: { minWords: 150 },
-		benefit: { minWords: 200 },
-		appointmentProcedures: { minWords: 150 },
-		uniqueness: { minWords: 75 },
-		meetingSchedule: { minChars: 50 },
+		mission: {minChars: 20},
+		purpose: {minWords: 150},
+		benefit: {minWords: 200},
+		appointmentProcedures: {minWords: 150},
+		uniqueness: {minWords: 75},
+		meetingSchedule: {minChars: 50},
 		meetingDays: {}
 	};
 
@@ -81,7 +81,7 @@ export default class Charter extends React.Component {
 					return null;
 				}
 
-				return { errors: { ...state.errors, [field]: value } };
+				return {errors: {...state.errors, [field]: value}};
 			});
 		};
 
@@ -105,7 +105,7 @@ export default class Charter extends React.Component {
 		};
 
 		this.beforeStepChange = () => {
-			const errors = { ...this.state.errors };
+			const errors = {...this.state.errors};
 
 			if (this.state.activeStep >= 1) {
 				errors.name = this.state?.name?.trim() ? false : "You must provide a name for your activity";
@@ -133,14 +133,14 @@ export default class Charter extends React.Component {
 				}
 			}
 
-			this.setState({ errors });
+			this.setState({errors});
 		};
 
 		this.nextStep = () => {
 			this.beforeStepChange();
 			if (this.state.activeStep + 1 < Charter.numSteps) {
 				this.setState(state => {
-					return { activeStep: state.activeStep + 1 };
+					return {activeStep: state.activeStep + 1};
 				});
 			}
 		};
@@ -178,7 +178,7 @@ export default class Charter extends React.Component {
 
 	render() {
 		if (!this.context.signedIn) {
-			return <SignInRequired />;
+			return <SignInRequired/>;
 		}
 
 		return (
@@ -187,8 +187,8 @@ export default class Charter extends React.Component {
 					<CharterFormContext.Provider value={this.state}>
 						<FlexCenter>
 							<div className={classes.container}>
-								<BackButton to={"/"} label={"Back To Home"} className={classes.backButton} />
-								<Typography variant={"h4"} style={{ textAlign: "center" }}>
+								<BackButton to={"/"} label={"Back To Home"} className={classes.backButton}/>
+								<Typography variant={"h4"} style={{textAlign: "center"}}>
 									Chartering A New Activity
 								</Typography>
 
@@ -200,12 +200,12 @@ export default class Charter extends React.Component {
 									<Step>
 										<StepLabel
 											className={classes.stepLabel}
-											onClick={() => this.setState({ activeStep: 0 })}
+											onClick={() => this.setState({activeStep: 0})}
 										>
 											Before you start
 										</StepLabel>
 										<StepContent>
-											<BeforeYouStart />
+											<BeforeYouStart/>
 										</StepContent>
 									</Step>
 									<Step>
@@ -214,12 +214,12 @@ export default class Charter extends React.Component {
 												field => this.state.errors[field]
 											)}
 											className={classes.stepLabel}
-											onClick={() => this.setState({ activeStep: 1 })}
+											onClick={() => this.setState({activeStep: 1})}
 										>
 											Basic Info
 										</StepLabel>
 										<StepContent>
-											<BasicInfoForm />
+											<BasicInfoForm/>
 										</StepContent>
 									</Step>
 									<Step>
@@ -228,29 +228,29 @@ export default class Charter extends React.Component {
 												field => this.state.errors[field]
 											)}
 											className={classes.stepLabel}
-											onClick={() => this.setState({ activeStep: 2 })}
+											onClick={() => this.setState({activeStep: 2})}
 										>
 											Charter Information
 										</StepLabel>
 										<StepContent>
-											<CharterQuestions />
+											<CharterQuestions/>
 										</StepContent>
 									</Step>
 									<Step>
 										<StepLabel
 											className={classes.stepLabel}
-											onClick={() => this.setState({ activeStep: 3 })}
+											onClick={() => this.setState({activeStep: 3})}
 										>
 											Leaders
 										</StepLabel>
 										<StepContent>
-											<AddLeaders />
+											<AddLeaders/>
 										</StepContent>
 									</Step>
 									<Step>
 										<StepLabel>Confirm</StepLabel>
 										<StepContent>
-											<Confirm />
+											<Confirm/>
 										</StepContent>
 									</Step>
 								</Stepper>
@@ -274,7 +274,7 @@ export default class Charter extends React.Component {
 											</span>
 										</Tooltip>
 									)}
-									{this.state.activeStep >= 4 && <SubmitCharter />}
+									{this.state.activeStep >= 4 && <SubmitCharter/>}
 									&nbsp;
 									<Button onClick={this.previousStep}>Back</Button>
 								</div>

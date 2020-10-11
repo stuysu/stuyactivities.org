@@ -1,7 +1,7 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
-import { CharterFormContext } from "../../../pages/charter";
-import { makeStyles } from "@material-ui/core/styles";
+import {Typography} from "@material-ui/core";
+import {CharterFormContext} from "../../../pages/charter";
+import {makeStyles} from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
@@ -26,28 +26,28 @@ const Confirm = () => {
 	return (
 		<div>
 			<Typography variant={"h5"}>Confirm your changes:</Typography>
-			<br />
+			<br/>
 			<Typography variant={"h6"}>Basic Info: </Typography>
 
 			<List dense>
 				<ListItem>
-					<ListItemText primary={"Name"} secondary={form.name} />
+					<ListItemText primary={"Name"} secondary={form.name}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Url"} secondary={`https://stuyactivities.org/${form.url}`} />
+					<ListItemText primary={"Url"} secondary={`https://stuyactivities.org/${form.url}`}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Commitment Level"} secondary={form.commitmentLevel} />
+					<ListItemText primary={"Commitment Level"} secondary={form.commitmentLevel}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Tags"} secondary={form?.tags?.map(tag => tag.name).join(", ")} />
+					<ListItemText primary={"Tags"} secondary={form?.tags?.map(tag => tag.name).join(", ")}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Keywords"} secondary={form?.keywords?.join(", ")} />
+					<ListItemText primary={"Keywords"} secondary={form?.keywords?.join(", ")}/>
 				</ListItem>
 
 				{form.picture && (
@@ -69,30 +69,30 @@ const Confirm = () => {
 			<Typography variant={"h6"}>Charter:</Typography>
 			<List dense>
 				<ListItem>
-					<ListItemText primary={"Mission Statement"} secondary={form.mission} />
+					<ListItemText primary={"Mission Statement"} secondary={form.mission}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Purpose"} secondary={form.purpose} />
+					<ListItemText primary={"Purpose"} secondary={form.purpose}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Community Benefit"} secondary={form.benefit} />
+					<ListItemText primary={"Community Benefit"} secondary={form.benefit}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Appointment Procedures"} secondary={form.appointmentProcedures} />
+					<ListItemText primary={"Appointment Procedures"} secondary={form.appointmentProcedures}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Uniqueness"} secondary={form.uniqueness} />
+					<ListItemText primary={"Uniqueness"} secondary={form.uniqueness}/>
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Additional Information"} secondary={form.extra} />
+					<ListItemText primary={"Additional Information"} secondary={form.extra}/>
 				</ListItem>
 				<ListItem>
-					<ListItemText primary={"Meeting Schedule"} secondary={form.meetingSchedule} />
+					<ListItemText primary={"Meeting Schedule"} secondary={form.meetingSchedule}/>
 				</ListItem>
 
 				<ListItem>
@@ -109,14 +109,14 @@ const Confirm = () => {
 					return (
 						<ListItem key={user.id}>
 							<ListItemAvatar>
-								<Avatar src={user.picture} />
+								<Avatar src={user.picture}/>
 							</ListItemAvatar>
 							<ListItemText
 								primary={user.name}
 								secondary={
 									<span>
 										{user.email}
-										<br />
+										<br/>
 										{user.role}
 									</span>
 								}
@@ -125,7 +125,7 @@ const Confirm = () => {
 					);
 				})}
 			</List>
-			<br />
+			<br/>
 			{Boolean(form?.serverError) && (
 				<Typography paragraph color={"error"}>
 					{form?.serverError?.graphQLErrors?.[0]?.message || form.serverError?.message || "Unknown error"}

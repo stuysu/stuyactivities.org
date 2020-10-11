@@ -1,7 +1,7 @@
 import React from "react";
-import { gql } from "apollo-boost";
-import { useQuery } from "@apollo/client";
-import { CharterFormContext } from "../../../pages/charter";
+import {gql} from "apollo-boost";
+import {useQuery} from "@apollo/client";
+import {CharterFormContext} from "../../../pages/charter";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
@@ -31,9 +31,9 @@ const QUERY = gql`
 	}
 `;
 
-const TagSelection = ({ className }) => {
+const TagSelection = ({className}) => {
 	const classes = useStyles();
-	const { data } = useQuery(QUERY);
+	const {data} = useQuery(QUERY);
 	const charterContext = React.useContext(CharterFormContext);
 	const tags = data?.tags || [];
 	const tagMap = {};
@@ -45,13 +45,13 @@ const TagSelection = ({ className }) => {
 
 	React.useEffect(() => {
 		if (!Array.isArray(charterContext.tags)) {
-			charterContext.set({ tags: [] });
+			charterContext.set({tags: []});
 		}
 	}, [charterContext]);
 
 	const handleSelect = ev => {
 		if (ev.target.value.length <= 3) {
-			charterContext.set({ tags: ev.target.value });
+			charterContext.set({tags: ev.target.value});
 			charterContext.setError("tags", false);
 		}
 		setOpen(false);
@@ -100,7 +100,7 @@ const TagSelection = ({ className }) => {
 					{charterContext?.errors?.tags && (
 						<span>
 							{charterContext?.errors?.tags}
-							<br />
+							<br/>
 						</span>
 					)}
 					{charterContext?.tags?.length >= 3

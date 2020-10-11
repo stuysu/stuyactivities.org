@@ -5,10 +5,10 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Carousel from "react-multi-carousel";
-import { Link, Typography } from "@material-ui/core";
+import {Link, Typography} from "@material-ui/core";
 
 import Card from "@material-ui/core/Card";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import ReactMarkdown from "react-markdown";
 import LinkPreview from "./LinkPreview";
 import moment from "moment-timezone";
@@ -25,15 +25,15 @@ const useStyles = makeStyles({
 
 const responsive = {
 	desktop: {
-		breakpoint: { max: 4000, min: 0 },
+		breakpoint: {max: 4000, min: 0},
 		items: 1,
 		slidesToSlide: 1
 	}
 };
 
-const BlueLink = props => <Link {...props} color={"secondary"} />;
+const BlueLink = props => <Link {...props} color={"secondary"}/>;
 
-const UpdateCard = ({ organization, title, content, pictures, links, createdAt }) => {
+const UpdateCard = ({organization, title, content, pictures, links, createdAt}) => {
 	const classes = useStyles();
 
 	return (
@@ -42,7 +42,7 @@ const UpdateCard = ({ organization, title, content, pictures, links, createdAt }
 				<UnstyledLink to={`/${organization.url}`}>
 					<ListItem>
 						<ListItemAvatar>
-							<Avatar alt={organization?.name} src={organization?.charter?.picture} />
+							<Avatar alt={organization?.name} src={organization?.charter?.picture}/>
 						</ListItemAvatar>
 						<ListItemText
 							primary={organization?.name}
@@ -88,7 +88,7 @@ const UpdateCard = ({ organization, title, content, pictures, links, createdAt }
 						))}
 					</Carousel>
 				)}
-				{links?.length > 0 && links.map(link => <LinkPreview {...link} key={link.id} />)}
+				{links?.length > 0 && links.map(link => <LinkPreview {...link} key={link.id}/>)}
 			</div>
 		</Card>
 	);

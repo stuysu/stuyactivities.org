@@ -1,19 +1,19 @@
 import React from "react";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { OrgContext } from "../index";
+import {gql, useMutation, useQuery} from "@apollo/client";
+import {OrgContext} from "../index";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Card from "@material-ui/core/Card";
-import { Avatar, Button } from "@material-ui/core";
+import {Avatar, Button} from "@material-ui/core";
 // import { makeStyles } from "@material-ui/core/styles";
 import capitalizeString from "../../../utils/capitalizeString";
 import Typography from "@material-ui/core/Typography";
-import { CharterFormContext } from "../../charter";
+import {CharterFormContext} from "../../charter";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import SmartCharterQuestion from "../../../comps/pages/charter/SmartCharterQuestion";
 import TextField from "@material-ui/core/TextField";
 import arrayToggle from "../../../utils/arrayToggle";
-import { cache } from "../../../comps/context/ApolloProvider";
+import {cache} from "../../../comps/context/ApolloProvider";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
 import Linkify from "linkifyjs/react";
@@ -102,25 +102,25 @@ const SAVE_MUTATION = gql`
 	}
 `;
 
-const SaveButton = ({ disabled }) => {
+const SaveButton = ({disabled}) => {
 	const org = React.useContext(OrgContext);
 
 	const form = React.useContext(CharterFormContext);
 	const orgId = org.id;
 
-	const [submit, { loading }] = useMutation(SAVE_MUTATION);
+	const [submit, {loading}] = useMutation(SAVE_MUTATION);
 
 	const onClick = () => {
-		const variables = { orgId };
+		const variables = {orgId};
 
 		form.editing.forEach(field => {
 			variables[field] = form[field];
 		});
 
-		submit({ variables })
+		submit({variables})
 			.then(() => cache.reset())
 			.then(() => {
-				form.set({ editing: [] });
+				form.set({editing: []});
 				// org.refetch();
 			})
 			.catch(console.error);
@@ -134,31 +134,6 @@ const SaveButton = ({ disabled }) => {
 };
 
 class CharterEditForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.setState = this.setState.bind(this);
-		this.setError = (field, value) => {
-			this.setState(state => {
-				if (state.errors[field] === value) {
-					return null;
-				}
-
-				return { errors: { ...state.errors, [field]: value } };
-			});
-		};
-
-		this.state = {
-			set: this.setState,
-			setError: this.setError,
-			errors: {},
-			editing: []
-		};
-
-		this.picRef = React.createRef();
-		this.handleFileUpload = this.handleFileUpload.bind(this);
-		this.changePic = this.changePic.bind(this);
-	}
-
 	static questions = [
 		{
 			name: "mission",
@@ -227,6 +202,31 @@ class CharterEditForm extends React.Component {
 		}
 	];
 
+	constructor(props) {
+		super(props);
+		this.setState = this.setState.bind(this);
+		this.setError = (field, value) => {
+			this.setState(state => {
+				if (state.errors[field] === value) {
+					return null;
+				}
+
+				return {errors: {...state.errors, [field]: value}};
+			});
+		};
+
+		this.state = {
+			set: this.setState,
+			setError: this.setError,
+			errors: {},
+			editing: []
+		};
+
+		this.picRef = React.createRef();
+		this.handleFileUpload = this.handleFileUpload.bind(this);
+		this.changePic = this.changePic.bind(this);
+	}
+
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		const newResponseFields = Object.keys(this.props.latestChanges);
 		if (newResponseFields.length !== Object.keys(prevProps.latestChanges).length) {
@@ -282,7 +282,7 @@ class CharterEditForm extends React.Component {
 							<Typography>
 								Picture -{" "}
 								{this.state.editing.includes("picture") ? (
-									<span style={{ color: "#7f8c8d" }}>Editing</span>
+									<span style={{color: "#7f8c8d"}}>Editing</span>
 								) : (
 									<span
 										style={{
@@ -298,9 +298,9 @@ class CharterEditForm extends React.Component {
 									</span>
 								)}
 							</Typography>
-							<br />
+							<br/>
 							<Avatar
-								style={{ width: "200px", height: "200px" }}
+								style={{width: "200px", height: "200px"}}
 								src={
 									this.state.editing.includes("picture")
 										? window.URL.createObjectURL(this.state.picture)
@@ -309,7 +309,7 @@ class CharterEditForm extends React.Component {
 							/>
 							<input
 								type={"file"}
-								style={{ display: "none" }}
+								style={{display: "none"}}
 								ref={this.picRef}
 								accept="image/*"
 								onChange={this.handleFileUpload}
@@ -362,7 +362,7 @@ class CharterEditForm extends React.Component {
 									<Typography>
 										{question.label} -{" "}
 										{isEditing ? (
-											<span style={{ color: "#7f8c8d" }}>Editing</span>
+											<span style={{color: "#7f8c8d"}}>Editing</span>
 										) : (
 											<span
 												style={{
@@ -373,7 +373,7 @@ class CharterEditForm extends React.Component {
 											</span>
 										)}
 									</Typography>
-									<br />
+									<br/>
 									{isEditing ? (
 										<SmartCharterQuestion
 											{...question}
@@ -413,7 +413,7 @@ class CharterEditForm extends React.Component {
 					})}
 				</List>
 
-				<div style={{ textAlign: "right", margin: "1rem" }}>
+				<div style={{textAlign: "right", margin: "1rem"}}>
 					<SaveButton
 						disabled={
 							!this.state.editing.length ||
@@ -459,14 +459,14 @@ const CREATE_MESSAGE_MUTATION = gql`
 
 const ApprovalMessages = () => {
 	const org = React.useContext(OrgContext);
-	const { data, refetch } = useQuery(MESSAGE_QUERY, {
-		variables: { orgId: org.id }
+	const {data, refetch} = useQuery(MESSAGE_QUERY, {
+		variables: {orgId: org.id}
 	});
 
 	const [message, setMessage] = React.useState("");
 
 	const [submitMessage] = useMutation(CREATE_MESSAGE_MUTATION, {
-		variables: { message, orgId: org.id }
+		variables: {message, orgId: org.id}
 	});
 	const messageRef = React.createRef();
 
@@ -500,7 +500,7 @@ const ApprovalMessages = () => {
 						return (
 							<ListItem>
 								<ListItemAvatar>
-									<Avatar src={message?.user?.picture} />
+									<Avatar src={message?.user?.picture}/>
 								</ListItemAvatar>
 								<div>
 									<p
@@ -512,8 +512,8 @@ const ApprovalMessages = () => {
 										{message?.auto
 											? "Automatic Message"
 											: message?.user?.adminRoles?.length
-											? "ClubPub Team"
-											: "Organization Admin"}
+												? "ClubPub Team"
+												: "Organization Admin"}
 									</p>
 									<p
 										style={{
@@ -557,7 +557,7 @@ const ApprovalMessages = () => {
 						onChange={ev => setMessage(ev.target.value)}
 						variant={"outlined"}
 						placeholder={"Message for StuyActivities Admins"}
-						style={{ flexGrow: 1 }}
+						style={{flexGrow: 1}}
 					/>
 					&nbsp;
 					<Button variant={"contained"} color={"secondary"} onClick={onSubmit}>
@@ -571,7 +571,7 @@ const ApprovalMessages = () => {
 
 const CharterEdits = () => {
 	const org = React.useContext(OrgContext);
-	const { data } = useQuery(QUERY, { variables: { orgId: org.id } });
+	const {data} = useQuery(QUERY, {variables: {orgId: org.id}});
 	const [latestChanges, setLatestChanges] = React.useState({});
 
 	React.useEffect(() => {
@@ -600,14 +600,14 @@ const CharterEdits = () => {
 
 	return (
 		<div>
-			<Card style={{ padding: "0.5rem" }}>
+			<Card style={{padding: "0.5rem"}}>
 				<Typography variant={"h2"} align={"center"}>
 					Edit Charter:
 				</Typography>
-				<CharterEditForm latestChanges={latestChanges} org={org} />
+				<CharterEditForm latestChanges={latestChanges} org={org}/>
 			</Card>
-			<br />
-			<ApprovalMessages />
+			<br/>
+			<ApprovalMessages/>
 		</div>
 	);
 };

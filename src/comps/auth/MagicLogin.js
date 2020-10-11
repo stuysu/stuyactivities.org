@@ -3,10 +3,10 @@ import TextField from "@material-ui/core/TextField";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import FlexCenter from "../ui/FlexCenter";
 import Button from "@material-ui/core/Button";
-import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/client";
+import {gql} from "apollo-boost";
+import {useMutation} from "@apollo/client";
 import Typography from "@material-ui/core/Typography";
-import { client } from "../context/ApolloProvider";
+import {client} from "../context/ApolloProvider";
 
 const useStyles = makeStyles({
 	formFieldContainer: {
@@ -40,7 +40,7 @@ export default function MagicLogin() {
 	const classes = useStyles();
 	const [email, setEmail] = React.useState("");
 	const [success, setSuccess] = React.useState(false);
-	const [requestToken, { error, loading }] = useMutation(MUTATION, {
+	const [requestToken, {error, loading}] = useMutation(MUTATION, {
 		client
 	});
 
@@ -50,9 +50,10 @@ export default function MagicLogin() {
 		}
 
 		try {
-			await requestToken({ variables: { email } });
+			await requestToken({variables: {email}});
 			setSuccess(true);
-		} catch (er) {}
+		} catch (er) {
+		}
 	};
 
 	return (

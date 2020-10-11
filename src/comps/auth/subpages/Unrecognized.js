@@ -1,7 +1,7 @@
 import React from "react";
 import FallingInSpace from "../../../img/vectors/clip-in-the-space.svg";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import AuthContext from "../AuthContext";
 
 const useStyles = makeStyles(theme => ({
@@ -29,7 +29,7 @@ const Unrecognized = () => {
 
 	return (
 		<div>
-			<img src={FallingInSpace} alt={"Astronaut falling in space"} className={classes.defaultVector} />
+			<img src={FallingInSpace} alt={"Astronaut falling in space"} className={classes.defaultVector}/>
 			<Typography variant={"h4"} className={classes.heading}>
 				Ouch!
 			</Typography>
@@ -41,7 +41,7 @@ const Unrecognized = () => {
 				department you teach.
 			</Typography>
 
-			<p className={classes.retryLogin} onClick={() => authContext.set({ page: "landing" })}>
+			<p className={classes.retryLogin} onClick={() => authContext.set({page: "landing"})}>
 				I want to try signing in again.
 			</p>
 		</div>

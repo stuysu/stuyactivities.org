@@ -8,9 +8,9 @@ const Navigation = () => {
 
 	return (
 		<React.Fragment>
-			<NavBar setDrawerOpen={setDrawerOpen} />
-			<NavDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
-			<CssBaseline />
+			<NavBar setDrawerOpen={setDrawerOpen}/>
+			<NavDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}/>
+			<CssBaseline/>
 		</React.Fragment>
 	);
 };

@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { OrgContext } from "./index";
+import {Button, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {OrgContext} from "./index";
 import joinVector from "../../img/vectors/undraw_join.svg";
 import TextField from "@material-ui/core/TextField";
-import { gql, useMutation } from "@apollo/client";
-import { cache } from "../../comps/context/ApolloProvider";
+import {gql, useMutation} from "@apollo/client";
+import {cache} from "../../comps/context/ApolloProvider";
 
 import moment from "moment-timezone";
 import UserContext from "../../comps/context/UserContext";
@@ -52,7 +52,7 @@ const CreateRequest = () => {
 	const [message, setMessage] = React.useState("");
 	const user = React.useContext(UserContext);
 
-	const [submit, { error }] = useMutation(CREATE, {
+	const [submit, {error}] = useMutation(CREATE, {
 		variables: {
 			message,
 			orgId: org.id
@@ -60,7 +60,7 @@ const CreateRequest = () => {
 	});
 
 	if (!user.signedIn) {
-		return <SignInRequired />;
+		return <SignInRequired/>;
 	}
 
 	const onSubmit = () => {
@@ -73,7 +73,7 @@ const CreateRequest = () => {
 	return (
 		<>
 			<div>
-				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
+				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector}/>
 			</div>
 
 			<p>
@@ -92,7 +92,7 @@ const CreateRequest = () => {
 						value={message}
 						onChange={ev => setMessage(ev.target.value)}
 					/>
-					<br />
+					<br/>
 					<Button color={"primary"} variant={"contained"} onClick={onSubmit}>
 						Submit Request
 					</Button>
@@ -117,8 +117,8 @@ const ExistingRequest = () => {
 	const org = React.useContext(OrgContext);
 	const classes = useStyles();
 
-	const [deleteRequest, { error }] = useMutation(DELETE, {
-		variables: { requestId: org.membershipRequest.id },
+	const [deleteRequest, {error}] = useMutation(DELETE, {
+		variables: {requestId: org.membershipRequest.id},
 		update: cache => {
 			cache.reset().then(() => org.refetch());
 		}
@@ -127,7 +127,7 @@ const ExistingRequest = () => {
 	return (
 		<>
 			<div>
-				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
+				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector}/>
 			</div>
 
 			<p>
@@ -168,15 +168,15 @@ const AcceptRequest = () => {
 	const org = React.useContext(OrgContext);
 	const classes = useStyles();
 
-	const [acceptRequest, { error, loading: loadingAccept }] = useMutation(ACCEPT, {
-		variables: { requestId: org.membershipRequest.id },
+	const [acceptRequest, {error, loading: loadingAccept}] = useMutation(ACCEPT, {
+		variables: {requestId: org.membershipRequest.id},
 		update: cache => {
 			cache.reset().then(() => org.refetch());
 		}
 	});
 
-	const [rejectRequest, { loading: loadingDelete }] = useMutation(DELETE, {
-		variables: { requestId: org.membershipRequest.id },
+	const [rejectRequest, {loading: loadingDelete}] = useMutation(DELETE, {
+		variables: {requestId: org.membershipRequest.id},
 		update: cache => {
 			cache.reset().then(() => org.refetch());
 		}
@@ -185,7 +185,7 @@ const AcceptRequest = () => {
 	return (
 		<>
 			<div>
-				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
+				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector}/>
 			</div>
 			<p>You've been invited to join this club as a {org.membershipRequest.role}</p>
 			<Button
@@ -209,7 +209,7 @@ const AcceptRequest = () => {
 	);
 };
 
-const Join = ({ match }) => {
+const Join = ({match}) => {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 
@@ -220,9 +220,9 @@ const Join = ({ match }) => {
 			</Typography>
 
 			<div className={classes.tabContainer}>
-				{!org.membership && !org.membershipRequest && <CreateRequest />}
-				{!org.membership && org.membershipRequest && org.membershipRequest.userApproval && <ExistingRequest />}
-				{!org.membership && org.membershipRequest && org.membershipRequest.adminApproval && <AcceptRequest />}
+				{!org.membership && !org.membershipRequest && <CreateRequest/>}
+				{!org.membership && org.membershipRequest && org.membershipRequest.userApproval && <ExistingRequest/>}
+				{!org.membership && org.membershipRequest && org.membershipRequest.adminApproval && <AcceptRequest/>}
 				{org.membership && <p>You're a member of this activity :)</p>}
 			</div>
 		</div>

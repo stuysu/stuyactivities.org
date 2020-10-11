@@ -1,16 +1,16 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/react-hooks";
+import {Grid, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import {gql} from "@apollo/client";
+import {useQuery} from "@apollo/react-hooks";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
-import { List as ListIcon, ViewComfy } from "@material-ui/icons";
+import {List as ListIcon, ViewComfy} from "@material-ui/icons";
 import SearchBox from "../comps/pages/catalog/filters/SearchBox";
 import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
 import CommitmentFilter from "../comps/pages/catalog/filters/CommitmentFilter";
 import MeetingDaysFilter from "../comps/pages/catalog/filters/MeetingDaysFilter";
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 
 import scubaNotFound from "../img/vectors/scuba-diver-not-found.svg";
 import cherryNotFound from "../img/vectors/cherry-page-not-found.svg";
@@ -129,7 +129,7 @@ const Catalog = () => {
 		<div className={classes.root}>
 			<Helmet>
 				<title>Catalog | StuyActivities</title>
-				<meta property="og:title" content="Catalog | StuyActivities" />
+				<meta property="og:title" content="Catalog | StuyActivities"/>
 				<meta
 					property="og:description"
 					content={"Look through and find activities at Stuyvesant High School."}
@@ -142,13 +142,13 @@ const Catalog = () => {
 						<Typography className={classes.filterHeading} variant={"h4"}>
 							Filters
 						</Typography>
-						<SearchBox setKeyword={setKeyword} keyword={keyword} />
-						<TagsFilter tags={tags} setTags={setTags} />
+						<SearchBox setKeyword={setKeyword} keyword={keyword}/>
+						<TagsFilter tags={tags} setTags={setTags}/>
 						<CommitmentFilter
 							commitmentLevels={commitmentLevels}
 							setCommitmentLevels={setCommitmentLevels}
 						/>
-						<MeetingDaysFilter meetingDays={meetingDays} setMeetingDays={setMeetingDays} />
+						<MeetingDaysFilter meetingDays={meetingDays} setMeetingDays={setMeetingDays}/>
 					</div>
 				</Grid>
 				<Grid item xs={12} sm={12} md={9} lg={9} xl={10} className={classes.bigChild}>
@@ -164,15 +164,15 @@ const Catalog = () => {
 							className={classes.displayTypeIcon}
 						>
 							<ToggleButton value={false} aria-label="card view">
-								<ViewComfy />
+								<ViewComfy/>
 							</ToggleButton>
 							<ToggleButton value={true} aria-label="list view">
-								<ListIcon />
+								<ListIcon/>
 							</ToggleButton>
 						</ToggleButtonGroup>
 					</div>
 					{loading ? (
-						<Loading />
+						<Loading/>
 					) : (
 						<>
 							{organizations.length === 0 && (

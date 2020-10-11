@@ -1,10 +1,10 @@
 import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { Tab, Tabs } from "@material-ui/core";
+import {Redirect, Route, Switch} from "react-router-dom";
+import {Tab, Tabs} from "@material-ui/core";
 
 /** Tabs are [{url: ..., name: ..., component: ...}, ...] **/
 
-export default function Tabbed({ match, history, tabs }) {
+export default function Tabbed({match, history, tabs}) {
 	console.log(match);
 	const tabUrls = tabs.map(e => e.url);
 	const [currTab, setCurrTab] = React.useState(tabUrls.findIndex(tab => window.location.href.includes(tab)));
@@ -16,13 +16,13 @@ export default function Tabbed({ match, history, tabs }) {
 		<div>
 			<Tabs value={currTab} onChange={changeTab}>
 				{tabs.map(e => (
-					<Tab label={e.name} />
+					<Tab label={e.name}/>
 				))}
 			</Tabs>
 			<Switch>
-				<Route path={match.path} component={() => <Redirect to={"/stuysu/admin/members"} />} exact />
+				<Route path={match.path} component={() => <Redirect to={"/stuysu/admin/members"}/>} exact/>
 				{tabs.map(e => (
-					<Route path={match.path + e.url} component={e.component} exact />
+					<Route path={match.path + e.url} component={e.component} exact/>
 				))}
 			</Switch>
 		</div>
