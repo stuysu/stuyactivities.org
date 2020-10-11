@@ -9,16 +9,16 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Logo from "./../../../img/logo512.png";
 import UserContext from "../../context/UserContext";
 import {
+	AccountBox,
 	AddCircleOutlined,
 	Archive,
+	EmojiFlags,
 	EmojiSymbols,
 	Gavel,
 	Home,
 	Info,
 	LockOpen,
-	PowerSettingsNew,
-	AccountBox,
-	EmojiFlags
+	PowerSettingsNew
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
@@ -67,7 +67,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				{user.signedIn ? (
 					<div>
 						<Avatar src={user.picture} className={classes.avatar} />
-						<Typography variant={"h6"}>{user?.name}</Typography>
+						<Typography variant={"h5"}>{user?.name}</Typography>
 						<Typography variant={"body2"}>{user?.email}</Typography>
 						{Boolean(user?.fourDigitId) && (
 							<Typography variant={"body2"}>Four Digit ID: {user?.fourDigitId}</Typography>
