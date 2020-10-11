@@ -9,8 +9,6 @@ import { OrgContext } from "./index";
 import Linkify from "linkifyjs/react";
 import Link from "@material-ui/core/Link";
 
-import normalize from "normalize-url";
-
 //styles
 const useStyles = makeStyles(theme => ({
 	tabName: {
@@ -77,8 +75,13 @@ const CharterQuestion = ({ question, answer }) => {
 							}
 
 							if (type === "url") {
+								let link = value;
+								if (!link.startsWith("http://") && !link.startsWith("https://")) {
+									link = `https://${link}`;
+								}
+
 								return (
-									<Link href={normalize(value)} target={"_blank"} color={"secondary"}>
+									<Link href={link} target={"_blank"} color={"secondary"}>
 										{value}
 									</Link>
 								);
