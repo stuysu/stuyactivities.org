@@ -1,27 +1,27 @@
 import React from "react";
 import {
-	Grid,
-	makeStyles,
-	Typography,
 	Button,
-	List,
-	ListItem,
-	ListItemText,
-	Paper,
-	IconButton,
-	ListItemSecondaryAction,
 	Dialog,
-	DialogTitle,
+	DialogActions,
 	DialogContent,
 	DialogContentText,
-	DialogActions,
-	Snackbar
+	DialogTitle,
+	Grid,
+	IconButton,
+	List,
+	ListItem,
+	ListItemSecondaryAction,
+	ListItemText,
+	makeStyles,
+	Paper,
+	Snackbar,
+	Typography
 } from "@material-ui/core";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 import BackButton from "../../../comps/ui/BackButton";
 import "easymde/dist/easymde.min.css";
 import { gql, useMutation } from "@apollo/client";
-import { Edit, Close } from "@material-ui/icons";
+import { Close, Edit } from "@material-ui/icons";
 import { OrgContext } from "../index";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";

@@ -1,13 +1,13 @@
 import React from "react";
 
-import Members from "./Members";
-import Requests from "./MemberRequests";
+import Members from "./members";
+import Requests from "./member-requests";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
 import RouteTabs from "../../../comps/ui/RouteTabs";
 import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
-import CharterEdits from "./CharterEdits";
-import Meetings from "./Meetings";
+import CharterEdits from "./charter-edits";
+import Meetings from "./meetings";
 import { Group, GroupAdd, GroupWork, ListAlt, LocalActivity } from "@material-ui/icons";
 import ClubFair from "./club-fair";
 
@@ -26,7 +26,7 @@ export default function OrgAdminRouter({ match }) {
 			icon: <Group />
 		},
 		{
-			path: actualMatch + "/requests",
+			path: actualMatch + "/member-requests",
 			label: "Member Requests",
 			icon: <GroupAdd />
 		},
@@ -53,7 +53,7 @@ export default function OrgAdminRouter({ match }) {
 
 			<Switch>
 				<Route path={match.path + "/members"} component={Members} />
-				<Route path={match.path + "/requests"} component={Requests} />
+				<Route path={match.path + "/member-requests"} component={Requests} />
 				<Route path={match.path + "/charter-edits"} component={CharterEdits} />
 				<Route path={match.path + "/meetings"} component={Meetings} />
 				<Route path={match.path + "/club-fair"} component={ClubFair} />
