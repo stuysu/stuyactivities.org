@@ -10,7 +10,7 @@ import {
 	TextField,
 	Typography
 } from "@material-ui/core";
-import { CalendarToday, CheckBox, Schedule } from "@material-ui/icons";
+import { CalendarToday, Schedule } from "@material-ui/icons";
 import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles(theme => ({
