@@ -14,8 +14,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
 import { cache } from "../../../comps/context/ApolloProvider";
-
-import Linkify from "linkifyjs/react";
+import LinkifyText from "../../../comps/ui/LinkifyText";
 
 const CREATE_MESSAGE_MUTATION = gql`
 	mutation($orgId: Int!, $message: String!) {
@@ -89,14 +88,7 @@ const ApprovalMessages = ({ organization, refetch }) => {
 												overflowWrap: "anywhere"
 											}}
 										>
-											<Linkify
-												properties={{
-													target: "_blank",
-													style: { color: "red", fontWeight: "bold" }
-												}}
-											>
-												{message?.message}
-											</Linkify>
+											<LinkifyText color={"primary"}>{message?.message}</LinkifyText>
 										</p>
 									</div>
 								</div>

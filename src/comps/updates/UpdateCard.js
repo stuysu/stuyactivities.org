@@ -13,6 +13,7 @@ import ReactMarkdown from "react-markdown";
 import LinkPreview from "./LinkPreview";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
+import LinkifyText from "../ui/LinkifyText";
 
 const useStyles = makeStyles({
 	cardContent: {
@@ -59,7 +60,8 @@ const UpdateCard = ({ organization, title, content, pictures, links, createdAt }
 					escapeHtml
 					linkTarget={"_blank"}
 					renderers={{
-						link: BlueLink
+						link: BlueLink,
+						paragraph: LinkifyText
 					}}
 				/>
 

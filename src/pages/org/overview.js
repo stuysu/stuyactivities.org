@@ -6,10 +6,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import Link from "@material-ui/core/Link";
-import Linkify from "linkifyjs/react";
 import Grid from "@material-ui/core/Grid";
 import MeetingCard from "../../comps/meetings/MeetingCard";
+import LinkifyText from "../../comps/ui/LinkifyText";
 
 const Overview = () => {
 	const org = React.useContext(OrgContext);
@@ -40,20 +39,7 @@ const Overview = () => {
 					{!org.active && !org.charter.meetingSchedule && (
 						<span style={{ color: "grey" }}>This response is pending approval</span>
 					)}
-					<Linkify
-						options={{
-							tagName: "span",
-							format: function (value, type) {
-								return (
-									<Link href={value} target={"_blank"} color={"secondary"}>
-										{value}
-									</Link>
-								);
-							}
-						}}
-					>
-						{org.charter.meetingSchedule}
-					</Linkify>
+					<LinkifyText>{org.charter.meetingSchedule}</LinkifyText>
 				</Typography>
 
 				<Typography variant={"h5"} color={"primary"}>
