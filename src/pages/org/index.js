@@ -82,6 +82,7 @@ const getQuery = signedIn => {
 					title
 					description
 					start
+					privacy
 					end
 				}
 				meetings {
@@ -89,6 +90,7 @@ const getQuery = signedIn => {
 					title
 					description
 					start
+					privacy
 					end
 				}
 				membership {

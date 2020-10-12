@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Button,
 	FormControlLabel,
@@ -10,7 +10,8 @@ import {
 	TextField,
 	Typography
 } from "@material-ui/core";
-import { CalendarToday, Schedule } from "@material-ui/icons";
+import { CalendarToday, CheckBox, Schedule } from "@material-ui/icons";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitting }) => {
 	const classes = useStyles();
 	const [title, setTitle] = React.useState(meeting.title || "");
+	const [isPublic, setIsPublic] = useState(meeting.privacy === "public");
 	const [description, setDescription] = React.useState(meeting.description || "");
 
 	const startDate = new Date(meeting.start || "");
@@ -130,13 +132,36 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 					</Typography>
 				}
 			/>
+
+			<Grid component="label" container alignItems="center" spacing={1}>
+				<Grid item>Members Only</Grid>
+				<Grid item>
+					<Switch checked={isPublic} onChange={() => setIsPublic(!isPublic)} />
+				</Grid>
+				<Grid item>Public</Grid>
+			</Grid>
+			<Typography paragraph variant={"body2"} color={"primary"}>
+				If a meeting is not public then only members of the club will be able to see the description.
+			</Typography>
+
 			<FormControlLabel
-				control={<Switch checked={checked} onChange={e => setChecked(e.target.checked)} />}
+				control={<Checkbox checked={checked} onChange={e => setChecked(e.target.checked)} />}
 				label={checkboxText}
 			/>
 			<br />
+
 			<Button
-				onClick={() => submit({ title, description, date, startTime, endTime, checked })}
+				onClick={() =>
+					submit({
+						title,
+						description,
+						date,
+						startTime,
+						endTime,
+						checked,
+						privacy: isPublic ? "public" : "private"
+					})
+				}
 				color={"primary"}
 				variant="contained"
 				disabled={isSubmitting}
