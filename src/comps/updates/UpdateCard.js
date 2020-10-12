@@ -13,7 +13,6 @@ import ReactMarkdown from "react-markdown";
 import LinkPreview from "./LinkPreview";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
-import LinkifyText from "../ui/LinkifyText";
 
 const useStyles = makeStyles({
 	cardContent: {
@@ -33,6 +32,7 @@ const responsive = {
 };
 
 const BlueLink = props => <Link {...props} color={"secondary"} />;
+const SmallText = props => <Typography {...props} variant={"body2"} paragraph />;
 
 const UpdateCard = ({ organization, title, content, pictures, links, createdAt }) => {
 	const classes = useStyles();
@@ -61,7 +61,7 @@ const UpdateCard = ({ organization, title, content, pictures, links, createdAt }
 					linkTarget={"_blank"}
 					renderers={{
 						link: BlueLink,
-						paragraph: LinkifyText
+						paragraph: SmallText
 					}}
 				/>
 
