@@ -76,10 +76,8 @@ const QUERY = gql`
 			name
 			url
 			active
-			tags {
-				name
-			}
 			charter {
+				id
 				picture
 				mission
 				commitmentLevel
