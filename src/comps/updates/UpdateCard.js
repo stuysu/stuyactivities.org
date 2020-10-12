@@ -16,7 +16,8 @@ import UnstyledLink from "../ui/UnstyledLink";
 
 const useStyles = makeStyles({
 	cardContent: {
-		padding: "0 1rem"
+		padding: "0 1rem",
+		overflowWrap: "anywhere"
 	},
 	card: {
 		width: "100%"
