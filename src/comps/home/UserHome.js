@@ -6,6 +6,7 @@ import UserMemberships from "./UserMemberships";
 import UserMeetings from "./UserMeetings";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import UserUpdates from "./UserUpdates";
 
 const useStyles = makeStyles({
 	greeting: {
@@ -30,6 +31,9 @@ const UserHome = () => {
 				</Grid>
 				<Grid item xs={12} sm={7} md={8} lg={8} xl={8}>
 					<UserMeetings />
+				</Grid>
+				<Grid item xs={12}>
+					<UserUpdates />
 				</Grid>
 			</Grid>
 		</div>
