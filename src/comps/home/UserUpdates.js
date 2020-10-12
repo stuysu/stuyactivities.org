@@ -51,8 +51,14 @@ const UserUpdates = () => {
 	}
 
 	return (
-		<div>
-			<Typography variant={"h4"}>Posts</Typography>
+		<div
+			style={{
+				marginTop: "2rem"
+			}}
+		>
+			<Typography variant={"h3"} color={"primary"}>
+				Posts
+			</Typography>
 			<Masonry
 				breakpointCols={isMobile ? 1 : 2}
 				className="my-masonry-grid"
