@@ -59,6 +59,8 @@ const UserUpdates = () => {
 			<Typography variant={"h3"} color={"primary"}>
 				Posts
 			</Typography>
+			<br />
+
 			<Masonry
 				breakpointCols={isMobile ? 1 : 2}
 				className="my-masonry-grid"
@@ -68,6 +70,9 @@ const UserUpdates = () => {
 					<UpdateCard {...update} />
 				))}
 			</Masonry>
+			{!data.updates.length && (
+				<Typography paragraph>None of your organizations have posted any updates yet.</Typography>
+			)}
 		</div>
 	);
 };
