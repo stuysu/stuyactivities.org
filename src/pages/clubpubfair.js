@@ -65,7 +65,7 @@ const useStyles = makeStyles(() => ({
 
 const ClubPubFair = () => {
 	const classes = useStyles();
-	const [tab, setTab] = React.useState(1);
+	const [tab, setTab] = React.useState(0);
 	const user = React.useContext(UserContext);
 
 	const handleChange = (event, newTab) => {
