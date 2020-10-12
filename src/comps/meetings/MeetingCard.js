@@ -62,7 +62,7 @@ const MeetingCard = ({ id, title, description, start, end, organization, privacy
 					{smartTimespan(new Date(start), new Date(end))}
 				</Typography>
 				<div className={classes.descriptionContainer}>
-					<MarkdownRenderer>{description}</MarkdownRenderer>
+					{!!description && <MarkdownRenderer>{description}</MarkdownRenderer>}
 				</div>
 			</div>
 		</Card>
