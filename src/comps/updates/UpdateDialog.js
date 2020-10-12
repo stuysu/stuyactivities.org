@@ -1,10 +1,13 @@
 import React from "react";
 import Dialog from "@material-ui/core/Dialog";
+import UpdateCard from "./UpdateCard";
 
-const UpdateDialog = () => {
+const UpdateDialog = ({ open, setOpen }) => {
 	return (
 		<div>
-			<Dialog></Dialog>
+			<Dialog open={open} onClose={() => setOpen(false)}>
+				<UpdateCard limit={false}></UpdateCard>
+			</Dialog>
 		</div>
 	);
 };
