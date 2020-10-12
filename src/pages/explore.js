@@ -125,7 +125,7 @@ const ExploreContent = () => {
 				columnClassName="my-masonry-grid_column"
 			>
 				{data.updates.map(update => (
-					<UpdateCard {...update} />
+					<UpdateCard key={update.id} {...update} />
 				))}
 			</Masonry>
 		</div>

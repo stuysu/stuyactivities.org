@@ -55,7 +55,8 @@ function LinkPreview({ title, description, image, url, siteName }) {
 					secondary={
 						<>
 							{shortDescription}
-							<Typography>{domain}</Typography>
+							<br />
+							{domain}
 						</>
 					}
 				/>

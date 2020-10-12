@@ -139,9 +139,6 @@ const Catalog = () => {
 			<Grid container>
 				<Grid item xs={12} sm={12} md={3} lg={3} xl={2} className={classes.bigChild}>
 					<div className={classes.filterContainer}>
-						<Typography className={classes.filterHeading} variant={"h4"}>
-							Filters
-						</Typography>
 						<SearchBox setKeyword={setKeyword} keyword={keyword} />
 						<TagsFilter tags={tags} setTags={setTags} />
 						<CommitmentFilter
