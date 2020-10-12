@@ -4,6 +4,7 @@ import {
 	FormControlLabel,
 	Grid,
 	InputAdornment,
+	Link,
 	makeStyles,
 	Switch,
 	TextField,
@@ -46,6 +47,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 				variant="outlined"
 				label="Title"
 				value={title}
+				placeholder={"e.g. Weekly Check In #2"}
 				onChange={e => setTitle(e.target.value)}
 			/>
 			<Grid container spacing={1}>
@@ -104,17 +106,29 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 					/>
 				</Grid>
 			</Grid>
-			<Typography variant={"h6"} className={classes.marginBottom}>
-				Description
-			</Typography>
+
+			<br />
 			<TextField
 				fullWidth
+				label={"Description"}
 				outlined
 				variant={"outlined"}
 				multiline
 				rows={5}
 				value={description}
+				placeholder={`e.g. We're going to be discussing the movie Ender's game this week. \n\nHere's a link to the zoom call: https://zoom.us/j/94318855567?pwd=bFpPbVV4ZStaNlVMRjY1UnZJV2tTdz09`}
 				onChange={ev => setDescription(ev.target.value)}
+				helperText={
+					<Typography paragraph>
+						Please include a Zoom link (as well as the Meeting ID and Passcode) for your meeting in the
+						description below. For instructions on how to create a secure Zoom meeting using your stuy.edu
+						account, click{" "}
+						<Link href="https://docs.google.com/document/d/1-jbrKLIAOh97qxEk4VrQnW66PLcoVTlEvtG_tAcM-Rg/edit?usp=sharing">
+							here
+						</Link>
+						.
+					</Typography>
+				}
 			/>
 			<FormControlLabel
 				control={<Switch checked={checked} onChange={e => setChecked(e.target.checked)} />}

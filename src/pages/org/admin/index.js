@@ -42,8 +42,8 @@ export default function OrgAdminRouter({ match }) {
 			icon: <GroupWork />
 		},
 		{
-			path: actualMatch + "/updates",
-			label: "Updates",
+			path: actualMatch + "/posts",
+			label: "Posts",
 			icon: <PostAdd />
 		}
 	];
@@ -58,7 +58,7 @@ export default function OrgAdminRouter({ match }) {
 				<Route path={match.path + "/charter-edits"} component={CharterEdits} />
 				<Route path={match.path + "/meetings"} component={Meetings} />
 				<Route path={match.path + "/club-fair"} component={ClubFair} />
-				<Route path={match.path + "/updates"} component={Updates} />
+				<Route path={match.path + "/posts"} component={Updates} />
 				<Route path={match.path}>
 					<Redirect to={actualMatch + "/members"} />
 				</Route>
