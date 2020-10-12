@@ -118,7 +118,7 @@ const ExploreContent = () => {
 					<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard} />
 				))}
 			</Carousel>
-			<Typography variant={"h3"}>Club Updates:</Typography>
+			<Typography variant={"h3"}>Club Posts:</Typography>
 			<Masonry
 				breakpointCols={isMobile ? 1 : 2}
 				className="my-masonry-grid"
