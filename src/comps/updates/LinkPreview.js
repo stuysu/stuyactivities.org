@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
 	list: {
@@ -23,6 +24,14 @@ const useStyles = makeStyles({
 	}
 });
 
+const clampString = (str, len) => {
+	if (str.length > len) {
+		return str.substr(0, len) + "...";
+	}
+
+	return str;
+};
+
 function LinkPreview({ title, description, image, url, siteName }) {
 	const classes = useStyles();
 
@@ -30,13 +39,26 @@ function LinkPreview({ title, description, image, url, siteName }) {
 		window.open(url);
 	};
 
+	const shortTitle = typeof title === "string" ? clampString(title, 60) : title;
+	const shortDescription = typeof description === "string" ? clampString(description, 115) : description;
+
+	const domain = new window.URL(url).hostname;
+
 	return (
 		<List className={classes.list}>
 			<ListItem onClick={confirmDialog}>
 				<ListItemAvatar>
 					<Avatar alt={title} src={image} />
 				</ListItemAvatar>
-				<ListItemText primary={title} secondary={description} />
+				<ListItemText
+					primary={shortTitle}
+					secondary={
+						<>
+							{shortDescription}
+							<Typography>{domain}</Typography>
+						</>
+					}
+				/>
 			</ListItem>
 		</List>
 	);
