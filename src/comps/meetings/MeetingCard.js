@@ -9,8 +9,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import { useHistory } from "react-router-dom";
 import { Typography } from "@material-ui/core";
-import ReactMarkdown from "react-markdown";
 import smartTimespan from "../../utils/smartTimespan";
+import MarkdownRenderer from "../ui/MarkdownRenderer";
 
 const useStyles = makeStyles({
 	meetingContent: {
@@ -29,11 +29,6 @@ const useStyles = makeStyles({
 		fontWeight: 700
 	}
 });
-
-const ParagraphTypography = props => <Typography {...props} paragraph />;
-const LimitedHeadingTypography = ({ children, level }) => (
-	<Typography variant={`h${level + 4 > 6 ? 6 : level + 4}`}>{children}</Typography>
-);
 
 const MeetingCard = ({ id, title, description, start, end, organization, privacy, className }) => {
 	const classes = useStyles();
@@ -67,14 +62,7 @@ const MeetingCard = ({ id, title, description, start, end, organization, privacy
 					{smartTimespan(new Date(start), new Date(end))}
 				</Typography>
 				<div className={classes.descriptionContainer}>
-					<ReactMarkdown
-						source={description}
-						renderers={{
-							heading: LimitedHeadingTypography,
-							paragraph: ParagraphTypography
-						}}
-						escapeHtml
-					/>
+					<MarkdownRenderer>{description}</MarkdownRenderer>
 				</div>
 			</div>
 		</Card>

@@ -5,14 +5,14 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Carousel from "react-multi-carousel";
-import { Link, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
-import ReactMarkdown from "react-markdown";
 import LinkPreview from "./LinkPreview";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
+import MarkdownRenderer from "../ui/MarkdownRenderer";
 
 const useStyles = makeStyles({
 	cardContent: {
@@ -37,9 +37,6 @@ const responsive = {
 		slidesToSlide: 1
 	}
 };
-
-const BlueLink = props => <Link {...props} color={"secondary"} />;
-const SmallText = props => <Typography {...props} variant={"body2"} paragraph />;
 
 const UpdateCard = ({ organization, title, content, pictures, links, createdAt, limit = true }) => {
 	const classes = useStyles();
@@ -71,16 +68,7 @@ const UpdateCard = ({ organization, title, content, pictures, links, createdAt, 
 			</List>
 			<div className={classes.cardContent}>
 				<Typography variant={"h5"}>{title}</Typography>
-				<ReactMarkdown
-					source={shortContent.replace(/\n/g, "\n\n")}
-					disallowedTypes={["image"]}
-					escapeHtml
-					linkTarget={"_blank"}
-					renderers={{
-						link: BlueLink,
-						paragraph: SmallText
-					}}
-				/>
+				<MarkdownRenderer>{shortContent}</MarkdownRenderer>
 
 				{limited && !ignoreLimit && (
 					<Typography color={"primary"} className={classes.ignoreLimit} onClick={() => setIgnoreLimit(true)}>
