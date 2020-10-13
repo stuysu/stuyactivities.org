@@ -123,7 +123,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 				helperText={
 					<Typography paragraph>
 						Please include a Zoom link (as well as the Meeting ID and Passcode) for your meeting in the
-						description below. For instructions on how to create a secure Zoom meeting using your stuy.edu
+						description above. For instructions on how to create a secure Zoom meeting using your stuy.edu
 						account, click{" "}
 						<Link href="https://docs.google.com/document/d/1-jbrKLIAOh97qxEk4VrQnW66PLcoVTlEvtG_tAcM-Rg/edit?usp=sharing">
 							here
