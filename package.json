@@ -31,7 +31,7 @@
 		"notistack": "^1.0.1",
 		"prettier": "^2.1.2",
 		"prop-types": "latest",
-		"react": "^16.13.1",
+		"react": "^16.14.0",
 		"react-dom": "^16.13.1",
 		"react-dropzone": "^11.2.0",
 		"react-ga": "^3.1.2",
