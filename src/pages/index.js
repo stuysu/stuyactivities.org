@@ -17,6 +17,7 @@ import ClubPubFair from "./clubpubfair";
 import Charter from "./charter";
 
 import ReactGA from "react-ga";
+import Explore from "./explore";
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -53,6 +54,7 @@ const Pages = () => {
 				<Route path={"/admin"} component={AdminRouter} />
 				<Route path={"/rules"} component={Rules} />
 				<Route path={"/about"} component={About} />
+				<Route path={"/explore"} component={Explore} />
 				<Route path={"/clubpubfair"} component={ClubPubFair} />
 
 				<Route path={"/organizations/:orgUrl"}>

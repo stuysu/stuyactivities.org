@@ -42,7 +42,7 @@ export default function TagsFilter({ tags, setTags }) {
 					clickable
 					variant={"outlined"}
 					size={"small"}
-					color={tags.includes(tag.id) ? "secondary" : ""}
+					color={tags.includes(tag.id) ? "secondary" : "default"}
 					className={classes.tag}
 				/>
 			))}

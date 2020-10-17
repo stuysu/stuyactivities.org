@@ -54,6 +54,9 @@ const useStyles = makeStyles({
 	meetingCard: {
 		margin: "0 0.5rem",
 		minHeight: 250
+	},
+	title: {
+		marginLeft: "0.5rem"
 	}
 });
 
@@ -74,7 +77,7 @@ const UserMeetings = () => {
 	}
 	return (
 		<div>
-			<Typography variant={"h3"} color={"primary"}>
+			<Typography variant={"h3"} color={"primary"} className={classes.title}>
 				My Upcoming Meetings:
 			</Typography>
 

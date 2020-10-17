@@ -15,9 +15,7 @@ import TextField from "@material-ui/core/TextField";
 import arrayToggle from "../../../utils/arrayToggle";
 import { cache } from "../../../comps/context/ApolloProvider";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-
-import Linkify from "linkifyjs/react";
-import Link from "@material-ui/core/Link";
+import LinkifyText from "../../../comps/ui/LinkifyText";
 
 // THIS FILE IS UNCOMFORTABLY HUGE
 // TODO WHEN WE HAVE MORE TIME: EXPORT CODE INTO SEPARATE COMPONENTS
@@ -134,31 +132,6 @@ const SaveButton = ({ disabled }) => {
 };
 
 class CharterEditForm extends React.Component {
-	constructor(props) {
-		super(props);
-		this.setState = this.setState.bind(this);
-		this.setError = (field, value) => {
-			this.setState(state => {
-				if (state.errors[field] === value) {
-					return null;
-				}
-
-				return { errors: { ...state.errors, [field]: value } };
-			});
-		};
-
-		this.state = {
-			set: this.setState,
-			setError: this.setError,
-			errors: {},
-			editing: []
-		};
-
-		this.picRef = React.createRef();
-		this.handleFileUpload = this.handleFileUpload.bind(this);
-		this.changePic = this.changePic.bind(this);
-	}
-
 	static questions = [
 		{
 			name: "mission",
@@ -226,6 +199,31 @@ class CharterEditForm extends React.Component {
 			rows: 6
 		}
 	];
+
+	constructor(props) {
+		super(props);
+		this.setState = this.setState.bind(this);
+		this.setError = (field, value) => {
+			this.setState(state => {
+				if (state.errors[field] === value) {
+					return null;
+				}
+
+				return { errors: { ...state.errors, [field]: value } };
+			});
+		};
+
+		this.state = {
+			set: this.setState,
+			setError: this.setError,
+			errors: {},
+			editing: []
+		};
+
+		this.picRef = React.createRef();
+		this.handleFileUpload = this.handleFileUpload.bind(this);
+		this.changePic = this.changePic.bind(this);
+	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		const newResponseFields = Object.keys(this.props.latestChanges);
@@ -522,20 +520,7 @@ const ApprovalMessages = () => {
 											overflowWrap: "anywhere"
 										}}
 									>
-										<Linkify
-											options={{
-												tagName: "span",
-												format: function (value) {
-													return (
-														<Link href={value} target={"_blank"}>
-															{value}
-														</Link>
-													);
-												}
-											}}
-										>
-											{message?.message}
-										</Linkify>
+										<LinkifyText color={"primary"}>{message?.message}</LinkifyText>
 									</p>
 								</div>
 							</ListItem>

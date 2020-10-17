@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
@@ -22,6 +22,7 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import Loading from "../comps/ui/Loading";
 import shuffleArray from "../utils/shuffleArray";
 import List from "@material-ui/core/List";
+import Masonry from "react-masonry-css";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
@@ -75,10 +76,8 @@ const QUERY = gql`
 			name
 			url
 			active
-			tags {
-				name
-			}
 			charter {
+				id
 				picture
 				mission
 				commitmentLevel
@@ -98,6 +97,19 @@ const Catalog = () => {
 	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
 	const [meetingDays, setMeetingDays] = React.useState([]);
 	const [listView, setListView] = React.useState(false);
+
+	const isMobile = useMediaQuery("(max-width: 500px)");
+	const isTablet = useMediaQuery("(max-width: 900px)");
+
+	let numColumns = 3;
+
+	if (isTablet) {
+		numColumns = 2;
+	}
+
+	if (isMobile) {
+		numColumns = 1;
+	}
 
 	const [seed] = React.useState(Math.floor(Math.random() * 1000));
 
@@ -139,9 +151,6 @@ const Catalog = () => {
 			<Grid container>
 				<Grid item xs={12} sm={12} md={3} lg={3} xl={2} className={classes.bigChild}>
 					<div className={classes.filterContainer}>
-						<Typography className={classes.filterHeading} variant={"h4"}>
-							Filters
-						</Typography>
 						<SearchBox setKeyword={setKeyword} keyword={keyword} />
 						<TagsFilter tags={tags} setTags={setTags} />
 						<CommitmentFilter
@@ -205,13 +214,15 @@ const Catalog = () => {
 									))}
 								</List>
 							) : (
-								<Grid container alignContent={"flex-start"} alignItems={"flex-start"}>
+								<Masonry
+									breakpointCols={numColumns}
+									className="my-masonry-grid"
+									columnClassName="my-masonry-grid_column"
+								>
 									{organizations.map(org => (
-										<Grid item key={org.id} xs={12} sm={6} xl={3} lg={3} md={6}>
-											<CatalogCard {...org} />
-										</Grid>
+										<CatalogCard {...org} key={org.id} />
 									))}
-								</Grid>
+								</Masonry>
 							)}
 						</>
 					)}
