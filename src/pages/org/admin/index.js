@@ -8,8 +8,9 @@ import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
 import CharterEdits from "./charter-edits";
 import Meetings from "./meetings";
-import { Group, GroupAdd, GroupWork, ListAlt, LocalActivity } from "@material-ui/icons";
+import { Group, GroupAdd, GroupWork, ListAlt, LocalActivity, SmsFailed } from "@material-ui/icons";
 import ClubFair from "./club-fair";
+import Strikes from "./Strikes";
 
 export default function OrgAdminRouter({ match }) {
 	const actualMatch = generatePath(match.path, match.params);
@@ -44,6 +45,11 @@ export default function OrgAdminRouter({ match }) {
 			path: actualMatch + "/club-fair",
 			label: "Club Fair",
 			icon: <LocalActivity />
+		},
+		{
+			path: actualMatch + "/strikes",
+			label: "Strikes",
+			icon: <SmsFailed />
 		}
 	];
 
@@ -57,6 +63,7 @@ export default function OrgAdminRouter({ match }) {
 				<Route path={match.path + "/charter-edits"} component={CharterEdits} />
 				<Route path={match.path + "/meetings"} component={Meetings} />
 				<Route path={match.path + "/club-fair"} component={ClubFair} />
+				<Route path={match.path + "/strikes"} component={Strikes} />
 				<Route path={match.path}>
 					<Redirect to={actualMatch + "/members"} />
 				</Route>

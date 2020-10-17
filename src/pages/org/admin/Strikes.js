@@ -9,8 +9,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const QUERY = gql`
-	query Strikes($url: String!) {
-		organization(orgUrl: $url) {
+	query Strikes($url: String) {
+		organization(url: $url) {
 			strikes {
 				weight
 				reason
@@ -26,16 +26,20 @@ export default function Strikes({ match }) {
 		variables: { url: match.params.orgUrl }
 	});
 
+	console.log(data);
+
 	return (
 		<div>
 			<List>
-				<ListItem>
-					<div>
-						<Typography>Reason: {data?.organization?.strikes?.reason}</Typography>
-						<Typography>Weight: {data?.organization?.strikes?.weight}</Typography>
-						<Typography>Date: {data?.organization?.strikes?.createdAt}</Typography>
-					</div>
-				</ListItem>
+				{data?.organization?.map(strikeData => (
+					<ListItem>
+						<div>
+							<Typography>Reason: "{strikeData.strikes?.reason}"</Typography>
+							<Typography>Weight: "{strikeData.strikes?.weight}"</Typography>
+							<Typography>Date: "{strikeData.strikes?.createdAt}"</Typography>
+						</div>
+					</ListItem>
+				))}
 			</List>
 		</div>
 	);
