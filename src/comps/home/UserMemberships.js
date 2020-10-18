@@ -15,7 +15,8 @@ const useStyles = makeStyles({
 		height: 250,
 		border: "1px solid rgba(0, 0, 0, 0.1)",
 		borderRadius: "10px",
-		overflow: "auto"
+		overflow: "auto",
+		width: "95%"
 	},
 	noMembershipsMessage: {
 		textAlign: "center",

@@ -7,9 +7,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
 
 const useStyles = makeStyles(theme => ({
-	card: {
-		margin: theme.spacing(1)
-	},
 	chip: {
 		marginTop: "0.3rem",
 		marginRight: "5px"

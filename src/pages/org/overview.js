@@ -1,17 +1,19 @@
 import React from "react";
 import { OrgContext } from "./index";
 import FlexCenter from "../../comps/ui/FlexCenter";
-import { Typography } from "@material-ui/core";
+import { Typography, useMediaQuery } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import MeetingCards from "../../comps/pages/organization/MeetingCards";
-import Link from "@material-ui/core/Link";
-import Linkify from "linkifyjs/react";
+import MeetingCard from "../../comps/meetings/MeetingCard";
+import LinkifyText from "../../comps/ui/LinkifyText";
+import Masonry from "react-masonry-css";
+import UpdateCard from "../../comps/updates/UpdateCard";
 
 const Overview = () => {
 	const org = React.useContext(OrgContext);
+	const isMobile = useMediaQuery("(max-width: 900px)");
 
 	return (
 		<FlexCenter>
@@ -39,20 +41,7 @@ const Overview = () => {
 					{!org.active && !org.charter.meetingSchedule && (
 						<span style={{ color: "grey" }}>This response is pending approval</span>
 					)}
-					<Linkify
-						options={{
-							tagName: "span",
-							format: function (value, type) {
-								return (
-									<Link href={value} target={"_blank"} color={"secondary"}>
-										{value}
-									</Link>
-								);
-							}
-						}}
-					>
-						{org.charter.meetingSchedule}
-					</Linkify>
+					<LinkifyText>{org.charter.meetingSchedule}</LinkifyText>
 				</Typography>
 
 				<Typography variant={"h5"} color={"primary"}>
@@ -89,7 +78,33 @@ const Overview = () => {
 					<span style={{ color: "grey" }}>There currently are no upcoming meetings scheduled.</span>
 				)}
 
-				<MeetingCards meetings={org.upcomingMeetings} />
+				<Masonry
+					breakpointCols={isMobile ? 1 : 2}
+					className="my-masonry-grid"
+					columnClassName="my-masonry-grid_column"
+				>
+					{org.upcomingMeetings.map(meeting => (
+						<MeetingCard {...meeting} key={meeting.id} />
+					))}
+				</Masonry>
+
+				<Typography variant={"h5"} color={"primary"}>
+					Posts
+				</Typography>
+				<br />
+				<Masonry
+					breakpointCols={isMobile ? 1 : 2}
+					className="my-masonry-grid"
+					columnClassName="my-masonry-grid_column"
+				>
+					{org.updates.map(update => (
+						<UpdateCard {...update} key={update.id} organization={org} />
+					))}
+				</Masonry>
+
+				{!org.updates?.length && (
+					<span style={{ color: "grey" }}>This activity has not made any posts yet.</span>
+				)}
 			</div>
 		</FlexCenter>
 	);

@@ -81,7 +81,7 @@ const Error404 = () => {
 							Maybe you meant to check out one of these activities?
 						</Typography>
 						<Grid container justify={"center"}>
-							{data.organizations.map(org => (
+							{data?.organizations?.map(org => (
 								<Grid item xl={3} lg={3} md={3} sm={6} xs={12}>
 									<CatalogCard name={org.name} url={org.url} charter={org.charter} />
 								</Grid>

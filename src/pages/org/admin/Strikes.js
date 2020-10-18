@@ -25,22 +25,36 @@ export default function Strikes({ match }) {
 	const { data } = useQuery(QUERY, {
 		variables: { url: match.params.orgUrl }
 	});
+	let array = data?.organization?.strikes;
 
-	console.log(data);
-
-	return (
-		<div>
-			<List>
-				{data?.organization?.map(strikeData => (
-					<ListItem>
-						<div>
-							<Typography>Reason: "{strikeData.strikes?.reason}"</Typography>
-							<Typography>Weight: "{strikeData.strikes?.weight}"</Typography>
-							<Typography>Date: "{strikeData.strikes?.createdAt}"</Typography>
-						</div>
-					</ListItem>
-				))}
-			</List>
-		</div>
-	);
+	if (array === undefined || array.length === 0) {
+		return (
+			<div className={classes.margin}>
+				<Typography>Your club doesn't have any strikes yet. Keep up the good work!</Typography>
+			</div>
+		);
+	} else {
+		return (
+			<div className={classes.margin}>
+				<List>
+					{data?.organization?.strikes?.map(strikeData => (
+						<ListItem>
+							<div>
+								<Typography>Reason: {strikeData.reason}</Typography>
+								<Typography>Weight: {strikeData.weight}</Typography>
+								<Typography>
+									Date:{" "}
+									{new Date(strikeData.createdAt).toLocaleDateString(undefined, {
+										year: "numeric",
+										month: "long",
+										day: "numeric"
+									})}
+								</Typography>
+							</div>
+						</ListItem>
+					))}
+				</List>
+			</div>
+		);
+	}
 }

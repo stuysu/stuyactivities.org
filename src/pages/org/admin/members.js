@@ -240,7 +240,7 @@ export default function Members({ match }) {
 				autoHideDuration={1000}
 				onClose={() => setSnackBarOpen(false)}
 				message="Copied email list to clipboard!"
-			></Snackbar>
+			/>
 		</div>
 	);
 }

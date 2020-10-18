@@ -26,7 +26,7 @@ export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels
 					clickable
 					variant={"outlined"}
 					size={"small"}
-					color={commitmentLevels.includes(tag) ? "secondary" : ""}
+					color={commitmentLevels.includes(tag) ? "secondary" : "default"}
 					className={classes.tag}
 				/>
 			))}
