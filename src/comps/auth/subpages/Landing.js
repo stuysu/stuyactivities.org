@@ -48,7 +48,8 @@ const Landing = () => {
 			<Typography variant={"subtitle1"}>
 				Your session will expire 30 days after the last time you access StuyActivities.
 				<br /> You can end your session anytime by logging out.
-				<br /> If you are having any trouble logging in, please email <a href="mailto:help@stuyactivities.org">help@stuyactivities.org</a>.
+				<br /> If you are having any trouble logging in, please email{" "}
+				<a href="mailto:help@stuyactivities.org">help@stuyactivities.org</a>.
 			</Typography>
 			<br />
 			<Typography variant={"subtitle1"}>Are you signing in as a:</Typography>
