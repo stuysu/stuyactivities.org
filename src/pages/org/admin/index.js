@@ -53,7 +53,7 @@ export default function OrgAdminRouter({ match }) {
 
 	return (
 		<div>
-			{org?.membership?.adminPrivileges ?
+			{org?.membership?.adminPrivileges ? (
 				<div>
 					<RouteTabs tabs={tabs} />
 
@@ -69,9 +69,15 @@ export default function OrgAdminRouter({ match }) {
 						</Route>
 					</Switch>
 				</div>
-				:
-				<Typography variant={"h2"} align={"center"} style={{maxWidth: "40em", margin: "auto", display: "block"}}>You are not an admin of this club, so you may not access the admin panel!</Typography>
-			}
+			) : (
+				<Typography
+					variant={"h2"}
+					align={"center"}
+					style={{ maxWidth: "40em", margin: "auto", display: "block" }}
+				>
+					You are not an admin of this club, so you may not access the admin panel!
+				</Typography>
+			)}
 		</div>
 	);
 }
