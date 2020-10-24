@@ -91,6 +91,7 @@ export default function Members({ match }) {
 	const { data, refetch } = useQuery(QUERY, {
 		variables: { orgId: org.id }
 	});
+	const [dialogError, setDialogError] = React.useState("");
 	const [approveMutation] = useMutation(APPROVE_MUTATION, {
 		update(cache) {
 			cache.reset().then(() => refetch());
@@ -99,6 +100,9 @@ export default function Members({ match }) {
 	const [deleteMutation] = useMutation(DELETE_MUTATION, {
 		update(cache) {
 			cache.reset().then(() => refetch());
+		},
+		onError(err) {
+			setDialogError(err.message);
 		}
 	});
 	const [rejectingRequest, setRejectingRequest] = React.useState({});
@@ -154,6 +158,9 @@ export default function Members({ match }) {
 		},
 		update(cache) {
 			cache.reset().then(() => refetch());
+		},
+		onError(err) {
+			setDialogError(err.message);
 		}
 	});
 	const userContext = React.useContext(UserContext);
@@ -331,6 +338,12 @@ export default function Members({ match }) {
 				onClose={() => setSnackbarOpen(false)}
 				message="Set join instructions!"
 			></Snackbar>
+			<Dialog open={dialogError !== ""} onClose={() => setDialogError("")}>
+				<DialogTitle>Error: {dialogError}</DialogTitle>
+				<DialogActions>
+					<Button onClick={() => setDialogError("")}>Close</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	);
 }
