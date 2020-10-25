@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { CharterFormContext } from "../../../pages/Charter";
+import { CharterFormContext } from "../../../pages/charter";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";

@@ -5,9 +5,9 @@ import { client } from "../../comps/context/ApolloProvider";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
 import Loading from "../../comps/ui/Loading";
-import Charter from "./Charter";
-import Overview from "./Overview";
-import Meetings from "./Meetings";
+import Charter from "./charter";
+import Overview from "./overview";
+import Meetings from "./meetings";
 import { Helmet } from "react-helmet";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -15,11 +15,11 @@ import Grid from "@material-ui/core/Grid";
 
 import OrgNavPanel from "../../comps/pages/organization/OrgNavPanel";
 import BackButton from "../../comps/ui/BackButton";
-import Members from "./Members";
-import Error404 from "../Error404";
+import Members from "./members";
+import Error404 from "../error404";
 
 import OrgAdminRouter from "./admin";
-import Join from "./Join";
+import Join from "./join";
 import UserContext from "../../comps/context/UserContext";
 
 import styles from "./../../Globals.module.css";
@@ -45,6 +45,28 @@ const getQuery = signedIn => {
 					meetingSchedule
 					picture
 				}
+				updates {
+					id
+					title
+					content
+					createdAt
+					links {
+						id
+						title
+						description
+						url
+						image
+						siteName
+					}
+					pictures {
+						id
+						mimetype
+						description
+						defaultUrl
+						height
+						width
+					}
+				}
 				leaders: memberships(onlyLeaders: true) {
 					id
 					user {
@@ -60,6 +82,7 @@ const getQuery = signedIn => {
 					title
 					description
 					start
+					privacy
 					end
 				}
 				meetings {
@@ -67,6 +90,7 @@ const getQuery = signedIn => {
 					title
 					description
 					start
+					privacy
 					end
 				}
 				membership {

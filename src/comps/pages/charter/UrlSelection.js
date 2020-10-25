@@ -1,6 +1,6 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { CharterFormContext } from "../../../pages/Charter";
+import { CharterFormContext } from "../../../pages/charter";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
 

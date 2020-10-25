@@ -26,7 +26,7 @@ export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
 					clickable
 					variant={"outlined"}
 					size={"small"}
-					color={meetingDays.includes(tag) ? "secondary" : ""}
+					color={meetingDays.includes(tag) ? "secondary" : "default"}
 					className={classes.tag}
 				/>
 			))}

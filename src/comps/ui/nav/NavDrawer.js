@@ -9,16 +9,17 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Logo from "./../../../img/logo512.png";
 import UserContext from "../../context/UserContext";
 import {
+	AccountBox,
 	AddCircleOutlined,
 	Archive,
+	EmojiFlags,
 	EmojiSymbols,
+	Explore,
 	Gavel,
 	Home,
 	Info,
 	LockOpen,
-	PowerSettingsNew,
-	AccountBox,
-	EmojiFlags
+	PowerSettingsNew
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
@@ -67,7 +68,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				{user.signedIn ? (
 					<div>
 						<Avatar src={user.picture} className={classes.avatar} />
-						<Typography variant={"h6"}>{user?.name}</Typography>
+						<Typography variant={"h5"}>{user?.name}</Typography>
 						<Typography variant={"body2"}>{user?.email}</Typography>
 						{Boolean(user?.fourDigitId) && (
 							<Typography variant={"body2"}>Four Digit ID: {user?.fourDigitId}</Typography>
@@ -109,7 +110,15 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItem>
 				</UnstyledLink>
 
-				<ListSubheader disableSticky>Explore</ListSubheader>
+				<ListSubheader disableSticky>Discover</ListSubheader>
+				<UnstyledLink to={"/explore"}>
+					<ListItem button>
+						<ListItemIcon>
+							<Explore />
+						</ListItemIcon>
+						<ListItemText primary={"Explore"} />
+					</ListItem>
+				</UnstyledLink>
 				<UnstyledLink to={"/catalog"}>
 					<ListItem button>
 						<ListItemIcon>
@@ -118,20 +127,6 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Catalog"} />
 					</ListItem>
 				</UnstyledLink>
-
-				<ListItem
-					button
-					onClick={() =>
-						window.open(
-							"https://docs.google.com/spreadsheets/d/1zXnAbnR3uq0a1bJxKKefP1xShE6ovyJX2k9bl_qkEco/edit?usp=sharing"
-						)
-					}
-				>
-					<ListItemIcon>
-						<Archive />
-					</ListItemIcon>
-					<ListItemText primary={"Archive"} />
-				</ListItem>
 
 				{user.signedIn && (
 					<>
@@ -146,6 +141,19 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</>
 				)}
 
+				<ListItem
+					button
+					onClick={() =>
+						window.open(
+							"https://docs.google.com/spreadsheets/d/1zXnAbnR3uq0a1bJxKKefP1xShE6ovyJX2k9bl_qkEco/edit?usp=sharing"
+						)
+					}
+				>
+					<ListItemIcon>
+						<Archive />
+					</ListItemIcon>
+					<ListItemText primary={"Archive"} />
+				</ListItem>
 				{user.signedIn && (
 					<>
 						<ListSubheader disableSticky>My Activities</ListSubheader>

@@ -6,8 +6,7 @@ import { gql, useQuery } from "@apollo/client";
 import { client } from "../../comps/context/ApolloProvider";
 import capitalizeString from "../../utils/capitalizeString";
 import { OrgContext } from "./index";
-import Linkify from "linkifyjs/react";
-import Link from "@material-ui/core/Link";
+import LinkifyText from "../../comps/ui/LinkifyText";
 
 //styles
 const useStyles = makeStyles(theme => ({
@@ -56,25 +55,12 @@ const CharterQuestion = ({ question, answer }) => {
 
 	return (
 		<div>
-			<Typography variant={"h6"} className={classes.charterQuestion}>
+			<Typography variant={"h5"} className={classes.charterQuestion}>
 				{question}
 			</Typography>
 			<Typography variant={"body1"} className={classes.charterAnswer}>
 				{!org.active && !answer && <span style={{ color: "grey" }}>This response is pending approval</span>}
-				<Linkify
-					options={{
-						tagName: "span",
-						format: function (value, type) {
-							return (
-								<Link href={value} target={"_blank"} color={"secondary"}>
-									{value}
-								</Link>
-							);
-						}
-					}}
-				>
-					{answer}
-				</Linkify>
+				<LinkifyText>{answer}</LinkifyText>
 			</Typography>
 		</div>
 	);
@@ -99,7 +85,7 @@ const Charter = () => {
 
 	return (
 		<div>
-			<Typography variant={"h4"} className={classes.tabName}>
+			<Typography variant={"h2"} className={classes.tabName}>
 				Charter
 			</Typography>
 

@@ -9,18 +9,21 @@ import Pages from "./pages";
 
 import ErrorBoundary from "@honeybadger-io/react";
 import honeybadger from "./utils/honeybadger";
+import { SnackbarProvider } from "notistack";
 
 function App() {
 	return (
 		<ApolloProvider>
 			<ThemeProvider>
-				<BrowserRouter>
-					<UserProvider>
-						<ErrorBoundary honeybadger={honeybadger}>
-							<Pages />
-						</ErrorBoundary>
-					</UserProvider>
-				</BrowserRouter>
+				<SnackbarProvider maxSnack={3}>
+					<BrowserRouter>
+						<UserProvider>
+							<ErrorBoundary honeybadger={honeybadger}>
+								<Pages />
+							</ErrorBoundary>
+						</UserProvider>
+					</BrowserRouter>
+				</SnackbarProvider>
 			</ThemeProvider>
 		</ApolloProvider>
 	);

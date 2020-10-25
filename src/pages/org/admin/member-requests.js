@@ -1,17 +1,17 @@
 import React from "react";
 import {
-	Snackbar,
-	FormControlLabel,
-	Switch,
 	Button,
 	Dialog,
 	DialogActions,
 	DialogTitle,
+	FormControlLabel,
 	Grid,
 	makeStyles,
-	Typography,
 	TextField,
-	Avatar
+	Avatar,
+	Snackbar,
+	Switch,
+	Typography
 } from "@material-ui/core";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
@@ -85,7 +85,7 @@ const OUTGOING_MUTATION = gql`
 	}
 `;
 
-export default function Members({ match }) {
+export default function MemberRequests({ match }) {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	const { data, refetch } = useQuery(QUERY, {

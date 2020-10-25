@@ -1,27 +1,27 @@
 import React from "react";
 import {
-	Grid,
-	makeStyles,
-	Typography,
 	Button,
-	List,
-	ListItem,
-	ListItemText,
-	Paper,
-	IconButton,
-	ListItemSecondaryAction,
 	Dialog,
-	DialogTitle,
+	DialogActions,
 	DialogContent,
 	DialogContentText,
-	DialogActions,
-	Snackbar
+	DialogTitle,
+	Grid,
+	IconButton,
+	List,
+	ListItem,
+	ListItemSecondaryAction,
+	ListItemText,
+	makeStyles,
+	Paper,
+	Snackbar,
+	Typography
 } from "@material-ui/core";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 import BackButton from "../../../comps/ui/BackButton";
 import "easymde/dist/easymde.min.css";
 import { gql, useMutation } from "@apollo/client";
-import { Edit, Close } from "@material-ui/icons";
+import { Close, Edit } from "@material-ui/icons";
 import { OrgContext } from "../index";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";
@@ -60,6 +60,7 @@ const CREATE_MUTATION = gql`
 		$start: DateTime!
 		$end: DateTime!
 		$notifyFaculty: Boolean
+		$privacy: String!
 	) {
 		createMeeting(
 			orgUrl: $orgUrl
@@ -68,12 +69,14 @@ const CREATE_MUTATION = gql`
 			start: $start
 			end: $end
 			notifyFaculty: $notifyFaculty
+			privacy: $privacy
 		) {
 			id
 			title
 			description
 			start
 			end
+			privacy
 		}
 	}
 `;
@@ -92,6 +95,7 @@ const EDIT_MUTATION = gql`
 		$start: DateTime
 		$end: DateTime
 		$notifyMembers: Boolean
+		$privacy: String
 	) {
 		alterMeeting(
 			meetingId: $id
@@ -100,12 +104,14 @@ const EDIT_MUTATION = gql`
 			start: $start
 			end: $end
 			notifyMembers: $notifyMembers
+			privacy: $privacy
 		) {
 			id
 			title
 			description
 			start
 			end
+			privacy
 		}
 	}
 `;
@@ -147,7 +153,7 @@ const Main = ({ match }) => {
 			});
 		}
 	});
-	const create = ({ title, description, date, startTime, endTime, checked }) => {
+	const create = ({ title, description, date, startTime, endTime, checked, privacy }) => {
 		createMutation({
 			variables: {
 				orgUrl: match.params.orgUrl,
@@ -155,7 +161,8 @@ const Main = ({ match }) => {
 				description: description || "",
 				start: new Date(`${date} ${startTime}`).toISOString(),
 				end: new Date(`${date} ${endTime}`).toISOString(),
-				notifyFaculty: checked
+				notifyFaculty: checked,
+				privacy
 			}
 		});
 	};
@@ -282,7 +289,7 @@ const EditPage = ({ match }) => {
 			setSnackbarOpen(true);
 		}
 	});
-	const edit = ({ title, description, date, startTime, endTime, checked }) => {
+	const edit = ({ title, description, date, startTime, endTime, checked, privacy }) => {
 		editMutation({
 			variables: {
 				id: Number(match.params.meetingId),
@@ -290,7 +297,8 @@ const EditPage = ({ match }) => {
 				description: description || "",
 				start: new Date(`${date} ${startTime}`).toISOString(),
 				end: new Date(`${date} ${endTime}`).toISOString(),
-				notifyMembers: checked
+				notifyMembers: checked,
+				privacy
 			}
 		});
 	};
