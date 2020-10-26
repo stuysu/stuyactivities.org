@@ -1,8 +1,5 @@
 import React from "react";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
-import { gql } from "apollo-boost";
-import { useQuery } from "@apollo/client";
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { CharterFormContext } from "../../../pages/charter";
@@ -13,41 +10,19 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import UserContext from "../../context/UserContext";
 import { Close } from "@material-ui/icons";
+import UserSelect from "../../ui/UserSelect";
 
 const useStyles = makeStyles({
-	smallerText: {
-		scale: 0.8
-	},
 	removeIcon: {
 		cursor: "pointer"
 	}
 });
 
-const QUERY = gql`
-	query Users($keyword: String!) {
-		users(keyword: $keyword, limit: 10) {
-			id
-			name
-			email
-			grade
-			picture
-			isFaculty
-		}
-	}
-`;
-
 const AddLeaders = () => {
 	const classes = useStyles();
-	const [keyword, setKeyword] = React.useState("");
-	const { data, loading } = useQuery(QUERY, { variables: { keyword } });
 	const userContext = React.useContext(UserContext);
 
 	const form = React.useContext(CharterFormContext);
-
-	const options =
-		data?.users?.filter(
-			user => user.id !== userContext.id && !form?.leaders?.some(leader => leader.id === user.id)
-		) || [];
 
 	return (
 		<div>
@@ -58,23 +33,8 @@ const AddLeaders = () => {
 				Student Union. When you charter your role will be "creator" but once your organization is approved you
 				will be able to change it.
 			</Typography>
-			<Autocomplete
-				options={options}
-				value={null}
-				getOptionLabel={a => ""}
-				renderOption={option => (
-					<>
-						<span>
-							<span>{option?.name}</span>
-							<br />
-							<span className={classes.smallerText}>
-								{option?.email}
-								<br />
-								{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
-							</span>
-						</span>
-					</>
-				)}
+			<UserSelect
+				filter={user => user.id !== userContext.id && !form?.leaders?.some(leader => leader.id === user.id)}
 				onChange={(ev, user) => {
 					if (user) {
 						let existingLeaders = form?.leaders || [];
@@ -87,22 +47,8 @@ const AddLeaders = () => {
 						});
 
 						form.set({ leaders: newLeaders });
-						setKeyword("");
 					}
 				}}
-				// Don't filter on the client
-				loading={loading}
-				filterOptions={a => a}
-				renderInput={params => (
-					<TextField
-						{...params}
-						required={true}
-						label="Find User"
-						variant="outlined"
-						value={keyword}
-						onChange={ev => setKeyword(ev.target.value)}
-					/>
-				)}
 			/>
 			<br />
 
