@@ -63,7 +63,7 @@ const Error404 = () => {
 
 			<div className={classes.contentContainer}>
 				<img className={classes.defaultVector} src={img} alt={"Cute page-not-found vector"} />
-				<Typography variant={"h4"}>We couldn't find that page</Typography>
+				<Typography variant={"h4"}>We couldn't find that page!</Typography>
 
 				<FlexCenter>
 					<BackButton
