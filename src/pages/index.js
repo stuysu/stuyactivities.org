@@ -18,6 +18,7 @@ import Charter from "./charter";
 
 import ReactGA from "react-ga";
 import Explore from "./explore";
+import ReportDialog from "../comps/help/ReportDialog";
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -45,7 +46,7 @@ const Pages = () => {
 
 			<Navigation />
 			<AuthDialog />
-
+			<ReportDialog />
 			<Switch>
 				<Route path={"/"} component={Home} exact />
 				<Route path={"/catalog"} component={Catalog} exact />
