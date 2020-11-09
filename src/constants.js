@@ -8,4 +8,4 @@ export const GRAPHQL_URI = process.env.REACT_APP_GRAPHQL_URI || "https://api.stu
 
 export const HONEYBADGER_KEY = process.env.REACT_APP_HONEYBADGER_KEY || "020b3acf";
 
-export const CAPTCHA_KEY = process.env.REACT_APP_CAPTCHA_KEY || '6Le_RsUZAAAAABpg51serX7jqhZpG89wygB2Pf6_';
+export const CAPTCHA_KEY = process.env.REACT_APP_CAPTCHA_KEY || "6Le_RsUZAAAAABpg51serX7jqhZpG89wygB2Pf6_";

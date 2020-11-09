@@ -37,7 +37,7 @@ class ReportDialog extends React.Component {
 
 		this.state = {
 			open: false,
-			handleClose: this.handleClose,
+			handleClose: this.handleClose
 		};
 
 		this.dialogOpenListener = this.dialogOpenListener.bind(this);
