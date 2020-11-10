@@ -241,7 +241,7 @@ export default function Rules() {
 								shirts)
 							</li>
 							<li>Paying faculty advisors</li>
-							<li>Computer systems and software</li>
+							<li>Computer systems and software (see Addendum below!)</li>
 							<li>Food or beverages</li>
 							<li>Apparel</li>
 						</ul>
@@ -319,6 +319,18 @@ export default function Rules() {
 					<li>
 						The Funding Rules are subject to change and the Student Union reserves the right to amend them
 						through a majority vote of the Budget Committee.
+					</li>
+                    <li>
+						ADDENDUM (2020-2021)
+                        <ul>
+							<li>Rule 5 under Budget Rules for Club Pub Allocations is deemed void for the remainder of the 2020-2021 school year.</li>
+							<li>
+	                            Computer systems and softwares that are strictly related to club activities will be considered in the allocation 
+                                process, and may include, but are not limited to: (a) Editing softwares for videography and photography, (b) 
+                                Communication/video platforms (ex. Zoom Pro Plan) , and (c) Online subscription services (excluding streaming 
+                                services such as Netflix, Spotify, Hulu, etc.) </li>
+							<li>This addendum will go into effect immediately after passage.</li>
+						</ul>
 					</li>
 				</ol>
 			</Typography>
