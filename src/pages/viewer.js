@@ -47,7 +47,7 @@ function Meeting() {
 				Loading...
 			</div>
 		);
-	}r
+	}
 
 	const findZoom = (desc) => {
 		let re = /https:\/\/(us02web\.)*zoom.us\/j\/.+?\s/;
@@ -119,7 +119,6 @@ function Meeting() {
 }
 
 export default function Viewer() {
-
 	return (
 		<ApolloProvider>
 			<Meeting />
