@@ -4,15 +4,15 @@ import BackButton from "../comps/ui/BackButton";
 import SignInRequired from "../comps/ui/SignInRequired";
 
 const useStyles = makeStyles(theme => ({
-	formContainer : {
+	formContainer: {
 		maxWidth: "1200px",
 		margin: "auto",
-		padding: "2rem",
+		padding: "2rem"
 	},
 	form: {
 		margin: "auto",
 		display: "block",
-		textAlign: "center",
+		textAlign: "center"
 	}
 }));
 
@@ -31,7 +31,17 @@ export default function FeedbackForm() {
 			<div className={classes.form}>
 				<br />
 				<br />
-				<iframe title="feedbackForm" src="https://docs.google.com/forms/d/e/1FAIpQLSd4abtXLw7GDW9H1etDOv6dVLSZKxO6EYgqvrk_tr7H1NoBew/viewform?embedded=true" width="640" height="3860" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+				<iframe
+					title="feedbackForm"
+					src="https://docs.google.com/forms/d/e/1FAIpQLSd4abtXLw7GDW9H1etDOv6dVLSZKxO6EYgqvrk_tr7H1NoBew/viewform?embedded=true"
+					width="640"
+					height="3860"
+					frameborder="0"
+					marginheight="0"
+					marginwidth="0"
+				>
+					Loading…
+				</iframe>
 			</div>
 		</div>
 	);
