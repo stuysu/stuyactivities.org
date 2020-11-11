@@ -15,6 +15,7 @@ import {
 	EmojiFlags,
 	EmojiSymbols,
 	Explore,
+	Feeback,
 	Gavel,
 	Home,
 	Info,
@@ -200,6 +201,15 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 							<Gavel />
 						</ListItemIcon>
 						<ListItemText primary={"Rules"} />
+					</ListItem>
+				</UnstyledLink>
+
+				<UnstyledLink to={"/feedback"}>
+					<ListItem button>
+						<ListItemIcon>
+							<Feedback />
+						</ListItemIcon>
+						<ListItemText primary={"Feedback"} />
 					</ListItem>
 				</UnstyledLink>
 
