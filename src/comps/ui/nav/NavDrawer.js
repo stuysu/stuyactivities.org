@@ -15,7 +15,7 @@ import {
 	EmojiFlags,
 	EmojiSymbols,
 	Explore,
-	Feeback,
+	Feedback,
 	Gavel,
 	Home,
 	Info,
