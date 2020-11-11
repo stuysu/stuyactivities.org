@@ -41,6 +41,10 @@ const QUERY = gql`
 				mission
 				commitmentLevel
 			}
+			tags {
+				id
+				name
+			}
 			url
 		}
 	}
@@ -80,10 +84,10 @@ const Error404 = () => {
 						<Typography paragraph className={classes.safeMargin}>
 							Maybe you meant to check out one of these activities?
 						</Typography>
-						<Grid container justify={"center"}>
+						<Grid container justify={"center"} spacing={2}>
 							{data?.organizations?.map(org => (
 								<Grid item xl={3} lg={3} md={3} sm={6} xs={12}>
-									<CatalogCard name={org.name} url={org.url} charter={org.charter} />
+									<CatalogCard {...org} />
 								</Grid>
 							))}
 						</Grid>
