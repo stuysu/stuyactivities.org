@@ -15,12 +15,11 @@ import Rules from "./rules";
 import About from "./about";
 import ClubPubFair from "./clubpubfair";
 import Charter from "./charter";
-import FeedbackForm from "./feedback";
 
 import ReactGA from "react-ga";
 import Explore from "./explore";
 import ReportDialog from "../comps/help/ReportDialog";
-import { Feedback } from "@material-ui/icons";
+import Viewer from "./viewer";
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -51,9 +50,9 @@ const Pages = () => {
 			<ReportDialog />
 			<Switch>
 				<Route path={"/"} component={Home} exact />
+				<Route path={"/viewer"} component={Viewer} exact />
 				<Route path={"/catalog"} component={Catalog} exact />
 				<Route path={"/charter"} component={Charter} exact />
-				<Route path={"/feedback"} component={FeedbackForm} />
 				<Route path={"/token/:token"} component={TokenLogin} exact />
 				<Route path={"/admin"} component={AdminRouter} />
 				<Route path={"/rules"} component={Rules} />

@@ -204,15 +204,6 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItem>
 				</UnstyledLink>
 
-				<UnstyledLink to={"/feedback"}>
-					<ListItem button>
-						<ListItemIcon>
-							<Feedback />
-						</ListItemIcon>
-						<ListItemText primary={"Feedback"} />
-					</ListItem>
-				</UnstyledLink>
-
 				{user?.adminRoles !== undefined || {} ? (
 					<UnstyledLink to={"/admin"}>
 						<ListItem button>
