@@ -27,7 +27,7 @@
 		"linkifyjs": "^2.1.9",
 		"material-ui-chip-input": "^1.1.0",
 		"moment": "^2.29.1",
-		"moment-timezone": "^0.5.31",
+		"moment-timezone": "^0.5.32",
 		"notistack": "^1.0.1",
 		"prettier": "^2.1.2",
 		"prop-types": "latest",
