@@ -1,9 +1,9 @@
 import React from "react";
 import { OrgContext } from "./index";
 import { makeStyles, Typography } from "@material-ui/core";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import listPlugin from "@fullcalendar/list";
+// import FullCalendar from "@fullcalendar/react";
+// import dayGridPlugin from "@fullcalendar/daygrid";
+// import listPlugin from "@fullcalendar/list";
 import Grid from "@material-ui/core/Grid";
 import MeetingCard from "../../comps/meetings/MeetingCard";
 
@@ -41,17 +41,21 @@ export default function Meetings() {
 			<br />
 			<Typography variant={"h4"}>All Meetings</Typography>
 			<br />
-			<div className={classes.calendarContainer}>
-				<FullCalendar
-					plugins={[dayGridPlugin, listPlugin]}
-					headerToolbar={{
-						start: "title",
-						center: "",
-						end: "dayGridMonth dayGridWeek listYear prev next"
-					}}
-					events={org.meetings || []}
-				/>
-			</div>
+			<span style={{ color: "grey" }}>
+				An update to the calendar library we were using caused the calendar to stop working. We're working to
+				fix it but for the time being the meetings calendar has been removed.
+			</span>
+
+			{/*<div className={classes.calendarContainer}>*/}
+			{/*	<FullCalendar*/}
+			{/*		plugins={[dayGridPlugin, listPlugin]}*/}
+			{/*		headerToolbar={{*/}
+			{/*			start: "title",*/}
+			{/*			end: "dayGridMonth dayGridWeek listYear prev next"*/}
+			{/*		}}*/}
+			{/*		events={[]}*/}
+			{/*	/>*/}
+			{/*</div>*/}
 		</div>
 	);
 }
