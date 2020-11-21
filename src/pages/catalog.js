@@ -132,7 +132,10 @@ const Catalog = () => {
 	}
 
 	const organizations = data?.organizations?.filter(org => org.url !== "stuysu") || [];
-	shuffleArray(organizations, seed);
+	if (!keyword) {
+		shuffleArray(organizations, seed);
+	}
+
 	if (organizations?.length !== (data?.organizations || []).length) {
 		organizations.unshift(data?.organizations?.find(org => org.url === "stuysu"));
 	}
