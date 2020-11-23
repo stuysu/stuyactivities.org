@@ -36,7 +36,7 @@
 		"react-dom": "^16.14.0",
 		"react-dropzone": "^11.2.4",
 		"react-ga": "^3.2.1",
-		"react-google-login": "^5.1.23",
+		"react-google-login": "^5.1.24",
 		"react-google-recaptcha": "^2.1.0",
 		"react-helmet": "^6.1.0",
 		"react-markdown": "^5.0.3",
