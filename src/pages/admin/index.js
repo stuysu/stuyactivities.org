@@ -7,7 +7,7 @@ import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import OrgApprovals from "./approvals/OrgApprovals";
 import Viewer from "./viewer.js";
-import { AssignmentTurnedIn, LiveHelp } from "@material-ui/icons";
+import { AssignmentTurnedIn, LiveHelp, MeetingRoom } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -33,6 +33,12 @@ export default function AdminRouter({ match }) {
 			role: "charters",
 			path: actualPath + "/approvals",
 			icon: <AssignmentTurnedIn />
+		},
+		{
+			label: "Meeting Viewer",
+			role: "charters",
+			path: actualPath + "/viewer",
+			icon: <MeetingRoom />
 		},
 		{
 			label: "Help Requests",
