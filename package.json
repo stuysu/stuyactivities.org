@@ -79,6 +79,6 @@
 	},
 	"proxy": "https://staging.stuyactivities.org/",
 	"devDependencies": {
-		"react-lazy-load-image-component": "^1.5.0"
+		"react-lazy-load-image-component": "^1.5.1"
 	}
 }
