@@ -11,7 +11,7 @@
 		"@fullcalendar/timegrid": "^5.4.0",
 		"@honeybadger-io/react": "0.0.8",
 		"@material-ui/core": "^4.11.1",
-		"@material-ui/icons": "^4.9.1",
+		"@material-ui/icons": "^4.11.2",
 		"@material-ui/lab": "^4.0.0-alpha.56",
 		"@testing-library/jest-dom": "^5.11.6",
 		"@testing-library/react": "^11.2.2",
