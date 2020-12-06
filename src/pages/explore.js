@@ -43,6 +43,15 @@ const QUERY = gql`
 					picture
 				}
 			}
+			questions {
+				question
+				answer
+				private
+				submittingUser {
+					name
+					picture
+				}
+			}
 		}
 
 		meetings: exploreMeetings {
@@ -125,7 +134,7 @@ const ExploreContent = () => {
 				columnClassName="my-masonry-grid_column"
 			>
 				{data.updates.map(update => (
-					<UpdateCard key={update.id} {...update} />
+					<UpdateCard key={update.id} {...update} refetchFunc={() => {}} />
 				))}
 			</Masonry>
 		</div>
