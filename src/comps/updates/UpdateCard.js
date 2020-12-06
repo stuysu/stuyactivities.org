@@ -27,8 +27,8 @@ import UnstyledLink from "../ui/UnstyledLink";
 import MarkdownRenderer from "../ui/MarkdownRenderer";
 import UpdateDeleteButton from "./UpdateDeleteButton";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import DeleteIcon from '@material-ui/icons/Delete';
+import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const ASK_QUESTION = gql`
 	mutation CreateUpdateQuestion($updateId: Int!, $question: String!) {
@@ -52,7 +52,7 @@ const DELETE_QUESTION = gql`
 	}
 `;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
 	cardContent: {
 		padding: "0 1rem",
 		overflowWrap: "anywhere"
@@ -115,10 +115,10 @@ const UpdateCard = ({
 	const [question, setQuestion] = useState("");
 	const [ask] = useMutation(ASK_QUESTION, {
 		update(cache) {
-			cache.reset()
-			setQuestion("")
+			cache.reset();
+			setQuestion("");
 		}
-	})
+	});
 
 	return (
 		<Card>
@@ -180,16 +180,29 @@ const UpdateCard = ({
 				{Boolean(questions?.length) && (
 					<List>
 						{questions.map((question, i) => (
-							<Question question={question} organization={organization} keyy={i*2}/>
+							<Question question={question} organization={organization} keyy={i * 2} />
 						))}
 					</List>
 				)}
 				<Grid container alignItems={"center"} className={classes.topBottomMargin}>
 					<Grid item xs={10}>
-						<TextField fullWidth variant="outlined" label="Ask a Question" value={question} onChange={e => setQuestion(e.target.value)}/>
+						<TextField
+							fullWidth
+							variant="outlined"
+							label="Ask a Question"
+							value={question}
+							onChange={e => setQuestion(e.target.value)}
+						/>
 					</Grid>
 					<Grid item xs={2}>
-						<Button style={{float: "right"}} variant="contained" color="primary" onClick={() => ask({variables: {question, updateId: id}})}>Ask</Button>
+						<Button
+							style={{ float: "right" }}
+							variant="contained"
+							color="primary"
+							onClick={() => ask({ variables: { question, updateId: id } })}
+						>
+							Ask
+						</Button>
 					</Grid>
 				</Grid>
 			</div>
@@ -197,24 +210,23 @@ const UpdateCard = ({
 	);
 };
 
-const Question = ({question, organization, keyy}) => {
+const Question = ({ question, organization, keyy }) => {
 	const classes = useStyles();
 	const [answer, setAnswer] = React.useState();
 	const [open, setOpen] = React.useState(false);
 	const [answerMutation] = useMutation(ANSWER_QUESTION, {
 		update(cache) {
-			cache.reset()
+			cache.reset();
 		},
 		onComplete() {
-			setOpen(false)
+			setOpen(false);
 		}
-	})
+	});
 	const [del] = useMutation(DELETE_QUESTION, {
 		update(cache) {
-			cache.reset()
+			cache.reset();
 		}
-	})
-
+	});
 
 	return (
 		<>
@@ -222,16 +234,14 @@ const Question = ({question, organization, keyy}) => {
 				<ListItemAvatar>
 					<Avatar alt={question.submittingUser.name} src={question.submittingUser.picture} />
 				</ListItemAvatar>
-				<ListItemText
-					primary={question.question}
-					secondary={question.submittingUser.name}/>
+				<ListItemText primary={question.question} secondary={question.submittingUser.name} />
 				{organization?.membership?.adminPrivileges && (
 					<ListItemSecondaryAction>
 						<IconButton onClick={() => setOpen(true)}>
-							<QuestionAnswerIcon/>
+							<QuestionAnswerIcon />
 						</IconButton>
-						<IconButton onClick={() => del({variables: {updateQuestionId: question.id}})}>
-							<DeleteIcon/>
+						<IconButton onClick={() => del({ variables: { updateQuestionId: question.id } })}>
+							<DeleteIcon />
 						</IconButton>
 					</ListItemSecondaryAction>
 				)}
@@ -241,7 +251,8 @@ const Question = ({question, organization, keyy}) => {
 					<ListItemText
 						className={classes.rightAlignedText}
 						primary={question.answer}
-						secondary={organization?.name}/>
+						secondary={organization?.name}
+					/>
 					<ListItemAvatar>
 						<Avatar alt={organization?.name} src={organization?.charter?.picture} />
 					</ListItemAvatar>
@@ -250,9 +261,7 @@ const Question = ({question, organization, keyy}) => {
 			<Dialog open={open} onClose={() => setOpen(false)}>
 				<DialogTitle>Answer {question.submittingUser.name}'s question</DialogTitle>
 				<DialogContent>
-					<DialogContentText>
-						Question: "{question.question}"
-					</DialogContentText>
+					<DialogContentText>Question: "{question.question}"</DialogContentText>
 					<TextField
 						autoFocus
 						fullWidth
@@ -263,12 +272,24 @@ const Question = ({question, organization, keyy}) => {
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={() => setOpen(false)}>Cancel</Button>
-					<Button onClick={() => answerMutation({variables: {updateQuestionId: question.id, answer, private: true}})}>Answer Privately</Button>
-					<Button onClick={() => answerMutation({variables: {updateQuestionId: question.id, answer, private: false}})}>Answer Publicly</Button>
+					<Button
+						onClick={() =>
+							answerMutation({ variables: { updateQuestionId: question.id, answer, private: true } })
+						}
+					>
+						Answer Privately
+					</Button>
+					<Button
+						onClick={() =>
+							answerMutation({ variables: { updateQuestionId: question.id, answer, private: false } })
+						}
+					>
+						Answer Publicly
+					</Button>
 				</DialogActions>
 			</Dialog>
 		</>
 	);
-}
+};
 
 export default UpdateCard;
