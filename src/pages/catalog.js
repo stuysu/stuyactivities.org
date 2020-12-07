@@ -139,6 +139,8 @@ const Catalog = () => {
 		organizations.unshift(data?.organizations?.find(org => org.url === "stuysu"));
 	}
 
+
+
 	return (
 		<div className={classes.root}>
 			<Helmet>
