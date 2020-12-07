@@ -7,18 +7,25 @@ import {
 	FormControlLabel,
 	Grid,
 	makeStyles,
+	TextField,
+	Avatar,
 	Snackbar,
 	Switch,
-	TextField,
 	Typography
 } from "@material-ui/core";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
 import RequestList from "../../../comps/pages/organization/RequestList";
+import UserContext from "../../../comps/context/UserContext";
+import UserSelect from "../../../comps/ui/UserSelect";
 
 const useStyles = makeStyles(theme => ({
 	margin: {
 		margin: theme.spacing(2)
+	},
+	leftRightMargin: {
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1)
 	},
 	topBottomMargin: {
 		marginTop: theme.spacing(1),
@@ -31,6 +38,7 @@ const QUERY = gql`
 		membershipRequests(orgId: $orgId) {
 			id
 			user {
+				id
 				name
 				email
 				picture
@@ -62,8 +70,17 @@ const DELETE_MUTATION = gql`
 const ALTER_JOIN_MUTATION = gql`
 	mutation AlterJoinInstructions($orgId: Int!, $buttonEnabled: Boolean, $instructions: String) {
 		alterJoinInstructions(orgId: $orgId, buttonEnabled: $buttonEnabled, instructions: $instructions) {
+			id
 			buttonEnabled
 			instructions
+		}
+	}
+`;
+
+const OUTGOING_MUTATION = gql`
+	mutation CreateOutgoingRequest($orgId: Int, $userId: Int!, $message: String, $admin: Boolean, $role: String) {
+		createOutgoingRequest(orgId: $orgId, userId: $userId, message: $message, admin: $admin, role: $role) {
+			id
 		}
 	}
 `;
@@ -74,6 +91,7 @@ export default function MemberRequests({ match }) {
 	const { data, refetch } = useQuery(QUERY, {
 		variables: { orgId: org.id }
 	});
+	const [dialogError, setDialogError] = React.useState("");
 	const [approveMutation] = useMutation(APPROVE_MUTATION, {
 		update(cache) {
 			cache.reset().then(() => refetch());
@@ -82,6 +100,9 @@ export default function MemberRequests({ match }) {
 	const [deleteMutation] = useMutation(DELETE_MUTATION, {
 		update(cache) {
 			cache.reset().then(() => refetch());
+		},
+		onError(err) {
+			setDialogError(err.message);
 		}
 	});
 	const [rejectingRequest, setRejectingRequest] = React.useState({});
@@ -104,8 +125,45 @@ export default function MemberRequests({ match }) {
 	const [joinInstructionsMutation] = useMutation(ALTER_JOIN_MUTATION, {
 		onCompleted() {
 			setSnackbarOpen(true);
+		},
+		update(cache, { data: { alterJoinInstructions } }) {
+			cache.modify({
+				id: cache.identify(org),
+				fields: {
+					joinInstructions() {
+						return cache.writeFragment({
+							data: alterJoinInstructions,
+							fragment: gql`
+								fragment AlteredJoinInstructions on JoinInstructions {
+									id
+									instructions
+									buttonEnabled
+								}
+							`
+						});
+					}
+				}
+			});
 		}
 	});
+
+	const [keyword, setKeyword] = React.useState("");
+	const [user, setUser] = React.useState({});
+	const [role, setRole] = React.useState("Member");
+	const [message, setMessage] = React.useState("");
+	const [adminPriveleges, setAdminPriveleges] = React.useState(false);
+	const [outgoingMutation] = useMutation(OUTGOING_MUTATION, {
+		onCompleted() {
+			setUser({});
+		},
+		update(cache) {
+			cache.reset().then(() => refetch());
+		},
+		onError(err) {
+			setDialogError(err.message);
+		}
+	});
+	const userContext = React.useContext(UserContext);
 
 	return (
 		<div className={classes.margin}>
@@ -140,6 +198,96 @@ export default function MemberRequests({ match }) {
 					</Button>
 				</Grid>
 			</Grid>
+			{org.joinInstructions?.buttonEnabled === false && (
+				<div>
+					<Typography variant="h5">Send Outgoing Request</Typography>
+					<div className={classes.topBottomMargin}>
+						{!user.id ? (
+							<UserSelect
+								filter={user =>
+									user.id !== userContext.id &&
+									!org.memberships.some(member => member.user.id === user.id) &&
+									data &&
+									!data.membershipRequests.some(request => request.user.id === user.id)
+								}
+								onChange={(_, newUser) => setUser(newUser)}
+								keyword={keyword}
+								setKeyword={setKeyword}
+							/>
+						) : (
+							<Grid container spacing={1} alignItems={"center"}>
+								<Grid item xs={12} sm={6} md={4} lg={4} xl={2} style={{ display: "flex" }}>
+									<Avatar src={user.picture} className={classes.leftRightMargin} />
+									<div>
+										<Typography>{user.name}</Typography>
+										<Typography color={"textSecondary"} variant={"subtitle2"}>
+											{user.email}
+										</Typography>
+									</div>
+								</Grid>
+								<Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
+									<TextField
+										fullWidth
+										multiline
+										label="Role"
+										value={role}
+										onChange={e => setRole(e.target.value)}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+									<TextField
+										fullWidth
+										multiline
+										label="Message (optional)"
+										value={message}
+										onChange={e => setMessage(e.target.value)}
+									/>
+								</Grid>
+								<Grid item xs={12} sm={6} md={6} lg={6} xl={2}>
+									<FormControlLabel
+										control={
+											<Switch
+												checked={adminPriveleges}
+												onChange={e => setAdminPriveleges(e.target.checked)}
+											/>
+										}
+										label="Admin Priveleges"
+									/>
+								</Grid>
+								<Grid item xs={12} sm={12} md={6} lg={6} xl={2}>
+									<Button
+										style={{ float: "right" }}
+										className={classes.leftRightMargin}
+										variant="contained"
+										color="primary"
+										onClick={() =>
+											outgoingMutation({
+												variables: {
+													orgId: org.id,
+													userId: user.id,
+													role,
+													message,
+													admin: adminPriveleges
+												}
+											})
+										}
+									>
+										Send
+									</Button>
+									<Button
+										style={{ float: "right" }}
+										className={classes.leftRightMargin}
+										variant="contained"
+										onClick={() => setUser({})}
+									>
+										Cancel
+									</Button>
+								</Grid>
+							</Grid>
+						)}
+					</div>
+				</div>
+			)}
 			{data?.membershipRequests?.filter(request => !request.userApproval || !request.adminApproval)?.length ===
 			0 ? (
 				<Typography variant="h5">No outgoing or incoming requests at this time</Typography>
@@ -190,6 +338,12 @@ export default function MemberRequests({ match }) {
 				onClose={() => setSnackbarOpen(false)}
 				message="Set join instructions!"
 			></Snackbar>
+			<Dialog open={dialogError !== ""} onClose={() => setDialogError("")}>
+				<DialogTitle>Error: {dialogError}</DialogTitle>
+				<DialogActions>
+					<Button onClick={() => setDialogError("")}>Close</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	);
 }
