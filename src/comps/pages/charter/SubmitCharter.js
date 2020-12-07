@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { gql } from "apollo-boost";
+import { gql }from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { CharterFormContext } from "../../../pages/charter";
 import { Redirect } from "react-router-dom";

@@ -1,6 +1,6 @@
 import React from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import UserContext from "./UserContext";
 
 const basicInfo = gql`

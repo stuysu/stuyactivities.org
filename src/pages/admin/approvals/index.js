@@ -9,8 +9,7 @@ import {
 	makeStyles,
 	Typography
 } from "@material-ui/core";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/react-hooks";
+import { gql, useQuery  } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 

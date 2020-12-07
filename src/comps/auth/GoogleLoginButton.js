@@ -1,7 +1,6 @@
 import React from "react";
 import GoogleLogin from "react-google-login";
-import { gql } from "apollo-boost";
-import { useMutation } from "@apollo/react-hooks";
+import { gql, useMutation }from "@apollo/client";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import UserContext from "../context/UserContext";
 import Typography from "@material-ui/core/Typography";

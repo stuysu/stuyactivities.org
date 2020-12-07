@@ -1,5 +1,5 @@
 import React from "react";
-import { gql } from "apollo-boost";
+import { gql }from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { client } from "../comps/context/ApolloProvider";
