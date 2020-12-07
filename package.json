@@ -73,6 +73,5 @@
 		"trailingComma": "none",
 		"singleQuote": false
 	},
-	"proxy": "https://staging.stuyactivities.org/",
 	"devDependencies": {}
 }
