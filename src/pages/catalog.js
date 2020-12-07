@@ -21,6 +21,7 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import Loading from "../comps/ui/Loading";
 import List from "@material-ui/core/List";
 import Masonry from "react-masonry-css";
+import { usePagination } from "@material-ui/lab";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
@@ -68,6 +69,7 @@ const QUERY = gql`
 		$commitmentLevels: [String!]
 		$meetingDays: [String!]
 		$limit: Int!
+		$offset: Int!
 		$randomOrderSeed: Int!
 	) {
 		organizations(
@@ -75,9 +77,9 @@ const QUERY = gql`
 			tags: $tags
 			commitmentLevels: $commitmentLevels
 			meetingDays: $meetingDays
-			offset: 0
 			limit: $limit
 			randomOrderSeed: $randomOrderSeed
+			offset: $offset
 		) {
 			id
 			name
@@ -104,7 +106,8 @@ const Catalog = () => {
 	const [commitmentLevels, setCommitmentLevels] = useState([]);
 	const [meetingDays, setMeetingDays] = useState([]);
 	const [listView, setListView] = useState(false);
-	const [limit, setLimit] = useState(15);
+	const [limit] = useState(15);
+	const [offset, setOffset] = useState(0);
 	const [organizations, setOrganizations] = useState(null);
 
 	const isMobile = useMediaQuery("(max-width: 500px)");
@@ -122,37 +125,26 @@ const Catalog = () => {
 
 	const [randomOrderSeed] = React.useState(Math.floor(Math.random() * 1000));
 
-	const {
-		data,
-		loading
-	} = useQuery(QUERY, {
+	const { data, loading } = useQuery(QUERY, {
 		variables: {
 			keyword,
 			tags,
 			limit,
 			commitmentLevels,
 			meetingDays,
-			randomOrderSeed
+			randomOrderSeed,
+			offset
 		}
 	});
 
 	useEffect(() => {
-		const hasLoadedMore = (limit > 15 && data);
-
-		if( hasLoadedMore || limit === 15 ){
-			setOrganizations(data?.organizations || []);
-		}
-
-	},[setOrganizations, limit, data]);
-
-	useEffect(() => {
-		if(limit <= data?.organizations?.length){
+		if (offset < data?.organizations?.length + organizations?.length) {
 			const scrollHandler = () => {
 				const offsetTop = window.innerHeight + window.scrollY;
 				const pageHeight = window.document.body.offsetHeight;
 
-				if(pageHeight - offsetTop < 800){
-					setLimit(current => current + 15);
+				if (pageHeight - offsetTop < 800 && !loading) {
+					setOffset(offset => offset + 15);
 				}
 			};
 
@@ -161,6 +153,28 @@ const Catalog = () => {
 			return () => window.removeEventListener("scroll", scrollHandler);
 		}
 	});
+
+	useEffect(() => {
+		setOffset(0);
+	}, [setOffset, keyword, tags, limit, commitmentLevels, meetingDays]);
+
+	useEffect(() => {
+		if (data?.organizations) {
+			setOrganizations(currentOrgs => {
+				if (offset === 0) {
+					return data.organizations;
+				}
+
+				const combinedSize = currentOrgs.length + data.organizations.length;
+
+				if (combinedSize > offset && organizations.length <= offset) {
+					return currentOrgs.concat(data.organizations);
+				}
+
+				return currentOrgs;
+			});
+		}
+	}, [data, setOrganizations]);
 
 	return (
 		<div className={classes.root}>
@@ -205,11 +219,11 @@ const Catalog = () => {
 							</ToggleButton>
 						</ToggleButtonGroup>
 					</div>
-					{loading && limit === 15 ? (
+					{loading && offset === 0 && !organizations ? (
 						<Loading />
 					) : (
 						<>
-							{organizations.length === 0 && (
+							{organizations?.length === 0 && (
 								<div className={classes.notFoundContainer}>
 									<img
 										src={errorImages[Math.floor(Math.random() * errorImages.length)]}
@@ -234,7 +248,7 @@ const Catalog = () => {
 
 							{listView ? (
 								<List>
-									{organizations.map(org => (
+									{organizations?.map(org => (
 										<CatalogListCard key={org.id} {...org} />
 									))}
 								</List>
@@ -244,12 +258,17 @@ const Catalog = () => {
 									className="my-masonry-grid"
 									columnClassName="my-masonry-grid_column"
 								>
-									{organizations.map(org => (
+									{organizations?.map(org => (
 										<CatalogCard {...org} key={org.id} />
 									))}
 								</Masonry>
 							)}
 
+							{loading && (
+								<div style={{ textAlign: "center", marginBottom: "1rem" }}>
+									<Loading />
+								</div>
+							)}
 						</>
 					)}
 				</Grid>
