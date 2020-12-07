@@ -21,7 +21,6 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import Loading from "../comps/ui/Loading";
 import List from "@material-ui/core/List";
 import Masonry from "react-masonry-css";
-import { usePagination } from "@material-ui/lab";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
