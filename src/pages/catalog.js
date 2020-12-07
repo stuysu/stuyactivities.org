@@ -137,7 +137,7 @@ const Catalog = () => {
 	});
 
 	useEffect(() => {
-		if (offset < data?.organizations?.length + organizations?.length) {
+		if (offset <= data?.organizations?.length + organizations?.length) {
 			const scrollHandler = () => {
 				const offsetTop = window.innerHeight + window.scrollY;
 				const pageHeight = window.document.body.offsetHeight;
