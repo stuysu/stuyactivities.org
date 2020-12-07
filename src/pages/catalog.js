@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
@@ -19,7 +19,6 @@ import UnstyledLink from "../comps/ui/UnstyledLink";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import Loading from "../comps/ui/Loading";
-import shuffleArray from "../utils/shuffleArray";
 import List from "@material-ui/core/List";
 import Masonry from "react-masonry-css";
 
@@ -63,13 +62,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const QUERY = gql`
-	query Organizations($keyword: String, $tags: [Int!], $commitmentLevels: [String!], $meetingDays: [String!]) {
+	query Organizations(
+		$keyword: String
+		$tags: [Int!]
+		$commitmentLevels: [String!]
+		$meetingDays: [String!]
+		$limit: Int!
+		$randomOrderSeed: Int!
+	) {
 		organizations(
 			keyword: $keyword
 			tags: $tags
 			commitmentLevels: $commitmentLevels
 			meetingDays: $meetingDays
 			offset: 0
+			limit: $limit
+			randomOrderSeed: $randomOrderSeed
 		) {
 			id
 			name
@@ -91,11 +99,13 @@ const QUERY = gql`
 
 const Catalog = () => {
 	const classes = useStyles();
-	const [keyword, setKeyword] = React.useState("");
-	const [tags, setTags] = React.useState([]);
-	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
-	const [meetingDays, setMeetingDays] = React.useState([]);
-	const [listView, setListView] = React.useState(false);
+	const [keyword, setKeyword] = useState("");
+	const [tags, setTags] = useState([]);
+	const [commitmentLevels, setCommitmentLevels] = useState([]);
+	const [meetingDays, setMeetingDays] = useState([]);
+	const [listView, setListView] = useState(false);
+	const [limit, setLimit] = useState(15);
+	const [organizations, setOrganizations] = useState(null);
 
 	const isMobile = useMediaQuery("(max-width: 500px)");
 	const isTablet = useMediaQuery("(max-width: 900px)");
@@ -110,36 +120,47 @@ const Catalog = () => {
 		numColumns = 1;
 	}
 
-	const [seed] = React.useState(Math.floor(Math.random() * 1000));
+	const [randomOrderSeed] = React.useState(Math.floor(Math.random() * 1000));
 
 	const {
-		error,
 		data,
-		// refetch
 		loading
 	} = useQuery(QUERY, {
 		variables: {
 			keyword,
 			tags,
+			limit,
 			commitmentLevels,
-			meetingDays
+			meetingDays,
+			randomOrderSeed
 		}
 	});
 
-	if (error) {
-		return <p>There was an error loading this page</p>;
-	}
+	useEffect(() => {
+		const hasLoadedMore = (limit > 15 && data);
 
-	const organizations = data?.organizations?.filter(org => org.url !== "stuysu") || [];
-	if (!keyword) {
-		shuffleArray(organizations, seed);
-	}
+		if( hasLoadedMore || limit === 15 ){
+			setOrganizations(data?.organizations || []);
+		}
 
-	if (organizations?.length !== (data?.organizations || []).length) {
-		organizations.unshift(data?.organizations?.find(org => org.url === "stuysu"));
-	}
+	},[setOrganizations, limit, data]);
 
+	useEffect(() => {
+		if(limit <= data?.organizations?.length){
+			const scrollHandler = () => {
+				const offsetTop = window.innerHeight + window.scrollY;
+				const pageHeight = window.document.body.offsetHeight;
 
+				if(pageHeight - offsetTop < 800){
+					setLimit(current => current + 15);
+				}
+			};
+
+			window.addEventListener("scroll", scrollHandler);
+
+			return () => window.removeEventListener("scroll", scrollHandler);
+		}
+	});
 
 	return (
 		<div className={classes.root}>
@@ -184,7 +205,7 @@ const Catalog = () => {
 							</ToggleButton>
 						</ToggleButtonGroup>
 					</div>
-					{loading ? (
+					{loading && limit === 15 ? (
 						<Loading />
 					) : (
 						<>
@@ -228,6 +249,7 @@ const Catalog = () => {
 									))}
 								</Masonry>
 							)}
+
 						</>
 					)}
 				</Grid>
