@@ -1,26 +1,27 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Navigation from "../comps/ui/nav/Navigation";
 import AuthDialog from "../comps/auth/AuthDialog";
 import { PUBLIC_URL } from "../constants";
 import { Helmet } from "react-helmet";
+import ReactGA from "react-ga";
+import ReportDialog from "../comps/help/ReportDialog";
+import ErrorBoundary from "../comps/ui/ErrorBoundary";
+import Loading from "../comps/ui/Loading";
 
 // Pages
 import Home from "./Home";
-import OrgRouter from "./org";
-import Catalog from "./catalog";
-import TokenLogin from "./token";
-import AdminRouter from "./admin";
-import Rules from "./rules";
-import About from "./about";
-import ClubPubFair from "./clubpubfair";
-import Charter from "./charter";
-import FeedbackForm from "./feedback";
+const OrgRouter = lazy(() => import("./org"));
+const Catalog = lazy(() => import("./catalog"));
+const TokenLogin = lazy(() => import("./token"));
+const AdminRouter = lazy(() => import("./admin"));
+const Rules = lazy(() => import("./rules"));
+const About = lazy(() => import("./about"));
+const ClubPubFair = lazy(() => import("./clubpubfair"));
+const Charter = lazy(() => import("./charter"))
+const FeedbackForm = lazy(() => import("./feedback"));
+const Explore = lazy(() => import("./explore"));
 
-import ReactGA from "react-ga";
-import Explore from "./explore";
-import ReportDialog from "../comps/help/ReportDialog";
-import ErrorBoundary from "../comps/ui/ErrorBoundary";
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -50,6 +51,8 @@ const Pages = () => {
 			<AuthDialog />
 			<ReportDialog />
 			<ErrorBoundary>
+				<Suspense fallback={<Loading />}>
+
 				<Switch>
 					<Route path={"/"} component={Home} exact />
 					<Route path={"/catalog"} component={Catalog} exact />
@@ -67,6 +70,8 @@ const Pages = () => {
 					</Route>
 					<Route path={"/:orgUrl"} component={OrgRouter} />
 				</Switch>
+				</Suspense>
+
 			</ErrorBoundary>
 		</div>
 	);

@@ -8,6 +8,7 @@ import "react-multi-carousel/lib/styles.css";
 import MeetingCard from "../meetings/MeetingCard";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { client } from "../context/ApolloProvider";
 
 const responsive = {
 	superLargeDesktop: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles({
 const UserMeetings = () => {
 	const classes = useStyles();
 	const user = useContext(UserContext);
-	const { data, loading } = useQuery(QUERY, { variables: { userId: user.id } });
+	const { data, loading } = useQuery(QUERY, { variables: { userId: user.id }, client });
 
 	if (loading) {
 		return (
