@@ -81,7 +81,7 @@ const SubmitCharter = () => {
 		}
 	}, [error, form]);
 
-	React.useEffect(updateError, [error]);
+	React.useEffect(updateError, [error, updateError]);
 
 	if (data?.createOrganization) {
 		return <Redirect to={`/${data?.createOrganization?.url}`} />;

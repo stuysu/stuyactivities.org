@@ -53,12 +53,14 @@ const TokenLogin = () => {
 	});
 
 	const attemptLogin = React.useCallback(() => {
-		login()
-			.then(() => user.refetch())
-			.catch(e => {});
-	}, [user, login]);
+		if(! data){
+			login()
+				.then(() => user.refetch())
+				.catch(e => {});
+		}
+	}, [login, user, data]);
 
-	React.useEffect(attemptLogin, []);
+	React.useEffect(attemptLogin, [attemptLogin]);
 
 	if (data) {
 		const linkedGoogleAccount = data?.login?.oAuths?.find(auth => auth.platform === "google");
