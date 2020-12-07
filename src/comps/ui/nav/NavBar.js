@@ -10,6 +10,9 @@ import { triggerLoginDialog } from "../../auth/AuthDialog";
 import UserContext from "../../context/UserContext";
 import NavAvatar from "./NavAvatar";
 import UnstyledLink from "../UnstyledLink";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { Report } from "@material-ui/icons";
+import { triggerReportDialog } from "../../help/ReportDialog";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -25,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 const NavBar = ({ setDrawerOpen }) => {
 	const classes = useStyles();
-
+	const isMobile = useMediaQuery("(max-width: 800px)");
 	const user = React.useContext(UserContext);
 
 	return (
@@ -44,14 +47,28 @@ const NavBar = ({ setDrawerOpen }) => {
 					<Typography variant="h5" className={classes.title}>
 						<UnstyledLink to={"/"}>StuyActivities</UnstyledLink>
 					</Typography>
+					<div>
+						<IconButton
+							edge="start"
+							color="inherit"
+							aria-label="menu"
+							onClick={() => triggerReportDialog()}
+						>
+							<Report />
+						</IconButton>
 
-					{user.signedIn ? (
-						<NavAvatar />
-					) : (
-						<Button color="inherit" onClick={triggerLoginDialog}>
-							Sign In
-						</Button>
-					)}
+						{!isMobile && (
+							<>
+								{user.signedIn ? (
+									<NavAvatar />
+								) : (
+									<Button color="inherit" onClick={triggerLoginDialog}>
+										Sign In
+									</Button>
+								)}
+							</>
+						)}
+					</div>
 				</Toolbar>
 			</AppBar>
 		</div>

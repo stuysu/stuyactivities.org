@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import AuthContext from "../AuthContext";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles(theme => ({
 	userTypeButton: {
@@ -48,6 +49,11 @@ const Landing = () => {
 			<Typography variant={"subtitle1"}>
 				Your session will expire 30 days after the last time you access StuyActivities.
 				<br /> You can end your session anytime by logging out.
+				<br /> If you are having any trouble logging in, please email{" "}
+				<Link href="mailto:help@stuyactivities.org" color={"secondary"}>
+					help@stuyactivities.org
+				</Link>
+				.
 			</Typography>
 			<br />
 			<Typography variant={"subtitle1"}>Are you signing in as a:</Typography>

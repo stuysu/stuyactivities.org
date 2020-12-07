@@ -1,16 +1,16 @@
 .defaultVector {
-    max-width: 80vw;
-    width: 300px;
-    max-height: 25vh;
-    margin: 0.5rem;
+	max-width: 80vw;
+	width: 300px;
+	max-height: 25vh;
+	margin: 0.5rem;
 }
 
 .contentContainer {
-    padding: 2rem;
+	padding: 2rem;
 }
 
 @media (max-width: 800px) {
-    .contentContainer {
-        padding: 0.5rem;
-    }
+	.contentContainer {
+		padding: 0.5rem;
+	}
 }

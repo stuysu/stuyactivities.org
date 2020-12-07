@@ -7,8 +7,6 @@ import ThemeProvider from "./comps/context/ThemeProvider";
 import { BrowserRouter } from "react-router-dom";
 import Pages from "./pages";
 
-import ErrorBoundary from "@honeybadger-io/react";
-import honeybadger from "./utils/honeybadger";
 import { SnackbarProvider } from "notistack";
 
 function App() {
@@ -18,9 +16,7 @@ function App() {
 				<SnackbarProvider maxSnack={3}>
 					<BrowserRouter>
 						<UserProvider>
-							<ErrorBoundary honeybadger={honeybadger}>
-								<Pages />
-							</ErrorBoundary>
+							<Pages />
 						</UserProvider>
 					</BrowserRouter>
 				</SnackbarProvider>

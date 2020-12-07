@@ -15,9 +15,12 @@ import Rules from "./rules";
 import About from "./about";
 import ClubPubFair from "./clubpubfair";
 import Charter from "./charter";
+import FeedbackForm from "./feedback";
 
 import ReactGA from "react-ga";
 import Explore from "./explore";
+import ReportDialog from "../comps/help/ReportDialog";
+import ErrorBoundary from "../comps/ui/ErrorBoundary";
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -45,23 +48,26 @@ const Pages = () => {
 
 			<Navigation />
 			<AuthDialog />
+			<ReportDialog />
+			<ErrorBoundary>
+				<Switch>
+					<Route path={"/"} component={Home} exact />
+					<Route path={"/catalog"} component={Catalog} exact />
+					<Route path={"/charter"} component={Charter} exact />
+					<Route path={"/feedback"} component={FeedbackForm} />
+					<Route path={"/token/:token"} component={TokenLogin} exact />
+					<Route path={"/admin"} component={AdminRouter} />
+					<Route path={"/rules"} component={Rules} />
+					<Route path={"/about"} component={About} />
+					<Route path={"/explore"} component={Explore} />
+					<Route path={"/clubpubfair"} component={ClubPubFair} />
 
-			<Switch>
-				<Route path={"/"} component={Home} exact />
-				<Route path={"/catalog"} component={Catalog} exact />
-				<Route path={"/charter"} component={Charter} exact />
-				<Route path={"/token/:token"} component={TokenLogin} exact />
-				<Route path={"/admin"} component={AdminRouter} />
-				<Route path={"/rules"} component={Rules} />
-				<Route path={"/about"} component={About} />
-				<Route path={"/explore"} component={Explore} />
-				<Route path={"/clubpubfair"} component={ClubPubFair} />
-
-				<Route path={"/organizations/:orgUrl"}>
-					<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
-				</Route>
-				<Route path={"/:orgUrl"} component={OrgRouter} />
-			</Switch>
+					<Route path={"/organizations/:orgUrl"}>
+						<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
+					</Route>
+					<Route path={"/:orgUrl"} component={OrgRouter} />
+				</Switch>
+			</ErrorBoundary>
 		</div>
 	);
 };

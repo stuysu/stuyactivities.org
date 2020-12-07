@@ -103,14 +103,14 @@ const About = () => {
 					<Grid container style={{ textAlign: "center" }}>
 						<Grid item xs={12} sm={6} md={6}>
 							<h2>The StuyActivities 2.0 Team:</h2>
-							<p>Julian Giordano, SU Vice President ‘19-’20</p>
-							<p>Abir Taheer, SU IT ‘19-’20</p>
-							<p>Victor Veytsman, SU IT ‘19-’20</p>
-							<p>Ethan Shan, SU IT ‘19-’20</p>
-							<p>Theo Kubovy-Weiss, SU Exec ‘19-’20</p>
-							<p>Neve Diaz-Carr, SU Exec ‘19-’20</p>
-							<p>Aaron Wang, SU Exec ‘19-’20</p>
-							<p>Shivali Korgaonkar, SU External ‘19-’20</p>
+							<p>Julian Giordano, SU President ’20-’21</p>
+							<p>Shivali Korgaonkar, SU Vice President ’20-’21</p>
+							<p>Abir Taheer, SU IT ’20-’21</p>
+							<p>Victor Veytsman, SU IT ’20-’21</p>
+							<p>Ethan Shan, SU IT ’20-’21</p>
+							<p>Theo Kubovy-Weiss, SU Exec ’20-’21</p>
+							<p>Neve Diaz-Carr, SU Exec ’20-’21</p>
+							<p>Aaron Wang, SU Exec ’20-’21</p>
 						</Grid>
 						<Grid item xs={12} sm={6} md={6}>
 							<h2>The Original StuyActivities Team:</h2>
@@ -123,7 +123,7 @@ const About = () => {
 							<p>Abir Taheer, SU IT ’18’19</p>
 							<p>Elizabeth Avakov, SU Clubs & Pubs ’18-’19</p>
 							<p>Gordon Ebanks, SU Clubs & Pubs ’18-’19</p>
-							<p>Joshua Weiner, SU SLT '18-'19</p>
+							<p>Joshua Weiner, SU SLT ’18-’19</p>
 						</Grid>
 					</Grid>
 				</main>
