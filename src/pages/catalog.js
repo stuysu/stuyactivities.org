@@ -166,14 +166,14 @@ const Catalog = () => {
 
 				const combinedSize = currentOrgs.length + data.organizations.length;
 
-				if (combinedSize > offset && organizations.length <= offset) {
+				if (combinedSize > offset && currentOrgs.length <= offset) {
 					return currentOrgs.concat(data.organizations);
 				}
 
 				return currentOrgs;
 			});
 		}
-	}, [data, setOrganizations]);
+	}, [data, setOrganizations, offset]);
 
 	return (
 		<div className={classes.root}>
