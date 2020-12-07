@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@apollo/client": "^3.3.3",
+		"@apollo/client": "^3.3.4",
 		"@apollo/react-hooks": "^4.0.0",
 		"@fullcalendar/daygrid": "^5.4.0",
 		"@fullcalendar/list": "^5.4.0",
