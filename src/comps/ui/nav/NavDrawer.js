@@ -109,6 +109,16 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Home"} />
 					</ListItem>
 				</UnstyledLink>
+				{user?.adminRoles?.length > 0 && (
+					<UnstyledLink to={"/admin"}>
+						<ListItem button>
+							<ListItemIcon>
+								<AccountBox />
+							</ListItemIcon>
+							<ListItemText primary={"Admin Panel"} />
+						</ListItem>
+					</UnstyledLink>
+				)}
 
 				<ListSubheader disableSticky>Discover</ListSubheader>
 				<UnstyledLink to={"/explore"}>
@@ -202,19 +212,6 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Rules"} />
 					</ListItem>
 				</UnstyledLink>
-
-				{user?.adminRoles !== undefined || {} ? (
-					<UnstyledLink to={"/admin"}>
-						<ListItem button>
-							<ListItemIcon>
-								<AccountBox />
-							</ListItemIcon>
-							<ListItemText primary={"Admin Panel"} />
-						</ListItem>
-					</UnstyledLink>
-				) : (
-					<></>
-				)}
 			</List>
 		</Drawer>
 	);

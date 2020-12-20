@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/react-hooks";
+import { gql, useQuery } from "@apollo/client";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
 import { List as ListIcon, ViewComfy } from "@material-ui/icons";
@@ -20,7 +19,6 @@ import UnstyledLink from "../comps/ui/UnstyledLink";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import Loading from "../comps/ui/Loading";
-import shuffleArray from "../utils/shuffleArray";
 import List from "@material-ui/core/List";
 import Masonry from "react-masonry-css";
 
@@ -64,13 +62,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const QUERY = gql`
-	query Organizations($keyword: String, $tags: [Int!], $commitmentLevels: [String!], $meetingDays: [String!]) {
+	query Organizations(
+		$keyword: String
+		$tags: [Int!]
+		$commitmentLevels: [String!]
+		$meetingDays: [String!]
+		$limit: Int!
+		$offset: Int!
+		$randomOrderSeed: Int!
+	) {
 		organizations(
 			keyword: $keyword
 			tags: $tags
 			commitmentLevels: $commitmentLevels
 			meetingDays: $meetingDays
-			offset: 0
+			limit: $limit
+			randomOrderSeed: $randomOrderSeed
+			offset: $offset
 		) {
 			id
 			name
@@ -92,11 +100,14 @@ const QUERY = gql`
 
 const Catalog = () => {
 	const classes = useStyles();
-	const [keyword, setKeyword] = React.useState("");
-	const [tags, setTags] = React.useState([]);
-	const [commitmentLevels, setCommitmentLevels] = React.useState([]);
-	const [meetingDays, setMeetingDays] = React.useState([]);
-	const [listView, setListView] = React.useState(false);
+	const [keyword, setKeyword] = useState("");
+	const [tags, setTags] = useState([]);
+	const [commitmentLevels, setCommitmentLevels] = useState([]);
+	const [meetingDays, setMeetingDays] = useState([]);
+	const [listView, setListView] = useState(false);
+	const [limit] = useState(15);
+	const [offset, setOffset] = useState(0);
+	const [organizations, setOrganizations] = useState(null);
 
 	const isMobile = useMediaQuery("(max-width: 500px)");
 	const isTablet = useMediaQuery("(max-width: 900px)");
@@ -111,34 +122,58 @@ const Catalog = () => {
 		numColumns = 1;
 	}
 
-	const [seed] = React.useState(Math.floor(Math.random() * 1000));
+	const [randomOrderSeed] = React.useState(Math.floor(Math.random() * 1000));
 
-	const {
-		error,
-		data,
-		// refetch
-		loading
-	} = useQuery(QUERY, {
+	const { data, loading } = useQuery(QUERY, {
 		variables: {
 			keyword,
 			tags,
+			limit,
 			commitmentLevels,
-			meetingDays
+			meetingDays,
+			randomOrderSeed,
+			offset
 		}
 	});
 
-	if (error) {
-		return <p>There was an error loading this page</p>;
-	}
+	useEffect(() => {
+		if (offset <= data?.organizations?.length + organizations?.length) {
+			const scrollHandler = () => {
+				const offsetTop = window.innerHeight + window.scrollY;
+				const pageHeight = window.document.body.offsetHeight;
 
-	const organizations = data?.organizations?.filter(org => org.url !== "stuysu") || [];
-	if (!keyword) {
-		shuffleArray(organizations, seed);
-	}
+				if (pageHeight - offsetTop < 800 && !loading) {
+					setOffset(offset => offset + 15);
+				}
+			};
 
-	if (organizations?.length !== (data?.organizations || []).length) {
-		organizations.unshift(data?.organizations?.find(org => org.url === "stuysu"));
-	}
+			window.addEventListener("scroll", scrollHandler);
+
+			return () => window.removeEventListener("scroll", scrollHandler);
+		}
+	});
+
+	useEffect(() => {
+		setOffset(0);
+	}, [setOffset, keyword, tags, limit, commitmentLevels, meetingDays]);
+
+	useEffect(() => {
+		if (data?.organizations) {
+			setOrganizations(currentOrgs => {
+				if (offset === 0) {
+					return data.organizations;
+				}
+
+				const combinedSize = currentOrgs.length + data.organizations.length;
+
+				if (combinedSize >= offset && currentOrgs.length <= offset) {
+					return currentOrgs.concat(data.organizations);
+				}
+
+				return currentOrgs;
+			});
+		}
+	}, [data, setOrganizations, offset]);
 
 	return (
 		<div className={classes.root}>
@@ -183,11 +218,11 @@ const Catalog = () => {
 							</ToggleButton>
 						</ToggleButtonGroup>
 					</div>
-					{loading ? (
+					{loading && offset === 0 && !organizations ? (
 						<Loading />
 					) : (
 						<>
-							{organizations.length === 0 && (
+							{organizations?.length === 0 && (
 								<div className={classes.notFoundContainer}>
 									<img
 										src={errorImages[Math.floor(Math.random() * errorImages.length)]}
@@ -212,7 +247,7 @@ const Catalog = () => {
 
 							{listView ? (
 								<List>
-									{organizations.map(org => (
+									{organizations?.map(org => (
 										<CatalogListCard key={org.id} {...org} />
 									))}
 								</List>
@@ -222,10 +257,16 @@ const Catalog = () => {
 									className="my-masonry-grid"
 									columnClassName="my-masonry-grid_column"
 								>
-									{organizations.map(org => (
+									{organizations?.map(org => (
 										<CatalogCard {...org} key={org.id} />
 									))}
 								</Masonry>
+							)}
+
+							{loading && (
+								<div style={{ textAlign: "center", marginBottom: "1rem" }}>
+									<Loading />
+								</div>
 							)}
 						</>
 					)}

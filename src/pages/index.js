@@ -1,26 +1,26 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Navigation from "../comps/ui/nav/Navigation";
 import AuthDialog from "../comps/auth/AuthDialog";
 import { PUBLIC_URL } from "../constants";
 import { Helmet } from "react-helmet";
+import ReactGA from "react-ga";
+import ReportDialog from "../comps/help/ReportDialog";
+import ErrorBoundary from "../comps/ui/ErrorBoundary";
+import Loading from "../comps/ui/Loading";
 
 // Pages
 import Home from "./Home";
-import OrgRouter from "./org";
-import Catalog from "./catalog";
-import TokenLogin from "./token";
-import AdminRouter from "./admin";
-import Rules from "./rules";
-import About from "./about";
-import ClubPubFair from "./clubpubfair";
-import Charter from "./charter";
-import FeedbackForm from "./feedback";
-
-import ReactGA from "react-ga";
-import Explore from "./explore";
-import ReportDialog from "../comps/help/ReportDialog";
-import ErrorBoundary from "../comps/ui/ErrorBoundary";
+const OrgRouter = lazy(() => import("./org"));
+const Catalog = lazy(() => import("./catalog"));
+const TokenLogin = lazy(() => import("./token"));
+const AdminRouter = lazy(() => import("./admin"));
+const Rules = lazy(() => import("./rules"));
+const About = lazy(() => import("./about"));
+const ClubPubFair = lazy(() => import("./clubpubfair"));
+const Charter = lazy(() => import("./charter"));
+const FeedbackForm = lazy(() => import("./feedback"));
+const Explore = lazy(() => import("./explore"));
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -50,23 +50,25 @@ const Pages = () => {
 			<AuthDialog />
 			<ReportDialog />
 			<ErrorBoundary>
-				<Switch>
-					<Route path={"/"} component={Home} exact />
-					<Route path={"/catalog"} component={Catalog} exact />
-					<Route path={"/charter"} component={Charter} exact />
-					<Route path={"/feedback"} component={FeedbackForm} />
-					<Route path={"/token/:token"} component={TokenLogin} exact />
-					<Route path={"/admin"} component={AdminRouter} />
-					<Route path={"/rules"} component={Rules} />
-					<Route path={"/about"} component={About} />
-					<Route path={"/explore"} component={Explore} />
-					<Route path={"/clubpubfair"} component={ClubPubFair} />
+				<Suspense fallback={<Loading />}>
+					<Switch>
+						<Route path={"/"} component={Home} exact />
+						<Route path={"/catalog"} component={Catalog} exact />
+						<Route path={"/charter"} component={Charter} exact />
+						<Route path={"/feedback"} component={FeedbackForm} />
+						<Route path={"/token/:token"} component={TokenLogin} exact />
+						<Route path={"/admin"} component={AdminRouter} />
+						<Route path={"/rules"} component={Rules} />
+						<Route path={"/about"} component={About} />
+						<Route path={"/explore"} component={Explore} />
+						<Route path={"/clubpubfair"} component={ClubPubFair} />
 
-					<Route path={"/organizations/:orgUrl"}>
-						<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
-					</Route>
-					<Route path={"/:orgUrl"} component={OrgRouter} />
-				</Switch>
+						<Route path={"/organizations/:orgUrl"}>
+							<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
+						</Route>
+						<Route path={"/:orgUrl"} component={OrgRouter} />
+					</Switch>
+				</Suspense>
 			</ErrorBoundary>
 		</div>
 	);

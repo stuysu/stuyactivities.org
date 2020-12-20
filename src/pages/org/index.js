@@ -2,7 +2,7 @@ import React from "react";
 import { generatePath, Route, Switch } from "react-router-dom";
 
 import { client } from "../../comps/context/ApolloProvider";
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import Loading from "../../comps/ui/Loading";
 import Charter from "./charter";

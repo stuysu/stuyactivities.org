@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Card, CardContent, makeStyles, TextField, Typography } from "@material-ui/core";
-import { gql } from "@apollo/client";
-import { useMutation } from "@apollo/react-hooks";
+import { gql, useMutation } from "@apollo/client";
 import { cache } from "../../context/ApolloProvider";
 
 const ADDCOMMENT = gql`
