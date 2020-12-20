@@ -7,6 +7,7 @@ import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import OrgApprovals from "./approvals/OrgApprovals";
 import { AssignmentTurnedIn, LiveHelp } from "@material-ui/icons";
+import AdminLog from "./AdminLog";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -54,6 +55,7 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/approvals"} component={Approvals} exact />
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
 				<Route path={match.path + "/help"} component={Approvals} />
+				<Route path={match.path + "/log"} component={AdminLog} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>
