@@ -66,7 +66,7 @@ const Meetings = () => {
 						plugins={[dayGridPlugin, listPlugin]}
 						headerToolbar={{
 							start: "title",
-							end: "dayGridMonth dayGridWeek listYear prev next"
+							end: "dayGridMonth dayGridWeek listMonth prev next"
 						}}
 						dayMaxEventRows={4}
 						events={data?.meetings?.map(meeting => {
