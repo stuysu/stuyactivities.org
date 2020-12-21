@@ -129,6 +129,14 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Explore"} />
 					</ListItem>
 				</UnstyledLink>
+				<UnstyledLink to={"/explore"}>
+					<ListItem button>
+						<ListItemIcon>
+							<Explore />
+						</ListItemIcon>
+						<ListItemText primary={"Explore"} />
+					</ListItem>
+				</UnstyledLink>
 				<UnstyledLink to={"/catalog"}>
 					<ListItem button>
 						<ListItemIcon>

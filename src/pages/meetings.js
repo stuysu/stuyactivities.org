@@ -18,6 +18,7 @@ const QUERY = gql`
 			title
 			start
 			end
+			privacy
 			organization {
 				id
 				name
@@ -68,9 +69,11 @@ const Meetings = () => {
 							end: "dayGridMonth dayGridWeek listYear prev next"
 						}}
 						dayMaxEventRows={4}
-						events={data?.meetings?.map(a => {
-							const newMeeting = { ...a };
-							newMeeting.title = a.organization.name + " - " + a.title;
+						events={data?.meetings?.map(meeting => {
+							const newMeeting = { ...meeting };
+							newMeeting.title = meeting.organization.name + " - " + meeting.title;
+							newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
+
 							return newMeeting;
 						})}
 						eventClick={ev => triggerMeetingDialog(ev.event.id)}
