@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
 	calendarContainer: {
 		width: 1200,
 		maxWidth: "95%"
+	},
+	event: {
+		cursor: "pointer"
 	}
 }));
 
@@ -71,6 +74,7 @@ const Meetings = () => {
 							return newMeeting;
 						})}
 						eventClick={ev => triggerMeetingDialog(ev.event.id)}
+						eventClassNames={classes.event}
 					/>
 				</div>
 			</FlexCenter>
