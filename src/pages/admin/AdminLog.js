@@ -1,6 +1,5 @@
 import React from "react";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/react-hooks";
+import { gql, useQuery } from "@apollo/client";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
@@ -10,8 +9,10 @@ import Tab from "@material-ui/core/Tab";
 
 const QUERY = gql`
 	query {
-		strikes {
-			reason
+		organizations {
+			strikes {
+				reason
+			}
 		}
 	}
 `;
@@ -76,7 +77,7 @@ const AdminLog = () => {
 					scrollButtons="auto"
 					aria-label="scrollable auto tabs example"
 				>
-					<Tab label="Item One" {...a11yProps(0)} />
+					<Tab label="Strikes" {...a11yProps(0)} />
 					<Tab label="Item Two" {...a11yProps(1)} />
 					<Tab label="Item Three" {...a11yProps(2)} />
 					<Tab label="Item Four" {...a11yProps(3)} />
@@ -86,7 +87,9 @@ const AdminLog = () => {
 				</Tabs>
 			</AppBar>
 			<TabPanel value={value} index={0}>
-				Item One
+				{data?.organizations?.strikes?.map(strike => (
+					<Typography>{strike.reason}</Typography>
+				))}
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				Item Two

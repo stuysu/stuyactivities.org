@@ -39,8 +39,12 @@ export default function AdminRouter({ match }) {
 			role: "helpRequests",
 			path: actualPath + "/help",
 			icon: <LiveHelp />
+		},
+		{
+			label: "Admin Log",
+			path: actualPath + "/log"
 		}
-	].filter(tab => adminRoles.some(row => tab.role === row.role));
+	];
 
 	if (!tabs.length) {
 		return <p>You don't have access to this page</p>;
