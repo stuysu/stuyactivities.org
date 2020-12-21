@@ -48,7 +48,7 @@ export default function Meetings() {
 					plugins={[dayGridPlugin, listPlugin]}
 					headerToolbar={{
 						start: "title",
-						end: "dayGridMonth dayGridWeek listMonth prev next"
+						end: "dayGridMonth listMonth prev next"
 					}}
 					events={org.meetings}
 					eventClick={ev => triggerMeetingDialog(ev.event.id)}
