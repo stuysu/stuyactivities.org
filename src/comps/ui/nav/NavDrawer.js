@@ -9,17 +9,18 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Logo from "./../../../img/logo512.png";
 import UserContext from "../../context/UserContext";
 import {
-	AccountBox,
+	AccountBoxOutlined,
 	AddCircleOutlined,
-	Archive,
-	EmojiFlags,
-	EmojiSymbols,
-	Explore,
-	Gavel,
-	Home,
-	Info,
-	LockOpen,
-	PowerSettingsNew
+	ArchiveOutlined,
+	EmojiFlagsOutlined,
+	EmojiSymbolsOutlined,
+	ExploreOutlined,
+	GavelOutlined,
+	GroupWorkOutlined,
+	HomeOutlined,
+	InfoOutlined,
+	LockOpenOutlined,
+	PowerSettingsNewOutlined
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
@@ -88,14 +89,14 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				{user.signedIn ? (
 					<ListItem button onClick={() => user.logout()}>
 						<ListItemIcon>
-							<PowerSettingsNew />
+							<PowerSettingsNewOutlined />
 						</ListItemIcon>
 						<ListItemText primary={"Sign Out"} />
 					</ListItem>
 				) : (
 					<ListItem button onClick={() => triggerLoginDialog()}>
 						<ListItemIcon>
-							<LockOpen />
+							<LockOpenOutlined />
 						</ListItemIcon>
 						<ListItemText primary={"Sign In"} />
 					</ListItem>
@@ -104,7 +105,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				<UnstyledLink to={"/"}>
 					<ListItem button>
 						<ListItemIcon>
-							<Home />
+							<HomeOutlined />
 						</ListItemIcon>
 						<ListItemText primary={"Home"} />
 					</ListItem>
@@ -113,7 +114,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					<UnstyledLink to={"/admin"}>
 						<ListItem button>
 							<ListItemIcon>
-								<AccountBox />
+								<AccountBoxOutlined />
 							</ListItemIcon>
 							<ListItemText primary={"Admin Panel"} />
 						</ListItem>
@@ -124,15 +125,25 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				<UnstyledLink to={"/explore"}>
 					<ListItem button>
 						<ListItemIcon>
-							<Explore />
+							<ExploreOutlined />
 						</ListItemIcon>
 						<ListItemText primary={"Explore"} />
 					</ListItem>
 				</UnstyledLink>
+
+				<UnstyledLink to={"/meetings"}>
+					<ListItem button>
+						<ListItemIcon>
+							<GroupWorkOutlined />
+						</ListItemIcon>
+						<ListItemText primary={"All Meetings"} />
+					</ListItem>
+				</UnstyledLink>
+
 				<UnstyledLink to={"/catalog"}>
 					<ListItem button>
 						<ListItemIcon>
-							<EmojiSymbols />
+							<EmojiSymbolsOutlined />
 						</ListItemIcon>
 						<ListItemText primary={"Catalog"} />
 					</ListItem>
@@ -143,7 +154,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<UnstyledLink to={"/clubpubfair"}>
 							<ListItem button>
 								<ListItemIcon>
-									<EmojiFlags />
+									<EmojiFlagsOutlined />
 								</ListItemIcon>
 								<ListItemText primary={"Clubs & Pubs Fair"} />
 							</ListItem>
@@ -160,7 +171,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					}
 				>
 					<ListItemIcon>
-						<Archive />
+						<ArchiveOutlined />
 					</ListItemIcon>
 					<ListItemText primary={"Archive"} />
 				</ListItem>
@@ -198,7 +209,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				<UnstyledLink to={"/about"}>
 					<ListItem button>
 						<ListItemIcon>
-							<Info />
+							<InfoOutlined />
 						</ListItemIcon>
 						<ListItemText primary={"About"} />
 					</ListItem>
@@ -207,7 +218,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				<UnstyledLink to={"/rules"}>
 					<ListItem button>
 						<ListItemIcon>
-							<Gavel />
+							<GavelOutlined />
 						</ListItemIcon>
 						<ListItemText primary={"Rules"} />
 					</ListItem>
