@@ -23,7 +23,7 @@
 		"material-ui-chip-input": "^1.1.0",
 		"moment": "^2.29.1",
 		"moment-timezone": "^0.5.32",
-		"notistack": "^1.0.2",
+		"notistack": "^1.0.3",
 		"prettier": "^2.2.1",
 		"prop-types": "latest",
 		"react": "^16.14.0",
