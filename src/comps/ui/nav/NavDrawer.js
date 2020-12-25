@@ -184,7 +184,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 									<ListItemAvatar>
 										<Avatar
 											alt={membership?.organization?.name}
-											src={membership?.organization?.charter?.picture}
+											src={membership?.organization?.charter?.picture.tinyThumbnail}
 										/>
 									</ListItemAvatar>
 									<ListItemText

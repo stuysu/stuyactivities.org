@@ -43,7 +43,10 @@ const QUERY = gql`
 				name
 				url
 				charter {
-					picture
+					picture {
+						thumbnail: url(width: 100, height: 100)
+						url
+					}
 				}
 			}
 			privacy
@@ -54,7 +57,7 @@ const QUERY = gql`
 const useStyles = makeStyles({
 	meetingCard: {
 		margin: "0 0.5rem",
-		minHeight: 250
+		minHeight: 220
 	},
 	title: {
 		marginLeft: "0.5rem"

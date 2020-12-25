@@ -9,7 +9,7 @@ import {
 	makeStyles,
 	Typography
 } from "@material-ui/core";
-import { gql, useQuery  } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 
@@ -41,7 +41,10 @@ const QUERY = gql`
 			name
 			url
 			charter {
-				picture
+				picture {
+					url
+					thumbnail(width: 100, height: 100)
+				}
 				mission
 			}
 		}

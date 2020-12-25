@@ -26,7 +26,9 @@ const QUERY = gql`
 				}
 				charter {
 					id
-					picture
+					picture {
+						thumbnail(width: 100, height: 100)
+					}
 				}
 			}
 		}
@@ -89,7 +91,7 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 	return (
 		<div>
 			<img
-				src={organization.charter.picture}
+				src={organization.charter.picture.thumbnail}
 				className={classes.logo}
 				alt={organization.name + " logo"}
 				onClick={navigateToOrg}

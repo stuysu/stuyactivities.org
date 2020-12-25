@@ -167,7 +167,7 @@ const Updates = () => {
 						<List>
 							<ListItem>
 								<ListItemAvatar>
-									<Avatar alt={org?.name} src={org?.charter?.picture} />
+									<Avatar alt={org?.name} src={org?.charter?.picture?.tinyThumbnail} />
 								</ListItemAvatar>
 								<ListItemText
 									primary={org?.name}

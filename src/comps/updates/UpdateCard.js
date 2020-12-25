@@ -69,7 +69,7 @@ const UpdateCard = ({
 				<ListItem>
 					<UnstyledLink to={`/${organization.url}`}>
 						<ListItemAvatar>
-							<Avatar alt={organization?.name} src={organization?.charter?.picture} />
+							<Avatar alt={organization?.name} src={organization?.charter?.picture?.thumbnail} />
 						</ListItemAvatar>
 					</UnstyledLink>
 					<UnstyledLink to={`/${organization.url}`}>
