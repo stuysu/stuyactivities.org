@@ -73,7 +73,7 @@ const MeetingPreviewDialog = () => {
 			</AppBar>
 			<FlexCenter>
 				<div className={classes.pageContainer}>
-					<DynamicMeetingPreview meetingId={meetingId} />
+					<DynamicMeetingPreview meetingId={meetingId} closeDialog={closeDialog} />
 				</div>
 			</FlexCenter>
 		</Dialog>

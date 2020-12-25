@@ -91,7 +91,7 @@ const OrgNavPanel = ({ match }) => {
 	return (
 		<div className={classes.stickyContainer}>
 			<FlexCenter>
-				<Avatar className={classes.avatar} src={org?.charter?.picture} />
+				<Avatar className={classes.avatar} src={org?.charter?.picture?.icon} />
 			</FlexCenter>
 			<Typography className={classes.orgName} variant={"h5"}>
 				{org?.name}

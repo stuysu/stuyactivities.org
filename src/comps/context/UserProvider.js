@@ -23,7 +23,11 @@ const basicInfo = gql`
 					name
 					url
 					charter {
-						picture
+						picture {
+							thumbnail(width: 80, height: 80)
+							tinyThumbnail: thumbnail(width: 40, height: 40)
+							url
+						}
 					}
 				}
 				adminPrivileges

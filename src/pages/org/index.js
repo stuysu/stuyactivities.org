@@ -2,7 +2,7 @@ import React from "react";
 import { generatePath, Route, Switch } from "react-router-dom";
 
 import { client } from "../../comps/context/ApolloProvider";
-import { gql }from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import Loading from "../../comps/ui/Loading";
 import Charter from "./charter";
@@ -43,7 +43,12 @@ const getQuery = signedIn => {
 				charter {
 					mission
 					meetingSchedule
-					picture
+					picture {
+						url
+						icon: url(width: 200, height: 200, crop: thumb, gravity: center)
+						thumbnail(width: 80, height: 80)
+						tinyThumbnail: thumbnail(width: 40, height: 40)
+					}
 				}
 				updates {
 					id
@@ -168,7 +173,7 @@ const OrgRouter = ({ match, history }) => {
 							`${data?.organization?.name} - An activity at Stuyvesant High School`
 						}
 					/>
-					<meta property="og:image" content={data?.organization?.charter?.picture} />
+					<meta property="og:image" content={data?.organization?.charter?.picture.url} />
 				</Helmet>
 
 				<div className={styles.contentContainer}>

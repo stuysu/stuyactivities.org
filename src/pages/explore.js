@@ -40,7 +40,10 @@ const QUERY = gql`
 				url
 				charter {
 					id
-					picture
+					picture {
+						thumbnail(width: 80, height: 80)
+						url
+					}
 				}
 			}
 		}
@@ -57,7 +60,10 @@ const QUERY = gql`
 				url
 				charter {
 					id
-					picture
+					picture {
+						url
+						thumbnail(width: 80, height: 80)
+					}
 				}
 			}
 		}
@@ -90,7 +96,7 @@ const responsive = {
 
 const useStyles = makeStyles({
 	meetingCard: {
-		height: 450,
+		height: 250,
 		overflow: "auto",
 		overflowWrap: "anywhere",
 		margin: "0 0.5rem"

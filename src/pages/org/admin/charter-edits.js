@@ -24,7 +24,10 @@ const QUERY = gql`
 	query($orgId: Int!) {
 		charter(orgId: $orgId) {
 			mission
-			picture
+			picture {
+				url
+				thumbnail(width: 200, height: 200)
+			}
 			purpose
 			benefit
 			appointmentProcedures
@@ -39,7 +42,10 @@ const QUERY = gql`
 		charterEdits(orgId: $orgId) {
 			alteredFields
 			mission
-			picture
+			picture {
+				url
+				thumbnail(width: 200, height: 200)
+			}
 			purpose
 			benefit
 			appointmentProcedures
@@ -302,7 +308,8 @@ class CharterEditForm extends React.Component {
 								src={
 									this.state.editing.includes("picture")
 										? window.URL.createObjectURL(this.state.picture)
-										: this.props.latestChanges?.picture?.value || this.props.org.charter.picture
+										: this.props.latestChanges?.picture?.value?.thumbnail ||
+										  this.props.org.charter.picture.icon
 								}
 							/>
 							<input
@@ -317,8 +324,8 @@ class CharterEditForm extends React.Component {
 									onClick={() => {
 										this.setState({
 											picture:
-												this.props.latestChanges?.picture?.value ||
-												this.props.org.charter.picture,
+												this.props.latestChanges?.picture?.value.thumbnail ||
+												this.props.org.charter.picture.thumbnail,
 											editing: arrayToggle("picture", this.state.editing)
 										});
 									}}
