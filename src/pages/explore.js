@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Typography, useMediaQuery } from "@material-ui/core";
+import { Typography, useMediaQuery, Divider } from "@material-ui/core";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
 import { gql, useQuery } from "@apollo/client";
@@ -100,6 +100,12 @@ const useStyles = makeStyles({
 		overflow: "auto",
 		overflowWrap: "anywhere",
 		margin: "0 0.5rem"
+	},
+	darkerDivider: {
+		backgroundColor: "rgba(0, 0, 0, 0.24)" //original is 0, 0, 0, 0.12
+	},
+	matchMasonryBottomMargin: {
+		marginBottom: "calc(30px - 1rem)"
 	}
 });
 
@@ -116,6 +122,16 @@ const ExploreContent = () => {
 		return null;
 	}
 
+	const oneWeek = 7 * 24 * 60 * 60 * 1000;
+	const dateFilters = [
+		{ newest: 0, oldest: oneWeek, name: "" },
+		{ newest: oneWeek, oldest: 2 * oneWeek, name: "One Week Ago" },
+		{ newest: 2 * oneWeek, oldest: 3 * oneWeek, name: "Two Weeks Ago" },
+		{ newest: 3 * oneWeek, oldest: 4 * oneWeek, name: "Three Weeks Ago" },
+		{ newest: 4 * oneWeek, oldest: 8 * oneWeek, name: "One Month Ago" },
+		{ newest: 8 * oneWeek, oldest: 52 * oneWeek, name: "Older Than One Month Ago" }
+	];
+
 	return (
 		<div>
 			<Typography variant={"h3"}>Public Meetings</Typography>
@@ -125,15 +141,31 @@ const ExploreContent = () => {
 				))}
 			</Carousel>
 			<Typography variant={"h3"}>Club Posts:</Typography>
-			<Masonry
-				breakpointCols={isMobile ? 1 : 2}
-				className="my-masonry-grid"
-				columnClassName="my-masonry-grid_column"
-			>
-				{data.updates.map(update => (
-					<UpdateCard key={update.id} {...update} />
-				))}
-			</Masonry>
+			{dateFilters.map(filter => (
+				<>
+					{filter.name && (
+						<>
+							<Divider className={classes.darkerDivider} />
+							<Typography className={classes.matchMasonryBottomMargin}>{filter.name}</Typography>
+						</>
+					)}
+					<Masonry
+						breakpointCols={isMobile ? 1 : 2}
+						className="my-masonry-grid"
+						columnClassName="my-masonry-grid_column"
+					>
+						{data.updates
+							.filter(
+								update =>
+									new Date(update.createdAt) > new Date(Date.now() - filter.oldest) &&
+									new Date(update.createdAt) < new Date(Date.now() - filter.newest)
+							)
+							.map(update => (
+								<UpdateCard key={update.id} {...update} />
+							))}
+					</Masonry>
+				</>
+			))}
 		</div>
 	);
 };
