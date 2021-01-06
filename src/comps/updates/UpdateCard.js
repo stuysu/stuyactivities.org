@@ -26,7 +26,7 @@ import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
 import MarkdownRenderer from "../ui/MarkdownRenderer";
 import UpdateDeleteButton from "./UpdateDeleteButton";
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import DeleteIcon from "@material-ui/icons/Delete";
 
