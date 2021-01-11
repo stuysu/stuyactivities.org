@@ -41,7 +41,10 @@ const QUERY = gql`
 			name
 			url
 			charter {
-				picture
+				picture {
+					url
+					thumbnail(width: 150, height: 150)
+				}
 				mission
 			}
 		}
@@ -70,7 +73,7 @@ const Approvals = () => {
 						<UnstyledLink to={"/admin/approvals/" + org.url}>
 							<CardActionArea className={classes.card}>
 								<CardMedia
-									image={org.charter.picture}
+									image={org.charter.picture.thumbnail}
 									style={{
 										width: 150,
 										height: 150,

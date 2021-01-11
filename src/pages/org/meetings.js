@@ -6,6 +6,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
 import Grid from "@material-ui/core/Grid";
 import MeetingCard from "../../comps/meetings/MeetingCard";
+import { triggerMeetingDialog } from "../../comps/meetings/MeetingPreviewDialog";
 
 const useStyles = makeStyles(theme => ({
 	margin: {
@@ -47,10 +48,10 @@ export default function Meetings() {
 					plugins={[dayGridPlugin, listPlugin]}
 					headerToolbar={{
 						start: "title",
-						end: "dayGridMonth dayGridWeek listYear prev next"
+						end: "dayGridMonth listMonth prev next"
 					}}
-					dayPopover
 					events={org.meetings}
+					eventClick={ev => triggerMeetingDialog(ev.event.id)}
 				/>
 			</div>
 		</div>

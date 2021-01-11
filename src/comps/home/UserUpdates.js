@@ -34,7 +34,9 @@ const QUERY = gql`
 				name
 				url
 				charter {
-					picture
+					picture {
+						thumbnail(width: 40, height: 40)
+					}
 				}
 			}
 		}

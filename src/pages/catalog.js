@@ -86,7 +86,10 @@ const QUERY = gql`
 			active
 			charter {
 				id
-				picture
+				picture {
+					card: url(height: 180, width: 180, crop: thumb, gravity: center, radius: 100)
+					thumbnail(height: 80, width: 80)
+				}
 				mission
 				commitmentLevel
 			}

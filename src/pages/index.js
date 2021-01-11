@@ -11,6 +11,8 @@ import Loading from "../comps/ui/Loading";
 
 // Pages
 import Home from "./Home";
+import MeetingPreviewDialog from "../comps/meetings/MeetingPreviewDialog";
+import Meetings from "./meetings";
 const OrgRouter = lazy(() => import("./org"));
 const Catalog = lazy(() => import("./catalog"));
 const TokenLogin = lazy(() => import("./token"));
@@ -48,6 +50,7 @@ const Pages = () => {
 
 			<Navigation />
 			<AuthDialog />
+			<MeetingPreviewDialog />
 			<ReportDialog />
 			<ErrorBoundary>
 				<Suspense fallback={<Loading />}>
@@ -62,7 +65,7 @@ const Pages = () => {
 						<Route path={"/about"} component={About} />
 						<Route path={"/explore"} component={Explore} />
 						<Route path={"/clubpubfair"} component={ClubPubFair} />
-
+						<Route path={"/meetings"} component={Meetings} />
 						<Route path={"/organizations/:orgUrl"}>
 							<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
 						</Route>

@@ -34,7 +34,9 @@ const useStyles = makeStyles(theme => ({
 const QUERY = gql`
 	query Charter($orgUrl: String) {
 		charter(orgUrl: $orgUrl) {
-			picture
+			picture {
+				url
+			}
 			mission
 			purpose
 			benefit

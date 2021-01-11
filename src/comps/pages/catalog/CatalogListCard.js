@@ -12,7 +12,7 @@ export default function CatalogCard({ name, url, tags, charter }) {
 				<ListItem button style={{ padding: "1rem" }}>
 					<ListItemAvatar>
 						<LazyLoadImage
-							src={charter.picture}
+							src={charter.picture.thumbnail}
 							width={80}
 							style={{
 								borderRadius: "50%",
