@@ -46,7 +46,8 @@ const useStyles = makeStyles({
 		}
 	},
 	descriptionContainer: {
-		overflowWrap: "anywhere"
+		overflowWrap: "anywhere",
+		textAlign: "left"
 	},
 	title: {
 		fontWeight: 700

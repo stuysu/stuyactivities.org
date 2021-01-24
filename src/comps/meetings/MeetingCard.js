@@ -14,6 +14,9 @@ import { triggerMeetingDialog } from "./MeetingPreviewDialog";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
+	card: {
+		position: "relative"
+	},
 	meetingContent: {
 		padding: "0 1rem",
 		height: 130,
@@ -52,7 +55,7 @@ const MeetingCard = ({ id, title, start, end, organization, className }) => {
 	};
 
 	return (
-		<Card variant={"outlined"} className={className}>
+		<Card variant={"outlined"} className={className + " " + classes.card}>
 			{Boolean(showOrganization) && (
 				<List>
 					<ListItem className={classes.orgHeading}>
