@@ -12,8 +12,8 @@ import Masonry from "react-masonry-css";
 import FlexCenter from "../comps/ui/FlexCenter";
 
 const QUERY = gql`
-	query {
-		updates: exploreUpdates {
+	query ExploreQuery($updatesLimit: Int, $updatesOffset: Int) {
+		updates: exploreUpdates(limit: $updatesLimit, offset: $updatesOffset) {
 			id
 			title
 			content
@@ -112,14 +112,50 @@ const useStyles = makeStyles({
 const ExploreContent = () => {
 	const isMobile = useMediaQuery("(max-width: 900px)");
 	const classes = useStyles();
-	const { data, loading } = useQuery(QUERY);
+	const limit = 15;
+	const [offset, setOffset] = React.useState(0);
+	const [updates, setUpdates] = React.useState([]);
+	const { data, loading } = useQuery(QUERY, {
+		variables: {
+			updatesLimit: limit,
+			updatesOffset: offset
+		}
+	});
 
-	if (loading) {
+	React.useEffect(() => {
+		if (offset <= data?.updates?.length) {
+			const scrollHandler = () => {
+				const offsetTop = window.innerHeight + window.scrollY;
+				const pageHeight = window.document.body.offsetHeight;
+				if (pageHeight - offsetTop < 800 && !loading) {
+					setOffset(offset => offset + 15);
+				}
+			};
+
+			window.addEventListener("scroll", scrollHandler);
+			return () => window.removeEventListener("scroll", scrollHandler);
+		}
+	});
+
+	React.useEffect(() => {
+		if (data?.updates) {
+			setUpdates(viewedUpdates => {
+				if (offset === 0) {
+					return data.updates;
+				} //might not need this bc offset doesn't reset on this page
+				const combinedSize = viewedUpdates.length + data.updates.length;
+
+				if (combinedSize >= offset && viewedUpdates.length <= offset) {
+					return viewedUpdates.concat(data.updates);
+				}
+
+				return viewedUpdates;
+			});
+		}
+	}, [data, setUpdates, offset]);
+
+	if (loading && offset === 0) {
 		return <Loading />;
-	}
-
-	if (!data) {
-		return null;
 	}
 
 	const oneWeek = 7 * 24 * 60 * 60 * 1000;
@@ -135,11 +171,13 @@ const ExploreContent = () => {
 	return (
 		<div>
 			<Typography variant={"h3"}>Public Meetings</Typography>
-			<Carousel responsive={responsive}>
-				{data.meetings.map(meeting => (
-					<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard} />
-				))}
-			</Carousel>
+			{data !== undefined && (
+				<Carousel responsive={responsive}>
+					{data.meetings.map(meeting => (
+						<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard} />
+					))}
+				</Carousel>
+			)}
 			<Typography variant={"h3"}>Club Posts:</Typography>
 			{dateFilters.map(filter => (
 				<>
@@ -154,7 +192,7 @@ const ExploreContent = () => {
 						className="my-masonry-grid"
 						columnClassName="my-masonry-grid_column"
 					>
-						{data.updates
+						{updates
 							.filter(
 								update =>
 									new Date(update.createdAt) > new Date(Date.now() - filter.oldest) &&
@@ -173,9 +211,9 @@ const ExploreContent = () => {
 const Explore = () => {
 	const user = useContext(UserContext);
 
-	if (!user.signedIn) {
+	/*if (!user.signedIn) {
 		return <SignInRequired />;
-	}
+	}*/
 
 	return (
 		<FlexCenter>
