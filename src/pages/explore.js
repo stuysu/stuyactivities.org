@@ -211,9 +211,9 @@ const ExploreContent = () => {
 const Explore = () => {
 	const user = useContext(UserContext);
 
-	/*if (!user.signedIn) {
+	if (!user.signedIn) {
 		return <SignInRequired />;
-	}*/
+	}
 
 	return (
 		<FlexCenter>
