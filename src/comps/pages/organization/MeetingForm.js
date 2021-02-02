@@ -122,13 +122,17 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 				onChange={ev => setDescription(ev.target.value)}
 				helperText={
 					<Typography paragraph>
-						Please include a Zoom link (as well as the Meeting ID and Passcode) for your meeting in the
+						Please include a Zoom, Google Meet, or Discord link (as well as the Meeting ID and Passcode) for your meeting in the
 						description above. For instructions on how to create a secure Zoom meeting using your stuy.edu
 						account, click{" "}
 						<Link href="https://docs.google.com/document/d/1-jbrKLIAOh97qxEk4VrQnW66PLcoVTlEvtG_tAcM-Rg/edit?usp=sharing">
 							here
 						</Link>
-						.
+						. Click{" "}
+						<Link href={"/rules"}>
+							here
+						</Link>
+						{" "}to make sure you are following all online meetings regulations.
 					</Typography>
 				}
 			/>
