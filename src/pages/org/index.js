@@ -71,16 +71,6 @@ const getQuery = signedIn => {
 						height
 						width
 					}
-					questions {
-						id
-						submittingUser {
-							name
-							picture
-						}
-						private
-						question
-						answer
-					}
 				}
 				leaders: memberships(onlyLeaders: true) {
 					id
