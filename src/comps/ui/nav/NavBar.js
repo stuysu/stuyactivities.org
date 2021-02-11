@@ -11,7 +11,7 @@ import UserContext from "../../context/UserContext";
 import NavAvatar from "./NavAvatar";
 import UnstyledLink from "../UnstyledLink";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { Report } from "@material-ui/icons";
+import { BugReport } from "@material-ui/icons";
 import { triggerReportDialog } from "../../help/ReportDialog";
 
 const useStyles = makeStyles(theme => ({
@@ -54,7 +54,7 @@ const NavBar = ({ setDrawerOpen }) => {
 							aria-label="menu"
 							onClick={() => triggerReportDialog()}
 						>
-							<Report />
+							<BugReport />
 						</IconButton>
 
 						{!isMobile && (
