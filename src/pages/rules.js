@@ -363,12 +363,6 @@ export default function Rules() {
 						ADDENDUM (2020-2021)
 						<ul>
 							<li>
-<<<<<<< HEAD
-	                            Computer systems and softwares that are strictly related to club activities will be considered in the allocation
-                                process, and may include, but are not limited to: (a) Editing softwares for videography and photography, (b)
-                                Communication/video platforms (ex. Zoom Pro Plan) , and (c) Online subscription services (excluding streaming
-                                services such as Netflix, Spotify, Hulu, etc.) </li>
-=======
 								Rule 5 under Budget Rules for Club Pub Allocations is deemed void for the remainder of
 								the 2020-2021 school year.
 							</li>
@@ -379,7 +373,6 @@ export default function Rules() {
 								(ex. Zoom Pro Plan) , and (c) Online subscription services (excluding streaming services
 								such as Netflix, Spotify, Hulu, etc.){" "}
 							</li>
->>>>>>> d1daa17f9ae08d44f7ce0f1f21cf3a90d559d9f2
 							<li>This addendum will go into effect immediately after passage.</li>
 						</ul>
 					</li>

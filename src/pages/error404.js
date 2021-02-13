@@ -10,7 +10,7 @@ import pixeltrue from "../img/vectors/pale-page-not-found.svg";
 import pale from "../img/vectors/pale-page-not-found.svg";
 import { makeStyles } from "@material-ui/core/styles";
 import BackButton from "../comps/ui/BackButton";
-import { gql }from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 

@@ -3,7 +3,7 @@ import arrayToggle from "../../../../utils/arrayToggle";
 import useFilterStyles from "./useFilterStyles";
 import { useQuery } from "@apollo/client";
 import { client } from "../../../context/ApolloProvider";
-import { gql }from "@apollo/client";
+import { gql } from "@apollo/client";
 import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
 

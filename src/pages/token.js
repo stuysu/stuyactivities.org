@@ -1,5 +1,5 @@
 import React from "react";
-import { gql }from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { client } from "../comps/context/ApolloProvider";
@@ -53,7 +53,7 @@ const TokenLogin = () => {
 	});
 
 	const attemptLogin = React.useCallback(() => {
-		if(! data){
+		if (!data) {
 			login()
 				.then(() => user.refetch())
 				.catch(e => {});
