@@ -1,16 +1,7 @@
 import React from "react";
 import FlexCenter from "../comps/ui/FlexCenter";
 import UserContext from "../comps/context/UserContext";
-import {
-	Typography,
-	Table,
-	TableHead,
-	TableRow,
-	TableCell,
-	Avatar,
-	TableBody,
-	Switch
-} from "@material-ui/core";
+import { Typography, Table, TableHead, TableRow, TableCell, Avatar, TableBody, Switch } from "@material-ui/core";
 
 import { gql, useMutation } from "@apollo/client";
 
