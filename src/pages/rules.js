@@ -94,6 +94,45 @@ export default function Rules() {
 				</ol>
 			</Typography>
 			<Typography variant={"h5"} color="primary">
+				Official Regulations for Online Club Meetings
+			</Typography>
+			<Typography paragraph>
+				<ol>
+					<li>
+						All official meetings must be hosted online.
+						<ul>
+							<li>
+								Activities may not advertise in-person meetings on StuyActivities. Any violation of this
+								will lead to an immediate strike.
+							</li>
+						</ul>
+					</li>
+					<li>Links to all official online Activity meetings must be accessible on StuyActivities.</li>
+					<li>
+						All official Activity meetings must be scheduled on StuyActivities.
+						<ul>
+							<li>Official Activity meetings must take place between 2:30 PM and 8:00 PM.</li>
+						</ul>
+					</li>
+					<li>
+						Activities may not host guest speakers at online meetings without the presence of a faculty
+						member (either the Activity’s registered faculty advisor or another member of the faculty).
+					</li>
+					<li>
+						In the event that an online Activity meeting is bombarded with uninvited guests and/or
+						inappropriate behavior is exhibited (including racist, sexist, homophobic, or otherwise
+						disrespectful comments or statements; bullying (online or in-person); and any violation of the
+						rules of the Student Code of Conduct or the Chancellor’s Regulations), the Activity must end the
+						meeting immediately and email MPolazz@schools.nyc.gov and clubpub@stuysu.org to report the
+						issue.
+					</li>
+					<li>
+						Please email help@stuyactivities.org for support using StuyActivities and IT@stuysu.org for
+						general technical support.
+					</li>
+				</ol>
+			</Typography>
+			<Typography variant={"h5"} color="primary">
 				Meetings
 			</Typography>
 			<Typography paragraph>
@@ -320,15 +359,20 @@ export default function Rules() {
 						The Funding Rules are subject to change and the Student Union reserves the right to amend them
 						through a majority vote of the Budget Committee.
 					</li>
-                    <li>
+					<li>
 						ADDENDUM (2020-2021)
-                        <ul>
-							<li>Rule 5 under Budget Rules for Club Pub Allocations is deemed void for the remainder of the 2020-2021 school year.</li>
+						<ul>
 							<li>
-	                            Computer systems and softwares that are strictly related to club activities will be considered in the allocation 
-                                process, and may include, but are not limited to: (a) Editing softwares for videography and photography, (b) 
-                                Communication/video platforms (ex. Zoom Pro Plan) , and (c) Online subscription services (excluding streaming 
-                                services such as Netflix, Spotify, Hulu, etc.) </li>
+								Rule 5 under Budget Rules for Club Pub Allocations is deemed void for the remainder of
+								the 2020-2021 school year.
+							</li>
+							<li>
+								Computer systems and softwares that are strictly related to club activities will be
+								considered in the allocation process, and may include, but are not limited to: (a)
+								Editing softwares for videography and photography, (b) Communication/video platforms
+								(ex. Zoom Pro Plan) , and (c) Online subscription services (excluding streaming services
+								such as Netflix, Spotify, Hulu, etc.){" "}
+							</li>
 							<li>This addendum will go into effect immediately after passage.</li>
 						</ul>
 					</li>
