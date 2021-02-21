@@ -123,8 +123,9 @@ const ExploreContent = () => {
 	});
 
 	React.useEffect(() => {
-		if (offset <= data?.updates?.length) {
+		if (offset <= updates.length) {
 			const scrollHandler = () => {
+				console.log("scrolling");
 				const offsetTop = window.innerHeight + window.scrollY;
 				const pageHeight = window.document.body.offsetHeight;
 				if (pageHeight - offsetTop < 800 && !loading) {
@@ -134,8 +135,8 @@ const ExploreContent = () => {
 
 			window.addEventListener("scroll", scrollHandler);
 			return () => window.removeEventListener("scroll", scrollHandler);
-		}
-	});
+		} else console.log("bubkes");
+	}, [data]);
 
 	React.useEffect(() => {
 		if (data?.updates) {
@@ -166,7 +167,7 @@ const ExploreContent = () => {
 		{ newest: 3 * oneWeek, oldest: 4 * oneWeek, name: "Three Weeks Ago" },
 		{ newest: 4 * oneWeek, oldest: 8 * oneWeek, name: "One Month Ago" },
 		{ newest: 8 * oneWeek, oldest: 52 * oneWeek, name: "Older Than One Month Ago" }
-	];
+	].filter(filter => updates.some(update => new Date(update.createdAt) < new Date(Date.now() - filter.newest)));
 
 	return (
 		<div>
