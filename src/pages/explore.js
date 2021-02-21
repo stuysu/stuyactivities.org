@@ -145,7 +145,7 @@ const ExploreContent = () => {
 			window.addEventListener("scroll", scrollHandler);
 			return () => window.removeEventListener("scroll", scrollHandler);
 		} else console.log("bubkes");
-	}, [data]);
+	}, [data, loading, offset, updates]);
 
 	React.useEffect(() => {
 		if (data?.updates) {
