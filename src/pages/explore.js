@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Typography, useMediaQuery } from "@material-ui/core";
+import { Typography, useMediaQuery, Divider } from "@material-ui/core";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
 import { gql, useQuery } from "@apollo/client";
@@ -12,8 +12,8 @@ import Masonry from "react-masonry-css";
 import FlexCenter from "../comps/ui/FlexCenter";
 
 const QUERY = gql`
-	query {
-		updates: exploreUpdates {
+	query ExploreQuery($updatesLimit: Int, $updatesOffset: Int) {
+		updates: exploreUpdates(limit: $updatesLimit, offset: $updatesOffset) {
 			id
 			title
 			content
@@ -109,40 +109,111 @@ const useStyles = makeStyles({
 		overflow: "auto",
 		overflowWrap: "anywhere",
 		margin: "0 0.5rem"
+	},
+	darkerDivider: {
+		backgroundColor: "rgba(0, 0, 0, 0.24)" //original is 0, 0, 0, 0.12
+	},
+	matchMasonryBottomMargin: {
+		marginBottom: "calc(30px - 1rem)"
 	}
 });
 
 const ExploreContent = () => {
 	const isMobile = useMediaQuery("(max-width: 900px)");
 	const classes = useStyles();
-	const { data, loading } = useQuery(QUERY);
+	const limit = 15;
+	const [offset, setOffset] = React.useState(0);
+	const [updates, setUpdates] = React.useState([]);
+	const { data, loading } = useQuery(QUERY, {
+		variables: {
+			updatesLimit: limit,
+			updatesOffset: offset
+		}
+	});
 
-	if (loading) {
+	React.useEffect(() => {
+		if (offset <= updates.length) {
+			const scrollHandler = () => {
+				console.log("scrolling");
+				const offsetTop = window.innerHeight + window.scrollY;
+				const pageHeight = window.document.body.offsetHeight;
+				if (pageHeight - offsetTop < 800 && !loading) {
+					setOffset(offset => offset + 15);
+				}
+			};
+
+			window.addEventListener("scroll", scrollHandler);
+			return () => window.removeEventListener("scroll", scrollHandler);
+		} else console.log("bubkes");
+	}, [data, loading, offset, updates]);
+
+	React.useEffect(() => {
+		if (data?.updates) {
+			setUpdates(viewedUpdates => {
+				if (offset === 0) {
+					return data.updates;
+				} //might not need this bc offset doesn't reset on this page
+				const combinedSize = viewedUpdates.length + data.updates.length;
+
+				if (combinedSize >= offset && viewedUpdates.length <= offset) {
+					return viewedUpdates.concat(data.updates);
+				}
+
+				return viewedUpdates;
+			});
+		}
+	}, [data, setUpdates, offset]);
+
+	if (loading && offset === 0) {
 		return <Loading />;
 	}
 
-	if (!data) {
-		return null;
-	}
+	const oneWeek = 7 * 24 * 60 * 60 * 1000;
+	const dateFilters = [
+		{ newest: 0, oldest: oneWeek, name: "" },
+		{ newest: oneWeek, oldest: 2 * oneWeek, name: "One Week Ago" },
+		{ newest: 2 * oneWeek, oldest: 3 * oneWeek, name: "Two Weeks Ago" },
+		{ newest: 3 * oneWeek, oldest: 4 * oneWeek, name: "Three Weeks Ago" },
+		{ newest: 4 * oneWeek, oldest: 8 * oneWeek, name: "One Month Ago" },
+		{ newest: 8 * oneWeek, oldest: 52 * oneWeek, name: "Older Than One Month Ago" }
+	].filter(filter => updates.some(update => new Date(update.createdAt) < new Date(Date.now() - filter.newest)));
 
 	return (
 		<div>
 			<Typography variant={"h3"}>Public Meetings</Typography>
-			<Carousel responsive={responsive}>
-				{data.meetings.map(meeting => (
-					<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard} />
-				))}
-			</Carousel>
+			{data !== undefined && (
+				<Carousel responsive={responsive}>
+					{data.meetings.map(meeting => (
+						<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard} />
+					))}
+				</Carousel>
+			)}
 			<Typography variant={"h3"}>Club Posts:</Typography>
-			<Masonry
-				breakpointCols={isMobile ? 1 : 2}
-				className="my-masonry-grid"
-				columnClassName="my-masonry-grid_column"
-			>
-				{data.updates.map(update => (
-					<UpdateCard key={update.id} {...update} refetchFunc={() => {}} />
-				))}
-			</Masonry>
+			{dateFilters.map(filter => (
+				<>
+					{filter.name && (
+						<>
+							<Divider className={classes.darkerDivider} />
+							<Typography className={classes.matchMasonryBottomMargin}>{filter.name}</Typography>
+						</>
+					)}
+					<Masonry
+						breakpointCols={isMobile ? 1 : 2}
+						className="my-masonry-grid"
+						columnClassName="my-masonry-grid_column"
+					>
+						{updates
+							.filter(
+								update =>
+									new Date(update.createdAt) > new Date(Date.now() - filter.oldest) &&
+									new Date(update.createdAt) < new Date(Date.now() - filter.newest)
+							)
+							.map(update => (
+								<UpdateCard key={update.id} {...update} refetchFunc={() => {}} />
+							))}
+					</Masonry>
+				</>
+			))}
 		</div>
 	);
 };
