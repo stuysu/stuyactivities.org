@@ -1,5 +1,5 @@
 import React from "react";
-import { gql }from "@apollo/client";
+import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import GoogleLogin from "react-google-login";

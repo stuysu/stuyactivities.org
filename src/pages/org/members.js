@@ -35,7 +35,7 @@ const Members = () => {
 	return (
 		<div>
 			<Typography style={{ textAlign: "center" }} variant={"h2"}>
-				Members
+				{data?.memberships.length} Members
 			</Typography>
 
 			{data?.memberships.map(membership => {
