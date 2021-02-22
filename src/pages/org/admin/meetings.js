@@ -122,9 +122,15 @@ const Main = ({ match }) => {
 	//changing the key of a component causes react to remake it
 	//here, we use the key to reset the form when it has been submitted
 	const [formKey, setFormKey] = React.useState(0);
+	const [errorMessage, setErrorMessage] = React.useState("");
 	const [createMutation, { loading }] = useMutation(CREATE_MUTATION, {
 		onCompleted() {
 			setFormKey(formKey + 1);
+			setErrorMessage("");
+		},
+		onError(error) {
+			console.log({error});
+			setErrorMessage(error.message);
 		},
 		update(cache, { data: { createMeeting } }) {
 			cache.modify({
@@ -154,13 +160,16 @@ const Main = ({ match }) => {
 		}
 	});
 	const create = ({ title, description, date, startTime, endTime, checked, privacy }) => {
+		const raw_start = new Date(`${date} ${startTime}`);
+		const raw_end = new Date(`${date} ${endTime}`);
+		const validateDate = date => isNaN(date) ? new Date(0) : date.toISOString();
 		createMutation({
 			variables: {
 				orgUrl: match.params.orgUrl,
 				title,
 				description: description || "",
-				start: new Date(`${date} ${startTime}`).toISOString(),
-				end: new Date(`${date} ${endTime}`).toISOString(),
+				start: validateDate(raw_start),
+				end: validateDate(raw_end),
 				notifyFaculty: checked,
 				privacy
 			}
@@ -196,6 +205,7 @@ const Main = ({ match }) => {
 						buttonText={"Create"}
 						checkboxText={"Notify faculty members?"}
 						isSubmitting={loading}
+						errorMessage={errorMessage}
 					/>
 				</Grid>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
@@ -258,6 +268,7 @@ const EditPage = ({ match }) => {
 	const classes = useStyles();
 	//Use snackbar since edit has no other visible effects
 	const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+	const [errorMessage, setErrorMessage] = React.useState("");
 	const editingMeeting = org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
 	const [editMutation, { loading }] = useMutation(EDIT_MUTATION, {
 		update(cache, { data: { alterMeeting } }) {
@@ -285,18 +296,25 @@ const EditPage = ({ match }) => {
 				}
 			});
 		},
+		onError(error) {
+			setErrorMessage(error.message);
+		},
 		onCompleted() {
 			setSnackbarOpen(true);
+			setErrorMessage("");
 		}
 	});
 	const edit = ({ title, description, date, startTime, endTime, checked, privacy }) => {
+		const raw_start = new Date(`${date} ${startTime}`);
+		const raw_end = new Date(`${date} ${endTime}`);
+		const validateDate = date => isNaN(date) ? new Date(0) : date.toISOString();
 		editMutation({
 			variables: {
 				id: Number(match.params.meetingId),
 				title,
 				description: description || "",
-				start: new Date(`${date} ${startTime}`).toISOString(),
-				end: new Date(`${date} ${endTime}`).toISOString(),
+				start: validateDate(raw_start),
+				end: validateDate(raw_end),
 				notifyMembers: checked,
 				privacy
 			}
@@ -321,6 +339,7 @@ const EditPage = ({ match }) => {
 						buttonText={"Edit"}
 						checkboxText={"Notify club members?"}
 						isSubmitting={loading}
+						errorMessage={errorMessage}
 					/>
 				</Grid>
 			</Grid>
