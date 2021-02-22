@@ -51,16 +51,16 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 	const isMobile = useMediaQuery("(max-width: 800px)");
 
 	const [lastErr, setLastErr] = React.useState("");
-	const closeDialog = () => {setLastErr(errorMessage)};
+	const closeDialog = () => {
+		setLastErr(errorMessage);
+	};
 
 	return (
 		<div>
 			<Dialog fullScreen={isMobile} open={errorMessage !== "" && lastErr !== errorMessage} onClose={closeDialog}>
 				<DialogTitle>Something went wrong...</DialogTitle>
 				<DialogContent>
-					<DialogContentText>
-						{errorMessage}
-					</DialogContentText>
+					<DialogContentText>{errorMessage}</DialogContentText>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={closeDialog} color="primary">
@@ -177,20 +177,18 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 			<br />
 
 			<Button
-				onClick={() =>
-					{
-						setLastErr("");
-						submit({
-							title,
-							description,
-							date,
-							startTime,
-							endTime,
-							checked,
-							privacy: isPublic ? "public" : "private"
-						});
-					}
-				}
+				onClick={() => {
+					setLastErr("");
+					submit({
+						title,
+						description,
+						date,
+						startTime,
+						endTime,
+						checked,
+						privacy: isPublic ? "public" : "private"
+					});
+				}}
 				color={"primary"}
 				variant="contained"
 				disabled={isSubmitting}
