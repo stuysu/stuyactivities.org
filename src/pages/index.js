@@ -23,6 +23,7 @@ const ClubPubFair = lazy(() => import("./clubpubfair"));
 const Charter = lazy(() => import("./charter"));
 const FeedbackForm = lazy(() => import("./feedback"));
 const Explore = lazy(() => import("./explore"));
+const Settings = lazy(() => import("./settings"));
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -66,6 +67,7 @@ const Pages = () => {
 						<Route path={"/explore"} component={Explore} />
 						<Route path={"/clubpubfair"} component={ClubPubFair} />
 						<Route path={"/meetings"} component={Meetings} />
+						<Route path={"/settings"} component={Settings} />
 
 						<Route path={"/organizations/:orgUrl"}>
 							<Redirect to={window.location.pathname.replace("/organizations/", "/")} />

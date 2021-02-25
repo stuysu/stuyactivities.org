@@ -20,7 +20,8 @@ import {
 	HomeOutlined,
 	InfoOutlined,
 	LockOpenOutlined,
-	PowerSettingsNewOutlined
+	PowerSettingsNewOutlined,
+	SettingsOutlined
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
@@ -110,6 +111,16 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Home"} />
 					</ListItem>
 				</UnstyledLink>
+				{user?.memberships?.length > 0 && (
+					<UnstyledLink to={"/settings"}>
+						<ListItem button>
+							<ListItemIcon>
+								<SettingsOutlined />
+							</ListItemIcon>
+							<ListItemText primary={"Email Settings"} />
+						</ListItem>
+					</UnstyledLink>
+				)}
 				{user?.adminRoles?.length > 0 && (
 					<UnstyledLink to={"/admin"}>
 						<ListItem button>

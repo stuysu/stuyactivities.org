@@ -31,6 +31,8 @@ const basicInfo = gql`
 					}
 				}
 				adminPrivileges
+				meetingNotification
+				updateNotification
 			}
 			adminRoles {
 				id
