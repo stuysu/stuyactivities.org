@@ -6,12 +6,15 @@ import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 
 const QUERY = gql`
 	query {
 		organizations {
 			strikes {
 				reason
+				createdAt
 			}
 		}
 	}
@@ -29,9 +32,9 @@ function TabPanel(props) {
 			{...other}
 		>
 			{value === index && (
-				<Box p={3}>
-					<Typography>{children}</Typography>
-				</Box>
+				<Container>
+					<Box p={3}>{children}</Box>
+				</Container>
 			)}
 		</div>
 	);
@@ -81,33 +84,34 @@ const AdminLog = () => {
 					<Tab label="Item Two" {...a11yProps(1)} />
 					<Tab label="Item Three" {...a11yProps(2)} />
 					<Tab label="Item Four" {...a11yProps(3)} />
-					<Tab label="Item Five" {...a11yProps(4)} />
-					<Tab label="Item Six" {...a11yProps(5)} />
-					<Tab label="Item Seven" {...a11yProps(6)} />
 				</Tabs>
 			</AppBar>
 			<TabPanel value={value} index={0}>
-				{data?.organizations?.strikes?.map(strike => (
-					<Typography>{strike.reason}</Typography>
-				))}
+				{data?.organizations.map(org => {
+					if (org.strikes.length > 0) {
+						return (
+							<div>
+								{org.strikes.map(s => {
+									console.log(s.reason);
+									return (
+										<Paper>
+											<Typography>{s.reason}</Typography>
+											<Typography>{s.createdAt}</Typography>
+										</Paper>
+									);
+								})}
+							</div>
+						);
+					}
+					return true;
+				})}
 			</TabPanel>
-			<TabPanel value={value} index={1}>
-				Item Two
-			</TabPanel>
+			<TabPanel value={value} index={1}></TabPanel>
 			<TabPanel value={value} index={2}>
 				Item Three
 			</TabPanel>
 			<TabPanel value={value} index={3}>
 				Item Four
-			</TabPanel>
-			<TabPanel value={value} index={4}>
-				Item Five
-			</TabPanel>
-			<TabPanel value={value} index={5}>
-				Item Six
-			</TabPanel>
-			<TabPanel value={value} index={6}>
-				Item Seven
 			</TabPanel>
 		</div>
 	);
