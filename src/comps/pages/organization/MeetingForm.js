@@ -3,6 +3,11 @@ import {
 	Button,
 	FormControlLabel,
 	Grid,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogContentText,
+	DialogTitle,
 	InputAdornment,
 	Link,
 	makeStyles,
@@ -12,6 +17,7 @@ import {
 } from "@material-ui/core";
 import { CalendarToday, Schedule } from "@material-ui/icons";
 import Checkbox from "@material-ui/core/Checkbox";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -22,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitting }) => {
+const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitting, errorMessage }) => {
 	const classes = useStyles();
 	const [title, setTitle] = React.useState(meeting.title || "");
 	const [isPublic, setIsPublic] = useState(meeting.privacy === "public");
@@ -41,8 +47,27 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 			: "17:00"
 	);
 	const [checked, setChecked] = React.useState(false);
+
+	const isMobile = useMediaQuery("(max-width: 800px)");
+
+	const [lastErr, setLastErr] = React.useState("");
+	const closeDialog = () => {
+		setLastErr(errorMessage);
+	};
+
 	return (
 		<div>
+			<Dialog fullScreen={isMobile} open={errorMessage !== "" && lastErr !== errorMessage} onClose={closeDialog}>
+				<DialogTitle>Something went wrong...</DialogTitle>
+				<DialogContent>
+					<DialogContentText>{errorMessage}</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={closeDialog} color="primary">
+						Close
+					</Button>
+				</DialogActions>
+			</Dialog>
 			<TextField
 				className={classes.marginBottomBig}
 				fullWidth
@@ -122,13 +147,14 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 				onChange={ev => setDescription(ev.target.value)}
 				helperText={
 					<Typography paragraph>
-						Please include a Zoom link (as well as the Meeting ID and Passcode) for your meeting in the
-						description above. For instructions on how to create a secure Zoom meeting using your stuy.edu
-						account, click{" "}
+						Please include a Zoom, Google Meet, or Discord link (as well as the Meeting ID and Passcode) for
+						your meeting in the description above. For instructions on how to create a secure Zoom meeting
+						using your stuy.edu account, click{" "}
 						<Link href="https://docs.google.com/document/d/1-jbrKLIAOh97qxEk4VrQnW66PLcoVTlEvtG_tAcM-Rg/edit?usp=sharing">
 							here
 						</Link>
-						.
+						. Click <Link href={"/rules"}>here</Link> to make sure you are following all online meetings
+						regulations.
 					</Typography>
 				}
 			/>
@@ -151,7 +177,8 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 			<br />
 
 			<Button
-				onClick={() =>
+				onClick={() => {
+					setLastErr("");
 					submit({
 						title,
 						description,
@@ -160,8 +187,8 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						endTime,
 						checked,
 						privacy: isPublic ? "public" : "private"
-					})
-				}
+					});
+				}}
 				color={"primary"}
 				variant="contained"
 				disabled={isSubmitting}

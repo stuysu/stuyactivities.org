@@ -1,5 +1,5 @@
 import React from "react";
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { client } from "../comps/context/ApolloProvider";
@@ -53,12 +53,14 @@ const TokenLogin = () => {
 	});
 
 	const attemptLogin = React.useCallback(() => {
-		login()
-			.then(() => user.refetch())
-			.catch(e => {});
-	}, [user, login]);
+		if (!data) {
+			login()
+				.then(() => user.refetch())
+				.catch(e => {});
+		}
+	}, [login, user, data]);
 
-	React.useEffect(attemptLogin, []);
+	React.useEffect(attemptLogin, [attemptLogin]);
 
 	if (data) {
 		const linkedGoogleAccount = data?.login?.oAuths?.find(auth => auth.platform === "google");

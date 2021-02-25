@@ -41,7 +41,7 @@ const UserMemberships = () => {
 							<ListItemAvatar>
 								<Avatar
 									alt={membership?.organization?.name}
-									src={membership?.organization?.charter?.picture}
+									src={membership?.organization?.charter?.picture?.thumbnail}
 								/>
 							</ListItemAvatar>
 							<ListItemText primary={membership?.organization?.name} secondary={membership?.role} />

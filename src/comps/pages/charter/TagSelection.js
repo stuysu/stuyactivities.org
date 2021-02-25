@@ -1,5 +1,5 @@
 import React from "react";
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { CharterFormContext } from "../../../pages/charter";
 import FormControl from "@material-ui/core/FormControl";

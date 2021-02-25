@@ -10,11 +10,17 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { useHistory } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import smartTimespan from "../../utils/smartTimespan";
-import MarkdownRenderer from "../ui/MarkdownRenderer";
+import { triggerMeetingDialog } from "./MeetingPreviewDialog";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
+	card: {
+		position: "relative"
+	},
 	meetingContent: {
-		padding: "0 1rem"
+		padding: "0 1rem",
+		height: 130,
+		overflow: "auto"
 	},
 	orgHeading: {
 		cursor: "pointer",
@@ -27,10 +33,16 @@ const useStyles = makeStyles({
 	},
 	title: {
 		fontWeight: 700
+	},
+	buttonContainer: {
+		width: "100%",
+		height: "50px",
+		position: "fixed",
+		bottom: 0
 	}
 });
 
-const MeetingCard = ({ id, title, description, start, end, organization, privacy, className }) => {
+const MeetingCard = ({ id, title, start, end, organization, className }) => {
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -43,12 +55,12 @@ const MeetingCard = ({ id, title, description, start, end, organization, privacy
 	};
 
 	return (
-		<Card variant={"outlined"} className={className}>
+		<Card variant={"outlined"} className={className + " " + classes.card}>
 			{Boolean(showOrganization) && (
 				<List>
 					<ListItem className={classes.orgHeading}>
 						<ListItemAvatar onClick={navigateToOrg}>
-							<Avatar alt={organization?.name} src={organization?.charter?.picture} />
+							<Avatar alt={organization?.name} src={organization?.charter?.picture?.thumbnail} />
 						</ListItemAvatar>
 						<ListItemText primary={organization?.name} onClick={navigateToOrg} />
 					</ListItem>
@@ -61,8 +73,11 @@ const MeetingCard = ({ id, title, description, start, end, organization, privacy
 				<Typography paragraph color={"secondary"}>
 					{smartTimespan(new Date(start), new Date(end))}
 				</Typography>
-				<div className={classes.descriptionContainer}>
-					{!!description && <MarkdownRenderer>{description}</MarkdownRenderer>}
+
+				<div className={classes.buttonContainer}>
+					<Button variant={"contained"} color={"secondary"} onClick={() => triggerMeetingDialog(id)}>
+						View More
+					</Button>
 				</div>
 			</div>
 		</Card>

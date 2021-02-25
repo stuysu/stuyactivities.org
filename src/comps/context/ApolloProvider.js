@@ -1,7 +1,6 @@
 import React from "react";
-import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloLink, InMemoryCache, ApolloProvider as Provider } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
-import { ApolloProvider as Provider } from "@apollo/react-hooks";
 import { GRAPHQL_URI } from "../../constants";
 
 import { onError } from "@apollo/client/link/error";

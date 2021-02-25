@@ -9,8 +9,7 @@ import {
 	makeStyles,
 	Typography
 } from "@material-ui/core";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/react-hooks";
+import { gql, useQuery } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 
@@ -42,7 +41,10 @@ const QUERY = gql`
 			name
 			url
 			charter {
-				picture
+				picture {
+					url
+					thumbnail(width: 150, height: 150)
+				}
 				mission
 			}
 		}
@@ -71,7 +73,7 @@ const Approvals = () => {
 						<UnstyledLink to={"/admin/approvals/" + org.url}>
 							<CardActionArea className={classes.card}>
 								<CardMedia
-									image={org.charter.picture}
+									image={org.charter.picture.thumbnail}
 									style={{
 										width: 150,
 										height: 150,

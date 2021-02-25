@@ -5,6 +5,7 @@ import Loading from "../ui/Loading";
 import { Typography, useMediaQuery } from "@material-ui/core";
 import UpdateCard from "../updates/UpdateCard";
 import Masonry from "react-masonry-css";
+import { client } from "../context/ApolloProvider";
 
 const QUERY = gql`
 	query($userId: Int!) {
@@ -33,7 +34,9 @@ const QUERY = gql`
 				name
 				url
 				charter {
-					picture
+					picture {
+						thumbnail(width: 40, height: 40)
+					}
 				}
 			}
 		}
@@ -44,7 +47,7 @@ const UserUpdates = () => {
 	const user = useContext(UserContext);
 	const isMobile = useMediaQuery("(max-width: 900px)");
 
-	const { data, loading } = useQuery(QUERY, { variables: { userId: user.id } });
+	const { data, loading } = useQuery(QUERY, { variables: { userId: user.id }, client });
 
 	if (loading) {
 		return <Loading />;
