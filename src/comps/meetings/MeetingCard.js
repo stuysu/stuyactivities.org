@@ -37,7 +37,6 @@ const useStyles = makeStyles({
 	buttonContainer: {
 		width: "100%",
 		height: "50px",
-		position: "fixed",
 		bottom: 0
 	}
 });
