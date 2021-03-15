@@ -15,12 +15,12 @@ import {
 	Select,
 	MenuItem,
 	TextField,
-	Typography,
+	Typography
 } from "@material-ui/core";
 import { Schedule } from "@material-ui/icons";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -38,8 +38,8 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 	const [description, setDescription] = React.useState(meeting.description || "");
 
 	const [month, setMonth] = React.useState(moment().format("MMM"));
-	const [day  , setDay  ] = React.useState(moment().format("DD"));
-	const [year , setYear ] = React.useState(moment().format("YYYY"));
+	const [day, setDay] = React.useState(moment().format("DD"));
+	const [year, setYear] = React.useState(moment().format("YYYY"));
 
 	const startDate = new Date(meeting.start || "");
 	const [date, setDate] = React.useState(
@@ -89,34 +89,50 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 					<Select
 						fullWidth
 						value={month}
-						onChange={e => {setMonth(e.target.value); setDate(`${month} ${day} ${year}`);}}
+						onChange={e => {
+							setMonth(e.target.value);
+							setDate(`${month} ${day} ${year}`);
+						}}
 						variant={"outlined"}
 					>
-						{moment.monthsShort()
-						.map(month => <MenuItem value={month}>{month}</MenuItem>)}
+						{moment.monthsShort().map(month => (
+							<MenuItem value={month}>{month}</MenuItem>
+						))}
 					</Select>
 				</Grid>
 				<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 					<Select
 						fullWidth
 						value={day}
-						onChange={e => {setDay(e.target.value); setDate(`${month} ${day} ${year}`);}}
+						onChange={e => {
+							setDay(e.target.value);
+							setDate(`${month} ${day} ${year}`);
+						}}
 						variant={"outlined"}
 					>
-						{//Add all days in month as selectable options
-						[...Array(moment(`${year}-${month}`, "YYYY-MMM").daysInMonth()+1).keys()].slice(1)
-						.map(day => <MenuItem value={day}>{day}</MenuItem>)}
+						{
+							//Add all days in month as selectable options
+							[...Array(moment(`${year}-${month}`, "YYYY-MMM").daysInMonth() + 1).keys()]
+								.slice(1)
+								.map(day => (
+									<MenuItem value={day}>{day}</MenuItem>
+								))
+						}
 					</Select>
 				</Grid>
 				<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 					<Select
 						fullWidth
 						value={year}
-						onChange={e => {setYear(e.target.value); setDate(`${month} ${day} ${year}`);}}
+						onChange={e => {
+							setYear(e.target.value);
+							setDate(`${month} ${day} ${year}`);
+						}}
 						variant={"outlined"}
 					>
-						{[moment().year(), moment().year()+1]
-						.map(year => <MenuItem value={year}>{year}</MenuItem>)}
+						{[moment().year(), moment().year() + 1].map(year => (
+							<MenuItem value={year}>{year}</MenuItem>
+						))}
 					</Select>
 				</Grid>
 				<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
