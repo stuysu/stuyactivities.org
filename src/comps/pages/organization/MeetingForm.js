@@ -12,12 +12,15 @@ import {
 	Link,
 	makeStyles,
 	Switch,
+	Select,
+	MenuItem,
 	TextField,
 	Typography
 } from "@material-ui/core";
-import { CalendarToday, Schedule } from "@material-ui/icons";
+import { Schedule } from "@material-ui/icons";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import * as moment from "moment";
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -33,6 +36,10 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 	const [title, setTitle] = React.useState(meeting.title || "");
 	const [isPublic, setIsPublic] = useState(meeting.privacy === "public");
 	const [description, setDescription] = React.useState(meeting.description || "");
+
+	const [month, setMonth] = React.useState(moment().format("MMM"));
+	const [day, setDay] = React.useState(moment().format("DD"));
+	const [year, setYear] = React.useState(moment().format("YYYY"));
 
 	const startDate = new Date(meeting.start || "");
 	const [date, setDate] = React.useState(
@@ -78,25 +85,57 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 				onChange={e => setTitle(e.target.value)}
 			/>
 			<Grid container spacing={1}>
-				<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-					<TextField
+				<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
+					<Select
 						fullWidth
-						label={"Date"}
-						type="date"
-						value={date}
-						onChange={e => setDate(e.target.value)}
-						variant={"outlined"}
-						InputLabelProps={{ shrink: true }}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<CalendarToday />
-								</InputAdornment>
-							)
+						value={month}
+						onChange={e => {
+							setMonth(e.target.value);
+							setDate(`${month} ${day} ${year}`);
 						}}
-					/>
+						variant={"outlined"}
+					>
+						{moment.monthsShort().map(month => (
+							<MenuItem value={month}>{month}</MenuItem>
+						))}
+					</Select>
 				</Grid>
-				<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+				<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
+					<Select
+						fullWidth
+						value={day}
+						onChange={e => {
+							setDay(e.target.value);
+							setDate(`${month} ${day} ${year}`);
+						}}
+						variant={"outlined"}
+					>
+						{
+							//Add all days in month as selectable options
+							[...Array(moment(`${year}-${month}`, "YYYY-MMM").daysInMonth() + 1).keys()]
+								.slice(1)
+								.map(day => (
+									<MenuItem value={day}>{day}</MenuItem>
+								))
+						}
+					</Select>
+				</Grid>
+				<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
+					<Select
+						fullWidth
+						value={year}
+						onChange={e => {
+							setYear(e.target.value);
+							setDate(`${month} ${day} ${year}`);
+						}}
+						variant={"outlined"}
+					>
+						{[moment().year(), moment().year() + 1].map(year => (
+							<MenuItem value={year}>{year}</MenuItem>
+						))}
+					</Select>
+				</Grid>
+				<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
 					<TextField
 						fullWidth
 						label={"Start Time"}
@@ -114,7 +153,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						}}
 					/>
 				</Grid>
-				<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+				<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
 					<TextField
 						fullWidth
 						label={"End Time"}
