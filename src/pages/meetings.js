@@ -8,7 +8,6 @@ import { makeStyles, Typography } from "@material-ui/core";
 import FlexCenter from "../comps/ui/FlexCenter";
 import UserContext from "../comps/context/UserContext";
 
-
 const now = new Date();
 const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
 const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
@@ -74,13 +73,15 @@ const Meetings = () => {
 							end: "dayGridMonth listMonth prev next"
 						}}
 						dayMaxEventRows={4}
-						events={data?.meetings?.filter(meeting => meeting.privacy !== "private" || audits).map(meeting => {
-							const newMeeting = { ...meeting };
-							newMeeting.title = meeting.organization.name + " - " + meeting.title;
-							newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
+						events={data?.meetings
+							?.filter(meeting => meeting.privacy !== "private" || audits)
+							.map(meeting => {
+								const newMeeting = { ...meeting };
+								newMeeting.title = meeting.organization.name + " - " + meeting.title;
+								newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
 
-							return newMeeting;
-						})}
+								return newMeeting;
+							})}
 						eventClick={ev => triggerMeetingDialog(ev.event.id)}
 						eventClassNames={classes.event}
 					/>
