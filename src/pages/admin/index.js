@@ -6,7 +6,7 @@ import Approvals from "./approvals";
 import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import OrgApprovals from "./approvals/OrgApprovals";
-import { AssignmentTurnedIn, LiveHelp } from "@material-ui/icons";
+import { Assignment, AssignmentTurnedIn, LiveHelp } from "@material-ui/icons";
 import AdminLog from "./AdminLog";
 
 const useStyles = makeStyles(theme => ({
@@ -42,9 +42,11 @@ export default function AdminRouter({ match }) {
 		},
 		{
 			label: "Admin Log",
-			path: actualPath + "/log"
+			role: "charters",
+			path: actualPath + "/log",
+			icon: <Assignment />
 		}
-	];
+	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
 	if (!tabs.length) {
 		return <p>You don't have access to this page</p>;

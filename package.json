@@ -34,6 +34,7 @@
 		"react-google-recaptcha": "^2.1.0",
 		"react-helmet": "^6.1.0",
 		"react-lazy-load-image-component": "^1.5.1",
+		"react-lazyload": "^3.2.0",
 		"react-markdown": "^5.0.3",
 		"react-masonry-css": "^1.0.14",
 		"react-multi-carousel": "^2.6.1",
@@ -71,6 +72,5 @@
 		"printWidth": 120,
 		"trailingComma": "none",
 		"singleQuote": false
-	},
-	"devDependencies": {}
+	}
 }
