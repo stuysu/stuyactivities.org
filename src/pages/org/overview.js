@@ -10,7 +10,6 @@ import MeetingCard from "../../comps/meetings/MeetingCard";
 import LinkifyText from "../../comps/ui/LinkifyText";
 import Masonry from "react-masonry-css";
 import UpdateCard from "../../comps/updates/UpdateCard";
-import { client } from "../../comps/context/ApolloProvider";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 const Overview = () => {
@@ -54,7 +53,7 @@ const Overview = () => {
 			var common = 0;
 			ids.forEach(i => {
 				orgIds.forEach(k => {
-					if(i == k) {
+					if(i === k) {
 						common++;
 					}
 				});	
@@ -159,7 +158,7 @@ const Overview = () => {
 				</Typography>	
 				<List>
 					{orgList.map(relatedOrg => {
-						if(relatedOrg[0].name != org.name) {
+						if(relatedOrg[0].name !== org.name) {
 							var url = "/" + relatedOrg[0].url;
 							return (
 								<ListItem key={relatedOrg[0].name} button component="a" href={url}>
@@ -174,7 +173,7 @@ const Overview = () => {
 								</ListItem>
 							);
 						}
-						
+						return null;
 					})}
 				</List>
 			</div>
