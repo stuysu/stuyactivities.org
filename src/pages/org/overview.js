@@ -15,9 +15,9 @@ import { useQuery } from "@apollo/client";
 const Overview = () => {
 	const org = React.useContext(OrgContext);
 	const isMobile = useMediaQuery("(max-width: 900px)");
-	const ids = []
+	const ids = [];
 	org.tags.forEach(n => {
-		ids.push(n.id)
+		ids.push(n.id);
 	});
 	const relatedQuery = gql`{
 		organizations(tags: ${"[" + ids + "]"}) {
@@ -36,30 +36,30 @@ const Overview = () => {
 			}
 		}
 	}`;
-	const {data, loading} = useQuery(relatedQuery);
-	
-	if(loading) {
+	const { data, loading } = useQuery(relatedQuery);
+
+	if (loading) {
 		return null;
-	} 
-	if(!loading) {
+	}
+	if (!loading) {
 		// get how many tags are shared and sort
-		var orgs = data.organizations
+		var orgs = data.organizations;
 		var tempOrgList = [];
 		orgs.forEach(n => {
 			var orgIds = [];
 			n.tags.forEach(j => {
-				orgIds.push(j.id)
+				orgIds.push(j.id);
 			});
 			var common = 0;
 			ids.forEach(i => {
 				orgIds.forEach(k => {
-					if(i === k) {
+					if (i === k) {
 						common++;
 					}
-				});	
-			});	
+				});
+			});
 			tempOrgList.push([n, common]);
-			console.log(tempOrgList)
+			console.log(tempOrgList);
 		});
 		var orgList = tempOrgList.sort().reverse();
 	}
@@ -149,27 +149,25 @@ const Overview = () => {
 						<UpdateCard {...update} key={update.id} organization={org} />
 					))}
 				</Masonry>
-				
+
 				{!org.updates?.length && (
 					<span style={{ color: "grey" }}>This activity has not made any posts yet.</span>
 				)}
 				<Typography variant={"h5"} color={"primary"}>
 					Related Clubs (in order of relevance)
-				</Typography>	
+				</Typography>
 				<List>
 					{orgList.map(relatedOrg => {
-						if(relatedOrg[0].name !== org.name) {
+						if (relatedOrg[0].name !== org.name) {
 							var url = "/" + relatedOrg[0].url;
 							return (
 								<ListItem key={relatedOrg[0].name} button component="a" href={url}>
-										<ListItemAvatar>
-											<Avatar src={relatedOrg[0].charter.picture.icon} />
-										</ListItemAvatar>
-										<span>
-											<Typography>
-												{relatedOrg[0].name}
-											</Typography>
-										</span>
+									<ListItemAvatar>
+										<Avatar src={relatedOrg[0].charter.picture.icon} />
+									</ListItemAvatar>
+									<span>
+										<Typography>{relatedOrg[0].name}</Typography>
+									</span>
 								</ListItem>
 							);
 						}
