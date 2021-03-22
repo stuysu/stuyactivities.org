@@ -10,11 +10,60 @@ import MeetingCard from "../../comps/meetings/MeetingCard";
 import LinkifyText from "../../comps/ui/LinkifyText";
 import Masonry from "react-masonry-css";
 import UpdateCard from "../../comps/updates/UpdateCard";
-
+import { client } from "../../comps/context/ApolloProvider";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 const Overview = () => {
 	const org = React.useContext(OrgContext);
 	const isMobile = useMediaQuery("(max-width: 900px)");
-
+	const ids = []
+	org.tags.forEach(n => {
+		ids.push(n.id)
+	});
+	const relatedQuery = gql`{
+		organizations(tags: ${"[" + ids + "]"}) {
+			name
+			tags {
+				id
+			}
+			url 
+			charter {
+				picture {
+					url
+					icon: url(width: 200, height: 200, crop: thumb, gravity: center)
+					thumbnail(width: 80, height: 80)
+					tinyThumbnail: thumbnail(width: 40, height: 40)
+				}
+			}
+		}
+	}`;
+	const {data, loading} = useQuery(relatedQuery);
+	
+	if(loading) {
+		return null;
+	} 
+	if(!loading) {
+		// get how many tags are shared and sort
+		var orgs = data.organizations
+		var tempOrgList = [];
+		orgs.forEach(n => {
+			var orgIds = [];
+			n.tags.forEach(j => {
+				orgIds.push(j.id)
+			});
+			var common = 0;
+			ids.forEach(i => {
+				orgIds.forEach(k => {
+					if(i == k) {
+						common++;
+					}
+				});	
+			});	
+			tempOrgList.push([n, common]);
+			console.log(tempOrgList)
+		});
+		var orgList = tempOrgList.sort().reverse();
+	}
 	return (
 		<FlexCenter>
 			<div style={{ width: "100%" }}>
@@ -101,10 +150,33 @@ const Overview = () => {
 						<UpdateCard {...update} key={update.id} organization={org} />
 					))}
 				</Masonry>
-
+				
 				{!org.updates?.length && (
 					<span style={{ color: "grey" }}>This activity has not made any posts yet.</span>
 				)}
+				<Typography variant={"h5"} color={"primary"}>
+					Related Clubs (in order of relevance)
+				</Typography>	
+				<List>
+					{orgList.map(relatedOrg => {
+						if(relatedOrg[0].name != org.name) {
+							var url = "/" + relatedOrg[0].url;
+							return (
+								<ListItem key={relatedOrg[0].name} button component="a" href={url}>
+										<ListItemAvatar>
+											<Avatar src={relatedOrg[0].charter.picture.icon} />
+										</ListItemAvatar>
+										<span>
+											<Typography>
+												{relatedOrg[0].name}
+											</Typography>
+										</span>
+								</ListItem>
+							);
+						}
+						
+					})}
+				</List>
 			</div>
 		</FlexCenter>
 	);
