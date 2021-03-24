@@ -19,7 +19,6 @@ const useStyles = makeStyles({
 	},
 	meetingContent: {
 		padding: "0 1rem",
-		height: 130,
 		overflow: "auto"
 	},
 	orgHeading: {

@@ -7,6 +7,7 @@ import UserMeetings from "./UserMeetings";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UserUpdates from "./UserUpdates";
+import CommunityBuildingNotification from "./CommunityBuildingNotification";
 
 const useStyles = makeStyles({
 	greeting: {
@@ -25,13 +26,25 @@ const UserHome = () => {
 			<Typography variant={"h1"} className={classes.greeting}>
 				Welcome back, {user.firstName}
 			</Typography>
-			<Grid container>
-				<Grid item xs={12} sm={5} md={4} lg={4} xl={4}>
-					<UserMemberships />
+
+
+			<Grid container spacing={5}>
+				<Grid item xs={12} sm={12} md={6} lg={6} xl={8}>
+					<CommunityBuildingNotification />
 				</Grid>
-				<Grid item xs={12} sm={7} md={8} lg={8} xl={8}>
-					<UserMeetings />
+				<Grid item  xs={12} sm={12} md={6} lg={6} xl={4} spacing={5}>
+					<Grid item xs={12}
+					      // sm={5} md={4} lg={4} xl={4}
+					>
+						<UserMemberships />
+					</Grid>
+					<Grid item xs={12}
+					      // sm={7} md={8} lg={8} xl={8}
+					>
+						<UserMeetings />
+					</Grid>
 				</Grid>
+
 				<Grid item xs={12}>
 					<UserUpdates />
 				</Grid>
