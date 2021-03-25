@@ -103,7 +103,6 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						value={day}
 						onChange={e => {
 							setDay(e.target.value);
-
 						}}
 						variant={"outlined"}
 					>
