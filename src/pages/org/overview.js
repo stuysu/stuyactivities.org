@@ -10,6 +10,9 @@ import MeetingCard from "../../comps/meetings/MeetingCard";
 import LinkifyText from "../../comps/ui/LinkifyText";
 import Masonry from "react-masonry-css";
 import UpdateCard from "../../comps/updates/UpdateCard";
+import ListItemText from "@material-ui/core/ListItemText";
+import UnstyledLink from "../../comps/ui/UnstyledLink";
+
 
 const Overview = () => {
 	const org = React.useContext(OrgContext);
@@ -105,6 +108,20 @@ const Overview = () => {
 				{!org.updates?.length && (
 					<span style={{ color: "grey" }}>This activity has not made any posts yet.</span>
 				)}
+
+				{
+					<UnstyledLink to={`/${org.url}`}>
+						<ListItem button>
+							<ListItemAvatar>
+								<Avatar
+									alt={org?.name}
+									src={org?.charter?.picture?.thumbnail}
+								/>
+							</ListItemAvatar>
+							<ListItemText primary={org?.name} />
+						</ListItem>
+					</UnstyledLink>
+				}
 			</div>
 		</FlexCenter>
 	);

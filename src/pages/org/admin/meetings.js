@@ -162,6 +162,7 @@ const Main = ({ match }) => {
 	const create = ({ title, description, date, startTime, endTime, checked, privacy }) => {
 		const raw_start = new Date(`${date} ${startTime}`);
 		const raw_end = new Date(`${date} ${endTime}`);
+		console.log(raw_start);
 		const validateDate = date => (isNaN(date) ? new Date(0) : date.toISOString());
 		createMutation({
 			variables: {

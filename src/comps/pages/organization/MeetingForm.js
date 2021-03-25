@@ -37,14 +37,12 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 	const [isPublic, setIsPublic] = useState(meeting.privacy === "public");
 	const [description, setDescription] = React.useState(meeting.description || "");
 
-	const [month, setMonth] = React.useState(moment().format("MMM"));
+	const [month, setMonth] = React.useState(moment().format("MM"));
 	const [day, setDay] = React.useState(moment().format("DD"));
 	const [year, setYear] = React.useState(moment().format("YYYY"));
 
 	const startDate = new Date(meeting.start || "");
-	const [date, setDate] = React.useState(
-		`${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, "0")}-${startDate.getDate()}`
-	);
+
 	const [startTime, setStartTime] = React.useState(
 		meeting.start ? `${startDate.getHours()}:${String(startDate.getMinutes()).padStart(2, "0")}` : "15:00"
 	);
@@ -88,10 +86,9 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 				<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 					<Select
 						fullWidth
-						value={month}
+						value={moment(month, "MM").format("MMM")}
 						onChange={e => {
-							setMonth(e.target.value);
-							setDate(`${month} ${day} ${year}`);
+							setMonth(moment(e.target.value, "MMM").format("MM"));
 						}}
 						variant={"outlined"}
 					>
@@ -106,13 +103,13 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						value={day}
 						onChange={e => {
 							setDay(e.target.value);
-							setDate(`${month} ${day} ${year}`);
+
 						}}
 						variant={"outlined"}
 					>
 						{
 							//Add all days in month as selectable options
-							[...Array(moment(`${year}-${month}`, "YYYY-MMM").daysInMonth() + 1).keys()]
+							[...Array(moment(`${year}-${month}`, "YYYY-M").daysInMonth() + 1).keys()]
 								.slice(1)
 								.map(day => (
 									<MenuItem value={day}>{day}</MenuItem>
@@ -126,7 +123,6 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						value={year}
 						onChange={e => {
 							setYear(e.target.value);
-							setDate(`${month} ${day} ${year}`);
 						}}
 						variant={"outlined"}
 					>
@@ -221,10 +217,10 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 					submit({
 						title,
 						description,
-						date,
 						startTime,
 						endTime,
 						checked,
+						date: `${year}-${month}-${day}`,
 						privacy: isPublic ? "public" : "private"
 					});
 				}}
