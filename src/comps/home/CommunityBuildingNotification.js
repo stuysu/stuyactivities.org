@@ -6,8 +6,21 @@ import socialization from "./socialization";
 import psalcm from "./psal+clubMeetings";
 
 const CommunityBuildingNotification = ({ grade }) => {
-	//juniors and sophmores are grouped for socialization
-	const socGrade = grade === 12 ? 11 : grade;
+	let cctable = Object.values(communityCircles).flat();
+	// I wrote this right after I woke up so if it's dumb don't blame me lmao
+	let soctable = Object.values(socialization)
+		.map((e, i) =>
+			e.map(el => {
+				el.activity = el.activity + ["(Freshmen)", "(Sophmores)", "(Juniors+Seniors)"][i];
+				return el;
+			})
+		)
+		.flat();
+	if (grade) {
+		cctable = communityCircles[grade];
+		//juniors and sophmores are grouped for socialization
+		soctable = grade === 12 ? socialization[11] : socialization[grade];
+	}
 	return (
 		<div>
 			<div>
@@ -56,7 +69,7 @@ const CommunityBuildingNotification = ({ grade }) => {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{communityCircles[grade].map(e => (
+							{cctable.map(e => (
 								<TableRow>
 									<TableCell>{e.homerooms}</TableCell>
 									<TableCell>{e.facilitators}</TableCell>
@@ -92,7 +105,7 @@ const CommunityBuildingNotification = ({ grade }) => {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{socialization[socGrade].map(e => (
+							{soctable.map(e => (
 								<TableRow>
 									<TableCell>{e.activity}</TableCell>
 									<TableCell>{e.facilitators}</TableCell>

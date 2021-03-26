@@ -28,27 +28,15 @@ const UserHome = () => {
 			</Typography>
 
 			<Grid container spacing={5}>
-                {Boolean(user.grade) && (
-                    <>
-                        <Grid item xs={0} sm={0} md={2} lg={2} xl={2}></Grid>
-                        <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
-                            <CommunityBuildingNotification grade={user.grade} />
-                        </Grid>
-                    </>
-                )}
 				<Grid item xs={0} sm={0} md={2} lg={2} xl={2}></Grid>
-				<Grid
-					item
-					xs={12}
-					// sm={5} md={4} lg={4} xl={4}
-				>
+				<Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
+					<CommunityBuildingNotification grade={user.grade} />
+				</Grid>
+				<Grid item xs={0} sm={0} md={2} lg={2} xl={2}></Grid>
+				<Grid item xs={12} sm={5} md={4} lg={4} xl={4}>
 					<UserMemberships />
 				</Grid>
-				<Grid
-					item
-					xs={12}
-					// sm={7} md={8} lg={8} xl={8}
-				>
+				<Grid item xs={12} sm={7} md={8} lg={8} xl={8}>
 					<UserMeetings />
 				</Grid>
 

@@ -80,9 +80,21 @@
 		},
 		{
 			"sport": "Coed Cricket Team",
-			"coach": "",
+			"coach": "Mohammed Khan (mkhan@schools.nyc.gov)",
 			"time": "11:30 AM",
 			"zoom": "https://zoom.us/j/9581049226?fbclid=IwAR3lx-sjk4m8qzaw5603LcaEmcG2_QXXOzeba9dxtX7mPC4_lF1xkboTQ1w\nMeeting ID: 958 104 9226\nPasscode: cricket"
+		},
+		{
+			"sport": "Girls + Boys Varsity Volleyball Team",
+			"coach": "Vasken Coubaralian (vchoubaralian@schools.nyc.gov)",
+			"time": "12:00 PM",
+			"zoom": "https://us02web.zoom.us/j/81831950385?pwd=OFBSTE12cW5rbWpDanRSRGI0R2tqdz09\nMeeting ID: 818 3195 0385\nPasscode: a5Jmq5"
+		},
+		{
+			"sport": "Boys Lacrosse",
+			"coach": "Stephen McClellan (smcclellan@stuy.edu)",
+			"time": "11:30 AM",
+			"zoom": "https://zoom.us/j/94149821578?pwd=TmJDOW5FM0dmWTJENGlDMTZQUzFWQT09"
 		}
 	],
 	"clubs": [
