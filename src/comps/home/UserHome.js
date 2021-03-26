@@ -35,7 +35,7 @@ const UserHome = () => {
                             <CommunityBuildingNotification grade={user.grade} />
                         </Grid>
                     </>
-                }
+                )}
 				<Grid item xs={0} sm={0} md={2} lg={2} xl={2}></Grid>
 				<Grid
 					item
