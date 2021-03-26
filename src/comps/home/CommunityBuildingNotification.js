@@ -1,14 +1,15 @@
 import React from "react";
-import { Card } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
+import { Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
+import Linkify from "linkifyjs/react";
+import communityCircles from "./communityCircles.json";
+import socialization from "./socialization";
+import psalcm from "./psal+clubMeetings"
 
-const CommunityBuildingNotification = () => {
+const CommunityBuildingNotification = ({grade}) => {
+	//juniors and sophmores are grouped for socialization
+	const socGrade = grade === 12 ? 11 : grade;
 	return (
 		<div>
-			<Typography variant={"h3"} color={"primary"}>
-				Announcements:
-			</Typography>
-			<Card style={{ padding: "1rem" }}>
 				<div>
 					<h4 style={{ "text-align": "center" }}>
 						<strong>Community Building Day: Friday, March 26</strong>
@@ -45,9 +46,26 @@ const CommunityBuildingNotification = () => {
 							</span>
 						</em>
 					</p>
-					<p>
-						<span style={{ "font-weight": "400" }}>Zoom Links: Coming soon!</span>
-					</p>
+					<TableContainer component={Paper}>
+					<Table>
+						<TableHead>
+							<TableRow>
+								<TableCell>Homerooms</TableCell>
+								<TableCell>Facilitators</TableCell>
+								<TableCell>Zoom Information</TableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{communityCircles[grade].map(e => (
+								<TableRow>
+									<TableCell>{e.homerooms}</TableCell>
+									<TableCell>{e.facilitators}</TableCell>
+									<TableCell style={{"white-space": "pre-line"}}><Linkify>{e.zoom}</Linkify></TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+					</TableContainer>
 					<h5 style={{ "text-align": "center" }}>
 						<strong>Socialization Activities</strong>
 					</h5>
@@ -62,9 +80,26 @@ const CommunityBuildingNotification = () => {
 							</span>
 						</em>
 					</p>
-					<p>
-						<span style={{ "font-weight": "400" }}>Zoom Links: Coming soon!</span>
-					</p>
+					<TableContainer component={Paper}>
+						<Table>
+						<TableHead>
+							<TableRow>
+								<TableCell>Activity</TableCell>
+								<TableCell>Facilitators</TableCell>
+								<TableCell>Zoom Information</TableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{socialization[socGrade].map(e => (
+								<TableRow>
+									<TableCell>{e.activity}</TableCell>
+									<TableCell>{e.facilitators}</TableCell>
+									<TableCell style={{"white-space": "pre-line"}}><Linkify>{e.zoom}</Linkify></TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+					</TableContainer>
 					<h5 style={{ "text-align": "center" }}>
 						<strong>PSAL Teams Interest Meetings &amp; Club Meetings</strong>
 					</h5>
@@ -81,20 +116,49 @@ const CommunityBuildingNotification = () => {
 							</span>
 						</em>
 					</p>
-					<p>
-						<span style={{ "font-weight": "400" }}>Zoom Links: Coming soon!</span>
-					</p>
-					<p>
-						<span style={{ "font-weight": "400" }}>
-							With PSAL sports opening up in April, you can attend team interest meetings hosted by
-							coaches and participate in other club activities! With PSAL sports opening up in April, our
-							coaches are hosting interest meetings so you can learn about new teams to potentially join.
-							In addition, we have a few awesome clubs listed that will be hosting activities for both
-							members and non-members during this time.{" "}
-						</span>
-					</p>
+					<h6 style={{ "text-align": "center" }}><strong>PSAL Information</strong></h6>
+					<TableContainer component={Paper}>
+						<Table>
+							<TableHead>
+								<TableRow>
+									<TableCell>Sport</TableCell>
+									<TableCell>Coach</TableCell>
+									<TableCell>Time</TableCell>
+									<TableCell>Zoom Information</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{psalcm.psal.map(e => (
+									<TableRow>
+										<TableCell>{e.sport}</TableCell>
+										<TableCell><Linkify>{e.coach}</Linkify></TableCell>
+										<TableCell>{e.time}</TableCell>
+										<TableCell style={{"white-space": "pre-line"}}><Linkify>{e.zoom}</Linkify></TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</TableContainer>
+					<h6 style={{ "text-align": "center" }}><strong>Club Meeting Information</strong></h6>
+					<TableContainer component={Paper}>
+						<Table>
+							<TableHead>
+								<TableRow>
+									<TableCell>Club Name</TableCell>
+									<TableCell>Zoom Information</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{psalcm.clubs.map(e => (
+									<TableRow>
+										<TableCell>{e.name}</TableCell>
+										<TableCell style={{"white-space": "pre-line"}}><Linkify>{e.zoom}</Linkify></TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</TableContainer>
 				</div>
-			</Card>
 		</div>
 	);
 };
