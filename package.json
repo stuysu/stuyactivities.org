@@ -34,7 +34,7 @@
 		"react-google-recaptcha": "^2.1.0",
 		"react-helmet": "^6.1.0",
 		"react-lazy-load-image-component": "^1.5.1",
-		"react-markdown": "^5.0.3",
+		"react-markdown": "^6.0.0",
 		"react-masonry-css": "^1.0.14",
 		"react-multi-carousel": "^2.6.1",
 		"react-router-dom": "^5.2.0",
