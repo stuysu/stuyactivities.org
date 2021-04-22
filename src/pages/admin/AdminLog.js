@@ -27,20 +27,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 const QUERY = gql`
-	#	query Organizations($keyword: String) {
-	#		organizations(keyword: $keyword) {
-	#			name
-	#			strikes {
-	#				reason
-	#				createdAt
-	#			}
-	#			url
-	#			updatedAt
-	#		}
-	#	}
-
-	query {
-		organizations {
+	query Organizations($keyword: String) {
+		organizations(keyword: $keyword) {
 			name
 			strikes {
 				reason
@@ -88,7 +76,7 @@ function a11yProps(index) {
 const AdminLog = () => {
 	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
-	// const [keyword, setKeyword] = React.useState("");
+	const [keyword, setKeyword] = React.useState("");
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -106,7 +94,11 @@ const AdminLog = () => {
 		error,
 		data
 		// refetch
-	} = useQuery(QUERY);
+	} = useQuery(QUERY, {
+		variables: {
+			keyword
+		}
+	});
 
 	if (error) return <p>There was an error loading this page</p>;
 

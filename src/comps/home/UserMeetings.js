@@ -57,7 +57,7 @@ const QUERY = gql`
 const useStyles = makeStyles({
 	meetingCard: {
 		margin: "0 0.5rem",
-		minHeight: 220
+		minHeight: 250
 	},
 	title: {
 		marginLeft: "0.5rem"
