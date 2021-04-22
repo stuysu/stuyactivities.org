@@ -107,9 +107,9 @@ const AdminLog = () => {
 	});
 
 	let orgStrike = [];
-	data?.organizations.map(org => {
+	data?.organizations.forEach(org => {
 		if (org.strikes.length !== 0) {
-			org.strikes.map(strike => {
+			org.strikes.forEach(strike => {
 				orgStrike.push({
 					name: org.name,
 					url: org.url,
