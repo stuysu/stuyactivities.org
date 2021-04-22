@@ -139,7 +139,7 @@ const AdminLog = () => {
 				</Tabs>
 				<TabPanel value={value} index={0}>
 					<div>
-						{/*<SearchBox setKeyword={setKeyword} keyword={keyword} />*/}
+						<SearchBox setKeyword={setKeyword} keyword={keyword} />
 						{orgStrike &&
 							orgStrike.map(org => {
 								const date = new Date(org.strike.createdAt);
@@ -170,7 +170,7 @@ const AdminLog = () => {
 					</div>
 				</TabPanel>
 				<TabPanel value={value} index={1}>
-					{/*<SearchBox setKeyword={setKeyword} keyword={keyword} />*/}
+					<SearchBox setKeyword={setKeyword} keyword={keyword} />
 					{orgArray &&
 						orgArray.map(org => {
 							const date = new Date(org.updatedAt);
