@@ -26,18 +26,25 @@ export default function CatalogCard({ name, url, charter, tags }) {
 		<Card className={classes.card}>
 			<UnstyledLink to={`/${url}`}>
 				<CardActionArea>
-					<LazyLoadImage
-						alt={name}
-						height={180}
-						src={charter.picture}
-						width={"100%"}
-						style={{ objectFit: "cover" }}
-					/>
+					<div style={{ textAlign: "center" }}>
+						<LazyLoadImage
+							alt={name}
+							height={180}
+							src={charter.picture.card}
+							width={180}
+							style={{
+								objectFit: "cover",
+								borderRadius: "50%",
+								marginTop: "1rem"
+							}}
+						/>
+					</div>
+
 					<CardContent>
-						<Typography variant={"h5"} gutterBottom>
+						<Typography variant={"h5"} gutterBottom align={"center"}>
 							{name}
 						</Typography>
-						<Typography>{charter.mission}</Typography>
+						<Typography gutterBottom>{charter.mission}</Typography>
 						<Chip
 							label={capitalizeString(charter.commitmentLevel) + " Commitment"}
 							size={"small"}

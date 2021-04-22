@@ -125,11 +125,13 @@ const ApprovalMessages = ({ organization, refetch }) => {
 
 const ORG_QUERY = gql`
 	query($url: String!) {
-		organization(url: $url) {
+		organization: organizationByUrl(url: $url) {
 			id
 			name
 			charter {
-				picture
+				picture {
+					thumbnail(width: 200, height: 200)
+				}
 				mission
 				purpose
 				benefit
@@ -145,7 +147,9 @@ const ORG_QUERY = gql`
 
 			charterEdits {
 				id
-				picture
+				picture {
+					thumbnail(width: 200, height: 200)
+				}
 				submittingUser {
 					id
 					name
@@ -311,7 +315,7 @@ const OrgApprovals = ({ match }) => {
 															<h4>{capitalizeString(field)}</h4>
 															{field === "picture" ? (
 																<Avatar
-																	src={value}
+																	src={value.thumbnail}
 																	style={{
 																		width: 200,
 																		height: 200

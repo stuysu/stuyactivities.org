@@ -1,6 +1,6 @@
 import React from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import UserContext from "./UserContext";
 
 const basicInfo = gql`
@@ -23,10 +23,16 @@ const basicInfo = gql`
 					name
 					url
 					charter {
-						picture
+						picture {
+							thumbnail(width: 80, height: 80)
+							tinyThumbnail: thumbnail(width: 40, height: 40)
+							url
+						}
 					}
 				}
 				adminPrivileges
+				meetingNotification
+				updateNotification
 			}
 			adminRoles {
 				id
