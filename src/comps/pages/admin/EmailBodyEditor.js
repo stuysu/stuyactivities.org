@@ -28,10 +28,9 @@ const PageBodyEditor = ({ value, setValue, className, disabled }) => {
 						"searchreplace visualblocks code fullscreen",
 						"insertdatetime media table paste code help wordcount"
 					],
-					toolbar:
-						"undo redo | formatselect | bold italic forecolor backcolor | \
-						alignleft aligncenter alignright alignjustify | \
-						bullist numlist outdent indent | removeformat | image | help",
+					toolbar: `undo redo | formatselect | bold italic forecolor backcolor | 
+						alignleft aligncenter alignright alignjustify | 
+						bullist numlist outdent indent | removeformat | image | help`,
 					automatic_uploads: true,
 					images_upload_handler: (file, success, failure) => {
 						uploadPicture({
