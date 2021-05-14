@@ -183,7 +183,7 @@ const OrgRouter = ({ match, history }) => {
 							`${data?.organization?.name} - An activity at Stuyvesant High School`
 						}
 					/>
-					<meta property="og:image" content={data?.organization?.charter?.picture.url} />
+					<meta property="og:image" content={data?.organization?.charter?.picture?.url} />
 				</Helmet>
 
 				<div className={styles.contentContainer}>

@@ -178,6 +178,7 @@ const Catalog = () => {
 		}
 	}, [data, setOrganizations, offset]);
 
+
 	return (
 		<div className={classes.root}>
 			<Helmet>
@@ -247,7 +248,6 @@ const Catalog = () => {
 									</UnstyledLink>
 								</div>
 							)}
-
 							{listView ? (
 								<List>
 									{organizations?.map(org => (
