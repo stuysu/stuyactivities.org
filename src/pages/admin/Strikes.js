@@ -1,8 +1,7 @@
 import React from "react";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
 import { Grid } from "@material-ui/core";
-import { useQuery } from "@apollo/react-hooks";
 import StrikeCard from "../../comps/pages/admin/StrikeCard";
 import { client } from "../../comps/context/ApolloProvider";
 import UserContext from "../../comps/context/UserContext";
@@ -18,7 +17,6 @@ const QUERY = gql`
 				name
 			}
 			charter {
-				picture
 				mission
 				commitmentLevel
 			}
@@ -43,7 +41,10 @@ const Strikes = () => {
 	if (!user?.adminRoles?.map(e => e.role).includes("strikes")) {
 		return <p>You do not have the proper admin role to access this page!</p>;
 	}
-	if (error) return <p>There was an error loading this page</p>;
+	if (error) {
+		console.log(error);
+		return <p>There was an error loading this page</p>;
+	}
 
 	return (
 		<div>

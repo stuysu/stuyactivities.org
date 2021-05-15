@@ -1,6 +1,6 @@
 import React from "react";
 import {
-	Avatar,
+	// Avatar,
 	Grid,
 	List,
 	Paper,
@@ -22,16 +22,16 @@ import { cache } from "../../context/ApolloProvider";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
 	item: {
 		width: "100%",
 		float: "left"
 	},
-	avatar: {
-		marginRight: "18px",
-		width: theme.spacing(6),
-		height: theme.spacing(6)
-	},
+	// avatar: {
+	// 	marginRight: "18px",
+	// 	width: theme.spacing(6),
+	// 	height: theme.spacing(6)
+	// },
 	actionButton: {
 		paddingRight: "20px"
 	},
@@ -103,7 +103,7 @@ export default function StrikeCard({ name, id, charter }) {
 							id="panel1a-header"
 							className={classes.actionButton}
 						>
-							<Avatar src={charter.picture} className={classes.avatar} />
+							{/*<Avatar src={charter.picture} className={classes.avatar} />*/}
 							<Typography className={classes.heading}>{name}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>

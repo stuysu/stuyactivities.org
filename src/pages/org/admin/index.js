@@ -74,6 +74,7 @@ export default function OrgAdminRouter({ match }) {
 						<Route path={match.path + "/meetings"} component={Meetings} />
 						<Route path={match.path + "/club-fair"} component={ClubFair} />
 						<Route path={match.path + "/posts"} component={Updates} />
+						<Route path={match.path + "/strikes"} component={Strikes} />
 						<Route path={match.path}>
 							<Redirect to={actualMatch + "/members"} />
 						</Route>
