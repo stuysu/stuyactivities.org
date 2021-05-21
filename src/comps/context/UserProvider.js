@@ -60,7 +60,8 @@ const UserProvider = props => {
 
 	const logout = async () => {
 		await performLogout();
-		await refetch();
+		window.localStorage.clear();
+		window.location.reload();
 	};
 
 	let value = {
