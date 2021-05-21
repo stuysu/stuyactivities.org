@@ -8,7 +8,6 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import handstandVector from "../img/vectors/clip-dancer.svg";
 import ghost from "../img/vectors/hugo-ghost.svg";
-import LinkGoogleAccount from "../comps/auth/LinkGoogleAccount";
 import BackButton from "../comps/ui/BackButton";
 import Loading from "../comps/ui/Loading";
 import UserContext from "../comps/context/UserContext";
@@ -31,14 +30,7 @@ const useStyles = makeStyles({
 
 const MUTATION = gql`
 	mutation Login($token: String!) {
-		login(loginToken: $token) {
-			name
-			email
-			oAuths {
-				platform
-				platformEmail
-			}
-		}
+		login(loginToken: $token)
 	}
 `;
 
@@ -63,38 +55,15 @@ const TokenLogin = () => {
 	React.useEffect(attemptLogin, [attemptLogin]);
 
 	if (data) {
-		const linkedGoogleAccount = data?.login?.oAuths?.find(auth => auth.platform === "google");
-
 		return (
 			<FlexCenter>
 				<div className={classes.contentContainer}>
 					<img src={handstandVector} alt={"A person dancing"} className={classes.defaultVector} />
 
 					<br />
-					<Typography variant={"h5"}>You are now signed in as {data?.login?.name}!</Typography>
+					<Typography variant={"h5"}>You are now signed in as {user.name}!</Typography>
 
 					<br />
-					<div>
-						{linkedGoogleAccount ? (
-							<>
-								<Typography paragraph>
-									It looks like you've linked your Google account {linkedGoogleAccount.platformEmail}{" "}
-									to your StuyActivities account in the past.
-								</Typography>
-								<Typography paragraph>
-									Just a reminder that you can always use that account to sign in as well.
-								</Typography>
-							</>
-						) : (
-							<div>
-								<Typography paragraph>
-									You can link your Google account to your StuyActivities account to make future
-									logins much easier!
-								</Typography>
-								<LinkGoogleAccount className={classes.googleButton} />
-							</div>
-						)}
-					</div>
 
 					<FlexCenter>
 						<BackButton
