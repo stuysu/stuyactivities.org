@@ -73,7 +73,7 @@ const Approvals = () => {
 						<UnstyledLink to={"/admin/approvals/" + org.url}>
 							<CardActionArea className={classes.card}>
 								<CardMedia
-									image={org.charter.picture.thumbnail}
+									image={org.charter.picture?.thumbnail}
 									style={{
 										width: 150,
 										height: 150,

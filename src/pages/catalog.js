@@ -247,7 +247,6 @@ const Catalog = () => {
 									</UnstyledLink>
 								</div>
 							)}
-
 							{listView ? (
 								<List>
 									{organizations?.map(org => (

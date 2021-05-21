@@ -7,7 +7,12 @@ import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
+<<<<<<< HEAD
 import { AssignmentTurnedIn, LiveHelp, SmsFailed } from "@material-ui/icons";
+=======
+import { AssignmentTurnedIn, EmailOutlined, LiveHelp } from "@material-ui/icons";
+import EmailClubLeaders from "./email";
+>>>>>>> 10d6bfa5564ff645627f238e1cb5d7a529a9e9d9
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -41,10 +46,17 @@ export default function AdminRouter({ match }) {
 			icon: <LiveHelp />
 		},
 		{
+<<<<<<< HEAD
 			label: "Strikes",
 			role: "helpRequests",
 			path: actualPath + "/strikes",
 			icon: <SmsFailed />
+=======
+			label: "Email Club Leaders",
+			role: "charters",
+			path: actualPath + "/email",
+			icon: <EmailOutlined />
+>>>>>>> 10d6bfa5564ff645627f238e1cb5d7a529a9e9d9
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
@@ -61,7 +73,11 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/approvals"} component={Approvals} exact />
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
 				<Route path={match.path + "/help"} component={Approvals} />
+<<<<<<< HEAD
 				<Route path={match.path + "/strikes"} component={Strikes} />
+=======
+				<Route path={match.path + "/email"} component={EmailClubLeaders} />
+>>>>>>> 10d6bfa5564ff645627f238e1cb5d7a529a9e9d9
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>

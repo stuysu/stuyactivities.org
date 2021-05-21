@@ -92,7 +92,7 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 	return (
 		<div>
 			<img
-				src={organization.charter.picture.thumbnail}
+				src={organization.charter.picture?.thumbnail}
 				className={classes.logo}
 				alt={organization.name + " logo"}
 				onClick={navigateToOrg}
