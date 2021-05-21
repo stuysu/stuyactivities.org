@@ -42,11 +42,10 @@ export default function AdminRouter({ match }) {
 			icon: <LiveHelp />
 		},
 		{
-
 			label: "Strikes",
 			role: "helpRequests",
 			path: actualPath + "/strikes",
-			icon: <SmsFailed/>
+			icon: <SmsFailed />
 		},
 		{
 			label: "Email Club Leaders",
