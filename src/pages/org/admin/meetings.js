@@ -19,7 +19,6 @@ import {
 } from "@material-ui/core";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 import BackButton from "../../../comps/ui/BackButton";
-import "easymde/dist/easymde.min.css";
 import { gql, useMutation } from "@apollo/client";
 import { Close, Edit } from "@material-ui/icons";
 import { OrgContext } from "../index";
