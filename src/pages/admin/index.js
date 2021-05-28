@@ -6,8 +6,9 @@ import Approvals from "./approvals";
 import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import OrgApprovals from "./approvals/OrgApprovals";
-import { Assignment, AssignmentTurnedIn, LiveHelp } from "@material-ui/icons";
 import AdminLog from "./AdminLog";
+import { AssignmentTurnedIn, EmailOutlined, Assignment, LiveHelp } from "@material-ui/icons";
+import EmailClubLeaders from "./email";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -45,6 +46,12 @@ export default function AdminRouter({ match }) {
 			role: "charters",
 			path: actualPath + "/log",
 			icon: <Assignment />
+		},
+		{
+			label: "Email Club Leaders",
+			role: "charters",
+			path: actualPath + "/email",
+			icon: <EmailOutlined />
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
@@ -62,6 +69,7 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
 				<Route path={match.path + "/help"} component={Approvals} />
 				<Route path={match.path + "/log"} component={AdminLog} />
+				<Route path={match.path + "/email"} component={EmailClubLeaders} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>

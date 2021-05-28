@@ -67,7 +67,7 @@ export default function Settings() {
 						{user?.memberships?.map(membership => (
 							<TableRow key={membership.id}>
 								<TableCell padding="checkbox">
-									<Avatar src={membership.organization.charter.picture.thumbnail} />
+									<Avatar src={membership.organization.charter.picture?.thumbnail} />
 								</TableCell>
 								<TableCell>
 									<Typography>{membership.organization.name}</Typography>

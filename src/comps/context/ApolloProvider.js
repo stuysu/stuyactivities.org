@@ -8,9 +8,13 @@ import honeybadger from "../../utils/honeybadger";
 
 export const cache = new InMemoryCache();
 
+const authJWT = window.localStorage.getItem("auth-jwt");
 const uploadLink = createUploadLink({
 	uri: GRAPHQL_URI,
-	credentials: "include"
+	credentials: "include",
+	headers: {
+		authorization: authJWT ? "Bearer " + authJWT : ""
+	}
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {

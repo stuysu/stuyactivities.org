@@ -2,16 +2,12 @@ import React from "react";
 import GoogleLogin from "react-google-login";
 import { gql, useMutation } from "@apollo/client";
 import { GOOGLE_CLIENT_ID } from "../../constants";
-import UserContext from "../context/UserContext";
 import Typography from "@material-ui/core/Typography";
 import AuthContext from "./AuthContext";
 
 const LOGIN_WITH_GOOGLE = gql`
 	mutation loginWithGoogle($token: String!) {
-		login(googleToken: $token) {
-			name
-			email
-		}
+		login(googleToken: $token)
 	}
 `;
 
@@ -20,13 +16,12 @@ const GoogleLoginButton = ({ className }) => {
 
 	const authContext = React.useContext(AuthContext);
 
-	const user = React.useContext(UserContext);
-
 	const attemptLogin = React.useCallback(
-		async data => {
+		async payload => {
 			try {
-				await loginWithGoogle({ variables: { token: data.tokenId } });
-				user.refetch();
+				const { data } = await loginWithGoogle({ variables: { token: payload.tokenId } });
+				window.localStorage.setItem("auth-jwt", data?.login);
+				window.location.reload();
 			} catch (er) {
 				const possibleUnknownUserError = er?.graphQLErrors?.some(
 					er => er?.extensions?.code === "POSSIBLE_UNKNOWN_USER"
@@ -35,12 +30,12 @@ const GoogleLoginButton = ({ className }) => {
 				if (possibleUnknownUserError) {
 					authContext.set({
 						page: "unrecognized",
-						unrecognizedEmail: data?.profileObj?.email
+						unrecognizedEmail: payload?.profileObj?.email
 					});
 				}
 			}
 		},
-		[loginWithGoogle, user, authContext]
+		[loginWithGoogle, authContext]
 	);
 
 	return (

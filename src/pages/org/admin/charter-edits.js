@@ -309,7 +309,7 @@ class CharterEditForm extends React.Component {
 									this.state.editing.includes("picture")
 										? window.URL.createObjectURL(this.state.picture)
 										: this.props.latestChanges?.picture?.value?.thumbnail ||
-										  this.props.org.charter.picture.icon
+										  this.props.org.charter.picture?.icon
 								}
 							/>
 							<input
@@ -325,7 +325,7 @@ class CharterEditForm extends React.Component {
 										this.setState({
 											picture:
 												this.props.latestChanges?.picture?.value.thumbnail ||
-												this.props.org.charter.picture.thumbnail,
+												this.props.org.charter.picture?.thumbnail,
 											editing: arrayToggle("picture", this.state.editing)
 										});
 									}}
