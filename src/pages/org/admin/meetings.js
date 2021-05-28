@@ -158,17 +158,17 @@ const Main = ({ match }) => {
 			});
 		}
 	});
-	const create = ({ title, description, date, startTime, endTime, checked, privacy }) => {
-		const raw_start = new Date(`${date} ${startTime}`);
-		const raw_end = new Date(`${date} ${endTime}`);
-		const validateDate = date => (isNaN(date) ? new Date(0) : date.toISOString());
+	const create = ({ title, description, date, endTime, checked, privacy }) => {
 		createMutation({
 			variables: {
 				orgUrl: match.params.orgUrl,
 				title,
 				description: description || "",
-				start: validateDate(raw_start),
-				end: validateDate(raw_end),
+				start: date.toISOString(),
+				end: moment(
+					`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
+					"MM-DD-YYYY HH:mm"
+				).toISOString(),
 				notifyFaculty: checked,
 				privacy
 			}
@@ -303,17 +303,17 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
-	const edit = ({ title, description, date, startTime, endTime, checked, privacy }) => {
-		const raw_start = new Date(`${date} ${startTime}`);
-		const raw_end = new Date(`${date} ${endTime}`);
-		const validateDate = date => (isNaN(date) ? new Date(0) : date.toISOString());
+	const edit = ({ title, description, date, endTime, checked, privacy }) => {
 		editMutation({
 			variables: {
 				id: Number(match.params.meetingId),
 				title,
 				description: description || "",
-				start: validateDate(raw_start),
-				end: validateDate(raw_end),
+				start: date.toISOString(),
+				end: moment(
+					`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
+					"MM-DD-YYYY HH:mm"
+				).toISOString(),
 				notifyMembers: checked,
 				privacy
 			}
