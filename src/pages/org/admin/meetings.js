@@ -165,7 +165,10 @@ const Main = ({ match }) => {
 				title,
 				description: description || "",
 				start: date.toISOString(),
-				end : moment(`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`, "MM-DD-YYYY HH:mm").toISOString(),
+				end: moment(
+					`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
+					"MM-DD-YYYY HH:mm"
+				).toISOString(),
 				notifyFaculty: checked,
 				privacy
 			}
@@ -307,7 +310,10 @@ const EditPage = ({ match }) => {
 				title,
 				description: description || "",
 				start: date.toISOString(),
-				end: moment(`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`, "MM-DD-YYYY HH:mm").toISOString(),
+				end: moment(
+					`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
+					"MM-DD-YYYY HH:mm"
+				).toISOString(),
 				notifyMembers: checked,
 				privacy
 			}

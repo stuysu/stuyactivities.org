@@ -17,8 +17,8 @@ import {
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import * as moment from "moment";
-import MomentUtils from '@date-io/moment';
-import { MuiPickersUtilsProvider, DatePicker, TimePicker } from '@material-ui/pickers';
+import MomentUtils from "@date-io/moment";
+import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pickers";
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -81,20 +81,10 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						/>
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<TimePicker
-							autoOk
-							label="Start Time"
-							inputVariant="outlined"
-							value={date}
-							onChange={setDate} />
+						<TimePicker autoOk label="Start Time" inputVariant="outlined" value={date} onChange={setDate} />
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<TimePicker
-							autoOk
-							label="Start Time"
-							inputVariant="outlined"
-							value={end}
-							onChange={setEnd} />
+						<TimePicker autoOk label="Start Time" inputVariant="outlined" value={end} onChange={setEnd} />
 					</Grid>
 				</MuiPickersUtilsProvider>
 			</Grid>
