@@ -178,7 +178,6 @@ const Catalog = () => {
 		}
 	}, [data, setOrganizations, offset]);
 
-
 	return (
 		<div className={classes.root}>
 			<Helmet>
