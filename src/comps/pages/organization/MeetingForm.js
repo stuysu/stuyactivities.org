@@ -37,8 +37,8 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 
 	let defaultStart = new Date();
 	let defaultEnd = new Date();
-	defaultStart.setHours(15,0);
-	defaultEnd.setHours(17,0);
+	defaultStart.setHours(15, 0);
+	defaultEnd.setHours(17, 0);
 
 	const [date, setDate] = React.useState(moment(meeting.start ? new Date(meeting.start) : defaultStart));
 	const [end, setEnd] = React.useState(moment(meeting.end ? new Date(meeting.end) : defaultEnd));
@@ -87,10 +87,24 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						/>
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<TimePicker fullWidth autoOk label="Start Time" inputVariant="outlined" value={date} onChange={setDate} />
+						<TimePicker
+							fullWidth
+							autoOk
+							label="Start Time"
+							inputVariant="outlined"
+							value={date}
+							onChange={setDate}
+						/>
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<TimePicker fullWidth autoOk label="Start Time" inputVariant="outlined" value={end} onChange={setEnd} />
+						<TimePicker
+							fullWidth
+							autoOk
+							label="Start Time"
+							inputVariant="outlined"
+							value={end}
+							onChange={setEnd}
+						/>
 					</Grid>
 				</MuiPickersUtilsProvider>
 			</Grid>
