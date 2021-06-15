@@ -101,7 +101,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						/>
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-					<KeyboardTimePicker
+						<KeyboardTimePicker
 							fullWidth
 							autoOk
 							placeholder="05:00 PM"
@@ -110,7 +110,8 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 							inputVariant="outlined"
 							value={end}
 							onChange={setEnd}
-						/>					</Grid>
+						/>{" "}
+					</Grid>
 				</MuiPickersUtilsProvider>
 			</Grid>
 
