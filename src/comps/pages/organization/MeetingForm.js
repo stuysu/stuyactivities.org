@@ -18,7 +18,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import * as moment from "moment";
 import MomentUtils from "@date-io/moment";
-import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, DatePicker, KeyboardTimePicker } from "@material-ui/pickers";
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -37,8 +37,8 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 
 	let defaultStart = new Date();
 	let defaultEnd = new Date();
-	defaultStart.setHours(15,0);
-	defaultEnd.setHours(17,0);
+	defaultStart.setHours(15, 0);
+	defaultEnd.setHours(17, 0);
 
 	const [date, setDate] = React.useState(moment(meeting.start ? new Date(meeting.start) : defaultStart));
 	const [end, setEnd] = React.useState(moment(meeting.end ? new Date(meeting.end) : defaultEnd));
@@ -79,19 +79,38 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
 						<DatePicker
 							fullWidth
+							autoOk
 							label="Date"
 							value={date}
+							format="MMMM DD"
 							onChange={setDate}
 							animateYearScrolling
 							inputVariant="outlined"
 						/>
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<TimePicker fullWidth autoOk label="Start Time" inputVariant="outlined" value={date} onChange={setDate} />
+						<KeyboardTimePicker
+							fullWidth
+							autoOk
+							placeholder="03:00 PM"
+							mask="__:__ _M"
+							label="Start Time"
+							inputVariant="outlined"
+							value={date}
+							onChange={setDate}
+						/>
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<TimePicker fullWidth autoOk label="Start Time" inputVariant="outlined" value={end} onChange={setEnd} />
-					</Grid>
+					<KeyboardTimePicker
+							fullWidth
+							autoOk
+							placeholder="05:00 PM"
+							mask="__:__ _M"
+							label="End Time"
+							inputVariant="outlined"
+							value={end}
+							onChange={setEnd}
+						/>					</Grid>
 				</MuiPickersUtilsProvider>
 			</Grid>
 
