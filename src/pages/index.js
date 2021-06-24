@@ -68,7 +68,6 @@ const Pages = () => {
 						<Route path={"/clubpubfair"} component={ClubPubFair} />
 						<Route path={"/meetings"} component={Meetings} />
 						<Route path={"/settings"} component={Settings} />
-
 						<Route path={"/organizations/:orgUrl"}>
 							<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
 						</Route>

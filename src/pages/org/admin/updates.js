@@ -45,7 +45,7 @@ const responsive = {
 };
 
 const CREATE_UPDATE = gql`
-	mutation(
+	mutation (
 		$title: String!
 		$content: String!
 		$pictures: [UpdatePicUpload!]!

@@ -17,7 +17,7 @@ import { cache } from "../../../comps/context/ApolloProvider";
 import LinkifyText from "../../../comps/ui/LinkifyText";
 
 const CREATE_MESSAGE_MUTATION = gql`
-	mutation($orgId: Int!, $message: String!) {
+	mutation ($orgId: Int!, $message: String!) {
 		createCharterApprovalMessage(orgId: $orgId, message: $message) {
 			id
 		}
@@ -124,7 +124,7 @@ const ApprovalMessages = ({ organization, refetch }) => {
 };
 
 const ORG_QUERY = gql`
-	query($url: String!) {
+	query ($url: String!) {
 		organization: organizationByUrl(url: $url) {
 			id
 			name
@@ -207,7 +207,7 @@ const ORG_QUERY = gql`
 `;
 
 const APPROVE_MUTATION = gql`
-	mutation($editId: Int!, $fields: [String!]!) {
+	mutation ($editId: Int!, $fields: [String!]!) {
 		approveCharterFields(charterEditId: $editId, fields: $fields) {
 			id
 			alteredFields
@@ -216,7 +216,7 @@ const APPROVE_MUTATION = gql`
 `;
 
 const REJECT_MUTATION = gql`
-	mutation($editId: Int!, $fields: [String!]!) {
+	mutation ($editId: Int!, $fields: [String!]!) {
 		rejectCharterFields(charterEditId: $editId, fields: $fields) {
 			id
 			alteredFields
