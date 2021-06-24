@@ -18,13 +18,10 @@ import {
 	DialogContentText,
 	DialogActions
 } from "@material-ui/core";
-import Carousel from "react-multi-carousel";
 
 import { makeStyles } from "@material-ui/core/styles";
-import LinkPreview from "./LinkPreview";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
-import MarkdownRenderer from "../ui/MarkdownRenderer";
 import UpdateDeleteButton from "./UpdateDeleteButton";
 import { gql, useMutation } from "@apollo/client";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
@@ -80,14 +77,6 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const responsive = {
-	desktop: {
-		breakpoint: { max: 4000, min: 0 },
-		items: 1,
-		slidesToSlide: 1
-	}
-};
-
 const truncate = require("html-truncate");
 
 const UpdateCard = ({
@@ -140,7 +129,10 @@ const UpdateCard = ({
 			</List>
 			<div className={classes.cardContent}>
 				<Typography variant={"h5"}>{title}</Typography>
-				<div className={"HtmlContent"} dangerouslySetInnerHTML={{ __html: ignoreLimit ? content : shortContent }} />
+				<div
+					className={"HtmlContent"}
+					dangerouslySetInnerHTML={{ __html: ignoreLimit ? content : shortContent }}
+				/>
 				{!ignoreLimit && limited && (
 					<Link color={"primary"} onClick={() => setIgnoreLimit(true)} style={{ cursor: "pointer" }}>
 						Keep Reading...
