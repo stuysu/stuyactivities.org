@@ -46,7 +46,7 @@ export default function AdminRouter({ match }) {
 			label: "Strikes",
 			role: "helpRequests",
 			path: actualPath + "/strikes",
-			icon: <SmsFailed/>
+			icon: <SmsFailed />
 		},
 		{
 			label: "Admin Log",
