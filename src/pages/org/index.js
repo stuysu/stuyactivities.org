@@ -55,22 +55,6 @@ const getQuery = signedIn => {
 					title
 					content
 					createdAt
-					links {
-						id
-						title
-						description
-						url
-						image
-						siteName
-					}
-					pictures {
-						id
-						mimetype
-						description
-						defaultUrl
-						height
-						width
-					}
 					questions {
 						id
 						submittingUser {
