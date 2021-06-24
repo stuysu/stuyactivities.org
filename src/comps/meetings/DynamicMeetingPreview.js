@@ -3,7 +3,6 @@ import { gql, useQuery } from "@apollo/client";
 import Loading from "../ui/Loading";
 import { Typography } from "@material-ui/core";
 import smartTimespan from "../../utils/smartTimespan";
-import MarkdownRenderer from "../ui/MarkdownRenderer";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
