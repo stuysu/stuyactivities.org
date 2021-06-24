@@ -21,7 +21,7 @@ import LinkifyText from "../../../comps/ui/LinkifyText";
 // TODO WHEN WE HAVE MORE TIME: EXPORT CODE INTO SEPARATE COMPONENTS
 
 const QUERY = gql`
-	query($orgId: Int!) {
+	query ($orgId: Int!) {
 		charter(orgId: $orgId) {
 			mission
 			picture {
@@ -70,7 +70,7 @@ const QUERY = gql`
 `;
 
 const SAVE_MUTATION = gql`
-	mutation(
+	mutation (
 		$orgId: Int!
 		$mission: String
 		$purpose: String
@@ -434,7 +434,7 @@ class CharterEditForm extends React.Component {
 }
 
 const MESSAGE_QUERY = gql`
-	query($orgId: Int!) {
+	query ($orgId: Int!) {
 		organization(id: $orgId) {
 			charterApprovalMessages {
 				id
@@ -455,7 +455,7 @@ const MESSAGE_QUERY = gql`
 `;
 
 const CREATE_MESSAGE_MUTATION = gql`
-	mutation($orgId: Int!, $message: String!) {
+	mutation ($orgId: Int!, $message: String!) {
 		createCharterApprovalMessage(orgId: $orgId, message: $message) {
 			id
 		}
