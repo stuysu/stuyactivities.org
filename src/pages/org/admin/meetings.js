@@ -154,6 +154,41 @@ const REMOVE_RECURRING_MUTATION = gql`
 	}
 `;
 
+const EDIT_RECURRING_MUTATION = gql`
+	mutation AlterRecurringMeeting(
+		$id: Int!
+		$title: String
+		$description: String
+		$start: Time
+		$end: Time
+		$privacy: String
+		$notifyMembers: Boolean
+		$frequency: Int
+		$dayOfWeek: Int
+	) {
+		alterRecurringMeeting(
+			recurringMeetingId: $id
+			title: $title
+			description: $description
+			start: $start
+			end: $end
+			notifyMembers: $notifyMembers
+			privacy: $privacy
+			frequency: $frequency
+			dayOfWeek: $dayOfWeek
+		) {
+			id
+			title
+			description
+			start
+			end
+			privacy
+			frequency
+			dayOfWeek
+		}
+	}
+`;
+
 const Main = ({ match }) => {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
@@ -376,32 +411,15 @@ const EditPage = ({ match }) => {
 	//Use snackbar since edit has no other visible effects
 	const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 	const [errorMessage, setErrorMessage] = React.useState("");
-	const editingMeeting = org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
-	const [editMutation, { loading }] = useMutation(EDIT_MUTATION, {
+
+	const recurring = match.path.includes("editRecurring");
+	const editingMeeting = recurring ? 
+		org?.recurringMeetings?.find(meeting => meeting.id === Number(match.params.meetingId)) :
+		org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
+
+	const [editMutation, { loading }] = useMutation(recurring ? EDIT_RECURRING_MUTATION : EDIT_MUTATION, {
 		update(cache, { data: { alterMeeting } }) {
-			cache.modify({
-				id: cache.identify(org),
-				fields: {
-					meetings(existingMeetings = [], { readField }) {
-						const alteredMeetingRef = cache.writeFragment({
-							data: alterMeeting,
-							fragment: gql`
-								fragment AlteredMeeting on Meeting {
-									id
-									title
-									description
-									start
-									end
-								}
-							`
-						});
-						return [
-							...existingMeetings.filter(ref => readField("id", ref) !== alterMeeting.id),
-							alteredMeetingRef
-						];
-					}
-				}
-			});
+			cache.reset().then(() => org.refetch());
 		},
 		onError(error) {
 			setErrorMessage(error.message);
@@ -411,19 +429,25 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
-	const edit = ({ title, description, date, endTime, checked, privacy }) => {
+	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek }) => {
 		editMutation({
 			variables: {
 				id: Number(match.params.meetingId),
 				title,
 				description: description || "",
-				start: date.toISOString(),
-				end: moment(
-					`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
-					"MM-DD-YYYY HH:mm"
-				).toISOString(),
+				start: recurring ?
+					date.format("HH:mm:ss.SSS") + "Z" :
+					date.toISOString(),
+				end: recurring ?
+					endTime.format("HH:mm:ss.SSS") + "Z" :
+					moment(
+						`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
+						"MM-DD-YYYY HH:mm"
+					).toISOString(),
 				notifyMembers: checked,
-				privacy
+				privacy,
+				frequency,
+				dayOfWeek
 			}
 		});
 	};
@@ -438,7 +462,7 @@ const EditPage = ({ match }) => {
 			<Grid container justify={"center"} className={classes.margin}>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
 					<Typography variant={"h4"} className={classes.newMeetingTitle}>
-						Edit Meeting
+						{recurring ? "Edit Recurring Meeting" : "Edit Meeting"}
 					</Typography>
 					<MeetingForm
 						submit={edit}
@@ -447,6 +471,7 @@ const EditPage = ({ match }) => {
 						checkboxText={"Notify club members?"}
 						isSubmitting={loading}
 						errorMessage={errorMessage}
+						recurring={recurring}
 					/>
 				</Grid>
 			</Grid>
@@ -464,6 +489,7 @@ const Meetings = ({ match }) => {
 	return (
 		<Switch>
 			<Route path={match.path + "/edit/:meetingId"} component={EditPage} />
+			<Route path={match.path + "/editRecurring/:meetingId"} component={EditPage} />
 			<Route path={match.path} component={Main} />
 		</Switch>
 	);
