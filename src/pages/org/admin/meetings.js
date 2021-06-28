@@ -267,8 +267,8 @@ const Main = ({ match }) => {
 					orgUrl: match.params.orgUrl,
 					title,
 					description: description || "",
-					start: date.format("HH:mm:ss.SSS") + "Z",
-					end: endTime.format("HH:mm:ss.SSS") + "Z",
+					start: date.format("HH:mm:ss.SSSZ"),
+					end: endTime.format("HH:mm:ss.SSSZ"),
 					privacy,
 					frequency,
 					dayOfWeek: date.day()
@@ -335,7 +335,7 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(meeting.start, "HH:mm:ss.SSS").format("h:mm a")} to ${moment(meeting.end, "HH:mm:ss.SSS").format("h:mm a")}`}
+										secondary={`${moment(meeting.start, "HH:mm:ss.SSSZ").format("h:mm a")} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
@@ -436,10 +436,10 @@ const EditPage = ({ match }) => {
 				title,
 				description: description || "",
 				start: recurring ?
-					date.format("HH:mm:ss.SSS") + "Z" :
+					date.format("HH:mm:ss.SSSZ") :
 					date.toISOString(),
 				end: recurring ?
-					endTime.format("HH:mm:ss.SSS") + "Z" :
+					endTime.format("HH:mm:ss.SSSZ") :
 					moment(
 						`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
 						"MM-DD-YYYY HH:mm"

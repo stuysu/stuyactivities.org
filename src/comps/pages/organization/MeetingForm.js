@@ -50,7 +50,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 
 	let newDate
 	if (alreadyRecurring) {
-		newDate = moment(meeting.start, "HH:mm:ss.SSS")
+		newDate = moment(meeting.start, "HH:mm:ss.SSSZ")
 		newDate.day(meeting.dayOfWeek)
 	}
 
@@ -60,7 +60,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 		moment(meeting.start ? new Date(meeting.start) : defaultStart));
 	const [end, setEnd] = React.useState(
 		alreadyRecurring ?
-		moment(meeting.end, "HH:mm:ss.SSS") :
+		moment(meeting.end, "HH:mm:ss.SSSZ") :
 		moment(meeting.end ? new Date(meeting.end) : defaultEnd));
 
 	const [checked, setChecked] = React.useState(false);
