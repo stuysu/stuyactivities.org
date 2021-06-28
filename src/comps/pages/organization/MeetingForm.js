@@ -52,6 +52,9 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 		setLastErr(errorMessage);
 	};
 
+	const [recurring, setRecurring] = React.useState(false);
+	const [frequency, setFrequency] = React.useState(1);
+
 	return (
 		<div>
 			<Dialog fullScreen={isMobile} open={errorMessage !== "" && lastErr !== errorMessage} onClose={closeDialog}>
@@ -157,6 +160,21 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 			/>
 			<br />
 
+			<FormControlLabel
+				control={<Switch checked={recurring} onChange={e => setRecurring(!recurring)}/>}
+				label={"Recur?"}
+			/>
+
+			{recurring && <Grid component="label" container alignItems="center" spacing={1}>
+				<Grid item>This meeting will happen every</Grid>
+				<Grid item>
+					<TextField variant={"outlined"} type="number" value={frequency} onChange={e => Number(e.target.value) >= 1 && setFrequency(e.target.value)}/>
+				</Grid>
+				<Grid>week(s).</Grid>
+			</Grid>}
+
+			<br />
+
 			<Button
 				onClick={() => {
 					setLastErr("");
@@ -166,7 +184,9 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 						endTime: end,
 						checked,
 						date,
-						privacy: isPublic ? "public" : "private"
+						privacy: isPublic ? "public" : "private",
+						frequency: recurring ? Number(frequency) : 0,
+						dayOfWeek: date.day()
 					});
 				}}
 				color={"primary"}
