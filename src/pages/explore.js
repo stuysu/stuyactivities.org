@@ -17,22 +17,6 @@ const QUERY = gql`
 			id
 			title
 			content
-			links {
-				id
-				title
-				description
-				url
-				siteName
-				image
-			}
-			pictures {
-				id
-				description
-				width
-				height
-				defaultUrl
-				publicId
-			}
 			createdAt
 			organization {
 				id

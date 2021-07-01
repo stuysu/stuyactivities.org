@@ -18,17 +18,14 @@ import {
 	DialogContentText,
 	DialogActions
 } from "@material-ui/core";
-import Carousel from "react-multi-carousel";
-
 import { makeStyles } from "@material-ui/core/styles";
-import LinkPreview from "./LinkPreview";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
-import MarkdownRenderer from "../ui/MarkdownRenderer";
 import UpdateDeleteButton from "./UpdateDeleteButton";
 import { gql, useMutation } from "@apollo/client";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Link from "@material-ui/core/Link";
 
 const ASK_QUESTION = gql`
 	mutation CreateUpdateQuestion($updateId: Int!, $question: String!) {
@@ -79,21 +76,21 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const responsive = {
-	desktop: {
-		breakpoint: { max: 4000, min: 0 },
-		items: 1,
-		slidesToSlide: 1
-	}
-};
+// const responsive = {
+// 	desktop: {
+// 		breakpoint: { max: 4000, min: 0 },
+// 		items: 1,
+// 		slidesToSlide: 1
+// 	}
+// };
+
+const truncate = require("html-truncate");
 
 const UpdateCard = ({
 	id,
 	organization,
 	title,
 	content,
-	pictures,
-	links,
 	createdAt,
 	limit = true,
 	showDelete = false,
@@ -103,14 +100,9 @@ const UpdateCard = ({
 	const classes = useStyles();
 
 	const [ignoreLimit, setIgnoreLimit] = useState(false);
-	let shortContent = content;
+	const [shortContent] = useState(truncate(content, 400));
 
-	let limited = false;
-
-	if (!ignoreLimit && limit && typeof content === "string" && content.length > 500) {
-		shortContent = content.substr(0, 500) + "...";
-		limited = true;
-	}
+	let limited = shortContent !== content;
 
 	const [question, setQuestion] = useState("");
 	const [ask] = useMutation(ASK_QUESTION, {
@@ -144,39 +136,12 @@ const UpdateCard = ({
 			</List>
 			<div className={classes.cardContent}>
 				<Typography variant={"h5"}>{title}</Typography>
-				<MarkdownRenderer>{shortContent}</MarkdownRenderer>
-
-				{limited && !ignoreLimit && (
-					<Typography color={"primary"} className={classes.ignoreLimit} onClick={() => setIgnoreLimit(true)}>
-						Keep Reading
-					</Typography>
+				<div className={"HtmlContent"} dangerouslySetInnerHTML={{ __html: ignoreLimit ? content : shortContent }} />
+				{!ignoreLimit && limited && (
+					<Link color={"primary"} onClick={() => setIgnoreLimit(true)} style={{ cursor: "pointer" }}>
+						Keep Reading...
+					</Link>
 				)}
-				{Boolean(pictures.length) && (
-					<Carousel responsive={responsive} className={classes.picCarousel}>
-						{pictures.map(pic => (
-							<div
-								style={{
-									position: "relative"
-								}}
-								key={pic.id}
-							>
-								<img
-									src={pic.defaultUrl}
-									alt={"Upload"}
-									style={{
-										objectFit: "contain",
-										width: "100%",
-										height: "300px"
-									}}
-								/>
-								<Typography variant={"subtitle2"} align={"center"} color={"secondary"}>
-									{pic.description}
-								</Typography>
-							</div>
-						))}
-					</Carousel>
-				)}
-				{links?.length > 0 && links.map(link => <LinkPreview {...link} key={link.id} />)}
 				{Boolean(questions?.length) && (
 					<List>
 						{questions.map((question, i) => (
