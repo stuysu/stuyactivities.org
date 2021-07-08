@@ -88,6 +88,8 @@ export default function StrikeCard({ name, id, charter }) {
 			.then(() => setOpen(true))
 			.then(() => {
 				window.sessionStorage.clear();
+                setReason("");
+                setWeight("");
 			})
 			.catch(console.log);
 	};
