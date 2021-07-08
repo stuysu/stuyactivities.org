@@ -21,7 +21,6 @@ function Tag({ name }) {
 
 export default function CatalogCard({ name, url, charter, tags }) {
 	const classes = useStyles();
-
 	return (
 		<Card className={classes.card}>
 			<UnstyledLink to={`/${url}`}>
@@ -30,7 +29,7 @@ export default function CatalogCard({ name, url, charter, tags }) {
 						<LazyLoadImage
 							alt={name}
 							height={180}
-							src={charter.picture.card}
+							src={charter.picture?.card}
 							width={180}
 							style={{
 								objectFit: "cover",

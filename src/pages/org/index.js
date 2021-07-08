@@ -57,22 +57,6 @@ const getQuery = signedIn => {
 					title
 					content
 					createdAt
-					links {
-						id
-						title
-						description
-						url
-						image
-						siteName
-					}
-					pictures {
-						id
-						mimetype
-						description
-						defaultUrl
-						height
-						width
-					}
 					questions {
 						id
 						submittingUser {
@@ -185,7 +169,7 @@ const OrgRouter = ({ match, history }) => {
 							`${data?.organization?.name} - An activity at Stuyvesant High School`
 						}
 					/>
-					<meta property="og:image" content={data?.organization?.charter?.picture.url} />
+					<meta property="og:image" content={data?.organization?.charter?.picture?.url} />
 				</Helmet>
 
 				<div className={styles.contentContainer}>

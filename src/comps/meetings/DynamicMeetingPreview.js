@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
 const QUERY = gql`
-	query($id: Int!) {
+	query ($id: Int!) {
 		meetingById(id: $id) {
 			id
 			title
@@ -92,7 +92,7 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 	return (
 		<div>
 			<img
-				src={organization.charter.picture.thumbnail}
+				src={organization.charter.picture?.thumbnail}
 				className={classes.logo}
 				alt={organization.name + " logo"}
 				onClick={navigateToOrg}
@@ -110,15 +110,10 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 					<Typography paragraph color={"secondary"}>
 						{smartTimespan(new Date(meeting.start), new Date(meeting.end))}
 					</Typography>
-					<div className={classes.descriptionContainer}>
-						{!!meeting.description && <MarkdownRenderer>{meeting.description}</MarkdownRenderer>}
-						{!Boolean(meeting.description) && meeting.privacy === "private" && !organization.membership && (
-							<p>
-								This meeting is private and the description can only be seen by members of the
-								organization.
-							</p>
-						)}
-					</div>
+					<div
+						className={classes.descriptionContainer + " HtmlContent"}
+						dangerouslySetInnerHTML={{ __html: meeting.description }}
+					/>
 				</div>
 			) : (
 				<p>You need to be signed in to see more information about this meeting.</p>

@@ -74,7 +74,7 @@ const Meetings = () => {
 						}}
 						dayMaxEventRows={4}
 						events={data?.meetings
-							?.filter(meeting => meeting.privacy !== "private" || audits)
+							?.filter(meeting => meeting.privacy !== "private" || audits || user?.isFaculty)
 							.map(meeting => {
 								const newMeeting = { ...meeting };
 								newMeeting.title = meeting.organization.name + " - " + meeting.title;
