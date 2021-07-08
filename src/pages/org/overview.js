@@ -43,14 +43,14 @@ const Overview = () => {
 	}
 	if (!loading) {
 		// get how many tags are shared and sort
-		var orgs = data.organizations;
-		var tempOrgList = [];
+		const orgs = data.organizations;
+		const tempOrgList = [];
 		orgs.forEach(n => {
-			var orgIds = [];
+			const orgIds = [];
 			n.tags.forEach(j => {
 				orgIds.push(j.id);
 			});
-			var common = 0;
+			let common = 0;
 			ids.forEach(i => {
 				orgIds.forEach(k => {
 					if (i === k) {
@@ -59,7 +59,6 @@ const Overview = () => {
 				});
 			});
 			tempOrgList.push([n, common]);
-			console.log(tempOrgList);
 		});
 		var orgList = tempOrgList.sort().reverse();
 	}
@@ -159,7 +158,7 @@ const Overview = () => {
 				<List>
 					{orgList.map(relatedOrg => {
 						if (relatedOrg[0].name !== org.name) {
-							var url = "/" + relatedOrg[0].url;
+							const url = "/" + relatedOrg[0].url;
 							return (
 								<ListItem key={relatedOrg[0].name} button component="a" href={url}>
 									<ListItemAvatar>
