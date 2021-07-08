@@ -76,14 +76,6 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-// const responsive = {
-// 	desktop: {
-// 		breakpoint: { max: 4000, min: 0 },
-// 		items: 1,
-// 		slidesToSlide: 1
-// 	}
-// };
-
 const truncate = require("html-truncate");
 
 const UpdateCard = ({

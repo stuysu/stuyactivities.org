@@ -1,4 +1,4 @@
-import React, { createRef, useCallback, useContext, useEffect, useState } from "react";
+import React, { createRef, useContext, useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button, Grid, Typography } from "@material-ui/core";
 
@@ -12,13 +12,10 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import IconButton from "@material-ui/core/IconButton";
-import { AddPhotoAlternate, Close, EmojiEmotionsOutlined } from "@material-ui/icons";
-import Picker from "emoji-picker-react";
+import { Close } from "@material-ui/icons";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { useDropzone } from "react-dropzone";
-import { useSnackbar } from "notistack";
 import Carousel from "react-multi-carousel";
 
 import { find } from "linkifyjs";
@@ -26,6 +23,7 @@ import DynamicLinkPreview from "../../../comps/updates/DynamicLinkPreview";
 import { gql, useMutation } from "@apollo/client";
 import UpdateCard from "../../../comps/updates/UpdateCard";
 import moment from "moment-timezone";
+import TinyEditor from "../../../comps/updates/TinyEditor";
 
 const useStyles = makeStyles({
 	cardContent: {
@@ -74,13 +72,11 @@ const CREATE_UPDATE = gql`
 const Updates = () => {
 	const org = useContext(OrgContext);
 	const classes = useStyles();
-	const snackbar = useSnackbar();
 
 	const [link, setLink] = useState(null);
 
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
-	const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
 
 	const [isPublic, setIsPublic] = useState(true);
 	const [notifyMembers, setNotifyMembers] = useState(true);
@@ -104,7 +100,6 @@ const Updates = () => {
 		update: cache => {
 			setTitle("");
 			setContent("");
-			setEmojiPickerOpen(false);
 			setIsPublic(true);
 			setNotifyFaculty(false);
 			setNotifyMembers(true);
@@ -132,38 +127,11 @@ const Updates = () => {
 		}
 	}, [content, link, linkFetchTimeout]);
 
-	const onDrop = useCallback(
-		acceptedFiles => {
-			if (pictures.length > 10) {
-				return snackbar.enqueueSnackbar("You cannot upload more than 10 images.");
-			}
-
-			const file = acceptedFiles[0];
-
-			if (!file) {
-				return snackbar.enqueueSnackbar("You are only allowed to upload image files less than 5MB");
-			}
-
-			const description = window.prompt("Provide a description for this picture.");
-
-			setPictures(pics => pics.concat({ file, description }));
-		},
-		[pictures, snackbar]
-	);
-
-	const { getRootProps, getInputProps, open } = useDropzone({
-		onDrop,
-		noClick: true,
-		multiple: false,
-		accept: "image/*",
-		maxSize: 5000000
-	});
-
 	return (
 		<div className={layout.container}>
 			<Grid container spacing={4}>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-					<Card {...getRootProps()}>
+					<Card>
 						<List>
 							<ListItem>
 								<ListItemAvatar>
@@ -175,7 +143,7 @@ const Updates = () => {
 								/>
 							</ListItem>
 						</List>
-						<input style={{ display: "none" }} {...getInputProps()} />
+						<input style={{ display: "none" }} />
 						<div className={classes.cardContent}>
 							<TextField
 								fullWidth
@@ -189,36 +157,13 @@ const Updates = () => {
 								}
 								onChange={ev => setTitle(ev.target.value)}
 							/>
-							<IconButton onClick={open}>
-								<AddPhotoAlternate />
-							</IconButton>
-							<IconButton
-								color={emojiPickerOpen ? "primary" : "default"}
-								onClick={setEmojiPickerOpen.bind(null, !emojiPickerOpen)}
-							>
-								<EmojiEmotionsOutlined />
-							</IconButton>
-							{emojiPickerOpen && (
-								<div style={{ position: "absolute", background: "white", zIndex: 20 }}>
-									<Picker
-										onEmojiClick={(ev, emoji) => {
-											setContent(content + emoji.emoji);
-											setEmojiPickerOpen(false);
-										}}
-									/>
-								</div>
-							)}
-							<TextField
-								fullWidth
-								label={"Content"}
-								variant={"outlined"}
-								multiline
-								rows={5}
+
+							<TinyEditor
 								value={content}
+								setValue={setContent}
 								placeholder={
 									"Could be an update for your members or for the world to see. Feel free to include links, images, emojis, and anything else you'd like."
 								}
-								onChange={ev => setContent(ev.target.value)}
 							/>
 
 							{Boolean(pictures.length) && (

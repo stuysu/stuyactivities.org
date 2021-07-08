@@ -19,7 +19,7 @@ const PageBodyEditor = ({ value, setValue, className, disabled }) => {
 			<p>Email Body:</p>
 			<Editor
 				value={value}
-				apiKey={process.env.NEXT_APP_TINYMCE_APIKEY || "m257jlgp1mrcjuhac6m4ffb5i4va70spc0ho5r36vmqiesh3"}
+				apiKey={process.env.NEXT_APP_TINYMCE_APIKEY || "bzg71o9rxjiw3vfmrlmdu07vif9lfs9j50q8h932ajzahz4b"}
 				init={{
 					height: 500,
 					menubar: true,
