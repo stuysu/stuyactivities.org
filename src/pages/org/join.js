@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CREATE = gql`
-	mutation($message: String, $orgId: Int!) {
+	mutation ($message: String, $orgId: Int!) {
 		createMembershipRequest(orgId: $orgId, message: $message) {
 			id
 		}
@@ -108,7 +108,7 @@ const CreateRequest = () => {
 };
 
 const DELETE = gql`
-	mutation($requestId: Int!) {
+	mutation ($requestId: Int!) {
 		deleteMembershipRequest(requestId: $requestId)
 	}
 `;
@@ -157,7 +157,7 @@ const ExistingRequest = () => {
 };
 
 const ACCEPT = gql`
-	mutation($requestId: Int!) {
+	mutation ($requestId: Int!) {
 		approveMembershipRequest(requestId: $requestId) {
 			id
 		}
