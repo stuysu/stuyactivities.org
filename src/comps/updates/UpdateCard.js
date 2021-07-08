@@ -137,7 +137,10 @@ const UpdateCard = ({
 			</List>
 			<div className={classes.cardContent}>
 				<Typography variant={"h5"}>{title}</Typography>
-				<div className={"HtmlContent"} dangerouslySetInnerHTML={{ __html: ignoreLimit ? content : shortContent }} />
+				<div
+					className={"HtmlContent"}
+					dangerouslySetInnerHTML={{ __html: ignoreLimit ? content : shortContent }}
+				/>
 				{!ignoreLimit && limited && (
 					<Link color={"primary"} onClick={() => setIgnoreLimit(true)} style={{ cursor: "pointer" }}>
 						Keep Reading...
