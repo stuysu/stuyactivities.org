@@ -18,6 +18,7 @@ import {
 	DialogContentText,
 	DialogActions
 } from "@material-ui/core";
+
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
@@ -75,14 +76,6 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(1)
 	}
 }));
-
-// const responsive = {
-// 	desktop: {
-// 		breakpoint: { max: 4000, min: 0 },
-// 		items: 1,
-// 		slidesToSlide: 1
-// 	}
-// };
 
 const truncate = require("html-truncate");
 
