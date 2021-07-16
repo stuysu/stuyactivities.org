@@ -347,6 +347,7 @@ const EditPage = ({ match }) => {
 				onClose={() => setSnackbarOpen(false)}
 				message={"Meeting Edited!"}
 			/>
+			<p>We're currently working on this page but we expect to have it up sometime this week.</p>
 		</div>
 	);
 };

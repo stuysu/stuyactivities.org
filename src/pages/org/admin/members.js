@@ -237,10 +237,10 @@ export default function Members({ match }) {
 			</Dialog>
 			<Snackbar
 				open={snackBarOpen}
-				autoHideDuration={1000}
+				autoHideDuration={3000}
 				onClose={() => setSnackBarOpen(false)}
 				message="Copied email list to clipboard!"
-			></Snackbar>
+			/>
 		</div>
 	);
 }

@@ -52,9 +52,12 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 		setLastErr(errorMessage);
 	};
 
+	//only show error dialog box if mutation submission is completed & error message is a new one
+	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
+
 	return (
 		<div>
-			<Dialog fullScreen={isMobile} open={errorMessage !== "" && lastErr !== errorMessage} onClose={closeDialog}>
+			<Dialog fullScreen={isMobile} open={err_dialog_open} onClose={closeDialog}>
 				<DialogTitle>Something went wrong...</DialogTitle>
 				<DialogContent>
 					<DialogContentText>{errorMessage}</DialogContentText>
