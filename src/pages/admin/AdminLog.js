@@ -82,10 +82,7 @@ const AdminLog = () => {
 		setValue(newValue);
 	};
 
-	const {
-		error,
-		data
-	} = useQuery(QUERY, {
+	const { error, data } = useQuery(QUERY, {
 		variables: {
 			keyword
 		}
@@ -135,11 +132,11 @@ const AdminLog = () => {
 							orgStrike.map(org => {
 								const date = new Date(org.strike.createdAt);
 								const options = {
-									year: 'numeric',
-									month: 'long',
-									day: 'numeric',
-									hour: 'numeric',
-									minute: 'numeric',
+									year: "numeric",
+									month: "long",
+									day: "numeric",
+									hour: "numeric",
+									minute: "numeric",
 									hour12: true
 								};
 								return (
@@ -147,9 +144,7 @@ const AdminLog = () => {
 										<div className={classes.logCard}>
 											<Typography>{org.name}</Typography>
 											<Typography>Reason: {org.strike.reason}</Typography>
-											<Typography>
-												{date.toLocaleString('en-US', options)}
-											</Typography>
+											<Typography>{date.toLocaleString("en-US", options)}</Typography>
 											<Typography>Weight: {org.strike.weight}</Typography>
 										</div>
 										<Divider variant="middle" />
@@ -164,21 +159,18 @@ const AdminLog = () => {
 						orgArray.map(org => {
 							const date = new Date(org.updatedAt);
 							const options = {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric',
-								hour: 'numeric',
-								minute: 'numeric',
+								year: "numeric",
+								month: "long",
+								day: "numeric",
+								hour: "numeric",
+								minute: "numeric",
 								hour12: true
 							};
 							return (
 								<LazyLoadComponent>
 									<div className={classes.logCard}>
 										<Typography>{org.name}</Typography>
-										<Typography>
-											Last Update:{" "}
-											{date.toLocaleString('en-US', options)}
-										</Typography>
+										<Typography>Last Update: {date.toLocaleString("en-US", options)}</Typography>
 									</div>
 									<Divider variant="middle" />
 								</LazyLoadComponent>
