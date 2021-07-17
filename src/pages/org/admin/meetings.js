@@ -59,6 +59,7 @@ const CREATE_MUTATION = gql`
 		$end: DateTime!
 		$notifyFaculty: Boolean
 		$privacy: String!
+		$roomId: Int
 	) {
 		createMeeting(
 			orgUrl: $orgUrl
@@ -68,6 +69,7 @@ const CREATE_MUTATION = gql`
 			end: $end
 			notifyFaculty: $notifyFaculty
 			privacy: $privacy
+			roomId: $roomId
 		) {
 			id
 			title
@@ -94,6 +96,7 @@ const EDIT_MUTATION = gql`
 		$end: DateTime
 		$notifyMembers: Boolean
 		$privacy: String
+		$roomId: Int
 	) {
 		alterMeeting(
 			meetingId: $id
@@ -157,19 +160,16 @@ const Main = ({ match }) => {
 			});
 		}
 	});
-	const create = ({ title, description, date, endTime, checked, privacy }) => {
+	const create = ({ title, description, date, endTime, checked, privacy, roomId }) => {
 		createMutation({
 			variables: {
 				orgUrl: match.params.orgUrl,
 				title,
 				description: description || "",
 				start: date.toISOString(),
-				end: moment(
-					`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
-					"MM-DD-YYYY HH:mm"
-				).toISOString(),
+				end: endTime.toISOString(),
 				notifyFaculty: checked,
-				privacy
+				privacy,
 			}
 		});
 	};
@@ -302,19 +302,17 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
-	const edit = ({ title, description, date, endTime, checked, privacy }) => {
+	const edit = ({ title, description, date, endTime, checked, privacy, roomId }) => {
 		editMutation({
 			variables: {
 				id: Number(match.params.meetingId),
 				title,
 				description: description || "",
 				start: date.toISOString(),
-				end: moment(
-					`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
-					"MM-DD-YYYY HH:mm"
-				).toISOString(),
+				end: endTime.toISOString(),
 				notifyMembers: checked,
-				privacy
+				privacy,
+				roomId
 			}
 		});
 	};

@@ -13,12 +13,25 @@ import {
 	TextField,
 	Typography
 } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import * as moment from "moment";
 import MomentUtils from "@date-io/moment";
-import { MuiPickersUtilsProvider, DatePicker, KeyboardTimePicker } from "@material-ui/pickers";
+import { gql, useQuery } from "@apollo/client";
+import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pickers";
 import TinyEditor from "../../updates/TinyEditor";
+
+const availableRooms = gql`
+	query ($start: DateTime!, $end: DateTime!){
+		availableRooms(start: $start, end: $end) {
+			id
+			name
+			floor
+			approvalRequired
+		}
+	}
+`;
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -55,6 +68,32 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 	//only show error dialog box if mutation submission is completed & error message is a new one
 	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
 
+	const [room, setRoom] = React.useState({ name: "", id: 0 });
+
+	const { data, loading, error } = useQuery(availableRooms, {
+		variables: {
+			start: date,
+			end,
+		}
+	});
+
+	const updateEnd = (end) => {
+		setEnd(moment(
+			`${date.format("MM-DD-YYYY")} ${end.format("HH:mm")}`,
+			"MM-DD-YYYY HH:mm"
+		));
+	}
+
+	const updateDate = (date) => {
+		setDate(date);
+		updateEnd(end);
+	}
+
+	const roomAvailable = !loading && !error && room.id != 0 && data.availableRooms.find(roomNumber => roomNumber.name === room.name) !== undefined;
+	const valid = !err_dialog_open && roomAvailable;
+
+	console.log(room);
+
 	return (
 		<div>
 			<Dialog fullScreen={isMobile} open={err_dialog_open} onClose={closeDialog}>
@@ -79,20 +118,20 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 			/>
 			<Grid container spacing={1}>
 				<MuiPickersUtilsProvider utils={MomentUtils}>
-					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
 						<DatePicker
 							fullWidth
 							autoOk
 							label="Date"
 							value={date}
-							format="MMMM DD"
-							onChange={setDate}
+							format="MMM DD"
+							onChange={updateDate}
 							animateYearScrolling
 							inputVariant="outlined"
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<KeyboardTimePicker
+					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+						<TimePicker
 							fullWidth
 							autoOk
 							placeholder="03:00 PM"
@@ -100,11 +139,11 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 							label="Start Time"
 							inputVariant="outlined"
 							value={date}
-							onChange={setDate}
+							onChange={updateDate}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<KeyboardTimePicker
+					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+						<TimePicker
 							fullWidth
 							autoOk
 							placeholder="05:00 PM"
@@ -112,8 +151,25 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 							label="End Time"
 							inputVariant="outlined"
 							value={end}
-							onChange={setEnd}
-						/>{" "}
+							onChange={updateEnd}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+						<Autocomplete
+							options={loading ? [] : data?.availableRooms}
+							getOptionLabel={(option) => option.name}
+							disabled={loading}
+							error={!roomAvailable}
+							value={room}
+							onChange={(_, r) => setRoom(r)}
+							renderInput={
+								(params) =>
+									<TextField
+										{...params}
+										label="Room"
+										variant="outlined"
+									/>}
+						/>
 					</Grid>
 				</MuiPickersUtilsProvider>
 			</Grid>
@@ -156,7 +212,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 				}}
 				color={"primary"}
 				variant="contained"
-				disabled={isSubmitting}
+				disabled={!valid}
 			>
 				{buttonText}
 			</Button>
