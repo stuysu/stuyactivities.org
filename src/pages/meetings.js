@@ -13,7 +13,7 @@ const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
 const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
 const QUERY = gql`
-	query($start: DateTime!, $end: DateTime!) {
+	query ($start: DateTime!, $end: DateTime!) {
 		meetings(start: $start, end: $end) {
 			id
 			title

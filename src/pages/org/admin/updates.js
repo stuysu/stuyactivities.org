@@ -1,6 +1,6 @@
-import React, { createRef, useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 
 import layout from "./../../../styles/Layout.module.css";
 import Card from "@material-ui/core/Card";
@@ -11,15 +11,9 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
-import IconButton from "@material-ui/core/IconButton";
-import { Close } from "@material-ui/icons";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Carousel from "react-multi-carousel";
-
-import { find } from "linkifyjs";
-import DynamicLinkPreview from "../../../comps/updates/DynamicLinkPreview";
 import { gql, useMutation } from "@apollo/client";
 import UpdateCard from "../../../comps/updates/UpdateCard";
 import moment from "moment-timezone";
@@ -33,14 +27,6 @@ const useStyles = makeStyles({
 		marginTop: "1rem"
 	}
 });
-
-const responsive = {
-	desktop: {
-		breakpoint: { max: 4000, min: 0 },
-		items: 1,
-		slidesToSlide: 1
-	}
-};
 
 const CREATE_UPDATE = gql`
 	mutation (
