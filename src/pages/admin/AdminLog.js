@@ -10,7 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
-import UnstyledLink from "../../comps/ui/UnstyledLink";
 import LazyLoadComponent from "react-lazyload";
 
 const useStyles = makeStyles(() => ({
