@@ -89,7 +89,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 		updateEnd(end);
 	}
 
-	const roomAvailable = !loading && !error && room.id != 0 && data.availableRooms.find(roomNumber => roomNumber.name === room.name) !== undefined;
+	const roomAvailable = !loading && !error && room.id !== 0 && data.availableRooms.find(roomNumber => roomNumber.name === room.name) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
 
 	console.log(room);
