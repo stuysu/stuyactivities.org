@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const OrgContext = React.createContext({});
-
 const getQuery = signedIn => {
 	return gql`
 		query Organization($url: String!) {
@@ -40,6 +39,9 @@ const getQuery = signedIn => {
 				active
 				name
 				url
+				tags {
+				        id
+				}
 				charter {
 					mission
 					meetingSchedule
