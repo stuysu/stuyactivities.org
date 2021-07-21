@@ -16,7 +16,9 @@ import {
 	Select,
 	MenuItem,
 	FormControl,
-	InputLabel
+	InputLabel,
+	FormHelperText,
+	FormLabel
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -195,10 +197,15 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 			/>
 			<br />
 
-			{!alreadyRecurring && buttonText !== "Edit" && <FormControlLabel
-				control={<Switch checked={recurring} onChange={e => setRecurring(!recurring)}/>}
-				label={"Recur?"}
-			/>}
+			{!alreadyRecurring && buttonText !== "Edit" && <FormControl component="label">
+					<FormControlLabel
+						control={<Switch checked={recurring} onChange={e => setRecurring(!recurring)}/>}
+						label={"Recur?"}
+					/>
+					<FormHelperText>
+						<Typography paragraph>When a meeting is recurring, new meetings will automatically be created with the same settings as the recurring meeting. You may then edit those meetings individually to provide additional information. Removing a recurring meeting will only remove meetings with the same exact settings (including start and end times, title, and description).</Typography></FormHelperText>
+				</FormControl>
+			}
 
 			{recurring && <Grid component="label" container alignItems="center" spacing={1}>
 				<Grid item>This meeting will happen every</Grid>

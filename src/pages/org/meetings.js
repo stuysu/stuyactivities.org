@@ -26,6 +26,18 @@ export default function Meetings() {
 			<Typography variant={"h2"} align={"center"}>
 				Meetings
 			</Typography>
+			{org.recurringMeetings?.length &&
+				<>
+					<Typography variant={"h4"}>Recurring Meetings</Typography>
+					<Grid container>
+						{org.recurringMeetings.map(meeting => (
+							<Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+								<MeetingCard {...meeting}/>
+							</Grid>
+						))}
+					</Grid>
+				</>
+			}
 			<Typography variant={"h4"}>Upcoming Meetings</Typography>
 			<br />
 			{org.upcomingMeetings?.length ? (
