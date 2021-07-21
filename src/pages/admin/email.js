@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import { gql, useMutation } from "@apollo/client";
 
 const MUTATION = gql`
-	mutation($subject: String!, $body: String!) {
+	mutation ($subject: String!, $body: String!) {
 		emailClubLeaders(subject: $subject, body: $body)
 	}
 `;

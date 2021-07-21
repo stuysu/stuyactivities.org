@@ -3,7 +3,7 @@ import { gql, useMutation } from "@apollo/client";
 import { Editor } from "@tinymce/tinymce-react";
 
 const UPLOAD_MUTATION = gql`
-	mutation($file: Upload!, $alt: String!) {
+	mutation ($file: Upload!, $alt: String!) {
 		uploadImage(alt: $alt, file: $file) {
 			id
 			url
