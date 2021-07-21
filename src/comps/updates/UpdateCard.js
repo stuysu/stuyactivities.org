@@ -18,7 +18,6 @@ import {
 	DialogContentText,
 	DialogActions
 } from "@material-ui/core";
-
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
