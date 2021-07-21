@@ -36,9 +36,9 @@ const Unrecognized = () => {
 
 			<Typography variant={"subtitle1"}>
 				Your email {authContext.unrecognizedEmail && <b>{authContext.unrecognizedEmail}</b>} seems like it could
-				belong to a stuy student or teacher, but you're not in our database. If you're an incoming freshman, your
-				account will be added soon. If you feel this is a mistake, please send us an email at it@stuysu.org with
-				your name, osis and grade (if applicable) or what	department you teach.
+				belong to a stuy student or teacher, but you're not in our database. If you're an incoming freshman,
+				your account will be added soon. If you feel this is a mistake, please send us an email at it@stuysu.org
+				with your name, osis and grade (if applicable) or what department you teach.
 			</Typography>
 
 			<p className={classes.retryLogin} onClick={() => authContext.set({ page: "landing" })}>
