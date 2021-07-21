@@ -161,6 +161,7 @@ const Main = ({ match }) => {
 		}
 	});
 	const create = ({ title, description, date, endTime, checked, privacy, roomId }) => {
+		console.log("!");
 		createMutation({
 			variables: {
 				orgUrl: match.params.orgUrl,
@@ -170,6 +171,7 @@ const Main = ({ match }) => {
 				end: endTime.toISOString(),
 				notifyFaculty: checked,
 				privacy,
+				roomId,
 			}
 		});
 	};
@@ -312,7 +314,6 @@ const EditPage = ({ match }) => {
 				end: endTime.toISOString(),
 				notifyMembers: checked,
 				privacy,
-				roomId
 			}
 		});
 	};

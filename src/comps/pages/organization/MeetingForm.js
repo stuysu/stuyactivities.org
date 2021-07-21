@@ -53,8 +53,10 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 	defaultStart.setHours(15, 0);
 	defaultEnd.setHours(17, 0);
 
-	const [date, setDate] = React.useState(moment(meeting.start ? new Date(meeting.start) : defaultStart));
-	const [end, setEnd] = React.useState(moment(meeting.end ? new Date(meeting.end) : defaultEnd));
+	const [time, setTime] = React.useState({
+		start: moment(meeting.start ? new Date(meeting.start) : defaultStart),
+		end: moment(meeting.end ? new Date(meeting.end) : defaultEnd)
+	});
 
 	const [checked, setChecked] = React.useState(false);
 
@@ -68,31 +70,35 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 	//only show error dialog box if mutation submission is completed & error message is a new one
 	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
 
-	const [room, setRoom] = React.useState({ name: "", id: 0 });
+	const Virtual = { name: "Virtual", id: 0 };
+	const [room, setRoom] = React.useState(Virtual);
 
 	const { data, loading, error } = useQuery(availableRooms, {
 		variables: {
-			start: date,
-			end,
+			...time
 		}
 	});
 
-	const updateEnd = (end) => {
-		setEnd(moment(
-			`${date.format("MM-DD-YYYY")} ${end.format("HH:mm")}`,
+	const updateEnd = (new_end) => {
+		let end = moment(
+			`${time.start.format("MM-DD-YYYY")} ${new_end.format("HH:mm")}`,
 			"MM-DD-YYYY HH:mm"
-		));
+		)
+		setTime({ ...time, end });
 	}
 
-	const updateDate = (date) => {
-		setDate(date);
-		updateEnd(end);
-	}
+	const updateDate = (start) => {
+		let end = moment(
+			`${start.format("MM-DD-YYYY")} ${time.end.format("HH:mm")}`,
+			"MM-DD-YYYY HH:mm"
+		)
+		setTime({ start, end });
+	};
 
-	const roomAvailable = !loading && !error && room.id !== 0 && data.availableRooms.find(roomNumber => roomNumber.name === room.name) !== undefined;
+
+	let rooms = (loading || error) ? [Virtual] : [Virtual].concat(data.availableRooms);
+	const roomAvailable = !loading && !error && rooms.find(roomNumber => roomNumber.name === room.name) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
-
-	console.log(room);
 
 	return (
 		<div>
@@ -123,7 +129,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 							fullWidth
 							autoOk
 							label="Date"
-							value={date}
+							value={time.start}
 							format="MMM DD"
 							onChange={updateDate}
 							animateYearScrolling
@@ -138,7 +144,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 							mask="__:__ _M"
 							label="Start Time"
 							inputVariant="outlined"
-							value={date}
+							value={time.start}
 							onChange={updateDate}
 						/>
 					</Grid>
@@ -150,13 +156,13 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 							mask="__:__ _M"
 							label="End Time"
 							inputVariant="outlined"
-							value={end}
+							value={time.end}
 							onChange={updateEnd}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
 						<Autocomplete
-							options={loading ? [] : data?.availableRooms}
+							options={rooms}
 							getOptionLabel={(option) => option.name}
 							disabled={loading}
 							error={!roomAvailable}
@@ -204,10 +210,11 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 					submit({
 						title,
 						description,
-						endTime: end,
+						endTime: time.end,
 						checked,
-						date,
-						privacy: isPublic ? "public" : "private"
+						date: time.start,
+						privacy: isPublic ? "public" : "private",
+						...room.id !== 0 && { roomId: room.id },
 					});
 				}}
 				color={"primary"}
