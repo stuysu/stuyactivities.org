@@ -12,14 +12,6 @@ const QUERY = gql`
 			id
 			name
 			url
-			active
-			tags {
-				name
-			}
-			charter {
-				mission
-				commitmentLevel
-			}
 		}
 	}
 `;
