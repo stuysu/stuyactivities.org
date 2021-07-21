@@ -60,7 +60,7 @@ const Overview = () => {
 			});
 			tempOrgList.push([n, common]);
 		});
-		var orgList = tempOrgList.sort().reverse();
+		var orgList = tempOrgList.sort().reverse().slice(0, 4);
 	}
 	return (
 		<FlexCenter>
@@ -153,7 +153,7 @@ const Overview = () => {
 					<span style={{ color: "grey" }}>This activity has not made any posts yet.</span>
 				)}
 				<Typography variant={"h5"} color={"primary"}>
-					Related Clubs (in order of relevance)
+					Related Clubs
 				</Typography>
 				<List>
 					{orgList.map(relatedOrg => {
