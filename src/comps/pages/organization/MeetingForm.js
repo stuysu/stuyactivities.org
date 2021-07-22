@@ -17,7 +17,7 @@ import {
 	MenuItem,
 	FormControl,
 	InputLabel,
-	FormHelperText,
+	FormHelperText
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -38,7 +38,15 @@ const useStyles = makeStyles(theme => ({
 // when already editing, it shows dayOfWeek input instead of date input
 // ^ could be changed to show day of week when creating the recurring meeting, not only when editing it
 // but idk if that's the best choice
-const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitting, errorMessage, recurring: alreadyRecurring }) => {
+const MeetingForm = ({
+	submit,
+	buttonText,
+	checkboxText,
+	meeting = {},
+	isSubmitting,
+	errorMessage,
+	recurring: alreadyRecurring
+}) => {
 	const classes = useStyles();
 	const [title, setTitle] = React.useState(meeting.title || "");
 	const [isPublic, setIsPublic] = useState(meeting.privacy === "public");
@@ -49,20 +57,20 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 	defaultStart.setHours(15, 0);
 	defaultEnd.setHours(17, 0);
 
-	let newDate
+	let newDate;
 	if (alreadyRecurring) {
-		newDate = moment(meeting.start, "HH:mm:ss.SSSZ")
-		newDate.day(meeting.dayOfWeek)
+		newDate = moment(meeting.start, "HH:mm:ss.SSSZ");
+		newDate.day(meeting.dayOfWeek);
 	}
 
 	const [date, setDate] = React.useState(
-		alreadyRecurring ?
-		newDate :
-		moment(meeting.start ? new Date(meeting.start) : defaultStart));
+		alreadyRecurring ? newDate : moment(meeting.start ? new Date(meeting.start) : defaultStart)
+	);
 	const [end, setEnd] = React.useState(
-		alreadyRecurring ?
-		moment(meeting.end, "HH:mm:ss.SSSZ") :
-		moment(meeting.end ? new Date(meeting.end) : defaultEnd));
+		alreadyRecurring
+			? moment(meeting.end, "HH:mm:ss.SSSZ")
+			: moment(meeting.end ? new Date(meeting.end) : defaultEnd)
+	);
 
 	const [checked, setChecked] = React.useState(false);
 
@@ -102,10 +110,14 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 			<Grid container spacing={1}>
 				<MuiPickersUtilsProvider utils={MomentUtils}>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						{ alreadyRecurring ?
+						{alreadyRecurring ? (
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel shrink>Day Of Week</InputLabel>
-								<Select value={dayOfWeek} onChange={e => setDayOfWeek(e.target.value)} label="Day Of Week">
+								<Select
+									value={dayOfWeek}
+									onChange={e => setDayOfWeek(e.target.value)}
+									label="Day Of Week"
+								>
 									<MenuItem value={0}>Sunday</MenuItem>
 									<MenuItem value={1}>Monday</MenuItem>
 									<MenuItem value={2}>Tuesday</MenuItem>
@@ -115,7 +127,7 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 									<MenuItem value={6}>Saturday</MenuItem>
 								</Select>
 							</FormControl>
-						:
+						) : (
 							<DatePicker
 								fullWidth
 								autoOk
@@ -125,7 +137,8 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 								onChange={setDate}
 								animateYearScrolling
 								inputVariant="outlined"
-							/>}
+							/>
+						)}
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
 						<KeyboardTimePicker
@@ -196,23 +209,37 @@ const MeetingForm = ({ submit, buttonText, checkboxText, meeting = {}, isSubmitt
 			/>
 			<br />
 
-			{!alreadyRecurring && buttonText !== "Edit" && <FormControl component="label">
+			{!alreadyRecurring && buttonText !== "Edit" && (
+				<FormControl component="label">
 					<FormControlLabel
-						control={<Switch checked={recurring} onChange={e => setRecurring(!recurring)}/>}
+						control={<Switch checked={recurring} onChange={e => setRecurring(!recurring)} />}
 						label={"Recur?"}
 					/>
 					<FormHelperText>
-						<Typography paragraph>When a meeting is recurring, new meetings will automatically be created with the same settings as the recurring meeting. You may then edit those meetings individually to provide additional information. Removing a recurring meeting will only remove meetings with the same exact settings (including start and end times, title, and description).</Typography></FormHelperText>
+						<Typography paragraph>
+							When a meeting is recurring, new meetings will automatically be created with the same
+							settings as the recurring meeting. You may then edit those meetings individually to provide
+							additional information. Removing a recurring meeting will only remove meetings with the same
+							exact settings (including start and end times, title, and description).
+						</Typography>
+					</FormHelperText>
 				</FormControl>
-			}
+			)}
 
-			{recurring && <Grid component="label" container alignItems="center" spacing={1}>
-				<Grid item>This meeting will happen every</Grid>
-				<Grid item>
-					<TextField variant={"outlined"} type="number" value={frequency} onChange={e => Number(e.target.value) >= 1 && setFrequency(e.target.value)}/>
+			{recurring && (
+				<Grid component="label" container alignItems="center" spacing={1}>
+					<Grid item>This meeting will happen every</Grid>
+					<Grid item>
+						<TextField
+							variant={"outlined"}
+							type="number"
+							value={frequency}
+							onChange={e => Number(e.target.value) >= 1 && setFrequency(e.target.value)}
+						/>
+					</Grid>
+					<Grid>week(s).</Grid>
 				</Grid>
-				<Grid>week(s).</Grid>
-			</Grid>}
+			)}
 
 			<br />
 
