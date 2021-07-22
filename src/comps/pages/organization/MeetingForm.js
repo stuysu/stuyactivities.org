@@ -18,7 +18,6 @@ import {
 	FormControl,
 	InputLabel,
 	FormHelperText,
-	FormLabel
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
