@@ -23,7 +23,6 @@ import { gql, useMutation } from "@apollo/client";
 import { Close, Edit } from "@material-ui/icons";
 import { OrgContext } from "../index";
 import moment from "moment";
-import ReactMarkdown from "react-markdown";
 import { generatePath, Route, Switch } from "react-router-dom";
 import MeetingForm from "../../../comps/pages/organization/MeetingForm";
 
@@ -401,7 +400,7 @@ const Main = ({ match }) => {
 					<DialogContentText>
 						Description:
 						<br />
-						<ReactMarkdown source={removingMeeting.description} />
+						<div dangerouslySetInnerHTML={{ __html: removingMeeting.description }} />
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
@@ -498,6 +497,7 @@ const EditPage = ({ match }) => {
 				onClose={() => setSnackbarOpen(false)}
 				message={"Meeting Edited!"}
 			/>
+			<p>We're currently working on this page but we expect to have it up sometime this week.</p>
 		</div>
 	);
 };

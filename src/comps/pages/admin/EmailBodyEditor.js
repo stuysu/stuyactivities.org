@@ -3,7 +3,7 @@ import { gql, useMutation } from "@apollo/client";
 import { Editor } from "@tinymce/tinymce-react";
 
 const UPLOAD_MUTATION = gql`
-	mutation($file: Upload!, $alt: String!) {
+	mutation ($file: Upload!, $alt: String!) {
 		uploadImage(alt: $alt, file: $file) {
 			id
 			url
@@ -19,7 +19,7 @@ const PageBodyEditor = ({ value, setValue, className, disabled }) => {
 			<p>Email Body:</p>
 			<Editor
 				value={value}
-				apiKey={process.env.NEXT_APP_TINYMCE_APIKEY || "m257jlgp1mrcjuhac6m4ffb5i4va70spc0ho5r36vmqiesh3"}
+				apiKey={process.env.NEXT_APP_TINYMCE_APIKEY || "bzg71o9rxjiw3vfmrlmdu07vif9lfs9j50q8h932ajzahz4b"}
 				init={{
 					height: 500,
 					menubar: true,

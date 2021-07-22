@@ -4,7 +4,7 @@ import Loading from "../ui/Loading";
 import LinkPreview from "./LinkPreview";
 
 const LINK_PREVIEW_QUERY = gql`
-	query($url: String!) {
+	query ($url: String!) {
 		linkPreview(url: $url) {
 			title
 			description

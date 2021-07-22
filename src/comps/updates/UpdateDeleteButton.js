@@ -7,7 +7,7 @@ import { gql, useMutation } from "@apollo/client";
 import { OrgContext } from "../../pages/org";
 
 const MUTATION = gql`
-	mutation($updateId: Int!) {
+	mutation ($updateId: Int!) {
 		deleteUpdate(updateId: $updateId)
 	}
 `;

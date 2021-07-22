@@ -10,7 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
-import UnstyledLink from "../../comps/ui/UnstyledLink";
 import LazyLoadComponent from "react-lazyload";
 
 const useStyles = makeStyles(() => ({
@@ -33,6 +32,7 @@ const QUERY = gql`
 			strikes {
 				reason
 				createdAt
+				weight
 			}
 			url
 			updatedAt
@@ -82,19 +82,7 @@ const AdminLog = () => {
 		setValue(newValue);
 	};
 
-	// const {
-	// 	error,
-	// 	data
-	// 	// refetch
-	// } = useQuery(QUERY, {
-	// 	variables: keyword
-	// });
-
-	const {
-		error,
-		data
-		// refetch
-	} = useQuery(QUERY, {
+	const { error, data } = useQuery(QUERY, {
 		variables: {
 			keyword
 		}
@@ -143,25 +131,21 @@ const AdminLog = () => {
 						{orgStrike &&
 							orgStrike.map(org => {
 								const date = new Date(org.strike.createdAt);
-								const minutes =
-									date.getMinutes().toString().length === 1
-										? "0" + date.getMinutes()
-										: date.getMinutes();
-								console.log(org.url);
+								const options = {
+									year: "numeric",
+									month: "long",
+									day: "numeric",
+									hour: "numeric",
+									minute: "numeric",
+									hour12: true
+								};
 								return (
 									<LazyLoadComponent>
 										<div className={classes.logCard}>
-											<UnstyledLink to={`/${org.url}`}>
-												<Typography>{org.name}</Typography>
-												<Typography>Reason: {org.strike.reason}</Typography>
-												<Typography>
-													{org.strike.createdAt.split("T")[0] +
-														", " +
-														date.getHours() +
-														":" +
-														minutes}
-												</Typography>
-											</UnstyledLink>
+											<Typography>{org.name}</Typography>
+											<Typography>Reason: {org.strike.reason}</Typography>
+											<Typography>{date.toLocaleString("en-US", options)}</Typography>
+											<Typography>Weight: {org.strike.weight}</Typography>
 										</div>
 										<Divider variant="middle" />
 									</LazyLoadComponent>
@@ -174,18 +158,19 @@ const AdminLog = () => {
 					{orgArray &&
 						orgArray.map(org => {
 							const date = new Date(org.updatedAt);
-							const minutes =
-								date.getMinutes().toString().length === 1 ? "0" + date.getMinutes() : date.getMinutes();
+							const options = {
+								year: "numeric",
+								month: "long",
+								day: "numeric",
+								hour: "numeric",
+								minute: "numeric",
+								hour12: true
+							};
 							return (
 								<LazyLoadComponent>
 									<div className={classes.logCard}>
-										<UnstyledLink to={`/${org.url}`}>
-											<Typography>{org.name}</Typography>
-											<Typography>
-												Last Update:{" "}
-												{org.updatedAt.split("T")[0] + ", " + date.getHours() + ":" + minutes}
-											</Typography>
-										</UnstyledLink>
+										<Typography>{org.name}</Typography>
+										<Typography>Last Update: {date.toLocaleString("en-US", options)}</Typography>
 									</div>
 									<Divider variant="middle" />
 								</LazyLoadComponent>

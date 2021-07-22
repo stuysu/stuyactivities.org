@@ -8,7 +8,6 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	Link,
 	makeStyles,
 	Switch,
 	TextField,
@@ -24,6 +23,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import * as moment from "moment";
 import MomentUtils from "@date-io/moment";
 import { MuiPickersUtilsProvider, DatePicker, KeyboardTimePicker } from "@material-ui/pickers";
+import TinyEditor from "../../updates/TinyEditor";
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -84,10 +84,12 @@ const MeetingForm = ({
 	const [recurring, setRecurring] = React.useState(alreadyRecurring || false);
 	const [frequency, setFrequency] = React.useState(meeting.frequency || 1);
 	const [dayOfWeek, setDayOfWeek] = React.useState(meeting.dayOfWeek || 0);
+	//only show error dialog box if mutation submission is completed & error message is a new one
+	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
 
 	return (
 		<div>
-			<Dialog fullScreen={isMobile} open={errorMessage !== "" && lastErr !== errorMessage} onClose={closeDialog}>
+			<Dialog fullScreen={isMobile} open={err_dialog_open} onClose={closeDialog}>
 				<DialogTitle>Something went wrong...</DialogTitle>
 				<DialogContent>
 					<DialogContentText>{errorMessage}</DialogContentText>
@@ -168,28 +170,10 @@ const MeetingForm = ({
 			</Grid>
 
 			<br />
-			<TextField
-				fullWidth
-				label={"Description"}
-				outlined
-				variant={"outlined"}
-				multiline
-				rows={5}
+			<TinyEditor
 				value={description}
+				setValue={setDescription}
 				placeholder={`e.g. We're going to be discussing the movie Ender's game this week. \n\nHere's a link to the zoom call: https://zoom.us/j/94318855567?pwd=bFpPbVV4ZStaNlVMRjY1UnZJV2tTdz09`}
-				onChange={ev => setDescription(ev.target.value)}
-				helperText={
-					<Typography paragraph>
-						Please include a Zoom, Google Meet, or Discord link (as well as the Meeting ID and Passcode) for
-						your meeting in the description above. For instructions on how to create a secure Zoom meeting
-						using your stuy.edu account, click{" "}
-						<Link href="https://docs.google.com/document/d/1-jbrKLIAOh97qxEk4VrQnW66PLcoVTlEvtG_tAcM-Rg/edit?usp=sharing">
-							here
-						</Link>
-						. Click <Link href={"/rules"}>here</Link> to make sure you are following all online meetings
-						regulations.
-					</Typography>
-				}
 			/>
 
 			<Grid component="label" container alignItems="center" spacing={1}>

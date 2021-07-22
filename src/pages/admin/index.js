@@ -5,9 +5,10 @@ import RouteTabs from "../../comps/ui/RouteTabs";
 import Approvals from "./approvals";
 import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
+import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
 import AdminLog from "./AdminLog";
-import { AssignmentTurnedIn, EmailOutlined, Assignment, LiveHelp } from "@material-ui/icons";
+import { AssignmentTurnedIn, EmailOutlined, Assignment, SmsFailed, LiveHelp } from "@material-ui/icons";
 import EmailClubLeaders from "./email";
 
 const useStyles = makeStyles(theme => ({
@@ -42,6 +43,12 @@ export default function AdminRouter({ match }) {
 			icon: <LiveHelp />
 		},
 		{
+			label: "Strikes",
+			role: "helpRequests",
+			path: actualPath + "/strikes",
+			icon: <SmsFailed />
+		},
+		{
 			label: "Admin Log",
 			role: "charters",
 			path: actualPath + "/log",
@@ -68,6 +75,7 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/approvals"} component={Approvals} exact />
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
 				<Route path={match.path + "/help"} component={Approvals} />
+				<Route path={match.path + "/strikes"} component={Strikes} />
 				<Route path={match.path + "/log"} component={AdminLog} />
 				<Route path={match.path + "/email"} component={EmailClubLeaders} />
 				<Route path={match.path}>
