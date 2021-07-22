@@ -259,7 +259,7 @@ const Main = ({ match }) => {
 			cache.reset().then(() => org.refetch());
 		}
 	});
-	const create = ({ title, description, date, endTime, checked, privacy, frequency}) => {
+	const create = ({ title, description, date, endTime, checked, privacy, frequency }) => {
 		console.log(frequency);
 		if (frequency) {
 			createRecurringMutation({
@@ -328,14 +328,22 @@ const Main = ({ match }) => {
 					<Typography variant={"h4"} style={{ textAlign: "center" }}>
 						Existing Meetings
 					</Typography>
-					{org?.recurringMeetings?.length > 0 && <Typography variant={"h5"} className={classes.margin}>Recurring Meetings</Typography>}
+					{org?.recurringMeetings?.length > 0 && (
+						<Typography variant={"h5"} className={classes.margin}>
+							Recurring Meetings
+						</Typography>
+					)}
 					<List>
 						{org?.recurringMeetings?.map(meeting => (
 							<Paper className={classes.margin}>
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${meeting.frequency} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format("h:mm a")} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
+										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${
+											meeting.frequency
+										} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
+											"h:mm a"
+										)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
@@ -353,7 +361,11 @@ const Main = ({ match }) => {
 							</Paper>
 						))}
 					</List>
-					{org?.recurringMeetings?.length > 0 && <Typography variant={"h5"} className={classes.margin}>Non-Recurring Meetings</Typography>}
+					{org?.recurringMeetings?.length > 0 && (
+						<Typography variant={"h5"} className={classes.margin}>
+							Non-Recurring Meetings
+						</Typography>
+					)}
 					<List>
 						{org?.meetings?.map(meeting => (
 							<Paper className={classes.margin}>
@@ -396,7 +408,14 @@ const Main = ({ match }) => {
 					<Button onClick={() => setRemovingMeeting({})} color="primary">
 						Cancel
 					</Button>
-					<Button onClick={() => removingMeeting.frequency ? removeRecurringMutation({variables:removingMeeting}) : removeMutation({ variables: removingMeeting })} color="primary">
+					<Button
+						onClick={() =>
+							removingMeeting.frequency
+								? removeRecurringMutation({ variables: removingMeeting })
+								: removeMutation({ variables: removingMeeting })
+						}
+						color="primary"
+					>
 						Remove
 					</Button>
 				</DialogActions>
@@ -413,9 +432,9 @@ const EditPage = ({ match }) => {
 	const [errorMessage, setErrorMessage] = React.useState("");
 
 	const recurring = match.path.includes("editRecurring");
-	const editingMeeting = recurring ? 
-		org?.recurringMeetings?.find(meeting => meeting.id === Number(match.params.meetingId)) :
-		org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
+	const editingMeeting = recurring
+		? org?.recurringMeetings?.find(meeting => meeting.id === Number(match.params.meetingId))
+		: org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
 
 	const [editMutation, { loading }] = useMutation(recurring ? EDIT_RECURRING_MUTATION : EDIT_MUTATION, {
 		update(cache, { data: { alterMeeting } }) {
@@ -435,15 +454,13 @@ const EditPage = ({ match }) => {
 				id: Number(match.params.meetingId),
 				title,
 				description: description || "",
-				start: recurring ?
-					date.format("HH:mm:ss.SSSZ") :
-					date.toISOString(),
-				end: recurring ?
-					endTime.format("HH:mm:ss.SSSZ") :
-					moment(
-						`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
-						"MM-DD-YYYY HH:mm"
-					).toISOString(),
+				start: recurring ? date.format("HH:mm:ss.SSSZ") : date.toISOString(),
+				end: recurring
+					? endTime.format("HH:mm:ss.SSSZ")
+					: moment(
+							`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
+							"MM-DD-YYYY HH:mm"
+					  ).toISOString(),
 				notifyMembers: checked,
 				privacy,
 				frequency,

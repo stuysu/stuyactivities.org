@@ -70,25 +70,29 @@ const MeetingCard = ({ id, title, start, end, organization, className, dayOfWeek
 					{title}
 				</Typography>
 				<Typography paragraph color={"secondary"}>
-					{frequency ?
-						`${moment(dayOfWeek, "d").format("dddd")}s, every ${frequency} week(s), ${moment(start, "HH:mm:ss.SSSZ").format("h:mm a")} to ${moment(end, "HH:mm:ss.SSSZ").format("h:mm a")}` :
-					smartTimespan(new Date(start), new Date(end))}
+					{frequency
+						? `${moment(dayOfWeek, "d").format("dddd")}s, every ${frequency} week(s), ${moment(
+								start,
+								"HH:mm:ss.SSSZ"
+						  ).format("h:mm a")} to ${moment(end, "HH:mm:ss.SSSZ").format("h:mm a")}`
+						: smartTimespan(new Date(start), new Date(end))}
 				</Typography>
 
-				{frequency ?
-						description &&
-							<Typography paragraph
-								className={classes.descriptionContainer + " HtmlContent"}
-								dangerouslySetInnerHTML={{ __html: description }}
-							/>
-							:
-				<div className={classes.buttonContainer}>
-					<Button variant={"contained"} color={"secondary"} onClick={() => triggerMeetingDialog(id)}>
-						View More
-					</Button>
-				</div>
-				}
-
+				{frequency ? (
+					description && (
+						<Typography
+							paragraph
+							className={classes.descriptionContainer + " HtmlContent"}
+							dangerouslySetInnerHTML={{ __html: description }}
+						/>
+					)
+				) : (
+					<div className={classes.buttonContainer}>
+						<Button variant={"contained"} color={"secondary"} onClick={() => triggerMeetingDialog(id)}>
+							View More
+						</Button>
+					</div>
+				)}
 			</div>
 		</Card>
 	);
