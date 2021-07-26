@@ -33,7 +33,7 @@ const CREATE_UPDATE = gql`
 		$title: NonEmptyString!
 		$content: NonEmptyString!
 		$orgId: Int!
-		$type: String!
+		$type: updateTypes!
 		$notifyFaculty: Boolean!
 		$notifyMembers: Boolean!
 	) {
