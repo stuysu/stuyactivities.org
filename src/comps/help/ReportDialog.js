@@ -1,8 +1,8 @@
-import React from "react";
-import EventEmitter from "events";
 import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import EventEmitter from "events";
+import React from "react";
 import UserContext from "../context/UserContext";
 import ReportContent from "./ReportContent";
 

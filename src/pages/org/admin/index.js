@@ -1,19 +1,18 @@
+import { Typography } from "@material-ui/core";
+import { Group, GroupAdd, GroupWork, ListAlt, LocalActivity, PostAdd, SmsFailed } from "@material-ui/icons";
 import React from "react";
-
-import Members from "./members";
-import Requests from "./member-requests";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
-import RouteTabs from "../../../comps/ui/RouteTabs";
 import UserContext from "../../../comps/context/UserContext";
+import RouteTabs from "../../../comps/ui/RouteTabs";
 import SignInRequired from "../../../comps/ui/SignInRequired";
+import { OrgContext } from "../index";
 import CharterEdits from "./charter-edits";
-import Meetings from "./meetings";
-import { Group, GroupAdd, GroupWork, ListAlt, LocalActivity, SmsFailed, PostAdd } from "@material-ui/icons";
 import ClubFair from "./club-fair";
+import Meetings from "./meetings";
+import Requests from "./member-requests";
+import Members from "./members";
 import Strikes from "./Strikes";
 import Updates from "./updates";
-import { OrgContext } from "../index";
-import { Typography } from "@material-ui/core";
 
 export default function OrgAdminRouter({ match }) {
 	const actualMatch = generatePath(match.path, match.params);

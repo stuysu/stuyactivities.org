@@ -1,5 +1,6 @@
-import React from "react";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import {
+	Avatar,
 	Button,
 	Dialog,
 	DialogActions,
@@ -7,17 +8,16 @@ import {
 	FormControlLabel,
 	Grid,
 	makeStyles,
-	TextField,
-	Avatar,
 	Snackbar,
 	Switch,
+	TextField,
 	Typography
 } from "@material-ui/core";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { OrgContext } from "../index";
-import RequestList from "../../../comps/pages/organization/RequestList";
+import React from "react";
 import UserContext from "../../../comps/context/UserContext";
+import RequestList from "../../../comps/pages/organization/RequestList";
 import UserSelect from "../../../comps/ui/UserSelect";
+import { OrgContext } from "../index";
 
 const useStyles = makeStyles(theme => ({
 	margin: {

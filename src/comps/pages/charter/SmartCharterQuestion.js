@@ -1,7 +1,7 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { CharterFormContext } from "../../../pages/charter";
 import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import React from "react";
+import { CharterFormContext } from "../../../pages/charter";
 
 const useStyles = makeStyles(theme => ({
 	textField: {

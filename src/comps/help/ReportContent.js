@@ -1,20 +1,20 @@
-import React, { useContext, useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core/styles";
-import FlexCenter from "../ui/FlexCenter";
-import { triggerReportDialog } from "./ReportDialog";
-import fixingBugs from "./../../img/vectors/fixing-bugs.svg";
-import TextField from "@material-ui/core/TextField";
-import UserContext from "../context/UserContext";
+import React, { useContext, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { CAPTCHA_KEY } from "../../constants";
-import Button from "@material-ui/core/Button";
-import { gql, useMutation } from "@apollo/client";
 import { useLocation } from "react-router-dom";
+import { CAPTCHA_KEY } from "../../constants";
+import UserContext from "../context/UserContext";
+import FlexCenter from "../ui/FlexCenter";
+import fixingBugs from "./../../img/vectors/fixing-bugs.svg";
+import { triggerReportDialog } from "./ReportDialog";
 const useStyles = makeStyles(theme => ({
 	appBar: {
 		position: "relative",

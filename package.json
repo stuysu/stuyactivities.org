@@ -76,5 +76,8 @@
 		"printWidth": 120,
 		"trailingComma": "none",
 		"singleQuote": false
+	},
+	"devDependencies": {
+		"prettier-plugin-organize-imports": "^2.3.3"
 	}
 }

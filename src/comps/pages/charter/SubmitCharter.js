@@ -1,9 +1,8 @@
-import React from "react";
+import { gql, useMutation } from "@apollo/client";
 import Button from "@material-ui/core/Button";
-import { gql } from "@apollo/client";
-import { useMutation } from "@apollo/client";
-import { CharterFormContext } from "../../../pages/charter";
+import React from "react";
 import { Redirect } from "react-router-dom";
+import { CharterFormContext } from "../../../pages/charter";
 import { cache } from "../../context/ApolloProvider";
 
 const MUTATION = gql`

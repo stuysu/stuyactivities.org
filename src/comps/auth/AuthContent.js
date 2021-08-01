@@ -1,16 +1,16 @@
-import React from "react";
 import AppBar from "@material-ui/core/AppBar";
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
+import FlexCenter from "../ui/FlexCenter";
 import AuthContext from "./AuthContext";
 import Landing from "./subpages/Landing";
 import Student from "./subpages/Student";
 import Teacher from "./subpages/Teacher";
 import Unrecognized from "./subpages/Unrecognized";
-import FlexCenter from "../ui/FlexCenter";
 
 const useStyles = makeStyles(theme => ({
 	appBar: {

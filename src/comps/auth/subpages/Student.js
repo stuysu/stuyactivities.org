@@ -1,10 +1,10 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import StudentVector from "../../../img/vectors/clip-student-thinking-about-mathematics.svg";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import GoogleLoginButton from "../GoogleLoginButton";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import React from "react";
+import StudentVector from "../../../img/vectors/clip-student-thinking-about-mathematics.svg";
 import AuthContext from "../AuthContext";
+import GoogleLoginButton from "../GoogleLoginButton";
 
 const useStyles = makeStyles(theme => ({
 	heading: {

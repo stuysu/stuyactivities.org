@@ -1,16 +1,16 @@
-import React from "react";
 import { gql, useQuery } from "@apollo/client";
+import { makeStyles } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
-import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
+import React from "react";
 import LazyLoadComponent from "react-lazyload";
+import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
 
 const useStyles = makeStyles(() => ({
 	root: {

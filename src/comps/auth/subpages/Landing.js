@@ -1,10 +1,10 @@
+import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import SignInVector from "../../../img/vectors/clip-internet-security.svg";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 import AuthContext from "../AuthContext";
-import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles(theme => ({
 	userTypeButton: {

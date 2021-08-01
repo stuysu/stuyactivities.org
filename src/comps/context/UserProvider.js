@@ -1,6 +1,5 @@
+import { gql, useMutation, useQuery } from "@apollo/client";
 import React from "react";
-import { useMutation, useQuery } from "@apollo/client";
-import { gql } from "@apollo/client";
 import UserContext from "./UserContext";
 
 const basicInfo = gql`

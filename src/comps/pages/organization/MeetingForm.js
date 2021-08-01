@@ -1,28 +1,28 @@
-import React, { useState } from "react";
+import MomentUtils from "@date-io/moment";
 import {
 	Button,
-	FormControlLabel,
-	Grid,
 	Dialog,
 	DialogActions,
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
+	FormControl,
+	FormControlLabel,
+	FormHelperText,
+	Grid,
+	InputLabel,
 	makeStyles,
+	MenuItem,
+	Select,
 	Switch,
 	TextField,
-	Typography,
-	Select,
-	MenuItem,
-	FormControl,
-	InputLabel,
-	FormHelperText
+	Typography
 } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { DatePicker, KeyboardTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import * as moment from "moment";
-import MomentUtils from "@date-io/moment";
-import { MuiPickersUtilsProvider, DatePicker, KeyboardTimePicker } from "@material-ui/pickers";
+import React, { useState } from "react";
 import TinyEditor from "../../updates/TinyEditor";
 
 const useStyles = makeStyles(theme => ({

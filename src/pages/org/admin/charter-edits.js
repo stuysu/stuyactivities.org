@@ -1,21 +1,21 @@
-import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { OrgContext } from "../index";
+import { Avatar, Button } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Card from "@material-ui/core/Card";
-import { Avatar, Button } from "@material-ui/core";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import React from "react";
+import { cache } from "../../../comps/context/ApolloProvider";
+import SmartCharterQuestion from "../../../comps/pages/charter/SmartCharterQuestion";
+import LinkifyText from "../../../comps/ui/LinkifyText";
+import arrayToggle from "../../../utils/arrayToggle";
 // import { makeStyles } from "@material-ui/core/styles";
 import capitalizeString from "../../../utils/capitalizeString";
-import Typography from "@material-ui/core/Typography";
 import { CharterFormContext } from "../../charter";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import SmartCharterQuestion from "../../../comps/pages/charter/SmartCharterQuestion";
-import TextField from "@material-ui/core/TextField";
-import arrayToggle from "../../../utils/arrayToggle";
-import { cache } from "../../../comps/context/ApolloProvider";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import LinkifyText from "../../../comps/ui/LinkifyText";
+import { OrgContext } from "../index";
 
 // THIS FILE IS UNCOMFORTABLY HUGE
 // TODO WHEN WE HAVE MORE TIME: EXPORT CODE INTO SEPARATE COMPONENTS

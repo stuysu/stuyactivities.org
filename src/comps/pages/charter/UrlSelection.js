@@ -1,8 +1,7 @@
-import React from "react";
+import { gql, useQuery } from "@apollo/client";
 import TextField from "@material-ui/core/TextField";
+import React from "react";
 import { CharterFormContext } from "../../../pages/charter";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
 
 const QUERY = gql`
 	query Organization($url: String!) {

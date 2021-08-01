@@ -1,23 +1,22 @@
-import React, { useContext, useState } from "react";
-import TextField from "@material-ui/core/TextField";
+import { gql, useMutation } from "@apollo/client";
 import { Button, Grid } from "@material-ui/core";
-
-import layout from "./../../../styles/Layout.module.css";
+import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
-import { makeStyles } from "@material-ui/core/styles";
-import { OrgContext } from "../index";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
+import { makeStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import { gql, useMutation } from "@apollo/client";
-import UpdateCard from "../../../comps/updates/UpdateCard";
+import TextField from "@material-ui/core/TextField";
 import moment from "moment-timezone";
+import React, { useContext, useState } from "react";
 import TinyEditor from "../../../comps/updates/TinyEditor";
+import UpdateCard from "../../../comps/updates/UpdateCard";
+import { OrgContext } from "../index";
+import layout from "./../../../styles/Layout.module.css";
 
 const useStyles = makeStyles({
 	cardContent: {

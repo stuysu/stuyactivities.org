@@ -1,26 +1,26 @@
-import React from "react";
+import { gql, useMutation } from "@apollo/client";
 import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	FormControl,
 	// Avatar,
 	Grid,
-	List,
-	Paper,
-	Typography,
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
-	TextField,
-	FormControl,
 	InputLabel,
-	Select,
+	List,
+	makeStyles,
 	MenuItem,
-	makeStyles
+	Paper,
+	Select,
+	TextField,
+	Typography
 } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
-import { gql, useMutation } from "@apollo/client";
-import { cache } from "../../context/ApolloProvider";
 import Snackbar from "@material-ui/core/Snackbar";
+import EditIcon from "@material-ui/icons/Edit";
 import Alert from "@material-ui/lab/Alert";
+import React from "react";
+import { cache } from "../../context/ApolloProvider";
 
 const useStyles = makeStyles(() => ({
 	item: {

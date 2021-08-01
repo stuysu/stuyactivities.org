@@ -1,8 +1,8 @@
+import { gql, useMutation } from "@apollo/client";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import GoogleLogin from "react-google-login";
-import { gql, useMutation } from "@apollo/client";
 import { GOOGLE_CLIENT_ID } from "../../constants";
-import Typography from "@material-ui/core/Typography";
 import AuthContext from "./AuthContext";
 
 const LOGIN_WITH_GOOGLE = gql`

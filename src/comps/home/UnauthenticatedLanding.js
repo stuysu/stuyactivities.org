@@ -1,14 +1,13 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import layout from "../../styles/Layout.module.css";
-import Grid from "@material-ui/core/Grid";
-import TextLink from "../ui/TextLink";
-import ButtonLink from "../ui/ButtonLink";
-
-import { triggerLoginDialog } from "../auth/AuthDialog";
-import { makeStyles } from "@material-ui/core/styles";
-import biking from "./../../img/vectors/clip-biking.svg";
 import { Typography } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
+import layout from "../../styles/Layout.module.css";
+import { triggerLoginDialog } from "../auth/AuthDialog";
+import ButtonLink from "../ui/ButtonLink";
+import TextLink from "../ui/TextLink";
+import biking from "./../../img/vectors/clip-biking.svg";
 
 const useStyles = makeStyles({
 	vector: {

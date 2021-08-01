@@ -1,5 +1,4 @@
-import React from "react";
-import FlexCenter from "../../ui/FlexCenter";
+import { gql, useMutation } from "@apollo/client";
 import {
 	Avatar,
 	Button,
@@ -11,15 +10,16 @@ import {
 	Typography
 } from "@material-ui/core";
 import List from "@material-ui/core/List";
-import { generatePath, useParams, useRouteMatch } from "react-router-dom";
-import UnstyledLink from "../../ui/UnstyledLink";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { Dashboard, Description, GroupWork, Person, Settings } from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
+import { Dashboard, Description, GroupWork, Person, Settings } from "@material-ui/icons";
+import React from "react";
+import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import { OrgContext } from "../../../pages/org";
-import { gql, useMutation } from "@apollo/client";
+import FlexCenter from "../../ui/FlexCenter";
+import UnstyledLink from "../../ui/UnstyledLink";
 
 const useStyles = makeStyles(theme => ({
 	avatar: {

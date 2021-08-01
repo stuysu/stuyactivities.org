@@ -1,14 +1,13 @@
-import React from "react";
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client";
-import { CharterFormContext } from "../../../pages/charter";
+import { gql, useQuery } from "@apollo/client";
+import Chip from "@material-ui/core/Chip";
 import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Chip from "@material-ui/core/Chip";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import MenuItem from "@material-ui/core/MenuItem";
+import React from "react";
+import { CharterFormContext } from "../../../pages/charter";
 
 const useStyles = makeStyles(theme => ({
 	tagInput: {

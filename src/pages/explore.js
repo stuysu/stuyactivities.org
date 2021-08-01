@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
-import { Typography, useMediaQuery, Divider } from "@material-ui/core";
-import UserContext from "../comps/context/UserContext";
-import SignInRequired from "../comps/ui/SignInRequired";
 import { gql, useQuery } from "@apollo/client";
-import Loading from "../comps/ui/Loading";
-import UpdateCard from "../comps/updates/UpdateCard";
-import MeetingCard from "../comps/meetings/MeetingCard";
-import Carousel from "react-multi-carousel";
+import { Divider, Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import React, { useContext } from "react";
 import Masonry from "react-masonry-css";
+import Carousel from "react-multi-carousel";
+import UserContext from "../comps/context/UserContext";
+import MeetingCard from "../comps/meetings/MeetingCard";
 import FlexCenter from "../comps/ui/FlexCenter";
+import Loading from "../comps/ui/Loading";
+import SignInRequired from "../comps/ui/SignInRequired";
+import UpdateCard from "../comps/updates/UpdateCard";
 
 const QUERY = gql`
 	query ExploreQuery($updatesLimit: Int, $updatesOffset: Int) {

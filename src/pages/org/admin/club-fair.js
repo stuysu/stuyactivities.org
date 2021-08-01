@@ -1,11 +1,11 @@
-import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { OrgContext } from "../index";
-import Loading from "../../../comps/ui/Loading";
-import layout from "./../../../styles/Layout.module.css";
+import { Button } from "@material-ui/core";
 import CheckBox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { Button } from "@material-ui/core";
+import React from "react";
+import Loading from "../../../comps/ui/Loading";
+import { OrgContext } from "../index";
+import layout from "./../../../styles/Layout.module.css";
 
 const RESPONSE = gql`
 	query ($orgId: Int!) {

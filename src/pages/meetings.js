@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { gql, useQuery } from "@apollo/client";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
-import { triggerMeetingDialog } from "../comps/meetings/MeetingPreviewDialog";
 import FullCalendar from "@fullcalendar/react";
-import { gql, useQuery } from "@apollo/client";
 import { makeStyles, Typography } from "@material-ui/core";
-import FlexCenter from "../comps/ui/FlexCenter";
+import React, { useState } from "react";
 import UserContext from "../comps/context/UserContext";
+import { triggerMeetingDialog } from "../comps/meetings/MeetingPreviewDialog";
+import FlexCenter from "../comps/ui/FlexCenter";
 
 const now = new Date();
 const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);

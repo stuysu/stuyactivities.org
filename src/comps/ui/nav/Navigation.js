@@ -1,7 +1,7 @@
+import CssBaseline from "@material-ui/core/CssBaseline";
 import React from "react";
 import NavBar from "./NavBar";
 import NavDrawer from "./NavDrawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
 
 const Navigation = () => {
 	const [drawerOpen, setDrawerOpen] = React.useState(false);

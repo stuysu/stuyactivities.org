@@ -1,12 +1,12 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { gql, useQuery } from "@apollo/client";
+import React from "react";
+import { useParams } from "react-router-dom";
 import { client } from "../../comps/context/ApolloProvider";
+import LinkifyText from "../../comps/ui/LinkifyText";
 import capitalizeString from "../../utils/capitalizeString";
 import { OrgContext } from "./index";
-import LinkifyText from "../../comps/ui/LinkifyText";
 
 //styles
 const useStyles = makeStyles(theme => ({

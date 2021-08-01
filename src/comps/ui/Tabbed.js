@@ -1,6 +1,6 @@
+import { Tab, Tabs } from "@material-ui/core";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { Tab, Tabs } from "@material-ui/core";
 
 /** Tabs are [{url: ..., name: ..., component: ...}, ...] **/
 

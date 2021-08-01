@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Grid, Typography, useMediaQuery } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
+import { Grid, Typography, useMediaQuery } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import { makeStyles } from "@material-ui/core/styles";
+import { List as ListIcon, ViewComfy } from "@material-ui/icons";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
+import Masonry from "react-masonry-css";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
-import { List as ListIcon, ViewComfy } from "@material-ui/icons";
-import SearchBox from "../comps/pages/catalog/filters/SearchBox";
-import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
 import CommitmentFilter from "../comps/pages/catalog/filters/CommitmentFilter";
 import MeetingDaysFilter from "../comps/pages/catalog/filters/MeetingDaysFilter";
-import { Helmet } from "react-helmet";
-
-import scubaNotFound from "../img/vectors/scuba-diver-not-found.svg";
-import cherryNotFound from "../img/vectors/cherry-page-not-found.svg";
-
-import Button from "@material-ui/core/Button";
-import UnstyledLink from "../comps/ui/UnstyledLink";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import ToggleButton from "@material-ui/lab/ToggleButton";
+import SearchBox from "../comps/pages/catalog/filters/SearchBox";
+import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
 import Loading from "../comps/ui/Loading";
-import List from "@material-ui/core/List";
-import Masonry from "react-masonry-css";
+import UnstyledLink from "../comps/ui/UnstyledLink";
+import cherryNotFound from "../img/vectors/cherry-page-not-found.svg";
+import scubaNotFound from "../img/vectors/scuba-diver-not-found.svg";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 

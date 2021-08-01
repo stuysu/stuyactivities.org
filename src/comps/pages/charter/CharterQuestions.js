@@ -1,12 +1,12 @@
-import React from "react";
-import SmartCharterQuestion from "./SmartCharterQuestion";
 import { Typography } from "@material-ui/core";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
+import React from "react";
 import { CharterFormContext } from "../../../pages/charter";
 import arrayToggle from "../../../utils/arrayToggle";
 import capitalizeString from "../../../utils/capitalizeString";
+import SmartCharterQuestion from "./SmartCharterQuestion";
 
 const CharterQuestions = () => {
 	const form = React.useContext(CharterFormContext);
