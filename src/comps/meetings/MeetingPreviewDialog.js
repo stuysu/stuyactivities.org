@@ -1,16 +1,16 @@
-import AppBar from "@material-ui/core/AppBar";
-import Dialog from "@material-ui/core/Dialog";
-import IconButton from "@material-ui/core/IconButton";
+import React, { useEffect, useState } from "react";
+import EventEmitter from "events";
 import Slide from "@material-ui/core/Slide";
-import { makeStyles } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Dialog from "@material-ui/core/Dialog";
+import DynamicMeetingPreview from "./DynamicMeetingPreview";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import EventEmitter from "events";
-import React, { useEffect, useState } from "react";
+import AppBar from "@material-ui/core/AppBar";
+import { makeStyles } from "@material-ui/core/styles";
 import FlexCenter from "../ui/FlexCenter";
-import DynamicMeetingPreview from "./DynamicMeetingPreview";
 
 const previewEmitter = new EventEmitter();
 

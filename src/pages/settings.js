@@ -1,8 +1,9 @@
-import { gql, useMutation } from "@apollo/client";
-import { Avatar, Switch, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@material-ui/core";
 import React from "react";
-import UserContext from "../comps/context/UserContext";
 import FlexCenter from "../comps/ui/FlexCenter";
+import UserContext from "../comps/context/UserContext";
+import { Typography, Table, TableHead, TableRow, TableCell, Avatar, TableBody, Switch } from "@material-ui/core";
+
+import { gql, useMutation } from "@apollo/client";
 
 const ALTER_EMAIL_SETTINGS = gql`
 	mutation AlterEmailSettings($membershipId: Int!, $meetingNotification: Boolean, $updateNotification: Boolean) {

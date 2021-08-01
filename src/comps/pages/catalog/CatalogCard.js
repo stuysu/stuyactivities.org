@@ -1,10 +1,10 @@
-import { Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import Chip from "@material-ui/core/Chip";
-import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import UnstyledLink from "../../ui/UnstyledLink";
+import Chip from "@material-ui/core/Chip";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
-import UnstyledLink from "../../ui/UnstyledLink";
 
 const useStyles = makeStyles(theme => ({
 	chip: {

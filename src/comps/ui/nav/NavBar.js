@@ -1,18 +1,18 @@
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { BugReport } from "@material-ui/icons";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import React from "react";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
 import UserContext from "../../context/UserContext";
-import { triggerReportDialog } from "../../help/ReportDialog";
-import UnstyledLink from "../UnstyledLink";
 import NavAvatar from "./NavAvatar";
+import UnstyledLink from "../UnstyledLink";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { BugReport } from "@material-ui/icons";
+import { triggerReportDialog } from "../../help/ReportDialog";
 
 const useStyles = makeStyles(theme => ({
 	root: {

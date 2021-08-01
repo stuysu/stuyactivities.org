@@ -1,23 +1,23 @@
-import Button from "@material-ui/core/Button";
-import Step from "@material-ui/core/Step";
-import StepContent from "@material-ui/core/StepContent";
-import StepLabel from "@material-ui/core/StepLabel";
-import Stepper from "@material-ui/core/Stepper";
-import { makeStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
 import React from "react";
+import Typography from "@material-ui/core/Typography";
 import UserContext from "../comps/context/UserContext";
-import AddLeaders from "../comps/pages/charter/AddLeaders";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import StepContent from "@material-ui/core/StepContent";
+import Button from "@material-ui/core/Button";
 import BasicInfoForm from "../comps/pages/charter/BasicInfoForm";
-import BeforeYouStart from "../comps/pages/charter/BeforeYouStart";
-import CharterQuestions from "../comps/pages/charter/CharterQuestions";
-import Confirm from "../comps/pages/charter/Confirm";
-import SubmitCharter from "../comps/pages/charter/SubmitCharter";
-import BackButton from "../comps/ui/BackButton";
 import FlexCenter from "../comps/ui/FlexCenter";
-import SignInRequired from "../comps/ui/SignInRequired";
+import CharterQuestions from "../comps/pages/charter/CharterQuestions";
+import AddLeaders from "../comps/pages/charter/AddLeaders";
+import BeforeYouStart from "../comps/pages/charter/BeforeYouStart";
+import Confirm from "../comps/pages/charter/Confirm";
+import BackButton from "../comps/ui/BackButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import SubmitCharter from "../comps/pages/charter/SubmitCharter";
+import { makeStyles } from "@material-ui/core/styles";
 import textValidator from "../utils/textValidator";
+import SignInRequired from "../comps/ui/SignInRequired";
 
 // const numSteps = 3;
 

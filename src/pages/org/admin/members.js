@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import React from "react";
 import {
 	Avatar,
 	Button,
@@ -20,7 +20,7 @@ import {
 	Typography
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import React from "react";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
 
 const useStyles = makeStyles(theme => ({

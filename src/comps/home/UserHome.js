@@ -1,11 +1,11 @@
-import { Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import React, { useContext } from "react";
-import UserContext from "../context/UserContext";
 import layout from "./../../styles/Layout.module.css";
-import UserMeetings from "./UserMeetings";
+import UserContext from "../context/UserContext";
+import Grid from "@material-ui/core/Grid";
 import UserMemberships from "./UserMemberships";
+import UserMeetings from "./UserMeetings";
+import { Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import UserUpdates from "./UserUpdates";
 
 const useStyles = makeStyles({

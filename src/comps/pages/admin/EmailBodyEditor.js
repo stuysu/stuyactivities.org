@@ -1,6 +1,6 @@
+import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import { Editor } from "@tinymce/tinymce-react";
-import React from "react";
 
 const UPLOAD_MUTATION = gql`
 	mutation ($file: Upload!, $alt: String!) {

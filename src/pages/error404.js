@@ -1,16 +1,18 @@
-import { gql, useQuery } from "@apollo/client";
-import { Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
-import CatalogCard from "../comps/pages/catalog/CatalogCard";
-import BackButton from "../comps/ui/BackButton";
 import FlexCenter from "../comps/ui/FlexCenter";
-import clip from "../img/vectors/clip-page-not-found.svg";
+import { Grid, Typography } from "@material-ui/core";
 import conifer from "../img/vectors/conifer-page-not-found.svg";
 import marginalia from "../img/vectors/marginalia-page-not-found.svg";
-import { default as pale, default as pixeltrue } from "../img/vectors/pale-page-not-found.svg";
+import clip from "../img/vectors/clip-page-not-found.svg";
+import pixeltrue from "../img/vectors/pale-page-not-found.svg";
+import pale from "../img/vectors/pale-page-not-found.svg";
+import { makeStyles } from "@material-ui/core/styles";
+import BackButton from "../comps/ui/BackButton";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import CatalogCard from "../comps/pages/catalog/CatalogCard";
 
 const error404Imgs = [conifer, marginalia, clip, pixeltrue, pale];
 

@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import React from "react";
 import {
 	Button,
 	Card,
@@ -9,7 +9,7 @@ import {
 	makeStyles,
 	Typography
 } from "@material-ui/core";
-import React from "react";
+import { gql, useQuery } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 

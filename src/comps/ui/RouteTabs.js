@@ -1,6 +1,6 @@
-import { Tab, Tabs } from "@material-ui/core";
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { Tab, Tabs } from "@material-ui/core";
 
 const RouteTabs = ({ tabs }) => {
 	const [selectedTabIndex, setSelectedTabIndex] = React.useState(0);

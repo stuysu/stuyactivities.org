@@ -1,15 +1,15 @@
+import React from "react";
+import { OrgContext } from "./index";
+import FlexCenter from "../../comps/ui/FlexCenter";
 import { Typography, useMediaQuery } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import React from "react";
-import Masonry from "react-masonry-css";
+import Avatar from "@material-ui/core/Avatar";
 import MeetingCard from "../../comps/meetings/MeetingCard";
-import FlexCenter from "../../comps/ui/FlexCenter";
 import LinkifyText from "../../comps/ui/LinkifyText";
+import Masonry from "react-masonry-css";
 import UpdateCard from "../../comps/updates/UpdateCard";
-import { OrgContext } from "./index";
 
 const Overview = () => {
 	const org = React.useContext(OrgContext);

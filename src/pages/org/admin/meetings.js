@@ -1,4 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
+import React from "react";
 import {
 	Button,
 	Dialog,
@@ -17,14 +17,14 @@ import {
 	Snackbar,
 	Typography
 } from "@material-ui/core";
+import UnstyledLink from "../../../comps/ui/UnstyledLink";
+import BackButton from "../../../comps/ui/BackButton";
+import { gql, useMutation } from "@apollo/client";
 import { Close, Edit } from "@material-ui/icons";
+import { OrgContext } from "../index";
 import moment from "moment";
-import React from "react";
 import { generatePath, Route, Switch } from "react-router-dom";
 import MeetingForm from "../../../comps/pages/organization/MeetingForm";
-import BackButton from "../../../comps/ui/BackButton";
-import UnstyledLink from "../../../comps/ui/UnstyledLink";
-import { OrgContext } from "../index";
 
 const useStyles = makeStyles(theme => ({
 	margin: {

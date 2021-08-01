@@ -1,5 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
 import React from "react";
+import { gql, useQuery } from "@apollo/client";
 import Loading from "../ui/Loading";
 import LinkPreview from "./LinkPreview";
 

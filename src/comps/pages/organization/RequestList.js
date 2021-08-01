@@ -1,3 +1,4 @@
+import React from "react";
 import {
 	Avatar,
 	Grid,
@@ -10,7 +11,6 @@ import {
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
-import React from "react";
 
 const RequestList = ({ requests, reject, approve }) => {
 	return (

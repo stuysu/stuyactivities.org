@@ -1,11 +1,11 @@
-import { gql, useQuery } from "@apollo/client";
-import { Typography, useMediaQuery } from "@material-ui/core";
 import React, { useContext } from "react";
+import UserContext from "../context/UserContext";
+import { gql, useQuery } from "@apollo/client";
+import Loading from "../ui/Loading";
+import { Typography, useMediaQuery } from "@material-ui/core";
+import UpdateCard from "../updates/UpdateCard";
 import Masonry from "react-masonry-css";
 import { client } from "../context/ApolloProvider";
-import UserContext from "../context/UserContext";
-import Loading from "../ui/Loading";
-import UpdateCard from "../updates/UpdateCard";
 
 const QUERY = gql`
 	query ($userId: Int!) {

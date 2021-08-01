@@ -1,6 +1,6 @@
-import { Typography } from "@material-ui/core";
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { Typography } from "@material-ui/core";
 import LinkifyText from "./LinkifyText";
 
 // Links are actually detected by linkify.js so ignore the links that react-markdown finds

@@ -1,9 +1,9 @@
-import { gql, useMutation } from "@apollo/client";
+import React, { useContext } from "react";
 import { IconButton } from "@material-ui/core";
+import { Menu as MenuIcon } from "@material-ui/icons";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Menu as MenuIcon } from "@material-ui/icons";
-import React, { useContext } from "react";
+import { gql, useMutation } from "@apollo/client";
 import { OrgContext } from "../../pages/org";
 
 const MUTATION = gql`

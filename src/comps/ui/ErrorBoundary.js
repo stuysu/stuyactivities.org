@@ -1,12 +1,12 @@
-import Boundary from "@honeybadger-io/react";
-import { Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import React from "react";
 import honeybadger from "../../utils/honeybadger";
-import { triggerReportDialog } from "../help/ReportDialog";
 import errorImage from "./../../img/vectors/cherry-list-is-empty.svg";
+import { Typography } from "@material-ui/core";
+import Boundary from "@honeybadger-io/react";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import { triggerReportDialog } from "../help/ReportDialog";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles({
 	container: {

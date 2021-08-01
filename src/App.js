@@ -1,11 +1,13 @@
-import { SnackbarProvider } from "notistack";
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
 import "./App.css";
+
 import ApolloProvider from "./comps/context/ApolloProvider";
-import ThemeProvider from "./comps/context/ThemeProvider";
 import UserProvider from "./comps/context/UserProvider";
+import ThemeProvider from "./comps/context/ThemeProvider";
+import { BrowserRouter } from "react-router-dom";
 import Pages from "./pages";
+
+import { SnackbarProvider } from "notistack";
 
 function App() {
 	return (

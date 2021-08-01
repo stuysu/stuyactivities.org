@@ -1,14 +1,14 @@
-import { Avatar } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import React, { useContext } from "react";
 import UserContext from "../context/UserContext";
-import ButtonLink from "../ui/ButtonLink";
 import UnstyledLink from "../ui/UnstyledLink";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import { Avatar } from "@material-ui/core";
+import ListItemText from "@material-ui/core/ListItemText";
+import List from "@material-ui/core/List";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import ButtonLink from "../ui/ButtonLink";
 
 const useStyles = makeStyles({
 	fixedSizeList: {

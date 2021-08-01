@@ -1,15 +1,15 @@
-import { makeStyles, Typography } from "@material-ui/core";
-import { Assignment, AssignmentTurnedIn, EmailOutlined, LiveHelp, SmsFailed } from "@material-ui/icons";
 import React from "react";
+import { makeStyles, Typography } from "@material-ui/core";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
-import UserContext from "../../comps/context/UserContext";
 import RouteTabs from "../../comps/ui/RouteTabs";
-import SignInRequired from "../../comps/ui/SignInRequired";
-import AdminLog from "./AdminLog";
 import Approvals from "./approvals";
-import OrgApprovals from "./approvals/OrgApprovals";
-import EmailClubLeaders from "./email";
+import UserContext from "../../comps/context/UserContext";
+import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
+import OrgApprovals from "./approvals/OrgApprovals";
+import AdminLog from "./AdminLog";
+import { AssignmentTurnedIn, EmailOutlined, Assignment, SmsFailed, LiveHelp } from "@material-ui/icons";
+import EmailClubLeaders from "./email";
 
 const useStyles = makeStyles(theme => ({
 	root: {

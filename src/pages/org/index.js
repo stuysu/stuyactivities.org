@@ -1,22 +1,28 @@
-import { gql, useQuery } from "@apollo/client";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
-import { Helmet } from "react-helmet";
 import { generatePath, Route, Switch } from "react-router-dom";
+
 import { client } from "../../comps/context/ApolloProvider";
-import UserContext from "../../comps/context/UserContext";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import Loading from "../../comps/ui/Loading";
+import Charter from "./charter";
+import Overview from "./overview";
+import Meetings from "./meetings";
+import { Helmet } from "react-helmet";
+import { makeStyles } from "@material-ui/core/styles";
+
+import Grid from "@material-ui/core/Grid";
+
 import OrgNavPanel from "../../comps/pages/organization/OrgNavPanel";
 import BackButton from "../../comps/ui/BackButton";
-import Loading from "../../comps/ui/Loading";
-import Error404 from "../error404";
-import styles from "./../../Globals.module.css";
-import OrgAdminRouter from "./admin";
-import Charter from "./charter";
-import Join from "./join";
-import Meetings from "./meetings";
 import Members from "./members";
-import Overview from "./overview";
+import Error404 from "../error404";
+
+import OrgAdminRouter from "./admin";
+import Join from "./join";
+import UserContext from "../../comps/context/UserContext";
+
+import styles from "./../../Globals.module.css";
 
 const useStyles = makeStyles(theme => ({
 	backButton: {

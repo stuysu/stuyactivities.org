@@ -1,11 +1,11 @@
+import React from "react";
 import { gql, useQuery } from "@apollo/client";
+import { OrgContext } from "./index";
 import { Typography } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
+import UserContext from "../../comps/context/UserContext";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import React from "react";
-import UserContext from "../../comps/context/UserContext";
-import { OrgContext } from "./index";
+import Avatar from "@material-ui/core/Avatar";
 
 const getQuery = signedIn => {
 	return gql`

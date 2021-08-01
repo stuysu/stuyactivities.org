@@ -1,7 +1,7 @@
-import { Card, Grid, Typography } from "@material-ui/core";
-import moment from "moment-timezone";
 import React from "react";
+import { Card, Grid, Typography } from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
+import moment from "moment-timezone";
 
 export default function MeetingCards({ meetings }) {
 	return (

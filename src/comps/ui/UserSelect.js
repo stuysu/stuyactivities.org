@@ -1,7 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
+import React from "react";
 import { makeStyles, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import React from "react";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 const QUERY = gql`
 	query Users($keyword: String!) {
 		users(keyword: $keyword, limit: 10) {

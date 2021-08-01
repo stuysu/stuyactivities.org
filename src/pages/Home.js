@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import UserContext from "../comps/context/UserContext";
 import UnauthenticatedLanding from "../comps/home/UnauthenticatedLanding";
+import UserContext from "../comps/context/UserContext";
 import UserHome from "../comps/home/UserHome";
 
 const Home = () => {

@@ -1,8 +1,8 @@
+import React from "react";
+import useFilterStyles from "./useFilterStyles";
+import arrayToggle from "../../../../utils/arrayToggle";
 import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
-import arrayToggle from "../../../../utils/arrayToggle";
-import useFilterStyles from "./useFilterStyles";
 
 export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
 	const classes = useFilterStyles();

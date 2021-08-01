@@ -1,20 +1,20 @@
+import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import BackButton from "../../../comps/ui/BackButton";
+import layout from "./../../../styles/Layout.module.css";
+import Loading from "../../../comps/ui/Loading";
 import { Button, Divider, Grid, Typography } from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
+import moment from "moment-timezone";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import TextField from "@material-ui/core/TextField";
-import moment from "moment-timezone";
-import React from "react";
-import { cache } from "../../../comps/context/ApolloProvider";
-import BackButton from "../../../comps/ui/BackButton";
-import LinkifyText from "../../../comps/ui/LinkifyText";
-import Loading from "../../../comps/ui/Loading";
 import capitalizeString from "../../../utils/capitalizeString";
-import layout from "./../../../styles/Layout.module.css";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import TextField from "@material-ui/core/TextField";
+import { cache } from "../../../comps/context/ApolloProvider";
+import LinkifyText from "../../../comps/ui/LinkifyText";
 
 const CREATE_MESSAGE_MUTATION = gql`
 	mutation ($orgId: Int!, $message: String!) {

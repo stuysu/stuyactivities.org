@@ -1,12 +1,12 @@
+import React from "react";
+import { OrgContext } from "./index";
+import { makeStyles, Typography } from "@material-ui/core";
+import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
-import FullCalendar from "@fullcalendar/react";
-import { makeStyles, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import React from "react";
 import MeetingCard from "../../comps/meetings/MeetingCard";
 import { triggerMeetingDialog } from "../../comps/meetings/MeetingPreviewDialog";
-import { OrgContext } from "./index";
 
 const useStyles = makeStyles(theme => ({
 	margin: {

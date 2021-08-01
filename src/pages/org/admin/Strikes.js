@@ -1,6 +1,6 @@
-import { gql, useQuery } from "@apollo/client";
-import { List, ListItem, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { List, ListItem, makeStyles, Typography } from "@material-ui/core";
+import { gql, useQuery } from "@apollo/client";
 
 const useStyles = makeStyles(theme => ({
 	margin: {

@@ -1,11 +1,11 @@
-import { gql, useQuery } from "@apollo/client";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
-import smartTimespan from "../../utils/smartTimespan";
-import UserContext from "../context/UserContext";
+import { gql, useQuery } from "@apollo/client";
 import Loading from "../ui/Loading";
+import { Typography } from "@material-ui/core";
+import smartTimespan from "../../utils/smartTimespan";
+import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 const QUERY = gql`
 	query ($id: Int!) {

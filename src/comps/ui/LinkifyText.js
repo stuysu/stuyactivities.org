@@ -1,6 +1,6 @@
+import React from "react";
 import Link from "@material-ui/core/Link";
 import Linkify from "linkifyjs/react";
-import React from "react";
 
 const LinkifyText = ({ children, color = "secondary" }) => {
 	return (

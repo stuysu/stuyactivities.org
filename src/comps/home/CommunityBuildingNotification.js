@@ -1,9 +1,9 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import Linkify from "linkifyjs/react";
 import React from "react";
+import { Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
+import Linkify from "linkifyjs/react";
 import communityCircles from "./communityCircles.json";
-import psalcm from "./psal+clubMeetings";
 import socialization from "./socialization";
+import psalcm from "./psal+clubMeetings";
 
 const CommunityBuildingNotification = ({ grade }) => {
 	let cctable = Object.values(communityCircles).flat();

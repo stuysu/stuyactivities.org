@@ -1,15 +1,16 @@
-import { gql, useMutation } from "@apollo/client";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { client } from "../comps/context/ApolloProvider";
-import UserContext from "../comps/context/UserContext";
-import BackButton from "../comps/ui/BackButton";
 import FlexCenter from "../comps/ui/FlexCenter";
-import Loading from "../comps/ui/Loading";
+import { Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import handstandVector from "../img/vectors/clip-dancer.svg";
 import ghost from "../img/vectors/hugo-ghost.svg";
+import BackButton from "../comps/ui/BackButton";
+import Loading from "../comps/ui/Loading";
+import UserContext from "../comps/context/UserContext";
 
 const useStyles = makeStyles({
 	contentContainer: {

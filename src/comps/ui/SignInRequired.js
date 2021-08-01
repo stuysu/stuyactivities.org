@@ -1,8 +1,9 @@
-import { Button, Typography } from "@material-ui/core";
 import React from "react";
-import { triggerLoginDialog } from "../auth/AuthDialog";
+
 import accessBlocked from "./../../img/vectors/ginger-cat-access-blocked.svg";
 import FlexCenter from "./FlexCenter";
+import { Button, Typography } from "@material-ui/core";
+import { triggerLoginDialog } from "../auth/AuthDialog";
 
 const SignInRequired = () => {
 	return (

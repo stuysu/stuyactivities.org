@@ -1,7 +1,7 @@
+import React from "react";
 import { Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
 import { CharterFormContext } from "../../../pages/charter";
 
 const useStyles = makeStyles(theme => ({

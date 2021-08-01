@@ -1,12 +1,12 @@
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import TeacherVector from "../../../img/vectors/clip-teacher.svg";
-import FlexCenter from "../../ui/FlexCenter";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import GoogleLoginButton from "../GoogleLoginButton";
 // import MagicLogin from "../MagicLogin";
 import AuthContext from "../AuthContext";
-import GoogleLoginButton from "../GoogleLoginButton";
+import FlexCenter from "../../ui/FlexCenter";
 
 const useStyles = makeStyles(theme => ({
 	textContainer: {

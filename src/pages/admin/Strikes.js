@@ -1,10 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
-import { Grid } from "@material-ui/core";
 import React from "react";
+import { gql, useQuery } from "@apollo/client";
+import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
+import { Grid } from "@material-ui/core";
+import StrikeCard from "../../comps/pages/admin/StrikeCard";
 import { client } from "../../comps/context/ApolloProvider";
 import UserContext from "../../comps/context/UserContext";
-import StrikeCard from "../../comps/pages/admin/StrikeCard";
-import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
 
 const QUERY = gql`
 	query Organizations($keyword: String) {

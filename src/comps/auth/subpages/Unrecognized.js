@@ -1,7 +1,7 @@
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import React from "react";
 import FallingInSpace from "../../../img/vectors/clip-in-the-space.svg";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 import AuthContext from "../AuthContext";
 
 const useStyles = makeStyles(theme => ({

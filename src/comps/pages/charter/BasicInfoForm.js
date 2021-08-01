@@ -1,14 +1,14 @@
-import { Chip, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import ChipInput from "material-ui-chip-input";
 import React from "react";
 import { CharterFormContext } from "../../../pages/charter";
-import arrayToggle from "../../../utils/arrayToggle";
-import CommitmentLevel from "./CommitmentLevel";
-import PictureUpload from "./PictureUpload";
+import TextField from "@material-ui/core/TextField";
 import TagSelection from "./TagSelection";
 import UrlSelection from "./UrlSelection";
+import { makeStyles } from "@material-ui/core/styles";
+import PictureUpload from "./PictureUpload";
+import CommitmentLevel from "./CommitmentLevel";
+import { Chip, Grid } from "@material-ui/core";
+import ChipInput from "material-ui-chip-input";
+import arrayToggle from "../../../utils/arrayToggle";
 
 const useStyles = makeStyles({
 	select: {

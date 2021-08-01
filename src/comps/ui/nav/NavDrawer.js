@@ -1,12 +1,13 @@
-import { Avatar, Typography } from "@material-ui/core";
+import React, { useContext } from "react";
+import { useLocation } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import { makeStyles } from "@material-ui/core/styles";
+import Logo from "./../../../img/logo512.png";
+import UserContext from "../../context/UserContext";
 import {
 	AccountBox,
 	AccountBoxOutlined,
@@ -23,12 +24,11 @@ import {
 	PowerSettingsNewOutlined,
 	SettingsOutlined
 } from "@material-ui/icons";
-import React, { useContext } from "react";
-import { useLocation } from "react-router-dom";
-import { triggerLoginDialog } from "../../auth/AuthDialog";
-import UserContext from "../../context/UserContext";
+import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
-import Logo from "./../../../img/logo512.png";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import { triggerLoginDialog } from "../../auth/AuthDialog";
 
 const useStyles = makeStyles(theme => ({
 	list: {

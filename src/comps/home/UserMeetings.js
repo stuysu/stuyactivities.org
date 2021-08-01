@@ -1,13 +1,14 @@
+import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
+import UserContext from "../context/UserContext";
+import Loading from "../ui/Loading";
+import Carousel from "react-multi-carousel";
+
+import "react-multi-carousel/lib/styles.css";
+import MeetingCard from "../meetings/MeetingCard";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useContext } from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { client } from "../context/ApolloProvider";
-import UserContext from "../context/UserContext";
-import MeetingCard from "../meetings/MeetingCard";
-import Loading from "../ui/Loading";
 
 const responsive = {
 	superLargeDesktop: {
