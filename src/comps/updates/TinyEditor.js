@@ -3,7 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 
 const UPLOAD_MUTATION = gql`
 	mutation ($file: Upload!, $alt: NonEmptyString!) {
-		uploadPicture(alt: $alt, file: $file) {
+		uploadImage(alt: $alt, file: $file) {
 			id
 			alt
 			resource {
