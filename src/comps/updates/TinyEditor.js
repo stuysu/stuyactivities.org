@@ -40,7 +40,7 @@ const TinyEditor = ({ value, setValue, className, disabled, placeholder }) => {
 								alt: "Upload for platform field"
 							}
 						})
-							.then(({ data }) => success(data?.uploadPicture?.url))
+							.then(({ data }) => success(data?.uploadImage?.url))
 							.catch(failure);
 					},
 					images_upload_url: false,
