@@ -1,4 +1,4 @@
-import React, { useState }from "react";
+import React, { useState } from "react";
 import { OrgContext } from "./index";
 import FlexCenter from "../../comps/ui/FlexCenter";
 import { Typography, useMediaQuery } from "@material-ui/core";
@@ -188,7 +188,7 @@ const Overview = () => {
 					})}
 				</List>
 				{showMore ? (
-					<Button color={'primary'} onClick={handleRelatedClubs}>
+					<Button color={"primary"} onClick={handleRelatedClubs}>
 						Show More
 					</Button>
 				) : (
