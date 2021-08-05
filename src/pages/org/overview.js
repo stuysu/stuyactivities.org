@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }from "react";
 import { OrgContext } from "./index";
 import FlexCenter from "../../comps/ui/FlexCenter";
 import { Typography, useMediaQuery } from "@material-ui/core";
@@ -12,9 +12,12 @@ import Masonry from "react-masonry-css";
 import UpdateCard from "../../comps/updates/UpdateCard";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
+import Button from "@material-ui/core/Button";
 const Overview = () => {
 	const org = React.useContext(OrgContext);
 	const isMobile = useMediaQuery("(max-width: 900px)");
+	const [relatedClubs, setRelatedClubs] = useState(4);
+	const [showMore, setShowMore] = useState(true);
 	const ids = [];
 	org.tags.forEach(n => {
 		ids.push(n.id);
@@ -60,8 +63,19 @@ const Overview = () => {
 			});
 			tempOrgList.push([n, common]);
 		});
-		var orgList = tempOrgList.sort().reverse().slice(0, 4);
+		var orgList = tempOrgList.sort().reverse().slice(0, relatedClubs);
 	}
+
+	const handleRelatedClubs = () => {
+		const length = data.organizations.length;
+		if (relatedClubs + 3 <= length) {
+			setRelatedClubs(relatedClubs + 3);
+		} else {
+			setRelatedClubs(relatedClubs + (length % 3));
+			setShowMore(false);
+		}
+	};
+
 	return (
 		<FlexCenter>
 			<div style={{ width: "100%" }}>
@@ -173,6 +187,13 @@ const Overview = () => {
 						return null;
 					})}
 				</List>
+				{showMore ? (
+					<Button color={'primary'} onClick={handleRelatedClubs}>
+						Show More
+					</Button>
+				) : (
+					<></>
+				)}
 			</div>
 		</FlexCenter>
 	);
