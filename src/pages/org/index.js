@@ -94,6 +94,16 @@ const getQuery = signedIn => {
 					privacy
 					end
 				}
+				recurringMeetings {
+					id
+					title
+					description
+					start
+					end
+					privacy
+					frequency
+					dayOfWeek
+				}
 				membership {
 					id
 					role
