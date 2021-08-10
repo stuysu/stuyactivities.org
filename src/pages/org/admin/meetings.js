@@ -463,8 +463,6 @@ const EditPage = ({ match }) => {
 				end: recurring
 					? endTime.format("HH:mm:ss.SSSZ")
 					: endTime.toISOString(),
-				notifyMembers: checked,
-				privacy,
 				frequency,
 				dayOfWeek
 			}

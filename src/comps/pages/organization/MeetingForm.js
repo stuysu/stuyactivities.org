@@ -47,6 +47,17 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
+//Map number to ordinal, used to format room floors
+//1 -> 1st, 2 -> 2nd, etc...
+const ordinal = (number) => {
+	let suffixes = ["st", "nd", "rd"];
+	let ones = number % 10;
+	let tens = parseInt(number / 10) % 10;
+	if (0 < ones && ones <= 3 && tens !== 1)
+		return number + suffixes[ones - 1];
+	return number + "th";
+}
+
 // recurring param is for editing only
 // when already editing, it shows dayOfWeek input instead of date input
 // ^ could be changed to show day of week when creating the recurring meeting, not only when editing it
@@ -122,7 +133,7 @@ const MeetingForm = ({
 
 
 	let rooms = (loading || error) ? [External] : [External].concat(data.availableRooms);
-	const roomAvailable = !loading && !error && rooms.find(roomNumber => roomNumber.name === room.name) !== undefined;
+	const roomAvailable = !loading && !error && rooms.find(roomNumber => roomNumber.id === room.id) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
 
 	return (
@@ -149,7 +160,7 @@ const MeetingForm = ({
 			/>
 			<Grid container spacing={1}>
 				<MuiPickersUtilsProvider utils={MomentUtils}>
-					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						{alreadyRecurring ? (
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel shrink>Day Of Week</InputLabel>
@@ -172,7 +183,7 @@ const MeetingForm = ({
 								fullWidth
 								autoOk
 								label="Date"
-								value={date}
+								value={time.start}
 								format="MMM DD"
 								onChange={updateDate}
 								animateYearScrolling
@@ -204,14 +215,25 @@ const MeetingForm = ({
 							onChange={updateEnd}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
 						<Autocomplete
 							options={rooms}
 							getOptionLabel={(option) => option.name}
+							getOptionSelected={(option) => option.id === room.id}
 							disabled={loading}
 							error={!roomAvailable}
 							value={room}
 							onChange={(_, r) => setRoom(r)}
+							renderOption={
+								(option) =>
+									<span>
+										<Typography>{option.name}</Typography>
+										{option.floor && <Typography color="textSecondary">
+											{ordinal(option.floor)} Floor
+										</Typography>}
+									</span>
+
+							}
 							renderInput={
 								(params) =>
 									<TextField
@@ -293,7 +315,7 @@ const MeetingForm = ({
 						date: time.start,
 						privacy: isPublic ? "public" : "private",
 						frequency: recurring ? Number(frequency) : 0,
-						dayOfWeek: alreadyRecurring ? dayOfWeek : date.day(),
+						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
 						...room.id !== 0 && { roomId: room.id },
 					});
 				}}
