@@ -16,7 +16,7 @@ import {
 	ListItemSecondaryAction,
 	makeStyles,
 	TextField,
-	Typography,
+	Typography
 } from "@material-ui/core";
 import { Delete, Edit } from "@material-ui/icons";
 import { Autocomplete } from "@material-ui/lab";
@@ -62,7 +62,7 @@ const GROUP_QUERY = gql`
 
 const CREATE_GROUP_MEMBERSHIP_MUTATION = gql`
 	mutation CreateGroupMembership($groupId: Int!, $userId: Int!) {
-		createGroupMembership(groupId:$groupId, userId:$userId) {
+		createGroupMembership(groupId: $groupId, userId: $userId) {
 			id
 		}
 	}
@@ -111,7 +111,7 @@ export default function Groups({ match }) {
 		createGroupMutation({
 			variables: {
 				orgId: data?.organizationByUrl.id,
-				name: newGroupName,
+				name: newGroupName
 			}
 		});
 	};
@@ -122,8 +122,8 @@ export default function Groups({ match }) {
 			createMembershipMutation({
 				variables: {
 					groupId: editGroup.id,
-					userId: user.id,
-				},
+					userId: user.id
+				}
 			})
 		);
 		setEditGroup({});
@@ -133,7 +133,7 @@ export default function Groups({ match }) {
 	const deleteGroupMembership = () => {
 		deleteMembershipMutation({
 			variables: {
-				groupMembershipId: groupMembership.id,
+				groupMembershipId: groupMembership.id
 			}
 		});
 		setGroupMembership({});
@@ -142,164 +142,178 @@ export default function Groups({ match }) {
 	const deleteGroup = () => {
 		deleteGroupMutation({
 			variables: {
-				groupId: editGroup.id,
+				groupId: editGroup.id
 			}
-		})
+		});
 		setEditGroup({});
 	};
 
-	return <div className={classes.margin}>
-
-		<Card>
-			<Box p={2} m={2} pb={5}>
-				<Typography variant="h5">
-					Create New Group
-				</Typography>
-				<br />
-				<TextField
-					value={newGroupName}
-					onChange={e => setNewGroupName(e.target.value)}
-					required={true}
-					label="Name"
-					variant="outlined"
-					fullWidth
-				/>
-				<br />
-				<br />
-				<Button
-					onClick={createGroup}
-					color="primary"
-					variant={"contained"}
-					style={{ float: 'right' }}
-				>
-					Create Group
-				</Button>
-			</Box>
-		</Card>
-		<List>
-			{data?.organizationByUrl?.groups.map((group) =>
-				<Card><Box p={1}><ListItem key={group.id} fullWidth>
-					<Grid container xl={12} lg={12} md={12} sm={12} xs={12} direction="column">
-						<Typography variant="h5">
-							{group.name}
-						</Typography>
-						<List>
-							{group.memberships.length > 0 ? group.memberships.map((membership) =>
-								<ListItem button>
+	return (
+		<div className={classes.margin}>
+			<Card>
+				<Box p={2} m={2} pb={5}>
+					<Typography variant="h5">Create New Group</Typography>
+					<br />
+					<TextField
+						value={newGroupName}
+						onChange={e => setNewGroupName(e.target.value)}
+						required={true}
+						label="Name"
+						variant="outlined"
+						fullWidth
+					/>
+					<br />
+					<br />
+					<Button onClick={createGroup} color="primary" variant={"contained"} style={{ float: "right" }}>
+						Create Group
+					</Button>
+				</Box>
+			</Card>
+			<List>
+				{data?.organizationByUrl?.groups.map(group => (
+					<Card>
+						<Box p={1}>
+							<ListItem key={group.id} fullWidth>
+								<Grid container xl={12} lg={12} md={12} sm={12} xs={12} direction="column">
+									<Typography variant="h5">{group.name}</Typography>
+									<List>
+										{group.memberships.length > 0 ? (
+											group.memberships.map(membership => (
+												<ListItem button>
+													<ListItemAvatar>
+														<Avatar src={membership.user.picture} />
+													</ListItemAvatar>
+													<span>
+														<Typography>{membership.user.name}</Typography>
+														<Typography color={"textSecondary"} variant={"subtitle2"}>
+															{membership.user.email}
+														</Typography>
+													</span>
+													<ListItemSecondaryAction>
+														<IconButton
+															onClick={() => {
+																setGroupMembership({
+																	groupName: group.name,
+																	...membership
+																});
+															}}
+														>
+															<Delete />
+														</IconButton>
+													</ListItemSecondaryAction>
+												</ListItem>
+											))
+										) : (
+											<Typography color={"textSecondary"}>
+												This group has no members yet.
+											</Typography>
+										)}
+									</List>
+								</Grid>
+								<IconButton onClick={() => setEditGroup(group)}>
+									<Edit />
+								</IconButton>
+							</ListItem>
+						</Box>
+					</Card>
+				))}
+				{/*Remove member dialog*/}
+				<Dialog open={groupMembership.id !== undefined} onClose={() => setGroupMembership({})}>
+					<DialogTitle>
+						Are you sure you want to remove {groupMembership.user?.name} from {groupMembership.groupName}?
+					</DialogTitle>
+					<DialogActions>
+						<Button onClick={() => setGroupMembership({})} color="primary">
+							Cancel
+						</Button>
+						<Button onClick={deleteGroupMembership} color="primary">
+							Yes
+						</Button>
+					</DialogActions>
+				</Dialog>
+				{/*Add members dialog*/}
+				<Dialog open={editGroup.id !== undefined} onClose={() => setEditGroup({})} fullWidth>
+					<DialogTitle>Edit or delete {editGroup.name}</DialogTitle>
+					<Box margin={3}>
+						<Autocomplete
+							options={data?.organizationByUrl.memberships
+								.map(membership => membership.user)
+								.filter(
+									user =>
+										editGroup.newMembers?.find(newUser => newUser.id === user.id) === undefined &&
+										editGroup.memberships?.find(membership => membership.user.id === user.id) ===
+											undefined
+								)}
+							renderInput={params => <TextField {...params} label="Find User" variant="outlined" />}
+							renderOption={option => (
+								<>
 									<ListItemAvatar>
-										<Avatar src={membership.user.picture} />
+										<Avatar src={option?.picture} />
 									</ListItemAvatar>
 									<span>
-										<Typography>{membership.user.name}</Typography>
-										<Typography color={"textSecondary"} variant={"subtitle2"}>
-											{membership.user.email}
-										</Typography>
+										<span>{option?.name}</span>
+										<br />
+										<span className={classes.smallerText}>
+											{option?.email}
+											<br />
+											{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
+										</span>
 									</span>
+								</>
+							)}
+							getOptionLabel={user => user.name}
+							onChange={(_, user) => {
+								if (user) {
+									let newMembers;
+									if (editGroup.newMembers !== undefined) {
+										newMembers = [...editGroup.newMembers, user];
+									} else {
+										newMembers = [user];
+									}
+									setEditGroup({ ...editGroup, newMembers });
+								}
+							}}
+						/>
+					</Box>
+					<List>
+						{editGroup.newMembers?.map((member, index) => (
+							<ListItem key={index} button>
+								<Grid container xl={12} lg={12} md={12} sm={12} xs={12}>
+									<Typography>{member.name}</Typography>
 									<ListItemSecondaryAction>
-										<IconButton onClick={() => { setGroupMembership({ groupName: group.name, ...membership }) }}>
+										<IconButton
+											onClick={() => {
+												editGroup.newMembers.splice(index, 1);
+												setEditGroup({ ...editGroup });
+											}}
+										>
 											<Delete />
 										</IconButton>
 									</ListItemSecondaryAction>
-								</ListItem>
-							) : <Typography color={"textSecondary"}>This group has no members yet.</Typography>}
-						</List>
-					</Grid>
-					<IconButton onClick={() => setEditGroup(group)}>
-						<Edit />
-					</IconButton>
-				</ListItem></Box></Card>
-			)}
-			{/*Remove member dialog*/}
-			<Dialog open={groupMembership.id !== undefined} onClose={() => setGroupMembership({})}>
-				<DialogTitle>Are you sure you want to remove {groupMembership.user?.name} from {groupMembership.groupName}?</DialogTitle>
-				<DialogActions>
-					<Button onClick={() => setGroupMembership({})} color="primary">
-						Cancel
-					</Button>
-					<Button onClick={deleteGroupMembership} color="primary">
-						Yes
-					</Button>
-				</DialogActions>
-			</Dialog>
-			{/*Add members dialog*/}
-			<Dialog open={editGroup.id !== undefined} onClose={() => setEditGroup({})} fullWidth>
-				<DialogTitle>Edit or delete {editGroup.name}</DialogTitle>
-				<Box margin={3}>
-					<Autocomplete
-						options={data?.organizationByUrl.memberships
-							.map(membership => membership.user)
-							.filter(user =>
-								editGroup.newMembers?.find(newUser => newUser.id === user.id) === undefined
-								&& editGroup.memberships?.find(membership => membership.user.id === user.id) === undefined
-							)}
-						renderInput={params =>
-							<TextField
-								{...params}
-								label="Find User"
-								variant="outlined"
-							/>}
-						renderOption={option =>
-							<>
-								<ListItemAvatar>
-									<Avatar src={option?.picture} />
-								</ListItemAvatar>
-								<span>
-									<span>{option?.name}</span>
-									<br />
-									<span className={classes.smallerText}>
-										{option?.email}
-										<br />
-										{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
-									</span>
-								</span>
-							</>}
-						getOptionLabel={user => user.name}
-						onChange={(_, user) => {
-							if (user) {
-								let newMembers;
-								if (editGroup.newMembers !== undefined) {
-									newMembers = [...editGroup.newMembers, user];
-								} else {
-									newMembers = [user];
+								</Grid>
+							</ListItem>
+						))}
+					</List>
+					<DialogActions>
+						<Button onClick={() => setEditGroup({})}>Close</Button>
+						{editGroup.newMembers?.length > 0 && <Button onClick={addGroupMemberships}>Add Members</Button>}
+						<Button
+							color="primary"
+							onClick={() => {
+								if (
+									window.confirm(
+										"Are you sure you want to delete " + editGroup.name + " permanently?"
+									)
+								) {
+									deleteGroup();
 								}
-								setEditGroup({ ...editGroup, newMembers })
-							}
-						}}
-					/>
-				</Box>
-				<List>
-					{editGroup.newMembers?.map((member, index) =>
-						<ListItem key={index} button>
-							<Grid container xl={12} lg={12} md={12} sm={12} xs={12}>
-								<Typography>{member.name}</Typography>
-								<ListItemSecondaryAction>
-									<IconButton onClick={() => { editGroup.newMembers.splice(index, 1); setEditGroup({ ...editGroup }); }}>
-										<Delete />
-									</IconButton>
-								</ListItemSecondaryAction>
-							</Grid>
-						</ListItem>
-					)}
-				</List>
-				<DialogActions>
-					<Button onClick={() => setEditGroup({})}>
-						Close
-					</Button>
-					{editGroup.newMembers?.length > 0 &&
-						<Button onClick={addGroupMemberships}>
-							Add Members
-						</Button>}
-					<Button
-						color="primary"
-						onClick={() => {
-							if (window.confirm("Are you sure you want to delete " + editGroup.name + " permanently?")) {
-								deleteGroup();
-							}
-						}}>
-						Delete {editGroup.name} Permanently
-					</Button>
-				</DialogActions>
-			</Dialog>
-		</List>
-	</div >;
-};
+							}}
+						>
+							Delete {editGroup.name} Permanently
+						</Button>
+					</DialogActions>
+				</Dialog>
+			</List>
+		</div>
+	);
+}
