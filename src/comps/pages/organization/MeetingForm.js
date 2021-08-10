@@ -28,7 +28,7 @@ import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pi
 import TinyEditor from "../../updates/TinyEditor";
 
 const availableRooms = gql`
-	query ($start: DateTime!, $end: DateTime!){
+	query ($start: DateTime!, $end: DateTime!) {
 		availableRooms(start: $start, end: $end) {
 			id
 			name
@@ -49,14 +49,13 @@ const useStyles = makeStyles(theme => ({
 
 //Map number to ordinal, used to format room floors
 //1 -> 1st, 2 -> 2nd, etc...
-const ordinal = (number) => {
+const ordinal = number => {
 	let suffixes = ["st", "nd", "rd"];
 	let ones = number % 10;
 	let tens = parseInt(number / 10) % 10;
-	if (0 < ones && ones <= 3 && tens !== 1)
-		return number + suffixes[ones - 1];
+	if (0 < ones && ones <= 3 && tens !== 1) return number + suffixes[ones - 1];
 	return number + "th";
-}
+};
 
 // recurring param is for editing only
 // when already editing, it shows dayOfWeek input instead of date input
@@ -115,24 +114,17 @@ const MeetingForm = ({
 		}
 	});
 
-	const updateEnd = (new_end) => {
-		let end = moment(
-			`${time.start.format("MM-DD-YYYY")} ${new_end.format("HH:mm")}`,
-			"MM-DD-YYYY HH:mm"
-		)
+	const updateEnd = new_end => {
+		let end = moment(`${time.start.format("MM-DD-YYYY")} ${new_end.format("HH:mm")}`, "MM-DD-YYYY HH:mm");
 		setTime({ ...time, end });
-	}
+	};
 
-	const updateDate = (start) => {
-		let end = moment(
-			`${start.format("MM-DD-YYYY")} ${time.end.format("HH:mm")}`,
-			"MM-DD-YYYY HH:mm"
-		)
+	const updateDate = start => {
+		let end = moment(`${start.format("MM-DD-YYYY")} ${time.end.format("HH:mm")}`, "MM-DD-YYYY HH:mm");
 		setTime({ start, end });
 	};
 
-
-	let rooms = (loading || error) ? [External] : [External].concat(data.availableRooms);
+	let rooms = loading || error ? [External] : [External].concat(data.availableRooms);
 	const roomAvailable = !loading && !error && rooms.find(roomNumber => roomNumber.id === room.id) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
 
@@ -218,29 +210,21 @@ const MeetingForm = ({
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
 						<Autocomplete
 							options={rooms}
-							getOptionLabel={(option) => option.name}
-							getOptionSelected={(option) => option.id === room.id}
+							getOptionLabel={option => option.name}
+							getOptionSelected={option => option.id === room.id}
 							disabled={loading}
 							error={!roomAvailable}
 							value={room}
 							onChange={(_, r) => setRoom(r)}
-							renderOption={
-								(option) =>
-									<span>
-										<Typography>{option.name}</Typography>
-										{option.floor && <Typography color="textSecondary">
-											{ordinal(option.floor)} Floor
-										</Typography>}
-									</span>
-
-							}
-							renderInput={
-								(params) =>
-									<TextField
-										{...params}
-										label="Room"
-										variant="outlined"
-									/>}
+							renderOption={option => (
+								<span>
+									<Typography>{option.name}</Typography>
+									{option.floor && (
+										<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
+									)}
+								</span>
+							)}
+							renderInput={params => <TextField {...params} label="Room" variant="outlined" />}
 						/>
 					</Grid>
 				</MuiPickersUtilsProvider>
@@ -316,7 +300,7 @@ const MeetingForm = ({
 						privacy: isPublic ? "public" : "private",
 						frequency: recurring ? Number(frequency) : 0,
 						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
-						...room.id !== 0 && { roomId: room.id },
+						...(room.id !== 0 && { roomId: room.id })
 					});
 				}}
 				color={"primary"}
