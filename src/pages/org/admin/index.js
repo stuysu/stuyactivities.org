@@ -8,7 +8,7 @@ import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
 import CharterEdits from "./charter-edits";
 import Meetings from "./meetings";
-import { Group, GroupAdd, GroupWork, ListAlt, SmsFailed, PostAdd } from "@material-ui/icons";
+import { Person, PersonAdd, GroupWork, ListAlt, SmsFailed, PostAdd } from "@material-ui/icons";
 import Strikes from "./Strikes";
 import Updates from "./updates";
 import { OrgContext } from "../index";
@@ -27,12 +27,12 @@ export default function OrgAdminRouter({ match }) {
 		{
 			path: actualMatch + "/members",
 			label: "Members",
-			icon: <Group />
+			icon: <Person />
 		},
 		{
 			path: actualMatch + "/member-requests",
 			label: "Member Requests",
-			icon: <GroupAdd />
+			icon: <PersonAdd />
 		},
 		{
 			path: actualMatch + "/meetings",
