@@ -2,13 +2,10 @@ import { gql, useMutation } from "@apollo/client";
 import { Editor } from "@tinymce/tinymce-react";
 
 const UPLOAD_MUTATION = gql`
-	mutation ($file: Upload!, $alt: NonEmptyString!) {
-		uploadPicture(alt: $alt, file: $file) {
+	mutation ($file: Upload!, $alt: String!) {
+		uploadImage(alt: $alt, file: $file) {
 			id
-			alt
-			resource {
-				url
-			}
+			url
 		}
 	}
 `;
@@ -43,7 +40,7 @@ const TinyEditor = ({ value, setValue, className, disabled, placeholder }) => {
 								alt: "Upload for platform field"
 							}
 						})
-							.then(({ data }) => success(data?.uploadPicture?.resource?.url))
+							.then(({ data }) => success(data?.uploadImage?.url))
 							.catch(failure);
 					},
 					images_upload_url: false,

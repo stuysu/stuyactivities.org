@@ -117,6 +117,80 @@ const EDIT_MUTATION = gql`
 	}
 `;
 
+const CREATE_RECURRING_MUTATION = gql`
+	mutation CreateRecurringMeeting(
+		$orgUrl: String
+		$title: String!
+		$description: String!
+		$start: Time!
+		$end: Time!
+		$privacy: String!
+		$frequency: Int!
+		$dayOfWeek: Int!
+	) {
+		createRecurringMeeting(
+			orgUrl: $orgUrl
+			title: $title
+			description: $description
+			start: $start
+			end: $end
+			privacy: $privacy
+			frequency: $frequency
+			dayOfWeek: $dayOfWeek
+		) {
+			id
+			title
+			description
+			start
+			end
+			privacy
+			frequency
+			dayOfWeek
+		}
+	}
+`;
+
+const REMOVE_RECURRING_MUTATION = gql`
+	mutation DeleteRecurringMeeting($id: Int!) {
+		deleteRecurringMeeting(recurringMeetingId: $id)
+	}
+`;
+
+const EDIT_RECURRING_MUTATION = gql`
+	mutation AlterRecurringMeeting(
+		$id: Int!
+		$title: String
+		$description: String
+		$start: Time
+		$end: Time
+		$privacy: String
+		$notifyMembers: Boolean
+		$frequency: Int
+		$dayOfWeek: Int
+	) {
+		alterRecurringMeeting(
+			recurringMeetingId: $id
+			title: $title
+			description: $description
+			start: $start
+			end: $end
+			notifyMembers: $notifyMembers
+			privacy: $privacy
+			frequency: $frequency
+			dayOfWeek: $dayOfWeek
+		) {
+			id
+			title
+			description
+			start
+			end
+			privacy
+			frequency
+			dayOfWeek
+		}
+	}
+`;
+
 const Main = ({ match }) => {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
@@ -160,20 +234,66 @@ const Main = ({ match }) => {
 			});
 		}
 	});
-	const create = ({ title, description, date, endTime, checked, privacy, roomId }) => {
-		console.log("!");
-		createMutation({
-			variables: {
-				orgUrl: match.params.orgUrl,
-				title,
-				description: description || "",
-				start: date.toISOString(),
-				end: endTime.toISOString(),
-				notifyFaculty: checked,
-				privacy,
-				roomId,
-			}
-		});
+	// loadingReucrring is quick fix to get around const
+	// also could use let, idk why I went with this option
+	// I feel like both r equally valid
+	const [createRecurringMutation, { loadingRecurring }] = useMutation(CREATE_RECURRING_MUTATION, {
+		onCompleted() {
+			setFormKey(formKey + 1);
+			setErrorMessage("");
+		},
+		onError(error) {
+			console.log({ error });
+			setErrorMessage(error.message);
+		},
+		update(cache) {
+			// too many variables involved based on child meetings...
+			cache.reset().then(() => org.refetch());
+		}
+	});
+	const [removeRecurringMutation] = useMutation(REMOVE_RECURRING_MUTATION, {
+		onCompleted() {
+			setRemovingMeeting({});
+		},
+		update(cache) {
+			// just refresh cache because recurring meeting also deletes child meetings
+			// could do fancier but it's ok
+			cache.reset().then(() => org.refetch());
+		}
+	});
+	const create = ({ title, description, date, endTime, checked, privacy, frequency, roomId }) => {
+		console.log(frequency);
+		if (frequency) {
+			createRecurringMutation({
+				variables: {
+					orgUrl: match.params.orgUrl,
+					title,
+					description: description || "",
+					start: date.format("HH:mm:ss.SSSZ"),
+					end: endTime.format("HH:mm:ss.SSSZ"),
+					privacy,
+					frequency,
+					dayOfWeek: date.day(),
+					roomId
+				}
+			});
+		} else {
+			createMutation({
+				variables: {
+					orgUrl: match.params.orgUrl,
+					title,
+					description: description || "",
+					start: date.toISOString(),
+					end: moment(
+						`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
+						"MM-DD-YYYY HH:mm"
+					).toISOString(),
+					notifyFaculty: checked,
+					privacy,
+					roomId
+				}
+			});
+		}
 	};
 
 	const [removingMeeting, setRemovingMeeting] = React.useState({});
@@ -204,7 +324,7 @@ const Main = ({ match }) => {
 						key={formKey}
 						buttonText={"Create"}
 						checkboxText={"Notify faculty members?"}
-						isSubmitting={loading}
+						isSubmitting={loading || loadingRecurring}
 						errorMessage={errorMessage}
 					/>
 				</Grid>
@@ -212,6 +332,43 @@ const Main = ({ match }) => {
 					<Typography variant={"h4"} style={{ textAlign: "center" }}>
 						Existing Meetings
 					</Typography>
+					{org?.recurringMeetings?.length > 0 && (
+						<Typography variant={"h5"} className={classes.margin}>
+							Recurring Meetings
+						</Typography>
+					)}
+					<List>
+						{org?.recurringMeetings?.map(meeting => (
+							<Paper className={classes.margin}>
+								<ListItem>
+									<ListItemText
+										primary={meeting.title}
+										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${meeting.frequency
+											} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
+												"h:mm a"
+											)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
+									/>
+									<ListItemSecondaryAction>
+										<UnstyledLink
+											to={generatePath(match.path, match.params) + "/editRecurring/" + meeting.id}
+										>
+											<IconButton>
+												<Edit />
+											</IconButton>
+										</UnstyledLink>
+										<IconButton onClick={() => setRemovingMeeting(meeting)}>
+											<Close />
+										</IconButton>
+									</ListItemSecondaryAction>
+								</ListItem>
+							</Paper>
+						))}
+					</List>
+					{org?.recurringMeetings?.length > 0 && (
+						<Typography variant={"h5"} className={classes.margin}>
+							Non-Recurring Meetings
+						</Typography>
+					)}
 					<List>
 						{org?.meetings?.map(meeting => (
 							<Paper className={classes.margin}>
@@ -254,7 +411,14 @@ const Main = ({ match }) => {
 					<Button onClick={() => setRemovingMeeting({})} color="primary">
 						Cancel
 					</Button>
-					<Button onClick={() => removeMutation({ variables: removingMeeting })} color="primary">
+					<Button
+						onClick={() =>
+							removingMeeting.frequency
+								? removeRecurringMutation({ variables: removingMeeting })
+								: removeMutation({ variables: removingMeeting })
+						}
+						color="primary"
+					>
 						Remove
 					</Button>
 				</DialogActions>
@@ -269,32 +433,15 @@ const EditPage = ({ match }) => {
 	//Use snackbar since edit has no other visible effects
 	const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 	const [errorMessage, setErrorMessage] = React.useState("");
-	const editingMeeting = org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
-	const [editMutation, { loading }] = useMutation(EDIT_MUTATION, {
+
+	const recurring = match.path.includes("editRecurring");
+	const editingMeeting = recurring
+		? org?.recurringMeetings?.find(meeting => meeting.id === Number(match.params.meetingId))
+		: org?.meetings?.find(meeting => meeting.id === Number(match.params.meetingId));
+
+	const [editMutation, { loading }] = useMutation(recurring ? EDIT_RECURRING_MUTATION : EDIT_MUTATION, {
 		update(cache, { data: { alterMeeting } }) {
-			cache.modify({
-				id: cache.identify(org),
-				fields: {
-					meetings(existingMeetings = [], { readField }) {
-						const alteredMeetingRef = cache.writeFragment({
-							data: alterMeeting,
-							fragment: gql`
-								fragment AlteredMeeting on Meeting {
-									id
-									title
-									description
-									start
-									end
-								}
-							`
-						});
-						return [
-							...existingMeetings.filter(ref => readField("id", ref) !== alterMeeting.id),
-							alteredMeetingRef
-						];
-					}
-				}
-			});
+			cache.reset().then(() => org.refetch());
 		},
 		onError(error) {
 			setErrorMessage(error.message);
@@ -304,16 +451,22 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
-	const edit = ({ title, description, date, endTime, checked, privacy, roomId }) => {
+	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek }) => {
 		editMutation({
 			variables: {
 				id: Number(match.params.meetingId),
 				title,
 				description: description || "",
-				start: date.toISOString(),
-				end: endTime.toISOString(),
 				notifyMembers: checked,
 				privacy,
+				start: recurring ? date.format("HH:mm:ss.SSSZ") : date.toISOString(),
+				end: recurring
+					? endTime.format("HH:mm:ss.SSSZ")
+					: endTime.toISOString(),
+				notifyMembers: checked,
+				privacy,
+				frequency,
+				dayOfWeek
 			}
 		});
 	};
@@ -328,7 +481,7 @@ const EditPage = ({ match }) => {
 			<Grid container justify={"center"} className={classes.margin}>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
 					<Typography variant={"h4"} className={classes.newMeetingTitle}>
-						Edit Meeting
+						{recurring ? "Edit Recurring Meeting" : "Edit Meeting"}
 					</Typography>
 					<MeetingForm
 						submit={edit}
@@ -337,6 +490,7 @@ const EditPage = ({ match }) => {
 						checkboxText={"Notify club members?"}
 						isSubmitting={loading}
 						errorMessage={errorMessage}
+						recurring={recurring}
 					/>
 				</Grid>
 			</Grid>
@@ -346,6 +500,7 @@ const EditPage = ({ match }) => {
 				onClose={() => setSnackbarOpen(false)}
 				message={"Meeting Edited!"}
 			/>
+			<p>We're currently working on this page but we expect to have it up sometime this week.</p>
 		</div>
 	);
 };
@@ -354,6 +509,7 @@ const Meetings = ({ match }) => {
 	return (
 		<Switch>
 			<Route path={match.path + "/edit/:meetingId"} component={EditPage} />
+			<Route path={match.path + "/editRecurring/:meetingId"} component={EditPage} />
 			<Route path={match.path} component={Main} />
 		</Switch>
 	);

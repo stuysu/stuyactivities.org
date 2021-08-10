@@ -1,3 +1,7 @@
+//NO LONGER ACCESSIBLE FROM SITE
+//File has not been deleted in order to make re-implementation easier, if we
+//choose to re-implement this page similarly in coming years.
+
 import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
@@ -8,7 +12,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Button } from "@material-ui/core";
 
 const RESPONSE = gql`
-	query($orgId: Int!) {
+	query ($orgId: Int!) {
 		clubFairResponse(orgId: $orgId) {
 			id
 			isAttending
@@ -19,7 +23,7 @@ const RESPONSE = gql`
 `;
 
 const ALTER_RESPONSE = gql`
-	mutation($orgId: Int!, $isAttending: Boolean!, $meetingLink: String) {
+	mutation ($orgId: Int!, $isAttending: Boolean!, $meetingLink: String) {
 		alterClubFairResponse(orgId: $orgId, isAttending: $isAttending, meetingLink: $meetingLink) {
 			id
 			organizationId

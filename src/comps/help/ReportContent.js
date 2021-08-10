@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MUTATION = gql`
-	mutation($title: String!, $description: String!, $email: String!, $captchaToken: String!, $path: String!) {
+	mutation ($title: String!, $description: String!, $email: String!, $captchaToken: String!, $path: String!) {
 		createHelpRequest(
 			email: $email
 			title: $title

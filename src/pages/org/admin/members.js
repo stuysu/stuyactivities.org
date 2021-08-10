@@ -189,7 +189,7 @@ export default function Members({ match }) {
 						control={
 							<Switch checked={notify} onChange={e => setNotify(e.target.checked)} color="primary" />
 						}
-						label="Send an e-mail notification?"
+						label="Send an e-mail notification??"
 					/>
 				</DialogContent>
 				<DialogActions>
@@ -237,10 +237,10 @@ export default function Members({ match }) {
 			</Dialog>
 			<Snackbar
 				open={snackBarOpen}
-				autoHideDuration={1000}
+				autoHideDuration={3000}
 				onClose={() => setSnackBarOpen(false)}
 				message="Copied email list to clipboard!"
-			></Snackbar>
+			/>
 		</div>
 	);
 }

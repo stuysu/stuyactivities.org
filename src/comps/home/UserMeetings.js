@@ -31,7 +31,7 @@ const responsive = {
 };
 
 const QUERY = gql`
-	query($userId: Int!) {
+	query ($userId: Int!) {
 		meetings: upcomingUserMeetings(userId: $userId) {
 			id
 			title

@@ -1,6 +1,6 @@
-import React, { createRef, useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 
 import layout from "./../../../styles/Layout.module.css";
 import Card from "@material-ui/core/Card";
@@ -11,15 +11,9 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
-import IconButton from "@material-ui/core/IconButton";
-import { Close } from "@material-ui/icons";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Carousel from "react-multi-carousel";
-
-import { find } from "linkifyjs";
-import DynamicLinkPreview from "../../../comps/updates/DynamicLinkPreview";
 import { gql, useMutation } from "@apollo/client";
 import UpdateCard from "../../../comps/updates/UpdateCard";
 import moment from "moment-timezone";
@@ -34,31 +28,19 @@ const useStyles = makeStyles({
 	}
 });
 
-const responsive = {
-	desktop: {
-		breakpoint: { max: 4000, min: 0 },
-		items: 1,
-		slidesToSlide: 1
-	}
-};
-
 const CREATE_UPDATE = gql`
 	mutation (
-		$title: String!
-		$content: String!
-		$pictures: [UpdatePicUpload!]!
+		$title: NonEmptyString!
+		$content: NonEmptyString!
 		$orgId: Int!
-		$links: [String!]!
-		$type: String!
+		$type: updateTypes!
 		$notifyFaculty: Boolean!
 		$notifyMembers: Boolean!
 	) {
 		createUpdate(
 			title: $title
 			content: $content
-			pictures: $pictures
 			orgId: $orgId
-			links: $links
 			type: $type
 			localPinned: false
 			notifyFaculty: $notifyFaculty
@@ -73,8 +55,6 @@ const Updates = () => {
 	const org = useContext(OrgContext);
 	const classes = useStyles();
 
-	const [link, setLink] = useState(null);
-
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 
@@ -82,20 +62,14 @@ const Updates = () => {
 	const [notifyMembers, setNotifyMembers] = useState(true);
 	const [notifyFaculty, setNotifyFaculty] = useState(false);
 
-	const [pictures, setPictures] = useState([]);
-
-	const linkFetchTimeout = createRef();
-
 	const [submit, { loading }] = useMutation(CREATE_UPDATE, {
 		variables: {
 			orgId: org.id,
 			title,
 			content,
-			pictures,
 			notifyMembers,
 			notifyFaculty,
-			type: isPublic ? "public" : "private",
-			links: link ? [link] : []
+			type: isPublic ? "public" : "private"
 		},
 		update: cache => {
 			setTitle("");
@@ -103,29 +77,10 @@ const Updates = () => {
 			setIsPublic(true);
 			setNotifyFaculty(false);
 			setNotifyMembers(true);
-			setLink(null);
-			setPictures([]);
 
 			cache.reset().then(() => org.refetch());
 		}
 	});
-
-	useEffect(() => {
-		if (!linkFetchTimeout.current) {
-			linkFetchTimeout.current = setTimeout(() => {
-				const links = find(content, "url");
-				const href = links[0]?.href || null;
-
-				if (link !== href) {
-					setLink(href);
-				}
-
-				linkFetchTimeout.current = null;
-			}, 300);
-
-			return () => clearTimeout(linkFetchTimeout.current);
-		}
-	}, [content, link, linkFetchTimeout]);
 
 	return (
 		<div className={layout.container}>
@@ -165,50 +120,6 @@ const Updates = () => {
 									"Could be an update for your members or for the world to see. Feel free to include links, images, emojis, and anything else you'd like."
 								}
 							/>
-
-							{Boolean(pictures.length) && (
-								<Carousel responsive={responsive} className={classes.picCarousel}>
-									{pictures.map((pic, index) => (
-										<div
-											style={{
-												position: "relative"
-											}}
-										>
-											<IconButton
-												style={{
-													position: "absolute",
-													right: "1rem",
-													background: "rgba(0, 0, 0, 0.2)",
-													borderRadius: "50%",
-													color: "white",
-													cursor: "pointer"
-												}}
-												onClick={() => {
-													const pics = Array.from(pictures);
-													pics.splice(index, 1);
-													setPictures(pics);
-												}}
-											>
-												<Close />
-											</IconButton>
-											<img
-												src={window.URL.createObjectURL(pic.file)}
-												alt={"Upload"}
-												style={{
-													objectFit: "contain",
-													width: "100%",
-													height: "300px"
-												}}
-											/>
-											<Typography variant={"subtitle2"} align={"center"} color={"secondary"}>
-												{pic.description}
-											</Typography>
-										</div>
-									))}
-								</Carousel>
-							)}
-
-							{link !== null && <DynamicLinkPreview url={link} />}
 
 							<Grid component="label" container alignItems="center" spacing={1}>
 								<Grid item>Members Only</Grid>

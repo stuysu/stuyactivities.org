@@ -8,7 +8,7 @@ import Masonry from "react-masonry-css";
 import { client } from "../context/ApolloProvider";
 
 const QUERY = gql`
-	query($userId: Int!) {
+	query ($userId: Int!) {
 		updates: userUpdates(userId: $userId) {
 			id
 			title
