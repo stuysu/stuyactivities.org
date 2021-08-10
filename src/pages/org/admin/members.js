@@ -189,7 +189,7 @@ export default function Members({ match }) {
 						control={
 							<Switch checked={notify} onChange={e => setNotify(e.target.checked)} color="primary" />
 						}
-						label="Send an e-mail notification?"
+						label="Send an e-mail notification??"
 					/>
 				</DialogContent>
 				<DialogActions>

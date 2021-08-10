@@ -8,8 +8,14 @@ import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
 import CharterEdits from "./charter-edits";
 import Meetings from "./meetings";
-import { Group, GroupAdd, GroupWork, ListAlt, LocalActivity, SmsFailed, PostAdd } from "@material-ui/icons";
-import ClubFair from "./club-fair";
+import {
+	Group,
+	GroupAdd,
+	GroupWork,
+	ListAlt,
+	SmsFailed,
+	PostAdd
+} from "@material-ui/icons";
 import Strikes from "./Strikes";
 import Updates from "./updates";
 import { OrgContext } from "../index";
@@ -36,19 +42,9 @@ export default function OrgAdminRouter({ match }) {
 			icon: <GroupAdd />
 		},
 		{
-			path: actualMatch + "/charter-edits",
-			label: "Charter",
-			icon: <ListAlt />
-		},
-		{
 			path: actualMatch + "/meetings",
 			label: "Meetings",
 			icon: <GroupWork />
-		},
-		{
-			path: actualMatch + "/club-fair",
-			label: "Club Fair",
-			icon: <LocalActivity />
 		},
 		{
 			path: actualMatch + "/posts",
@@ -59,7 +55,12 @@ export default function OrgAdminRouter({ match }) {
 			path: actualMatch + "/strikes",
 			label: "Strikes",
 			icon: <SmsFailed />
-		}
+		},
+		{
+			path: actualMatch + "/charter-edits",
+			label: "Charter",
+			icon: <ListAlt />
+		},
 	];
 
 	return (
@@ -72,7 +73,6 @@ export default function OrgAdminRouter({ match }) {
 						<Route path={match.path + "/member-requests"} component={Requests} />
 						<Route path={match.path + "/charter-edits"} component={CharterEdits} />
 						<Route path={match.path + "/meetings"} component={Meetings} />
-						<Route path={match.path + "/club-fair"} component={ClubFair} />
 						<Route path={match.path + "/posts"} component={Updates} />
 						<Route path={match.path + "/strikes"} component={Strikes} />
 						<Route path={match.path}>
