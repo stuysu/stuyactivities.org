@@ -1,3 +1,7 @@
+//NO LONGER ACCESSIBLE FROM SITE
+//File has not been deleted in order to make re-implementation easier, if we
+//choose to re-implement this page similarly in coming years.
+
 import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
