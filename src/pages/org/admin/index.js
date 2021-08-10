@@ -7,8 +7,9 @@ import RouteTabs from "../../../comps/ui/RouteTabs";
 import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
 import CharterEdits from "./charter-edits";
+import { Person, PersonAdd, Group, GroupWork, ListAlt, SmsFailed, PostAdd } from "@material-ui/icons";
 import Meetings from "./meetings";
-import { Person, PersonAdd, GroupWork, ListAlt, SmsFailed, PostAdd } from "@material-ui/icons";
+import Groups from "./groups";
 import Strikes from "./Strikes";
 import Updates from "./updates";
 import { OrgContext } from "../index";
@@ -45,6 +46,11 @@ export default function OrgAdminRouter({ match }) {
 			icon: <PostAdd />
 		},
 		{
+			path: actualMatch + "/groups",
+			label: "Groups",
+			icon: <Group />
+		},
+		{
 			path: actualMatch + "/strikes",
 			label: "Strikes",
 			icon: <SmsFailed />
@@ -64,10 +70,11 @@ export default function OrgAdminRouter({ match }) {
 					<Switch>
 						<Route path={match.path + "/members"} component={Members} />
 						<Route path={match.path + "/member-requests"} component={Requests} />
-						<Route path={match.path + "/charter-edits"} component={CharterEdits} />
 						<Route path={match.path + "/meetings"} component={Meetings} />
 						<Route path={match.path + "/posts"} component={Updates} />
+						<Route path={match.path + "/groups"} component={Groups} />
 						<Route path={match.path + "/strikes"} component={Strikes} />
+						<Route path={match.path + "/charter-edits"} component={CharterEdits} />
 						<Route path={match.path}>
 							<Redirect to={actualMatch + "/members"} />
 						</Route>
