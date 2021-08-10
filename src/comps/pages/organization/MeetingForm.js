@@ -18,12 +18,25 @@ import {
 	InputLabel,
 	FormHelperText
 } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import * as moment from "moment";
 import MomentUtils from "@date-io/moment";
-import { MuiPickersUtilsProvider, DatePicker, KeyboardTimePicker } from "@material-ui/pickers";
+import { gql, useQuery } from "@apollo/client";
+import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pickers";
 import TinyEditor from "../../updates/TinyEditor";
+
+const availableRooms = gql`
+	query ($start: DateTime!, $end: DateTime!) {
+		availableRooms(start: $start, end: $end) {
+			id
+			name
+			floor
+			approvalRequired
+		}
+	}
+`;
 
 const useStyles = makeStyles(theme => ({
 	marginBottom: {
@@ -33,6 +46,16 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(2)
 	}
 }));
+
+//Map number to ordinal, used to format room floors
+//1 -> 1st, 2 -> 2nd, etc...
+const ordinal = number => {
+	let suffixes = ["st", "nd", "rd"];
+	let ones = number % 10;
+	let tens = parseInt(number / 10) % 10;
+	if (0 < ones && ones <= 3 && tens !== 1) return number + suffixes[ones - 1];
+	return number + "th";
+};
 
 // recurring param is for editing only
 // when already editing, it shows dayOfWeek input instead of date input
@@ -57,20 +80,15 @@ const MeetingForm = ({
 	defaultStart.setHours(15, 0);
 	defaultEnd.setHours(17, 0);
 
-	let newDate;
-	if (alreadyRecurring) {
-		newDate = moment(meeting.start, "HH:mm:ss.SSSZ");
-		newDate.day(meeting.dayOfWeek);
-	}
+	const [time, setTime] = React.useState({
+		start: moment(meeting.start ? new Date(meeting.start) : defaultStart),
+		end: moment(meeting.end ? new Date(meeting.end) : defaultEnd)
+	});
 
-	const [date, setDate] = React.useState(
-		alreadyRecurring ? newDate : moment(meeting.start ? new Date(meeting.start) : defaultStart)
-	);
-	const [end, setEnd] = React.useState(
-		alreadyRecurring
-			? moment(meeting.end, "HH:mm:ss.SSSZ")
-			: moment(meeting.end ? new Date(meeting.end) : defaultEnd)
-	);
+	if (alreadyRecurring) {
+		time.start.day(meeting.dayOfWeek);
+		time.end.day(meeting.dayOfWeek);
+	}
 
 	const [checked, setChecked] = React.useState(false);
 
@@ -86,6 +104,29 @@ const MeetingForm = ({
 	const [dayOfWeek, setDayOfWeek] = React.useState(meeting.dayOfWeek || 0);
 	//only show error dialog box if mutation submission is completed & error message is a new one
 	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
+
+	const External = { name: "External/Virtual", id: 0 };
+	const [room, setRoom] = React.useState(External);
+
+	const { data, loading, error } = useQuery(availableRooms, {
+		variables: {
+			...time
+		}
+	});
+
+	const updateEnd = new_end => {
+		let end = moment(`${time.start.format("MM-DD-YYYY")} ${new_end.format("HH:mm")}`, "MM-DD-YYYY HH:mm");
+		setTime({ ...time, end });
+	};
+
+	const updateDate = start => {
+		let end = moment(`${start.format("MM-DD-YYYY")} ${time.end.format("HH:mm")}`, "MM-DD-YYYY HH:mm");
+		setTime({ start, end });
+	};
+
+	let rooms = loading || error ? [External] : [External].concat(data.availableRooms);
+	const roomAvailable = !loading && !error && rooms.find(roomNumber => roomNumber.id === room.id) !== undefined;
+	const valid = !err_dialog_open && roomAvailable;
 
 	return (
 		<div>
@@ -111,7 +152,7 @@ const MeetingForm = ({
 			/>
 			<Grid container spacing={1}>
 				<MuiPickersUtilsProvider utils={MomentUtils}>
-					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						{alreadyRecurring ? (
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel shrink>Day Of Week</InputLabel>
@@ -134,37 +175,57 @@ const MeetingForm = ({
 								fullWidth
 								autoOk
 								label="Date"
-								value={date}
-								format="MMMM DD"
-								onChange={setDate}
+								value={time.start}
+								format="MMM DD"
+								onChange={updateDate}
 								animateYearScrolling
 								inputVariant="outlined"
 							/>
 						)}
 					</Grid>
-					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<KeyboardTimePicker
+					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+						<TimePicker
 							fullWidth
 							autoOk
 							placeholder="03:00 PM"
 							mask="__:__ _M"
 							label="Start Time"
 							inputVariant="outlined"
-							value={date}
-							onChange={setDate}
+							value={time.start}
+							onChange={updateDate}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-						<KeyboardTimePicker
+					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+						<TimePicker
 							fullWidth
 							autoOk
 							placeholder="05:00 PM"
 							mask="__:__ _M"
 							label="End Time"
 							inputVariant="outlined"
-							value={end}
-							onChange={setEnd}
-						/>{" "}
+							value={time.end}
+							onChange={updateEnd}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+						<Autocomplete
+							options={rooms}
+							getOptionLabel={option => option.name}
+							getOptionSelected={option => option.id === room.id}
+							disabled={loading}
+							error={!roomAvailable}
+							value={room}
+							onChange={(_, r) => setRoom(r)}
+							renderOption={option => (
+								<span>
+									<Typography>{option.name}</Typography>
+									{option.floor && (
+										<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
+									)}
+								</span>
+							)}
+							renderInput={params => <TextField {...params} label="Room" variant="outlined" />}
+						/>
 					</Grid>
 				</MuiPickersUtilsProvider>
 			</Grid>
@@ -233,17 +294,18 @@ const MeetingForm = ({
 					submit({
 						title,
 						description,
-						endTime: end,
+						endTime: time.end,
 						checked,
-						date,
+						date: time.start,
 						privacy: isPublic ? "public" : "private",
 						frequency: recurring ? Number(frequency) : 0,
-						dayOfWeek: alreadyRecurring ? dayOfWeek : date.day()
+						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
+						...(room.id !== 0 && { roomId: room.id })
 					});
 				}}
 				color={"primary"}
 				variant="contained"
-				disabled={isSubmitting}
+				disabled={!valid}
 			>
 				{buttonText}
 			</Button>

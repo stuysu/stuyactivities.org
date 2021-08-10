@@ -59,6 +59,7 @@ const CREATE_MUTATION = gql`
 		$end: DateTime!
 		$notifyFaculty: Boolean
 		$privacy: String!
+		$roomId: Int
 	) {
 		createMeeting(
 			orgUrl: $orgUrl
@@ -68,6 +69,7 @@ const CREATE_MUTATION = gql`
 			end: $end
 			notifyFaculty: $notifyFaculty
 			privacy: $privacy
+			roomId: $roomId
 		) {
 			id
 			title
@@ -94,6 +96,7 @@ const EDIT_MUTATION = gql`
 		$end: DateTime
 		$notifyMembers: Boolean
 		$privacy: String
+		$roomId: Int
 	) {
 		alterMeeting(
 			meetingId: $id
@@ -258,7 +261,7 @@ const Main = ({ match }) => {
 			cache.reset().then(() => org.refetch());
 		}
 	});
-	const create = ({ title, description, date, endTime, checked, privacy, frequency }) => {
+	const create = ({ title, description, date, endTime, checked, privacy, frequency, roomId }) => {
 		console.log(frequency);
 		if (frequency) {
 			createRecurringMutation({
@@ -270,7 +273,8 @@ const Main = ({ match }) => {
 					end: endTime.format("HH:mm:ss.SSSZ"),
 					privacy,
 					frequency,
-					dayOfWeek: date.day()
+					dayOfWeek: date.day(),
+					roomId
 				}
 			});
 		} else {
@@ -285,7 +289,8 @@ const Main = ({ match }) => {
 						"MM-DD-YYYY HH:mm"
 					).toISOString(),
 					notifyFaculty: checked,
-					privacy
+					privacy,
+					roomId
 				}
 			});
 		}
@@ -453,15 +458,10 @@ const EditPage = ({ match }) => {
 				id: Number(match.params.meetingId),
 				title,
 				description: description || "",
-				start: recurring ? date.format("HH:mm:ss.SSSZ") : date.toISOString(),
-				end: recurring
-					? endTime.format("HH:mm:ss.SSSZ")
-					: moment(
-							`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
-							"MM-DD-YYYY HH:mm"
-					  ).toISOString(),
 				notifyMembers: checked,
 				privacy,
+				start: recurring ? date.format("HH:mm:ss.SSSZ") : date.toISOString(),
+				end: recurring ? endTime.format("HH:mm:ss.SSSZ") : endTime.toISOString(),
 				frequency,
 				dayOfWeek
 			}
