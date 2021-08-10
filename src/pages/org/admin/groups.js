@@ -167,7 +167,7 @@ export default function Groups({ match }) {
 				<br />
 				<br />
 				<Button
-					onClick={createGroup}
+					onClick={() => { createGroup(); setNewGroupName("") }}
 					color="primary"
 					variant={"contained"}
 					style={{ float: 'right' }}
@@ -178,7 +178,7 @@ export default function Groups({ match }) {
 		</Card>
 		<List>
 			{data?.organizationByUrl?.groups.map((group) =>
-				<Card><Box p={1}><ListItem key={group.id} fullWidth>
+				<Box mt={2}><Card><Box p={1}><ListItem key={group.id} fullWidth>
 					<Grid container xl={12} lg={12} md={12} sm={12} xs={12} direction="column">
 						<Typography variant="h5">
 							{group.name}
@@ -207,7 +207,7 @@ export default function Groups({ match }) {
 					<IconButton onClick={() => setEditGroup(group)}>
 						<Edit />
 					</IconButton>
-				</ListItem></Box></Card>
+				</ListItem></Box></Card></Box>
 			)}
 			{/*Remove member dialog*/}
 			<Dialog open={groupMembership.id !== undefined} onClose={() => setGroupMembership({})}>
