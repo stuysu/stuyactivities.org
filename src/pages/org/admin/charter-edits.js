@@ -435,7 +435,7 @@ class CharterEditForm extends React.Component {
 
 const MESSAGE_QUERY = gql`
 	query ($orgId: Int!) {
-		organization(id: $orgId) {
+		organizationById(id: $orgId) {
 			charterApprovalMessages {
 				id
 				user {
@@ -501,7 +501,7 @@ const ApprovalMessages = () => {
 				ref={messageRef}
 			>
 				<List>
-					{data?.organization?.charterApprovalMessages?.map(message => {
+					{data?.organizationById?.charterApprovalMessages?.map(message => {
 						return (
 							<ListItem>
 								<ListItemAvatar>

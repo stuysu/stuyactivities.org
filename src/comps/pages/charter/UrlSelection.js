@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 
 const QUERY = gql`
 	query Organization($url: String!) {
-		organization(url: $url) {
+		organizationByUrl(url: $url) {
 			url
 		}
 	}
@@ -20,7 +20,7 @@ const UrlSelection = ({ className }) => {
 	const { data } = useQuery(QUERY, { variables: { url: form?.url || "" } });
 
 	React.useEffect(() => {
-		if (data?.organization) {
+		if (data?.organizationById) {
 		}
 	}, [data, form.errors]);
 
@@ -53,7 +53,7 @@ const UrlSelection = ({ className }) => {
 					</span>
 				}
 				onBlur={() => {
-					if (Boolean(data?.organization)) {
+					if (Boolean(data?.organizationById)) {
 						form.setError("url", "There's already an activity at that url.");
 					}
 				}}

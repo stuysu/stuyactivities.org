@@ -35,7 +35,7 @@ export const OrgContext = React.createContext({});
 const getQuery = signedIn => {
 	return gql`
 		query Organization($url: String!) {
-			organization(url: $url) {
+			organizationByUrl(url: $url) {
 				id
 				active
 				name
@@ -145,7 +145,7 @@ const OrgRouter = ({ match, history }) => {
 	React.useEffect(() => {
 		// If capitalization or something is wrong in the url, fix it
 		if (data) {
-			const actualOrgUrl = data?.organization?.url;
+			const actualOrgUrl = data?.organizationByUrl?.url;
 
 			if (actualOrgUrl && match.params.orgUrl !== actualOrgUrl) {
 				const params = { ...match.params, orgUrl: actualOrgUrl };
@@ -160,24 +160,24 @@ const OrgRouter = ({ match, history }) => {
 		return <Loading fullscreen />;
 	}
 
-	if (!data?.organization) {
+	if (!data?.organizationByUrl) {
 		return <Error404 />;
 	}
 
 	return (
-		<OrgContext.Provider value={{ ...data.organization, refetch }}>
+		<OrgContext.Provider value={{ ...data.organizationByUrl, refetch }}>
 			<div>
 				<Helmet>
-					<title>{data?.organization?.name} | StuyActivities</title>
-					<meta property="og:title" content={`${data?.organization?.name} | StuyActivities`} />
+					<title>{data?.organizationByUrl?.name} | StuyActivities</title>
+					<meta property="og:title" content={`${data?.organizationByUrl?.name} | StuyActivities`} />
 					<meta
 						property="og:description"
 						content={
-							data?.organization?.charter?.mission ||
-							`${data?.organization?.name} - An activity at Stuyvesant High School`
+							data?.organizationByUrl?.charter?.mission ||
+							`${data?.organizationByUrl?.name} - An activity at Stuyvesant High School`
 						}
 					/>
-					<meta property="og:image" content={data?.organization?.charter?.picture?.url} />
+					<meta property="og:image" content={data?.organizationByUrl?.charter?.picture?.url} />
 				</Helmet>
 
 				<div className={styles.contentContainer}>
@@ -185,7 +185,7 @@ const OrgRouter = ({ match, history }) => {
 
 					<Grid container spacing={1}>
 						<Grid item xs={12} sm={12} xl={2} md={3} lg={2}>
-							<OrgNavPanel match={match} organization={data.organization} />
+							<OrgNavPanel match={match} organization={data.organizationByUrl} />
 						</Grid>
 
 						<Grid item lg={10} md={9} xl={10} sm={12} xs={12}>
