@@ -32,104 +32,102 @@ const useStyles = makeStyles(theme => ({
 
 export const OrgContext = React.createContext({});
 
-const getQuery = signedIn => {
-	return gql`
-		query Organization($url: String!) {
-			organizationByUrl(url: $url) {
-				id
-				active
-				name
-				url
-				charter {
-					mission
-					meetingSchedule
-					picture {
-						url
-						icon: url(width: 200, height: 200, crop: thumb, gravity: center)
-						thumbnail(width: 80, height: 80)
-						tinyThumbnail: thumbnail(width: 40, height: 40)
-					}
-				}
-				updates {
-					id
-					title
-					content
-					createdAt
-					questions {
-						id
-						submittingUser {
-							name
-							picture
-						}
-						private
-						question
-						answer
-					}
-				}
-				leaders: memberships(onlyLeaders: true) {
-					id
-					user {
-						id
-						name
-						${signedIn ? "email" : ""}
-						picture
-					}
-					role
-				}
-				upcomingMeetings {
-					id
-					title
-					description
-					start
-					privacy
-					end
-				}
-				meetings {
-					id
-					title
-					description
-					start
-					privacy
-					end
-				}
-				recurringMeetings {
-					id
-					title
-					description
-					start
-					end
-					privacy
-					frequency
-					dayOfWeek
-				}
-				membership {
-					id
-					role
-					adminPrivileges
-					createdAt
-				}
-				memberships {
-					user {
-						id
-					}
-				}
-				membershipRequest {
-					id
-					role
-					userMessage
-					adminApproval
-					adminMessage
-					userApproval
-					createdAt
-				}
-				joinInstructions {
-					instructions
-					buttonEnabled
+const QUERY = gql`
+	query Organization($url: String!, $signedIn: Boolean!) {
+		organizationByUrl(url: $url) {
+			id
+			active
+			name
+			url
+			charter {
+				mission
+				meetingSchedule
+				picture {
+					url
+					icon: url(width: 200, height: 200, crop: thumb, gravity: center)
+					thumbnail(width: 80, height: 80)
+					tinyThumbnail: thumbnail(width: 40, height: 40)
 				}
 			}
+			updates {
+				id
+				title
+				content
+				createdAt
+				questions {
+					id
+					submittingUser {
+						name
+						picture
+					}
+					private
+					question
+					answer
+				}
+			}
+			leaders: memberships(onlyLeaders: true) {
+				id
+				user {
+					id
+					name
+					email @include(if: $signedIn)
+					picture
+				}
+				role
+			}
+			upcomingMeetings {
+				id
+				title
+				description
+				start
+				privacy
+				end
+			}
+			meetings {
+				id
+				title
+				description
+				start
+				privacy
+				end
+			}
+			recurringMeetings {
+				id
+				title
+				description
+				start
+				end
+				privacy
+				frequency
+				dayOfWeek
+			}
+			membership {
+				id
+				role
+				adminPrivileges
+				createdAt
+			}
+			memberships {
+				user {
+					id
+				}
+			}
+			membershipRequest {
+				id
+				role
+				userMessage
+				adminApproval
+				adminMessage
+				userApproval
+				createdAt
+			}
+			joinInstructions {
+				instructions
+				buttonEnabled
+			}
 		}
-	`;
-};
+	}
+`;
 
 const OrgRouter = ({ match, history }) => {
 	const user = React.useContext(UserContext);
@@ -137,8 +135,8 @@ const OrgRouter = ({ match, history }) => {
 	const classes = useStyles();
 	const url = match.params.orgUrl;
 
-	const { data, loading, refetch } = useQuery(getQuery(user.signedIn), {
-		variables: { url },
+	const { data, loading, refetch } = useQuery(QUERY, {
+		variables: { url, signedIn: user.signedIn },
 		client
 	});
 
