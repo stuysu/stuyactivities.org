@@ -179,7 +179,6 @@ export default function Groups({ match }) {
 			</Card>
 			<List>
 				{data?.organizationByUrl?.groups.map(group => (
-
 					<Box mt={2}>
 						<Card>
 							<Box p={1}>
