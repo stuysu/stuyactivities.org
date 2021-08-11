@@ -164,58 +164,68 @@ export default function Groups({ match }) {
 					/>
 					<br />
 					<br />
-					<Button onClick={createGroup} color="primary" variant={"contained"} style={{ float: "right" }}>
+					<Button
+						onClick={() => {
+							createGroup();
+							setNewGroupName("");
+						}}
+						color="primary"
+						variant={"contained"}
+						style={{ float: "right" }}
+					>
 						Create Group
 					</Button>
 				</Box>
 			</Card>
 			<List>
 				{data?.organizationByUrl?.groups.map(group => (
-					<Card>
-						<Box p={1}>
-							<ListItem key={group.id} fullWidth>
-								<Grid container xl={12} lg={12} md={12} sm={12} xs={12} direction="column">
-									<Typography variant="h5">{group.name}</Typography>
-									<List>
-										{group.memberships.length > 0 ? (
-											group.memberships.map(membership => (
-												<ListItem button>
-													<ListItemAvatar>
-														<Avatar src={membership.user.picture} />
-													</ListItemAvatar>
-													<span>
-														<Typography>{membership.user.name}</Typography>
-														<Typography color={"textSecondary"} variant={"subtitle2"}>
-															{membership.user.email}
-														</Typography>
-													</span>
-													<ListItemSecondaryAction>
-														<IconButton
-															onClick={() => {
-																setGroupMembership({
-																	groupName: group.name,
-																	...membership
-																});
-															}}
-														>
-															<Delete />
-														</IconButton>
-													</ListItemSecondaryAction>
-												</ListItem>
-											))
-										) : (
-											<Typography color={"textSecondary"}>
-												This group has no members yet.
-											</Typography>
-										)}
-									</List>
-								</Grid>
-								<IconButton onClick={() => setEditGroup(group)}>
-									<Edit />
-								</IconButton>
-							</ListItem>
-						</Box>
-					</Card>
+					<Box mt={2}>
+						<Card>
+							<Box p={1}>
+								<ListItem key={group.id} fullWidth>
+									<Grid container xl={12} lg={12} md={12} sm={12} xs={12} direction="column">
+										<Typography variant="h5">{group.name}</Typography>
+										<List>
+											{group.memberships.length > 0 ? (
+												group.memberships.map(membership => (
+													<ListItem button>
+														<ListItemAvatar>
+															<Avatar src={membership.user.picture} />
+														</ListItemAvatar>
+														<span>
+															<Typography>{membership.user.name}</Typography>
+															<Typography color={"textSecondary"} variant={"subtitle2"}>
+																{membership.user.email}
+															</Typography>
+														</span>
+														<ListItemSecondaryAction>
+															<IconButton
+																onClick={() => {
+																	setGroupMembership({
+																		groupName: group.name,
+																		...membership
+																	});
+																}}
+															>
+																<Delete />
+															</IconButton>
+														</ListItemSecondaryAction>
+													</ListItem>
+												))
+											) : (
+												<Typography color={"textSecondary"}>
+													This group has no members yet.
+												</Typography>
+											)}
+										</List>
+									</Grid>
+									<IconButton onClick={() => setEditGroup(group)}>
+										<Edit />
+									</IconButton>
+								</ListItem>
+							</Box>
+						</Card>
+					</Box>
 				))}
 				{/*Remove member dialog*/}
 				<Dialog open={groupMembership.id !== undefined} onClose={() => setGroupMembership({})}>
