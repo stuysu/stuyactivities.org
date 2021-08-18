@@ -7,9 +7,9 @@ import RouteTabs from "../../../comps/ui/RouteTabs";
 import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
 import CharterEdits from "./charter-edits";
+import { Person, PersonAdd, Group, GroupWork, ListAlt, SmsFailed, PostAdd } from "@material-ui/icons";
 import Meetings from "./meetings";
-import { Group, GroupAdd, GroupWork, ListAlt, LocalActivity, SmsFailed, PostAdd } from "@material-ui/icons";
-import ClubFair from "./club-fair";
+import Groups from "./groups";
 import Strikes from "./Strikes";
 import Updates from "./updates";
 import { OrgContext } from "../index";
@@ -28,17 +28,12 @@ export default function OrgAdminRouter({ match }) {
 		{
 			path: actualMatch + "/members",
 			label: "Members",
-			icon: <Group />
+			icon: <Person />
 		},
 		{
 			path: actualMatch + "/member-requests",
 			label: "Member Requests",
-			icon: <GroupAdd />
-		},
-		{
-			path: actualMatch + "/charter-edits",
-			label: "Charter",
-			icon: <ListAlt />
+			icon: <PersonAdd />
 		},
 		{
 			path: actualMatch + "/meetings",
@@ -46,19 +41,24 @@ export default function OrgAdminRouter({ match }) {
 			icon: <GroupWork />
 		},
 		{
-			path: actualMatch + "/club-fair",
-			label: "Club Fair",
-			icon: <LocalActivity />
-		},
-		{
 			path: actualMatch + "/posts",
 			label: "Posts",
 			icon: <PostAdd />
 		},
 		{
+			path: actualMatch + "/groups",
+			label: "Groups",
+			icon: <Group />
+		},
+		{
 			path: actualMatch + "/strikes",
 			label: "Strikes",
 			icon: <SmsFailed />
+		},
+		{
+			path: actualMatch + "/charter-edits",
+			label: "Charter",
+			icon: <ListAlt />
 		}
 	];
 
@@ -70,11 +70,11 @@ export default function OrgAdminRouter({ match }) {
 					<Switch>
 						<Route path={match.path + "/members"} component={Members} />
 						<Route path={match.path + "/member-requests"} component={Requests} />
-						<Route path={match.path + "/charter-edits"} component={CharterEdits} />
 						<Route path={match.path + "/meetings"} component={Meetings} />
-						<Route path={match.path + "/club-fair"} component={ClubFair} />
 						<Route path={match.path + "/posts"} component={Updates} />
+						<Route path={match.path + "/groups"} component={Groups} />
 						<Route path={match.path + "/strikes"} component={Strikes} />
+						<Route path={match.path + "/charter-edits"} component={CharterEdits} />
 						<Route path={match.path}>
 							<Redirect to={actualMatch + "/members"} />
 						</Route>

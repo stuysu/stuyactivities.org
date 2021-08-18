@@ -31,107 +31,103 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const OrgContext = React.createContext({});
-const getQuery = signedIn => {
-	return gql`
-		query Organization($url: String!) {
-			organization(url: $url) {
-				id
-				active
-				name
-				url
-				tags {
-				        id
-				}
-				charter {
-					mission
-					meetingSchedule
-					picture {
-						url
-						icon: url(width: 200, height: 200, crop: thumb, gravity: center)
-						thumbnail(width: 80, height: 80)
-						tinyThumbnail: thumbnail(width: 40, height: 40)
-					}
-				}
-				updates {
-					id
-					title
-					content
-					createdAt
-					questions {
-						id
-						submittingUser {
-							name
-							picture
-						}
-						private
-						question
-						answer
-					}
-				}
-				leaders: memberships(onlyLeaders: true) {
-					id
-					user {
-						id
-						name
-						${signedIn ? "email" : ""}
-						picture
-					}
-					role
-				}
-				upcomingMeetings {
-					id
-					title
-					description
-					start
-					privacy
-					end
-				}
-				meetings {
-					id
-					title
-					description
-					start
-					privacy
-					end
-				}
-				recurringMeetings {
-					id
-					title
-					description
-					start
-					end
-					privacy
-					frequency
-					dayOfWeek
-				}
-				membership {
-					id
-					role
-					adminPrivileges
-					createdAt
-				}
-				memberships {
-					user {
-						id
-					}
-				}
-				membershipRequest {
-					id
-					role
-					userMessage
-					adminApproval
-					adminMessage
-					userApproval
-					createdAt
-				}
-				joinInstructions {
-					instructions
-					buttonEnabled
+
+const QUERY = gql`
+	query Organization($url: String!, $signedIn: Boolean!) {
+		organizationByUrl(url: $url) {
+			id
+			active
+			name
+			url
+			charter {
+				mission
+				meetingSchedule
+				picture {
+					url
+					icon: url(width: 200, height: 200, crop: thumb, gravity: center)
+					thumbnail(width: 80, height: 80)
+					tinyThumbnail: thumbnail(width: 40, height: 40)
 				}
 			}
+			updates {
+				id
+				title
+				content
+				createdAt
+				questions {
+					id
+					submittingUser {
+						name
+						picture
+					}
+					private
+					question
+					answer
+				}
+			}
+			leaders: memberships(onlyLeaders: true) {
+				id
+				user {
+					id
+					name
+					email @include(if: $signedIn)
+					picture
+				}
+				role
+			}
+			upcomingMeetings {
+				id
+				title
+				description
+				start
+				privacy
+				end
+			}
+			meetings {
+				id
+				title
+				description
+				start
+				privacy
+				end
+			}
+			recurringMeetings {
+				id
+				title
+				description
+				start
+				end
+				privacy
+				frequency
+				dayOfWeek
+			}
+			membership {
+				id
+				role
+				adminPrivileges
+				createdAt
+			}
+			memberships {
+				user {
+					id
+				}
+			}
+			membershipRequest {
+				id
+				role
+				userMessage
+				adminApproval
+				adminMessage
+				userApproval
+				createdAt
+			}
+			joinInstructions {
+				instructions
+				buttonEnabled
+			}
 		}
-	`;
-};
+	}
+`;
 
 const OrgRouter = ({ match, history }) => {
 	const user = React.useContext(UserContext);
@@ -139,15 +135,15 @@ const OrgRouter = ({ match, history }) => {
 	const classes = useStyles();
 	const url = match.params.orgUrl;
 
-	const { data, loading, refetch } = useQuery(getQuery(user.signedIn), {
-		variables: { url },
+	const { data, loading, refetch } = useQuery(QUERY, {
+		variables: { url, signedIn: user.signedIn },
 		client
 	});
 
 	React.useEffect(() => {
 		// If capitalization or something is wrong in the url, fix it
 		if (data) {
-			const actualOrgUrl = data?.organization?.url;
+			const actualOrgUrl = data?.organizationByUrl?.url;
 
 			if (actualOrgUrl && match.params.orgUrl !== actualOrgUrl) {
 				const params = { ...match.params, orgUrl: actualOrgUrl };
@@ -162,24 +158,24 @@ const OrgRouter = ({ match, history }) => {
 		return <Loading fullscreen />;
 	}
 
-	if (!data?.organization) {
+	if (!data?.organizationByUrl) {
 		return <Error404 />;
 	}
 
 	return (
-		<OrgContext.Provider value={{ ...data.organization, refetch }}>
+		<OrgContext.Provider value={{ ...data.organizationByUrl, refetch }}>
 			<div>
 				<Helmet>
-					<title>{data?.organization?.name} | StuyActivities</title>
-					<meta property="og:title" content={`${data?.organization?.name} | StuyActivities`} />
+					<title>{data?.organizationByUrl?.name} | StuyActivities</title>
+					<meta property="og:title" content={`${data?.organizationByUrl?.name} | StuyActivities`} />
 					<meta
 						property="og:description"
 						content={
-							data?.organization?.charter?.mission ||
-							`${data?.organization?.name} - An activity at Stuyvesant High School`
+							data?.organizationByUrl?.charter?.mission ||
+							`${data?.organizationByUrl?.name} - An activity at Stuyvesant High School`
 						}
 					/>
-					<meta property="og:image" content={data?.organization?.charter?.picture?.url} />
+					<meta property="og:image" content={data?.organizationByUrl?.charter?.picture?.url} />
 				</Helmet>
 
 				<div className={styles.contentContainer}>
@@ -187,7 +183,7 @@ const OrgRouter = ({ match, history }) => {
 
 					<Grid container spacing={1}>
 						<Grid item xs={12} sm={12} xl={2} md={3} lg={2}>
-							<OrgNavPanel match={match} organization={data.organization} />
+							<OrgNavPanel match={match} organization={data.organizationByUrl} />
 						</Grid>
 
 						<Grid item lg={10} md={9} xl={10} sm={12} xs={12}>
