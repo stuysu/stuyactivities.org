@@ -67,11 +67,10 @@ const Overview = () => {
 	}
 
 	const handleRelatedClubs = () => {
-		const length = data.organizations.length;
-		if (relatedClubs + 3 <= length) {
+		if (relatedClubs + 3 <= data.organizations.length) {
 			setRelatedClubs(relatedClubs + 3);
 		} else {
-			setRelatedClubs(relatedClubs + (length % 3));
+			setRelatedClubs(relatedClubs + (data.organizations.length % 3));
 			setShowMore(false);
 		}
 	};
