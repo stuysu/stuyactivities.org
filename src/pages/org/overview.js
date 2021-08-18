@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { OrgContext } from "./index";
 import FlexCenter from "../../comps/ui/FlexCenter";
 import { Typography, useMediaQuery } from "@material-ui/core";
@@ -10,7 +10,9 @@ import MeetingCard from "../../comps/meetings/MeetingCard";
 import LinkifyText from "../../comps/ui/LinkifyText";
 import Masonry from "react-masonry-css";
 import UpdateCard from "../../comps/updates/UpdateCard";
-
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import Button from "@material-ui/core/Button";
 const Overview = () => {
 	const org = React.useContext(OrgContext);
 	const isMobile = useMediaQuery("(max-width: 900px)");
@@ -163,9 +165,38 @@ const Overview = () => {
 				{!org.updates?.length && (
 					<span style={{ color: "grey" }}>This activity has not made any posts yet.</span>
 				)}
+				<Typography variant={"h5"} color={"primary"}>
+					Related Clubs
+				</Typography>
+				<List>
+					{orgList.map(relatedOrg => {
+						if (relatedOrg[0].name !== org.name) {
+							const url = "/" + relatedOrg[0].url;
+							return (
+								<ListItem key={relatedOrg[0].name} button component="a" href={url}>
+									<ListItemAvatar>
+										<Avatar src={relatedOrg[0].charter.picture.icon} />
+									</ListItemAvatar>
+									<span>
+										<Typography>{relatedOrg[0].name}</Typography>
+									</span>
+								</ListItem>
+							);
+						}
+						return null;
+					})}
+				</List>
+				{showMore ? (
+					<Button color={"primary"} onClick={handleRelatedClubs}>
+						Show More
+					</Button>
+				) : (
+					<></>
+				)}
 			</div>
 		</FlexCenter>
 	);
 };
 
 export default Overview;
+
