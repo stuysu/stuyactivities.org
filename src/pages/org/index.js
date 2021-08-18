@@ -39,6 +39,9 @@ const QUERY = gql`
 			active
 			name
 			url
+			tags {
+				id
+			}
 			charter {
 				mission
 				meetingSchedule
