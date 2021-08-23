@@ -143,6 +143,7 @@ const ORG_QUERY = gql`
 				keywords
 				extra
 				updatedAt
+				socials
 			}
 
 			charterEdits {
@@ -168,6 +169,7 @@ const ORG_QUERY = gql`
 				extra
 				alteredFields
 				keywords
+				socials
 			}
 			memberships(onlyLeaders: true) {
 				role

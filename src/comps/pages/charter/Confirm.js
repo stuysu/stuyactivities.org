@@ -50,6 +50,10 @@ const Confirm = () => {
 					<ListItemText primary={"Keywords"} secondary={form?.keywords?.join(", ")} />
 				</ListItem>
 
+				<ListItem>
+					<ListItemText primary={"Socials"} secondary={form?.socials} />
+				</ListItem>
+
 				{form.picture && (
 					<ListItem>
 						<ListItemText
@@ -99,6 +103,13 @@ const Confirm = () => {
 					<ListItemText
 						primary={"Meeting Days"}
 						secondary={form.meetingDays?.map(a => capitalizeString(a)).join(", ")}
+					/>
+				</ListItem>
+				
+				<ListItem>
+					<ListItemText
+						primary={"Interested in participating in the Clubs & Pubs fair?"}
+						secondary={form.clubpubParticipant ? "Yes" : "No"}
 					/>
 				</ListItem>
 			</List>
