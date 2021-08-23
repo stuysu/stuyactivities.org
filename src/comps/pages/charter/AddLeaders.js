@@ -28,9 +28,7 @@ const AddLeaders = () => {
 		<div>
 			<Typography paragraph>
 				Your Activity must have at least one other student leader. Your Activity must also have a Faculty
-				Advisor if it wishes to host meetings in Stuyvesant past 5:00 pm, host guest speakers at Stuyvesant,
-				have in-person events, meeting, field trips, etc. outside of Stuyvesant, or request funding from the
-				Student Union. When you charter your role will be "creator" but once your organization is approved you
+				Advisor. When you charter your role will be "creator" but once your organization is approved you
 				will be able to change it.
 			</Typography>
 			<UserSelect
