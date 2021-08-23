@@ -38,6 +38,7 @@ const QUERY = gql`
 			extra
 			keywords
 			updatedAt
+			socials
 		}
 		charterEdits(orgId: $orgId) {
 			alteredFields
@@ -83,6 +84,7 @@ const SAVE_MUTATION = gql`
 		$keywords: [String!]
 		$extra: String
 		$picture: Upload
+		$socials: String
 	) {
 		alterCharter(
 			orgId: $orgId
@@ -99,6 +101,7 @@ const SAVE_MUTATION = gql`
 				keywords: $keywords
 				extra: $extra
 				picture: $picture
+				socials: $socials
 			}
 		) {
 			id
@@ -139,6 +142,11 @@ const SaveButton = ({ disabled }) => {
 
 class CharterEditForm extends React.Component {
 	static questions = [
+		{
+			name: "socials",
+			label: "Activity Socials",
+			helperText: "(Optional) This would be a good place to put a social media tag or a link to a website"
+		},
 		{
 			name: "mission",
 			maxChars: 150,
