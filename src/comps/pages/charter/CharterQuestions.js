@@ -119,10 +119,12 @@ const CharterQuestions = () => {
 				control={
 					<Checkbox
 						checked={form?.clubpubParticipant}
-						onChange={ev => form.set({clubpubParticipant: ev.target.checked})}
+						onChange={ev => form.set({ clubpubParticipant: ev.target.checked })}
 					/>
 				}
-				label={"Are you interested in participating in the Clubs & Pubs fair? (This is just to get an idea of how many participants we might have, and you can change this in the future)"}
+				label={
+					"Are you interested in participating in the Clubs & Pubs fair? (This is just to get an idea of how many participants we might have, and you can change this in the future)"
+				}
 			/>
 		</div>
 	);

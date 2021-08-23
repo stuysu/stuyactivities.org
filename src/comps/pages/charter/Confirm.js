@@ -105,7 +105,7 @@ const Confirm = () => {
 						secondary={form.meetingDays?.map(a => capitalizeString(a)).join(", ")}
 					/>
 				</ListItem>
-				
+
 				<ListItem>
 					<ListItemText
 						primary={"Interested in participating in the Clubs & Pubs fair?"}
