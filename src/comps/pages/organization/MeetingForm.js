@@ -15,7 +15,7 @@ import {
 	Select,
 	MenuItem,
 	FormControl,
-	InputLabel,
+	InputLabel
 } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Checkbox from "@material-ui/core/Checkbox";
