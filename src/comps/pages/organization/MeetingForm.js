@@ -209,6 +209,7 @@ const MeetingForm = ({
 					</Grid>
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
 						<Autocomplete
+							disableClearable
 							options={rooms}
 							getOptionLabel={option => option.name}
 							getOptionSelected={option => option.id === room.id}
@@ -254,7 +255,12 @@ const MeetingForm = ({
 			/>
 			<br />
 
-			{!alreadyRecurring && buttonText !== "Edit" && (
+			{/*
+			Recurring meetings introduce a host of potential problems.
+			The option to create them is being temporarily removed until
+			solutions to these problems are created.
+
+			!alreadyRecurring && buttonText !== "Edit" && (
 				<FormControl component="label">
 					<FormControlLabel
 						control={<Switch checked={recurring} onChange={e => setRecurring(!recurring)} />}
@@ -269,7 +275,7 @@ const MeetingForm = ({
 						</Typography>
 					</FormHelperText>
 				</FormControl>
-			)}
+			)*/}
 
 			{recurring && (
 				<Grid component="label" container alignItems="center" spacing={1}>
