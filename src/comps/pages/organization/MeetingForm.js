@@ -16,7 +16,6 @@ import {
 	MenuItem,
 	FormControl,
 	InputLabel,
-	FormHelperText
 } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -99,14 +98,12 @@ const MeetingForm = ({
 		setLastErr(errorMessage);
 	};
 
-	const [recurring, setRecurring] = React.useState(alreadyRecurring || false);
-	const [frequency, setFrequency] = React.useState(meeting.frequency || 1);
 	const [dayOfWeek, setDayOfWeek] = React.useState(meeting.dayOfWeek || 0);
 	//only show error dialog box if mutation submission is completed & error message is a new one
 	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
 
-	const External = { name: "External/Virtual", id: 0 };
-	const [room, setRoom] = React.useState(External);
+	const noRoom = { name: "", id: 0 };
+	const [room, setRoom] = React.useState(noRoom);
 
 	const { data, loading, error } = useQuery(availableRooms, {
 		variables: {
@@ -124,7 +121,7 @@ const MeetingForm = ({
 		setTime({ start, end });
 	};
 
-	let rooms = loading || error ? [External] : [External].concat(data.availableRooms);
+	let rooms = loading || error ? [] : data?.availableRooms;
 	const roomAvailable = !loading && !error && rooms.find(roomNumber => roomNumber.id === room.id) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
 
@@ -253,46 +250,15 @@ const MeetingForm = ({
 				control={<Checkbox checked={checked} onChange={e => setChecked(e.target.checked)} />}
 				label={checkboxText}
 			/>
-			<br />
 
 			{/*
-			Recurring meetings introduce a host of potential problems.
-			The option to create them is being temporarily removed until
-			solutions to these problems are created.
-
-			!alreadyRecurring && buttonText !== "Edit" && (
-				<FormControl component="label">
-					<FormControlLabel
-						control={<Switch checked={recurring} onChange={e => setRecurring(!recurring)} />}
-						label={"Recur?"}
-					/>
-					<FormHelperText>
-						<Typography paragraph>
-							When a meeting is recurring, new meetings will automatically be created with the same
-							settings as the recurring meeting. You may then edit those meetings individually to provide
-							additional information. Removing a recurring meeting will only remove meetings with the same
-							exact settings (including start and end times, title, and description).
-						</Typography>
-					</FormHelperText>
-				</FormControl>
-			)*/}
-
-			{recurring && (
-				<Grid component="label" container alignItems="center" spacing={1}>
-					<Grid item>This meeting will happen every</Grid>
-					<Grid item>
-						<TextField
-							variant={"outlined"}
-							type="number"
-							value={frequency}
-							onChange={e => Number(e.target.value) >= 1 && setFrequency(e.target.value)}
-						/>
-					</Grid>
-					<Grid>week(s).</Grid>
-				</Grid>
-			)}
-
-			<br />
+				Recurring meetings introduce a host of potential problems.
+				The option to create them is being temporarily removed until
+				solutions to these problems are created.
+				This is where the switch to enabling recurring used to be,
+				but was removed. Other code relating to recurring meetings
+				may or may not have been removed.
+			*/}
 
 			<Button
 				onClick={() => {
@@ -304,7 +270,7 @@ const MeetingForm = ({
 						checked,
 						date: time.start,
 						privacy: isPublic ? "public" : "private",
-						frequency: recurring ? Number(frequency) : 0,
+						frequency: 0,
 						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
 						...(room.id !== 0 && { roomId: room.id })
 					});
