@@ -23,6 +23,8 @@ const MUTATION = gql`
 		$keywords: [String!]
 		$extra: String
 		$picture: Upload
+		$socials: String
+		$clubpubParticipant: Boolean
 	) {
 		createOrganization(
 			name: $name
@@ -41,6 +43,8 @@ const MUTATION = gql`
 				keywords: $keywords
 				extra: $extra
 				picture: $picture
+				socials: $socials
+				clubpubParticipant: $clubpubParticipant
 			}
 		) {
 			url
@@ -71,7 +75,9 @@ const SubmitCharter = () => {
 			commitmentLevel: form.commitmentLevel,
 			keywords: form.keywords.filter(Boolean),
 			extra: form.extra,
-			picture: form.picture
+			picture: form.picture,
+			socials: form.socials,
+			clubpubParticipant: form.clubpubParticipant
 		}
 	});
 

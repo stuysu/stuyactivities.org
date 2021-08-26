@@ -22,6 +22,9 @@ const useStyles = makeStyles({
 	chip: {
 		marginRight: "0.5rem",
 		marginBottom: "0.5rem"
+	},
+	socials: {
+		marginBottom: "0.5rem"
 	}
 });
 
@@ -87,6 +90,18 @@ const BasicInfoForm = () => {
 				variant={"outlined"}
 				newChipKeys={["Enter", "Tab", " ", ","]}
 				className={classes.keywords}
+			/>
+
+			<TextField
+				className={classes.socials}
+				variant={"outlined"}
+				label={"Socials (optional)"}
+				value={form?.socials || ""}
+				onChange={ev => {
+					form.set({ socials: ev.target.value });
+				}}
+				helperText={"This is a good place to put a link to a website or a social media handle."}
+				fullWidth
 			/>
 
 			<PictureUpload />

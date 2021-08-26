@@ -45,7 +45,7 @@ const PictureUpload = () => {
 
 	return (
 		<div>
-			<Typography>Upload a picture for your organization (optional)</Typography>
+			<Typography>Upload a picture for your organization (Highly Recommended)</Typography>
 
 			<input
 				ref={inputRef}
