@@ -10,6 +10,7 @@ import {
 	DialogTitle,
 	Typography
 } from "@material-ui/core";
+import Linkify from "linkifyjs/react";
 import List from "@material-ui/core/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
@@ -97,6 +98,9 @@ const OrgNavPanel = ({ match }) => {
 				{org?.name}
 			</Typography>
 
+			{org.charter.socials &&
+				<Typography align={"center"}><Linkify>{org.charter.socials}</Linkify></Typography>
+			}
 			{org.active ? (
 				memberStatus !== "member" ? (
 					<UnstyledLink to={joinPath}>

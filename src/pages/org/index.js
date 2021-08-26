@@ -51,6 +51,7 @@ const QUERY = gql`
 					thumbnail(width: 80, height: 80)
 					tinyThumbnail: thumbnail(width: 40, height: 40)
 				}
+				socials
 			}
 			updates {
 				id
