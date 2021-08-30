@@ -98,9 +98,11 @@ const OrgNavPanel = ({ match }) => {
 				{org?.name}
 			</Typography>
 
-			{org.charter.socials &&
-				<Typography align={"center"}><Linkify>{org.charter.socials}</Linkify></Typography>
-			}
+			{org.charter.socials && (
+				<Typography align={"center"}>
+					<Linkify>{org.charter.socials}</Linkify>
+				</Typography>
+			)}
 			{org.active ? (
 				memberStatus !== "member" ? (
 					<UnstyledLink to={joinPath}>
