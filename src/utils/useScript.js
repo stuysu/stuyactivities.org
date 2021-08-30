@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 export default function useScript(src) {
 	// Keep track of script status ("idle", "loading", "ready", "error")
@@ -24,11 +24,8 @@ export default function useScript(src) {
 				document.body.appendChild(script);
 				// Store status in attribute on script
 				// This can be read by other instances of this hook
-				const setAttributeFromEvent = (event) => {
-					script.setAttribute(
-						"data-status",
-						event.type === "load" ? "ready" : "error"
-					);
+				const setAttributeFromEvent = event => {
+					script.setAttribute("data-status", event.type === "load" ? "ready" : "error");
 				};
 				script.addEventListener("load", setAttributeFromEvent);
 				script.addEventListener("error", setAttributeFromEvent);
@@ -39,7 +36,7 @@ export default function useScript(src) {
 			// Script event handler to update status in state
 			// Note: Even if the script already exists we still need to add
 			// event handlers to update the state for *this* hook instance.
-			const setStateFromEvent = (event) => {
+			const setStateFromEvent = event => {
 				setStatus(event.type === "load" ? "ready" : "error");
 			};
 			// Add event listeners
