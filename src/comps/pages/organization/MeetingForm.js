@@ -26,7 +26,7 @@ import { gql, useQuery } from "@apollo/client";
 import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pickers";
 import TinyEditor from "../../updates/TinyEditor";
 
-const availableRooms = gql`
+const AVAILABLE_ROOMS_QUERY = gql`
 	query ($start: DateTime!, $end: DateTime!) {
 		availableRooms(start: $start, end: $end) {
 			id
@@ -102,10 +102,10 @@ const MeetingForm = ({
 	//only show error dialog box if mutation submission is completed & error message is a new one
 	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
 
-	const noRoom = { name: "", id: 0 };
-	const [room, setRoom] = React.useState(noRoom);
+	const virtual = { name: "Virtual", id: 0 };
+	const [room, setRoom] = React.useState(virtual);
 
-	const { data, loading, error } = useQuery(availableRooms, {
+	const { data, loading, error } = useQuery(AVAILABLE_ROOMS_QUERY, {
 		variables: {
 			...time
 		}
@@ -121,8 +121,8 @@ const MeetingForm = ({
 		setTime({ start, end });
 	};
 
-	let rooms = loading || error ? [] : data?.availableRooms;
-	const roomAvailable = !loading && !error && rooms.find(roomNumber => roomNumber.id === room.id) !== undefined;
+	let availableRooms = [virtual].concat(data?.availableRooms);
+	const roomAvailable = !loading && !error && availableRooms.find(avRoom => avRoom.id === room.id) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
 
 	return (
@@ -207,7 +207,7 @@ const MeetingForm = ({
 					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
 						<Autocomplete
 							disableClearable
-							options={rooms}
+							options={availableRooms}
 							getOptionLabel={option => option.name}
 							getOptionSelected={option => option.id === room.id}
 							disabled={loading}
