@@ -95,6 +95,10 @@ const QUERY = gql`
 				privacy
 				end
 			}
+			groups {
+				id
+				name
+			}
 			recurringMeetings {
 				id
 				title
