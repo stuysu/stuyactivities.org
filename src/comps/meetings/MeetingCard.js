@@ -41,7 +41,19 @@ const useStyles = makeStyles({
 	}
 });
 
-const MeetingCard = ({ id, title, start, end, organization, className, dayOfWeek, frequency, description }) => {
+const MeetingCard = ({
+	id,
+	title,
+	start,
+	end,
+	organization,
+	className,
+	dayOfWeek,
+	frequency,
+	description,
+	privacy,
+	group
+}) => {
 	const classes = useStyles();
 	const history = useHistory();
 
@@ -76,6 +88,8 @@ const MeetingCard = ({ id, title, start, end, organization, className, dayOfWeek
 								"HH:mm:ss.SSSZ"
 						  ).format("h:mm a")} to ${moment(end, "HH:mm:ss.SSSZ").format("h:mm a")}`
 						: smartTimespan(new Date(start), new Date(end))}
+					<br />
+					{privacy === "public" ? "Public" : `Private (${group?.id ? group.name : "members only"})`}
 				</Typography>
 
 				{frequency ? (

@@ -108,6 +108,10 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 					</Typography>
 					<Typography paragraph color={"secondary"}>
 						{smartTimespan(new Date(meeting.start), new Date(meeting.end))}
+						<br />
+						{meeting.privacy === "public"
+							? "Public"
+							: `Private (${meeting.group?.id ? meeting.group.name : "members only"})`}
 					</Typography>
 					<div
 						className={classes.descriptionContainer + " HtmlContent"}
