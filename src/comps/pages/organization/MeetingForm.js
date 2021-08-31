@@ -9,7 +9,6 @@ import {
 	DialogContentText,
 	DialogTitle,
 	makeStyles,
-	Switch,
 	TextField,
 	Typography,
 	Select,
@@ -25,6 +24,7 @@ import MomentUtils from "@date-io/moment";
 import { gql, useQuery } from "@apollo/client";
 import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pickers";
 import TinyEditor from "../../updates/TinyEditor";
+import { OrgContext } from "../../../pages/org/index";
 
 const AVAILABLE_ROOMS_QUERY = gql`
 	query ($start: DateTime!, $end: DateTime!) {
@@ -69,9 +69,14 @@ const MeetingForm = ({
 	errorMessage,
 	recurring: alreadyRecurring
 }) => {
+	const org = React.useContext(OrgContext);
 	const classes = useStyles();
 	const [title, setTitle] = React.useState(meeting.title || "");
-	const [isPublic, setIsPublic] = useState(meeting.privacy === "public");
+
+	const publicGroup = { name: "Public", id: 0 };
+	const privateGroup = { name: "Member-only", id: 0 };
+	const groups = [publicGroup, privateGroup].concat(org?.groups);
+	const [group, setGroup] = useState(publicGroup);
 	const [description, setDescription] = React.useState(meeting.description || "");
 
 	let defaultStart = new Date();
@@ -180,7 +185,7 @@ const MeetingForm = ({
 							/>
 						)}
 					</Grid>
-					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						<TimePicker
 							fullWidth
 							autoOk
@@ -192,7 +197,7 @@ const MeetingForm = ({
 							onChange={updateDate}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						<TimePicker
 							fullWidth
 							autoOk
@@ -204,7 +209,7 @@ const MeetingForm = ({
 							onChange={updateEnd}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
+					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
 						<Autocomplete
 							disableClearable
 							options={availableRooms}
@@ -225,6 +230,22 @@ const MeetingForm = ({
 							renderInput={params => <TextField {...params} label="Room" variant="outlined" />}
 						/>
 					</Grid>
+					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+						<Autocomplete
+							disableClearable
+							options={groups}
+							getOptionLabel={option => option.name}
+							getOptionSelected={option => option.id === group.id && option.name === group.name}
+							value={group}
+							onChange={(_, g) => { setGroup(g); console.log(g.id); }}
+							renderOption={option => (
+								<span>
+									<Typography>{option.name}</Typography>
+								</span>
+							)}
+							renderInput={params => <TextField {...params} label="Group" variant="outlined" />}
+						/>
+					</Grid>
 				</MuiPickersUtilsProvider>
 			</Grid>
 
@@ -235,13 +256,6 @@ const MeetingForm = ({
 				placeholder={`e.g. We're going to be discussing the movie Ender's game this week. \n\nHere's a link to the zoom call: https://zoom.us/j/94318855567?pwd=bFpPbVV4ZStaNlVMRjY1UnZJV2tTdz09`}
 			/>
 
-			<Grid component="label" container alignItems="center" spacing={1}>
-				<Grid item>Members Only</Grid>
-				<Grid item>
-					<Switch checked={isPublic} onChange={() => setIsPublic(!isPublic)} />
-				</Grid>
-				<Grid item>Public</Grid>
-			</Grid>
 			<Typography paragraph variant={"body2"} color={"primary"}>
 				If a meeting is not public then only members of the club will be able to see the description.
 			</Typography>
@@ -262,18 +276,20 @@ const MeetingForm = ({
 
 			<Button
 				onClick={() => {
-					setLastErr("");
 					submit({
 						title,
 						description,
 						endTime: time.end,
 						checked,
 						date: time.start,
-						privacy: isPublic ? "public" : "private",
+						privacy: (group.id === 0 && group.name === "Public") ? "public" : "private",
 						frequency: 0,
 						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
+						groupId: group.id,
 						...(room.id !== 0 && { roomId: room.id })
 					});
+					console.log(group.id);
+					setLastErr("");
 				}}
 				color={"primary"}
 				variant="contained"
