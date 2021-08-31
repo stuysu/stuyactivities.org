@@ -26,7 +26,7 @@ export default function Meetings() {
 			<Typography variant={"h2"} align={"center"}>
 				Meetings
 			</Typography>
-			{(org.recurringMeetings?.length > 0) && (
+			{org.recurringMeetings?.length > 0 && (
 				<>
 					<Typography variant={"h4"}>Recurring Meetings</Typography>
 					<Grid container>
