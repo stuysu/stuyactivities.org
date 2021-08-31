@@ -16,7 +16,7 @@ import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { Dashboard, Description, GroupWork, Person, Settings } from "@material-ui/icons";
+import { Dashboard, Description, Group, GroupWork, Person, Settings } from "@material-ui/icons";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import { OrgContext } from "../../../pages/org";
@@ -131,6 +131,7 @@ const OrgNavPanel = ({ match }) => {
 				<TabItem label={"Charter"} to={match.path + "/charter"} icon={<Description />} />
 				<TabItem label={"Meetings"} to={match.path + "/meetings"} icon={<GroupWork />} />
 				<TabItem label={"Members"} to={match.path + "/members"} icon={<Person />} />
+				<TabItem label={"Groups"} to={match.path + "/groups"} icon={<Group />} />
 
 				{org.membership?.adminPrivileges && (
 					<TabItem label={"Admin Panel"} exact={false} to={match.path + "/admin"} icon={<Settings />} />

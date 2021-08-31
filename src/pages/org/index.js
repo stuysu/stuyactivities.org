@@ -8,6 +8,7 @@ import Loading from "../../comps/ui/Loading";
 import Charter from "./charter";
 import Overview from "./overview";
 import Meetings from "./meetings";
+import Groups from "./groups";
 import { Helmet } from "react-helmet";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -204,6 +205,7 @@ const OrgRouter = ({ match, history }) => {
 									<Route path={match.path} component={Overview} exact />
 									<Route path={match.path + "/charter"} component={Charter} />
 									<Route path={match.path + "/members"} component={Members} />
+									<Route path={match.path + "/groups"} component={Groups} />
 									<Route path={match.path + "/admin"} component={OrgAdminRouter} />
 									<Route path={match.path + "/join"} component={Join} />
 									<Route path={match.path + "/meetings"} component={Meetings} />
