@@ -38,6 +38,10 @@ const QUERY = gql`
 			description
 			start
 			end
+			group {
+				id
+				name
+			}
 			organization {
 				id
 				name

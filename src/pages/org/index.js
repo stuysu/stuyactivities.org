@@ -85,6 +85,10 @@ const QUERY = gql`
 				description
 				start
 				privacy
+				group {
+					id
+					name
+				}
 				end
 			}
 			meetings {
