@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { FormControlLabel, Checkbox, Typography } from "@material-ui/core";
 import { CharterFormContext } from "../../../pages/charter";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -136,6 +136,19 @@ const Confirm = () => {
 					);
 				})}
 			</List>
+
+			<FormControlLabel
+				control={
+					<Checkbox
+						checked={form?.clubpubParticipant}
+						onChange={ev => form.set({ clubpubParticipant: ev.target.checked })}
+					/>
+				}
+				label={
+					"Are you interested in representing you club in the Clubs & Pubs Fair this September? (This is non-binding, and you may change your answer in the future.)"
+				}
+			/>
+
 			<br />
 			{Boolean(form?.serverError) && (
 				<Typography paragraph color={"error"}>
