@@ -237,7 +237,10 @@ const MeetingForm = ({
 							getOptionLabel={option => option.name}
 							getOptionSelected={option => option.id === group.id && option.name === group.name}
 							value={group}
-							onChange={(_, g) => { setGroup(g); console.log(g.id); }}
+							onChange={(_, g) => {
+								setGroup(g);
+								console.log(g.id);
+							}}
 							renderOption={option => (
 								<span>
 									<Typography>{option.name}</Typography>
@@ -282,7 +285,7 @@ const MeetingForm = ({
 						endTime: time.end,
 						checked,
 						date: time.start,
-						privacy: (group.id === 0 && group.name === "Public") ? "public" : "private",
+						privacy: group.id === 0 && group.name === "Public" ? "public" : "private",
 						frequency: 0,
 						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
 						groupId: group.id,

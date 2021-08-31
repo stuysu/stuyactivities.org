@@ -301,7 +301,7 @@ const Main = ({ match }) => {
 					notifyFaculty: checked,
 					privacy,
 					roomId,
-					groupId,
+					groupId
 				}
 			});
 		}
@@ -354,10 +354,11 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${meeting.frequency
-											} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
-												"h:mm a"
-											)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
+										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${
+											meeting.frequency
+										} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
+											"h:mm a"
+										)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
