@@ -60,6 +60,7 @@ const CREATE_MUTATION = gql`
 		$notifyFaculty: Boolean
 		$privacy: String!
 		$roomId: Int
+		$groupId: Int
 	) {
 		createMeeting(
 			orgUrl: $orgUrl
@@ -70,6 +71,7 @@ const CREATE_MUTATION = gql`
 			notifyFaculty: $notifyFaculty
 			privacy: $privacy
 			roomId: $roomId
+			groupId: $groupId
 		) {
 			id
 			title
@@ -97,6 +99,7 @@ const EDIT_MUTATION = gql`
 		$notifyMembers: Boolean
 		$privacy: String
 		$roomId: Int
+		$groupId: Int
 	) {
 		alterMeeting(
 			meetingId: $id
@@ -106,6 +109,7 @@ const EDIT_MUTATION = gql`
 			end: $end
 			notifyMembers: $notifyMembers
 			privacy: $privacy
+			groupId: $groupId
 		) {
 			id
 			title
@@ -137,6 +141,7 @@ const CREATE_RECURRING_MUTATION = gql`
 			privacy: $privacy
 			frequency: $frequency
 			dayOfWeek: $dayOfWeek
+			groupId: $groupId
 		) {
 			id
 			title
@@ -194,6 +199,11 @@ const EDIT_RECURRING_MUTATION = gql`
 const Main = ({ match }) => {
 	const classes = useStyles();
 	const org = React.useContext(OrgContext);
+	let reversedMeetings = org?.meetings?.slice(0);
+	if (reversedMeetings) {
+		reversedMeetings.reverse();
+	}
+
 	//changing the key of a component causes react to remake it
 	//here, we use the key to reset the form when it has been submitted
 	const [formKey, setFormKey] = React.useState(0);
@@ -261,8 +271,7 @@ const Main = ({ match }) => {
 			cache.reset().then(() => org.refetch());
 		}
 	});
-	const create = ({ title, description, date, endTime, checked, privacy, frequency, roomId }) => {
-		console.log(frequency);
+	const create = ({ title, description, date, endTime, checked, privacy, frequency, roomId, groupId }) => {
 		if (frequency) {
 			createRecurringMutation({
 				variables: {
@@ -274,7 +283,8 @@ const Main = ({ match }) => {
 					privacy,
 					frequency,
 					dayOfWeek: date.day(),
-					roomId
+					roomId,
+					groupId
 				}
 			});
 		} else {
@@ -290,7 +300,8 @@ const Main = ({ match }) => {
 					).toISOString(),
 					notifyFaculty: checked,
 					privacy,
-					roomId
+					roomId,
+					groupId
 				}
 			});
 		}
@@ -371,7 +382,7 @@ const Main = ({ match }) => {
 						</Typography>
 					)}
 					<List>
-						{org?.meetings?.map(meeting => (
+						{reversedMeetings?.map(meeting => (
 							<Paper className={classes.margin}>
 								<ListItem>
 									<ListItemText
@@ -452,7 +463,7 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
-	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek }) => {
+	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek, groupId }) => {
 		editMutation({
 			variables: {
 				id: Number(match.params.meetingId),
@@ -463,10 +474,12 @@ const EditPage = ({ match }) => {
 				start: recurring ? date.format("HH:mm:ss.SSSZ") : date.toISOString(),
 				end: recurring ? endTime.format("HH:mm:ss.SSSZ") : endTime.toISOString(),
 				frequency,
-				dayOfWeek
+				dayOfWeek,
+				groupId
 			}
 		});
 	};
+
 	//Grid isn't really necessary here but we use it to make the edit menu similar in shape to the main page halves
 	return (
 		<div>

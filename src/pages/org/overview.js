@@ -28,7 +28,7 @@ const Overview = () => {
 			tags {
 				id
 			}
-			url 
+			url
 			charter {
 				picture {
 					url
@@ -175,7 +175,7 @@ const Overview = () => {
 							return (
 								<ListItem key={relatedOrg[0].name} button component="a" href={url}>
 									<ListItemAvatar>
-										<Avatar src={relatedOrg[0].charter.picture.icon} />
+										<Avatar src={relatedOrg[0].charter?.picture?.icon} />
 									</ListItemAvatar>
 									<span>
 										<Typography>{relatedOrg[0].name}</Typography>

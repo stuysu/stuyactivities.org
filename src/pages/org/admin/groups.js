@@ -91,9 +91,14 @@ const DELETE_GROUP_MUTATION = gql`
 export default function Groups({ match }) {
 	const classes = useStyles();
 
+	const { data, refetch } = useQuery(GROUP_QUERY, {
+		variables: { url: match.params.orgUrl }
+	});
+
 	let clearCache = {
 		update(cache) {
 			cache.reset();
+			refetch();
 		}
 	};
 
@@ -101,10 +106,6 @@ export default function Groups({ match }) {
 	const [deleteMembershipMutation] = useMutation(REMOVE_GROUP_MEMBERSHIP_MUTATION, clearCache);
 	const [createGroupMutation] = useMutation(CREATE_GROUP_MUTATION, clearCache);
 	const [deleteGroupMutation] = useMutation(DELETE_GROUP_MUTATION, clearCache);
-
-	const { data } = useQuery(GROUP_QUERY, {
-		variables: { url: match.params.orgUrl }
-	});
 
 	const [newGroupName, setNewGroupName] = React.useState("");
 	const createGroup = () => {
@@ -172,6 +173,7 @@ export default function Groups({ match }) {
 						color="primary"
 						variant={"contained"}
 						style={{ float: "right" }}
+						disabled={newGroupName === ""}
 					>
 						Create Group
 					</Button>
@@ -286,33 +288,37 @@ export default function Groups({ match }) {
 						/>
 					</Box>
 					<List>
-						{editGroup.newMembers?.map((member, index) => (
-							<ListItem key={index} button>
-								<Grid container xl={12} lg={12} md={12} sm={12} xs={12}>
-									<Typography>{member.name}</Typography>
-									<ListItemSecondaryAction>
-										<IconButton
-											onClick={() => {
-												editGroup.newMembers.splice(index, 1);
-												setEditGroup({ ...editGroup });
-											}}
-										>
-											<Delete />
-										</IconButton>
-									</ListItemSecondaryAction>
-								</Grid>
-							</ListItem>
-						))}
+						<Box p={3} pt={0}>
+							{editGroup.newMembers?.length && <Typography variant="h5">Add Members:</Typography>}
+							<br />
+							{editGroup.newMembers?.map((member, index) => (
+								<ListItem key={index} button>
+									<Grid container xl={12} lg={12} md={12} sm={12} xs={12}>
+										<Typography>{member.name}</Typography>
+										<ListItemSecondaryAction>
+											<IconButton
+												onClick={() => {
+													editGroup.newMembers.splice(index, 1);
+													setEditGroup({ ...editGroup });
+												}}
+											>
+												<Delete />
+											</IconButton>
+										</ListItemSecondaryAction>
+									</Grid>
+								</ListItem>
+							))}
+						</Box>
 					</List>
 					<DialogActions>
-						<Button onClick={() => setEditGroup({})}>Close</Button>
-						{editGroup.newMembers?.length > 0 && <Button onClick={addGroupMemberships}>Add Members</Button>}
 						<Button
 							color="primary"
 							onClick={() => {
 								if (
 									window.confirm(
-										"Are you sure you want to delete " + editGroup.name + " permanently?"
+										"Are you sure you want to delete the group `" +
+											editGroup.name +
+											"` permanently?"
 									)
 								) {
 									deleteGroup();
@@ -321,6 +327,8 @@ export default function Groups({ match }) {
 						>
 							Delete {editGroup.name} Permanently
 						</Button>
+						{editGroup.newMembers?.length > 0 && <Button onClick={addGroupMemberships}>Add Members</Button>}
+						<Button onClick={() => setEditGroup({})}>Close</Button>
 					</DialogActions>
 				</Dialog>
 			</List>
