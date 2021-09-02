@@ -6,7 +6,7 @@ import BackButton from "../comps/ui/BackButton";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Box from "@material-ui/core/Box";
+import { Box, Link } from "@material-ui/core/";
 import PropTypes from "prop-types";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
@@ -80,7 +80,7 @@ const ClubPubFair = () => {
 		<div>
 			<Helmet>
 				<title>Club Pub Fair | StuyActivities</title>
-				<meta property="og:title" content="Club Pub Fair | StuyActivities" />
+				<meta property="og:title" content="Club Pub Fair 2020 | StuyActivities" />
 				<meta
 					property="og:description"
 					content={"A page designed to help students through the Club Pub Fair."}
@@ -100,7 +100,15 @@ const ClubPubFair = () => {
 					</Typography>
 					<Typography paragraph>
 						The Fair took place virtually over the course of 7 days (from 4-6 pm afterschool from Tue., Sep.
-						29th through Wed., Oct. 7th) and featured nearly 150 activities!
+						29th through Wed., Oct. 7th) and featured nearly 150 activities! (Participating activities are
+						listed
+						<Link
+							href="https://docs.google.com/document/d/1xFF6hU_BI_4yJ1o7_S508TqDFxtxD1DSyxumPvsyk9k/edit?usp=sharing"
+							color={"secondary"}
+						>
+							here
+						</Link>
+						).
 					</Typography>
 					<Typography paragraph>
 						A different category of ~20 activities with a similar theme (i.e. STEM, sports, arts, culture,

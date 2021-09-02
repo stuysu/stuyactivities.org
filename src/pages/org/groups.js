@@ -37,7 +37,7 @@ const Groups = () => {
 				Groups
 			</Typography>
 			<List>
-				{data &&
+				{data?.org?.groups?.length ? (
 					data.org.groups.map(group => (
 						<Box mt={1} p={1}>
 							<Card>
@@ -74,7 +74,10 @@ const Groups = () => {
 								</Box>
 							</Card>
 						</Box>
-					))}
+					))
+				) : (
+					<Typography color={"textSecondary"}>This club has no groups yet.</Typography>
+				)}
 			</List>
 		</>
 	);
