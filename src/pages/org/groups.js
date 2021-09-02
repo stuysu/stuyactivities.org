@@ -76,7 +76,7 @@ const Groups = () => {
 						</Box>
 					))
 				) : (
-					<Typography color={"textSecondary"}>This club has no groups yet.</Typography>
+					<Typography color={"textSecondary"}>This club does not have groups yet.</Typography>
 				)}
 			</List>
 		</>
