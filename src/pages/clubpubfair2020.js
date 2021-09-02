@@ -102,9 +102,13 @@ const ClubPubFair = () => {
 						The Fair took place virtually over the course of 7 days (from 4-6 pm afterschool from Tue., Sep.
 						29th through Wed., Oct. 7th) and featured nearly 150 activities! (Participating activities are
 						listed
-						<Link href="https://docs.google.com/document/d/1xFF6hU_BI_4yJ1o7_S508TqDFxtxD1DSyxumPvsyk9k/edit?usp=sharing" color={"secondary"}>
+						<Link
+							href="https://docs.google.com/document/d/1xFF6hU_BI_4yJ1o7_S508TqDFxtxD1DSyxumPvsyk9k/edit?usp=sharing"
+							color={"secondary"}
+						>
 							here
-						</Link>).
+						</Link>
+						).
 					</Typography>
 					<Typography paragraph>
 						A different category of ~20 activities with a similar theme (i.e. STEM, sports, arts, culture,
