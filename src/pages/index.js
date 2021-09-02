@@ -19,7 +19,7 @@ const TokenLogin = lazy(() => import("./token"));
 const AdminRouter = lazy(() => import("./admin"));
 const Rules = lazy(() => import("./rules"));
 const About = lazy(() => import("./about"));
-const ClubPubFair = lazy(() => import("./clubpubfair"));
+const ClubPubFair2020 = lazy(() => import("./clubpubfair2020"));
 const Charter = lazy(() => import("./charter"));
 const FeedbackForm = lazy(() => import("./feedback"));
 const Explore = lazy(() => import("./explore"));
@@ -65,7 +65,7 @@ const Pages = () => {
 						<Route path={"/rules"} component={Rules} />
 						<Route path={"/about"} component={About} />
 						<Route path={"/explore"} component={Explore} />
-						<Route path={"/clubpubfair"} component={ClubPubFair} />
+						<Route path={"/clubpubfair2020"} component={ClubPubFair2020} />
 						<Route path={"/meetings"} component={Meetings} />
 						<Route path={"/settings"} component={Settings} />
 						<Route path={"/organizations/:orgUrl"}>

@@ -163,12 +163,12 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 
 				{user.signedIn && (
 					<>
-						<UnstyledLink to={"/clubpubfair"}>
+						<UnstyledLink to={"/clubpubfair2020"}>
 							<ListItem button>
 								<ListItemIcon>
 									<EmojiFlagsOutlined />
 								</ListItemIcon>
-								<ListItemText primary={"Clubs & Pubs Fair"} />
+								<ListItemText primary={"2020 Clubs & Pubs Fair"} />
 							</ListItem>
 						</UnstyledLink>
 					</>

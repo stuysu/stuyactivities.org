@@ -80,7 +80,7 @@ const ClubPubFair = () => {
 		<div>
 			<Helmet>
 				<title>Club Pub Fair | StuyActivities</title>
-				<meta property="og:title" content="Club Pub Fair | StuyActivities" />
+				<meta property="og:title" content="Club Pub Fair 2020 | StuyActivities" />
 				<meta
 					property="og:description"
 					content={"A page designed to help students through the Club Pub Fair."}
