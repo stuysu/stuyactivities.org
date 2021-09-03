@@ -145,7 +145,7 @@ const Confirm = () => {
 					/>
 				}
 				label={
-					"Are you interested in representing you club in the Clubs & Pubs Fair this September? (This is non-binding, and you may change your answer in the future.)"
+					"Are you interested in representing your club in the Clubs & Pubs Fair this September? (This is non-binding, and you may change your answer in the future.)"
 				}
 			/>
 
