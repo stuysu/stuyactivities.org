@@ -24,6 +24,7 @@ const Charter = lazy(() => import("./charter"));
 const FeedbackForm = lazy(() => import("./feedback"));
 const Explore = lazy(() => import("./explore"));
 const Settings = lazy(() => import("./settings"));
+const Sports = lazy(() => import("./sports"));
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -72,6 +73,7 @@ const Pages = () => {
 							<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
 						</Route>
 						<Route path={"/:orgUrl"} component={OrgRouter} />
+						<Route path={"/sports"} component={Sports} />
 					</Switch>
 				</Suspense>
 			</ErrorBoundary>
