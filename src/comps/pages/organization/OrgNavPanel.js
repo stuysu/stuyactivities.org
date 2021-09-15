@@ -35,6 +35,9 @@ const useStyles = makeStyles(theme => ({
 	stickyContainer: {
 		position: "sticky",
 		top: "40px"
+	},
+	break: {
+		overflowWrap: "break-word"
 	}
 }));
 
@@ -99,7 +102,7 @@ const OrgNavPanel = ({ match }) => {
 			</Typography>
 
 			{org.charter.socials && (
-				<Typography align={"center"}>
+				<Typography align={"center"} className={classes.break}>
 					<Linkify>{org.charter.socials}</Linkify>
 				</Typography>
 			)}
