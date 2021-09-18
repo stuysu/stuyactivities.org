@@ -44,7 +44,7 @@ export default function AdminRouter({ match }) {
 		},
 		{
 			label: "Strikes",
-			role: "helpRequests",
+			role: "strikes",
 			path: actualPath + "/strikes",
 			icon: <SmsFailed />
 		},
@@ -74,7 +74,7 @@ export default function AdminRouter({ match }) {
 			<Switch>
 				<Route path={match.path + "/approvals"} component={Approvals} exact />
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
-				<Route path={match.path + "/help"} component={Approvals} />
+				<Route path={match.path + "/help"} component={Approvals} />	
 				<Route path={match.path + "/strikes"} component={Strikes} />
 				<Route path={match.path + "/log"} component={AdminLog} />
 				<Route path={match.path + "/email"} component={EmailClubLeaders} />
