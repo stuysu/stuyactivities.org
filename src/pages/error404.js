@@ -2,7 +2,8 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import FlexCenter from "../comps/ui/FlexCenter";
-import { Grid, Typography } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import conifer from "../img/vectors/conifer-page-not-found.svg";
 import marginalia from "../img/vectors/marginalia-page-not-found.svg";
 import clip from "../img/vectors/clip-page-not-found.svg";
@@ -37,7 +38,9 @@ const QUERY = gql`
 			id
 			name
 			charter {
-				picture
+				picture {
+					card: url(height: 180, width: 180, crop: thumb, gravity: center, radius: 100)
+				}
 				mission
 				commitmentLevel
 			}
