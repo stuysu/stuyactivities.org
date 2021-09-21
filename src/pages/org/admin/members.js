@@ -31,16 +31,18 @@ const useStyles = makeStyles(theme => ({
 
 const QUERY = gql`
 	query Memberships($url: String!) {
-		memberships(orgUrl: $url) {
-			id
-			user {
+		organizationByUrl(url: $url) {
+			memberships {
 				id
-				name
-				email
-				picture
+				user {
+					id
+					name
+					email
+					picture
+				}
+				role
+				adminPrivileges
 			}
-			role
-			adminPrivileges
 		}
 	}
 `;
@@ -117,7 +119,7 @@ export default function Members({ match }) {
 	};
 
 	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
-	const emailList = data?.memberships?.map(membership => membership.user.email).join(", ");
+	const emailList = data?.organizationByUrl?.memberships?.map(membership => membership.user.email).join(", ");
 	const copy = () => {
 		navigator.clipboard.writeText(emailList).then(() => setSnackBarOpen(true));
 	};
@@ -138,7 +140,7 @@ export default function Members({ match }) {
 				/>
 			</div>
 			<List>
-				{data?.memberships?.map(membership => (
+				{data?.organizationByUrl?.memberships?.map(membership => (
 					<ListItem>
 						<ListItemAvatar>
 							<Avatar src={membership.user.picture} />

@@ -10,12 +10,14 @@ import Avatar from "@material-ui/core/Avatar";
 const getQuery = signedIn => {
 	return gql`
 		query ($orgId: Int!){
-			memberships(orgId: $orgId){
-				role
-				user {
-					name
-					picture
-					${signedIn ? "email" : ""}
+			organizationById(id: $orgId) {
+				memberships(orgId: $orgId){
+					role
+					user {
+						name
+						picture
+						${signedIn ? "email" : ""}
+					}
 				}
 			}
 		}
@@ -35,10 +37,10 @@ const Members = () => {
 	return (
 		<div>
 			<Typography style={{ textAlign: "center" }} variant={"h2"}>
-				{data?.memberships.length} Members
+				{data?.organizationById.memberships.length} Members
 			</Typography>
 
-			{data?.memberships.map(membership => {
+			{data?.organizationById.memberships.map(membership => {
 				return (
 					<ListItem key={membership.user.id} button>
 						<ListItemAvatar>
