@@ -119,7 +119,7 @@ export default function Members({ match }) {
 	};
 
 	if (data?.organizationByUrl?.memberships) {
-		data.organizationByUrl.memberships.sort((a, _) => a.adminPrivileges ? 1 : -1);
+		data.organizationByUrl.memberships.sort((a, _) => (a.adminPrivileges ? 1 : -1));
 	}
 
 	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
