@@ -34,6 +34,10 @@ const Members = () => {
 		}
 	});
 
+	if (data?.organizationById?.memberships) {
+		data.organizationById.memberships.sort((a, _) => (a.adminPrivileges ? 1 : -1));
+	}
+
 	return (
 		<div>
 			<Typography style={{ textAlign: "center" }} variant={"h2"}>
