@@ -118,6 +118,10 @@ export default function Members({ match }) {
 		});
 	};
 
+	if (data?.organizationByUrl?.memberships) {
+		data.organizationByUrl.memberships.sort((a, _) => a.adminPrivileges ? 1 : -1);
+	}
+
 	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
 	const emailList = data?.organizationByUrl?.memberships?.map(membership => membership.user.email).join(", ");
 	const copy = () => {
