@@ -11,7 +11,7 @@ const getQuery = signedIn => {
 	return gql`
 		query ($orgId: Int!){
 			organizationById(id: $orgId) {
-				memberships(orgId: $orgId){
+				memberships {
 					role
 					user {
 						name
