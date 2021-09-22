@@ -34,6 +34,7 @@ const QUERY = gql`
 		organizationByUrl(url: $url) {
 			memberships {
 				id
+				adminPrivileges
 				user {
 					id
 					name
@@ -119,7 +120,7 @@ export default function Members({ match }) {
 	};
 
 	if (data?.organizationByUrl?.memberships) {
-		data.organizationById.memberships.sort((a, _) => a.adminPrivileges ? -1 : 1	);
+		data.organizationById.memberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
 	}
 
 	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
