@@ -13,6 +13,7 @@ const getQuery = signedIn => {
 			organizationById(id: $orgId) {
 				memberships {
 					role
+					adminPrivileges
 					user {
 						name
 						picture
@@ -35,7 +36,7 @@ const Members = () => {
 	});
 
 	if (data?.organizationById?.memberships) {
-		data.organizationById.memberships.sort((a, _) => (a.adminPrivileges ? 1 : -1));
+		data.organizationById.memberships.sort((a, _) => a.adminPrivileges ? 1 : -1	);
 	}
 
 	return (
