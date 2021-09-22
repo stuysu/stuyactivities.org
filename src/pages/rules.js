@@ -33,7 +33,7 @@ export default function Rules() {
 						administrators of the Clubs &amp; Pubs department. All clubs must have a faculty advisor. Please
 						allow up to 2 weeks for charter approval. When an Activity is fully approved and allowed to
 						operate, its charter will be visible on the online catalog of the StuyActivities website (
-						<a href="https://stuyactivities.org">www.StuyActivities.org</a>
+						<a href="https://stuyactivities.org/catalog">www.StuyActivities.org</a>
 						). All Activity leaders will receive an email when their charter has been fully approved and is
 						in the catalog.
 					</li>
@@ -94,12 +94,26 @@ export default function Rules() {
 				</ol>
 			</Typography>
 			<Typography variant={"h5"} color="primary">
+				2021-2022 Meeting Rules
+			</Typography>
+			<Typography paragraph>
+				<ol>
+					<li>
+						All Club Participants must abide by Covid-19 safety regulations set by the administration and
+						New York State during in-person meetings. Participants must wear masks and follow proper safety
+						guidelines during school and afterschool activities, violations of these regulations will lead
+						to a strike.
+					</li>
+					<li>All Activities must have a faculty advisor listed under their charter by November 2021.</li>{" "}
+				</ol>{" "}
+			</Typography>
+			<Typography variant={"h5"} color="primary">
 				Official Regulations for Online Club Meetings
 			</Typography>
 			<Typography paragraph>
 				<ol>
 					<li>
-						All official meetings must be hosted online.
+						Official meetings may be hosted online.
 						<ul>
 							<li>
 								Activities may not advertise in-person meetings on StuyActivities. Any violation of this
@@ -377,6 +391,65 @@ export default function Rules() {
 						</ul>
 					</li>
 				</ol>
+			</Typography>
+			<Typography variant={"h5"} color="primary">
+				Funding
+			</Typography>
+			<Typography>
+				<ul>
+					<li>
+						A faculty advisor must be present if:
+						<ul>
+							{" "}
+							<li>
+								An Activity plans to host speakers and lectures in the cafeteria, library, lecture
+								halls, or auditoriums.
+							</li>
+							<li>
+								An Activity plans to host events, meetings, field trips, etc outside of Stuyvesant with
+								Activity members present. This does not include virtual meetings.
+							</li>
+							<li>An Activity plans to host meetings in Stuyvesant past 5:00 PM.</li>
+							<li>An Activity plans to request funding from the Student Union.</li>
+						</ul>
+					</li>
+					<li>
+						If an Activity wishes to spend the money they have received during the Club Pub Allocations
+						Process, the faculty advisor must sign under the “Advisor/COSA” field on the Reimbursement Form.
+						This will indicate that the purchase has been approved by the faculty advisor.{" "}
+					</li>
+					<li>
+						If an Activity wishes to use the media carts from the programming office, they may do so only
+						with the presence of a registered Activity faculty advisor to sign them in and out.
+					</li>
+					<li>
+						If an Activity wishes to go on trips or engage in any official Activity-related meeting outside
+						of the school’s premises, they must:
+						<ul>
+							<li>
+								Have the registered Activity faculty advisor (not the Activity leaders) email
+								clubpub@stuysu.org, the COSA (Mr. Polazzo) and the Assistant Principal (Mr. Moran) at
+								least one week in advance with the Subject: “Activity Meeting Outside of School
+								Premises: [ACTIVITY NAME]”
+							</li>
+							<li>
+								The email should detail the date, location, paperwork, number of people attending,
+								Activity leader(s) and faculty leader names for the event.
+							</li>
+							<li>Mr. Polazzo can be reached at MPolazz@schools.nyc.gov and can be found in Room 260.</li>
+							<li>Mr. Moran can be reached at BMoran@schools.nyc.gov and can be found in Room 103.</li>
+							<li>
+								Have a faculty advisor present for the entirety of the event. Any Activity found in
+								violation of this rule may face suspension and revocation of their charter.
+							</li>
+						</ul>
+					</li>
+					<li>
+						If an Activity has received any combination of 3 strikes, they may resubmit a charter after
+						their suspension. If approved, a faculty advisor must be present at all meetings until otherwise
+						specified by the Student Union.
+					</li>{" "}
+				</ul>{" "}
 			</Typography>
 			<Typography paragraph>
 				ANY ACTIVITY THAT FAILS TO AGREE WITH THE ABOVE SET OF RULES WILL NOT BE CHARTERED. THE STUYVESANT

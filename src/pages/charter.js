@@ -156,6 +156,7 @@ export default class Charter extends React.Component {
 		};
 		this.hasErrors = () =>
 			Object.keys(this.state.errors).some(field => this.state.errors[field]) ||
+			!this.state?.leaders?.length ||
 			this.state?.leaders?.every(leader => leader.isFaculty); //at least one non-faculty
 	}
 

@@ -27,9 +27,10 @@ const AddLeaders = () => {
 	return (
 		<div>
 			<Typography paragraph>
-				Your Activity must have at least one other student leader. Your Activity must also have a Faculty
-				Advisor which must be added by October. When you charter your role will be "creator" but once your
-				organization is approved you will be able to change it.
+				Your Activity must have at least one other student leader. You will be automatically added as a student
+				leader when you submit the charter. Your Activity must also have a Faculty Advisor which must be added
+				by October. When you charter your role will be "creator" but once your organization is approved you will
+				be able to change it.
 			</Typography>
 			<UserSelect
 				filter={user => user.id !== userContext.id && !form?.leaders?.some(leader => leader.id === user.id)}
