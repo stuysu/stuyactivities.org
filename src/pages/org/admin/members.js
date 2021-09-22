@@ -120,7 +120,7 @@ export default function Members({ match }) {
 	};
 
 	if (data?.organizationByUrl?.memberships) {
-		data.organizationById.memberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
+		data.organizationByUrl.memberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
 	}
 
 	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
