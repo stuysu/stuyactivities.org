@@ -16,6 +16,10 @@ const QUERY = gql`
 			start
 			end
 			privacy
+			rooms {
+				id
+				name
+			}
 			organization {
 				id
 				name
@@ -108,6 +112,8 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 					</Typography>
 					<Typography paragraph color={"secondary"}>
 						{smartTimespan(new Date(meeting.start), new Date(meeting.end))}
+						<br />
+						Location: {meeting.rooms.length && meeting.rooms[0].name}
 						<br />
 						{meeting.privacy === "public"
 							? "Public"

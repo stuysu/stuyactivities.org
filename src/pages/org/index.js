@@ -84,6 +84,10 @@ const QUERY = gql`
 				description
 				start
 				privacy
+				rooms {
+					name
+					id
+				}
 				group {
 					id
 					name
@@ -95,6 +99,10 @@ const QUERY = gql`
 				title
 				description
 				start
+				rooms {
+					id
+					name
+				}
 				privacy
 				end
 			}

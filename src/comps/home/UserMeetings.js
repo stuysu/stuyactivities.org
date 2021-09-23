@@ -53,6 +53,10 @@ const QUERY = gql`
 					}
 				}
 			}
+			rooms {
+				id
+				name
+			}
 			privacy
 		}
 	}

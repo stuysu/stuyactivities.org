@@ -108,7 +108,9 @@ const MeetingForm = ({
 	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
 
 	const virtual = { name: "Virtual", id: 0 };
-	const [room, setRoom] = React.useState(virtual);
+	const [room, setRoom] = React.useState((meeting.rooms?.length && meeting.rooms[0]) || virtual);
+
+	console.log(meeting.rooms);
 
 	const { data, loading, error } = useQuery(AVAILABLE_ROOMS_QUERY, {
 		variables: {
@@ -126,7 +128,7 @@ const MeetingForm = ({
 		setTime({ start, end });
 	};
 
-	let availableRooms = [virtual].concat(data?.availableRooms);
+	let availableRooms = [virtual].concat(data?.availableRooms || []);
 	const roomAvailable = !loading && !error && availableRooms.find(avRoom => avRoom.id === room.id) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
 
@@ -289,9 +291,9 @@ const MeetingForm = ({
 						frequency: 0,
 						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
 						groupId: group.id,
-						...(room.id !== 0 && { roomId: room.id })
+						...(room.id !== 0 && { roomId: room.id }),
+						...(meeting.rooms?.length && { oldRoomId: meeting.rooms[0].id })
 					});
-					console.log(group.id);
 					setLastErr("");
 				}}
 				color={"primary"}

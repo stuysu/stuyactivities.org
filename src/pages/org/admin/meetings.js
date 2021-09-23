@@ -98,8 +98,6 @@ const EDIT_MUTATION = gql`
 		$end: DateTime
 		$notifyMembers: Boolean
 		$privacy: String
-		$roomId: Int
-		$groupId: Int
 	) {
 		alterMeeting(
 			meetingId: $id
@@ -109,7 +107,6 @@ const EDIT_MUTATION = gql`
 			end: $end
 			notifyMembers: $notifyMembers
 			privacy: $privacy
-			groupId: $groupId
 		) {
 			id
 			title
@@ -160,6 +157,26 @@ const REMOVE_RECURRING_MUTATION = gql`
 		deleteRecurringMeeting(recurringMeetingId: $id)
 	}
 `;
+
+const REPLACE_ROOM_MUTATION = gql`
+mutation(
+	$id:Int!
+	$oldRoom:Int!
+	$roomId:Int!
+) {
+	removeRoomFromMeeting(
+		meetingId:$id
+		roomId:$oldRoom
+	) {
+		id
+	}
+	addRoomToMeeting (
+		meetingId:$id
+		roomId:$roomId
+	) {
+		id
+	}
+}`;
 
 const EDIT_RECURRING_MUTATION = gql`
 	mutation AlterRecurringMeeting(
@@ -354,11 +371,10 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${
-											meeting.frequency
-										} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
-											"h:mm a"
-										)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
+										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${meeting.frequency
+											} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
+												"h:mm a"
+											)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
@@ -463,10 +479,12 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
-	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek, groupId }) => {
+	const [replaceRoomMutation] = useMutation(REPLACE_ROOM_MUTATION);
+	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek, roomId, oldRoomId, groupId }) => {
+		let id = Number(match.params.meetingId);
 		editMutation({
 			variables: {
-				id: Number(match.params.meetingId),
+				id,
 				title,
 				description: description || "",
 				notifyMembers: checked,
@@ -476,6 +494,13 @@ const EditPage = ({ match }) => {
 				frequency,
 				dayOfWeek,
 				groupId
+			}
+		});
+		replaceRoomMutation({
+			variables: {
+				id,
+				roomId,
+				oldRoomId,
 			}
 		});
 	};

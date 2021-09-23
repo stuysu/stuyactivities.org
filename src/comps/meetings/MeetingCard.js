@@ -52,7 +52,8 @@ const MeetingCard = ({
 	frequency,
 	description,
 	privacy,
-	group
+	group,
+	rooms
 }) => {
 	const classes = useStyles();
 	const history = useHistory();
@@ -84,10 +85,12 @@ const MeetingCard = ({
 				<Typography paragraph color={"secondary"}>
 					{frequency
 						? `${moment(dayOfWeek, "d").format("dddd")}s, every ${frequency} week(s), ${moment(
-								start,
-								"HH:mm:ss.SSSZ"
-						  ).format("h:mm a")} to ${moment(end, "HH:mm:ss.SSSZ").format("h:mm a")}`
+							start,
+							"HH:mm:ss.SSSZ"
+						).format("h:mm a")} to ${moment(end, "HH:mm:ss.SSSZ").format("h:mm a")}`
 						: smartTimespan(new Date(start), new Date(end))}
+					<br />
+					Location: {rooms?.length && rooms[0].name}
 					<br />
 					{privacy === "public" ? "Public" : `Private (${group?.id ? group.name : "members only"})`}
 				</Typography>
