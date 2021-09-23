@@ -9,7 +9,7 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	Typography,
+	Typography
 } from "@material-ui/core";
 import Linkify from "linkifyjs/react";
 import List from "@material-ui/core/List";
