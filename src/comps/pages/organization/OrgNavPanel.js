@@ -10,7 +10,6 @@ import {
 	DialogContentText,
 	DialogTitle,
 	Typography,
-	useMediaQuery,
 } from "@material-ui/core";
 import Linkify from "linkifyjs/react";
 import List from "@material-ui/core/List";
@@ -75,7 +74,6 @@ const OrgNavPanel = ({ match }) => {
 
 	const org = React.useContext(OrgContext);
 	const user = React.useContext(UserContext);
-	const isMobile = useMediaQuery("(max-width: 800px)");
 
 	let memberStatus = org.membership ? "member" : "none";
 
