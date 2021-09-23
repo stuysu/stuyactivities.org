@@ -162,7 +162,7 @@ const OrgNavPanel = ({ match }) => {
 					</Button>
 				</DialogActions>
 			</Dialog>
-			<Dialog open={joinOpen} onClose={() => setJoinOpen(false)}>
+			<Dialog open={joinOpen} maxWidth onClose={() => setJoinOpen(false)}>
 				<Box p={1}>
 					<Join />
 				</Box>
