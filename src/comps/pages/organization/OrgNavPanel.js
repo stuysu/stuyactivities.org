@@ -2,6 +2,7 @@ import React from "react";
 import FlexCenter from "../../ui/FlexCenter";
 import {
 	Avatar,
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -21,6 +22,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import { OrgContext } from "../../../pages/org";
 import { gql, useMutation } from "@apollo/client";
+import { triggerLoginDialog } from "../../auth/AuthDialog";
+import UserContext from "../../context/UserContext";
+import Join from "./join";
 
 const useStyles = makeStyles(theme => ({
 	avatar: {
@@ -68,6 +72,7 @@ const OrgNavPanel = ({ match }) => {
 	const classes = useStyles();
 
 	const org = React.useContext(OrgContext);
+	const user = React.useContext(UserContext);
 
 	let memberStatus = org.membership ? "member" : "none";
 
@@ -75,9 +80,8 @@ const OrgNavPanel = ({ match }) => {
 		memberStatus = org.membershipRequest.adminApproval ? "invited" : "requested";
 	}
 
-	const joinPath = generatePath(match.path + "/join", match.params);
-
 	const [leaveOpen, setLeaveOpen] = React.useState(false);
+	const [joinOpen, setJoinOpen] = React.useState(false);
 	const [leaveMutation] = useMutation(LEAVE_MUTATION, {
 		update(cache) {
 			cache.reset().then(() => org.refetch());
@@ -108,13 +112,15 @@ const OrgNavPanel = ({ match }) => {
 			)}
 			{org.active ? (
 				memberStatus !== "member" ? (
-					<UnstyledLink to={joinPath}>
-						<Button color={"secondary"} fullWidth>
-							{memberStatus === "none" && "Request To Join"}
-							{memberStatus === "invited" && "Accept Invitation"}
-							{memberStatus === "requested" && "Requested"}
-						</Button>
-					</UnstyledLink>
+					<Button
+						color={"secondary"}
+						fullWidth
+						onClick={user.signedIn ? () => setJoinOpen(true) : triggerLoginDialog}
+					>
+						{memberStatus === "none" && "Request To Join"}
+						{memberStatus === "invited" && "Accept Invitation"}
+						{memberStatus === "requested" && "Requested"}
+					</Button>
 				) : (
 					<Button color="secondary" onClick={() => setLeaveOpen(true)} fullWidth>
 						Member (Click to Leave)
@@ -155,6 +161,11 @@ const OrgNavPanel = ({ match }) => {
 						Leave
 					</Button>
 				</DialogActions>
+			</Dialog>
+			<Dialog open={joinOpen} onClose={() => setJoinOpen(false)}>
+				<Box p={1}>
+					<Join />
+				</Box>
 			</Dialog>
 			<Dialog open={dialogError !== ""} onClose={() => setDialogError("")}>
 				<DialogTitle>Error: {dialogError}</DialogTitle>

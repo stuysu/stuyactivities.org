@@ -1,15 +1,15 @@
 import React from "react";
 import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { OrgContext } from "./index";
-import joinVector from "../../img/vectors/undraw_join.svg";
+import { OrgContext } from "../../../pages/org/index";
+import joinVector from "../../../img/vectors/undraw_join.svg";
 import TextField from "@material-ui/core/TextField";
 import { gql, useMutation } from "@apollo/client";
-import { cache } from "../../comps/context/ApolloProvider";
+import { cache } from "../../context/ApolloProvider";
 
 import moment from "moment-timezone";
-import UserContext from "../../comps/context/UserContext";
-import SignInRequired from "../../comps/ui/SignInRequired";
+import UserContext from "../../context/UserContext";
+import SignInRequired from "../../ui/SignInRequired";
 
 // import musicBand from "./../../../img/vectors/pablita-music-band.svg";
 

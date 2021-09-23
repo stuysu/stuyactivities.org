@@ -18,9 +18,7 @@ import OrgNavPanel from "../../comps/pages/organization/OrgNavPanel";
 import BackButton from "../../comps/ui/BackButton";
 import Members from "./members";
 import Error404 from "../error404";
-
 import OrgAdminRouter from "./admin";
-import Join from "./join";
 import UserContext from "../../comps/context/UserContext";
 
 import styles from "./../../Globals.module.css";
@@ -207,7 +205,6 @@ const OrgRouter = ({ match, history }) => {
 									<Route path={match.path + "/members"} component={Members} />
 									<Route path={match.path + "/groups"} component={Groups} />
 									<Route path={match.path + "/admin"} component={OrgAdminRouter} />
-									<Route path={match.path + "/join"} component={Join} />
 									<Route path={match.path + "/meetings"} component={Meetings} />
 								</Switch>
 							</div>
