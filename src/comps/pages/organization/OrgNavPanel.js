@@ -52,7 +52,6 @@ const TabItem = ({ to, label, icon, exact = true }) => {
 
 	const isSelected = exact ? routeMatchesUrl?.isExact : Boolean(routeMatchesUrl);
 
-
 	return (
 		<UnstyledLink to={renderedUrl}>
 			<ListItem button selected={isSelected}>
@@ -113,7 +112,11 @@ const OrgNavPanel = ({ match }) => {
 			)}
 			{org.active ? (
 				memberStatus !== "member" ? (
-					<Button color={"secondary"} fullWidth onClick={user.signedIn ? () => setJoinOpen(true) : triggerLoginDialog}>
+					<Button
+						color={"secondary"}
+						fullWidth
+						onClick={user.signedIn ? () => setJoinOpen(true) : triggerLoginDialog}
+					>
 						{memberStatus === "none" && "Request To Join"}
 						{memberStatus === "invited" && "Accept Invitation"}
 						{memberStatus === "requested" && "Requested"}
