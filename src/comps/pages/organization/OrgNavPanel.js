@@ -9,7 +9,8 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	Typography
+	Typography,
+	useMediaQuery,
 } from "@material-ui/core";
 import Linkify from "linkifyjs/react";
 import List from "@material-ui/core/List";
@@ -74,6 +75,7 @@ const OrgNavPanel = ({ match }) => {
 
 	const org = React.useContext(OrgContext);
 	const user = React.useContext(UserContext);
+	const isMobile = useMediaQuery("(max-width: 800px)");
 
 	let memberStatus = org.membership ? "member" : "none";
 
@@ -159,7 +161,7 @@ const OrgNavPanel = ({ match }) => {
 					</Button>
 				</DialogActions>
 			</Dialog>
-			<Dialog open={joinOpen} onClose={() => setJoinOpen(false)}>
+			<Dialog open={joinOpen} maxWidth onClose={() => setJoinOpen(false)}>
 				<Box p={1}>
 					<Join />
 				</Box>

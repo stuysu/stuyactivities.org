@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Typography } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { OrgContext } from "../../../pages/org/index";
 import joinVector from "../../../img/vectors/undraw_join.svg";
@@ -30,11 +30,6 @@ const useStyles = makeStyles(theme => ({
 	tabContainer: {
 		padding: "1rem",
 		textAlign: "center"
-	},
-	note: {
-		width: "400px",
-		maxWidth: "90vw",
-		marginBottom: "1.5rem"
 	}
 }));
 
@@ -83,16 +78,16 @@ const CreateRequest = () => {
 			</p>
 			{(org?.joinInstructions === null || org?.joinInstructions.buttonEnabled) && (
 				<>
-					<TextField
-						multiline
-						rows={3}
-						variant={"outlined"}
-						label={"Optional Note"}
-						className={classes.note}
-						value={message}
-						onChange={ev => setMessage(ev.target.value)}
-					/>
-					<br />
+					<Box m={1} mt={2} mb={2}>
+						<TextField
+							multiline
+							rows={3}
+							variant={"outlined"}
+							label={"Optional Note"}
+							value={message}
+							onChange={ev => setMessage(ev.target.value)}
+						/>
+					</Box>
 					<Button color={"primary"} variant={"contained"} onClick={onSubmit}>
 						Submit Request
 					</Button>
@@ -214,7 +209,7 @@ const Join = ({ match }) => {
 	const org = React.useContext(OrgContext);
 
 	return (
-		<div>
+		<div border="1">
 			<Typography variant={"h4"} className={classes.tabName}>
 				Join Activity
 			</Typography>
