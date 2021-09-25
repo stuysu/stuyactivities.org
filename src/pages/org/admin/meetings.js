@@ -480,7 +480,7 @@ const EditPage = ({ match }) => {
 		}
 	});
 	const [replaceRoomMutation] = useMutation(REPLACE_ROOM_MUTATION);
-	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek, roomId, oldRoomId, groupId }) => {
+	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek, roomId, oldRoom, groupId }) => {
 		let id = Number(match.params.meetingId);
 		editMutation({
 			variables: {
@@ -493,16 +493,18 @@ const EditPage = ({ match }) => {
 				end: recurring ? endTime.format("HH:mm:ss.SSSZ") : endTime.toISOString(),
 				frequency,
 				dayOfWeek,
-				groupId
+				groupId,
 			}
 		});
-		replaceRoomMutation({
-			variables: {
-				id,
-				roomId,
-				oldRoomId,
-			}
-		});
+		if (oldRoom !== roomId) {
+			replaceRoomMutation({
+				variables: {
+					id,
+					roomId,
+					oldRoom,
+				}
+			});
+		}
 	};
 
 	//Grid isn't really necessary here but we use it to make the edit menu similar in shape to the main page halves

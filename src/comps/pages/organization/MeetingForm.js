@@ -110,8 +110,6 @@ const MeetingForm = ({
 	const virtual = { name: "Virtual", id: 0 };
 	const [room, setRoom] = React.useState((meeting.rooms?.length && meeting.rooms[0]) || virtual);
 
-	console.log(meeting.rooms);
-
 	const { data, loading, error } = useQuery(AVAILABLE_ROOMS_QUERY, {
 		variables: {
 			...time
@@ -281,6 +279,7 @@ const MeetingForm = ({
 
 			<Button
 				onClick={() => {
+					let oldRoom = meeting.rooms.length ? meeting.rooms[0].id : 0;
 					submit({
 						title,
 						description,
@@ -291,8 +290,8 @@ const MeetingForm = ({
 						frequency: 0,
 						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
 						groupId: group.id,
-						...(room.id !== 0 && { roomId: room.id }),
-						...(meeting.rooms?.length && { oldRoomId: meeting.rooms[0].id })
+						oldRoom,
+						roomId: room.id
 					});
 					setLastErr("");
 				}}
