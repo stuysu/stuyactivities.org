@@ -279,7 +279,7 @@ const MeetingForm = ({
 
 			<Button
 				onClick={() => {
-					let oldRoom = meeting.rooms.length ? meeting.rooms[0].id : 0;
+					let oldRoom = meeting.rooms?.length ? meeting.rooms[0].id : 0;
 					submit({
 						title,
 						description,
