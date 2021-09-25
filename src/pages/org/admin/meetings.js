@@ -212,6 +212,7 @@ const Main = ({ match }) => {
 		reversedMeetings.reverse();
 	}
 
+	const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 	//changing the key of a component causes react to remake it
 	//here, we use the key to reset the form when it has been submitted
 	const [formKey, setFormKey] = React.useState(0);
@@ -220,6 +221,7 @@ const Main = ({ match }) => {
 		onCompleted() {
 			setFormKey(formKey + 1);
 			setErrorMessage("");
+			setSnackbarOpen(true);
 		},
 		onError(error) {
 			console.log({ error });
@@ -279,6 +281,7 @@ const Main = ({ match }) => {
 			cache.reset().then(() => org.refetch());
 		}
 	});
+
 	const create = ({ title, description, date, endTime, checked, privacy, frequency, roomId, groupId }) => {
 		if (frequency) {
 			createRecurringMutation({
@@ -313,6 +316,7 @@ const Main = ({ match }) => {
 				}
 			});
 		}
+		setSnackbarOpen(true);
 	};
 
 	const [removingMeeting, setRemovingMeeting] = React.useState({});
@@ -362,11 +366,10 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${
-											meeting.frequency
-										} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
-											"h:mm a"
-										)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
+										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${meeting.frequency
+											} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
+												"h:mm a"
+											)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
@@ -395,11 +398,10 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${
-											meeting.rooms?.length ? meeting.rooms[0].name : "Virtual"
-										}, ${moment(meeting.start).format("dddd, MMMM Do YYYY, h:mm a")} to ${moment(
-											meeting.end
-										).format("h:mm a")}`}
+										secondary={`${meeting.rooms?.length ? meeting.rooms[0].name : "Virtual"
+											}, ${moment(meeting.start).format("dddd, MMMM Do YYYY, h:mm a")} to ${moment(
+												meeting.end
+											).format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
@@ -445,6 +447,12 @@ const Main = ({ match }) => {
 					</Button>
 				</DialogActions>
 			</Dialog>
+			<Snackbar
+				autoHideDuration={1000}
+				open={snackbarOpen}
+				onClose={() => setSnackbarOpen(false)}
+				message={"Meeting Created!"}
+			/>
 		</div>
 	);
 };
