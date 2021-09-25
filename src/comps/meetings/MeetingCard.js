@@ -52,7 +52,8 @@ const MeetingCard = ({
 	frequency,
 	description,
 	privacy,
-	group
+	group,
+	rooms
 }) => {
 	const classes = useStyles();
 	const history = useHistory();
@@ -88,6 +89,8 @@ const MeetingCard = ({
 								"HH:mm:ss.SSSZ"
 						  ).format("h:mm a")} to ${moment(end, "HH:mm:ss.SSSZ").format("h:mm a")}`
 						: smartTimespan(new Date(start), new Date(end))}
+					<br />
+					Location: {rooms?.length ? rooms[0].name : "Virtual"}
 					<br />
 					{privacy === "public" ? "Public" : `Private (${group?.id ? group.name : "members only"})`}
 				</Typography>

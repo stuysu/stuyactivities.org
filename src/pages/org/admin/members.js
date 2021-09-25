@@ -119,12 +119,11 @@ export default function Members({ match }) {
 		});
 	};
 
-	if (data?.organizationByUrl?.memberships) {
-		data.organizationByUrl.memberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
-	}
+	let sortedMemberships = [...(data?.organizationByUrl?.memberships || [])];
+	sortedMemberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
 
 	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
-	const emailList = data?.organizationByUrl?.memberships?.map(membership => membership.user.email).join(", ");
+	const emailList = sortedMemberships.map(membership => membership.user.email).join(", ");
 	const copy = () => {
 		navigator.clipboard.writeText(emailList).then(() => setSnackBarOpen(true));
 	};
@@ -145,7 +144,7 @@ export default function Members({ match }) {
 				/>
 			</div>
 			<List>
-				{data?.organizationByUrl?.memberships?.map(membership => (
+				{sortedMemberships.map(membership => (
 					<ListItem>
 						<ListItemAvatar>
 							<Avatar src={membership.user.picture} />

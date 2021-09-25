@@ -47,6 +47,10 @@ const QUERY = gql`
 			description
 			start
 			end
+			rooms {
+				id
+				name
+			}
 			organization {
 				id
 				name

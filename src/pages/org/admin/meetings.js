@@ -98,8 +98,6 @@ const EDIT_MUTATION = gql`
 		$end: DateTime
 		$notifyMembers: Boolean
 		$privacy: String
-		$roomId: Int
-		$groupId: Int
 	) {
 		alterMeeting(
 			meetingId: $id
@@ -109,7 +107,6 @@ const EDIT_MUTATION = gql`
 			end: $end
 			notifyMembers: $notifyMembers
 			privacy: $privacy
-			groupId: $groupId
 		) {
 			id
 			title
@@ -158,6 +155,17 @@ const CREATE_RECURRING_MUTATION = gql`
 const REMOVE_RECURRING_MUTATION = gql`
 	mutation DeleteRecurringMeeting($id: Int!) {
 		deleteRecurringMeeting(recurringMeetingId: $id)
+	}
+`;
+
+const REPLACE_ROOM_MUTATION = gql`
+	mutation ($id: Int!, $oldRoom: Int!, $roomId: Int!) {
+		removeRoomFromMeeting(meetingId: $id, roomId: $oldRoom) {
+			id
+		}
+		addRoomToMeeting(meetingId: $id, roomId: $roomId) {
+			id
+		}
 	}
 `;
 
@@ -387,9 +395,11 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(meeting.start).format(
-											"dddd, MMMM Do YYYY, h:mm a"
-										)} to ${moment(meeting.end).format("h:mm a")}`}
+										secondary={`${
+											meeting.rooms?.length ? meeting.rooms[0].name : "Virtual"
+										}, ${moment(meeting.start).format("dddd, MMMM Do YYYY, h:mm a")} to ${moment(
+											meeting.end
+										).format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
@@ -463,10 +473,24 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
-	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek, groupId }) => {
+	const [replaceRoomMutation] = useMutation(REPLACE_ROOM_MUTATION);
+	const edit = ({
+		title,
+		description,
+		date,
+		endTime,
+		checked,
+		privacy,
+		frequency,
+		dayOfWeek,
+		roomId,
+		oldRoom,
+		groupId
+	}) => {
+		let id = Number(match.params.meetingId);
 		editMutation({
 			variables: {
-				id: Number(match.params.meetingId),
+				id,
 				title,
 				description: description || "",
 				notifyMembers: checked,
@@ -478,6 +502,15 @@ const EditPage = ({ match }) => {
 				groupId
 			}
 		});
+		if (oldRoom !== roomId) {
+			replaceRoomMutation({
+				variables: {
+					id,
+					roomId,
+					oldRoom
+				}
+			});
+		}
 	};
 
 	//Grid isn't really necessary here but we use it to make the edit menu similar in shape to the main page halves
