@@ -113,7 +113,7 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 					<Typography paragraph color={"secondary"}>
 						{smartTimespan(new Date(meeting.start), new Date(meeting.end))}
 						<br />
-						Location: {meeting.rooms.length && meeting.rooms[0].name}
+						Location: {meeting.rooms.length ? meeting.rooms[0].name : "Virtual"}
 						<br />
 						{meeting.privacy === "public"
 							? "Public"
