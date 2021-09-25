@@ -122,7 +122,6 @@ export default function Members({ match }) {
 	let sortedMemberships = [...(data?.organizationByUrl?.memberships || [])];
 	sortedMemberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
 
-
 	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
 	const emailList = sortedMemberships.map(membership => membership.user.email).join(", ");
 	const copy = () => {

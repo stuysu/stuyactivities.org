@@ -159,24 +159,15 @@ const REMOVE_RECURRING_MUTATION = gql`
 `;
 
 const REPLACE_ROOM_MUTATION = gql`
-mutation(
-	$id:Int!
-	$oldRoom:Int!
-	$roomId:Int!
-) {
-	removeRoomFromMeeting(
-		meetingId:$id
-		roomId:$oldRoom
-	) {
-		id
+	mutation ($id: Int!, $oldRoom: Int!, $roomId: Int!) {
+		removeRoomFromMeeting(meetingId: $id, roomId: $oldRoom) {
+			id
+		}
+		addRoomToMeeting(meetingId: $id, roomId: $roomId) {
+			id
+		}
 	}
-	addRoomToMeeting (
-		meetingId:$id
-		roomId:$roomId
-	) {
-		id
-	}
-}`;
+`;
 
 const EDIT_RECURRING_MUTATION = gql`
 	mutation AlterRecurringMeeting(
@@ -371,10 +362,11 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${meeting.frequency
-											} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
-												"h:mm a"
-											)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
+										secondary={`${moment(meeting.dayOfWeek, "d").format("dddd")}s, every ${
+											meeting.frequency
+										} week(s), ${moment(meeting.start, "HH:mm:ss.SSSZ").format(
+											"h:mm a"
+										)} to ${moment(meeting.end, "HH:mm:ss.SSSZ").format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
@@ -403,9 +395,11 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${meeting.rooms?.length ? meeting.rooms[0].name : "Virtual"}, ${moment(meeting.start).format(
-											"dddd, MMMM Do YYYY, h:mm a"
-										)} to ${moment(meeting.end).format("h:mm a")}`}
+										secondary={`${
+											meeting.rooms?.length ? meeting.rooms[0].name : "Virtual"
+										}, ${moment(meeting.start).format("dddd, MMMM Do YYYY, h:mm a")} to ${moment(
+											meeting.end
+										).format("h:mm a")}`}
 									/>
 									<ListItemSecondaryAction>
 										<UnstyledLink
@@ -480,7 +474,19 @@ const EditPage = ({ match }) => {
 		}
 	});
 	const [replaceRoomMutation] = useMutation(REPLACE_ROOM_MUTATION);
-	const edit = ({ title, description, date, endTime, checked, privacy, frequency, dayOfWeek, roomId, oldRoom, groupId }) => {
+	const edit = ({
+		title,
+		description,
+		date,
+		endTime,
+		checked,
+		privacy,
+		frequency,
+		dayOfWeek,
+		roomId,
+		oldRoom,
+		groupId
+	}) => {
 		let id = Number(match.params.meetingId);
 		editMutation({
 			variables: {
@@ -493,7 +499,7 @@ const EditPage = ({ match }) => {
 				end: recurring ? endTime.format("HH:mm:ss.SSSZ") : endTime.toISOString(),
 				frequency,
 				dayOfWeek,
-				groupId,
+				groupId
 			}
 		});
 		if (oldRoom !== roomId) {
@@ -501,7 +507,7 @@ const EditPage = ({ match }) => {
 				variables: {
 					id,
 					roomId,
-					oldRoom,
+					oldRoom
 				}
 			});
 		}
