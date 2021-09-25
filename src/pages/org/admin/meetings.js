@@ -403,7 +403,7 @@ const Main = ({ match }) => {
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
-										secondary={`${moment(meeting.start).format(
+										secondary={`${meeting.rooms?.length ? meeting.rooms[0].name : "Virtual"}, ${moment(meeting.start).format(
 											"dddd, MMMM Do YYYY, h:mm a"
 										)} to ${moment(meeting.end).format("h:mm a")}`}
 									/>

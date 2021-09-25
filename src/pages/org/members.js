@@ -35,17 +35,16 @@ const Members = () => {
 		}
 	});
 
-	if (data?.organizationById?.memberships) {
-		data.organizationById.memberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
-	}
+	let sortedMemberships = [...(data?.organizationById?.memberships || [])];
+	sortedMemberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
 
 	return (
 		<div>
 			<Typography style={{ textAlign: "center" }} variant={"h2"}>
-				{data?.organizationById.memberships.length} Members
+				{sortedMemberships.length} Members
 			</Typography>
 
-			{data?.organizationById.memberships.map(membership => {
+			{sortedMemberships.map(membership => {
 				return (
 					<ListItem key={membership.user.id} button>
 						<ListItemAvatar>
