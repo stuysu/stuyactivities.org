@@ -1,15 +1,15 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import { Divider, Grid, ListItem, ListItemAvatar, Typography } from "@material-ui/core";
 import Chip from "@material-ui/core/Chip";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
 import UnstyledLink from "../../ui/UnstyledLink";
 
-export default function CatalogCard({ name, url, tags, charter }) {
+function CatalogListCardWithRef({ name, url, tags, charter }, ref) {
 	return (
 		<>
 			<UnstyledLink to={"/" + url}>
-				<ListItem button style={{ padding: "1rem" }}>
+				<ListItem button style={{ padding: "1rem" }} ref={ref}>
 					<ListItemAvatar>
 						<LazyLoadImage
 							src={charter.picture?.thumbnail}
@@ -49,3 +49,7 @@ export default function CatalogCard({ name, url, tags, charter }) {
 		</>
 	);
 }
+
+const CatalogListCard = forwardRef(CatalogListCardWithRef);
+
+export default CatalogListCard;

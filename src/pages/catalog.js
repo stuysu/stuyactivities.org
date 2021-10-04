@@ -257,8 +257,12 @@ const Catalog = () => {
 							)}
 							{listView ? (
 								<List>
-									{organizations?.map(org => (
-										<CatalogListCard key={org.id} {...org} />
+									{organizations?.map((org, index) => (
+										<CatalogListCard
+											key={org.id}
+											{...org}
+											ref={organizations?.length === index + 1 ? lastItemRef : undefined}
+										/>
 									))}
 								</List>
 							) : (
