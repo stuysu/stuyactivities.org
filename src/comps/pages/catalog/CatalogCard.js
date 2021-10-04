@@ -1,4 +1,4 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import { Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import UnstyledLink from "../../ui/UnstyledLink";
@@ -19,10 +19,10 @@ function Tag({ name }) {
 	return <Chip label={name} size={"small"} className={classes.chip} />;
 }
 
-export default function CatalogCard({ name, url, charter, tags }) {
+function CatalogCardWithRef({ name, url, charter, tags }, ref) {
 	const classes = useStyles();
 	return (
-		<Card className={classes.card}>
+		<Card className={classes.card} ref={ref}>
 			<UnstyledLink to={`/${url}`}>
 				<CardActionArea>
 					<div style={{ textAlign: "center" }}>
@@ -58,3 +58,7 @@ export default function CatalogCard({ name, url, charter, tags }) {
 		</Card>
 	);
 }
+
+const CatalogCard = forwardRef(CatalogCardWithRef);
+
+export default CatalogCard;

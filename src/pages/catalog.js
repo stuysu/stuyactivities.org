@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Grid, Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
@@ -111,6 +111,7 @@ const Catalog = () => {
 	const [limit] = useState(15);
 	const [offset, setOffset] = useState(0);
 	const [organizations, setOrganizations] = useState(null);
+	const lastItemRef = useRef();
 
 	const isMobile = useMediaQuery("(max-width: 500px)");
 	const isTablet = useMediaQuery("(max-width: 900px)");
@@ -140,19 +141,26 @@ const Catalog = () => {
 	});
 
 	useEffect(() => {
-		if (offset <= data?.organizations?.length + organizations?.length) {
-			const scrollHandler = () => {
-				const offsetTop = window.innerHeight + window.scrollY;
-				const pageHeight = window.document.body.offsetHeight;
+		if (
+			!loading &&
+			lastItemRef &&
+			lastItemRef.current &&
+			offset <= data?.organizations?.length + organizations?.length
+		) {
+			const options = {
+				threshold: 0.3
+			};
 
-				if (pageHeight - offsetTop < 800 && !loading) {
-					setOffset(offset => offset + 15);
+			const callback = entries => {
+				if (entries[0].isIntersecting) {
+					setOffset(offset + limit);
 				}
 			};
 
-			window.addEventListener("scroll", scrollHandler);
+			const observer = new IntersectionObserver(callback, options);
+			observer.observe(lastItemRef.current);
 
-			return () => window.removeEventListener("scroll", scrollHandler);
+			return () => observer.disconnect();
 		}
 	});
 
@@ -259,8 +267,12 @@ const Catalog = () => {
 									className="my-masonry-grid"
 									columnClassName="my-masonry-grid_column"
 								>
-									{organizations?.map(org => (
-										<CatalogCard {...org} key={org.id} />
+									{organizations?.map((org, index) => (
+										<CatalogCard
+											{...org}
+											key={org.id}
+											ref={organizations?.length === index + 1 ? lastItemRef : undefined}
+										/>
 									))}
 								</Masonry>
 							)}
