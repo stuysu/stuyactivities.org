@@ -1,11 +1,11 @@
 import React from "react";
-import { makeStyles, TextField } from "@material-ui/core";
+import { ListItemAvatar, makeStyles, TextField, Avatar } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 const QUERY = gql`
 	query Users($keyword: String!) {
-		users(keyword: $keyword, limit: 10) {
+		users(keyword: $keyword, limit: 15) {
 			id
 			name
 			email
@@ -26,7 +26,7 @@ const UserSelect = ({ onChange, filter }) => {
 	const classes = useStyles();
 	const [keyword, setKeyword] = React.useState("");
 	const { data, loading } = useQuery(QUERY, { variables: { keyword } });
-	const options = data?.users?.filter(filter) || [];
+	const options = data?.users?.filter(filter || (() => true)) || [];
 
 	return (
 		<Autocomplete
@@ -35,6 +35,9 @@ const UserSelect = ({ onChange, filter }) => {
 			getOptionLabel={_ => ""}
 			renderOption={option => (
 				<>
+					<ListItemAvatar>
+						<Avatar src={option?.picture} />
+					</ListItemAvatar>
 					<span>
 						<span>{option?.name}</span>
 						<br />

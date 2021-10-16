@@ -2,13 +2,14 @@ import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
 import RouteTabs from "../../comps/ui/RouteTabs";
+import Boograms from "./boograms";
 import Approvals from "./approvals";
 import UserContext from "../../comps/context/UserContext";
 import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
 import AdminLog from "./AdminLog";
-import { AssignmentTurnedIn, EmailOutlined, Assignment, SmsFailed, LiveHelp } from "@material-ui/icons";
+import { AssignmentTurnedIn, EmailOutlined, Assignment, SmsFailed, AttachMoney } from "@material-ui/icons";
 import EmailClubLeaders from "./email";
 
 const useStyles = makeStyles(theme => ({
@@ -31,16 +32,16 @@ export default function AdminRouter({ match }) {
 	// Only show the user tabs they have permission to view
 	const tabs = [
 		{
+			label: "Boograms",
+			role: "records",
+			path: actualPath + "/boograms",
+			icon: <AttachMoney />
+		},
+		{
 			label: "Charter Approvals",
 			role: "charters",
 			path: actualPath + "/approvals",
 			icon: <AssignmentTurnedIn />
-		},
-		{
-			label: "Help Requests",
-			role: "helpRequests",
-			path: actualPath + "/help",
-			icon: <LiveHelp />
 		},
 		{
 			label: "Strikes",
@@ -72,9 +73,9 @@ export default function AdminRouter({ match }) {
 			<RouteTabs tabs={tabs} />
 
 			<Switch>
+				<Route path={match.path + "/boograms"} component={Boograms} exact />
 				<Route path={match.path + "/approvals"} component={Approvals} exact />
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
-				<Route path={match.path + "/help"} component={Approvals} />
 				<Route path={match.path + "/strikes"} component={Strikes} />
 				<Route path={match.path + "/log"} component={AdminLog} />
 				<Route path={match.path + "/email"} component={EmailClubLeaders} />
