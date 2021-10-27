@@ -28,7 +28,7 @@ export default function Boograms() {
 			setArgs({ oneDollarCount: 0, twoDollarCount: 0 });
 			setSnackbarOpen(true);
 		},
-		onError() {
+		onError(err) {
 			setDialogOpen(true);
 		}
 	});
@@ -61,13 +61,6 @@ export default function Boograms() {
 								onChange={ev => setArgs({ ...args, oneDollarCount: Number(ev.target.value) })}
 							/>
 							<br />
-							<TextField
-								label="$2 Candy"
-								type="number"
-								onChange={ev => setArgs({ ...args, twoDollarCount: Number(ev.target.value) })}
-							/>
-							<br />
-							<br />
 							<Button
 								color="primary"
 								disabled={!isValid(args)}
@@ -92,7 +85,7 @@ export default function Boograms() {
 				<Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
 					<DialogTitle>Something went wrong...</DialogTitle>
 					<DialogContent>
-						<DialogContentText>{error}</DialogContentText>
+						<DialogContentText>{error?.message}</DialogContentText>
 					</DialogContent>
 				</Dialog>
 				<Snackbar
