@@ -81,7 +81,7 @@ const MeetingForm = ({
 
 	let defaultStart = new Date();
 	let defaultEnd = new Date();
-	defaultStart.setHours(15, 0);
+	defaultStart.setHours(15, 30);
 	defaultEnd.setHours(17, 0);
 
 	const [time, setTime] = React.useState({
@@ -219,7 +219,6 @@ const MeetingForm = ({
 						<TimePicker
 							fullWidth
 							autoOk
-							placeholder="03:00 PM"
 							mask="__:__ _M"
 							label="Start Time"
 							inputVariant="outlined"
@@ -231,7 +230,6 @@ const MeetingForm = ({
 						<TimePicker
 							fullWidth
 							autoOk
-							placeholder="05:00 PM"
 							mask="__:__ _M"
 							label="End Time"
 							inputVariant="outlined"
