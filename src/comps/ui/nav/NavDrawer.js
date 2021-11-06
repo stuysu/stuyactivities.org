@@ -134,14 +134,16 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				)}
 
 				<ListSubheader disableSticky>Discover</ListSubheader>
-				<UnstyledLink to={"/explore"}>
-					<ListItem button>
-						<ListItemIcon>
-							<ExploreOutlined />
-						</ListItemIcon>
-						<ListItemText primary={"Explore"} />
-					</ListItem>
-				</UnstyledLink>
+				{user.signedIn && (
+					<UnstyledLink to={"/explore"}>
+						<ListItem button>
+							<ListItemIcon>
+								<ExploreOutlined />
+							</ListItemIcon>
+							<ListItemText primary={"Explore"} />
+						</ListItem>
+					</UnstyledLink>
+				)}
 
 				<UnstyledLink to={"/meetings"}>
 					<ListItem button>
