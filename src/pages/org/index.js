@@ -87,7 +87,7 @@ const QUERY = gql`
 				rooms {
 					name
 					id
-                    floor
+					floor
 				}
 				group {
 					id
@@ -103,7 +103,7 @@ const QUERY = gql`
 				rooms {
 					id
 					name
-                    floor
+					floor
 				}
 				privacy
 				end
