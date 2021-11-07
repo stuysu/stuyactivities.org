@@ -81,7 +81,7 @@ const MeetingForm = ({
 
 	let defaultStart = new Date();
 	let defaultEnd = new Date();
-	defaultStart.setHours(15, 30);
+	defaultStart.setHours(15, 35);
 	defaultEnd.setHours(17, 0);
 
 	const [time, setTime] = React.useState({
@@ -108,7 +108,7 @@ const MeetingForm = ({
 	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
 
 	const virtual = { name: "Virtual", id: 0 };
-    const reservedRoom = meeting.rooms?.length > 0 ? meeting.rooms[0] : null;
+	const reservedRoom = meeting.rooms?.length > 0 ? meeting.rooms[0] : null;
 	const [room, setRoom] = React.useState(reservedRoom || virtual);
 
 	const { data, loading, error } = useQuery(AVAILABLE_ROOMS_QUERY, {
@@ -127,35 +127,18 @@ const MeetingForm = ({
 		setTime({ start, end });
 	};
 
-    // NOTE: data.availableRooms is immutable, so this copy (the concat) before 
-    // any operations on the rooms is preferrable 
-    let availableRooms = [virtual].concat(data?.availableRooms || []);
+	let availableRooms = [virtual].concat(data?.availableRooms || []);
 
-    if (reservedRoom) {
-        // TODO: figure out when (and why) this code runs, there should be a
-        // React-like way to get this to run at the right time
-        // MAYBE: work with bisection
-        let rvnum = reservedRoom.id;
-        let i = 0, shouldAdd = true;
-        for (; i < availableRooms.length; ++i) {
-            let num = availableRooms[i].id;
-            if (rvnum < num) {
-                if (i === 0) break;
-                else if (rvnum > availableRooms[i-1].id) break;
-            }
-            else if (rvnum === num) {
-                shouldAdd = false;
-                break;
-            }
-        }
-
-        if (shouldAdd) {
-            availableRooms.splice(i, 0, reservedRoom);
-            // console.log('found: ' + i);
-        }
-        // else console.log('reserved room already in the array');
-    }
-
+	if (reservedRoom) {
+		let rvnum = reservedRoom.id;
+		for (let i = 0; i < availableRooms.length; ++i) {
+			let num = availableRooms[i].id;
+			if (rvnum < num) {
+				availableRooms.splice(i, 0, reservedRoom);
+				break;
+			}
+		}
+	}
 
 	const roomAvailable = !loading && !error && availableRooms.find(avRoom => avRoom.id === room.id) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
