@@ -81,7 +81,7 @@ const MeetingForm = ({
 
 	let defaultStart = new Date();
 	let defaultEnd = new Date();
-	defaultStart.setHours(15, 0);
+	defaultStart.setHours(15, 35);
 	defaultEnd.setHours(17, 0);
 
 	const [time, setTime] = React.useState({
@@ -108,7 +108,8 @@ const MeetingForm = ({
 	const err_dialog_open = !isSubmitting && errorMessage !== "" && errorMessage !== lastErr;
 
 	const virtual = { name: "Virtual", id: 0 };
-	const [room, setRoom] = React.useState((meeting.rooms?.length && meeting.rooms[0]) || virtual);
+	const reservedRoom = meeting.rooms?.length > 0 ? meeting.rooms[0] : null;
+	const [room, setRoom] = React.useState(reservedRoom || virtual);
 
 	const { data, loading, error } = useQuery(AVAILABLE_ROOMS_QUERY, {
 		variables: {
@@ -127,6 +128,18 @@ const MeetingForm = ({
 	};
 
 	let availableRooms = [virtual].concat(data?.availableRooms || []);
+
+	if (reservedRoom) {
+		let rvnum = reservedRoom.id;
+		for (let i = 0; i < availableRooms.length; ++i) {
+			let num = availableRooms[i].id;
+			if (rvnum < num) {
+				availableRooms.splice(i, 0, reservedRoom);
+				break;
+			}
+		}
+	}
+
 	const roomAvailable = !loading && !error && availableRooms.find(avRoom => avRoom.id === room.id) !== undefined;
 	const valid = !err_dialog_open && roomAvailable;
 
@@ -189,7 +202,6 @@ const MeetingForm = ({
 						<TimePicker
 							fullWidth
 							autoOk
-							placeholder="03:00 PM"
 							mask="__:__ _M"
 							label="Start Time"
 							inputVariant="outlined"
@@ -201,7 +213,6 @@ const MeetingForm = ({
 						<TimePicker
 							fullWidth
 							autoOk
-							placeholder="05:00 PM"
 							mask="__:__ _M"
 							label="End Time"
 							inputVariant="outlined"
