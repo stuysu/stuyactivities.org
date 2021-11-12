@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { Typography } from "@material-ui/core";
 import { gql, useQuery } from "@apollo/client";
 import FlexCenter from "../comps/ui/FlexCenter";
-import Calendar from "../comps/Calendar";
+import {Calendar, FirstDay, LastDay} from "../comps/Calendar";
 import SignInRequired from "../comps/ui/SignInRequired";
 
 
@@ -25,23 +25,19 @@ const QUERY = gql`
 	}
 `;
 
-const now = new Date();
-const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
-const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-
 function MyMeetings() {
     const user = React.useContext(UserContext);
     const audits = user?.adminRoles?.find(role => role.role === "audits") !== undefined;
 
-    // TODO: this is in place of meetingsByUserId on 
-    // backend maybe, or even in the user context
+    // this might be in place of  a meetingsByUserId on 
+    // backend maybe
     let organizations = new Set();
     for (let membership of user?.memberships) {
         organizations.add(membership.organization.id);
     }
 
-    const [start, setStart] = useState(firstDay);
-	const [end, setEnd] = useState(lastDay);
+    const [start, setStart] = useState(FirstDay);
+	const [end, setEnd] = useState(LastDay);
 
 	const { data } = useQuery(QUERY, { variables: { start, end } });
 

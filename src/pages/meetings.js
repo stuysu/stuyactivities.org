@@ -3,11 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 import { Typography } from "@material-ui/core";
 import FlexCenter from "../comps/ui/FlexCenter";
 import UserContext from "../comps/context/UserContext";
-import Calendar from "../comps/Calendar";
-
-const now = new Date();
-const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
-const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+import { Calendar, FirstDay, LastDay } from "../comps/Calendar";
 
 const QUERY = gql`
 	query ($start: DateTime!, $end: DateTime!) {
@@ -29,8 +25,8 @@ const Meetings = () => {
 	const user = React.useContext(UserContext);
 	const audits = user?.adminRoles?.find(role => role.role === "audits") !== undefined;
 
-	const [start, setStart] = useState(firstDay);
-	const [end, setEnd] = useState(lastDay);
+	const [start, setStart] = useState(FirstDay);
+	const [end, setEnd] = useState(LastDay);
 
 	const { data } = useQuery(QUERY, { variables: { start, end } });
 

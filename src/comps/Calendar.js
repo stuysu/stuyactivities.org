@@ -15,7 +15,12 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function Calendar({ meetings, setStart, setEnd }) {
+// find the first & last days of month
+const now = new Date();
+export const FirstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+export const LastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+export function Calendar({ meetings, setStart, setEnd }) {
     const classes = useStyles();
 
     return <div className={classes.calendarContainer}>
