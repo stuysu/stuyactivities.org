@@ -160,33 +160,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Catalog"} />
 					</ListItem>
 				</UnstyledLink>
-
-				{user.signedIn && (
-					<>
-						<UnstyledLink to={"/clubpubfair2020"}>
-							<ListItem button>
-								<ListItemIcon>
-									<EmojiFlagsOutlined />
-								</ListItemIcon>
-								<ListItemText primary={"2020 Clubs & Pubs Fair"} />
-							</ListItem>
-						</UnstyledLink>
-					</>
-				)}
-
-				<ListItem
-					button
-					onClick={() =>
-						window.open(
-							"https://docs.google.com/spreadsheets/d/1qf-T82RdeLEScyET4trsZlih_QhWrA7YC9VjhonDdT8/edit?usp=sharing"
-						)
-					}
-				>
-					<ListItemIcon>
-						<ArchiveOutlined />
-					</ListItemIcon>
-					<ListItemText primary={"Archive"} />
-				</ListItem>
+				
 				{user.signedIn && (
 					<>
 						<ListSubheader disableSticky>My Activities</ListSubheader>
