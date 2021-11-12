@@ -160,7 +160,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Catalog"} />
 					</ListItem>
 				</UnstyledLink>
-				
+
 				{user.signedIn && (
 					<>
 						<ListSubheader disableSticky>My Activities</ListSubheader>
