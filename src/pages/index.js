@@ -24,6 +24,7 @@ const Charter = lazy(() => import("./charter"));
 const FeedbackForm = lazy(() => import("./feedback"));
 const Explore = lazy(() => import("./explore"));
 const Settings = lazy(() => import("./settings"));
+const MyMeetings = lazy(() => import("./mymeetings"));
 
 ReactGA.initialize("UA-119929576-2");
 
@@ -60,6 +61,7 @@ const Pages = () => {
 						<Route path={"/catalog"} component={Catalog} exact />
 						<Route path={"/charter"} component={Charter} exact />
 						<Route path={"/feedback"} component={FeedbackForm} />
+                        <Route path={"/my-meetings"} component={MyMeetings} />
 						<Route path={"/token/:token"} component={TokenLogin} exact />
 						<Route path={"/admin"} component={AdminRouter} />
 						<Route path={"/rules"} component={Rules} />
