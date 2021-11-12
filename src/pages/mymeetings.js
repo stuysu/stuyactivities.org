@@ -6,7 +6,6 @@ import { gql, useQuery } from "@apollo/client";
 import FlexCenter from "../comps/ui/FlexCenter";
 import Calendar from "../comps/Calendar";
 import SignInRequired from "../comps/ui/SignInRequired";
-import Loading from "../comps/ui/Loading"
 
 
 
@@ -83,8 +82,7 @@ export default function MyMeetingsLanding() {
 
             {user.signedIn ?
                 <MyMeetings /> :
-                <Loading /> 
-                // <SignInRequired /> // TODO: when does context know if it failed to login vs still tryting to authenticate 
+                <SignInRequired />
             }
         </div>
     );
