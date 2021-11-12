@@ -22,7 +22,7 @@ import {
 	InfoOutlined,
 	LockOpenOutlined,
 	PowerSettingsNewOutlined,
-    MeetingRoomOutlined,
+	MeetingRoomOutlined,
 	SettingsOutlined
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
@@ -144,16 +144,16 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</ListItem>
 				</UnstyledLink>
 
-                { user.signedIn && 
-                    <UnstyledLink to={"/my-meetings"}>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <MeetingRoomOutlined />
-                            </ListItemIcon>
-                            <ListItemText primary={"My Meetings"} />
-                        </ListItem>
-                    </UnstyledLink>
-                }
+				{user.signedIn && (
+					<UnstyledLink to={"/my-meetings"}>
+						<ListItem button>
+							<ListItemIcon>
+								<MeetingRoomOutlined />
+							</ListItemIcon>
+							<ListItemText primary={"My Meetings"} />
+						</ListItem>
+					</UnstyledLink>
+				)}
 
 				<UnstyledLink to={"/meetings"}>
 					<ListItem button>
