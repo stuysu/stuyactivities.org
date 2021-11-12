@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import listPlugin from "@fullcalendar/list";
-import { triggerMeetingDialog } from "../comps/meetings/MeetingPreviewDialog";
-import FullCalendar from "@fullcalendar/react";
 import { gql, useQuery } from "@apollo/client";
-import { makeStyles, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import FlexCenter from "../comps/ui/FlexCenter";
 import UserContext from "../comps/context/UserContext";
+import Calendar from "../comps/Calendar";
 
 const now = new Date();
 const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -28,16 +25,6 @@ const QUERY = gql`
 	}
 `;
 
-const useStyles = makeStyles(theme => ({
-	calendarContainer: {
-		width: 1200,
-		maxWidth: "95%"
-	},
-	event: {
-		cursor: "pointer"
-	}
-}));
-
 const Meetings = () => {
 	const user = React.useContext(UserContext);
 	const audits = user?.adminRoles?.find(role => role.role === "audits") !== undefined;
@@ -46,7 +33,6 @@ const Meetings = () => {
 	const [end, setEnd] = useState(lastDay);
 
 	const { data } = useQuery(QUERY, { variables: { start, end } });
-	const classes = useStyles();
 
 	return (
 		<div>
@@ -56,36 +42,24 @@ const Meetings = () => {
 				All Meetings Calendar
 			</Typography>
 			<FlexCenter>
-				<div className={classes.calendarContainer}>
-					<FullCalendar
-						height={800}
-						datesSet={ev => {
-							setStart(ev.view.activeStart);
-							setEnd(ev.view.activeEnd);
-						}}
-						viewDidMount={ev => {
-							setStart(ev.view.activeStart);
-							setEnd(ev.view.activeEnd);
-						}}
-						plugins={[dayGridPlugin, listPlugin]}
-						headerToolbar={{
-							start: "title",
-							end: "dayGridMonth listMonth prev next"
-						}}
-						dayMaxEventRows={4}
-						events={data?.meetings
-							?.filter(meeting => meeting.privacy !== "private" || audits || user?.isFaculty)
-							.map(meeting => {
-								const newMeeting = { ...meeting };
-								newMeeting.title = meeting.organization.name + " - " + meeting.title;
-								newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
+                <Calendar
+                    // give calendar meetings objects
+                    meetings={data?.meetings
+                        ?.filter(meeting => meeting.privacy !== "private" || audits || user?.isFaculty)
+                        .map(meeting => {
+                            const newMeeting = { ...meeting };
+                            newMeeting.title = meeting.organization.name + " - " + meeting.title;
+                            newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
 
-								return newMeeting;
-							})}
-						eventClick={ev => triggerMeetingDialog(ev.event.id)}
-						eventClassNames={classes.event}
-					/>
-				</div>
+                            return newMeeting;
+                        })
+                    }
+
+                    // passing down start and end allows the parent component
+                    // full control on how the meetings are sourced
+                    setStart={setStart}
+                    setEnd={setEnd}
+                />
 			</FlexCenter>
 			<br />
 		</div>
