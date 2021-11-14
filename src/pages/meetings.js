@@ -24,6 +24,9 @@ const QUERY = gql`
 				id
 				name
 			}
+			rooms {
+				name
+			}
 		}
 	}
 `;
@@ -77,9 +80,11 @@ const Meetings = () => {
 							?.filter(meeting => meeting.privacy !== "private" || audits || user?.isFaculty)
 							.map(meeting => {
 								const newMeeting = { ...meeting };
-								newMeeting.title = meeting.organization.name + " - " + meeting.title;
+								const meetingRoom =
+									typeof meeting.rooms[0] === "undefined" ? "" : ` : Room ${meeting.rooms[0].name}`;
+								newMeeting.title = meeting.organization.name + " - " + meeting.title + meetingRoom;
 								newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
-
+								
 								return newMeeting;
 							})}
 						eventClick={ev => triggerMeetingDialog(ev.event.id)}
