@@ -62,10 +62,10 @@ export default function Meetings() {
 						start: "title",
 						end: "dayGridMonth listMonth prev next"
 					}}
-					events={org?.meetings
-					.map(meeting => {
-						const newMeeting = {...meeting};
-						newMeeting.title += (typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`);
+					events={org?.meetings.map(meeting => {
+						const newMeeting = { ...meeting };
+						newMeeting.title +=
+							typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
 						return newMeeting;
 					})}
 					eventClick={ev => triggerMeetingDialog(ev.event.id)}
