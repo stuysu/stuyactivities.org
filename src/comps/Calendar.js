@@ -21,28 +21,30 @@ export const FirstDay = new Date(now.getFullYear(), now.getMonth(), 1);
 export const LastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
 export function Calendar({ meetings, setStart, setEnd }) {
-    const classes = useStyles();
+	const classes = useStyles();
 
-    return <div className={classes.calendarContainer}>
-        <FullCalendar
-            height={800}
-            datesSet={ev => {
-                setStart(ev.view.activeStart);
-                setEnd(ev.view.activeEnd);
-            }}
-            viewDidMount={ev => {
-                setStart(ev.view.activeStart);
-                setEnd(ev.view.activeEnd);
-            }}
-            plugins={[dayGridPlugin, listPlugin]}
-            headerToolbar={{
-                start: "title",
-                end: "dayGridMonth listMonth prev next"
-            }}
-            dayMaxEventRows={4}
-            events={meetings}
-            eventClick={ev => triggerMeetingDialog(ev.event.id)}
-            eventClassNames={classes.event}
-        />
-    </div>;
+	return (
+		<div className={classes.calendarContainer}>
+			<FullCalendar
+				height={800}
+				datesSet={ev => {
+					setStart(ev.view.activeStart);
+					setEnd(ev.view.activeEnd);
+				}}
+				viewDidMount={ev => {
+					setStart(ev.view.activeStart);
+					setEnd(ev.view.activeEnd);
+				}}
+				plugins={[dayGridPlugin, listPlugin]}
+				headerToolbar={{
+					start: "title",
+					end: "dayGridMonth listMonth prev next"
+				}}
+				dayMaxEventRows={4}
+				events={meetings}
+				eventClick={ev => triggerMeetingDialog(ev.event.id)}
+				eventClassNames={classes.event}
+			/>
+		</div>
+	);
 }

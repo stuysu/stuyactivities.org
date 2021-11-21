@@ -38,24 +38,22 @@ const Meetings = () => {
 				All Meetings Calendar
 			</Typography>
 			<FlexCenter>
-                <Calendar
-                    // give calendar meetings objects
-                    meetings={data?.meetings
-                        ?.filter(meeting => meeting.privacy !== "private" || audits || user?.isFaculty)
-                        .map(meeting => {
-                            const newMeeting = { ...meeting };
-                            newMeeting.title = meeting.organization.name + " - " + meeting.title;
-                            newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
+				<Calendar
+					// give calendar meetings objects
+					meetings={data?.meetings
+						?.filter(meeting => meeting.privacy !== "private" || audits || user?.isFaculty)
+						.map(meeting => {
+							const newMeeting = { ...meeting };
+							newMeeting.title = meeting.organization.name + " - " + meeting.title;
+							newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
 
-                            return newMeeting;
-                        })
-                    }
-
-                    // passing down start and end allows the parent component
-                    // full control on how the meetings are sourced
-                    setStart={setStart}
-                    setEnd={setEnd}
-                />
+							return newMeeting;
+						})}
+					// passing down start and end allows the parent component
+					// full control on how the meetings are sourced
+					setStart={setStart}
+					setEnd={setEnd}
+				/>
 			</FlexCenter>
 			<br />
 		</div>
