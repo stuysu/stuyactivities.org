@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { gql, useQuery } from "@apollo/client";
-import { Typography } from "@material-ui/core";
-import FlexCenter from "../comps/ui/FlexCenter";
 import UserContext from "../comps/context/UserContext";
+import { Helmet } from "react-helmet";
+import { Typography } from "@material-ui/core";
+import { gql, useQuery } from "@apollo/client";
+import FlexCenter from "../comps/ui/FlexCenter";
 import { Calendar, FirstDay, LastDay } from "../comps/Calendar";
+import SignInRequired from "../comps/ui/SignInRequired";
 
 const QUERY = gql`
 	query ($start: DateTime!, $end: DateTime!) {
@@ -21,9 +23,16 @@ const QUERY = gql`
 	}
 `;
 
-const Meetings = () => {
+function MyMeetings() {
 	const user = React.useContext(UserContext);
 	const audits = user?.adminRoles?.find(role => role.role === "audits") !== undefined;
+
+	// this might be in place of  a meetingsByUserId on
+	// backend maybe
+	let organizations = new Set();
+	for (let membership of user?.memberships) {
+		organizations.add(membership.organization.id);
+	}
 
 	const [start, setStart] = useState(FirstDay);
 	const [end, setEnd] = useState(LastDay);
@@ -35,13 +44,16 @@ const Meetings = () => {
 			<br />
 			<br />
 			<Typography align={"center"} variant={"h2"} paragraph>
-				All Meetings Calendar
+				{user?.name}'s Calendar
 			</Typography>
 			<FlexCenter>
 				<Calendar
-					// give calendar meetings objects
 					meetings={data?.meetings
-						?.filter(meeting => meeting.privacy !== "private" || audits || user?.isFaculty)
+						?.filter(
+							meeting =>
+								organizations.has(meeting.organization.id) &&
+								(meeting.privacy !== "private" || audits || user?.isFaculty)
+						)
 						.map(meeting => {
 							const newMeeting = { ...meeting };
 							newMeeting.title = meeting.organization.name + " - " + meeting.title;
@@ -49,8 +61,6 @@ const Meetings = () => {
 
 							return newMeeting;
 						})}
-					// passing down start and end allows the parent component
-					// full control on how the meetings are sourced
 					setStart={setStart}
 					setEnd={setEnd}
 				/>
@@ -58,6 +68,18 @@ const Meetings = () => {
 			<br />
 		</div>
 	);
-};
+}
 
-export default Meetings;
+export default function MyMeetingsLanding() {
+	const user = React.useContext(UserContext);
+
+	return (
+		<div>
+			<Helmet>
+				<title>Personal Meetings | StuyActivities</title>
+			</Helmet>
+
+			{user.signedIn ? <MyMeetings /> : <SignInRequired />}
+		</div>
+	);
+}
