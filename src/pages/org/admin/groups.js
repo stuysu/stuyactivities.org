@@ -15,6 +15,7 @@ import {
 	ListItemAvatar,
 	ListItemSecondaryAction,
 	makeStyles,
+	Snackbar,
 	TextField,
 	Typography
 } from "@material-ui/core";
@@ -149,6 +150,8 @@ export default function Groups({ match }) {
 		setEditGroup({});
 	};
 
+	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
+
 	return (
 		<div className={classes.margin}>
 			<Card>
@@ -186,7 +189,21 @@ export default function Groups({ match }) {
 							<Box p={1}>
 								<ListItem key={group.id} fullWidth>
 									<Grid container xl={12} lg={12} md={12} sm={12} xs={12} direction="column">
-										<Typography variant="h5">{group.name}</Typography>
+										<Grid container justifyContent="space-between">
+											<Typography variant="h5" align="left">{group.name}</Typography>
+											<Button
+												onClick={
+													() => navigator.clipboard.writeText(
+														group?.memberships.map(membership => membership.user.email).join(", ")
+													).then(() => setSnackBarOpen(true))
+												}
+												color={"primary"}
+												variant={"contained"}
+												size={"small"}
+											>
+												Copy Emails
+											</Button>
+										</Grid>
 										<List>
 											{group.memberships.length > 0 ? (
 												group.memberships.map(membership => (
@@ -331,6 +348,12 @@ export default function Groups({ match }) {
 						<Button onClick={() => setEditGroup({})}>Close</Button>
 					</DialogActions>
 				</Dialog>
+				<Snackbar
+					open={snackBarOpen}
+					autoHideDuration={3000}
+					onClose={() => setSnackBarOpen(false)}
+					message="Copied email list to clipboard!"
+				/>
 			</List>
 		</div>
 	);
