@@ -190,12 +190,18 @@ export default function Groups({ match }) {
 								<ListItem key={group.id} fullWidth>
 									<Grid container xl={12} lg={12} md={12} sm={12} xs={12} direction="column">
 										<Grid container justifyContent="space-between">
-											<Typography variant="h5" align="left">{group.name}</Typography>
+											<Typography variant="h5" align="left">
+												{group.name}
+											</Typography>
 											<Button
-												onClick={
-													() => navigator.clipboard.writeText(
-														group?.memberships.map(membership => membership.user.email).join(", ")
-													).then(() => setSnackBarOpen(true))
+												onClick={() =>
+													navigator.clipboard
+														.writeText(
+															group?.memberships
+																.map(membership => membership.user.email)
+																.join(", ")
+														)
+														.then(() => setSnackBarOpen(true))
 												}
 												color={"primary"}
 												variant={"contained"}
