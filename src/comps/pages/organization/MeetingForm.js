@@ -221,7 +221,25 @@ const MeetingForm = ({
 						/>
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
-						<Autocomplete
+						{
+                            // https://mui.com/components/selects/#multiple-select
+                            // https://mui.com/api/select/
+                            // https://mui.com/components/selects/#chip
+                            <Select multiple value={[]} onChange={(_, r) => console.table(_, r)}>
+                                {availableRooms.map(room => 
+                                    <MenuItem>
+                                        <span>
+                                            <Typography>{room.name}</Typography>
+                                            {room.floor && (
+                                                <Typography color="textSecondary">{ordinal(room.floor)} Floor</Typography>
+                                            )}
+                                        </span>
+                                    </MenuItem>
+                                )}
+                            </Select>
+                        }
+                        
+                        {false && <Autocomplete
 							disableClearable
 							options={availableRooms}
 							getOptionLabel={option => option.name}
@@ -239,7 +257,7 @@ const MeetingForm = ({
 								</span>
 							)}
 							renderInput={params => <TextField {...params} label="Room" variant="outlined" />}
-						/>
+						/>}
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
 						<Autocomplete
