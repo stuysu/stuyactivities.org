@@ -26,6 +26,8 @@ import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pi
 import TinyEditor from "../../updates/TinyEditor";
 import { OrgContext } from "../../../pages/org/index";
 
+import RoomSelector from './RoomSelector';
+
 const AVAILABLE_ROOMS_QUERY = gql`
 	query ($start: DateTime!, $end: DateTime!) {
 		availableRooms(start: $start, end: $end) {
@@ -222,21 +224,7 @@ const MeetingForm = ({
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
 						{
-                            // https://mui.com/components/selects/#multiple-select
-                            // https://mui.com/api/select/
-                            // https://mui.com/components/selects/#chip
-                            <Select multiple value={[]} onChange={(_, r) => console.table(_, r)}>
-                                {availableRooms.map(room => 
-                                    <MenuItem>
-                                        <span>
-                                            <Typography>{room.name}</Typography>
-                                            {room.floor && (
-                                                <Typography color="textSecondary">{ordinal(room.floor)} Floor</Typography>
-                                            )}
-                                        </span>
-                                    </MenuItem>
-                                )}
-                            </Select>
+                            <RoomSelector />
                         }
                         
                         {false && <Autocomplete
