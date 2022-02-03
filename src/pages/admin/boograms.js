@@ -101,7 +101,7 @@ export default function Boograms() {
 							<Button
 								color="primary"
 								disabled={!isValid(args)}
-								onClick={() => record({ variables: shrink(args) })}
+								onClick={() => record({ variables: args })}
 							>
 								Record
 							</Button>
