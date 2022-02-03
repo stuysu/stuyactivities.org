@@ -13,17 +13,18 @@ import {
 import { gql, useQuery, useMutation } from "@apollo/client";
 
 const ITEMS = gql`
-query {
-	saleItems {
-		id
-		item
-		price
+	query {
+		saleItems {
+			id
+			item
+			price
+		}
 	}
-}`;
+`;
 
 const RECORD = gql`
 	mutation ($userId: Int!, $purchases: [Int!]!, $counts: [Int!]!) {
-		recordSales(userId: $userId, purchases:$purchases, counts:$counts)
+		recordSales(userId: $userId, purchases: $purchases, counts: $counts)
 	}
 `;
 
@@ -33,15 +34,15 @@ export default function Boograms() {
 	const {
 		// loading,
 		// error,
-		data,
+		data
 	} = useQuery(ITEMS);
 
-	const empty = data ?
-		{
-			//array from 0 to N
-			purchases: Array.from({length: data.saleItems.length}, (_, i) => i+1),
-			counts: new Array(data.saleItems.length).fill(0),
-		}
+	const empty = data
+		? {
+				//array from 0 to N
+				purchases: Array.from({ length: data.saleItems.length }, (_, i) => i + 1),
+				counts: new Array(data.saleItems.length).fill(0)
+		  }
 		: null;
 
 	const [args, setArgs] = React.useState(empty);
@@ -54,7 +55,7 @@ export default function Boograms() {
 		let newCounts = args.counts.slice();
 		newCounts[i] = count;
 		setArgs({ ...args, counts: newCounts });
-	}
+	};
 
 	const [record, { error }] = useMutation(RECORD, {
 		onCompleted() {
@@ -66,8 +67,7 @@ export default function Boograms() {
 		}
 	});
 
-	const isValid = ({ userId, counts }) =>
-		userId && counts.some(c => c > 0);
+	const isValid = ({ userId, counts }) => userId && counts.some(c => c > 0);
 
 	return (
 		<div style={{ width: 1200, maxWidth: "90vw", margin: "auto" }}>
@@ -87,7 +87,7 @@ export default function Boograms() {
 								{args.user.email}
 							</Typography>
 							<br />
-							{data?.saleItems.map(item =>
+							{data?.saleItems.map(item => (
 								<>
 									<TextField
 										label={`${item.item} - $${item.price}`}
@@ -96,7 +96,7 @@ export default function Boograms() {
 									/>
 									<br />
 								</>
-							)}
+							))}
 							<br />
 							<Button
 								color="primary"
