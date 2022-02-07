@@ -92,7 +92,7 @@ export default function Boograms() {
 									<TextField
 										label={`${item.item} - $${item.price}`}
 										type="number"
-										onChange={ev => setCount(item.id, Number(ev.target.value))}
+										onChange={ev => setCount(item.id - 1, Number(ev.target.value))}
 									/>
 									<br />
 								</>
