@@ -20,7 +20,7 @@
 		"apollo-upload-client": "^15.0.0",
 		"diff": "^5.0.0",
 		"emoji-picker-react": "^3.4.8",
-		"graphql": "^15.5.0",
+		"graphql": "^16.3.0",
 		"honeybadger-js": "^2.3.0",
 		"html-truncate": "^1.2.2",
 		"linkifyjs": "^2.1.9",
