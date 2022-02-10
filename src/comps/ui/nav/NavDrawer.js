@@ -22,7 +22,8 @@ import {
 	InfoOutlined,
 	LockOpenOutlined,
 	PowerSettingsNewOutlined,
-	SettingsOutlined
+	SettingsOutlined,
+	SportsBasketballOutlined,
 } from "@material-ui/icons";
 import { Avatar, Typography } from "@material-ui/core";
 import UnstyledLink from "../UnstyledLink";
@@ -164,7 +165,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				<UnstyledLink to={"/sports"}>
 					<ListItem button>
 						<ListItemIcon>
-							<EmojiSymbolsOutlined />
+							<SportsBasketballOutlined />
 						</ListItemIcon>
 						<ListItemText primary={"PSAL Sports"} />
 					</ListItem>

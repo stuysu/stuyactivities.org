@@ -62,6 +62,7 @@ const Pages = () => {
 						<Route path={"/charter"} component={Charter} exact />
 						<Route path={"/feedback"} component={FeedbackForm} />
 						<Route path={"/token/:token"} component={TokenLogin} exact />
+						<Route path={"/sports"} component={Sports} />
 						<Route path={"/admin"} component={AdminRouter} />
 						<Route path={"/rules"} component={Rules} />
 						<Route path={"/about"} component={About} />
@@ -73,10 +74,10 @@ const Pages = () => {
 							<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
 						</Route>
 						<Route path={"/:orgUrl"} component={OrgRouter} />
-						<Route path={"/sports"} component={Sports} />
 					</Switch>
 				</Suspense>
 			</ErrorBoundary>
+
 		</div>
 	);
 };
