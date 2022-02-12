@@ -21,6 +21,7 @@ import {
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import UserContext from "../../../comps/context/UserContext";
 
 const useStyles = makeStyles(theme => ({
@@ -119,11 +120,11 @@ export default function Members({ match }) {
 		});
 	};
 
-	let sortedMemberships = [...(data?.organizationByUrl?.memberships || [])];
-	sortedMemberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
+	// should be sorted on the DB end if sorting is desired
+	const [memberships, updateMemberships] = React.useState([...(data?.organizationByUrl?.memberships || [])]); // this likes to intermittently not copy for no reason
 
 	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
-	const emailList = sortedMemberships.map(membership => membership.user.email).join(", ");
+	const emailList = memberships.map(membership => membership.user.email).join(", ");
 	const copy = () => {
 		navigator.clipboard.writeText(emailList).then(() => setSnackBarOpen(true));
 	};
@@ -143,33 +144,62 @@ export default function Members({ match }) {
 					value={emailList}
 				/>
 			</div>
-			<List>
-				{sortedMemberships.map(membership => (
-					<ListItem>
-						<ListItemAvatar>
-							<Avatar src={membership.user.picture} />
-						</ListItemAvatar>
-						<Grid container alignItems={"center"}>
-							<Grid item xl={4} lg={4} md={6} sm={6} xs={12}>
-								<Typography>{membership.user.name}</Typography>
-								<Typography color={"textSecondary"} variant={"subtitle2"}>
-									{membership.user.email}
-								</Typography>
-							</Grid>
-							<Grid item xl={8} lg={8} md={6} sm={6} xs={12}>
-								<Typography>
-									Role: "{membership.role}" {membership.adminPrivileges ? "(admin)" : ""}
-								</Typography>
-							</Grid>
-						</Grid>
-						<ListItemSecondaryAction>
-							<IconButton onClick={() => openEditDialog(membership)}>
-								<EditIcon />
-							</IconButton>
-						</ListItemSecondaryAction>
-					</ListItem>
-				))}
-			</List>
+			<DragDropContext
+				onDragEnd={result => {
+					if (!result.destination) return;
+					const items = Array.from(memberships);
+					const [reordered] = items.splice(result.source.index, 1);
+					items.splice(result.destination.index, 0, reordered);
+
+					updateMemberships(items);
+				}}
+			>
+				<Droppable droppableId="memberships">
+					{provided => (
+						<List className="memberships" {...provided.droppableProps} ref={provided.innerRef}>
+							{memberships.map((membership, index) => (
+								<Draggable
+									key={membership.id.toString()}
+									draggableId={membership.id.toString()}
+									index={index}
+								>
+									{provided => (
+										<ListItem
+											ref={provided.innerRef}
+											{...provided.draggableProps}
+											{...provided.dragHandleProps}
+										>
+											<ListItemAvatar>
+												<Avatar src={membership.user.picture} />
+											</ListItemAvatar>
+											<Grid container alignItems={"center"}>
+												<Grid item xl={4} lg={4} md={6} sm={6} xs={12}>
+													<Typography>{membership.user.name}</Typography>
+													<Typography color={"textSecondary"} variant={"subtitle2"}>
+														{membership.user.email}
+													</Typography>
+												</Grid>
+												<Grid item xl={8} lg={8} md={6} sm={6} xs={12}>
+													<Typography>
+														Role: "{membership.role}"{" "}
+														{membership.adminPrivileges ? "(admin)" : ""}
+													</Typography>
+												</Grid>
+											</Grid>
+											<ListItemSecondaryAction>
+												<IconButton onClick={() => openEditDialog(membership)}>
+													<EditIcon />
+												</IconButton>
+											</ListItemSecondaryAction>
+										</ListItem>
+									)}
+								</Draggable>
+							))}
+							{provided.placeholder}
+						</List>
+					)}
+				</Droppable>
+			</DragDropContext>
 			<Dialog open={editingMembership.user !== undefined} onClose={() => setEditingMembership({})}>
 				<DialogTitle>Edit or remove {editingMembership.user?.name}'s membership</DialogTitle>
 				<DialogContent>
