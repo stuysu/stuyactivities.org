@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useSnackbar } from 'notistack';
+import { useSnackbar } from "notistack";
 import {
 	Avatar,
 	Box,
@@ -202,14 +202,15 @@ export default function Groups({ match }) {
 																.map(membership => membership.user.email)
 																.join(", ")
 														)
-														.then(() => enqueueSnackbar("Copied email list to clipboard!", {
-															anchorOrigin: {
-												        vertical: 'bottom',
-												        horizontal: 'center',
-												    	},
-															autoHideDuration:3000,
-														}
-													))
+														.then(() =>
+															enqueueSnackbar("Copied email list to clipboard!", {
+																anchorOrigin: {
+																	vertical: "bottom",
+																	horizontal: "center"
+																},
+																autoHideDuration: 3000
+															})
+														)
 												}
 												color={"primary"}
 												variant={"contained"}
