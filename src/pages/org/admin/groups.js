@@ -16,7 +16,6 @@ import {
 	ListItemAvatar,
 	ListItemSecondaryAction,
 	makeStyles,
-	Snackbar,
 	TextField,
 	Typography
 } from "@material-ui/core";
@@ -151,7 +150,7 @@ export default function Groups({ match }) {
 		setEditGroup({});
 	};
 
-	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+	const { enqueueSnackbar } = useSnackbar();
 
 	return (
 		<div className={classes.margin}>
