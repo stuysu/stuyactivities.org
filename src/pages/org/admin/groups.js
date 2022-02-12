@@ -1,5 +1,6 @@
 import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { useSnackbar } from 'notistack';
 import {
 	Avatar,
 	Box,
@@ -150,7 +151,7 @@ export default function Groups({ match }) {
 		setEditGroup({});
 	};
 
-	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 	return (
 		<div className={classes.margin}>
@@ -201,7 +202,14 @@ export default function Groups({ match }) {
 																.map(membership => membership.user.email)
 																.join(", ")
 														)
-														.then(() => setSnackBarOpen(true))
+														.then(() => enqueueSnackbar("Copied email list to clipboard!", {
+															anchorOrigin: {
+												        vertical: 'bottom',
+												        horizontal: 'center',
+												    	},
+															autoHideDuration:3000,
+														}
+													))
 												}
 												color={"primary"}
 												variant={"contained"}
@@ -354,12 +362,6 @@ export default function Groups({ match }) {
 						<Button onClick={() => setEditGroup({})}>Close</Button>
 					</DialogActions>
 				</Dialog>
-				<Snackbar
-					open={snackBarOpen}
-					autoHideDuration={3000}
-					onClose={() => setSnackBarOpen(false)}
-					message="Copied email list to clipboard!"
-				/>
 			</List>
 		</div>
 	);
