@@ -1,5 +1,6 @@
 import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { useSnackbar } from "notistack";
 import {
 	Avatar,
 	Box,
@@ -149,6 +150,8 @@ export default function Groups({ match }) {
 		setEditGroup({});
 	};
 
+	const { enqueueSnackbar } = useSnackbar();
+
 	return (
 		<div className={classes.margin}>
 			<Card>
@@ -186,7 +189,35 @@ export default function Groups({ match }) {
 							<Box p={1}>
 								<ListItem key={group.id} fullWidth>
 									<Grid container xl={12} lg={12} md={12} sm={12} xs={12} direction="column">
-										<Typography variant="h5">{group.name}</Typography>
+										<Grid container justifyContent="space-between">
+											<Typography variant="h5" align="left">
+												{group.name}
+											</Typography>
+											<Button
+												onClick={() =>
+													navigator.clipboard
+														.writeText(
+															group?.memberships
+																.map(membership => membership.user.email)
+																.join(", ")
+														)
+														.then(() =>
+															enqueueSnackbar("Copied email list to clipboard!", {
+																anchorOrigin: {
+																	vertical: "bottom",
+																	horizontal: "center"
+																},
+																autoHideDuration: 3000
+															})
+														)
+												}
+												color={"primary"}
+												variant={"contained"}
+												size={"small"}
+											>
+												Copy Emails
+											</Button>
+										</Grid>
 										<List>
 											{group.memberships.length > 0 ? (
 												group.memberships.map(membership => (
