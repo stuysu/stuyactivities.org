@@ -64,6 +64,22 @@ const QUERY = gql`
 				}
 			}
 		}
+    
+    promotedClubs: promotedClubs {
+      id
+      blurb
+      organization {
+        id
+        name
+        charter {
+          id
+          picture {
+            url
+            thumbnail(width: 80, height: 80)
+          }
+        }
+      }
+    }
 	}
 `;
 
