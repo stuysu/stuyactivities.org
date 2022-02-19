@@ -9,8 +9,9 @@ import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
 import AdminLog from "./AdminLog";
-import { AssignmentTurnedIn, EmailOutlined, Assignment, SmsFailed, AttachMoney } from "@material-ui/icons";
+import { AssignmentTurnedIn, EmailOutlined, Assignment, SmsFailed, AttachMoney, FeaturedPlayList } from "@material-ui/icons";
 import EmailClubLeaders from "./email";
+import ManagePromotedClubs from "./promotedclub";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -60,7 +61,13 @@ export default function AdminRouter({ match }) {
 			role: "charters",
 			path: actualPath + "/email",
 			icon: <EmailOutlined />
-		}
+		},
+    {
+      label: "Manage Featured Clubs",
+      role: "promotedClubs",
+      path: actualPath + "/promotedclubs",
+      icon: <FeaturedPlayList />
+    }
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
 	if (!tabs.length) {
@@ -79,6 +86,7 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/strikes"} component={Strikes} />
 				<Route path={match.path + "/log"} component={AdminLog} />
 				<Route path={match.path + "/email"} component={EmailClubLeaders} />
+        <Route path={match.path + "/promotedclubs"} component={ManagePromotedClubs} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>

@@ -4,10 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import UnstyledLink from "../../ui/UnstyledLink";
 import { Typography } from "@material-ui/core";
+import PromotedClubDeleteButton from "./PromotedClubDeleteButton";
 
 const useStyles = makeStyles({
   clubCard: {
@@ -29,7 +31,9 @@ const useStyles = makeStyles({
 const PromotedClubCard = ({
   id,
   blurb,
-  organization
+  organization,
+  showDelete = false,
+  refetch = () => {}
 }) => {
   const classes = useStyles();
 
@@ -44,6 +48,11 @@ const PromotedClubCard = ({
             <ListItemText primary={organization?.name}/>
           </ListItem>
         </UnstyledLink>
+        {showDelete && (
+          <ListItemSecondaryAction>
+            <PromotedClubDeleteButton promotionId={id} refetch={refetch}/>
+          </ListItemSecondaryAction>
+        )}
       </List>
       <div className={classes.content}>
         <Typography paragraph>
