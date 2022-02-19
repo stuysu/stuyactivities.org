@@ -5,7 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 
 const QUERY = gql`
   query FindOrganization($keyword: String!){
-    organizations(keyword: $keyword){
+    organizations(keyword: $keyword, limit: 15){
       id
       name
     }
@@ -13,19 +13,42 @@ const QUERY = gql`
 `
 
 const OrganizationPicker = (orgId, setOrgId) => {
-  const{orgName, setOrgName} = React.useState("");
-  const findOrganization = (keyword) => {
-    const {data, loading} = useQuery(QUERY);
-    updatePicker();
-  };
+  const [orgName, setOrgName] = React.useState("");
+  const [keyword, setKeyword] = React.useState("");
+  const {data, loading, refetch} = useQuery(QUERY, {
+    variables: {keyword}
+  });
+  const options = data.organizations;
   return (
     <div>
+      <Autocomplete
+        options={options}
+        value={null}
+        getOptionLabel={_ => ""}
+        renderOption={option => <span>{option.name}</span>}
+        onChange={(ev, newvalue) =>
+          setOrgName(newvalue.name);
+          setOrgId(newvalue.id);
+        }
+        loading={loading}
+        filterOptions={f => f}
+        renderInput={params => (
+          <TextField
+            {...params}
+            required = {true}
+            label = "Find Organization"
+            variant = "outlined"
+            value = {keyword}
+            onChange = {ev => setKeyword(ev.target.value)}
+          />
+        )}
+      />
       <div>
         <Typography variant={"h5"}>Currently Selected Club: </Typography>
         {orgId === 0 ? (
-          <Typography>No organization selected.</Typography>
+          <span>No organization selected.</span>
         ) : (
-          <Typography>{orgName}</Typography>
+          <span>{orgName}</span>
         )}
       </div>
     </div>
