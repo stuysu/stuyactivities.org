@@ -18,7 +18,7 @@ const OrganizationPicker = (orgId, setOrgId) => {
   const {data, loading, refetch} = useQuery(QUERY, {
     variables: {keyword}
   });
-  const options = data?.organizations;
+  const options = data === undefined ? [] : data.organizations;
   return (
     <div>
       <Autocomplete
