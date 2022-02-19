@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography }from "@material-ui/core";
+import { Typography, TextField }from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { gql, useQuery } from "@apollo/client";
 
@@ -18,7 +18,7 @@ const OrganizationPicker = (orgId, setOrgId) => {
   const {data, loading, refetch} = useQuery(QUERY, {
     variables: {keyword}
   });
-  const options = data.organizations;
+  const options = data?.organizations;
   return (
     <div>
       <Autocomplete
@@ -26,10 +26,10 @@ const OrganizationPicker = (orgId, setOrgId) => {
         value={null}
         getOptionLabel={_ => ""}
         renderOption={option => <span>{option.name}</span>}
-        onChange={(ev, newvalue) =>
+        onChange={(ev, newvalue) => {
           setOrgName(newvalue.name);
           setOrgId(newvalue.id);
-        }
+        }}
         loading={loading}
         filterOptions={f => f}
         renderInput={params => (
