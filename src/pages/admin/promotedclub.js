@@ -4,6 +4,7 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from "../../comps/ui/Loading";
 import PromotedClubCard from "../../comps/pages/explore/PromotedClubCard";
+import OrganizationPicker from "../../comps/ui/OrganizationPicker";
 
 const QUERY = gql`
   query GetPromotedClubs {
@@ -38,6 +39,7 @@ const useStyles = makeStyles({
 const ManagePromotedClubs = () => {
   const {data, loading, refetch} = useQuery(QUERY);
   const classes = useStyles();
+  const [orgId, setOrgId] = React.useState(0);
   if (loading) {
     return (
       <Loading />
@@ -47,6 +49,7 @@ const ManagePromotedClubs = () => {
     <div>
       <Typography variant={"h3"}>Add New Featured Club:</Typography>
       <div className={classes.newPromotion}>
+        <OrganizationPicker orgId={orgId} setOrgId={setOrgId} />
       </div>
       <Typography variant={"h3"}>Delete Featured Club:</Typography>
       <div className={classes.deletePromotion}>
