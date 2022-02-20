@@ -45,7 +45,7 @@ const OrganizationPicker = ({ setOrgId }) => {
               />
             )}
         /> : 
-        <span>{orgName}</span>}
+        <Typography variant={"h5"}>{orgName}</Typography>}
       </div>
     </div>
   );
