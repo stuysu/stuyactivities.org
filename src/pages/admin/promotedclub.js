@@ -49,7 +49,7 @@ const ManagePromotedClubs = () => {
     <div>
       <Typography variant={"h3"}>Add New Featured Club:</Typography>
       <div className={classes.newPromotion}>
-        <OrganizationPicker orgId={orgId} setOrgId={setOrgId} />
+        <OrganizationPicker setOrgId={ setOrgId } />
       </div>
       <Typography variant={"h3"}>Delete Featured Club:</Typography>
       <div className={classes.deletePromotion}>

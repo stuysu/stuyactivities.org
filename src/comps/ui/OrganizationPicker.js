@@ -12,44 +12,40 @@ const QUERY = gql`
   }
 `
 
-const OrganizationPicker = (orgId, setOrgId) => {
+const OrganizationPicker = ({ setOrgId }) => {
   const [orgName, setOrgName] = React.useState("");
   const [keyword, setKeyword] = React.useState("");
-  const {data, loading, refetch} = useQuery(QUERY, {
+  const {data, loading} = useQuery(QUERY, {
     variables: {keyword}
   });
   const options = data === undefined ? [] : data.organizations;
   return (
     <div>
-      <Autocomplete
-        options={options}
-        value={null}
-        getOptionLabel={_ => ""}
-        renderOption={option => <span>{option.name}</span>}
-        onChange={(ev, newvalue) => {
-          setOrgName(newvalue.name);
-          setOrgId(newvalue.id);
-        }}
-        loading={loading}
-        filterOptions={f => f}
-        renderInput={params => (
-          <TextField
-            {...params}
-            required = {true}
-            label = "Find Organization"
-            variant = "outlined"
-            value = {keyword}
-            onChange = {ev => setKeyword(ev.target.value)}
-          />
-        )}
-      />
+      <Typography variant={"h5"}>Currently Selected Club: </Typography>
       <div>
-        <Typography variant={"h5"}>Currently Selected Club: </Typography>
-        {orgId === 0 ? (
-          <span>No organization selected.</span>
-        ) : (
-          <span>{orgName}</span>
-        )}
+        {orgName === "" ? <Autocomplete
+            options={options}
+            value={null}
+            getOptionLabel={_ => ""}
+            renderOption={option => <span>{option.name}</span>}
+            onChange={(ev, newvalue) => {
+              setOrgName(newvalue.name);
+              setOrgId(newvalue.id);
+            }}
+            loading={loading}
+            filterOptions={f => f}
+            renderInput={params => (
+              <TextField
+                {...params}
+                required = {true}
+                label = "Find Organization"
+                variant = "outlined"
+                value = {keyword}
+                onChange = {ev => setKeyword(ev.target.value)}
+              />
+            )}
+        /> : 
+        <span>{orgName}</span>}
       </div>
     </div>
   );
