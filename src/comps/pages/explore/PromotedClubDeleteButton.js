@@ -6,18 +6,18 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { gql, useMutation } from "@apollo/client";
 
 const MUTATION = gql`
-  mutation ($promotionId: Int!){
-    deletePromotedClub(promotedClubId: $promotionId)
-  }
+	mutation ($promotionId: Int!) {
+		deletePromotedClub(promotedClubId: $promotionId)
+	}
 `;
 
 const PromotedClubDeleteButton = ({ promotionId, refetch }) => {
 	const [deletePromotion] = useMutation(MUTATION, {
 		variables: { promotionId },
-    update(cache){
-      cache.reset();
-      refetch();
-    }
+		update(cache) {
+			cache.reset();
+			refetch();
+		}
 	});
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
