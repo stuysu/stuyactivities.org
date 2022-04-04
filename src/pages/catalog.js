@@ -21,6 +21,7 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import Loading from "../comps/ui/Loading";
 import List from "@material-ui/core/List";
 import Masonry from "react-masonry-css";
+import { useHistory } from "react-router-dom";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
@@ -115,6 +116,7 @@ const Catalog = () => {
 
 	const isMobile = useMediaQuery("(max-width: 500px)");
 	const isTablet = useMediaQuery("(max-width: 900px)");
+	const history = useHistory();
 
 	let numColumns = 3;
 
@@ -126,7 +128,9 @@ const Catalog = () => {
 		numColumns = 1;
 	}
 
-	const [randomOrderSeed] = React.useState(Math.floor(Math.random() * 1000));
+	const [randomOrderSeed] = React.useState(
+		parseInt(history.location.state?.randomSeed) || Math.floor(Math.random() * 1000)
+	);
 
 	const { data, loading } = useQuery(QUERY, {
 		variables: {
@@ -139,6 +143,17 @@ const Catalog = () => {
 			offset
 		}
 	});
+
+	useEffect(() => {
+		if (!history.location.state?.randomSeed) {
+			history.replace({
+				pathname: "/catalog",
+				state: {
+					randomSeed: randomOrderSeed
+				}
+			});
+		}
+	}, [randomOrderSeed, history]);
 
 	useEffect(() => {
 		if (
