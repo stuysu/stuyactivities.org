@@ -79,7 +79,7 @@ const QUERY = gql`
 			meetingDays: $meetingDays
 			limit: $limit
 			randomOrderSeed: $randomOrderSeed
-      active: true
+			active: true
 			offset: $offset
 		) {
 			id
