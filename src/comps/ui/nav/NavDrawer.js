@@ -192,7 +192,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					button
 					onClick={() =>
 						window.open(
-							"https://docs.google.com/spreadsheets/d/1qf-T82RdeLEScyET4trsZlih_QhWrA7YC9VjhonDdT8/edit?usp=sharing"
+							"https://docs.google.com/spreadsheets/d/17q8qR0x-JYLaiuI2K3Fn435Q2qLWrsUfBS0ZR4QqTfk/edit?usp=sharing"
 						)
 					}
 				>
