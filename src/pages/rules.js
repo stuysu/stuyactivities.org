@@ -23,8 +23,7 @@ export default function Rules() {
 			</Typography>
 			<Typography paragraph>
 				If you are experiencing technical issues or difficulties regarding the StuyActivities website, please
-				contact us at <a href="mailto:help@stuyactivities.org">help@stuyactivities.org</a>. All other
-				Activity-related issues may be emailed to <a href="clubpub@stuysu.org">clubpub@stuysu.org</a>.
+				contact us at <a href="mailto:help@stuyactivities.org">help@stuyactivities.org</a>, <a href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</a>, or an SU representative.
 			</Typography>
 			<Typography>
 				<ol>
@@ -40,21 +39,6 @@ export default function Rules() {
 					<li>
 						All Activities must have at least two leaders (i.e. two co-presidents or a president and a
 						vice-president).
-					</li>
-					<li>
-						A faculty advisor is recommended for all Activities and must be present if:
-						<ul>
-							<li>
-								An Activity plans to host speakers and lectures in the cafeteria, library, lecture
-								halls, or auditoriums.
-							</li>
-							<li>
-								An Activity&nbsp;plans to host events, meetings, field trips, etc outside of Stuyvesant
-								with Activity members present. This does not include virtual meetings.
-							</li>
-							<li>An Activity plans to host meetings in Stuyvesant past 5:00 PM.</li>
-							<li>An Activity plans to request funding from the Student Union.</li>
-						</ul>
 					</li>
 					<li>
 						All Activities must meet in person or online at least once a month by registering an Activity
@@ -91,46 +75,24 @@ export default function Rules() {
 						&nbsp;and other school policies. Any Activity that violates these regulations will face
 						suspension and revocation of their charter.
 					</li>
+          <li>
+            All Activities must host at least 1 club meeting in order to have their charter maintained. If
+            a club fails to meet their quota, they will risk their club charter being revoked.
+          </li>
 				</ol>
-			</Typography>
-			<Typography variant={"h5"} color="primary">
-				2021-2022 Meeting Rules
-			</Typography>
-			<Typography paragraph>
-				<ol>
-					<li>
-						All Club Participants must abide by Covid-19 safety regulations set by the administration and
-						New York State during in-person meetings. Participants must wear masks and follow proper safety
-						guidelines during school and afterschool activities, violations of these regulations will lead
-						to a strike.
-					</li>
-					<li>All Activities must have a faculty advisor listed under their charter by November 2021.</li>{" "}
-				</ol>{" "}
 			</Typography>
 			<Typography variant={"h5"} color="primary">
 				Official Regulations for Online Club Meetings
 			</Typography>
 			<Typography paragraph>
 				<ol>
-					<li>
-						Official meetings may be hosted online.
-						<ul>
-							<li>
-								Activities may not advertise in-person meetings on StuyActivities. Any violation of this
-								will lead to an immediate strike.
-							</li>
-						</ul>
-					</li>
+					<li>Official meetings may be hosted online.</li>
 					<li>Links to all official online Activity meetings must be accessible on StuyActivities.</li>
 					<li>
 						All official Activity meetings must be scheduled on StuyActivities.
 						<ul>
 							<li>Official Activity meetings must take place between 2:30 PM and 8:00 PM.</li>
 						</ul>
-					</li>
-					<li>
-						Activities may not host guest speakers at online meetings without the presence of a faculty
-						member (either the Activity’s registered faculty advisor or another member of the faculty).
 					</li>
 					<li>
 						In the event that an online Activity meeting is bombarded with uninvited guests and/or
@@ -171,7 +133,7 @@ export default function Rules() {
 						of the school’s premises, they must:
 						<ul>
 							<li>
-								Have the registered Activity faculty advisor (not the Activity leaders) email{" "}
+								Have the registered Activity faculty advisor (not the student leaders) email{" "}
 								<a href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</a>, the COSA (Mr. Polazzo) and
 								the Assistant Principal (Mr. Moran) at least one week in advance with the Subject:
 								“Activity Meeting Outside of School Premises: [ACTIVITY NAME]”
@@ -180,18 +142,6 @@ export default function Rules() {
 								The email should detail the date, location, paperwork, number of people attending,
 								Activity leader(s) and faculty leader names for the event.
 							</li>
-							<li>
-								Mr. Polazzo can be reached at{" "}
-								<a href="mailto:MPolazz@schools.nyc.gov">MPolazz@schools.nyc.gov</a> and be found in
-								Room 260.
-							</li>
-							<li>
-								Mr. Moran can be reached at{" "}
-								<a href="mailto:BMoran@schools.nyc.gov">BMoran@schools.nyc.gov</a> and be found in Room
-								103.
-							</li>
-						</ul>
-						<ul>
 							<li>
 								Have a faculty advisor present for the entirety of the event. Any Activity found in
 								violation of this rule may face suspension and revocation of their charter.
@@ -211,6 +161,10 @@ export default function Rules() {
 						Activities may not put up flyers or advertise their Activity until their charter has been
 						submitted and approved. All Activities are required to take down flyers from walls and/or
 						bulletin boards within a week of the event having taken place.
+            <ul>
+              <li>Fliers deemed inappropriate by SU members and school staff will be taken down without warning (i.e. Ad Hominems, Hate Speech)</li>
+              <li>Fliers placed in and/or near escalators will be relocated or torn down.</li>
+            </ul>
 					</li>
 				</ol>
 			</Typography>
@@ -245,24 +199,26 @@ export default function Rules() {
 						&amp; Pubs department in regards to the condition of a room may result in a strike or
 						suspension.
 					</li>
-					<li>All Activities must use the room reserved for their activity on the StuyActivities website.</li>
+					<li>
+            All Activities must use the room reserved for their activity on the StuyActivities website. Please
+            email clubpub@stuysu.org or contact an SU representative if you are unable to find a room.
+          </li>
 					<li>
 						All room reservations must be canceled at least 24 hours in advance if the Activity can no
 						longer hold its meeting.
 					</li>
 					<li>
 						Any Activity that wishes to reserve and use spaces other than school classrooms (i.e. cafeteria,
-						auditorium, lecture halls) for meetings must have all appropriate paperwork filled out by the
-						Activity’s Faculty Advisor before the event.
+						auditorium, lecture halls) for meetings must go through the process below.
 						<ul>
 							<li>
 								The registered Activity faculty advisor (not the Activity leaders) must email{" "}
 								<a href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</a>, the Student Union COSA, Mr.
 								Polazzo, and the Assistant Principal, Mr. Moran, at least one week in advance with the
 								Subject: “[NAME OF FACILITY] Reservation: [ACTIVITY NAME]. Mr. Polazzo can be reached at{" "}
-								<a href="mailto:MPolazz@schools.nyc.gov">MPolazz@schools.nyc.gov</a> and be found in
+								<a href="mailto:MPolazz@schools.nyc.gov">MPolazz@schools.nyc.gov</a> and can be found in
 								Room, 260. Mr. Moran can be reached at{" "}
-								<a href="mailto:BMoran@schools.nyc.gov">BMoran@schools.nyc.gov</a> and be found in Room
+								<a href="mailto:BMoran@schools.nyc.gov">BMoran@schools.nyc.gov</a> and can be found in Room
 								103.
 							</li>
 							<li>
@@ -416,40 +372,14 @@ export default function Rules() {
 					<li>
 						If an Activity wishes to spend the money they have received during the Club Pub Allocations
 						Process, the faculty advisor must sign under the “Advisor/COSA” field on the Reimbursement Form.
-						This will indicate that the purchase has been approved by the faculty advisor.{" "}
-					</li>
-					<li>
-						If an Activity wishes to use the media carts from the programming office, they may do so only
-						with the presence of a registered Activity faculty advisor to sign them in and out.
-					</li>
-					<li>
-						If an Activity wishes to go on trips or engage in any official Activity-related meeting outside
-						of the school’s premises, they must:
-						<ul>
-							<li>
-								Have the registered Activity faculty advisor (not the Activity leaders) email
-								clubpub@stuysu.org, the COSA (Mr. Polazzo) and the Assistant Principal (Mr. Moran) at
-								least one week in advance with the Subject: “Activity Meeting Outside of School
-								Premises: [ACTIVITY NAME]”
-							</li>
-							<li>
-								The email should detail the date, location, paperwork, number of people attending,
-								Activity leader(s) and faculty leader names for the event.
-							</li>
-							<li>Mr. Polazzo can be reached at MPolazz@schools.nyc.gov and can be found in Room 260.</li>
-							<li>Mr. Moran can be reached at BMoran@schools.nyc.gov and can be found in Room 103.</li>
-							<li>
-								Have a faculty advisor present for the entirety of the event. Any Activity found in
-								violation of this rule may face suspension and revocation of their charter.
-							</li>
-						</ul>
+						This will indicate that the purchase has been approved by the faculty advisor.
 					</li>
 					<li>
 						If an Activity has received any combination of 3 strikes, they may resubmit a charter after
 						their suspension. If approved, a faculty advisor must be present at all meetings until otherwise
 						specified by the Student Union.
-					</li>{" "}
-				</ul>{" "}
+					</li>
+				</ul>
 			</Typography>
 			<Typography paragraph>
 				ANY ACTIVITY THAT FAILS TO AGREE WITH THE ABOVE SET OF RULES WILL NOT BE CHARTERED. THE STUYVESANT
