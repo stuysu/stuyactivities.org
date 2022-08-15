@@ -23,7 +23,8 @@ export default function Rules() {
 			</Typography>
 			<Typography paragraph>
 				If you are experiencing technical issues or difficulties regarding the StuyActivities website, please
-				contact us at <a href="mailto:help@stuyactivities.org">help@stuyactivities.org</a>, <a href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</a>, or an SU representative.
+				contact us at <a href="mailto:help@stuyactivities.org">help@stuyactivities.org</a>,{" "}
+				<a href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</a>, or an SU representative.
 			</Typography>
 			<Typography>
 				<ol>
@@ -75,10 +76,10 @@ export default function Rules() {
 						&nbsp;and other school policies. Any Activity that violates these regulations will face
 						suspension and revocation of their charter.
 					</li>
-          <li>
-            All Activities must host at least 1 club meeting in order to have their charter maintained. If
-            a club fails to meet their quota, they will risk their club charter being revoked.
-          </li>
+					<li>
+						All Activities must host at least 1 club meeting in order to have their charter maintained. If a
+						club fails to meet their quota, they will risk their club charter being revoked.
+					</li>
 				</ol>
 			</Typography>
 			<Typography variant={"h5"} color="primary">
@@ -161,10 +162,13 @@ export default function Rules() {
 						Activities may not put up flyers or advertise their Activity until their charter has been
 						submitted and approved. All Activities are required to take down flyers from walls and/or
 						bulletin boards within a week of the event having taken place.
-            <ul>
-              <li>Fliers deemed inappropriate by SU members and school staff will be taken down without warning (i.e. Ad Hominems, Hate Speech)</li>
-              <li>Fliers placed in and/or near escalators will be relocated or torn down.</li>
-            </ul>
+						<ul>
+							<li>
+								Fliers deemed inappropriate by SU members and school staff will be taken down without
+								warning (i.e. Ad Hominems, Hate Speech)
+							</li>
+							<li>Fliers placed in and/or near escalators will be relocated or torn down.</li>
+						</ul>
 					</li>
 				</ol>
 			</Typography>
@@ -200,9 +204,10 @@ export default function Rules() {
 						suspension.
 					</li>
 					<li>
-            All Activities must use the room reserved for their activity on the StuyActivities website. Please
-            email clubpub@stuysu.org or contact an SU representative if you are unable to find a room.
-          </li>
+						All Activities must use the room reserved for their activity on the StuyActivities website.
+						Please email clubpub@stuysu.org or contact an SU representative if you are unable to find a
+						room.
+					</li>
 					<li>
 						All room reservations must be canceled at least 24 hours in advance if the Activity can no
 						longer hold its meeting.
@@ -218,8 +223,8 @@ export default function Rules() {
 								Subject: “[NAME OF FACILITY] Reservation: [ACTIVITY NAME]. Mr. Polazzo can be reached at{" "}
 								<a href="mailto:MPolazz@schools.nyc.gov">MPolazz@schools.nyc.gov</a> and can be found in
 								Room, 260. Mr. Moran can be reached at{" "}
-								<a href="mailto:BMoran@schools.nyc.gov">BMoran@schools.nyc.gov</a> and can be found in Room
-								103.
+								<a href="mailto:BMoran@schools.nyc.gov">BMoran@schools.nyc.gov</a> and can be found in
+								Room 103.
 							</li>
 							<li>
 								The email should detail the reason for reserving the facility, as well as the date,
