@@ -12,7 +12,6 @@ import {
 	AccountBoxOutlined,
 	AddCircleOutlined,
 	ArchiveOutlined,
-	EmojiFlagsOutlined,
 	EmojiSymbolsOutlined,
 	ExploreOutlined,
 	GavelOutlined,
