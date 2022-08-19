@@ -189,7 +189,7 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ArchiveOutlined />
 					</ListItemIcon>
 					<ListItemText primary={"Archive"} />
-				</ListItem>
+				</ListItem>}
 				{user.signedIn && (
 					<>
 						<ListSubheader disableSticky>My Activities</ListSubheader>
