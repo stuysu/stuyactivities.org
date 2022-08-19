@@ -46,9 +46,9 @@ const CharterQuestions = () => {
 
 			<SmartCharterQuestion
 				name={"appointmentProcedures"}
-				label={"Appointment Procedures"}
+				label={"Appointment and Impeachment Procedures"}
 				helperText={
-					"What are the leadership positions and how are they appointed? Are there any specific protocols members are expected to follow? What is the policy for transfer of leadership between school years?"
+					"What are the leadership positions and how are they appointed? Are there any specific protocols members are expected to follow? What is the policy for transfer of leadership between school years? How will leaders be removed if necessary?"
 				}
 				maxWords={400}
 				minWords={150}

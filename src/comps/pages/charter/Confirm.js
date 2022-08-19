@@ -85,7 +85,7 @@ const Confirm = () => {
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Appointment Procedures"} secondary={form.appointmentProcedures} />
+					<ListItemText primary={"Appointment and Impeachment Procedures"} secondary={form.appointmentProcedures} />
 				</ListItem>
 
 				<ListItem>
