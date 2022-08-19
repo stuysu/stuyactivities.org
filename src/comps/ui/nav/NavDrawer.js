@@ -9,7 +9,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Logo from "./../../../img/logo512.png";
 import UserContext from "../../context/UserContext";
 import {
-	AccountBox,
 	AccountBoxOutlined,
 	AddCircleOutlined,
 	ArchiveOutlined,
@@ -238,18 +237,6 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 						<ListItemText primary={"Rules"} />
 					</ListItem>
 				</UnstyledLink>
-				{user.adminRoles !== undefined || (user.adminRoles !== [] && user.signedIn) ? (
-					<UnstyledLink to={"/admin"}>
-						<ListItem button>
-							<ListItemIcon>
-								<AccountBox />
-							</ListItemIcon>
-							<ListItemText primary={"Admin Panel"} />
-						</ListItem>
-					</UnstyledLink>
-				) : (
-					<></>
-				)}
 			</List>
 		</Drawer>
 	);

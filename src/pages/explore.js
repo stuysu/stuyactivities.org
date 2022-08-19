@@ -4,6 +4,7 @@ import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
 import { gql, useQuery } from "@apollo/client";
 import Loading from "../comps/ui/Loading";
+import PromotedClubCard from "../comps/pages/explore/PromotedClubCard";
 import UpdateCard from "../comps/updates/UpdateCard";
 import MeetingCard from "../comps/meetings/MeetingCard";
 import Carousel from "react-multi-carousel";
@@ -51,6 +52,23 @@ const QUERY = gql`
 				id
 				name
 			}
+			organization {
+				id
+				name
+				url
+				charter {
+					id
+					picture {
+						url
+						thumbnail(width: 80, height: 80)
+					}
+				}
+			}
+		}
+
+		promotedClubs: promotedClubs {
+			id
+			blurb
 			organization {
 				id
 				name
@@ -168,6 +186,16 @@ const ExploreContent = () => {
 
 	return (
 		<div>
+			{data !== undefined && data.promotedClubs.length !== 0 && (
+				<div>
+					<Typography variant={"h3"}>Featured Clubs</Typography>
+					<div>
+						{data.promotedClubs.map(promotedClub => (
+							<PromotedClubCard {...promotedClub} />
+						))}
+					</div>
+				</div>
+			)}
 			<Typography variant={"h3"}>Public Meetings</Typography>
 			{data !== undefined && (
 				<Carousel responsive={responsive}>
