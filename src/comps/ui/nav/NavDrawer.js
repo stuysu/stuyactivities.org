@@ -177,17 +177,6 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 
 				{user.signedIn && (
 					<>
-						<UnstyledLink to={"/clubpubfair2020"}>
-							<ListItem button>
-								<ListItemIcon>
-									<EmojiFlagsOutlined />
-								</ListItemIcon>
-								<ListItemText primary={"2020 Clubs & Pubs Fair"} />
-							</ListItem>
-						</UnstyledLink>
-					</>
-				)}
-
 				<ListItem
 					button
 					onClick={() =>
