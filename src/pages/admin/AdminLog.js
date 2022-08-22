@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
-import LazyLoadComponent from "react-lazyload";
+import LazyLoadComponent from "parm-react-lazyload";
 
 const classes = {
 	root: {
