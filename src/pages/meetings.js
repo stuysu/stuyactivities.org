@@ -48,7 +48,7 @@ const Meetings = () => {
 						.map(meeting => {
 							const newMeeting = { ...meeting };
 							const meetingRoom =
-									typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
+								typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
 							newMeeting.title = meeting.organization.name + " - " + meeting.title + meetingRoom;
 							newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
 							return newMeeting;
