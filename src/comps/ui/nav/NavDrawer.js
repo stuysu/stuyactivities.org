@@ -174,19 +174,20 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 				</UnstyledLink>
 
 				{user.signedIn && (
-				<ListItem
-					button
-					onClick={() =>
-						window.open(
-							"https://docs.google.com/spreadsheets/d/17q8qR0x-JYLaiuI2K3Fn435Q2qLWrsUfBS0ZR4QqTfk/edit?usp=sharing"
-						)
-					}
-				>
-					<ListItemIcon>
-						<ArchiveOutlined />
-					</ListItemIcon>
-					<ListItemText primary={"Archive"} />
-				</ListItem>)}
+					<ListItem
+						button
+						onClick={() =>
+							window.open(
+								"https://docs.google.com/spreadsheets/d/17q8qR0x-JYLaiuI2K3Fn435Q2qLWrsUfBS0ZR4QqTfk/edit?usp=sharing"
+							)
+						}
+					>
+						<ListItemIcon>
+							<ArchiveOutlined />
+						</ListItemIcon>
+						<ListItemText primary={"Archive"} />
+					</ListItem>
+				)}
 				{user.signedIn && (
 					<>
 						<ListSubheader disableSticky>My Activities</ListSubheader>
