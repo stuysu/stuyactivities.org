@@ -2,7 +2,7 @@ import React from "react";
 import honeybadger from "../../utils/honeybadger";
 import errorImage from "./../../img/vectors/cherry-list-is-empty.svg";
 import { Typography } from "@material-ui/core";
-import Boundary from "@honeybadger-io/react";
+import { HoneybadgerErrorBoundary } from "@honeybadger-io/react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { triggerReportDialog } from "../help/ReportDialog";
@@ -26,6 +26,7 @@ const useStyles = makeStyles({
 
 const ErrorScreen = ({ error }) => {
 	const classes = useStyles();
+	console.log("its morbin time")
 	return (
 		<div className={classes.container}>
 			<img src={errorImage} alt={"Error box"} className={classes.vector} />
@@ -54,9 +55,9 @@ const ErrorScreen = ({ error }) => {
 
 const ErrorBoundary = ({ children }) => {
 	return (
-		<Boundary honeybadger={honeybadger} ErrorComponent={ErrorScreen}>
+		<HoneybadgerErrorBoundary honeybadger={honeybadger} ErrorComponent={ErrorScreen}>
 			{children}
-		</Boundary>
+		</HoneybadgerErrorBoundary>
 	);
 };
 
