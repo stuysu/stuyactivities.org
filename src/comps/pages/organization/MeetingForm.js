@@ -20,9 +20,10 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import Checkbox from "@material-ui/core/Checkbox";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import * as moment from "moment";
-import MomentUtils from "@date-io/moment";
 import { gql, useQuery } from "@apollo/client";
-import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pickers";
+import { DatePicker, TimePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import TinyEditor from "../../updates/TinyEditor";
 import { OrgContext } from "../../../pages/org/index";
 
@@ -166,7 +167,7 @@ const MeetingForm = ({
 				onChange={e => setTitle(e.target.value)}
 			/>
 			<Grid container spacing={1}>
-				<MuiPickersUtilsProvider utils={MomentUtils}>
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						{alreadyRecurring ? (
 							<FormControl variant="outlined" fullWidth>
@@ -195,6 +196,7 @@ const MeetingForm = ({
 								onChange={updateDate}
 								animateYearScrolling
 								inputVariant="outlined"
+								renderInput={(params) => <TextField {...params} />}
 							/>
 						)}
 					</Grid>
@@ -207,6 +209,7 @@ const MeetingForm = ({
 							inputVariant="outlined"
 							value={time.start}
 							onChange={updateDate}
+							renderInput={(params) => <TextField {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
@@ -218,6 +221,7 @@ const MeetingForm = ({
 							inputVariant="outlined"
 							value={time.end}
 							onChange={updateEnd}
+							renderInput={(params) => <TextField {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
@@ -260,7 +264,7 @@ const MeetingForm = ({
 							renderInput={params => <TextField {...params} label="Group" variant="outlined" />}
 						/>
 					</Grid>
-				</MuiPickersUtilsProvider>
+				</LocalizationProvider>
 			</Grid>
 
 			<br />
