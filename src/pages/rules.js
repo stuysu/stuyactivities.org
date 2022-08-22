@@ -359,7 +359,7 @@ export default function Rules() {
 			<Typography>
 				<ul>
 					<li>
-						A faculty advisor must be present if:
+						A Faculty Advisor must be present if:
 						<ul>
 							{" "}
 							<li>
