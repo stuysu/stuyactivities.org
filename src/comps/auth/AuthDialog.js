@@ -1,10 +1,10 @@
 import React from "react";
 import EventEmitter from "events";
-import Dialog from "@material-ui/core/Dialog";
-import Slide from "@material-ui/core/Slide";
+import Dialog from "@mui/material/Dialog";
+import Slide from "@mui/material/Slide";
 import AuthContext from "./AuthContext";
 import AuthContent from "./AuthContent";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import UserContext from "../context/UserContext";
 
 const loginDialogEmitter = new EventEmitter();

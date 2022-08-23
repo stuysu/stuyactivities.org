@@ -1,11 +1,11 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import TextField from "@mui/material/TextField";
+import makeStyles from "@mui/styles/makeStyles";
 import FlexCenter from "../ui/FlexCenter";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import { client } from "../context/ApolloProvider";
 
 const useStyles = makeStyles({

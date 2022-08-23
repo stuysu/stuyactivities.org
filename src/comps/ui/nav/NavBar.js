@@ -1,17 +1,17 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import makeStyles from "@mui/styles/makeStyles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
 import UserContext from "../../context/UserContext";
 import NavAvatar from "./NavAvatar";
 import UnstyledLink from "../UnstyledLink";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { BugReport } from "@material-ui/icons";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { BugReport } from "@mui/icons-material";
 import { triggerReportDialog } from "../../help/ReportDialog";
 
 const useStyles = makeStyles(theme => ({
@@ -41,6 +41,7 @@ const NavBar = ({ setDrawerOpen }) => {
 						color="inherit"
 						aria-label="menu"
 						onClick={() => setDrawerOpen(true)}
+						size="large"
 					>
 						<MenuIcon />
 					</IconButton>
@@ -53,6 +54,7 @@ const NavBar = ({ setDrawerOpen }) => {
 							color="inherit"
 							aria-label="menu"
 							onClick={() => triggerReportDialog()}
+							size="large"
 						>
 							<BugReport />
 						</IconButton>

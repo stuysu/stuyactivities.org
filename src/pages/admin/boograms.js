@@ -9,7 +9,7 @@ import {
 	Snackbar,
 	Typography,
 	TextField
-} from "@material-ui/core";
+} from "@mui/material";
 import { gql, useQuery, useMutation } from "@apollo/client";
 
 const ITEMS = gql`

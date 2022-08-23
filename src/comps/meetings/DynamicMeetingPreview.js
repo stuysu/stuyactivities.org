@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
 import Loading from "../ui/Loading";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import smartTimespan from "../../utils/smartTimespan";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 

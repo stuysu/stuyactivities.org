@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import { Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import UnstyledLink from "../../ui/UnstyledLink";
-import Chip from "@material-ui/core/Chip";
+import Chip from "@mui/material/Chip";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
 

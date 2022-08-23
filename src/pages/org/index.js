@@ -10,9 +10,9 @@ import Overview from "./overview";
 import Meetings from "./meetings";
 import Groups from "./groups";
 import { Helmet } from "react-helmet";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 
 import OrgNavPanel from "../../comps/pages/organization/OrgNavPanel";
 import BackButton from "../../comps/ui/BackButton";

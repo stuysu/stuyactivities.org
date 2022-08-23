@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
+import { Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@mui/material";
 import Linkify from "linkifyjs/react";
 import communityCircles from "./communityCircles.json";
 import socialization from "./socialization";

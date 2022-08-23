@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import makeStyles from "@mui/styles/makeStyles";
 import FlexCenter from "../ui/FlexCenter";
 import { triggerReportDialog } from "./ReportDialog";
 import fixingBugs from "./../../img/vectors/fixing-bugs.svg";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import UserContext from "../context/UserContext";
 import ReCAPTCHA from "react-google-recaptcha";
 import { CAPTCHA_KEY } from "../../constants";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { gql, useMutation } from "@apollo/client";
 import { useLocation } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
@@ -101,6 +101,7 @@ const ReportContent = () => {
 						color="inherit"
 						onClick={() => triggerReportDialog(false)}
 						aria-label="close"
+						size="large"
 					>
 						<CloseIcon />
 					</IconButton>

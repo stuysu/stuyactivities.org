@@ -7,9 +7,9 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
 import Loading from "../../../comps/ui/Loading";
 import layout from "./../../../styles/Layout.module.css";
-import CheckBox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { Button } from "@material-ui/core";
+import CheckBox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { Button } from "@mui/material";
 
 const RESPONSE = gql`
 	query ($orgId: Int!) {

@@ -1,6 +1,7 @@
 import React from "react";
-import { ListItemAvatar, makeStyles, TextField, Avatar } from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import { ListItemAvatar, TextField, Avatar } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Autocomplete from "@mui/material/Autocomplete";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 const QUERY = gql`

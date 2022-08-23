@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Card, Grid, List, ListItem, ListItemAvatar, Typography } from "@material-ui/core";
+import { Avatar, Box, Card, Grid, List, ListItem, ListItemAvatar, Typography } from "@mui/material";
 import { gql, useQuery } from "@apollo/client";
 import { OrgContext } from "./index";
 

@@ -1,15 +1,15 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@mui/material/TextField";
+import { Grid, Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { CharterFormContext } from "../../../pages/charter";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import UserContext from "../../context/UserContext";
-import { Close } from "@material-ui/icons";
+import { Close } from "@mui/icons-material";
 import UserSelect from "../../ui/UserSelect";
 
 const useStyles = makeStyles({

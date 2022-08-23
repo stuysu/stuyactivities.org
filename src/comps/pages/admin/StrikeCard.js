@@ -12,15 +12,15 @@ import {
 	FormControl,
 	InputLabel,
 	Select,
-	MenuItem,
-	makeStyles
-} from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import Button from "@material-ui/core/Button";
+	MenuItem
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import EditIcon from "@mui/icons-material/Edit";
+import Button from "@mui/material/Button";
 import { gql, useMutation } from "@apollo/client";
 import { cache } from "../../context/ApolloProvider";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const useStyles = makeStyles(() => ({
 	item: {

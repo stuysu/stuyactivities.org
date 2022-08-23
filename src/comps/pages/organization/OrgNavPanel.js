@@ -10,16 +10,16 @@ import {
 	DialogContentText,
 	DialogTitle,
 	Typography
-} from "@material-ui/core";
+} from "@mui/material";
 import Linkify from "linkifyjs/react";
-import List from "@material-ui/core/List";
+import List from "@mui/material/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { Dashboard, Description, Group, GroupWork, Person, Settings } from "@material-ui/icons";
-import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles } from "@material-ui/core/styles";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import { Dashboard, Description, Group, GroupWork, Person, Settings } from "@mui/icons-material";
+import ListItemText from "@mui/material/ListItemText";
+import makeStyles from "@mui/styles/makeStyles";
 import { OrgContext } from "../../../pages/org";
 import { gql, useMutation } from "@apollo/client";
 import { triggerLoginDialog } from "../../auth/AuthDialog";

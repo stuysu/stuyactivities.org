@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import UserContext from "../context/UserContext";
 import UnstyledLink from "../ui/UnstyledLink";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import { Avatar } from "@material-ui/core";
-import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import { Avatar } from "@mui/material";
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
+import makeStyles from "@mui/styles/makeStyles";
+import Typography from "@mui/material/Typography";
 import ButtonLink from "../ui/ButtonLink";
 
 const useStyles = makeStyles({

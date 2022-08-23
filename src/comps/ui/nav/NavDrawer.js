@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import makeStyles from "@mui/styles/makeStyles";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import Logo from "./../../../img/logo512.png";
 import UserContext from "../../context/UserContext";
 import {
@@ -22,11 +22,11 @@ import {
 	PowerSettingsNewOutlined,
 	MeetingRoomOutlined,
 	SettingsOutlined
-} from "@material-ui/icons";
-import { Avatar, Typography } from "@material-ui/core";
+} from "@mui/icons-material";
+import { Avatar, Typography } from "@mui/material";
 import UnstyledLink from "../UnstyledLink";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListSubheader from "@mui/material/ListSubheader";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
 
 const useStyles = makeStyles(theme => ({

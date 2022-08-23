@@ -1,5 +1,6 @@
 import React from "react";
-import { makeStyles, Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
 import RouteTabs from "../../comps/ui/RouteTabs";
 import Boograms from "./boograms";
@@ -16,7 +17,7 @@ import {
 	SmsFailed,
 	AttachMoney,
 	FeaturedPlayList
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import EmailClubLeaders from "./email";
 import ManagePromotedClubs from "./promotedclub";
 

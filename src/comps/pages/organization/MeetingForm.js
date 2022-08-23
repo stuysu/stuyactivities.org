@@ -8,22 +8,22 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	makeStyles,
 	TextField,
 	Typography,
 	Select,
 	MenuItem,
 	FormControl,
 	InputLabel
-} from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import Checkbox from "@material-ui/core/Checkbox";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Autocomplete from "@mui/material/Autocomplete";
+import Checkbox from "@mui/material/Checkbox";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import * as moment from "moment";
 import { gql, useQuery } from "@apollo/client";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import TinyEditor from "../../updates/TinyEditor";
 import { OrgContext } from "../../../pages/org/index";
 
@@ -196,7 +196,7 @@ const MeetingForm = ({
 								onChange={updateDate}
 								animateYearScrolling
 								inputVariant="outlined"
-								renderInput={(params) => <TextField {...params} />}
+								renderInput={params => <TextField {...params} />}
 							/>
 						)}
 					</Grid>
@@ -209,7 +209,7 @@ const MeetingForm = ({
 							inputVariant="outlined"
 							value={time.start}
 							onChange={updateDate}
-							renderInput={(params) => <TextField {...params} />}
+							renderInput={params => <TextField {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
@@ -221,7 +221,7 @@ const MeetingForm = ({
 							inputVariant="outlined"
 							value={time.end}
 							onChange={updateEnd}
-							renderInput={(params) => <TextField {...params} />}
+							renderInput={params => <TextField {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
@@ -229,7 +229,7 @@ const MeetingForm = ({
 							disableClearable
 							options={availableRooms}
 							getOptionLabel={option => option.name}
-							getOptionSelected={option => option.id === room.id}
+							isOptionEqualToValue={option => option.id === room.id}
 							disabled={loading}
 							error={!roomAvailable}
 							value={room}
@@ -250,7 +250,7 @@ const MeetingForm = ({
 							disableClearable
 							options={groups}
 							getOptionLabel={option => option.name}
-							getOptionSelected={option => option.id === group.id && option.name === group.name}
+							isOptionEqualToValue={option => option.id === group.id && option.name === group.name}
 							value={group}
 							onChange={(_, g) => {
 								setGroup(g);

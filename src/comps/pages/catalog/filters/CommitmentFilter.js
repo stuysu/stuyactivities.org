@@ -1,8 +1,8 @@
 import React from "react";
 import useFilterStyles from "./useFilterStyles";
 import arrayToggle from "../../../../utils/arrayToggle";
-import Chip from "@material-ui/core/Chip";
-import Typography from "@material-ui/core/Typography";
+import Chip from "@mui/material/Chip";
+import Typography from "@mui/material/Typography";
 
 export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels }) {
 	const classes = useFilterStyles();

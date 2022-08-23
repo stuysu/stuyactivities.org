@@ -6,13 +6,13 @@ import {
 	DialogTitle,
 	FormControlLabel,
 	Grid,
-	makeStyles,
 	TextField,
 	Avatar,
 	Snackbar,
 	Switch,
 	Typography
-} from "@material-ui/core";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
 import RequestList from "../../../comps/pages/organization/RequestList";

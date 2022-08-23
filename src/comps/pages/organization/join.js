@@ -1,9 +1,9 @@
 import React from "react";
-import { Box, Button, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Box, Button, Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { OrgContext } from "../../../pages/org/index";
 import joinVector from "../../../img/vectors/undraw_join.svg";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import { gql, useMutation } from "@apollo/client";
 import { cache } from "../../context/ApolloProvider";
 

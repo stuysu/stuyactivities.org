@@ -1,5 +1,6 @@
 import React from "react";
-import { List, ListItem, makeStyles, Typography } from "@material-ui/core";
+import { List, ListItem, Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { gql, useQuery } from "@apollo/client";
 
 const useStyles = makeStyles(theme => ({

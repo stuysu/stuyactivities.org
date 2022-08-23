@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import UserContext from "../context/UserContext";
 import { gql, useQuery } from "@apollo/client";
 import Loading from "../ui/Loading";
-import { Typography, useMediaQuery } from "@material-ui/core";
+import { Typography, useMediaQuery } from "@mui/material";
 import UpdateCard from "../updates/UpdateCard";
 import Masonry from "react-masonry-css";
 import { client } from "../context/ApolloProvider";

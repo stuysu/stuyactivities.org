@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Grid, Typography } from "@material-ui/core";
+import { Card, Grid, Typography } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import moment from "moment-timezone";
 
