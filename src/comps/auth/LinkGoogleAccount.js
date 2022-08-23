@@ -3,8 +3,8 @@ import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { GOOGLE_CLIENT_ID } from "../../constants";
 import GoogleLogin from "react-google-login";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 
 const MUTATION = gql`
 	mutation LinkGoogle($token: String!) {

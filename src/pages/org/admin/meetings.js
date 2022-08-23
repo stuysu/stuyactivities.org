@@ -12,15 +12,15 @@ import {
 	ListItem,
 	ListItemSecondaryAction,
 	ListItemText,
-	makeStyles,
 	Paper,
 	Snackbar,
 	Typography
-} from "@material-ui/core";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 import BackButton from "../../../comps/ui/BackButton";
 import { gql, useMutation } from "@apollo/client";
-import { Close, Edit } from "@material-ui/icons";
+import { Close, Edit } from "@mui/icons-material";
 import { OrgContext } from "../index";
 import moment from "moment";
 import { generatePath, Route, Switch } from "react-router-dom";
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 			marginLeft: theme.spacing(10),
 			marginTop: theme.spacing(3)
 		},
-		[theme.breakpoints.down("lg")]: {
+		[theme.breakpoints.down("xl")]: {
 			marginTop: theme.spacing(3)
 		}
 	}
@@ -376,11 +376,11 @@ const Main = ({ match }) => {
 										<UnstyledLink
 											to={generatePath(match.path, match.params) + "/editRecurring/" + meeting.id}
 										>
-											<IconButton>
+											<IconButton size="large">
 												<Edit />
 											</IconButton>
 										</UnstyledLink>
-										<IconButton onClick={() => setRemovingMeeting(meeting)}>
+										<IconButton onClick={() => setRemovingMeeting(meeting)} size="large">
 											<Close />
 										</IconButton>
 									</ListItemSecondaryAction>
@@ -409,11 +409,11 @@ const Main = ({ match }) => {
 										<UnstyledLink
 											to={generatePath(match.path, match.params) + "/edit/" + meeting.id}
 										>
-											<IconButton>
+											<IconButton size="large">
 												<Edit />
 											</IconButton>
 										</UnstyledLink>
-										<IconButton onClick={() => setRemovingMeeting(meeting)}>
+										<IconButton onClick={() => setRemovingMeeting(meeting)} size="large">
 											<Close />
 										</IconButton>
 									</ListItemSecondaryAction>
@@ -531,7 +531,7 @@ const EditPage = ({ match }) => {
 				label={"Back to Meetings"}
 				to={generatePath("/" + match.params.orgUrl + "/admin/meetings")}
 			/>
-			<Grid container justify={"center"} className={classes.margin}>
+			<Grid container justifyContent={"center"} className={classes.margin}>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
 					<Typography variant={"h4"} className={classes.newMeetingTitle}>
 						{recurring ? "Edit Recurring Meeting" : "Edit Meeting"}

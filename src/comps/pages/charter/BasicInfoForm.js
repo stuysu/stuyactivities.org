@@ -1,13 +1,13 @@
 import React from "react";
 import { CharterFormContext } from "../../../pages/charter";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import KeywordSelection from "./KeywordSelection";
 import TagSelection from "./TagSelection";
 import UrlSelection from "./UrlSelection";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 import PictureUpload from "./PictureUpload";
 import CommitmentLevel from "./CommitmentLevel";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 
 const useStyles = makeStyles({
 	select: {

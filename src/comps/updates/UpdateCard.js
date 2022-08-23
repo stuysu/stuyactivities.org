@@ -17,15 +17,15 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogActions
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
 import UpdateDeleteButton from "./UpdateDeleteButton";
 import { gql, useMutation } from "@apollo/client";
-import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Link from "@material-ui/core/Link";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Link from "@mui/material/Link";
 
 const ASK_QUESTION = gql`
 	mutation CreateUpdateQuestion($updateId: Int!, $question: String!) {
@@ -206,10 +206,10 @@ const Question = ({ question, organization, keyy }) => {
 				<ListItemText primary={question.question} secondary={question.submittingUser.name} />
 				{organization?.membership?.adminPrivileges && (
 					<ListItemSecondaryAction>
-						<IconButton onClick={() => setOpen(true)}>
+						<IconButton onClick={() => setOpen(true)} size="large">
 							<QuestionAnswerIcon />
 						</IconButton>
-						<IconButton onClick={() => del({ variables: { updateQuestionId: question.id } })}>
+						<IconButton onClick={() => del({ variables: { updateQuestionId: question.id } })} size="large">
 							<DeleteIcon />
 						</IconButton>
 					</ListItemSecondaryAction>

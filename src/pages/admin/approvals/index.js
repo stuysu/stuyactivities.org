@@ -1,21 +1,13 @@
 import React from "react";
-import {
-	Button,
-	Card,
-	CardActionArea,
-	CardActions,
-	CardContent,
-	CardMedia,
-	makeStyles,
-	Typography
-} from "@material-ui/core";
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { gql, useQuery } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		"max-width": theme.breakpoints.width("md"),
+		"max-width": theme.breakpoints.values.md,
 		margin: "auto" //possible TODO: make a standard class for centering things
 	},
 	title: {

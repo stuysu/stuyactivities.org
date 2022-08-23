@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { TextField } from "@material-ui/core";
+import { TextField } from "@mui/material";
 import EmailBodyEditor from "../../comps/pages/admin/EmailBodyEditor";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { gql, useMutation } from "@apollo/client";
 
 const MUTATION = gql`

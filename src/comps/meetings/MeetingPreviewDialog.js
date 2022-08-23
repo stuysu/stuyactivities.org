@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import EventEmitter from "events";
-import Slide from "@material-ui/core/Slide";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Dialog from "@material-ui/core/Dialog";
+import Slide from "@mui/material/Slide";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Dialog from "@mui/material/Dialog";
 import DynamicMeetingPreview from "./DynamicMeetingPreview";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import AppBar from "@material-ui/core/AppBar";
-import { makeStyles } from "@material-ui/core/styles";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import AppBar from "@mui/material/AppBar";
+import makeStyles from "@mui/styles/makeStyles";
 import FlexCenter from "../ui/FlexCenter";
 
 const previewEmitter = new EventEmitter();
@@ -66,7 +66,7 @@ const MeetingPreviewDialog = () => {
 					<Typography variant="h6" className={classes.title}>
 						Meeting Preview:{" "}
 					</Typography>
-					<IconButton edge="end" color="inherit" onClick={closeDialog} aria-label="close">
+					<IconButton edge="end" color="inherit" onClick={closeDialog} aria-label="close" size="large">
 						<CloseIcon />
 					</IconButton>
 				</Toolbar>

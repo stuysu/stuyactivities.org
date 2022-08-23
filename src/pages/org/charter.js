@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { gql, useQuery } from "@apollo/client";
 import { client } from "../../comps/context/ApolloProvider";
 import capitalizeString from "../../utils/capitalizeString";

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { OrgContext } from "./index";
 import FlexCenter from "../../comps/ui/FlexCenter";
-import { Typography, useMediaQuery } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
+import { Typography, useMediaQuery } from "@mui/material";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 import MeetingCard from "../../comps/meetings/MeetingCard";
 import LinkifyText from "../../comps/ui/LinkifyText";
 import Masonry from "react-masonry-css";
 import UpdateCard from "../../comps/updates/UpdateCard";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 const Overview = () => {
 	const org = React.useContext(OrgContext);
 	const isMobile = useMediaQuery("(max-width: 900px)");

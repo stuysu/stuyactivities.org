@@ -1,8 +1,8 @@
 import React from "react";
 import UserContext from "../../context/UserContext";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles({
 	menu: {

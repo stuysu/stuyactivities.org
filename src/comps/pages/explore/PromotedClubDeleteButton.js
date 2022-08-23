@@ -1,8 +1,8 @@
 import React from "react";
-import { IconButton } from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import { IconButton } from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { gql, useMutation } from "@apollo/client";
 
 const MUTATION = gql`
@@ -35,7 +35,7 @@ const PromotedClubDeleteButton = ({ promotionId, refetch }) => {
 
 	return (
 		<div>
-			<IconButton onClick={ev => setAnchorEl(ev.target)}>
+			<IconButton onClick={ev => setAnchorEl(ev.target)} size="large">
 				<MenuIcon />
 			</IconButton>
 			<Menu
