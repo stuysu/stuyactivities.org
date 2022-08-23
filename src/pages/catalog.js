@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Grid, Typography, useMediaQuery } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { gql, useQuery } from "@apollo/client";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
-import { List as ListIcon, ViewComfy } from "@material-ui/icons";
+import { List as ListIcon, ViewComfy } from "@mui/icons-material";
 import SearchBox from "../comps/pages/catalog/filters/SearchBox";
 import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
 import CommitmentFilter from "../comps/pages/catalog/filters/CommitmentFilter";
@@ -14,12 +14,12 @@ import { Helmet } from "react-helmet";
 import scubaNotFound from "../img/vectors/scuba-diver-not-found.svg";
 import cherryNotFound from "../img/vectors/cherry-page-not-found.svg";
 
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import UnstyledLink from "../comps/ui/UnstyledLink";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import ToggleButton from "@mui/material/ToggleButton";
 import Loading from "../comps/ui/Loading";
-import List from "@material-ui/core/List";
+import List from "@mui/material/List";
 import Masonry from "react-masonry-css";
 import { useHistory } from "react-router-dom";
 

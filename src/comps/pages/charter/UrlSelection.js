@@ -1,5 +1,5 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import { CharterFormContext } from "../../../pages/charter";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";

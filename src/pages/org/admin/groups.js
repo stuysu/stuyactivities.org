@@ -15,12 +15,12 @@ import {
 	ListItem,
 	ListItemAvatar,
 	ListItemSecondaryAction,
-	makeStyles,
 	TextField,
 	Typography
-} from "@material-ui/core";
-import { Delete, Edit } from "@material-ui/icons";
-import { Autocomplete } from "@material-ui/lab";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import { Delete, Edit } from "@mui/icons-material";
+import { Autocomplete } from "@mui/material";
 
 const useStyles = makeStyles(theme => ({
 	margin: {
@@ -239,6 +239,7 @@ export default function Groups({ match }) {
 																		...membership
 																	});
 																}}
+																size="large"
 															>
 																<Delete />
 															</IconButton>
@@ -252,7 +253,7 @@ export default function Groups({ match }) {
 											)}
 										</List>
 									</Grid>
-									<IconButton onClick={() => setEditGroup(group)}>
+									<IconButton onClick={() => setEditGroup(group)} size="large">
 										<Edit />
 									</IconButton>
 								</ListItem>
@@ -332,6 +333,7 @@ export default function Groups({ match }) {
 													editGroup.newMembers.splice(index, 1);
 													setEditGroup({ ...editGroup });
 												}}
+												size="large"
 											>
 												<Delete />
 											</IconButton>

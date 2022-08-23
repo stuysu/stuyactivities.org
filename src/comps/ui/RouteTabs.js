@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { Tab, Tabs } from "@material-ui/core";
+import { Tab, Tabs } from "@mui/material";
 
 const RouteTabs = ({ tabs }) => {
 	const [selectedTabIndex, setSelectedTabIndex] = React.useState(0);
@@ -18,7 +18,7 @@ const RouteTabs = ({ tabs }) => {
 
 	return (
 		<div>
-			<Tabs value={selectedTabIndex} scrollButtons={"on"} variant={"scrollable"}>
+			<Tabs value={selectedTabIndex} scrollButtons variant={"scrollable"} allowScrollButtonsMobile>
 				{tabs.map((tab, index) => (
 					<Tab
 						key={tab.path}

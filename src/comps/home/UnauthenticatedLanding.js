@@ -1,14 +1,14 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import layout from "../../styles/Layout.module.css";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import TextLink from "../ui/TextLink";
 import ButtonLink from "../ui/ButtonLink";
 
 import { triggerLoginDialog } from "../auth/AuthDialog";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 import biking from "./../../img/vectors/clip-biking.svg";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 const useStyles = makeStyles({
 	vector: {

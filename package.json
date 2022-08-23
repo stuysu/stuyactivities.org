@@ -12,6 +12,7 @@
 		"@honeybadger-io/react": "2.1.0",
 		"@mui/icons-material": "^5.8.4",
 		"@mui/material": "^5.10.1",
+		"@mui/styles": "^5.9.3",
 		"@mui/x-date-pickers": "^5.0.0-beta.6",
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^12.1.5",

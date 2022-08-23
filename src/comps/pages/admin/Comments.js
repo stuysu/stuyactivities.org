@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Card, CardContent, makeStyles, TextField, Typography } from "@material-ui/core";
+import { Button, Card, CardContent, TextField, Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { gql, useMutation } from "@apollo/client";
 import { cache } from "../../context/ApolloProvider";
 

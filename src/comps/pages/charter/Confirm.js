@@ -1,12 +1,12 @@
 import React from "react";
-import { FormControlLabel, Checkbox, Typography } from "@material-ui/core";
+import { FormControlLabel, Checkbox, Typography } from "@mui/material";
 import { CharterFormContext } from "../../../pages/charter";
-import { makeStyles } from "@material-ui/core/styles";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItemText from "@material-ui/core/ListItemText";
+import makeStyles from "@mui/styles/makeStyles";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import List from "@mui/material/List";
+import ListItemText from "@mui/material/ListItemText";
 import capitalizeString from "../../../utils/capitalizeString";
 
 const useStyles = makeStyles(theme => ({

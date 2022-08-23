@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import FlexCenter from "../comps/ui/FlexCenter";
 import UserContext from "../comps/context/UserContext";
 import { Calendar, FirstDay, LastDay } from "../comps/Calendar";

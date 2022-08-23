@@ -6,8 +6,8 @@ import Carousel from "react-multi-carousel";
 
 import "react-multi-carousel/lib/styles.css";
 import MeetingCard from "../meetings/MeetingCard";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { client } from "../context/ApolloProvider";
 
 const responsive = {

@@ -13,13 +13,13 @@ import {
 	ListItem,
 	ListItemAvatar,
 	ListItemSecondaryAction,
-	makeStyles,
 	Snackbar,
 	Switch,
 	TextField,
 	Typography
-} from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import EditIcon from "@mui/icons-material/Edit";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
 
@@ -163,7 +163,7 @@ export default function Members({ match }) {
 							</Grid>
 						</Grid>
 						<ListItemSecondaryAction>
-							<IconButton onClick={() => openEditDialog(membership)}>
+							<IconButton onClick={() => openEditDialog(membership)} size="large">
 								<EditIcon />
 							</IconButton>
 						</ListItemSecondaryAction>

@@ -1,12 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import makeStyles from "@mui/styles/makeStyles";
+import Typography from "@mui/material/Typography";
 import { Helmet } from "react-helmet";
 import BackButton from "../comps/ui/BackButton";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import { Box, Link } from "@material-ui/core/";
+import Paper from "@mui/material/Paper";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { Box, Link } from "@mui/material/";
 import PropTypes from "prop-types";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";

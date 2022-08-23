@@ -2,14 +2,14 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import FlexCenter from "../comps/ui/FlexCenter";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import conifer from "../img/vectors/conifer-page-not-found.svg";
 import marginalia from "../img/vectors/marginalia-page-not-found.svg";
 import clip from "../img/vectors/clip-page-not-found.svg";
 import pixeltrue from "../img/vectors/pale-page-not-found.svg";
 import pale from "../img/vectors/pale-page-not-found.svg";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 import BackButton from "../comps/ui/BackButton";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
@@ -87,7 +87,7 @@ const Error404 = () => {
 						<Typography paragraph className={classes.safeMargin}>
 							Maybe you meant to check out one of these activities?
 						</Typography>
-						<Grid container justify={"center"} spacing={2}>
+						<Grid container justifyContent={"center"} spacing={2}>
 							{data?.organizations?.map(org => (
 								<Grid item xl={3} lg={3} md={3} sm={6} xs={12}>
 									<CatalogCard {...org} />

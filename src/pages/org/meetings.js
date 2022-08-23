@@ -1,10 +1,11 @@
 import React from "react";
 import { OrgContext } from "./index";
-import { makeStyles, Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import MeetingCard from "../../comps/meetings/MeetingCard";
 import { triggerMeetingDialog } from "../../comps/meetings/MeetingPreviewDialog";
 

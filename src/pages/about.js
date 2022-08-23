@@ -1,9 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import makeStyles from "@mui/styles/makeStyles";
+import Typography from "@mui/material/Typography";
 import { Helmet } from "react-helmet";
-import Grid from "@material-ui/core/Grid";
-import { Link } from "@material-ui/core";
+import Grid from "@mui/material/Grid";
+import { Link } from "@mui/material";
 import BackButton from "../comps/ui/BackButton";
 
 const useStyles = makeStyles(() => ({

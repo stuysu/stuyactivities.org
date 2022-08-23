@@ -1,7 +1,7 @@
 import React from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { Typography, TextField, Button, Snackbar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography, TextField, Button, Snackbar } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import Loading from "../../comps/ui/Loading";
 import PromotedClubCard from "../../comps/pages/explore/PromotedClubCard";
 import OrganizationPicker from "../../comps/ui/OrganizationPicker";

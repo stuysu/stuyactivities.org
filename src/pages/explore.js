@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Typography, useMediaQuery, Divider } from "@material-ui/core";
+import { Typography, useMediaQuery, Divider } from "@mui/material";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
 import { gql, useQuery } from "@apollo/client";
@@ -8,7 +8,7 @@ import PromotedClubCard from "../comps/pages/explore/PromotedClubCard";
 import UpdateCard from "../comps/updates/UpdateCard";
 import MeetingCard from "../comps/meetings/MeetingCard";
 import Carousel from "react-multi-carousel";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 import Masonry from "react-masonry-css";
 import FlexCenter from "../comps/ui/FlexCenter";
 

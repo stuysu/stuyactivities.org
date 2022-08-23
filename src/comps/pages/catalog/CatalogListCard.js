@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import { Divider, Grid, ListItem, ListItemAvatar, Typography } from "@material-ui/core";
-import Chip from "@material-ui/core/Chip";
+import { Divider, Grid, ListItem, ListItemAvatar, Typography } from "@mui/material";
+import Chip from "@mui/material/Chip";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
 import UnstyledLink from "../../ui/UnstyledLink";
