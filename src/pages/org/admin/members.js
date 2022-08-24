@@ -174,6 +174,7 @@ export default function Members({ match }) {
 				<DialogTitle>Edit or remove {editingMembership.user?.name}'s membership</DialogTitle>
 				<DialogContent>
 					<TextField
+						variant="standard"
 						fullWidth
 						label="New role (optional)"
 						value={role}

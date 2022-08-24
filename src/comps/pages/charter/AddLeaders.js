@@ -81,7 +81,13 @@ const AddLeaders = () => {
 									</Typography>
 								</Grid>
 								<Grid item xl={4} lg={4} md={6} sm={6} xs={12}>
-									<TextField fullWidth label={"Role"} value={user.role} onChange={changeRole} />
+									<TextField
+										variant="standard"
+										fullWidth
+										label={"Role"}
+										value={user.role}
+										onChange={changeRole}
+									/>
 								</Grid>
 							</Grid>
 							<ListItemSecondaryAction>

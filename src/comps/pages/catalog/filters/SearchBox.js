@@ -6,7 +6,7 @@ export default function SearchBox({ setKeyword, keyword }) {
 	const classes = useFilterStyles();
 
 	return (
-		<FormControl className={classes.filterChild}>
+		<FormControl variant="standard" className={classes.filterChild}>
 			<TextField
 				name="keyword"
 				label="Search"

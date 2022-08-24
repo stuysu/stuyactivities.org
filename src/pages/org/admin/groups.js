@@ -289,8 +289,8 @@ export default function Groups({ match }) {
 											undefined
 								)}
 							renderInput={params => <TextField {...params} label="Find User" variant="outlined" />}
-							renderOption={option => (
-								<>
+							renderOption={(props, option) => (
+								<li {...props}>
 									<ListItemAvatar>
 										<Avatar src={option?.picture} />
 									</ListItemAvatar>
@@ -303,7 +303,7 @@ export default function Groups({ match }) {
 											{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
 										</span>
 									</span>
-								</>
+								</li>
 							)}
 							getOptionLabel={user => user.name}
 							onChange={(_, user) => {

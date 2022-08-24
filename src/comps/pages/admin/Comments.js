@@ -44,6 +44,7 @@ export default function Comments({ orgId, comments, changeComments }) {
 			<Card className={classes.card}>
 				<CardContent>
 					<TextField
+						variant="standard"
 						label={"Add a comment..."}
 						value={message}
 						onChange={e => setMessage(e.target.value)}
