@@ -50,7 +50,7 @@ const Landing = () => {
 				Your session will expire 30 days after the last time you access StuyActivities.
 				<br /> You can end your session anytime by logging out.
 				<br /> If you are having any trouble logging in, please email{" "}
-				<Link href="mailto:help@stuyactivities.org" color={"secondary"}>
+				<Link href="mailto:help@stuyactivities.org" color={"secondary"} underline="hover">
 					help@stuyactivities.org
 				</Link>
 				.

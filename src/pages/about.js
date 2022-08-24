@@ -66,17 +66,19 @@ const About = () => {
 					</Typography>
 					<Typography paragraph>
 						The front-end is a{" "}
-						<Link href={"https://reactjs.org"} target={"_blank"}>
+						<Link href={"https://reactjs.org"} target={"_blank"} underline="hover">
 							React App
 						</Link>{" "}
 						bootstrapped with <code>create-react-app</code> and we use{" "}
-						<Link target={"_blank"}>Material UI</Link> for styling and theming. The backend is a NodeJS
-						express server that serves an{" "}
-						<Link href={"https://www.apollographql.com/"} target={"_blank"}>
+						<Link target={"_blank"} underline="hover">
+							Material UI
+						</Link>{" "}
+						for styling and theming. The backend is a NodeJS express server that serves an{" "}
+						<Link href={"https://www.apollographql.com/"} target={"_blank"} underline="hover">
 							Apollo GraphQL
 						</Link>{" "}
 						API. We'd also like to give a huge shout-out to{" "}
-						<Link href={"https://icons8.com"} target={"_blank"}>
+						<Link href={"https://icons8.com"} target={"_blank"} underline="hover">
 							Icons8
 						</Link>{" "}
 						&#128150; for giving us access to their awesome vectors libraries for our work on
@@ -88,12 +90,16 @@ const About = () => {
 					</Typography>
 					<Typography paragraph>
 						Front-End:{" "}
-						<Link href="https://github.com/stuysu/stuyactivities.org" target={"_blank"}>
+						<Link href="https://github.com/stuysu/stuyactivities.org" target={"_blank"} underline="hover">
 							https://github.com/stuysu/stuyactivities.org
 						</Link>
 						<br />
 						Backend:{" "}
-						<Link href="https://github.com/stuysu/api.stuyactivities.org" target={"_blank"}>
+						<Link
+							href="https://github.com/stuysu/api.stuyactivities.org"
+							target={"_blank"}
+							underline="hover"
+						>
 							https://github.com/stuysu/api.stuyactivities.org
 						</Link>
 					</Typography>
