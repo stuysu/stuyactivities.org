@@ -11,7 +11,7 @@ const LinkifyText = ({ children, color = "secondary" }) => {
 				format: function (value, type) {
 					if (type === "email") {
 						return (
-							<Link href={`mailto:${value}`} target={"_blank"} color={"primary"}>
+							<Link href={`mailto:${value}`} target={"_blank"} color={"primary"} underline="hover">
 								{value}
 							</Link>
 						);
@@ -24,7 +24,7 @@ const LinkifyText = ({ children, color = "secondary" }) => {
 						}
 
 						return (
-							<Link href={link} target={"_blank"} color={color}>
+							<Link href={link} target={"_blank"} color={color} underline="hover">
 								{value}
 							</Link>
 						);

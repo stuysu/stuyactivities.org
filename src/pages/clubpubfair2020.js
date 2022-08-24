@@ -105,6 +105,7 @@ const ClubPubFair = () => {
 						<Link
 							href="https://docs.google.com/document/d/1xFF6hU_BI_4yJ1o7_S508TqDFxtxD1DSyxumPvsyk9k/edit?usp=sharing"
 							color={"secondary"}
+							underline="hover"
 						>
 							here
 						</Link>
