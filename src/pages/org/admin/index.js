@@ -67,7 +67,7 @@ export default function OrgAdminRouter({ match }) {
 			{org?.membership?.adminPrivileges ? (
 				<div>
 					<RouteTabs tabs={tabs} />
-					<Switch>
+					<Switch color="secondary">
 						<Route path={match.path + "/members"} component={Members} />
 						<Route path={match.path + "/member-requests"} component={Requests} />
 						<Route path={match.path + "/meetings"} component={Meetings} />

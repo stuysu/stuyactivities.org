@@ -454,6 +454,7 @@ const Main = ({ match }) => {
 				open={snackbarOpen}
 				onClose={() => setSnackbarOpen(false)}
 				message={"Meeting Created!"}
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
 		</div>
 	);
@@ -552,6 +553,7 @@ const EditPage = ({ match }) => {
 				open={snackbarOpen}
 				onClose={() => setSnackbarOpen(false)}
 				message={"Meeting Edited!"}
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
 			<p>We're currently working on this page but we expect to have it up sometime this week.</p>
 		</div>
@@ -560,7 +562,7 @@ const EditPage = ({ match }) => {
 
 const Meetings = ({ match }) => {
 	return (
-		<Switch>
+		<Switch color="secondary">
 			<Route path={match.path + "/edit/:meetingId"} component={EditPage} />
 			<Route path={match.path + "/editRecurring/:meetingId"} component={EditPage} />
 			<Route path={match.path} component={Main} />
