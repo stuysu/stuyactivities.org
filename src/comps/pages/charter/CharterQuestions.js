@@ -106,6 +106,7 @@ const CharterQuestions = () => {
 												meetingDays: arrayToggle(day, form.meetingDays || [])
 											});
 										}}
+										color="secondary"
 									/>
 								}
 								label={capitalizeString(day)}

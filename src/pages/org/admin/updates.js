@@ -124,7 +124,11 @@ const Updates = () => {
 							<Grid component="label" container alignItems="center" spacing={1}>
 								<Grid item>Members Only</Grid>
 								<Grid item>
-									<Switch checked={isPublic} onChange={() => setIsPublic(!isPublic)} />
+									<Switch
+										color="secondary"
+										checked={isPublic}
+										onChange={() => setIsPublic(!isPublic)}
+									/>
 								</Grid>
 								<Grid item>Public</Grid>
 							</Grid>
@@ -136,6 +140,7 @@ const Updates = () => {
 											<Checkbox
 												checked={notifyMembers}
 												onChange={() => setNotifyMembers(!notifyMembers)}
+												color="secondary"
 											/>
 										}
 										label="Notify Members"
@@ -147,6 +152,7 @@ const Updates = () => {
 											<Checkbox
 												checked={notifyFaculty}
 												onChange={() => setNotifyFaculty(!notifyFaculty)}
+												color="secondary"
 											/>
 										}
 										label="Notify Faculty Advisors"

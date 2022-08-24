@@ -151,7 +151,7 @@ export default function MemberRequests({ match }) {
 	const [user, setUser] = React.useState({});
 	const [role, setRole] = React.useState("Member");
 	const [message, setMessage] = React.useState("");
-	const [adminPriveleges, setAdminPriveleges] = React.useState(false);
+	const [adminPrivileges, setAdminPrivileges] = React.useState(false);
 	const [outgoingMutation] = useMutation(OUTGOING_MUTATION, {
 		onCompleted() {
 			setUser({});
@@ -181,7 +181,13 @@ export default function MemberRequests({ match }) {
 				</Grid>
 				<Grid item xs={8} sm={8} md={4} lg={4} xl={4}>
 					<FormControlLabel
-						control={<Switch checked={buttonEnabled} onChange={e => setButtonEnabled(e.target.checked)} />}
+						control={
+							<Switch
+								color="secondary"
+								checked={buttonEnabled}
+								onChange={e => setButtonEnabled(e.target.checked)}
+							/>
+						}
 						label="Allow join through StuyActivities"
 					/>
 				</Grid>
@@ -249,11 +255,12 @@ export default function MemberRequests({ match }) {
 									<FormControlLabel
 										control={
 											<Switch
-												checked={adminPriveleges}
-												onChange={e => setAdminPriveleges(e.target.checked)}
+												color="secondary"
+												checked={adminPrivileges}
+												onChange={e => setAdminPrivileges(e.target.checked)}
 											/>
 										}
-										label="Admin Priveleges"
+										label="Admin Privileges"
 									/>
 								</Grid>
 								<Grid item xs={12} sm={12} md={6} lg={6} xl={2}>
@@ -269,7 +276,7 @@ export default function MemberRequests({ match }) {
 													userId: user.id,
 													role,
 													message,
-													admin: adminPriveleges
+													admin: adminPrivileges
 												}
 											})
 										}
@@ -339,7 +346,8 @@ export default function MemberRequests({ match }) {
 				autoHideDuration={1000}
 				onClose={() => setSnackbarOpen(false)}
 				message="Set join instructions!"
-			></Snackbar>
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+			/>
 			<Dialog open={dialogError !== ""} onClose={() => setDialogError("")}>
 				<DialogTitle>Error: {dialogError}</DialogTitle>
 				<DialogActions>

@@ -247,6 +247,7 @@ export default function Members({ match }) {
 				autoHideDuration={3000}
 				onClose={() => setSnackBarOpen(false)}
 				message="Copied email list to clipboard!"
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
 		</div>
 	);

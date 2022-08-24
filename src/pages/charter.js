@@ -39,7 +39,8 @@ const useStyles = makeStyles(theme => ({
 		background: theme.palette.background.default
 	},
 	stepper: {
-		background: theme.palette.background.default
+		background: theme.palette.background.default,
+		padding: 24
 	},
 	stepLabel: {
 		cursor: "pointer"
@@ -259,6 +260,7 @@ export default class Charter extends React.Component {
 								<div className={classes.navigationButtons}>
 									{this.state.activeStep < 4 && (
 										<Tooltip
+											disableInteractive
 											disableHoverListener={this.state.activeStep !== 3 || !this.hasErrors()}
 											title={
 												"You need to fix the issues with your submission before you can continue"

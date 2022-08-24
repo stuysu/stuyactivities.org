@@ -74,6 +74,7 @@ export default function Settings() {
 								</TableCell>
 								<TableCell align={"right"}>
 									<Switch
+										color="secondary"
 										checked={
 											membership.meetingNotification !== null
 												? membership.meetingNotification
@@ -91,6 +92,7 @@ export default function Settings() {
 								</TableCell>
 								<TableCell align={"right"}>
 									<Switch
+										color="secondary"
 										checked={
 											membership.updateNotification !== null
 												? membership.updateNotification

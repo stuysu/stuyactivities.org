@@ -159,7 +159,12 @@ export default function StrikeCard({ name, id, charter }) {
 							</form>
 						</AccordionDetails>
 					</Accordion>
-					<Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
+					<Snackbar
+						open={open}
+						autoHideDuration={3000}
+						onClose={() => setOpen(false)}
+						anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+					>
 						<Alert onClose={() => setOpen(false)} severity="success">
 							Strike successfully submitted!
 						</Alert>

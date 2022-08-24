@@ -18,7 +18,14 @@ const RouteTabs = ({ tabs }) => {
 
 	return (
 		<div>
-			<Tabs value={selectedTabIndex} scrollButtons variant={"scrollable"} allowScrollButtonsMobile>
+			<Tabs
+				indicatorColor="primary"
+				textColor="inherit"
+				value={selectedTabIndex}
+				scrollButtons
+				variant={"scrollable"}
+				allowScrollButtonsMobile
+			>
 				{tabs.map((tab, index) => (
 					<Tab
 						key={tab.path}

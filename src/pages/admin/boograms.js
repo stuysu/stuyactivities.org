@@ -131,6 +131,7 @@ export default function Boograms() {
 					open={snackbarOpen}
 					onClose={() => setSnackbarOpen(false)}
 					message={"Success!"}
+					anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 				/>
 			</div>
 		</div>
