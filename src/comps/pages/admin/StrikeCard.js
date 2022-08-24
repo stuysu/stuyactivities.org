@@ -121,7 +121,12 @@ export default function StrikeCard({ name, id, charter }) {
 								/>
 								<FormControl variant="outlined" className={classes.select}>
 									<InputLabel>Weight</InputLabel>
-									<Select value={weight} onChange={e => setWeight(e.target.value)} label="Weight">
+									<Select
+										variant="standard"
+										value={weight}
+										onChange={e => setWeight(e.target.value)}
+										label="Weight"
+									>
 										<MenuItem value={0}>0</MenuItem>
 										<MenuItem value={1}>1</MenuItem>
 										<MenuItem value={2}>2</MenuItem>

@@ -232,6 +232,7 @@ const Question = ({ question, organization, keyy }) => {
 				<DialogContent>
 					<DialogContentText>Question: "{question.question}"</DialogContentText>
 					<TextField
+						variant="standard"
 						autoFocus
 						fullWidth
 						label="Answer"

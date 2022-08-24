@@ -52,14 +52,15 @@ const KeywordSelection = ({ className }) => {
 						{value?.map(chip => {
 							if (chip) {
 								return (
-									<Box
+									<Chip
+										key={value.indexOf(chip)}
+										label={chip}
+										color="primary"
 										sx={{
 											marginRight: "0.5rem",
 											marginBottom: "-0.25rem"
 										}}
-									>
-										<Chip key={value.indexOf(chip)} label={chip} color="primary" />
-									</Box>
+									/>
 								);
 							}
 							return null;

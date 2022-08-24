@@ -28,7 +28,11 @@ const OrganizationPicker = ({ setOrgId }) => {
 						options={options}
 						value={null}
 						getOptionLabel={_ => ""}
-						renderOption={option => <span>{option.name}</span>}
+						renderOption={(props, option) => (
+							<li {...props}>
+								<span>{option.name}</span>
+							</li>
+						)}
 						onChange={(ev, newvalue) => {
 							setOrgName(newvalue.name);
 							setOrgId(newvalue.id);

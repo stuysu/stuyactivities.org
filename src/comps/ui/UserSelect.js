@@ -34,8 +34,8 @@ const UserSelect = ({ onChange, filter }) => {
 			options={options}
 			value={null}
 			getOptionLabel={_ => ""}
-			renderOption={option => (
-				<>
+			renderOption={(props, option) => (
+				<li {...props}>
 					<ListItemAvatar>
 						<Avatar src={option?.picture} />
 					</ListItemAvatar>
@@ -48,7 +48,7 @@ const UserSelect = ({ onChange, filter }) => {
 							{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
 						</span>
 					</span>
-				</>
+				</li>
 			)}
 			onChange={onChange}
 			loading={loading}

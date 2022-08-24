@@ -173,6 +173,7 @@ const MeetingForm = ({
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel shrink>Day Of Week</InputLabel>
 								<Select
+									variant="standard"
 									value={dayOfWeek}
 									onChange={e => setDayOfWeek(e.target.value)}
 									label="Day Of Week"
@@ -196,7 +197,7 @@ const MeetingForm = ({
 								onChange={updateDate}
 								animateYearScrolling
 								inputVariant="outlined"
-								renderInput={params => <TextField {...params} />}
+								renderInput={params => <TextField variant="standard" {...params} />}
 							/>
 						)}
 					</Grid>
@@ -209,7 +210,7 @@ const MeetingForm = ({
 							inputVariant="outlined"
 							value={time.start}
 							onChange={updateDate}
-							renderInput={params => <TextField {...params} />}
+							renderInput={params => <TextField variant="standard" {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
@@ -221,7 +222,7 @@ const MeetingForm = ({
 							inputVariant="outlined"
 							value={time.end}
 							onChange={updateEnd}
-							renderInput={params => <TextField {...params} />}
+							renderInput={params => <TextField variant="standard" {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
@@ -234,13 +235,15 @@ const MeetingForm = ({
 							error={!roomAvailable}
 							value={room}
 							onChange={(_, r) => setRoom(r)}
-							renderOption={option => (
-								<span>
-									<Typography>{option.name}</Typography>
-									{option.floor && (
-										<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
-									)}
-								</span>
+							renderOption={(props, option) => (
+								<li {...props}>
+									<span id={props.id}>
+										<Typography>{option.name}</Typography>
+										{option.floor && (
+											<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
+										)}
+									</span>
+								</li>
 							)}
 							renderInput={params => <TextField {...params} label="Room" variant="outlined" />}
 						/>
@@ -256,10 +259,12 @@ const MeetingForm = ({
 								setGroup(g);
 								console.log(g.id);
 							}}
-							renderOption={option => (
-								<span>
-									<Typography>{option.name}</Typography>
-								</span>
+							renderOption={(props, option) => (
+								<li {...props}>
+									<span>
+										<Typography>{option.name}</Typography>
+									</span>
+								</li>
 							)}
 							renderInput={params => <TextField {...params} label="Group" variant="outlined" />}
 						/>
