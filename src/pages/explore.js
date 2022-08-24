@@ -117,7 +117,7 @@ const useStyles = makeStyles({
 		margin: "0 0.5rem"
 	},
 	darkerDivider: {
-		backgroundColor: "rgba(0, 0, 0, 0.24)" //original is 0, 0, 0, 0.12
+		borderColor: "rgba(0, 0, 0, 0.24)" //original is 0, 0, 0, 0.12
 	},
 	matchMasonryBottomMargin: {
 		marginBottom: "calc(30px - 1rem)"

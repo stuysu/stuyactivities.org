@@ -145,6 +145,7 @@ const Confirm = () => {
 					<Checkbox
 						checked={form?.clubpubParticipant}
 						onChange={ev => form.set({ clubpubParticipant: ev.target.checked })}
+						color="secondary"
 					/>
 				}
 				label={

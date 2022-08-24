@@ -284,7 +284,7 @@ const MeetingForm = ({
 			</Typography>
 
 			<FormControlLabel
-				control={<Checkbox checked={checked} onChange={e => setChecked(e.target.checked)} />}
+				control={<Checkbox checked={checked} onChange={e => setChecked(e.target.checked)} color="secondary" />}
 				label={checkboxText}
 			/>
 

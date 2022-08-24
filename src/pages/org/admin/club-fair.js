@@ -86,6 +86,7 @@ const ClubFair = () => {
 								onChange={() => {
 									setIsAttending(!Boolean(isAttending ?? data?.clubFairResponse?.isAttending));
 								}}
+								color="secondary"
 							/>
 						}
 						label={

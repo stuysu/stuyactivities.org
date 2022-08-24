@@ -87,7 +87,7 @@ export default function AdminRouter({ match }) {
 			<Typography variant={"h3"}>Admin Panel</Typography>
 			<RouteTabs tabs={tabs} />
 
-			<Switch>
+			<Switch color="secondary">
 				<Route path={match.path + "/boograms"} component={Boograms} exact />
 				<Route path={match.path + "/approvals"} component={Approvals} exact />
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />

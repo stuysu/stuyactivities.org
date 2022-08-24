@@ -101,7 +101,13 @@ const ManagePromotedClubs = () => {
 					))
 				)}
 			</div>
-			<Snackbar autoHideDuration={1000} open={success} onClose={() => setSuccess(false)} message={"Success!"} />
+			<Snackbar
+				autoHideDuration={1000}
+				open={success}
+				onClose={() => setSuccess(false)}
+				message={"Success!"}
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+			/>
 		</div>
 	);
 };

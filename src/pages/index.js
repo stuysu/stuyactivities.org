@@ -56,7 +56,7 @@ const Pages = () => {
 			<ReportDialog />
 			<ErrorBoundary>
 				<Suspense fallback={<Loading />}>
-					<Switch>
+					<Switch color="secondary">
 						<Route path={"/"} component={Home} exact />
 						<Route path={"/catalog"} component={Catalog} exact />
 						<Route path={"/charter"} component={Charter} exact />
