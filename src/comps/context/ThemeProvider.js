@@ -1,9 +1,8 @@
 import React from "react";
 
-import { createTheme, ThemeProvider as Provider, StyledEngineProvider, adaptV4Theme } from "@mui/material";
+import { createTheme, ThemeProvider as Provider, StyledEngineProvider } from "@mui/material";
 
-const theme = createTheme(
-	adaptV4Theme({
+const theme = createTheme({
 		palette: {
 			primary: {
 				main: "#e66767",
@@ -50,7 +49,7 @@ const theme = createTheme(
 				margin: "0.5rem 0"
 			}
 		}
-	})
+	}
 );
 
 const ThemeProvider = props => {
