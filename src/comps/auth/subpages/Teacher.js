@@ -4,7 +4,6 @@ import TeacherVector from "../../../img/vectors/clip-teacher.svg";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import GoogleLoginButton from "../GoogleLoginButton";
-// import MagicLogin from "../MagicLogin";
 import AuthContext from "../AuthContext";
 import FlexCenter from "../../ui/FlexCenter";
 
@@ -88,7 +87,6 @@ const Teacher = () => {
 					<br />
 				</div>
 			</FlexCenter>
-			{/*<MagicLogin />*/}
 
 			<GoogleLoginButton />
 		</div>
