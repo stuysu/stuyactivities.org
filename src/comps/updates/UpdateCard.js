@@ -142,7 +142,12 @@ const UpdateCard = ({
 					dangerouslySetInnerHTML={{ __html: ignoreLimit ? content : shortContent }}
 				/>
 				{!ignoreLimit && limited && (
-					<Link color={"primary"} onClick={() => setIgnoreLimit(true)} style={{ cursor: "pointer" }}>
+					<Link
+						color={"primary"}
+						onClick={() => setIgnoreLimit(true)}
+						style={{ cursor: "pointer" }}
+						underline="hover"
+					>
 						Keep Reading...
 					</Link>
 				)}
