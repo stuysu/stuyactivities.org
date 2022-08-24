@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 
 const ErrorScreen = ({ error }) => {
 	const classes = useStyles();
-	console.log("its morbin time");
 	return (
 		<div className={classes.container}>
 			<img src={errorImage} alt={"Error box"} className={classes.vector} />

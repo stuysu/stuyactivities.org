@@ -90,6 +90,7 @@ export default function Boograms() {
 							{data?.saleItems.map(item => (
 								<>
 									<TextField
+										variant="standard"
 										label={`${item.item} - $${item.price}`}
 										type="number"
 										onChange={ev => setCount(item.id - 1, Number(ev.target.value))}
