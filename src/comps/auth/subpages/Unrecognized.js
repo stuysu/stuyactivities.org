@@ -7,7 +7,7 @@ import AuthContext from "../AuthContext";
 const useStyles = makeStyles(theme => ({
 	heading: {
 		fontWeight: 600,
-		color: `rgba(0, 0, 0, 0.8)`,
+		color: `transparency.text`,
 		margin: "1rem"
 	},
 	defaultVector: {
