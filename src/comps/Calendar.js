@@ -1,15 +1,12 @@
 import React from "react";
+import Box from "@mui/material/Box";
 import makeStyles from "@mui/styles/makeStyles";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
-import { triggerMeetingDialog } from "../comps/meetings/MeetingPreviewDialog";
+import { triggerMeetingDialog } from "./meetings/MeetingPreviewDialog";
 
 const useStyles = makeStyles(theme => ({
-	calendarContainer: {
-		width: 1200,
-		maxWidth: "95%"
-	},
 	event: {
 		cursor: "pointer"
 	}
@@ -24,7 +21,12 @@ export function Calendar({ meetings, setStart, setEnd }) {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.calendarContainer}>
+		<Box
+			sx={{
+				width: 1200,
+				maxWidth: "95%"
+			}}
+		>
 			<FullCalendar
 				height={800}
 				datesSet={ev => {
@@ -45,6 +47,6 @@ export function Calendar({ meetings, setStart, setEnd }) {
 				eventClick={ev => triggerMeetingDialog(ev.event.id)}
 				eventClassNames={classes.event}
 			/>
-		</div>
+		</Box>
 	);
 }
