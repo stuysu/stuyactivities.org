@@ -34,12 +34,11 @@ const classes = {
 		paddingBottom: "1rem",
 		position: "sticky",
 		bottom: 0,
-		// TODO: affirm the theme specifier works
-		background: "palette.background.default"
+		backgroundColor: "background.default"
 	},
 	stepper: {
-		background: "palette.background.default",
-		padding: 24
+		backgroundColor: "background.default",
+		padding: "24px"
 	},
 	stepLabel: {
 		cursor: "pointer"

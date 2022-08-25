@@ -20,7 +20,8 @@ import Checkbox from "@mui/material/Checkbox";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import * as moment from "moment";
 import { gql, useQuery } from "@apollo/client";
-import { DatePicker, TimePicker } from "@mui/x-date-pickers";
+// use mobile pickers to restore legacy behavior
+import { MobileDatePicker as DatePicker, MobileTimePicker as TimePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import TinyEditor from "../../updates/TinyEditor";
@@ -39,7 +40,6 @@ const AVAILABLE_ROOMS_QUERY = gql`
 
 const classes = {
 	marginBottom: {
-		// TODO: see if this has any relation to that other marginBottom
 		marginBottom: 1
 	},
 	marginBottomBig: {
@@ -123,6 +123,7 @@ const MeetingForm = ({
 	};
 
 	const updateDate = start => {
+		start = moment(start); // Pickers provide a `Date` and not a `moment` now
 		let end = moment(`${start.format("MM-DD-YYYY")} ${time.end.format("HH:mm")}`, "MM-DD-YYYY HH:mm");
 		setTime({ start, end });
 	};
@@ -188,40 +189,28 @@ const MeetingForm = ({
 							</FormControl>
 						) : (
 							<DatePicker
-								fullWidth
-								autoOk
 								label="Date"
 								value={time.start}
-								format="MMM DD"
+								inputFormat="MMM dd"
 								onChange={updateDate}
-								animateYearScrolling
-								inputVariant="outlined"
-								renderInput={params => <TextField variant="standard" {...params} />}
+								renderInput={params => <TextField fullWidth variant="outlined" {...params} />}
 							/>
 						)}
 					</Grid>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						<TimePicker
-							fullWidth
-							autoOk
-							mask="__:__ _M"
 							label="Start Time"
-							inputVariant="outlined"
 							value={time.start}
 							onChange={updateDate}
-							renderInput={params => <TextField variant="standard" {...params} />}
+							renderInput={params => <TextField fullWidth variant="outlined" {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						<TimePicker
-							fullWidth
-							autoOk
-							mask="__:__ _M"
 							label="End Time"
-							inputVariant="outlined"
 							value={time.end}
 							onChange={updateEnd}
-							renderInput={params => <TextField variant="standard" {...params} />}
+							renderInput={params => <TextField fullWidth variant="outlined" {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>

@@ -4,12 +4,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
 import { triggerMeetingDialog } from "./meetings/MeetingPreviewDialog";
-
-const classes = {
-	event: {
-		cursor: "pointer"
-	}
-};
+import classes from "../styles/Calendar.module.css";
 
 // find the first & last days of month
 const now = new Date();
@@ -17,7 +12,6 @@ export const FirstDay = new Date(now.getFullYear(), now.getMonth(), 1);
 export const LastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
 export function Calendar({ meetings, setStart, setEnd }) {
-	// TODO: what even is an eventClassName
 	return (
 		<Box
 			sx={{

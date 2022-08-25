@@ -39,14 +39,12 @@ const classes = {
 		fontSize: "2em"
 	},
 	backButton: {
-		// TODO: make sure these breakpoints work!!!
-		lg: {
-			position: "absolute",
-			marginLeft: 10,
-			marginTop: 3
+		marginTop: 3,
+		position: {
+			lg: "absolute"
 		},
-		xl: {
-			marginTop: 3
+		marginLeft: {
+			lg: 10
 		}
 	}
 };
@@ -554,7 +552,6 @@ const EditPage = ({ match }) => {
 				message={"Meeting Edited!"}
 				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
-			<p>We're currently working on this page but we expect to have it up sometime this week.</p>
 		</div>
 	);
 };

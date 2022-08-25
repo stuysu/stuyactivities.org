@@ -98,7 +98,6 @@ const MeetingCard = ({
 					description && (
 						<Typography
 							paragraph
-							// TODO: investigate if this works
 							sx={classes.descriptionContainer}
 							className="HtmlContent"
 							dangerouslySetInnerHTML={{ __html: description }}

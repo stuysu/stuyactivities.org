@@ -5,7 +5,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Card from "@mui/material/Card";
 import { Avatar, Button } from "@mui/material";
-// import { makeStyles } from "@mui/material/styles";
 import capitalizeString from "../../../utils/capitalizeString";
 import Typography from "@mui/material/Typography";
 import { CharterFormContext } from "../../charter";
@@ -16,6 +15,7 @@ import arrayToggle from "../../../utils/arrayToggle";
 import { cache } from "../../../comps/context/ApolloProvider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import LinkifyText from "../../../comps/ui/LinkifyText";
+import Box from "@mui/material/Box";
 
 // THIS FILE IS UNCOMFORTABLY HUGE
 // TODO WHEN WE HAVE MORE TIME: EXPORT CODE INTO SEPARATE COMPONENTS
@@ -497,11 +497,13 @@ const ApprovalMessages = () => {
 	return (
 		<>
 			<Typography variant={"h3"}>Comments With The ClubPub Department: </Typography>
-			<div
-				style={{
+			<Box
+				sx={{
 					width: "100%",
 					borderRadius: "10px",
-					border: "solid 2px black",
+					borderStyle: "solid",
+					borderWidth: "2px",
+					borderColor: "transparency.text",
 					maxHeight: "500px",
 					position: "relative",
 					overflow: "auto"
@@ -516,9 +518,10 @@ const ApprovalMessages = () => {
 									<Avatar src={message?.user?.picture} />
 								</ListItemAvatar>
 								<div>
-									<p
-										style={{
-											color: message?.auto ? "grey" : "black"
+									<Box
+										component="p"
+										sx={{
+											color: message?.auto ? "transparency.textLighter" : "transparency.text"
 										}}
 									>
 										{message?.user?.name} -{" "}
@@ -527,27 +530,28 @@ const ApprovalMessages = () => {
 											: message?.user?.adminRoles?.length
 											? "ClubPub Team"
 											: "Organization Admin"}
-									</p>
-									<p
-										style={{
+									</Box>
+									<Box
+										component="p"
+										sx={{
 											fontStyle: message?.auto ? "italic" : "normal",
-											color: message?.auto ? "grey" : "black",
+											color: message?.auto ? "transparency.textLighter" : "transparency.text",
 											overflowWrap: "anywhere"
 										}}
 									>
 										<LinkifyText color={"primary"}>{message?.message}</LinkifyText>
-									</p>
+									</Box>
 								</div>
 							</ListItem>
 						);
 					})}
 				</List>
-				<div
-					style={{
+				<Box
+					sx={{
 						position: "sticky",
 						bottom: 0,
 						padding: "1rem",
-						background: "white",
+						backgroundColor: "background.default",
 						verticalAlign: "middle",
 						display: "flex"
 					}}
@@ -563,8 +567,8 @@ const ApprovalMessages = () => {
 					<Button variant={"contained"} color={"secondary"} onClick={onSubmit}>
 						Send
 					</Button>
-				</div>
-			</div>
+				</Box>
+			</Box>
 		</>
 	);
 };
