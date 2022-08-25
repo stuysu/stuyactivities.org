@@ -14,24 +14,19 @@ import {
 	Select,
 	MenuItem
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import { gql, useMutation } from "@apollo/client";
 import { cache } from "../../context/ApolloProvider";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(() => ({
+const classes = {
 	item: {
 		width: "100%",
 		float: "left"
 	},
-	// avatar: {
-	// 	marginRight: "18px",
-	// 	width: theme.spacing(6),
-	// 	height: theme.spacing(6)
-	// },
 	actionButton: {
 		paddingRight: "20px"
 	},
@@ -51,7 +46,7 @@ const useStyles = makeStyles(() => ({
 		height: "56px",
 		width: "auto"
 	}
-}));
+};
 
 const MUTATION = gql`
 	mutation createStrike($orgId: Int, $weight: Int!, $reason: String!) {
@@ -62,8 +57,7 @@ const MUTATION = gql`
 	}
 `;
 
-export default function StrikeCard({ name, id, charter }) {
-	const classes = useStyles();
+export default function StrikeCard({ name, id }) {
 	const [open, setOpen] = React.useState(false);
 	const [reason, setReason] = React.useState("");
 	const [weight, setWeight] = React.useState("");
@@ -97,29 +91,34 @@ export default function StrikeCard({ name, id, charter }) {
 	return (
 		<Grid item xs={12}>
 			<List>
-				<Paper className={classes.item}>
+				<Paper sx={classes.item}>
 					<Accordion>
 						<AccordionSummary
 							expandIcon={<EditIcon />}
 							aria-controls="panel1a-content"
 							id="panel1a-header"
-							className={classes.actionButton}
+							sx={classes.actionButton}
 						>
-							{/*<Avatar src={charter.picture} className={classes.avatar} />*/}
-							<Typography className={classes.heading}>{name}</Typography>
+							<Typography sx={classes.heading}>{name}</Typography>
 						</AccordionSummary>
 						<AccordionDetails>
-							<form onSubmit={handleSubmit} className={classes.form} noValidate autoComplete={"off"}>
+							<Box
+								component="form"
+								onSubmit={handleSubmit}
+								sx={classes.form}
+								noValidate
+								autoComplete={"off"}
+							>
 								<TextField
 									label="Reason"
 									multiline
 									variant="outlined"
-									className={classes.textField}
+									sx={classes.textField}
 									fullWidth
 									value={reason}
 									onChange={e => setReason(e.target.value)}
 								/>
-								<FormControl variant="outlined" className={classes.select}>
+								<FormControl variant="outlined" sx={classes.select}>
 									<InputLabel>Weight</InputLabel>
 									<Select
 										variant="standard"
@@ -137,7 +136,7 @@ export default function StrikeCard({ name, id, charter }) {
 									<Button
 										variant="contained"
 										color="primary"
-										className={classes.submit}
+										sx={classes.submit}
 										type={"submit"}
 										value={"submit"}
 										disabled
@@ -149,14 +148,14 @@ export default function StrikeCard({ name, id, charter }) {
 										variant="contained"
 										color="primary"
 										type={"submit"}
-										className={classes.submit}
+										sx={classes.submit}
 										disabled={loading}
 										onClick={handleSubmit}
 									>
 										Submit
 									</Button>
 								)}
-							</form>
+							</Box>
 						</AccordionDetails>
 					</Accordion>
 					<Snackbar

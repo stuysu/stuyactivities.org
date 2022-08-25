@@ -16,7 +16,6 @@ import {
 	Snackbar,
 	Typography
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 import BackButton from "../../../comps/ui/BackButton";
 import { gql, useMutation } from "@apollo/client";
@@ -25,30 +24,32 @@ import { OrgContext } from "../index";
 import moment from "moment";
 import { generatePath, Route, Switch } from "react-router-dom";
 import MeetingForm from "../../../comps/pages/organization/MeetingForm";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(1),
+		margin: 1,
 		boxSizing: "border-box"
 	},
 	newMeetingTitle: {
 		textAlign: "center",
-		marginBottom: theme.spacing(2)
+		marginBottom: 2
 	},
 	titleInput: {
 		fontSize: "2em"
 	},
 	backButton: {
-		[theme.breakpoints.up("lg")]: {
+		// TODO: make sure these breakpoints work!!!
+		lg: {
 			position: "absolute",
-			marginLeft: theme.spacing(10),
-			marginTop: theme.spacing(3)
+			marginLeft: 10,
+			marginTop: 3
 		},
-		[theme.breakpoints.down("xl")]: {
-			marginTop: theme.spacing(3)
+		xl: {
+			marginTop: 3
 		}
 	}
-}));
+};
 
 const CREATE_MUTATION = gql`
 	mutation CreateMeeting(
@@ -205,7 +206,6 @@ const EDIT_RECURRING_MUTATION = gql`
 `;
 
 const Main = ({ match }) => {
-	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	let reversedMeetings = org?.meetings?.slice(0);
 	if (reversedMeetings) {
@@ -336,10 +336,10 @@ const Main = ({ match }) => {
 		}
 	});
 	return (
-		<div className={classes.margin}>
+		<Box sx={classes.margin}>
 			<Grid container>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-					<Typography variant={"h4"} className={classes.newMeetingTitle}>
+					<Typography variant={"h4"} sx={classes.newMeetingTitle}>
 						New Meeting
 					</Typography>
 					<MeetingForm
@@ -356,13 +356,13 @@ const Main = ({ match }) => {
 						Existing Meetings
 					</Typography>
 					{org?.recurringMeetings?.length > 0 && (
-						<Typography variant={"h5"} className={classes.margin}>
+						<Typography variant={"h5"} sx={classes.margin}>
 							Recurring Meetings
 						</Typography>
 					)}
 					<List>
 						{org?.recurringMeetings?.map(meeting => (
-							<Paper className={classes.margin}>
+							<Paper sx={classes.margin}>
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
@@ -389,13 +389,13 @@ const Main = ({ match }) => {
 						))}
 					</List>
 					{org?.recurringMeetings?.length > 0 && (
-						<Typography variant={"h5"} className={classes.margin}>
+						<Typography variant={"h5"} sx={classes.margin}>
 							Non-Recurring Meetings
 						</Typography>
 					)}
 					<List>
 						{reversedMeetings?.map(meeting => (
-							<Paper className={classes.margin}>
+							<Paper sx={classes.margin}>
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
@@ -456,13 +456,12 @@ const Main = ({ match }) => {
 				message={"Meeting Created!"}
 				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
-		</div>
+		</Box>
 	);
 };
 
 const EditPage = ({ match }) => {
 	const org = React.useContext(OrgContext);
-	const classes = useStyles();
 	//Use snackbar since edit has no other visible effects
 	const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 	const [errorMessage, setErrorMessage] = React.useState("");
@@ -528,13 +527,13 @@ const EditPage = ({ match }) => {
 	return (
 		<div>
 			<BackButton
-				className={classes.backButton}
+				sx={classes.backButton}
 				label={"Back to Meetings"}
 				to={generatePath("/" + match.params.orgUrl + "/admin/meetings")}
 			/>
-			<Grid container justifyContent={"center"} className={classes.margin}>
+			<Grid container justifyContent={"center"} sx={classes.margin}>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-					<Typography variant={"h4"} className={classes.newMeetingTitle}>
+					<Typography variant={"h4"} sx={classes.newMeetingTitle}>
 						{recurring ? "Edit Recurring Meeting" : "Edit Meeting"}
 					</Typography>
 					<MeetingForm

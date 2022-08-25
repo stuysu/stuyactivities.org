@@ -1,16 +1,15 @@
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles({
+const classes = {
 	flexCenter: {
 		display: "flex",
 		justifyContent: "center"
 	}
-});
+};
 
 const FlexCenter = ({ children }) => {
-	const classes = useStyles();
-	return <div className={classes.flexCenter}>{children}</div>;
+	return <Box sx={classes.flexCenter}>{children}</Box>;
 };
 
 export default FlexCenter;

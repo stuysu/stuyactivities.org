@@ -5,21 +5,19 @@ import MenuItem from "@mui/material/MenuItem";
 import { FormHelperText } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import { CharterFormContext } from "../../../pages/charter";
-import makeStyles from "@mui/styles/makeStyles";
 
-const useStyles = makeStyles({
+const classes = {
 	commitmentLevel: {
 		width: "100%"
 	}
-});
+};
 
 const CommitmentLevel = ({ className }) => {
 	const form = React.useContext(CharterFormContext);
-	const classes = useStyles();
 
 	return (
 		<div>
-			<FormControl variant={"outlined"} className={classes.commitmentLevel} required>
+			<FormControl variant={"outlined"} sx={classes.commitmentLevel} required>
 				<InputLabel>Commitment Level</InputLabel>
 				<Select
 					fullWidth

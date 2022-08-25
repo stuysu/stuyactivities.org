@@ -1,13 +1,13 @@
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import TeacherVector from "../../../img/vectors/clip-teacher.svg";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import GoogleLoginButton from "../GoogleLoginButton";
 import AuthContext from "../AuthContext";
 import FlexCenter from "../../ui/FlexCenter";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	textContainer: {
 		width: "400px",
 		maxWidth: "100%",
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: "80%",
 		width: "300px",
 		maxHeight: "18vh",
-		marginTop: theme.spacing(2)
+		marginTop: 2
 	},
 	backButtonContainer: {
 		textAlign: "left"
@@ -32,34 +32,34 @@ const useStyles = makeStyles(theme => ({
 		background: 'transparency.border',
 		padding: 3,
 		borderRadius: "5px",
-		color: theme.palette.secondary.main,
+		color: "secondary",
 		whiteSpace: "nowrap"
 	}
-}));
+};
 
 const Teacher = () => {
-	const classes = useStyles();
 	const authContext = React.useContext(AuthContext);
 
 	return (
 		<div>
-			<div className={classes.backButtonContainer}>
+			<Box sx={classes.backButtonContainer}>
 				<Button color={"primary"} variant={"outlined"} onClick={() => authContext.set({ page: "landing" })}>
 					&lt;- I'm not a teacher
 				</Button>
-			</div>
+			</Box>
 
-			<img
+			<Box
+				component="img"
 				src={TeacherVector}
 				alt={"A teacher holding a lightbulb in one hand with sparks coming out of the other"}
-				className={classes.defaultVector}
+				sx={classes.defaultVector}
 			/>
-			<Typography variant={"h4"} className={classes.heading}>
+			<Typography variant={"h4"} sx={classes.heading}>
 				Teacher Sign In
 			</Typography>
 
 			<FlexCenter>
-				<div className={classes.textContainer}>
+				<Box sx={classes.textContainer}>
 					<Typography variant={"subtitle1"}>
 						If you think your StuyActivities account is linked to your stuy.edu email or you have linked it
 						to your own Google account you may use the sign in with Google option below. If that fails it's
@@ -73,11 +73,14 @@ const Teacher = () => {
 					<br />
 					<Typography>
 						Send an email from your "@schools.nyc.gov" email to{" "}
-						<a className={classes.code} href={"mailto:app@stuyactivities.org"}>
+						<Box component="a" sx={classes.code} href={"mailto:app@stuyactivities.org"}>
 							app@stuyactivities.org
-						</a>{" "}
-						with the subject line <span className={classes.code}>Login request</span>. The body of the email
-						is not important.{" "}
+						</Box>{" "}
+						with the subject line{" "}
+						<Box component="span" sx={classes.code}>
+							Login request
+						</Box>
+						. The body of the email is not important.{" "}
 					</Typography>
 					<br />
 					<Typography>
@@ -85,7 +88,7 @@ const Teacher = () => {
 						in. If you face any difficulties, please email us at help@stuyactivities.org.
 					</Typography>
 					<br />
-				</div>
+				</Box>
 			</FlexCenter>
 
 			<GoogleLoginButton />

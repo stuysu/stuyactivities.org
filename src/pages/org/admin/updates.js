@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Button, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 
 import layout from "./../../../styles/Layout.module.css";
 import Card from "@mui/material/Card";
-import makeStyles from "@mui/styles/makeStyles";
 import { OrgContext } from "../index";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -19,14 +18,11 @@ import UpdateCard from "../../../comps/updates/UpdateCard";
 import moment from "moment-timezone";
 import TinyEditor from "../../../comps/updates/TinyEditor";
 
-const useStyles = makeStyles({
+const classes = {
 	cardContent: {
 		padding: "1rem"
-	},
-	picCarousel: {
-		marginTop: "1rem"
 	}
-});
+};
 
 const CREATE_UPDATE = gql`
 	mutation (
@@ -53,7 +49,6 @@ const CREATE_UPDATE = gql`
 
 const Updates = () => {
 	const org = useContext(OrgContext);
-	const classes = useStyles();
 
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
@@ -99,7 +94,7 @@ const Updates = () => {
 							</ListItem>
 						</List>
 						<input style={{ display: "none" }} />
-						<div className={classes.cardContent}>
+						<Box sx={classes.cardContent}>
 							<TextField
 								fullWidth
 								variant={"outlined"}
@@ -163,7 +158,7 @@ const Updates = () => {
 							<Button color={"primary"} variant={"contained"} disabled={loading} onClick={submit}>
 								Submit
 							</Button>
-						</div>
+						</Box>
 					</Card>
 				</Grid>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>

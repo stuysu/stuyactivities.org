@@ -1,20 +1,18 @@
 import React from "react";
-import { Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { Box, Typography } from "@mui/material";
 import BackButton from "../comps/ui/BackButton";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	main: {
 		maxWidth: "1200px",
 		margin: "auto",
 		padding: "2rem"
 	}
-}));
+};
 
 export default function Rules() {
-	const classes = useStyles();
 	return (
-		<div className={classes.main}>
+		<Box sx={classes.main}>
 			<BackButton to={"/"} label={"Back To Home"} />
 			<Typography variant={"h4"} color="primary" style={{ textAlign: "center" }}>
 				Rules
@@ -392,6 +390,6 @@ export default function Rules() {
 				STUDENT UNION RESERVES THE RIGHT TO SUSPEND ANY ACTIVITY THAT DOES NOT FOLLOW THESE RULES WITHOUT ANY
 				PRIOR NOTICE.
 			</Typography>
-		</div>
+		</Box>
 	);
 }

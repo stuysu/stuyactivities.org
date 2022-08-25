@@ -18,16 +18,16 @@ import {
 	TextField,
 	Typography
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import EditIcon from "@mui/icons-material/Edit";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(2)
+		margin: 2
 	}
-}));
+};
 
 const QUERY = gql`
 	query Memberships($url: String!) {
@@ -71,7 +71,6 @@ const REMOVE_MUTATION = gql`
 `;
 
 export default function Members({ match }) {
-	const classes = useStyles();
 	const user = React.useContext(UserContext);
 	const { data } = useQuery(QUERY, {
 		variables: { url: match.params.orgUrl }
@@ -128,7 +127,7 @@ export default function Members({ match }) {
 		navigator.clipboard.writeText(emailList).then(() => setSnackBarOpen(true));
 	};
 	return (
-		<div className={classes.margin}>
+		<Box sx={classes.margin}>
 			<div style={{ display: "flex" }}>
 				<Button onClick={copy} color={"primary"}>
 					Copy
@@ -249,6 +248,6 @@ export default function Members({ match }) {
 				message="Copied email list to clipboard!"
 				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
-		</div>
+		</Box>
 	);
 }

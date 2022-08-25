@@ -5,24 +5,22 @@ import Grid from "@mui/material/Grid";
 import UserMemberships from "./UserMemberships";
 import UserMeetings from "./UserMeetings";
 import { Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import UserUpdates from "./UserUpdates";
 
-const useStyles = makeStyles({
+const classes = {
 	greeting: {
 		margin: "2rem"
 	}
-});
+};
 
 // A personalized home page for users
 // Show meetings from clubs they're in, posts from those clubs, and relevant links
 const UserHome = () => {
-	const classes = useStyles();
 	const user = useContext(UserContext);
 
 	return (
 		<div className={layout.container}>
-			<Typography variant={"h1"} className={classes.greeting}>
+			<Typography variant={"h1"} sx={classes.greeting}>
 				Welcome back, {user.firstName}
 			</Typography>
 

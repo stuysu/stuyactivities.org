@@ -5,22 +5,21 @@ import { CharterFormContext } from "../../../pages/charter";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
-import makeStyles from "@mui/styles/makeStyles";
 import Chip from "@mui/material/Chip";
 import FormHelperText from "@mui/material/FormHelperText";
 import MenuItem from "@mui/material/MenuItem";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	tagInput: {
 		marginBottom: "1rem"
 	},
 	tagChip: {
-		marginRight: theme.spacing(1)
+		marginRight: 1
 	},
 	select: {
 		width: "100%"
 	}
-}));
+};
 
 const QUERY = gql`
 	query {
@@ -32,7 +31,6 @@ const QUERY = gql`
 `;
 
 const TagSelection = ({ className }) => {
-	const classes = useStyles();
 	const { data } = useQuery(QUERY);
 	const charterContext = React.useContext(CharterFormContext);
 	const tags = data?.tags || [];
@@ -63,7 +61,7 @@ const TagSelection = ({ className }) => {
 				<InputLabel>Select Tags</InputLabel>
 				<Select
 					variant={"outlined"}
-					className={classes.select}
+					sx={classes.select}
 					fullWidth
 					multiple
 					label={"Select Tags"}
@@ -77,14 +75,7 @@ const TagSelection = ({ className }) => {
 						return (
 							<div>
 								{selected.map(tag => {
-									return (
-										<Chip
-											key={tag.id}
-											className={classes.tagChip}
-											label={tag?.name}
-											color="primary"
-										/>
-									);
+									return <Chip key={tag.id} sx={classes.tagChip} label={tag?.name} color="primary" />;
 								})}
 							</div>
 						);

@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "@mui/material/Card";
-import makeStyles from "@mui/styles/makeStyles";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -10,8 +9,9 @@ import ListItemText from "@mui/material/ListItemText";
 import UnstyledLink from "../../ui/UnstyledLink";
 import { Typography } from "@mui/material";
 import PromotedClubDeleteButton from "./PromotedClubDeleteButton";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles({
+const classes = {
 	clubCard: {
 		position: "relative",
 		width: "100%",
@@ -26,16 +26,14 @@ const useStyles = makeStyles({
 	content: {
 		padding: "0 1rem"
 	}
-});
+};
 
 const PromotedClubCard = ({ id, blurb, organization, showDelete = false, refetch = () => {} }) => {
-	const classes = useStyles();
-
 	return (
-		<Card variant={"outlined"} className={classes.clubCard}>
+		<Card variant={"outlined"} sx={classes.clubCard}>
 			<List>
 				<UnstyledLink to={`/${organization.url}`}>
-					<ListItem className={classes.orgHeading}>
+					<ListItem sx={classes.orgHeading}>
 						<ListItemAvatar>
 							<Avatar alt={organization?.name} src={organization?.charter?.picture?.thumbnail} />
 						</ListItemAvatar>
@@ -48,9 +46,9 @@ const PromotedClubCard = ({ id, blurb, organization, showDelete = false, refetch
 					</ListItemSecondaryAction>
 				)}
 			</List>
-			<div className={classes.content}>
+			<Box sx={classes.content}>
 				<Typography paragraph>{blurb}</Typography>
-			</div>
+			</Box>
 		</Card>
 	);
 };
