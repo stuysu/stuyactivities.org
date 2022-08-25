@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	heading: {
 		fontWeight: 600,
-		color: `rgba(0, 0, 0, 0.8)`,
+		color: 'transparency.text',
 		margin: "1rem"
 	},
 	defaultVector: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 		textAlign: "left"
 	},
 	code: {
-		background: `rgba(0, 0, 0, 0.1)`,
+		background: 'transparency.border',
 		padding: 3,
 		borderRadius: "5px",
 		color: theme.palette.secondary.main,

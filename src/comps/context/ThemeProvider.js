@@ -2,6 +2,12 @@ import React from "react";
 
 import { createTheme, ThemeProvider as Provider, StyledEngineProvider, useMediaQuery } from "@mui/material";
 
+
+/* TODO: Known bugs/issues
+ *   - No manual toggle for dark mode
+ *   - Shadows don't invert, look into https://mui.com/system/shadows/
+ */
+
 const ThemeProvider = props => {
 	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -17,6 +23,15 @@ const ThemeProvider = props => {
 					secondary: {
 						main: "#546de5",
 						contrastText: "#fff"
+					},
+					transparency: prefersDarkMode ? {
+						border: "rgba(255, 255, 255, 0.1)",
+						borderDarker: "rgba(255, 255, 255, 0.24)",
+						text: "rgba(255, 255, 255, 0.8)",
+					} : {
+						border: "rgba(0, 0, 0, 0.1)",
+						borderDarker: "rgba(0, 0, 0, 0.24)",
+						text: "rgba(0, 0, 0, 0.8)",
 					}
 				},
 				typography: {
