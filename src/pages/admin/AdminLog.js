@@ -7,24 +7,24 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import makeStyles from "@mui/styles/makeStyles";
 import Divider from "@mui/material/Divider";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
 // TODO: import LazyLoadComponent from "react-lazyload";
 const LazyLoadComponent = () => <div></div>;
 
-const useStyles = makeStyles(() => ({
+const classes = {
 	root: {
 		marginTop: "2rem"
 	},
 	logCard: {
 		margin: "4px",
 		padding: "1rem",
+		// TODO: insure functions correctly
 		"&:hover": {
-			color: "#e66767"
+			color: "primary.main"
 		}
 	}
-}));
+};
 
 const QUERY = gql`
 	query Organizations($keyword: String) {
@@ -75,7 +75,6 @@ function a11yProps(index) {
 }
 
 const AdminLog = () => {
-	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
 	const [keyword, setKeyword] = React.useState("");
 
@@ -113,7 +112,7 @@ const AdminLog = () => {
 	});
 
 	return (
-		<div className={classes.root}>
+		<Box sx={classes.root}>
 			<Paper position="static" color="default">
 				<Tabs
 					value={value}
@@ -142,12 +141,12 @@ const AdminLog = () => {
 								};
 								return (
 									<LazyLoadComponent>
-										<div className={classes.logCard}>
+										<Box sx={classes.logCard}>
 											<Typography>{org.name}</Typography>
 											<Typography>Reason: {org.strike.reason}</Typography>
 											<Typography>{date.toLocaleString("en-US", options)}</Typography>
 											<Typography>Weight: {org.strike.weight}</Typography>
-										</div>
+										</Box>
 										<Divider variant="middle" />
 									</LazyLoadComponent>
 								);
@@ -169,17 +168,17 @@ const AdminLog = () => {
 							};
 							return (
 								<LazyLoadComponent>
-									<div className={classes.logCard}>
+									<Box sx={classes.logCard}>
 										<Typography>{org.name}</Typography>
 										<Typography>Last Update: {date.toLocaleString("en-US", options)}</Typography>
-									</div>
+									</Box>
 									<Divider variant="middle" />
 								</LazyLoadComponent>
 							);
 						})}
 				</TabPanel>
 			</Paper>
-		</div>
+		</Box>
 	);
 };
 

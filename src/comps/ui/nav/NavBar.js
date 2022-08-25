@@ -1,5 +1,4 @@
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -13,31 +12,31 @@ import UnstyledLink from "../UnstyledLink";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { BugReport } from "@mui/icons-material";
 import { triggerReportDialog } from "../../help/ReportDialog";
+import { Box } from "@mui/material";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	root: {
 		flexGrow: 1
 	},
 	menuButton: {
-		marginRight: theme.spacing(2)
+		marginRight: 2
 	},
 	title: {
 		flexGrow: 1
 	}
-}));
+};
 
 const NavBar = ({ setDrawerOpen }) => {
-	const classes = useStyles();
 	const isMobile = useMediaQuery("(max-width: 800px)");
 	const user = React.useContext(UserContext);
 
 	return (
-		<div className={classes.root}>
+		<Box sx={classes.root}>
 			<AppBar position="static" enableColorOnDark>
 				<Toolbar>
 					<IconButton
 						edge="start"
-						className={classes.menuButton}
+						sx={classes.menuButton}
 						color="inherit"
 						aria-label="menu"
 						onClick={() => setDrawerOpen(true)}
@@ -45,7 +44,7 @@ const NavBar = ({ setDrawerOpen }) => {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h5" className={classes.title}>
+					<Typography variant="h5" sx={classes.title}>
 						<UnstyledLink to={"/"}>StuyActivities</UnstyledLink>
 					</Typography>
 					<div>
@@ -73,7 +72,7 @@ const NavBar = ({ setDrawerOpen }) => {
 					</div>
 				</Toolbar>
 			</AppBar>
-		</div>
+		</Box>
 	);
 };
 

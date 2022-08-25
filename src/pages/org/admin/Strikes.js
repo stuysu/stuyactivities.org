@@ -1,13 +1,13 @@
 import React from "react";
 import { List, ListItem, Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { gql, useQuery } from "@apollo/client";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(2)
+		margin: 2
 	}
-}));
+};
 
 const QUERY = gql`
 	query Strikes($url: String) {
@@ -22,8 +22,6 @@ const QUERY = gql`
 `;
 
 export default function Strikes({ match }) {
-	const classes = useStyles();
-
 	const { data } = useQuery(QUERY, {
 		variables: { url: match.params.orgUrl }
 	});
@@ -32,13 +30,13 @@ export default function Strikes({ match }) {
 
 	if (array === undefined || array.length === 0) {
 		return (
-			<div className={classes.margin}>
+			<Box sx={classes.margin}>
 				<Typography>Your club doesn't have any strikes yet. Keep up the good work!</Typography>
-			</div>
+			</Box>
 		);
 	} else {
 		return (
-			<div className={classes.margin}>
+			<Box sx={classes.margin}>
 				<List>
 					{data?.organizationByUrl?.strikes?.map(strikeData => (
 						<ListItem>
@@ -61,7 +59,7 @@ export default function Strikes({ match }) {
 					To appeal these strikes, email <a href="mailto: clubpub@stuysu.org">clubpub@stuysu.org</a> with your
 					organization name, the reason you were given the strike, and why it should be removed.
 				</Typography>
-			</div>
+			</Box>
 		);
 	}
 }

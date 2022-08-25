@@ -1,12 +1,12 @@
 import { FormControl, TextField } from "@mui/material";
 import React from "react";
-import useFilterStyles from "./useFilterStyles";
+import filterStyles from "./filterStyles";
 
 export default function SearchBox({ setKeyword, keyword }) {
-	const classes = useFilterStyles();
+	const classes = filterStyles();
 
 	return (
-		<FormControl variant="standard" className={classes.filterChild}>
+		<FormControl variant="standard" sx={classes.filterChild}>
 			<TextField
 				name="keyword"
 				label="Search"

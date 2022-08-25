@@ -2,17 +2,14 @@ import React from "react";
 import UserContext from "../../context/UserContext";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import makeStyles from "@mui/styles/makeStyles";
 
-const useStyles = makeStyles({
+const classes = {
 	menu: {
 		marginTop: "30px"
 	}
-});
+};
 
 const NavAvatar = () => {
-	const classes = useStyles();
-
 	const user = React.useContext(UserContext);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
@@ -31,24 +28,7 @@ const NavAvatar = () => {
 
 	return (
 		<div>
-			{/*<IconButton*/}
-			{/*	aria-label="account of current user"*/}
-			{/*	aria-controls={menuId}*/}
-			{/*	aria-haspopup="true"*/}
-			{/*	color="inherit"*/}
-			{/*	onClick={handleMenu}*/}
-			{/*>*/}
-			{/*	<Help />*/}
-			{/*</IconButton>*/}
-
-			<Menu
-				id={menuId}
-				anchorEl={anchorEl}
-				keepMounted
-				open={open}
-				onClose={handleClose}
-				className={classes.menu}
-			>
+			<Menu id={menuId} anchorEl={anchorEl} keepMounted open={open} onClose={handleClose} sx={classes.menu}>
 				<MenuItem onClick={handleClose}>My Account</MenuItem>
 				<MenuItem onClick={user.logout}>Log Out</MenuItem>
 			</Menu>

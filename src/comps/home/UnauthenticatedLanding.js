@@ -6,11 +6,11 @@ import TextLink from "../ui/TextLink";
 import ButtonLink from "../ui/ButtonLink";
 
 import { triggerLoginDialog } from "../auth/AuthDialog";
-import makeStyles from "@mui/styles/makeStyles";
 import biking from "./../../img/vectors/clip-biking.svg";
 import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles({
+const classes = {
 	vector: {
 		width: 400,
 		maxWidth: "80vw"
@@ -24,19 +24,17 @@ const useStyles = makeStyles({
 	secondButton: {
 		margin: "1rem"
 	}
-});
+};
 
 const UnauthenticatedLanding = () => {
-	const classes = useStyles();
-
 	return (
 		<div className={layout.container}>
 			<Grid container alignContent={"center"} alignItems={"center"}>
-				<Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classes.vectorCell}>
-					<img src={biking} alt={"Two people biking"} className={classes.vector} />
+				<Grid item xl={6} lg={6} md={6} sm={12} xs={12} sx={classes.vectorCell}>
+					<Box component="img" src={biking} alt={"Two people biking"} sx={classes.vector} />
 				</Grid>
 
-				<Grid item xl={6} lg={6} md={6} sm={12} xs={12} className={classes.textCell}>
+				<Grid item xl={6} lg={6} md={6} sm={12} xs={12} sx={classes.textCell}>
 					<Typography variant={"h1"}>Welcome to StuyActivities</Typography>
 
 					<Typography paragraph>
@@ -59,7 +57,7 @@ const UnauthenticatedLanding = () => {
 						Sign In
 					</Button>
 
-					<ButtonLink to={"/catalog"} variant={"outlined"} color={"primary"} className={classes.secondButton}>
+					<ButtonLink to={"/catalog"} variant={"outlined"} color={"primary"} sx={classes.secondButton}>
 						Browse Activities
 					</ButtonLink>
 				</Grid>

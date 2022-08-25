@@ -1,18 +1,19 @@
 import React from "react";
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { gql, useQuery } from "@apollo/client";
 import UserContext from "../../../comps/context/UserContext";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	root: {
-		"max-width": theme.breakpoints.values.md,
+		// TODO: investigate the meaning of this
+		// "max-width": theme.breakpoints.values.md,
 		margin: "auto" //possible TODO: make a standard class for centering things
 	},
 	title: {
 		"text-align": "center",
-		margin: theme.spacing(2)
+		margin: 2
 	},
 	card: {
 		display: "flex",
@@ -20,11 +21,11 @@ const useStyles = makeStyles(theme => ({
 		"justify-content": "flex-start"
 	},
 	cardRoot: {
-		"margin-top": theme.spacing(1),
-		"margin-bottom": theme.spacing(1),
+		"margin-top": 1,
+		"margin-bottom": 1,
 		display: "flex"
 	}
-}));
+};
 
 const QUERY = gql`
 	query {
@@ -44,7 +45,6 @@ const QUERY = gql`
 `;
 
 const Approvals = () => {
-	const classes = useStyles();
 	const user = React.useContext(UserContext);
 	const { loading, error, data } = useQuery(QUERY);
 	if (!user?.adminRoles?.some(e => e.role === "charters")) {
@@ -55,15 +55,15 @@ const Approvals = () => {
 	if (loading || !data) return <p>Loading</p>;
 	console.log(error, data);
 	return (
-		<div className={classes.root}>
-			<Typography variant={"h3"} className={classes.title}>
+		<Box sx={classes.root}>
+			<Typography variant={"h3"} sx={classes.title}>
 				Charter Approvals
 			</Typography>
 			{data.organizationsWithPendingCharters.map((org, index) => (
 				<div key={org.id}>
-					<Card className={classes.cardRoot}>
+					<Card sx={classes.cardRoot}>
 						<UnstyledLink to={"/admin/approvals/" + org.url}>
-							<CardActionArea className={classes.card}>
+							<CardActionArea sx={classes.card}>
 								<CardMedia
 									image={org.charter.picture?.thumbnail}
 									style={{
@@ -88,7 +88,7 @@ const Approvals = () => {
 					</Card>
 				</div>
 			))}
-		</div>
+		</Box>
 	);
 };
 

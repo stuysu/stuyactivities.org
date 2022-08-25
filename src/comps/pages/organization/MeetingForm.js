@@ -15,7 +15,6 @@ import {
 	FormControl,
 	InputLabel
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import Autocomplete from "@mui/material/Autocomplete";
 import Checkbox from "@mui/material/Checkbox";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -38,14 +37,15 @@ const AVAILABLE_ROOMS_QUERY = gql`
 	}
 `;
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	marginBottom: {
-		marginBottom: theme.spacing(1)
+		// TODO: see if this has any relation to that other marginBottom
+		marginBottom: 1
 	},
 	marginBottomBig: {
-		marginBottom: theme.spacing(2)
+		marginBottom: 2
 	}
-}));
+};
 
 //Map number to ordinal, used to format room floors
 //1 -> 1st, 2 -> 2nd, etc...
@@ -71,7 +71,6 @@ const MeetingForm = ({
 	recurring: alreadyRecurring
 }) => {
 	const org = React.useContext(OrgContext);
-	const classes = useStyles();
 	const [title, setTitle] = React.useState(meeting.title || "");
 
 	const publicGroup = { name: "Public", id: 0 };
@@ -158,7 +157,7 @@ const MeetingForm = ({
 				</DialogActions>
 			</Dialog>
 			<TextField
-				className={classes.marginBottomBig}
+				sx={classes.marginBottomBig}
 				fullWidth
 				variant="outlined"
 				label="Title"

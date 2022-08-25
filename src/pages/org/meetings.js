@@ -1,7 +1,6 @@
 import React from "react";
 import { OrgContext } from "./index";
-import { Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { Box, Typography } from "@mui/material";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
@@ -9,21 +8,20 @@ import Grid from "@mui/material/Grid";
 import MeetingCard from "../../comps/meetings/MeetingCard";
 import { triggerMeetingDialog } from "../../comps/meetings/MeetingPreviewDialog";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(1)
+		margin: 1
 	},
 	calendarContainer: {
 		width: 850,
 		maxWidth: "100%"
 	}
-}));
+};
 
 export default function Meetings() {
-	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	return (
-		<div className={classes.margin}>
+		<Box sx={classes.margin}>
 			<Typography variant={"h2"} align={"center"}>
 				Meetings
 			</Typography>
@@ -56,7 +54,7 @@ export default function Meetings() {
 			<Typography variant={"h4"}>All Meetings</Typography>
 			<br />
 
-			<div className={classes.calendarContainer}>
+			<Box sx={classes.calendarContainer}>
 				<FullCalendar
 					plugins={[dayGridPlugin, listPlugin]}
 					headerToolbar={{
@@ -71,7 +69,7 @@ export default function Meetings() {
 					})}
 					eventClick={ev => triggerMeetingDialog(ev.event.id)}
 				/>
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }

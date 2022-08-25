@@ -2,10 +2,20 @@ import React from "react";
 
 import { createTheme, ThemeProvider as Provider, StyledEngineProvider, useMediaQuery } from "@mui/material";
 
-
-/* TODO: Known bugs/issues
+// TODO: Known bugs/issues
+/*
  *   - No manual toggle for dark mode
  *   - Shadows don't invert, look into https://mui.com/system/shadows/
+ *   - Needs confirmation:
+ *      does the BackButton `sx` prop hack actually work
+ *      does the `theme.palette.background.default` referenced in charter pages work
+ *      check on MeetingCard.js
+ *   Why is BasicInfoForm so confusing:
+ *      where and what does the `classes.bottomMargin` in BasicInfoForm come from?!!
+ *      we need to add the `sx` prop capabilities to the BasicInfoForm's components
+ *   What is Masonry and why does it have its own classes (as seen in src/pages/explore.js)
+ *
+ *   various TODO comments have been strewn throughout the code i touched
  */
 
 const ThemeProvider = props => {
@@ -24,15 +34,20 @@ const ThemeProvider = props => {
 						main: "#546de5",
 						contrastText: "#fff"
 					},
-					transparency: prefersDarkMode ? {
-						border: "rgba(255, 255, 255, 0.1)",
-						borderDarker: "rgba(255, 255, 255, 0.24)",
-						text: "rgba(255, 255, 255, 0.8)",
-					} : {
-						border: "rgba(0, 0, 0, 0.1)",
-						borderDarker: "rgba(0, 0, 0, 0.24)",
-						text: "rgba(0, 0, 0, 0.8)",
-					}
+					button: {
+						main: prefersDarkMode ? "rgba(255, 255, 255, 0.87)" : "rgba(0, 0, 0, 0.87)"
+					},
+					transparency: prefersDarkMode
+						? {
+								border: "rgba(255, 255, 255, 0.1)",
+								borderDarker: "rgba(255, 255, 255, 0.24)",
+								text: "rgba(255, 255, 255, 0.8)"
+						  }
+						: {
+								border: "rgba(0, 0, 0, 0.1)",
+								borderDarker: "rgba(0, 0, 0, 0.24)",
+								text: "rgba(0, 0, 0, 0.8)"
+						  }
 				},
 				typography: {
 					fontFamily: `'Roboto Condensed', sans-serif`,

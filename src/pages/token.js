@@ -5,14 +5,14 @@ import { useParams } from "react-router-dom";
 import { client } from "../comps/context/ApolloProvider";
 import FlexCenter from "../comps/ui/FlexCenter";
 import { Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import handstandVector from "../img/vectors/clip-dancer.svg";
 import ghost from "../img/vectors/hugo-ghost.svg";
 import BackButton from "../comps/ui/BackButton";
 import Loading from "../comps/ui/Loading";
 import UserContext from "../comps/context/UserContext";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles({
+const classes = {
 	contentContainer: {
 		textAlign: "center",
 		width: "800px",
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 	googleButton: {
 		margin: "1rem"
 	}
-});
+};
 
 const MUTATION = gql`
 	mutation Login($token: String!) {
@@ -35,7 +35,6 @@ const MUTATION = gql`
 `;
 
 const TokenLogin = () => {
-	const classes = useStyles();
 	const user = React.useContext(UserContext);
 	const { token } = useParams();
 
@@ -57,8 +56,8 @@ const TokenLogin = () => {
 	if (data) {
 		return (
 			<FlexCenter>
-				<div className={classes.contentContainer}>
-					<img src={handstandVector} alt={"A person dancing"} className={classes.defaultVector} />
+				<Box sx={classes.contentContainer}>
+					<Box component="img" src={handstandVector} alt={"A person dancing"} sx={classes.defaultVector} />
 
 					<br />
 					<Typography variant={"h5"}>You are now signed in as {user.name}!</Typography>
@@ -74,7 +73,7 @@ const TokenLogin = () => {
 							label={"Go To The Home Page"}
 						/>
 					</FlexCenter>
-				</div>
+				</Box>
 			</FlexCenter>
 		);
 	}
@@ -84,25 +83,25 @@ const TokenLogin = () => {
 
 		return (
 			<FlexCenter>
-				<div className={classes.contentContainer}>
+				<Box sx={classes.contentContainer}>
 					<FlexCenter>
-						<img className={classes.defaultVector} src={ghost} alt={"child in a ghost costume"} />
+						<Box component="img" sx={classes.defaultVector} src={ghost} alt={"child in a ghost costume"} />
 					</FlexCenter>
 					<Typography variant={"subtitle1"} color={"error"}>
 						{errorMessage}
 					</Typography>
 					<BackButton to={"/"} color={"secondary"} label={"Go To The Home Page"} arrow={false} />
-				</div>
+				</Box>
 			</FlexCenter>
 		);
 	}
 
 	return (
 		<FlexCenter>
-			<div className={classes.contentContainer}>
+			<Box sx={classes.contentContainer}>
 				<Loading />
 				<Typography paragraph>Please wait while we sign you in</Typography>
-			</div>
+			</Box>
 		</FlexCenter>
 	);
 };

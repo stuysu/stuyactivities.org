@@ -1,7 +1,6 @@
 import React from "react";
-import { FormControlLabel, Checkbox, Typography } from "@mui/material";
+import { Box, FormControlLabel, Checkbox, Typography } from "@mui/material";
 import { CharterFormContext } from "../../../pages/charter";
-import makeStyles from "@mui/styles/makeStyles";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
@@ -9,18 +8,17 @@ import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import capitalizeString from "../../../utils/capitalizeString";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	uploadedPic: {
 		width: "300px",
 		maxWidth: "80vw",
 		maxHeight: "30vh",
 		objectFit: "contain",
-		marginTop: theme.spacing(1)
+		marginTop: 1
 	}
-}));
+};
 
 const Confirm = () => {
-	const classes = useStyles();
 	const form = React.useContext(CharterFormContext);
 
 	return (
@@ -59,8 +57,9 @@ const Confirm = () => {
 						<ListItemText
 							primary={"Picture"}
 							secondary={
-								<img
-									className={classes.uploadedPic}
+								<Box
+									component="img"
+									sx={classes.uploadedPic}
 									src={URL.createObjectURL(form.picture)}
 									alt={"uploaded file"}
 								/>

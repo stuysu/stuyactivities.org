@@ -8,7 +8,6 @@ import PromotedClubCard from "../comps/pages/explore/PromotedClubCard";
 import UpdateCard from "../comps/updates/UpdateCard";
 import MeetingCard from "../comps/meetings/MeetingCard";
 import Carousel from "react-multi-carousel";
-import makeStyles from "@mui/styles/makeStyles";
 import Masonry from "react-masonry-css";
 import FlexCenter from "../comps/ui/FlexCenter";
 
@@ -109,7 +108,7 @@ const responsive = {
 	}
 };
 
-const useStyles = makeStyles({
+const classes = {
 	meetingCard: {
 		height: 250,
 		overflow: "auto",
@@ -122,11 +121,10 @@ const useStyles = makeStyles({
 	matchMasonryBottomMargin: {
 		marginBottom: "calc(30px - 1rem)"
 	}
-});
+};
 
 const ExploreContent = () => {
 	const isMobile = useMediaQuery("(max-width: 900px)");
-	const classes = useStyles();
 	const limit = 15;
 	const [offset, setOffset] = React.useState(0);
 	const [updates, setUpdates] = React.useState([]);
@@ -200,7 +198,7 @@ const ExploreContent = () => {
 			{data !== undefined && (
 				<Carousel responsive={responsive}>
 					{data.meetings.map(meeting => (
-						<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard} />
+						<MeetingCard {...meeting} key={meeting.id} sx={classes.meetingCard} />
 					))}
 				</Carousel>
 			)}
@@ -209,10 +207,11 @@ const ExploreContent = () => {
 				<>
 					{filter.name && (
 						<>
-							<Divider className={classes.darkerDivider} />
-							<Typography className={classes.matchMasonryBottomMargin}>{filter.name}</Typography>
+							<Divider sx={classes.darkerDivider} />
+							<Typography sx={classes.matchMasonryBottomMargin}>{filter.name}</Typography>
 						</>
 					)}
+					{/* TODO: figure this out */}
 					<Masonry
 						breakpointCols={isMobile ? 1 : 2}
 						className="my-masonry-grid"

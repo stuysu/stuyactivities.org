@@ -16,9 +16,9 @@ import {
 	DialogTitle,
 	DialogContent,
 	DialogContentText,
-	DialogActions
+	DialogActions,
+	Box
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import moment from "moment-timezone";
 import UnstyledLink from "../ui/UnstyledLink";
 import UpdateDeleteButton from "./UpdateDeleteButton";
@@ -49,7 +49,7 @@ const DELETE_QUESTION = gql`
 	}
 `;
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	cardContent: {
 		padding: "0 1rem",
 		overflowWrap: "anywhere"
@@ -65,16 +65,16 @@ const useStyles = makeStyles(theme => ({
 	},
 	rightAlignedText: {
 		textAlign: "right",
-		marginRight: theme.spacing(2)
+		marginRight: 2
 	},
 	noPadding: {
 		padding: 0
 	},
 	topBottomMargin: {
-		marginTop: theme.spacing(1),
-		marginBottom: theme.spacing(1)
+		marginTop: 1,
+		marginBottom: 1
 	}
-}));
+};
 
 /* never used
 const responsive = {
@@ -98,8 +98,6 @@ const UpdateCard = ({
 	questions,
 	refetchFunc = () => {}
 }) => {
-	const classes = useStyles();
-
 	const [ignoreLimit, setIgnoreLimit] = useState(false);
 	const [shortContent] = useState(truncate(content, 400));
 
@@ -135,7 +133,7 @@ const UpdateCard = ({
 					</ListItemSecondaryAction>
 				)}
 			</List>
-			<div className={classes.cardContent}>
+			<Box sx={classes.cardContent}>
 				<Typography variant={"h5"}>{title}</Typography>
 				<div
 					className={"HtmlContent"}
@@ -158,7 +156,7 @@ const UpdateCard = ({
 						))}
 					</List>
 				)}
-				<Grid container alignItems={"center"} className={classes.topBottomMargin}>
+				<Grid container alignItems={"center"} sx={classes.topBottomMargin}>
 					<Grid item xs={10}>
 						<TextField
 							fullWidth
@@ -179,13 +177,12 @@ const UpdateCard = ({
 						</Button>
 					</Grid>
 				</Grid>
-			</div>
+			</Box>
 		</Card>
 	);
 };
 
 const Question = ({ question, organization, keyy }) => {
-	const classes = useStyles();
 	const [answer, setAnswer] = React.useState();
 	const [open, setOpen] = React.useState(false);
 	const [answerMutation] = useMutation(ANSWER_QUESTION, {
@@ -204,7 +201,7 @@ const Question = ({ question, organization, keyy }) => {
 
 	return (
 		<>
-			<ListItem className={classes.noPadding} key={keyy}>
+			<ListItem sx={classes.noPadding} key={keyy}>
 				<ListItemAvatar>
 					<Avatar alt={question.submittingUser.name} src={question.submittingUser.picture} />
 				</ListItemAvatar>
@@ -221,9 +218,9 @@ const Question = ({ question, organization, keyy }) => {
 				)}
 			</ListItem>
 			{question.answer && (
-				<ListItem className={classes.noPadding} key={keyy + 1}>
+				<ListItem sx={classes.noPadding} key={keyy + 1}>
 					<ListItemText
-						className={classes.rightAlignedText}
+						sx={classes.rightAlignedText}
 						primary={question.answer}
 						secondary={organization?.name}
 					/>

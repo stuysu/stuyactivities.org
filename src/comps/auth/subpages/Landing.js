@@ -36,7 +36,9 @@ const Landing = () => {
 
 	return (
 		<div>
-			<Box component="img" sx={classes.defaultVector}
+			<Box
+				component="img"
+				sx={classes.defaultVector}
 				src={SignInVector}
 				alt={"Two people unlocking a computer with a key"}
 			/>

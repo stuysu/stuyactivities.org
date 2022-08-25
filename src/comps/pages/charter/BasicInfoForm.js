@@ -4,12 +4,11 @@ import TextField from "@mui/material/TextField";
 import KeywordSelection from "./KeywordSelection";
 import TagSelection from "./TagSelection";
 import UrlSelection from "./UrlSelection";
-import makeStyles from "@mui/styles/makeStyles";
 import PictureUpload from "./PictureUpload";
 import CommitmentLevel from "./CommitmentLevel";
 import { Grid } from "@mui/material";
 
-const useStyles = makeStyles({
+const classes = {
 	select: {
 		width: "100%",
 		marginBottom: "1rem"
@@ -17,19 +16,19 @@ const useStyles = makeStyles({
 	socials: {
 		marginBottom: "0.5rem"
 	}
-});
+};
 
 const BasicInfoForm = () => {
-	const classes = useStyles();
 	const form = React.useContext(CharterFormContext);
 
+	// TODO: determine proper definition for bottomMargin
 	return (
 		<>
 			<Grid container spacing={2}>
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
 					<TextField
 						variant={"outlined"}
-						className={classes.bottomMargin}
+						sx={classes.bottomMargin}
 						label={"Activity Name"}
 						value={form?.name || ""}
 						onChange={ev => {
@@ -44,20 +43,20 @@ const BasicInfoForm = () => {
 				</Grid>
 
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-					<UrlSelection className={classes.bottomMargin} />
+					<UrlSelection sx={classes.bottomMargin} />
 				</Grid>
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-					<CommitmentLevel className={classes.select} />
+					<CommitmentLevel sx={classes.select} />
 				</Grid>
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-					<TagSelection className={classes.select} />
+					<TagSelection sx={classes.select} />
 				</Grid>
 			</Grid>
 
-			<KeywordSelection className={classes.keywords} />
+			<KeywordSelection sx={classes.keywords} />
 
 			<TextField
-				className={classes.socials}
+				sx={classes.socials}
 				variant={"outlined"}
 				label={"Socials (optional)"}
 				value={form?.socials || ""}

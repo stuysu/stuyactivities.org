@@ -1,6 +1,5 @@
 import React from "react";
-import { ListItemAvatar, TextField, Avatar } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { ListItemAvatar, TextField, Avatar, Box } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
@@ -17,14 +16,13 @@ const QUERY = gql`
 	}
 `;
 
-const useStyles = makeStyles({
+const classes = {
 	smallerText: {
 		scale: 0.8
 	}
-});
+};
 
 const UserSelect = ({ onChange, filter }) => {
-	const classes = useStyles();
 	const [keyword, setKeyword] = React.useState("");
 	const { data, loading } = useQuery(QUERY, { variables: { keyword } });
 	const options = data?.users?.filter(filter || (() => true)) || [];
@@ -42,11 +40,11 @@ const UserSelect = ({ onChange, filter }) => {
 					<span>
 						<span>{option?.name}</span>
 						<br />
-						<span className={classes.smallerText}>
+						<Box component="span" sx={classes.smallerText}>
 							{option?.email}
 							<br />
 							{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
-						</span>
+						</Box>
 					</span>
 				</li>
 			)}
