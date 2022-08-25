@@ -18,7 +18,7 @@ function Tag({ name }) {
 
 function CatalogCardWithRef({ name, url, charter, tags }, ref) {
 	return (
-		<Card className={classes.card} ref={ref}>
+		<Card sx={classes.card} ref={ref}>
 			<UnstyledLink to={`/${url}`}>
 				<CardActionArea>
 					<div style={{ textAlign: "center" }}>

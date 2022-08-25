@@ -29,10 +29,10 @@ const classes = {
 		textAlign: "left"
 	},
 	code: {
-		background: "transparency.border",
-		padding: 3,
+		backgroundColor: "transparency.border",
+		padding: "3px",
 		borderRadius: "5px",
-		color: "secondary",
+		color: "secondary.main",
 		whiteSpace: "nowrap"
 	}
 };

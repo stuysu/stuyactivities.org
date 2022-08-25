@@ -30,7 +30,7 @@ const QUERY = gql`
 	}
 `;
 
-const TagSelection = ({ className }) => {
+const TagSelection = ({ sx }) => {
 	const { data } = useQuery(QUERY);
 	const charterContext = React.useContext(CharterFormContext);
 	const tags = data?.tags || [];
@@ -57,7 +57,7 @@ const TagSelection = ({ className }) => {
 
 	return (
 		<div>
-			<FormControl variant={"outlined"} required className={className}>
+			<FormControl variant={"outlined"} required sx={sx}>
 				<InputLabel>Select Tags</InputLabel>
 				<Select
 					variant={"outlined"}

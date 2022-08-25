@@ -1,0 +1,4 @@
+/* CSS import class for src/comps/calendar.js, which uses a <FullCalendar> component that takes className */
+.event {
+	cursor: pointer;
+}

@@ -21,14 +21,12 @@ const classes = {
 const BasicInfoForm = () => {
 	const form = React.useContext(CharterFormContext);
 
-	// TODO: determine proper definition for bottomMargin
 	return (
 		<>
 			<Grid container spacing={2}>
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
 					<TextField
 						variant={"outlined"}
-						sx={classes.bottomMargin}
 						label={"Activity Name"}
 						value={form?.name || ""}
 						onChange={ev => {
@@ -43,7 +41,7 @@ const BasicInfoForm = () => {
 				</Grid>
 
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
-					<UrlSelection sx={classes.bottomMargin} />
+					<UrlSelection sx={classes.select} />
 				</Grid>
 				<Grid item lg={6} xl={6} md={6} sm={12} xs={12}>
 					<CommitmentLevel sx={classes.select} />
@@ -53,7 +51,7 @@ const BasicInfoForm = () => {
 				</Grid>
 			</Grid>
 
-			<KeywordSelection sx={classes.keywords} />
+			<KeywordSelection sx={classes.select} />
 
 			<TextField
 				sx={classes.socials}

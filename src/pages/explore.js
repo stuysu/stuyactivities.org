@@ -211,7 +211,6 @@ const ExploreContent = () => {
 							<Typography sx={classes.matchMasonryBottomMargin}>{filter.name}</Typography>
 						</>
 					)}
-					{/* TODO: figure this out */}
 					<Masonry
 						breakpointCols={isMobile ? 1 : 2}
 						className="my-masonry-grid"
