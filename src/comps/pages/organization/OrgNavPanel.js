@@ -15,7 +15,7 @@ import Linkify from "linkifyjs/react";
 import List from "@mui/material/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
-import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { Dashboard, Description, Group, GroupWork, Person, Settings } from "@mui/icons-material";
 import ListItemText from "@mui/material/ListItemText";
@@ -53,10 +53,20 @@ const TabItem = ({ to, label, icon, exact = true }) => {
 
 	return (
 		<UnstyledLink to={renderedUrl}>
-			<ListItem button selected={isSelected}>
+			<ListItemButton
+				sx={{
+					"&.Mui-selected": {
+						backgroundColor: "transparency.background",
+						"&.Mui-selected:hover": {
+							backgroundColor: "transparency.background"
+						}
+					}
+				}}
+				selected={isSelected}
+			>
 				<ListItemIcon>{icon}</ListItemIcon>
 				<ListItemText primary={label} />
-			</ListItem>
+			</ListItemButton>
 		</UnstyledLink>
 	);
 };
@@ -132,7 +142,7 @@ const OrgNavPanel = ({ match }) => {
 			)}
 
 			<hr />
-			<List component="nav" aria-label="main mailbox folders">
+			<List component="nav" aria-label="secondary mailbox folders">
 				<TabItem label={"Overview"} to={match.path} icon={<Dashboard />} />
 				<TabItem label={"Charter"} to={match.path + "/charter"} icon={<Description />} />
 				<TabItem label={"Meetings"} to={match.path + "/meetings"} icon={<GroupWork />} />

@@ -2,11 +2,7 @@ import React from "react";
 
 import { createTheme, ThemeProvider as Provider, StyledEngineProvider, useMediaQuery } from "@mui/material";
 
-// TODO: Known bugs/issues
-/*
- *   - No manual toggle for dark mode
- *   - Shadows don't invert, look into https://mui.com/system/shadows/
- */
+// TODO: Manual toggle for dark mode
 
 const ThemeProvider = props => {
 	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -29,12 +25,14 @@ const ThemeProvider = props => {
 					},
 					transparency: prefersDarkMode
 						? {
+								background: "rgba(255, 255, 255, 0.08)",
 								border: "rgba(255, 255, 255, 0.1)",
 								borderDarker: "rgba(255, 255, 255, 0.24)",
 								text: "rgba(255, 255, 255, 0.8)",
 								textLighter: "rgba(255, 255, 255, 0.4)"
 						  }
 						: {
+								background: "rgba(0, 0, 0, 0.08)",
 								border: "rgba(0, 0, 0, 0.1)",
 								borderDarker: "rgba(0, 0, 0, 0.24)",
 								text: "rgba(0, 0, 0, 0.8)",
@@ -77,7 +75,17 @@ const ThemeProvider = props => {
 				},
 				components: {
 					MuiPaper: {
-						styleOverrides: { root: { backgroundImage: "unset" } }
+						styleOverrides: {
+							root: {
+								backgroundImage: "unset",
+								boxShadow: prefersDarkMode
+									? "0px 2px 1px -1px rgba(255,255,255,0.2),0px 1px 1px 0px rgba(255,255,255,0.14),0px 1px 3px 0px rgba(255,255,255,0.12)"
+									: {}
+							}
+						}
+					},
+					MuiTab: {
+						styleOverrides: { root: { minWidth: "160px" } }
 					}
 				},
 				// restores legacy breakpoint values

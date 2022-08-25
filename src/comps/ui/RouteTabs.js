@@ -19,7 +19,7 @@ const RouteTabs = ({ tabs }) => {
 	return (
 		<div>
 			<Tabs
-				indicatorColor="primary"
+				indicatorColor="secondary"
 				textColor="inherit"
 				value={selectedTabIndex}
 				scrollButtons
