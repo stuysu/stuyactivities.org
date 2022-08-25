@@ -91,7 +91,7 @@ const ReportContent = () => {
 
 	return (
 		<div>
-			<AppBar className={classes.appBar} color={"secondary"}>
+			<AppBar className={classes.appBar} color={"secondary"} enableColorOnDark>
 				<Toolbar>
 					<Typography variant="h6" className={classes.title}>
 						Report an issue or ask for help

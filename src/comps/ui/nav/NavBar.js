@@ -33,7 +33,7 @@ const NavBar = ({ setDrawerOpen }) => {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static">
+			<AppBar position="static" enableColorOnDark>
 				<Toolbar>
 					<IconButton
 						edge="start"

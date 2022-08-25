@@ -61,7 +61,7 @@ const MeetingPreviewDialog = () => {
 
 	return (
 		<Dialog fullScreen={isMobile} open={open} onClose={closeDialog} TransitionComponent={Transition}>
-			<AppBar color={"secondary"} className={classes.appBar}>
+			<AppBar color={"secondary"} className={classes.appBar} enableColorOnDark>
 				<Toolbar>
 					<Typography variant="h6" className={classes.title}>
 						Meeting Preview:{" "}
