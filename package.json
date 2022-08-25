@@ -19,6 +19,7 @@
 		"@testing-library/user-event": "^13.5.0",
 		"@tinymce/tinymce-react": "^4.2.0",
 		"apollo-upload-client": "^17.0.0",
+		"date-fns": "^2.29.2",
 		"diff": "^5.1.0",
 		"emoji-picker-react": "^3.6.1",
 		"graphql": "^16.6.0",
@@ -82,5 +83,17 @@
 		"printWidth": 120,
 		"trailingComma": "none",
 		"singleQuote": false
-	}
+	},
+	"description": "The front-end for the new StuyActivities site.",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/stuysu/stuyactivities.org.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/stuysu/stuyactivities.org/issues"
+	},
+	"homepage": "https://github.com/stuysu/stuyactivities.org#readme"
 }
