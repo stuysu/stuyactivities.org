@@ -11,7 +11,7 @@ import {
 	DialogTitle,
 	Typography
 } from "@mui/material";
-import Linkify from "linkifyjs/react";
+import Linkify from "linkify-react";
 import List from "@mui/material/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
