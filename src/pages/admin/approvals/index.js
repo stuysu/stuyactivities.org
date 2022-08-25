@@ -7,8 +7,8 @@ import Box from "@mui/material/Box";
 
 const classes = {
 	root: {
-		// TODO: investigate the meaning of this
-		// "max-width": theme.breakpoints.values.md,
+		// constant set = to theme.breakpoints.values.md
+		maxWidth: "960px",
 		margin: "auto" //possible TODO: make a standard class for centering things
 	},
 	title: {

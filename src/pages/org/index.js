@@ -206,8 +206,7 @@ const OrgRouter = ({ match, history }) => {
 						</Grid>
 
 						<Grid item lg={10} md={9} xl={10} sm={12} xs={12}>
-							{/*TODO: figure out where this contentContainer came from*/}
-							<div className={classes.contentContainer}>
+							<div>
 								<Switch color="secondary">
 									<Route path={match.path} component={Overview} exact />
 									<Route path={match.path + "/charter"} component={Charter} />

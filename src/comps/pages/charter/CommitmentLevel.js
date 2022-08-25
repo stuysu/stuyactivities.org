@@ -12,7 +12,7 @@ const classes = {
 	}
 };
 
-const CommitmentLevel = ({ className }) => {
+const CommitmentLevel = ({ sx }) => {
 	const form = React.useContext(CharterFormContext);
 
 	return (
@@ -23,7 +23,7 @@ const CommitmentLevel = ({ className }) => {
 					fullWidth
 					label={"Commitment Level"}
 					variant={"outlined"}
-					className={className}
+					sx={sx}
 					required
 					value={form?.commitmentLevel || ""}
 					onChange={ev => {

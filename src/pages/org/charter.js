@@ -17,10 +17,9 @@ const classes = {
 		paddingTop: "0.5rem",
 		position: "sticky",
 		top: 0,
-		// TODO: verify that this style (originally `theme.palette.background.default`) works
-		background: "background",
+		backgroundColor: "background.default",
 		width: "100%",
-		color: "primary"
+		color: "primary.main"
 	},
 	charterAnswer: {
 		marginBottom: "1.5rem"

@@ -9,21 +9,24 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
-// TODO: import LazyLoadComponent from "react-lazyload";
-const LazyLoadComponent = () => <div></div>;
+import LazyLoadComponent from "react-lazyload";
 
 const classes = {
 	root: {
 		marginTop: "2rem"
 	},
-	logCard: {
-		margin: "4px",
-		padding: "1rem",
-		// TODO: insure functions correctly
-		"&:hover": {
-			color: "primary.main"
+	logCard: [
+		{
+			margin: "4px",
+			padding: "1rem"
+		},
+		// untested
+		{
+			"&:hover": {
+				color: "primary.main"
+			}
 		}
-	}
+	]
 };
 
 const QUERY = gql`

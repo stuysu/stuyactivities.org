@@ -117,7 +117,7 @@ const Confirm = () => {
 			</List>
 
 			<Typography variant={"h6"}>Leaders:</Typography>
-			<List dense className={classes.root}>
+			<List dense>
 				{form?.leaders?.map((user, index) => {
 					return (
 						<ListItem key={user.id}>

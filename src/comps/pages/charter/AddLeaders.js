@@ -49,7 +49,7 @@ const AddLeaders = () => {
 			/>
 			<br />
 
-			<List dense className={classes.root}>
+			<List dense>
 				{form?.leaders?.map((user, index) => {
 					const changeRole = ev => {
 						const leaders = form.leaders.map((leader, i) => {

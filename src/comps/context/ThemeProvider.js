@@ -6,16 +6,6 @@ import { createTheme, ThemeProvider as Provider, StyledEngineProvider, useMediaQ
 /*
  *   - No manual toggle for dark mode
  *   - Shadows don't invert, look into https://mui.com/system/shadows/
- *   - Needs confirmation:
- *      does the BackButton `sx` prop hack actually work
- *      does the `theme.palette.background.default` referenced in charter pages work
- *      check on MeetingCard.js
- *   Why is BasicInfoForm so confusing:
- *      where and what does the `classes.bottomMargin` in BasicInfoForm come from?!!
- *      we need to add the `sx` prop capabilities to the BasicInfoForm's components
- *   What is Masonry and why does it have its own classes (as seen in src/pages/explore.js)
- *
- *   various TODO comments have been strewn throughout the code i touched
  */
 
 const ThemeProvider = props => {
@@ -41,12 +31,14 @@ const ThemeProvider = props => {
 						? {
 								border: "rgba(255, 255, 255, 0.1)",
 								borderDarker: "rgba(255, 255, 255, 0.24)",
-								text: "rgba(255, 255, 255, 0.8)"
+								text: "rgba(255, 255, 255, 0.8)",
+								textLighter: "rgba(255, 255, 255, 0.4)"
 						  }
 						: {
 								border: "rgba(0, 0, 0, 0.1)",
 								borderDarker: "rgba(0, 0, 0, 0.24)",
-								text: "rgba(0, 0, 0, 0.8)"
+								text: "rgba(0, 0, 0, 0.8)",
+								textLighter: "rgba(0,0,0,0.4)"
 						  }
 				},
 				typography: {
@@ -86,6 +78,16 @@ const ThemeProvider = props => {
 				components: {
 					MuiPaper: {
 						styleOverrides: { root: { backgroundImage: "unset" } }
+					}
+				},
+				// restores legacy breakpoint values
+				breakpoints: {
+					values: {
+						xs: 0,
+						sm: 600,
+						md: 960,
+						lg: 1280,
+						xl: 1920
 					}
 				}
 			}),

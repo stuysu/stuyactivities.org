@@ -5,7 +5,7 @@ import Chip from "@mui/material/Chip";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 
-const KeywordSelection = ({ className }) => {
+const KeywordSelection = ({ sx }) => {
 	const form = React.useContext(CharterFormContext);
 	let value = form?.keywords || [];
 	const [keyword, setKeyword] = React.useState("");
@@ -84,7 +84,7 @@ const KeywordSelection = ({ className }) => {
 					label={"Keywords"}
 					fullWidth
 					required
-					className={className}
+					sx={sx}
 					value={keyword}
 					onChange={handleChange}
 					onKeyDown={handleKey}
