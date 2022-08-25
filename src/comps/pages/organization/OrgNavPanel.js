@@ -19,14 +19,13 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { Dashboard, Description, Group, GroupWork, Person, Settings } from "@mui/icons-material";
 import ListItemText from "@mui/material/ListItemText";
-import makeStyles from "@mui/styles/makeStyles";
 import { OrgContext } from "../../../pages/org";
 import { gql, useMutation } from "@apollo/client";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
 import UserContext from "../../context/UserContext";
 import Join from "./join";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	avatar: {
 		height: "200px",
 		width: "200px",
@@ -43,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 	break: {
 		overflowWrap: "break-word"
 	}
-}));
+};
 
 const TabItem = ({ to, label, icon, exact = true }) => {
 	const params = useParams();
@@ -69,8 +68,6 @@ const LEAVE_MUTATION = gql`
 `;
 
 const OrgNavPanel = ({ match }) => {
-	const classes = useStyles();
-
 	const org = React.useContext(OrgContext);
 	const user = React.useContext(UserContext);
 
@@ -97,16 +94,16 @@ const OrgNavPanel = ({ match }) => {
 	const [dialogError, setDialogError] = React.useState("");
 
 	return (
-		<div className={classes.stickyContainer}>
+		<Box sx={classes.stickyContainer}>
 			<FlexCenter>
-				<Avatar className={classes.avatar} src={org?.charter?.picture?.icon} />
+				<Avatar sx={classes.avatar} src={org?.charter?.picture?.icon} />
 			</FlexCenter>
-			<Typography className={classes.orgName} variant={"h5"}>
+			<Typography sx={classes.orgName} variant={"h5"}>
 				{org?.name}
 			</Typography>
 
 			{org.charter.socials && (
-				<Typography align={"center"} className={classes.break}>
+				<Typography align={"center"} sx={classes.break}>
 					<Linkify>{org.charter.socials}</Linkify>
 				</Typography>
 			)}
@@ -173,7 +170,7 @@ const OrgNavPanel = ({ match }) => {
 					<Button onClick={() => setDialogError("")}>Ok</Button>
 				</DialogActions>
 			</Dialog>
-		</div>
+		</Box>
 	);
 };
 

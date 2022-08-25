@@ -1,10 +1,10 @@
 import React from "react";
 import FallingInSpace from "../../../img/vectors/clip-in-the-space.svg";
 import Typography from "@mui/material/Typography";
-import makeStyles from "@mui/styles/makeStyles";
 import AuthContext from "../AuthContext";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	heading: {
 		fontWeight: 600,
 		color: `transparency.text`,
@@ -13,24 +13,22 @@ const useStyles = makeStyles(theme => ({
 	defaultVector: {
 		maxWidth: "80vw",
 		width: "400px",
-		marginTop: theme.spacing(2)
+		marginTop: 2
 	},
 	retryLogin: {
 		marginTop: "5%",
 		textDecoration: "underline",
 		cursor: "pointer"
 	}
-}));
+};
 
 const Unrecognized = () => {
-	const classes = useStyles();
-
 	const authContext = React.useContext(AuthContext);
 
 	return (
 		<div>
-			<img src={FallingInSpace} alt={"Astronaut falling in space"} className={classes.defaultVector} />
-			<Typography variant={"h4"} className={classes.heading}>
+			<Box component="img" src={FallingInSpace} alt={"Astronaut falling in space"} sx={classes.defaultVector} />
+			<Typography variant={"h4"} sx={classes.heading}>
 				Ouch!
 			</Typography>
 
@@ -41,9 +39,9 @@ const Unrecognized = () => {
 				with your name, osis and grade (if applicable) or what department you teach.
 			</Typography>
 
-			<p className={classes.retryLogin} onClick={() => authContext.set({ page: "landing" })}>
+			<Box component="p" sx={classes.retryLogin} onClick={() => authContext.set({ page: "landing" })}>
 				I want to try signing in again.
-			</p>
+			</Box>
 		</div>
 	);
 };

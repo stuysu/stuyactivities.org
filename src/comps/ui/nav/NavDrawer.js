@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import makeStyles from "@mui/styles/makeStyles";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -28,8 +27,9 @@ import UnstyledLink from "../UnstyledLink";
 import ListSubheader from "@mui/material/ListSubheader";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	list: {
 		width: 250
 	},
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: "inherit",
 		paddingLeft: 0
 	}
-}));
+};
 
 const gradeLabels = {
 	9: "Freshman",
@@ -57,7 +57,6 @@ const gradeLabels = {
 const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 	const user = useContext(UserContext);
 	const location = useLocation();
-	const classes = useStyles();
 
 	React.useEffect(() => {
 		// Close the drawer if the user uses it to navigate
@@ -66,10 +65,10 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 
 	return (
 		<Drawer anchor={"left"} open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-			<div className={classes.avatarContainer}>
+			<Box sx={classes.avatarContainer}>
 				{user.signedIn ? (
 					<div>
-						<Avatar src={user.picture} className={classes.avatar} />
+						<Avatar src={user.picture} sx={classes.avatar} />
 						<Typography variant={"h5"}>{user?.name}</Typography>
 						<Typography variant={"body2"}>{user?.email}</Typography>
 						{Boolean(user?.fourDigitId) && (
@@ -81,12 +80,12 @@ const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 					</div>
 				) : (
 					<div>
-						<img src={Logo} className={classes.avatar} alt={"Student Union Logo"} />
+						<Box component="img" src={Logo} sx={classes.avatar} alt={"Student Union Logo"} />
 						<Typography variant={"h6"}>StuyActivities</Typography>
 					</div>
 				)}
-			</div>
-			<List className={classes.list}>
+			</Box>
+			<List sx={classes.list}>
 				{user.signedIn ? (
 					<ListItem button onClick={() => user.logout()}>
 						<ListItemIcon>

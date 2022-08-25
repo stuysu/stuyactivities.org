@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
 import RouteTabs from "../../comps/ui/RouteTabs";
 import Boograms from "./boograms";
@@ -20,15 +19,15 @@ import {
 } from "@mui/icons-material";
 import EmailClubLeaders from "./email";
 import ManagePromotedClubs from "./promotedclub";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	root: {
-		margin: theme.spacing(3)
+		margin: 3
 	}
-}));
+};
 
 export default function AdminRouter({ match }) {
-	const classes = useStyles();
 	const actualPath = generatePath(match.path, match.params);
 	const user = React.useContext(UserContext);
 
@@ -83,7 +82,7 @@ export default function AdminRouter({ match }) {
 	}
 
 	return (
-		<div className={classes.root}>
+		<Box sx={classes.root}>
 			<Typography variant={"h3"}>Admin Panel</Typography>
 			<RouteTabs tabs={tabs} />
 
@@ -99,6 +98,6 @@ export default function AdminRouter({ match }) {
 					<Redirect to={tabs[0].path} />
 				</Route>
 			</Switch>
-		</div>
+		</Box>
 	);
 }

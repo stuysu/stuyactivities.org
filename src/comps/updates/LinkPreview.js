@@ -1,12 +1,12 @@
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles({
+const classes = {
 	list: {
 		border: "1px solid lightgrey",
 		borderRadius: 5,
@@ -16,16 +16,11 @@ const useStyles = makeStyles({
 		},
 		margin: "0.5rem 0"
 	},
-	icon: {
-		height: 70,
-		width: 70,
-		objectFit: "contain"
-	},
 	anchor: {
 		textDecoration: "none",
 		color: "unset"
 	}
-});
+};
 
 const clampString = (str, len) => {
 	if (str.length > len) {
@@ -36,16 +31,14 @@ const clampString = (str, len) => {
 };
 
 function LinkPreview({ title, description, image, url, siteName }) {
-	const classes = useStyles();
-
 	const shortTitle = typeof title === "string" ? clampString(title, 60) : title;
 	const shortDescription = typeof description === "string" ? clampString(description, 115) : description;
 
 	const domain = new window.URL(url).hostname;
 
 	return (
-		<List className={classes.list}>
-			<a href={url} className={classes.anchor} target={"_blank"} rel="noopener noreferrer">
+		<List sx={classes.list}>
+			<Box component="a" href={url} sx={classes.anchor} target={"_blank"} rel="noopener noreferrer">
 				<ListItem>
 					<ListItemAvatar>
 						<Avatar alt={title} src={image} />
@@ -61,7 +54,7 @@ function LinkPreview({ title, description, image, url, siteName }) {
 						}
 					/>
 				</ListItem>
-			</a>
+			</Box>
 		</List>
 	);
 }

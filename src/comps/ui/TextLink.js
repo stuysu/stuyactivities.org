@@ -1,22 +1,20 @@
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles(theme => ({
-	link: {
-		textDecoration: "none",
-		color: ({ color }) => (color ? theme.palette[color]?.main : "unset"),
-		"&:hover": {
-			textDecoration: "underline"
-		}
-	}
-}));
-
 const TextLink = ({ to, children, color = "primary", target }) => {
-	const classes = useStyles({ color });
-
 	return (
-		<Link to={to} target={target} className={classes.link}>
+		<Link
+			to={to}
+			target={target}
+			sx={{
+				textDecoration: "none",
+				// TODO: verify that `theme.palette[color]?.main` resolves to this
+				color: color,
+				"&:hover": {
+					textDecoration: "underline"
+				}
+			}}
+		>
 			{children}
 		</Link>
 	);

@@ -1,10 +1,9 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import { Grid, Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { CharterFormContext } from "../../../pages/charter";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
@@ -12,14 +11,13 @@ import UserContext from "../../context/UserContext";
 import { Close } from "@mui/icons-material";
 import UserSelect from "../../ui/UserSelect";
 
-const useStyles = makeStyles({
+const classes = {
 	removeIcon: {
 		cursor: "pointer"
 	}
-});
+};
 
 const AddLeaders = () => {
-	const classes = useStyles();
 	const userContext = React.useContext(UserContext);
 
 	const form = React.useContext(CharterFormContext);
@@ -69,7 +67,7 @@ const AddLeaders = () => {
 					};
 
 					return (
-						<ListItem key={user.id} button>
+						<ListItemButton key={user.id}>
 							<ListItemAvatar>
 								<Avatar src={user.picture} />
 							</ListItemAvatar>
@@ -91,9 +89,9 @@ const AddLeaders = () => {
 								</Grid>
 							</Grid>
 							<ListItemSecondaryAction>
-								<Close className={classes.removeIcon} onClick={removeLeader} />
+								<Close sx={classes.removeIcon} onClick={removeLeader} />
 							</ListItemSecondaryAction>
-						</ListItem>
+						</ListItemButton>
 					);
 				})}
 			</List>

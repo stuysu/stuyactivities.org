@@ -1,11 +1,12 @@
 import React from "react";
-import useFilterStyles from "./useFilterStyles";
+import filterStyles from "./filterStyles";
 import arrayToggle from "../../../../utils/arrayToggle";
+import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
 
 export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
-	const classes = useFilterStyles();
+	const classes = filterStyles();
 
 	const toggleMeetingDays = day => {
 		const newDays = arrayToggle(day, meetingDays);
@@ -13,7 +14,7 @@ export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
 	};
 
 	return (
-		<div className={classes.tagContainer}>
+		<Box sx={classes.tagContainer}>
 			<Typography variant={"h6"} style={{ padding: "3px" }}>
 				Meeting Days
 			</Typography>
@@ -27,9 +28,9 @@ export default function MeetingDaysFilter({ meetingDays, setMeetingDays }) {
 					variant={"outlined"}
 					size={"small"}
 					color={meetingDays.includes(tag) ? "secondary" : "default"}
-					className={classes.tag}
+					sx={classes.tag}
 				/>
 			))}
-		</div>
+		</Box>
 	);
 }

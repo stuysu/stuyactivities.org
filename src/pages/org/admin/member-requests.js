@@ -12,26 +12,26 @@ import {
 	Switch,
 	Typography
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
 import RequestList from "../../../comps/pages/organization/RequestList";
 import UserContext from "../../../comps/context/UserContext";
 import UserSelect from "../../../comps/ui/UserSelect";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(2)
+		margin: 2
 	},
 	leftRightMargin: {
-		marginLeft: theme.spacing(1),
-		marginRight: theme.spacing(1)
+		marginLeft: 1,
+		marginRight: 1
 	},
 	topBottomMargin: {
-		marginTop: theme.spacing(1),
-		marginBottom: theme.spacing(1)
+		marginTop: 1,
+		marginBottom: 1
 	}
-}));
+};
 
 const QUERY = gql`
 	query MembershipRequests($orgId: Int!) {
@@ -86,7 +86,6 @@ const OUTGOING_MUTATION = gql`
 `;
 
 export default function MemberRequests({ match }) {
-	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	const { data, refetch } = useQuery(QUERY, {
 		variables: { orgId: org.id }
@@ -166,9 +165,9 @@ export default function MemberRequests({ match }) {
 	const userContext = React.useContext(UserContext);
 
 	return (
-		<div className={classes.margin}>
+		<Box sx={classes.margin}>
 			<Typography variant="h5">Join Instructions</Typography>
-			<Grid container alignItems={"center"} spacing={2} className={classes.topBottomMargin}>
+			<Grid container alignItems={"center"} spacing={2} sx={classes.topBottomMargin}>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
 					<TextField
 						fullWidth
@@ -207,7 +206,7 @@ export default function MemberRequests({ match }) {
 			{org.joinInstructions?.buttonEnabled === false && (
 				<div>
 					<Typography variant="h5">Send Outgoing Request</Typography>
-					<div className={classes.topBottomMargin}>
+					<Box sx={classes.topBottomMargin}>
 						{!user.id ? (
 							<UserSelect
 								filter={user =>
@@ -223,7 +222,7 @@ export default function MemberRequests({ match }) {
 						) : (
 							<Grid container spacing={1} alignItems={"center"}>
 								<Grid item xs={12} sm={6} md={4} lg={4} xl={2} style={{ display: "flex" }}>
-									<Avatar src={user.picture} className={classes.leftRightMargin} />
+									<Avatar src={user.picture} sx={classes.leftRightMargin} />
 									<div>
 										<Typography>{user.name}</Typography>
 										<Typography color={"textSecondary"} variant={"subtitle2"}>
@@ -266,7 +265,7 @@ export default function MemberRequests({ match }) {
 								<Grid item xs={12} sm={12} md={6} lg={6} xl={2}>
 									<Button
 										style={{ float: "right" }}
-										className={classes.leftRightMargin}
+										sx={classes.leftRightMargin}
 										variant="contained"
 										color="primary"
 										onClick={() =>
@@ -285,7 +284,7 @@ export default function MemberRequests({ match }) {
 									</Button>
 									<Button
 										style={{ float: "right" }}
-										className={classes.leftRightMargin}
+										sx={classes.leftRightMargin}
 										variant="contained"
 										onClick={() => setUser({})}
 									>
@@ -294,7 +293,7 @@ export default function MemberRequests({ match }) {
 								</Grid>
 							</Grid>
 						)}
-					</div>
+					</Box>
 				</div>
 			)}
 			{data?.membershipRequests?.filter(request => !request.userApproval || !request.adminApproval)?.length ===
@@ -354,6 +353,6 @@ export default function MemberRequests({ match }) {
 					<Button onClick={() => setDialogError("")}>Close</Button>
 				</DialogActions>
 			</Dialog>
-		</div>
+		</Box>
 	);
 }

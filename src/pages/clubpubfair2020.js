@@ -1,5 +1,4 @@
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import Typography from "@mui/material/Typography";
 import { Helmet } from "react-helmet";
 import BackButton from "../comps/ui/BackButton";
@@ -44,7 +43,7 @@ function a11yProps(index) {
 	};
 }
 
-const useStyles = makeStyles(() => ({
+const classes = {
 	layout: {
 		display: "flex",
 		justifyContent: "center",
@@ -61,10 +60,9 @@ const useStyles = makeStyles(() => ({
 		textAlign: "center",
 		margin: "1rem"
 	}
-}));
+};
 
 const ClubPubFair = () => {
-	const classes = useStyles();
 	const [tab, setTab] = React.useState(0);
 	const user = React.useContext(UserContext);
 
@@ -86,10 +84,10 @@ const ClubPubFair = () => {
 					content={"A page designed to help students through the Club Pub Fair."}
 				/>
 			</Helmet>
-			<div className={classes.layout}>
+			<Box sx={classes.layout}>
 				<main style={{ width: "100%" }}>
 					<BackButton to={"/"} label={"Back To Home"} />
-					<Typography variant={"h4"} className={classes.title}>
+					<Typography variant={"h4"} sx={classes.title}>
 						Virtual Clubs & Pubs Fair 2020
 					</Typography>
 					<br />
@@ -207,7 +205,7 @@ const ClubPubFair = () => {
 						</TabPanel>
 					</Paper>
 				</main>
-			</div>
+			</Box>
 		</div>
 	);
 };

@@ -12,7 +12,7 @@ const LOGIN_WITH_GOOGLE = gql`
 	}
 `;
 
-const GoogleLoginButton = ({ className }) => {
+const GoogleLoginButton = () => {
 	const [loginWithGoogle, { error, loading }] = useMutation(LOGIN_WITH_GOOGLE);
 	const scriptStatus = useScript("https://accounts.google.com/gsi/client");
 	const ref = useRef(null);

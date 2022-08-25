@@ -1,11 +1,12 @@
 import React from "react";
-import useFilterStyles from "./useFilterStyles";
+import filterStyles from "./filterStyles";
 import arrayToggle from "../../../../utils/arrayToggle";
 import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels }) {
-	const classes = useFilterStyles();
+	const classes = filterStyles();
 
 	const toggleCommitmentLevel = level => {
 		const newLevels = arrayToggle(level, commitmentLevels);
@@ -13,7 +14,7 @@ export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels
 	};
 
 	return (
-		<div className={classes.tagContainer}>
+		<Box sx={classes.tagContainer}>
 			<Typography variant={"h6"} style={{ padding: "3px" }}>
 				Commitment Level
 			</Typography>
@@ -27,9 +28,9 @@ export default function CommitmentFilter({ commitmentLevels, setCommitmentLevels
 					variant={"outlined"}
 					size={"small"}
 					color={commitmentLevels.includes(tag) ? "secondary" : "default"}
-					className={classes.tag}
+					sx={classes.tag}
 				/>
 			))}
-		</div>
+		</Box>
 	);
 }

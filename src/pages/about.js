@@ -1,12 +1,11 @@
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import Typography from "@mui/material/Typography";
 import { Helmet } from "react-helmet";
 import Grid from "@mui/material/Grid";
-import { Link } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import BackButton from "../comps/ui/BackButton";
 
-const useStyles = makeStyles(() => ({
+const classes = {
 	layout: {
 		display: "flex",
 		justifyContent: "center",
@@ -22,11 +21,9 @@ const useStyles = makeStyles(() => ({
 		textAlign: "center",
 		margin: "1rem"
 	}
-}));
+};
 
 const About = () => {
-	const classes = useStyles();
-
 	return (
 		<div>
 			<Helmet>
@@ -39,10 +36,10 @@ const About = () => {
 					}
 				/>
 			</Helmet>
-			<div className={classes.layout}>
+			<Box sx={classes.layout}>
 				<main>
 					<BackButton to={"/"} label={"Back To Home"} />
-					<Typography variant={"h4"} className={classes.title}>
+					<Typography variant={"h4"} sx={classes.title}>
 						About
 					</Typography>
 					<br />
@@ -133,7 +130,7 @@ const About = () => {
 						</Grid>
 					</Grid>
 				</main>
-			</div>
+			</Box>
 		</div>
 	);
 };
