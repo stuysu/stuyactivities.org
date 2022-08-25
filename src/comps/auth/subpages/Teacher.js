@@ -16,7 +16,7 @@ const classes = {
 	},
 	heading: {
 		fontWeight: 600,
-		color: 'transparency.text',
+		color: "transparency.text",
 		margin: "1rem"
 	},
 	defaultVector: {
@@ -29,7 +29,7 @@ const classes = {
 		textAlign: "left"
 	},
 	code: {
-		background: 'transparency.border',
+		background: "transparency.border",
 		padding: 3,
 		borderRadius: "5px",
 		color: "secondary",

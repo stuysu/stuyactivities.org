@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 const classes = {
 	heading: {
 		fontWeight: 600,
-		color: 'transparency.text',
+		color: "transparency.text",
 		margin: "1rem"
 	},
 	defaultVector: {
