@@ -123,8 +123,11 @@ const OrgNavPanel = ({ match }) => {
 						color={"secondary"}
 						fullWidth
 						onClick={user.signedIn ? () => setJoinOpen(true) : triggerLoginDialog}
+						disabled={!org.joinInstructions?.buttonEnabled}
 					>
-						{memberStatus === "none" && org.joinInstructions.buttonEnabled && "Request To Join"}
+						{memberStatus === "none" && org.joinInstructions?.buttonEnabled
+							? "Request To Join"
+							: "Joining Disabled"}
 						{memberStatus === "invited" && "Accept Invitation"}
 						{memberStatus === "requested" && "Requested"}
 					</Button>
