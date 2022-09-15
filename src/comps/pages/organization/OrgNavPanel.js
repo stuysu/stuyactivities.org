@@ -103,8 +103,6 @@ const OrgNavPanel = ({ match }) => {
 	});
 	const [dialogError, setDialogError] = React.useState("");
 
-	console.log("DEBUG!!!", org.joinInstructions?.buttonEnabled);
-
 	return (
 		<Box sx={classes.stickyContainer}>
 			<FlexCenter>
