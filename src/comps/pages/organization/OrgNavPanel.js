@@ -105,7 +105,6 @@ const OrgNavPanel = ({ match }) => {
 
 	console.log("DEBUG!!!", org.joinInstructions?.buttonEnabled);
 
-
 	return (
 		<Box sx={classes.stickyContainer}>
 			<FlexCenter>
@@ -128,7 +127,7 @@ const OrgNavPanel = ({ match }) => {
 						onClick={user.signedIn ? () => setJoinOpen(true) : triggerLoginDialog}
 						disabled={org.joinInstructions?.buttonEnabled === false}
 					>
-						{memberStatus === "none" && (org.joinInstructions?.buttonEnabled === false)
+						{memberStatus === "none" && org.joinInstructions?.buttonEnabled === false
 							? "Joining Disabled"
 							: "Request To Join"}
 						{memberStatus === "invited" && "Accept Invitation"}
