@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
+import PromotedClubCard from "../comps/pages/explore/PromotedClubCard";
 import { List as ListIcon, ViewComfy } from "@material-ui/icons";
 import SearchBox from "../comps/pages/catalog/filters/SearchBox";
 import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
