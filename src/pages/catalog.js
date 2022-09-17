@@ -100,7 +100,7 @@ const QUERY = gql`
 				name
 			}
 		}
-    promotedClubs: promotedClubs {
+		promotedClubs: promotedClubs {
 			id
 			blurb
 			organization {
@@ -242,16 +242,16 @@ const Catalog = () => {
 					</div>
 				</Grid>
 				<Grid item xs={12} sm={12} md={9} lg={9} xl={10} className={classes.bigChild}>
-          {data !== undefined && data.promotedClubs.length !== 0 && (
-            <div>
-              <Typography variant={"h4"}>Featured Clubs</Typography>
-              <div>
-                {data.promotedClubs.map(promotedClub => (
-                  <PromotedClubCard {...promotedClub} />
-                ))}
-              </div>
-            </div>
-          )}
+					{data !== undefined && data.promotedClubs.length !== 0 && (
+						<div>
+							<Typography variant={"h4"}>Featured Clubs</Typography>
+							<div>
+								{data.promotedClubs.map(promotedClub => (
+									<PromotedClubCard {...promotedClub} />
+								))}
+							</div>
+						</div>
+					)}
 					<div className={classes.catalogHeading}>
 						<Typography variant={"h4"} className={classes.filterChild}>
 							Catalog
