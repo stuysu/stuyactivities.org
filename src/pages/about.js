@@ -60,8 +60,9 @@ const About = () => {
 					</Typography>
 					<Typography paragraph>
 						We also have a room reservation system, Google Calendar integration, member notification system
-						to help leaders to organize meetings and keep all their members informed and will soon be
-						introducing a feature for clubs to share updates with the world.
+						to help leaders to organize meetings and keep all their members informed, a system for clubs to
+						send updates to their members, a system to send out updates about policies to all club leaders,
+						and an archive of all clubs created since 2020.
 					</Typography>
 					<Typography paragraph>
 						The front-end is a{" "}
