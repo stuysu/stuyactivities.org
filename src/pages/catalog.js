@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { gql, useQuery } from "@apollo/client";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
+import PromotedClubCard from "../comps/pages/explore/PromotedClubCard";
 import { List as ListIcon, ViewComfy } from "@material-ui/icons";
 import SearchBox from "../comps/pages/catalog/filters/SearchBox";
 import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
@@ -72,7 +73,7 @@ const QUERY = gql`
 		$offset: Int!
 		$randomOrderSeed: Int!
 	) {
-		organizations(
+		organizations: organizations(
 			keyword: $keyword
 			tags: $tags
 			commitmentLevels: $commitmentLevels
@@ -98,6 +99,22 @@ const QUERY = gql`
 			tags {
 				id
 				name
+			}
+		}
+		promotedClubs: promotedClubs {
+			id
+			blurb
+			organization {
+				id
+				name
+				url
+				charter {
+					id
+					picture {
+						url
+						thumbnail(width: 80, height: 80)
+					}
+				}
 			}
 		}
 	}
@@ -226,6 +243,16 @@ const Catalog = () => {
 					</div>
 				</Grid>
 				<Grid item xs={12} sm={12} md={9} lg={9} xl={10} className={classes.bigChild}>
+					{data !== undefined && data.promotedClubs.length !== 0 && (
+						<div>
+							<Typography variant={"h4"}>Featured Clubs</Typography>
+							<div>
+								{data.promotedClubs.map(promotedClub => (
+									<PromotedClubCard {...promotedClub} />
+								))}
+							</div>
+						</div>
+					)}
 					<div className={classes.catalogHeading}>
 						<Typography variant={"h4"} className={classes.filterChild}>
 							Catalog
