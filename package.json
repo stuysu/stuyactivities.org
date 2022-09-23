@@ -93,8 +93,6 @@
 		"type": "git",
 		"url": "git+https://github.com/stuysu/stuyactivities.org.git"
 	},
-	"author": "",
-	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/stuysu/stuyactivities.org/issues"
 	},
