@@ -1,11 +1,26 @@
 import React from "react";
 
-import { createTheme, ThemeProvider as Provider, StyledEngineProvider, useMediaQuery } from "@mui/material";
+import { createTheme, ThemeProvider as Provider, useMediaQuery } from "@mui/material";
 
-// TODO: Manual toggle for dark mode
+const ThemeContext = React.createContext({
+	toggleColorMode: () => {},
+	colorMode: false
+});
 
 const ThemeProvider = props => {
-	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+	const browserPreference = useMediaQuery("(prefers-color-scheme: dark)");
+	const [storedPreference, setStoredPreference] = React.useState(window.localStorage.getItem("mode"));
+
+	const prefersDarkMode = storedPreference !== null ? storedPreference === "dark" : browserPreference;
+	const toggle = React.useMemo(
+		() => () =>
+			setStoredPreference(() => {
+				const output = prefersDarkMode ? "light" : "dark";
+				window.localStorage.setItem("mode", output); // persist in localStorage
+				return output;
+			}),
+		[prefersDarkMode]
+	);
 
 	const theme = React.useMemo(
 		() =>
@@ -101,11 +116,13 @@ const ThemeProvider = props => {
 			}),
 		[prefersDarkMode]
 	);
+
+	const value = { toggleColorMode: toggle, colorMode: prefersDarkMode };
 	return (
-		<StyledEngineProvider injectFirst>
+		<ThemeContext.Provider value={value}>
 			<Provider theme={theme}>{props.children}</Provider>
-		</StyledEngineProvider>
+		</ThemeContext.Provider>
 	);
 };
 
-export default ThemeProvider;
+export { ThemeProvider, ThemeContext };

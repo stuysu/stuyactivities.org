@@ -11,7 +11,6 @@ import {
 	DialogTitle,
 	Typography
 } from "@mui/material";
-import Linkify from "linkify-react";
 import List from "@mui/material/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
@@ -24,6 +23,7 @@ import { gql, useMutation } from "@apollo/client";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
 import UserContext from "../../context/UserContext";
 import Join from "./join";
+import LinkifyText from "../../ui/LinkifyText";
 
 const classes = {
 	avatar: {
@@ -114,7 +114,7 @@ const OrgNavPanel = ({ match }) => {
 
 			{org.charter.socials && (
 				<Typography align={"center"} sx={classes.break}>
-					<Linkify>{org.charter.socials}</Linkify>
+					<LinkifyText underline="always">{org.charter.socials}</LinkifyText>
 				</Typography>
 			)}
 			{org.active ? (

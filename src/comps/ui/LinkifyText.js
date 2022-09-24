@@ -2,7 +2,7 @@ import React from "react";
 import Link from "@mui/material/Link";
 import Linkify from "linkify-react";
 
-const LinkifyText = ({ children, color = "secondary" }) => {
+const LinkifyText = ({ children, color = "secondary", underline = "hover" }) => {
 	return (
 		<Linkify
 			options={{
@@ -24,7 +24,7 @@ const LinkifyText = ({ children, color = "secondary" }) => {
 						}
 
 						return (
-							<Link href={link} target={"_blank"} color={color} underline="hover">
+							<Link href={link} target={"_blank"} color={color} underline={underline}>
 								{value}
 							</Link>
 						);
