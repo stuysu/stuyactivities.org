@@ -10,9 +10,10 @@ import UserContext from "../../context/UserContext";
 import NavAvatar from "./NavAvatar";
 import UnstyledLink from "../UnstyledLink";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { BugReport } from "@mui/icons-material";
+import { BugReport, Brightness4, Brightness7 } from "@mui/icons-material";
 import { triggerReportDialog } from "../../help/ReportDialog";
 import { Box } from "@mui/material";
+import { ThemeContext } from "../../context/ThemeProvider";
 
 const classes = {
 	root: {
@@ -48,6 +49,21 @@ const NavBar = ({ setDrawerOpen }) => {
 						<UnstyledLink to={"/"}>StuyActivities</UnstyledLink>
 					</Typography>
 					<div>
+						<ThemeContext.Consumer>
+							{value => (
+								<IconButton
+									edge="start"
+									color="inherit"
+									aria-label="menu"
+									onClick={value.toggleColorMode}
+									size="large"
+									sx={{ marginRight: 1 }}
+								>
+									{value.colorMode ? <Brightness4 /> : <Brightness7 />}
+								</IconButton>
+							)}
+						</ThemeContext.Consumer>
+
 						<IconButton
 							edge="start"
 							color="inherit"

@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, Typography } from "@mui/material";
+import { List, ListItem, Link, Typography } from "@mui/material";
 import { gql, useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
 
@@ -56,7 +56,7 @@ export default function Strikes({ match }) {
 					))}
 				</List>
 				<Typography>
-					To appeal these strikes, email <a href="mailto: clubpub@stuysu.org">clubpub@stuysu.org</a> with your
+					To appeal these strikes, email <Link color="secondary"  href="mailto: clubpub@stuysu.org">clubpub@stuysu.org</Link> with your
 					organization name, the reason you were given the strike, and why it should be removed.
 				</Typography>
 			</Box>
