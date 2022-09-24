@@ -22,8 +22,15 @@ export default function Rules() {
 			</Typography>
 			<Typography paragraph>
 				If you are experiencing technical issues or difficulties regarding the StuyActivities website, please
-				contact us at <Link color="secondary"  href="mailto:help@stuyactivities.org">help@stuyactivities.org</Link>,{" "}
-				<Link color="secondary"  href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</Link>, or an SU representative.
+				contact us at{" "}
+				<Link color="secondary" href="mailto:help@stuyactivities.org">
+					help@stuyactivities.org
+				</Link>
+				,{" "}
+				<Link color="secondary" href="mailto:clubpub@stuysu.org">
+					clubpub@stuysu.org
+				</Link>
+				, or an SU representative.
 			</Typography>
 			<Typography>
 				<ol>
@@ -32,7 +39,9 @@ export default function Rules() {
 						administrators of the Clubs &amp; Pubs department. All clubs must have a faculty advisor. Please
 						allow up to 2 weeks for charter approval. When an Activity is fully approved and allowed to
 						operate, its charter will be visible on the online catalog of the StuyActivities website (
-						<Link color="secondary"  href="https://stuyactivities.org/catalog">www.StuyActivities.org</Link>
+						<Link color="secondary" href="https://stuyactivities.org/catalog">
+							www.StuyActivities.org
+						</Link>
 						). All Activity leaders will receive an email when their charter has been fully approved and is
 						in the catalog.
 					</li>
@@ -58,18 +67,27 @@ export default function Rules() {
 					</li>
 					<li>
 						All Activities must adhere to the New York City Department of Education{" "}
-						<Link color="secondary"  href="https://www.schools.nyc.gov/docs/default-source/default-document-library/a-601-english">
+						<Link
+							color="secondary"
+							href="https://www.schools.nyc.gov/docs/default-source/default-document-library/a-601-english"
+						>
 							Chancellor’s Regulation A-601
 						</Link>
 						. Any Activity that violates this regulation or other{" "}
-						<Link color="secondary"  href="https://www.schools.nyc.gov/about-us/policies/chancellors-regulations">
+						<Link
+							color="secondary"
+							href="https://www.schools.nyc.gov/about-us/policies/chancellors-regulations"
+						>
 							Chancellor’s Regulations
 						</Link>
 						&nbsp;will face suspension and revocation of their charter.
 					</li>
 					<li>
 						All Activities must adhere to the{" "}
-						<Link color="secondary"  href="https://stuy.enschool.org/apps/pages/index.jsp?uREC_ID=126635&type=d">
+						<Link
+							color="secondary"
+							href="https://stuy.enschool.org/apps/pages/index.jsp?uREC_ID=126635&type=d"
+						>
 							Stuyvesant Code of Conduct
 						</Link>
 						&nbsp;and other school policies. Any Activity that violates these regulations will face
@@ -134,9 +152,11 @@ export default function Rules() {
 						<ul>
 							<li>
 								Have the registered Activity faculty advisor (not the student leaders) email{" "}
-								<Link color="secondary"  href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</Link>, the COSA (Mr. Polazzo) and
-								the Assistant Principal (Mr. Moran) at least one week in advance with the Subject:
-								“Activity Meeting Outside of School Premises: [ACTIVITY NAME]”
+								<Link color="secondary" href="mailto:clubpub@stuysu.org">
+									clubpub@stuysu.org
+								</Link>
+								, the COSA (Mr. Polazzo) and the Assistant Principal (Mr. Moran) at least one week in
+								advance with the Subject: “Activity Meeting Outside of School Premises: [ACTIVITY NAME]”
 							</li>
 							<li>
 								The email should detail the date, location, paperwork, number of people attending,
@@ -190,7 +210,9 @@ export default function Rules() {
 					</li>
 					<li>
 						If an Activity needs a long-term booking of a specific room, its leaders must email{" "}
-						<Link color="secondary"  href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</Link>
+						<Link color="secondary" href="mailto:clubpub@stuysu.org">
+							clubpub@stuysu.org
+						</Link>
 						with the Subject: “Long Term Room Reservation: [ACTIVITY NAME]”, detailing the reason(s) for why
 						this reservation is necessary. Long term reservations will be handled by the SU Clubs &amp; Pubs
 						Department and approved on a case-by-case basis.
@@ -217,13 +239,20 @@ export default function Rules() {
 						<ul>
 							<li>
 								The registered Activity faculty advisor (not the Activity leaders) must email{" "}
-								<Link color="secondary"  href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</Link>, the Student Union COSA, Mr.
-								Polazzo, and the Assistant Principal, Mr. Moran, at least one week in advance with the
-								Subject: “[NAME OF FACILITY] Reservation: [ACTIVITY NAME]. Mr. Polazzo can be reached at{" "}
-								<Link color="secondary"  href="mailto:MPolazz@schools.nyc.gov">MPolazz@schools.nyc.gov</Link> and can be found in
-								Room, 260. Mr. Moran can be reached at{" "}
-								<Link color="secondary"  href="mailto:BMoran@schools.nyc.gov">BMoran@schools.nyc.gov</Link> and can be found in
-								Room 103.
+								<Link color="secondary" href="mailto:clubpub@stuysu.org">
+									clubpub@stuysu.org
+								</Link>
+								, the Student Union COSA, Mr. Polazzo, and the Assistant Principal, Mr. Moran, at least
+								one week in advance with the Subject: “[NAME OF FACILITY] Reservation: [ACTIVITY NAME].
+								Mr. Polazzo can be reached at{" "}
+								<Link color="secondary" href="mailto:MPolazz@schools.nyc.gov">
+									MPolazz@schools.nyc.gov
+								</Link>{" "}
+								and can be found in Room, 260. Mr. Moran can be reached at{" "}
+								<Link color="secondary" href="mailto:BMoran@schools.nyc.gov">
+									BMoran@schools.nyc.gov
+								</Link>{" "}
+								and can be found in Room 103.
 							</li>
 							<li>
 								The email should detail the reason for reserving the facility, as well as the date,
@@ -270,10 +299,17 @@ export default function Rules() {
 						meeting with the Student Union Budget Committee. Failure to attend the meeting will result in an
 						automatic refusal of the Activity’s funding request. If there are extenuating circumstances
 						preventing an Activity’s leader(s) or Faculty Advisor from attending the meeting, an email must
-						be sent to <Link color="secondary"  href="mailto:clubpub@stuysu.org">clubpub@stuysu.org</Link> and{" "}
-						<Link color="secondary"  href="mailto:budget@stuysu.org">budget@stuysu.org</Link> prior to the scheduled meeting time
-						detailing the excuse. The Student Union will decide upon further action on a case-by-case basis
-						and reserves the right to refuse an additional meeting if the excuse is not valid.
+						be sent to{" "}
+						<Link color="secondary" href="mailto:clubpub@stuysu.org">
+							clubpub@stuysu.org
+						</Link>{" "}
+						and{" "}
+						<Link color="secondary" href="mailto:budget@stuysu.org">
+							budget@stuysu.org
+						</Link>{" "}
+						prior to the scheduled meeting time detailing the excuse. The Student Union will decide upon
+						further action on a case-by-case basis and reserves the right to refuse an additional meeting if
+						the excuse is not valid.
 					</li>
 					<li>
 						When an Activity requests funding from the Student Union, the Activity can request to be given
@@ -283,7 +319,10 @@ export default function Rules() {
 								Grant:&nbsp;Upon receiving a grant, the Activity must spend its own money before
 								receiving reimbursements from the Student Union up to the amount allocated (not
 								including tax). Activities must save all of their receipts and submit original copies to
-								the SU Budget Department (<Link color="secondary"  href="mailto:budget@stuysu.org">budget@stuysu.org</Link>
+								the SU Budget Department (
+								<Link color="secondary" href="mailto:budget@stuysu.org">
+									budget@stuysu.org
+								</Link>
 								). Two weeks after submission, the Activity should go to Room 103 to pick up the
 								reimbursement check from Ms. Caruzo (the school treasurer). The Budget Department cannot
 								reimburse taxes, so it is suggested that the Activity use the school’s tax-exempt form.
@@ -306,7 +345,10 @@ export default function Rules() {
 							<li>
 								If an Activity has received a grant, it must provide proof of purchase of each item (in
 								the form of a receipt) as well as information on the purchase (i.e. expected delivery
-								date) to the Budget Department (<Link color="secondary"  href="mailto:budget@stuysu.org">budget@stuysu.org</Link>
+								date) to the Budget Department (
+								<Link color="secondary" href="mailto:budget@stuysu.org">
+									budget@stuysu.org
+								</Link>
 								) within seven days of purchase.
 							</li>
 							<li>Any items purchased must be shown at the advanced request of the Budget Department.</li>

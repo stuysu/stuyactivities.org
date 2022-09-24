@@ -56,8 +56,11 @@ export default function Strikes({ match }) {
 					))}
 				</List>
 				<Typography>
-					To appeal these strikes, email <Link color="secondary"  href="mailto: clubpub@stuysu.org">clubpub@stuysu.org</Link> with your
-					organization name, the reason you were given the strike, and why it should be removed.
+					To appeal these strikes, email{" "}
+					<Link color="secondary" href="mailto: clubpub@stuysu.org">
+						clubpub@stuysu.org
+					</Link>{" "}
+					with your organization name, the reason you were given the strike, and why it should be removed.
 				</Typography>
 			</Box>
 		);
