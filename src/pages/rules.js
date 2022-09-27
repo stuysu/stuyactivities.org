@@ -30,9 +30,9 @@ export default function Rules() {
 				<ol>
 					<li>
 						For an Activity to exist and operate, a charter must be submitted and&nbsp;approved by&nbsp;the
-						administrators of the Clubs &amp; Pubs department. All clubs must have a faculty advisor. Please
-						allow up to 2 weeks for charter approval. When an Activity is fully approved and allowed to
-						operate, its charter will be visible on the online catalog of the StuyActivities website (
+						administrators of the Clubs &amp; Pubs department. Please allow up to 2 weeks for
+            charter approval. When an Activity is fully approved and allowed to operate, its
+            charter will be visible on the online catalog of the StuyActivities website (
 						<a href="https://stuyactivities.org/catalog">www.StuyActivities.org</a>
 						). All Activity leaders will receive an email when their charter has been fully approved and is
 						in the catalog.
