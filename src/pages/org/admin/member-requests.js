@@ -198,96 +198,94 @@ export default function MemberRequests({ match }) {
 					</Button>
 				</Grid>
 			</Grid>
-			{org.joinInstructions?.buttonEnabled === false && (
-				<div>
-					<Typography variant="h5">Send Outgoing Request</Typography>
-					<div className={classes.topBottomMargin}>
-						{!user.id ? (
-							<UserSelect
-								filter={user =>
-									user.id !== userContext.id &&
-									!org.memberships.some(member => member.user.id === user.id) &&
-									data &&
-									!data.membershipRequests.some(request => request.user.id === user.id)
-								}
-								onChange={(_, newUser) => setUser(newUser)}
-								keyword={keyword}
-								setKeyword={setKeyword}
-							/>
-						) : (
-							<Grid container spacing={1} alignItems={"center"}>
-								<Grid item xs={12} sm={6} md={4} lg={4} xl={2} style={{ display: "flex" }}>
-									<Avatar src={user.picture} className={classes.leftRightMargin} />
-									<div>
-										<Typography>{user.name}</Typography>
-										<Typography color={"textSecondary"} variant={"subtitle2"}>
-											{user.email}
-										</Typography>
-									</div>
-								</Grid>
-								<Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
-									<TextField
-										fullWidth
-										multiline
-										label="Role"
-										value={role}
-										onChange={e => setRole(e.target.value)}
-									/>
-								</Grid>
-								<Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
-									<TextField
-										fullWidth
-										multiline
-										label="Message (optional)"
-										value={message}
-										onChange={e => setMessage(e.target.value)}
-									/>
-								</Grid>
-								<Grid item xs={12} sm={6} md={6} lg={6} xl={2}>
-									<FormControlLabel
-										control={
-											<Switch
-												checked={adminPriveleges}
-												onChange={e => setAdminPriveleges(e.target.checked)}
-											/>
-										}
-										label="Admin Priveleges"
-									/>
-								</Grid>
-								<Grid item xs={12} sm={12} md={6} lg={6} xl={2}>
-									<Button
-										style={{ float: "right" }}
-										className={classes.leftRightMargin}
-										variant="contained"
-										color="primary"
-										onClick={() =>
-											outgoingMutation({
-												variables: {
-													orgId: org.id,
-													userId: user.id,
-													role,
-													message,
-													admin: adminPriveleges
-												}
-											})
-										}
-									>
-										Send
-									</Button>
-									<Button
-										style={{ float: "right" }}
-										className={classes.leftRightMargin}
-										variant="contained"
-										onClick={() => setUser({})}
-									>
-										Cancel
-									</Button>
-								</Grid>
-							</Grid>
-						)}
-					</div>
-				</div>
-			)}
+      <div>
+        <Typography variant="h5">Send Outgoing Request</Typography>
+        <div className={classes.topBottomMargin}>
+          {!user.id ? (
+            <UserSelect
+              filter={user =>
+                user.id !== userContext.id &&
+                !org.memberships.some(member => member.user.id === user.id) &&
+                data &&
+                !data.membershipRequests.some(request => request.user.id === user.id)
+              }
+              onChange={(_, newUser) => setUser(newUser)}
+              keyword={keyword}
+              setKeyword={setKeyword}
+            />
+          ) : (
+            <Grid container spacing={1} alignItems={"center"}>
+              <Grid item xs={12} sm={6} md={4} lg={4} xl={2} style={{ display: "flex" }}>
+                <Avatar src={user.picture} className={classes.leftRightMargin} />
+                <div>
+                  <Typography>{user.name}</Typography>
+                  <Typography color={"textSecondary"} variant={"subtitle2"}>
+                    {user.email}
+                  </Typography>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
+                <TextField
+                  fullWidth
+                  multiline
+                  label="Role"
+                  value={role}
+                  onChange={e => setRole(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+                <TextField
+                  fullWidth
+                  multiline
+                  label="Message (optional)"
+                  value={message}
+                  onChange={e => setMessage(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={6} lg={6} xl={2}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={adminPriveleges}
+                      onChange={e => setAdminPriveleges(e.target.checked)}
+                    />
+                  }
+                  label="Give Admin Privileges"
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6} xl={2}>
+                <Button
+                  style={{ float: "right" }}
+                  className={classes.leftRightMargin}
+                  variant="contained"
+                  color="primary"
+                  onClick={() =>
+                    outgoingMutation({
+                      variables: {
+                        orgId: org.id,
+                        userId: user.id,
+                        role,
+                        message,
+                        admin: adminPriveleges
+                      }
+                    })
+                  }
+                >
+                  Send
+                </Button>
+                <Button
+                  style={{ float: "right" }}
+                  className={classes.leftRightMargin}
+                  variant="contained"
+                  onClick={() => setUser({})}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+            </Grid>
+          )}
+        </div>
+      </div>
 			{data?.membershipRequests?.filter(request => !request.userApproval || !request.adminApproval)?.length ===
 			0 ? (
 				<Typography variant="h5">No outgoing or incoming requests at this time</Typography>
