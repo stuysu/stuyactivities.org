@@ -55,7 +55,7 @@ p {
 	--fc-button-active-border-color: rgba(0, 0, 0, 0.01);
 	--fc-button-bg-color: #e66767;
 	--fc-button-border-color: rgba(0, 0, 0, 0.01);
-    /* --fc-today-bg-color defined in src/comps/Calendar.js for dynamic theming */
+	/* --fc-today-bg-color defined in src/comps/Calendar.js for dynamic theming */
 }
 
 .my-masonry-grid {
