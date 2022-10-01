@@ -8,6 +8,8 @@ const ThemeContext = React.createContext({
 });
 
 const ThemeProvider = props => {
+	// dark mode detection/toggles/context may become obsolete in a new version of MUI with the <CssVarsProvider> component
+	// using a home-made solution for now since it's still marked experimental
 	const browserPreference = useMediaQuery("(prefers-color-scheme: dark)");
 	const [storedPreference, setStoredPreference] = React.useState(window.localStorage.getItem("mode"));
 

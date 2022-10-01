@@ -1,5 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import {styled} from "@mui/material/styles";
+import {ThemeContext} from "./context/ThemeProvider";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
@@ -11,9 +13,15 @@ const now = new Date();
 export const FirstDay = new Date(now.getFullYear(), now.getMonth(), 1);
 export const LastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
+const DarkBox = styled(Box)({
+		'--fc-today-bg-color': 'rgba(255, 255, 255, 0.05)'
+	});
+
 export function Calendar({ meetings, setStart, setEnd }) {
+	const theme = React.useContext(ThemeContext);
+	const CalendarBox = theme.colorMode ? DarkBox : Box;
 	return (
-		<Box
+		<CalendarBox
 			sx={{
 				width: 1200,
 				maxWidth: "95%",
@@ -41,6 +49,6 @@ export function Calendar({ meetings, setStart, setEnd }) {
 				eventClick={ev => triggerMeetingDialog(ev.event.id)}
 				eventClassNames={classes.event}
 			/>
-		</Box>
+		</CalendarBox>
 	);
 }
