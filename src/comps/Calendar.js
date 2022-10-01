@@ -16,7 +16,9 @@ export function Calendar({ meetings, setStart, setEnd }) {
 		<Box
 			sx={{
 				width: 1200,
-				maxWidth: "95%"
+				maxWidth: "95%",
+				// see https://github.com/stuysu/stuyactivities.org/pull/601#discussion_r979145428
+				fontSize: "0.875rem"
 			}}
 		>
 			<FullCalendar
