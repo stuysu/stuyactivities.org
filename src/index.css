@@ -49,6 +49,14 @@ p {
 	}
 }
 
+/* used by @fullcalendar components */
+:root {
+	--fc-button-active-bg-color: rgb(161, 72, 72);
+	--fc-button-active-border-color: rgba(0, 0, 0, 0.01);
+	--fc-button-bg-color: #e66767;
+	--fc-button-border-color: rgba(0, 0, 0, 0.01);
+}
+
 .my-masonry-grid {
 	display: -webkit-box; /* Not needed if autoprefixing */
 	display: -ms-flexbox; /* Not needed if autoprefixing */
