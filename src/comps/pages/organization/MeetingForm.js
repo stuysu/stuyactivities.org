@@ -237,7 +237,7 @@ const MeetingForm = ({
 										<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
 									)}
                   {option.approvalRequired && (
-                    <Typography color="textSecondary" sx={{fontSize: "10px"}}>NOTE: Special permissions / additional reservations may be required for this room</Typography>
+                    <Typography color="textSecondary" fontSize="8px">NOTE: Additional permissions / reservations may be required for this room</Typography>
                   )}
 								</span>
 							)}
