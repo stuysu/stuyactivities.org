@@ -236,6 +236,9 @@ const MeetingForm = ({
 									{option.floor && (
 										<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
 									)}
+                  {option.approvalRequired && (
+                    <Typography color="textSecondary" sx={{fontSize: "10px"}}>NOTE: Special permissions / additional reservations may be required for this room</Typography>
+                  )}
 								</span>
 							)}
 							renderInput={params => <TextField {...params} label="Room" variant="outlined" />}
