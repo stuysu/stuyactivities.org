@@ -111,10 +111,7 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 							? "Public"
 							: `Private (${meeting.group?.id ? meeting.group.name : "members only"})`}
 					</Typography>
-					<Box
-						sx={classes.descriptionContainer}
-						dangerouslySetInnerHTML={{ __html: meeting.description }}
-					/>
+					<Box sx={classes.descriptionContainer} dangerouslySetInnerHTML={{ __html: meeting.description }} />
 				</Box>
 			) : (
 				<p>You need to be signed in to see more information about this meeting.</p>
