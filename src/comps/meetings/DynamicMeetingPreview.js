@@ -98,7 +98,7 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 			<hr />
 			<br />
 			{user.signedIn ? (
-				<Box sv={classes.meetingContent}>
+				<Box sx={classes.meetingContent}>
 					<Typography variant={"h5"} sx={classes.title}>
 						{meeting.title}
 					</Typography>
@@ -112,7 +112,7 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 							: `Private (${meeting.group?.id ? meeting.group.name : "members only"})`}
 					</Typography>
 					<Box
-						sx={classes.descriptionContainer + " HtmlContent"}
+						sx={classes.descriptionContainer}
 						dangerouslySetInnerHTML={{ __html: meeting.description }}
 					/>
 				</Box>
