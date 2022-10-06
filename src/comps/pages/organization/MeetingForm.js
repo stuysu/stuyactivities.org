@@ -225,10 +225,15 @@ const MeetingForm = ({
 							onChange={(_, r) => setRoom(r)}
 							renderOption={(props, option) => (
 								<li {...props}>
-									<span id={props.id}>
+									<span>
 										<Typography>{option.name}</Typography>
 										{option.floor && (
 											<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
+										)}
+										{option.approvalRequired && (
+											<Typography color="primary" variant="body2">
+												NOTE: Additional permissions / reservations may be required
+											</Typography>
 										)}
 									</span>
 								</li>
