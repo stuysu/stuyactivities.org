@@ -14,7 +14,8 @@ export const FirstDay = new Date(now.getFullYear(), now.getMonth(), 1);
 export const LastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
 const DarkBox = styled(Box)({
-	"--fc-today-bg-color": "rgba(255, 255, 255, 0.05)"
+	"--fc-today-bg-color": "rgba(255, 255, 255, 0.05)",
+	"--fc-page-bg-color": "rgb(18,18,18)"
 });
 
 export function Calendar({ meetings, setStart, setEnd }) {
