@@ -57,6 +57,7 @@ const Meetings = () => {
 					// full control on how the meetings are sourced
 					setStart={setStart}
 					setEnd={setEnd}
+					height={800}
 				/>
 			</FlexCenter>
 			<br />
