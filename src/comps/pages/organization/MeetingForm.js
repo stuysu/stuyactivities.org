@@ -118,7 +118,7 @@ const MeetingForm = ({
 	});
 
 	const updateEnd = new_end => {
-		let end = moment(`${time.start.format("MM-DD-YYYY")} ${new_end.format("HH:mm")}`, "MM-DD-YYYY HH:mm");
+		let end = moment(new_end);
 		setTime({ ...time, end });
 	};
 
