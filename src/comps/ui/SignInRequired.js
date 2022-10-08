@@ -2,7 +2,7 @@ import React from "react";
 
 import accessBlocked from "./../../img/vectors/ginger-cat-access-blocked.svg";
 import FlexCenter from "./FlexCenter";
-import { Button, Typography } from "@material-ui/core";
+import { Button, Typography } from "@mui/material";
 import { triggerLoginDialog } from "../auth/AuthDialog";
 
 const SignInRequired = () => {

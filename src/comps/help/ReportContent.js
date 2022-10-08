@@ -1,31 +1,31 @@
 import React, { useContext, useState } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import FlexCenter from "../ui/FlexCenter";
 import { triggerReportDialog } from "./ReportDialog";
 import fixingBugs from "./../../img/vectors/fixing-bugs.svg";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import UserContext from "../context/UserContext";
 import ReCAPTCHA from "react-google-recaptcha";
 import { CAPTCHA_KEY } from "../../constants";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { gql, useMutation } from "@apollo/client";
 import { useLocation } from "react-router-dom";
-const useStyles = makeStyles(theme => ({
+import Box from "@mui/material/Box";
+const classes = {
 	appBar: {
 		position: "relative",
 		boxShadow: "none"
 	},
 	title: {
-		marginLeft: theme.spacing(2),
+		marginLeft: 2,
 		flex: 1
 	},
 	pageContainer: {
-		padding: theme.spacing(3),
+		padding: 3,
 		width: "700px",
 		maxWidth: "90vw"
 	},
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 	submitButton: {
 		margin: "1rem 0"
 	}
-}));
+};
 
 const MUTATION = gql`
 	mutation ($title: String!, $description: String!, $email: String!, $captchaToken: String!, $path: String!) {
@@ -68,7 +68,6 @@ const MUTATION = gql`
 `;
 
 const ReportContent = () => {
-	const classes = useStyles();
 	const user = useContext(UserContext);
 	const location = useLocation();
 	const [email, setEmail] = useState(user?.email || "");
@@ -91,9 +90,9 @@ const ReportContent = () => {
 
 	return (
 		<div>
-			<AppBar className={classes.appBar} color={"secondary"}>
+			<AppBar sx={classes.appBar} color={"secondary"} enableColorOnDark>
 				<Toolbar>
-					<Typography variant="h6" className={classes.title}>
+					<Typography variant="h6" sx={classes.title}>
 						Report an issue or ask for help
 					</Typography>
 					<IconButton
@@ -101,15 +100,16 @@ const ReportContent = () => {
 						color="inherit"
 						onClick={() => triggerReportDialog(false)}
 						aria-label="close"
+						size="large"
 					>
 						<CloseIcon />
 					</IconButton>
 				</Toolbar>
 			</AppBar>
 			<FlexCenter>
-				<div className={classes.pageContainer}>
-					<div className={classes.vectorContainer}>
-						<img src={fixingBugs} alt={"Someone fixing bugs"} className={classes.vector} />
+				<div sx={classes.pageContainer}>
+					<div sx={classes.vectorContainer}>
+						<Box component="img" src={fixingBugs} alt={"Someone fixing bugs"} sx={classes.vector} />
 					</div>
 
 					{data ? (
@@ -127,7 +127,7 @@ const ReportContent = () => {
 								variant={"outlined"}
 								disabled={user.signedIn}
 								fullWidth
-								className={classes.textField}
+								sx={classes.textField}
 								helperText={"We'll contact you at this email if we need to"}
 							/>
 
@@ -139,7 +139,7 @@ const ReportContent = () => {
 								variant={"outlined"}
 								fullWidth
 								helperText={"Try to summarize the issue in a sentence or less"}
-								className={classes.textField}
+								sx={classes.textField}
 							/>
 
 							<TextField
@@ -156,7 +156,7 @@ const ReportContent = () => {
 								}
 								fullWidth
 								onChange={ev => setDescription(ev.target.value)}
-								className={classes.textField}
+								sx={classes.textField}
 							/>
 
 							<ReCAPTCHA sitekey={CAPTCHA_KEY} onChange={setCaptchaToken} />
@@ -169,7 +169,7 @@ const ReportContent = () => {
 							<Button
 								variant={"contained"}
 								color={"secondary"}
-								className={classes.submitButton}
+								sx={classes.submitButton}
 								disabled={!captchaToken || loading}
 								onClick={onSubmit}
 							>

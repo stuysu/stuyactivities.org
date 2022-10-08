@@ -15,18 +15,17 @@ import {
 	ListItem,
 	ListItemAvatar,
 	ListItemSecondaryAction,
-	makeStyles,
 	TextField,
 	Typography
-} from "@material-ui/core";
-import { Delete, Edit } from "@material-ui/icons";
-import { Autocomplete } from "@material-ui/lab";
+} from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
+import { Autocomplete } from "@mui/material";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(2)
+		margin: 2
 	}
-}));
+};
 
 const GROUP_QUERY = gql`
 	query Groups($url: String!) {
@@ -90,8 +89,6 @@ const DELETE_GROUP_MUTATION = gql`
 `;
 
 export default function Groups({ match }) {
-	const classes = useStyles();
-
 	const { data, refetch } = useQuery(GROUP_QUERY, {
 		variables: { url: match.params.orgUrl }
 	});
@@ -153,7 +150,7 @@ export default function Groups({ match }) {
 	const { enqueueSnackbar } = useSnackbar();
 
 	return (
-		<div className={classes.margin}>
+		<Box sx={classes.margin}>
 			<Card>
 				<Box p={2} m={2} pb={5}>
 					<Typography variant="h5">Create New Group</Typography>
@@ -239,6 +236,7 @@ export default function Groups({ match }) {
 																		...membership
 																	});
 																}}
+																size="large"
 															>
 																<Delete />
 															</IconButton>
@@ -252,7 +250,7 @@ export default function Groups({ match }) {
 											)}
 										</List>
 									</Grid>
-									<IconButton onClick={() => setEditGroup(group)}>
+									<IconButton onClick={() => setEditGroup(group)} size="large">
 										<Edit />
 									</IconButton>
 								</ListItem>
@@ -288,21 +286,21 @@ export default function Groups({ match }) {
 											undefined
 								)}
 							renderInput={params => <TextField {...params} label="Find User" variant="outlined" />}
-							renderOption={option => (
-								<>
+							renderOption={(props, option) => (
+								<li {...props}>
 									<ListItemAvatar>
 										<Avatar src={option?.picture} />
 									</ListItemAvatar>
 									<span>
 										<span>{option?.name}</span>
 										<br />
-										<span className={classes.smallerText}>
+										<Box component="span" sx={classes.smallerText}>
 											{option?.email}
 											<br />
 											{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
-										</span>
+										</Box>
 									</span>
-								</>
+								</li>
 							)}
 							getOptionLabel={user => user.name}
 							onChange={(_, user) => {
@@ -332,6 +330,7 @@ export default function Groups({ match }) {
 													editGroup.newMembers.splice(index, 1);
 													setEditGroup({ ...editGroup });
 												}}
+												size="large"
 											>
 												<Delete />
 											</IconButton>
@@ -363,6 +362,6 @@ export default function Groups({ match }) {
 					</DialogActions>
 				</Dialog>
 			</List>
-		</div>
+		</Box>
 	);
 }

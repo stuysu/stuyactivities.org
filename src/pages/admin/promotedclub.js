@@ -1,7 +1,6 @@
 import React from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { Typography, TextField, Button, Snackbar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography, TextField, Button, Snackbar, Box } from "@mui/material";
 import Loading from "../../comps/ui/Loading";
 import PromotedClubCard from "../../comps/pages/explore/PromotedClubCard";
 import OrganizationPicker from "../../comps/ui/OrganizationPicker";
@@ -35,7 +34,7 @@ const MUTATION = gql`
 	}
 `;
 
-const useStyles = makeStyles({
+const classes = {
 	newPromotion: {
 		margin: "1rem 0 2rem"
 	},
@@ -50,11 +49,10 @@ const useStyles = makeStyles({
 		maxWidth: "90%",
 		margin: "auto"
 	}
-});
+};
 
 const ManagePromotedClubs = () => {
 	const { data, loading, refetch } = useQuery(QUERY);
-	const classes = useStyles();
 	const [orgId, setOrgId] = React.useState(0);
 	const [blurb, setBlurb] = React.useState("");
 	const [success, setSuccess] = React.useState(false);
@@ -73,11 +71,11 @@ const ManagePromotedClubs = () => {
 		return <Loading />;
 	}
 	return (
-		<div className="mainDiv">
+		<Box sx={classes.mainDiv}>
 			<Typography variant={"h3"}>Add New Featured Club:</Typography>
-			<div className={classes.newPromotion}>
+			<Box sx={classes.newPromotion}>
 				<OrganizationPicker setOrgId={setOrgId} />
-				<div className={classes.blurbDiv}>
+				<Box sx={classes.blurbDiv}>
 					<Typography variant={"h5"}>Blurb:</Typography>
 					<TextField
 						required={true}
@@ -86,11 +84,11 @@ const ManagePromotedClubs = () => {
 						value={blurb}
 						onChange={ev => setBlurb(ev.target.value)}
 					/>
-				</div>
+				</Box>
 				<Button variant="outlined" disabled={blurb === "" || orgId === 0} onClick={addPromotedClub}>
 					Add Featured Club
 				</Button>
-			</div>
+			</Box>
 			<Typography variant={"h3"}>Delete Featured Club:</Typography>
 			<div className={classes.deletePromotion}>
 				{data === undefined || data.promotedClubs.length === 0 ? (
@@ -101,8 +99,14 @@ const ManagePromotedClubs = () => {
 					))
 				)}
 			</div>
-			<Snackbar autoHideDuration={1000} open={success} onClose={() => setSuccess(false)} message={"Success!"} />
-		</div>
+			<Snackbar
+				autoHideDuration={1000}
+				open={success}
+				onClose={() => setSuccess(false)}
+				message={"Success!"}
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+			/>
+		</Box>
 	);
 };
 

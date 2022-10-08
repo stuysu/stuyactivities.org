@@ -1,8 +1,9 @@
 import React from "react";
-import { makeStyles, Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import BackButton from "../comps/ui/BackButton";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	formContainer: {
 		maxWidth: "1200px",
 		margin: "auto",
@@ -13,18 +14,16 @@ const useStyles = makeStyles(theme => ({
 		display: "block",
 		textAlign: "center"
 	}
-}));
+};
 
 export default function FeedbackForm() {
-	const classes = useStyles();
-
 	return (
-		<div className={classes.formContainer}>
+		<Box sx={classes.formContainer}>
 			<BackButton to={"/"} label={"Back To Home"} />
 			<Typography variant={"h4"} color="primary" style={{ textAlign: "center" }}>
 				Feedback Form
 			</Typography>
-			<div className={classes.form}>
+			<Box sx={classes.form}>
 				<br />
 				<br />
 				<iframe
@@ -38,7 +37,7 @@ export default function FeedbackForm() {
 				>
 					Loading…
 				</iframe>
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }

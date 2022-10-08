@@ -10,23 +10,22 @@ import {
 	DialogContentText,
 	DialogTitle,
 	Typography
-} from "@material-ui/core";
-import Linkify from "linkifyjs/react";
-import List from "@material-ui/core/List";
+} from "@mui/material";
+import List from "@mui/material/List";
 import { generatePath, useParams, useRouteMatch } from "react-router-dom";
 import UnstyledLink from "../../ui/UnstyledLink";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { Dashboard, Description, Group, GroupWork, Person, Settings } from "@material-ui/icons";
-import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles } from "@material-ui/core/styles";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import { Dashboard, Description, Group, GroupWork, Person, Settings } from "@mui/icons-material";
+import ListItemText from "@mui/material/ListItemText";
 import { OrgContext } from "../../../pages/org";
 import { gql, useMutation } from "@apollo/client";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
 import UserContext from "../../context/UserContext";
 import Join from "./join";
+import LinkifyText from "../../ui/LinkifyText";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	avatar: {
 		height: "200px",
 		width: "200px",
@@ -43,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 	break: {
 		overflowWrap: "break-word"
 	}
-}));
+};
 
 const TabItem = ({ to, label, icon, exact = true }) => {
 	const params = useParams();
@@ -54,10 +53,20 @@ const TabItem = ({ to, label, icon, exact = true }) => {
 
 	return (
 		<UnstyledLink to={renderedUrl}>
-			<ListItem button selected={isSelected}>
+			<ListItemButton
+				sx={{
+					"&.Mui-selected": {
+						backgroundColor: "transparency.background",
+						"&.Mui-selected:hover": {
+							backgroundColor: "transparency.background"
+						}
+					}
+				}}
+				selected={isSelected}
+			>
 				<ListItemIcon>{icon}</ListItemIcon>
 				<ListItemText primary={label} />
-			</ListItem>
+			</ListItemButton>
 		</UnstyledLink>
 	);
 };
@@ -69,8 +78,6 @@ const LEAVE_MUTATION = gql`
 `;
 
 const OrgNavPanel = ({ match }) => {
-	const classes = useStyles();
-
 	const org = React.useContext(OrgContext);
 	const user = React.useContext(UserContext);
 
@@ -97,17 +104,17 @@ const OrgNavPanel = ({ match }) => {
 	const [dialogError, setDialogError] = React.useState("");
 
 	return (
-		<div className={classes.stickyContainer}>
+		<Box sx={classes.stickyContainer}>
 			<FlexCenter>
-				<Avatar className={classes.avatar} src={org?.charter?.picture?.icon} />
+				<Avatar sx={classes.avatar} src={org?.charter?.picture?.icon} />
 			</FlexCenter>
-			<Typography className={classes.orgName} variant={"h5"}>
+			<Typography sx={classes.orgName} variant={"h5"}>
 				{org?.name}
 			</Typography>
 
 			{org.charter.socials && (
-				<Typography align={"center"} className={classes.break}>
-					<Linkify>{org.charter.socials}</Linkify>
+				<Typography align={"center"} sx={classes.break}>
+					<LinkifyText underline="always">{org.charter.socials}</LinkifyText>
 				</Typography>
 			)}
 			{org.active ? (
@@ -116,8 +123,11 @@ const OrgNavPanel = ({ match }) => {
 						color={"secondary"}
 						fullWidth
 						onClick={user.signedIn ? () => setJoinOpen(true) : triggerLoginDialog}
+						disabled={org.joinInstructions?.buttonEnabled === false}
 					>
-						{memberStatus === "none" && "Request To Join"}
+						{memberStatus === "none" && org.joinInstructions?.buttonEnabled === false
+							? "Joining Disabled"
+							: "Request To Join"}
 						{memberStatus === "invited" && "Accept Invitation"}
 						{memberStatus === "requested" && "Requested"}
 					</Button>
@@ -135,7 +145,7 @@ const OrgNavPanel = ({ match }) => {
 			)}
 
 			<hr />
-			<List component="nav" aria-label="main mailbox folders">
+			<List component="nav" aria-label="secondary mailbox folders">
 				<TabItem label={"Overview"} to={match.path} icon={<Dashboard />} />
 				<TabItem label={"Charter"} to={match.path + "/charter"} icon={<Description />} />
 				<TabItem label={"Meetings"} to={match.path + "/meetings"} icon={<GroupWork />} />
@@ -162,7 +172,7 @@ const OrgNavPanel = ({ match }) => {
 					</Button>
 				</DialogActions>
 			</Dialog>
-			<Dialog open={joinOpen} maxWidth onClose={() => setJoinOpen(false)}>
+			<Dialog open={joinOpen} onClose={() => setJoinOpen(false)}>
 				<Box p={1}>
 					<Join />
 				</Box>
@@ -173,7 +183,7 @@ const OrgNavPanel = ({ match }) => {
 					<Button onClick={() => setDialogError("")}>Ok</Button>
 				</DialogActions>
 			</Dialog>
-		</div>
+		</Box>
 	);
 };
 

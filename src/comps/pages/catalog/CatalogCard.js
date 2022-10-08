@@ -1,28 +1,24 @@
 import React, { forwardRef } from "react";
-import { Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
 import UnstyledLink from "../../ui/UnstyledLink";
-import Chip from "@material-ui/core/Chip";
+import Chip from "@mui/material/Chip";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import capitalizeString from "../../../utils/capitalizeString";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	chip: {
 		marginTop: "0.3rem",
 		marginRight: "5px"
 	}
-}));
+};
 
 function Tag({ name }) {
-	const classes = useStyles();
-
-	return <Chip label={name} size={"small"} className={classes.chip} />;
+	return <Chip label={name} size={"small"} sx={classes.chip} />;
 }
 
 function CatalogCardWithRef({ name, url, charter, tags }, ref) {
-	const classes = useStyles();
 	return (
-		<Card className={classes.card} ref={ref}>
+		<Card sx={classes.card} ref={ref}>
 			<UnstyledLink to={`/${url}`}>
 				<CardActionArea>
 					<div style={{ textAlign: "center" }}>
@@ -47,7 +43,7 @@ function CatalogCardWithRef({ name, url, charter, tags }, ref) {
 						<Chip
 							label={capitalizeString(charter.commitmentLevel) + " Commitment"}
 							size={"small"}
-							className={classes.chip}
+							sx={classes.chip}
 						/>
 						{tags.map(tag => (
 							<Tag name={tag.name} key={tag.id} />

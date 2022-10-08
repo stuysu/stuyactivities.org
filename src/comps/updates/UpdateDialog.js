@@ -1,5 +1,5 @@
 import React from "react";
-import Dialog from "@material-ui/core/Dialog";
+import Dialog from "@mui/material/Dialog";
 import UpdateCard from "./UpdateCard";
 
 const UpdateDialog = ({ open, setOpen }) => {

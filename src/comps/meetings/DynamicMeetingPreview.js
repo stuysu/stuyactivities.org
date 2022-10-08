@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
 import Loading from "../ui/Loading";
-import { Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import smartTimespan from "../../utils/smartTimespan";
-import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
@@ -38,15 +37,9 @@ const QUERY = gql`
 	}
 `;
 
-const useStyles = makeStyles({
+const classes = {
 	meetingContent: {
 		padding: "0 1rem"
-	},
-	orgHeading: {
-		cursor: "pointer",
-		"&:hover": {
-			opacity: 0.9
-		}
 	},
 	descriptionContainer: {
 		overflowWrap: "anywhere",
@@ -65,15 +58,13 @@ const useStyles = makeStyles({
 			opacity: 0.8
 		}
 	}
-});
+};
 
 const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 	const { data, loading } = useQuery(QUERY, { variables: { id: Number(meetingId) } });
 	const history = useHistory();
 
 	const user = useContext(UserContext);
-
-	const classes = useStyles();
 
 	if (loading) {
 		return <Loading />;
@@ -94,9 +85,10 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 
 	return (
 		<div>
-			<img
+			<Box
+				component="img"
 				src={organization.charter.picture?.thumbnail}
-				className={classes.logo}
+				sx={classes.logo}
 				alt={organization.name + " logo"}
 				onClick={navigateToOrg}
 			/>
@@ -106,8 +98,8 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 			<hr />
 			<br />
 			{user.signedIn ? (
-				<div className={classes.meetingContent}>
-					<Typography variant={"h5"} className={classes.title}>
+				<Box sx={classes.meetingContent}>
+					<Typography variant={"h5"} sx={classes.title}>
 						{meeting.title}
 					</Typography>
 					<Typography paragraph color={"secondary"}>
@@ -119,11 +111,8 @@ const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 							? "Public"
 							: `Private (${meeting.group?.id ? meeting.group.name : "members only"})`}
 					</Typography>
-					<div
-						className={classes.descriptionContainer + " HtmlContent"}
-						dangerouslySetInnerHTML={{ __html: meeting.description }}
-					/>
-				</div>
+					<Box sx={classes.descriptionContainer} dangerouslySetInnerHTML={{ __html: meeting.description }} />
+				</Box>
 			) : (
 				<p>You need to be signed in to see more information about this meeting.</p>
 			)}

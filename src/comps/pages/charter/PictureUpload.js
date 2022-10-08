@@ -1,10 +1,10 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 import { CharterFormContext } from "../../../pages/charter";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	fileInput: {
 		display: "none"
 	},
@@ -13,16 +13,15 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: "80vw",
 		maxHeight: "30vh",
 		objectFit: "contain",
-		marginTop: theme.spacing(1)
+		marginTop: 1
 	},
 	clearButton: {
 		textDecoration: "underline",
 		cursor: "pointer"
 	}
-}));
+};
 
 const PictureUpload = () => {
-	const classes = useStyles();
 	const form = React.useContext(CharterFormContext);
 	const inputRef = React.createRef();
 	const [error, setError] = React.useState(null);
@@ -47,11 +46,12 @@ const PictureUpload = () => {
 		<div>
 			<Typography>Upload a picture for your organization (Highly Recommended)</Typography>
 
-			<input
+			<Box
+				component="input"
 				ref={inputRef}
 				type={"file"}
 				accept="image/*"
-				className={classes.fileInput}
+				sx={classes.fileInput}
 				onChange={handleChange}
 			/>
 
@@ -63,15 +63,16 @@ const PictureUpload = () => {
 			<br />
 			{form.picture && (
 				<div>
-					<img
-						className={classes.uploadedPic}
+					<Box
+						component="img"
+						sx={classes.uploadedPic}
 						src={URL.createObjectURL(form.picture)}
 						alt={"uploaded file"}
 					/>
 					<Typography
 						color={"secondary"}
 						onClick={() => form.set({ picture: null })}
-						className={classes.clearButton}
+						sx={classes.clearButton}
 					>
 						Clear Uploaded Picture
 					</Typography>

@@ -2,22 +2,22 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import FlexCenter from "../comps/ui/FlexCenter";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import conifer from "../img/vectors/conifer-page-not-found.svg";
 import marginalia from "../img/vectors/marginalia-page-not-found.svg";
 import clip from "../img/vectors/clip-page-not-found.svg";
 import pixeltrue from "../img/vectors/pale-page-not-found.svg";
 import pale from "../img/vectors/pale-page-not-found.svg";
-import { makeStyles } from "@material-ui/core/styles";
 import BackButton from "../comps/ui/BackButton";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
+import Box from "@mui/material/Box";
 
 const error404Imgs = [conifer, marginalia, clip, pixeltrue, pale];
 
-const useStyles = makeStyles({
+const classes = {
 	contentContainer: {
 		margin: "2rem",
 		textAlign: "center"
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 	safeMargin: {
 		margin: "1rem"
 	}
-});
+};
 
 const QUERY = gql`
 	query SimilarOrganizations($keyword: String!) {
@@ -56,7 +56,6 @@ const QUERY = gql`
 const Error404 = () => {
 	const { orgUrl } = useParams();
 	const { data } = useQuery(QUERY, { variables: { keyword: orgUrl } });
-	const classes = useStyles();
 
 	const [img] = React.useState(error404Imgs[Math.floor(Math.random() * error404Imgs.length)]);
 
@@ -68,8 +67,8 @@ const Error404 = () => {
 				<title>Page Not Found | StuyActivities</title>
 			</Helmet>
 
-			<div className={classes.contentContainer}>
-				<img className={classes.defaultVector} src={img} alt={"Cute page-not-found vector"} />
+			<Box sx={classes.contentContainer}>
+				<Box component="img" sx={classes.defaultVector} src={img} alt={"Cute page-not-found vector"} />
 				<Typography variant={"h4"}>We couldn't find that page!</Typography>
 
 				<FlexCenter>
@@ -78,16 +77,16 @@ const Error404 = () => {
 						arrow={false}
 						to={"/"}
 						label={"Go Back Home"}
-						className={classes.safeMargin}
+						sx={classes.safeMargin}
 					/>
 				</FlexCenter>
 
 				{Boolean(data?.organizations?.length) && (
 					<>
-						<Typography paragraph className={classes.safeMargin}>
+						<Typography paragraph sx={classes.safeMargin}>
 							Maybe you meant to check out one of these activities?
 						</Typography>
-						<Grid container justify={"center"} spacing={2}>
+						<Grid container justifyContent={"center"} spacing={2}>
 							{data?.organizations?.map(org => (
 								<Grid item xl={3} lg={3} md={3} sm={6} xs={12}>
 									<CatalogCard {...org} />
@@ -96,7 +95,7 @@ const Error404 = () => {
 						</Grid>
 					</>
 				)}
-			</div>
+			</Box>
 		</div>
 	);
 };

@@ -2,25 +2,24 @@ import React from "react";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { CharterFormContext } from "../../../pages/charter";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Chip from "@material-ui/core/Chip";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import Chip from "@mui/material/Chip";
+import FormHelperText from "@mui/material/FormHelperText";
+import MenuItem from "@mui/material/MenuItem";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	tagInput: {
 		marginBottom: "1rem"
 	},
 	tagChip: {
-		marginRight: theme.spacing(1)
+		marginRight: 1
 	},
 	select: {
 		width: "100%"
 	}
-}));
+};
 
 const QUERY = gql`
 	query {
@@ -31,8 +30,7 @@ const QUERY = gql`
 	}
 `;
 
-const TagSelection = ({ className }) => {
-	const classes = useStyles();
+const TagSelection = ({ sx }) => {
 	const { data } = useQuery(QUERY);
 	const charterContext = React.useContext(CharterFormContext);
 	const tags = data?.tags || [];
@@ -59,11 +57,11 @@ const TagSelection = ({ className }) => {
 
 	return (
 		<div>
-			<FormControl variant={"outlined"} required className={className}>
+			<FormControl variant={"outlined"} required sx={sx}>
 				<InputLabel>Select Tags</InputLabel>
 				<Select
 					variant={"outlined"}
-					className={classes.select}
+					sx={classes.select}
 					fullWidth
 					multiple
 					label={"Select Tags"}
@@ -77,14 +75,7 @@ const TagSelection = ({ className }) => {
 						return (
 							<div>
 								{selected.map(tag => {
-									return (
-										<Chip
-											key={tag.id}
-											className={classes.tagChip}
-											label={tag?.name}
-											color="primary"
-										/>
-									);
+									return <Chip key={tag.id} sx={classes.tagChip} label={tag?.name} color="primary" />;
 								})}
 							</div>
 						);

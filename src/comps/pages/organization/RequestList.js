@@ -8,9 +8,9 @@ import {
 	ListItemAvatar,
 	ListItemSecondaryAction,
 	Typography
-} from "@material-ui/core";
-import CheckIcon from "@material-ui/icons/Check";
-import CloseIcon from "@material-ui/icons/Close";
+} from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 
 const RequestList = ({ requests, reject, approve }) => {
 	return (
@@ -38,13 +38,13 @@ const RequestList = ({ requests, reject, approve }) => {
 					</Grid>
 					<ListItemSecondaryAction>
 						{request.userApproval ? (
-							<IconButton onClick={() => approve(request)}>
+							<IconButton onClick={() => approve(request)} size="large">
 								<CheckIcon />
 							</IconButton>
 						) : (
 							""
 						)}
-						<IconButton onClick={() => reject(request)}>
+						<IconButton onClick={() => reject(request)} size="large">
 							<CloseIcon />
 						</IconButton>
 					</ListItemSecondaryAction>

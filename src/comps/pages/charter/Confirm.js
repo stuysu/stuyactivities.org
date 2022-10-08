@@ -1,26 +1,24 @@
 import React from "react";
-import { FormControlLabel, Checkbox, Typography } from "@material-ui/core";
+import { Box, FormControlLabel, Checkbox, Typography } from "@mui/material";
 import { CharterFormContext } from "../../../pages/charter";
-import { makeStyles } from "@material-ui/core/styles";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import List from "@mui/material/List";
+import ListItemText from "@mui/material/ListItemText";
 import capitalizeString from "../../../utils/capitalizeString";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	uploadedPic: {
 		width: "300px",
 		maxWidth: "80vw",
 		maxHeight: "30vh",
 		objectFit: "contain",
-		marginTop: theme.spacing(1)
+		marginTop: 1
 	}
-}));
+};
 
 const Confirm = () => {
-	const classes = useStyles();
 	const form = React.useContext(CharterFormContext);
 
 	return (
@@ -59,8 +57,9 @@ const Confirm = () => {
 						<ListItemText
 							primary={"Picture"}
 							secondary={
-								<img
-									className={classes.uploadedPic}
+								<Box
+									component="img"
+									sx={classes.uploadedPic}
 									src={URL.createObjectURL(form.picture)}
 									alt={"uploaded file"}
 								/>
@@ -85,7 +84,10 @@ const Confirm = () => {
 				</ListItem>
 
 				<ListItem>
-					<ListItemText primary={"Appointment and Impeachment Procedures"} secondary={form.appointmentProcedures} />
+					<ListItemText
+						primary={"Appointment and Impeachment Procedures"}
+						secondary={form.appointmentProcedures}
+					/>
 				</ListItem>
 
 				<ListItem>
@@ -115,7 +117,7 @@ const Confirm = () => {
 			</List>
 
 			<Typography variant={"h6"}>Leaders:</Typography>
-			<List dense className={classes.root}>
+			<List dense>
 				{form?.leaders?.map((user, index) => {
 					return (
 						<ListItem key={user.id}>
@@ -142,6 +144,7 @@ const Confirm = () => {
 					<Checkbox
 						checked={form?.clubpubParticipant}
 						onChange={ev => form.set({ clubpubParticipant: ev.target.checked })}
+						color="secondary"
 					/>
 				}
 				label={

@@ -1,30 +1,35 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import { ThemeContext } from "./context/ThemeProvider";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
-import { triggerMeetingDialog } from "../comps/meetings/MeetingPreviewDialog";
-
-const useStyles = makeStyles(theme => ({
-	calendarContainer: {
-		width: 1200,
-		maxWidth: "95%"
-	},
-	event: {
-		cursor: "pointer"
-	}
-}));
+import { triggerMeetingDialog } from "./meetings/MeetingPreviewDialog";
+import classes from "../styles/Calendar.module.css";
 
 // find the first & last days of month
 const now = new Date();
 export const FirstDay = new Date(now.getFullYear(), now.getMonth(), 1);
 export const LastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-export function Calendar({ meetings, setStart, setEnd }) {
-	const classes = useStyles();
+const DarkBox = styled(Box)({
+	"--fc-today-bg-color": "rgba(255, 255, 255, 0.05)",
+	"--fc-page-bg-color": "rgb(18,18,18)"
+});
 
+export function Calendar({ meetings, setStart, setEnd }) {
+	const theme = React.useContext(ThemeContext);
+	const CalendarBox = theme.colorMode ? DarkBox : Box;
 	return (
-		<div className={classes.calendarContainer}>
+		<CalendarBox
+			sx={{
+				width: 1200,
+				maxWidth: "95%",
+				// see https://github.com/stuysu/stuyactivities.org/pull/601#discussion_r979145428
+				fontSize: "0.875rem"
+			}}
+		>
 			<FullCalendar
 				height={800}
 				datesSet={ev => {
@@ -45,6 +50,6 @@ export function Calendar({ meetings, setStart, setEnd }) {
 				eventClick={ev => triggerMeetingDialog(ev.event.id)}
 				eventClassNames={classes.event}
 			/>
-		</div>
+		</CalendarBox>
 	);
 }

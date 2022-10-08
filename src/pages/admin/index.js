@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
 import RouteTabs from "../../comps/ui/RouteTabs";
 import Boograms from "./boograms";
@@ -16,18 +16,18 @@ import {
 	SmsFailed,
 	AttachMoney,
 	FeaturedPlayList
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import EmailClubLeaders from "./email";
 import ManagePromotedClubs from "./promotedclub";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	root: {
-		margin: theme.spacing(3)
+		margin: 3
 	}
-}));
+};
 
 export default function AdminRouter({ match }) {
-	const classes = useStyles();
 	const actualPath = generatePath(match.path, match.params);
 	const user = React.useContext(UserContext);
 
@@ -82,11 +82,11 @@ export default function AdminRouter({ match }) {
 	}
 
 	return (
-		<div className={classes.root}>
+		<Box sx={classes.root}>
 			<Typography variant={"h3"}>Admin Panel</Typography>
 			<RouteTabs tabs={tabs} />
 
-			<Switch>
+			<Switch color="secondary">
 				<Route path={match.path + "/boograms"} component={Boograms} exact />
 				<Route path={match.path + "/approvals"} component={Approvals} exact />
 				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
@@ -98,6 +98,6 @@ export default function AdminRouter({ match }) {
 					<Redirect to={tabs[0].path} />
 				</Route>
 			</Switch>
-		</div>
+		</Box>
 	);
 }

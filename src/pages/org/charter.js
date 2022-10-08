@@ -1,27 +1,25 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@mui/material";
 import { gql, useQuery } from "@apollo/client";
 import { client } from "../../comps/context/ApolloProvider";
 import capitalizeString from "../../utils/capitalizeString";
 import { OrgContext } from "./index";
 import LinkifyText from "../../comps/ui/LinkifyText";
+import Box from "@mui/material/Box";
 
-//styles
-const useStyles = makeStyles(theme => ({
+const classes = {
 	tabName: {
 		textAlign: "center"
-		// color: theme.palette.secondary.main
 	},
 	charterQuestion: {
 		paddingBottom: "0.5rem",
 		paddingTop: "0.5rem",
 		position: "sticky",
 		top: 0,
-		background: theme.palette.background.default,
+		backgroundColor: "background.default",
 		width: "100%",
-		color: theme.palette.primary.main
+		color: "primary.main"
 	},
 	charterAnswer: {
 		marginBottom: "1.5rem"
@@ -29,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 	charterContainer: {
 		padding: "1rem"
 	}
-}));
+};
 
 const QUERY = gql`
 	query Charter($orgUrl: String) {
@@ -51,16 +49,14 @@ const QUERY = gql`
 `;
 
 const CharterQuestion = ({ question, answer }) => {
-	const classes = useStyles();
-
 	const org = React.useContext(OrgContext);
 
 	return (
 		<div>
-			<Typography variant={"h5"} className={classes.charterQuestion}>
+			<Typography variant={"h5"} sx={classes.charterQuestion}>
 				{question}
 			</Typography>
-			<Typography variant={"body1"} className={classes.charterAnswer}>
+			<Typography variant={"body1"} sx={classes.charterAnswer}>
 				{!org.active && !answer && <span style={{ color: "grey" }}>This response is pending approval</span>}
 				<LinkifyText>{answer}</LinkifyText>
 			</Typography>
@@ -70,7 +66,6 @@ const CharterQuestion = ({ question, answer }) => {
 
 const Charter = () => {
 	const { orgUrl } = useParams();
-	const classes = useStyles();
 
 	const { data, loading, error } = useQuery(QUERY, {
 		variables: { orgUrl },
@@ -87,11 +82,11 @@ const Charter = () => {
 
 	return (
 		<div>
-			<Typography variant={"h2"} className={classes.tabName}>
+			<Typography variant={"h2"} sx={classes.tabName}>
 				Charter
 			</Typography>
 
-			<div className={classes.charterContainer}>
+			<Box sx={classes.charterContainer}>
 				<CharterQuestion question={"Mission Statement: "} answer={data?.charter?.mission} />
 
 				<CharterQuestion
@@ -118,7 +113,7 @@ const Charter = () => {
 				{Boolean(data?.charter?.extra) && (
 					<CharterQuestion question={"Anything else?"} answer={data?.charter?.extra} />
 				)}
-			</div>
+			</Box>
 		</div>
 	);
 };

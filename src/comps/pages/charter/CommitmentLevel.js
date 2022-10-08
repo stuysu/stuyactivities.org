@@ -1,31 +1,29 @@
 import React from "react";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import { FormHelperText } from "@material-ui/core";
-import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { FormHelperText } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
 import { CharterFormContext } from "../../../pages/charter";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const classes = {
 	commitmentLevel: {
 		width: "100%"
 	}
-});
+};
 
-const CommitmentLevel = ({ className }) => {
+const CommitmentLevel = ({ sx }) => {
 	const form = React.useContext(CharterFormContext);
-	const classes = useStyles();
 
 	return (
 		<div>
-			<FormControl variant={"outlined"} className={classes.commitmentLevel} required>
+			<FormControl variant={"outlined"} sx={classes.commitmentLevel} required>
 				<InputLabel>Commitment Level</InputLabel>
 				<Select
 					fullWidth
 					label={"Commitment Level"}
 					variant={"outlined"}
-					className={className}
+					sx={sx}
 					required
 					value={form?.commitmentLevel || ""}
 					onChange={ev => {

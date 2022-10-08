@@ -3,18 +3,19 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import BackButton from "../../../comps/ui/BackButton";
 import layout from "./../../../styles/Layout.module.css";
 import Loading from "../../../comps/ui/Loading";
-import { Button, Divider, Grid, Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
+import { Button, Divider, Grid, Typography } from "@mui/material";
+import Card from "@mui/material/Card";
 import moment from "moment-timezone";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import capitalizeString from "../../../utils/capitalizeString";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import TextField from "@material-ui/core/TextField";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
 import { cache } from "../../../comps/context/ApolloProvider";
 import LinkifyText from "../../../comps/ui/LinkifyText";
+import Box from "@mui/material/Box";
 
 const CREATE_MESSAGE_MUTATION = gql`
 	mutation ($orgId: Int!, $message: String!) {
@@ -46,11 +47,13 @@ const ApprovalMessages = ({ organization, refetch }) => {
 	return (
 		<>
 			<h3>Messages:</h3>
-			<div
-				style={{
+			<Box
+				sx={{
 					width: "100%",
 					borderRadius: "10px",
-					border: "solid 2px black",
+					borderStyle: "solid",
+					borderWidth: "2px",
+					borderColor: "transparency.text",
 					maxHeight: "350px",
 					position: "relative",
 					overflow: "auto"
@@ -66,9 +69,10 @@ const ApprovalMessages = ({ organization, refetch }) => {
 								</ListItemAvatar>
 								<div style={{ display: "flex" }}>
 									<div style={{ flexGrow: 1 }}>
-										<p
-											style={{
-												color: message?.auto ? "grey" : "black"
+										<Box
+											component="p"
+											sx={{
+												color: message?.auto ? "transparency.textLighter" : "transparency.text"
 											}}
 										>
 											{message?.user?.name} -{" "}
@@ -77,31 +81,32 @@ const ApprovalMessages = ({ organization, refetch }) => {
 												: message?.user?.adminRoles?.length
 												? "ClubPub Team"
 												: "Organization Admin"}{" "}
-											<span style={{ color: "grey" }}>
+											<Box component="span" sx={{ color: "transparency.textLighter" }}>
 												({moment(message.createdAt).format("MM/DD/YY h:mma")})
-											</span>
-										</p>
-										<p
-											style={{
+											</Box>
+										</Box>
+										<Box
+											component="p"
+											sx={{
 												fontStyle: message?.auto ? "italic" : "normal",
-												color: message?.auto ? "grey" : "black",
+												color: message?.auto ? "transparency.textLighter" : "transparency.text",
 												overflowWrap: "anywhere"
 											}}
 										>
 											<LinkifyText color={"primary"}>{message?.message}</LinkifyText>
-										</p>
+										</Box>
 									</div>
 								</div>
 							</ListItem>
 						);
 					})}
 				</List>
-				<div
-					style={{
+				<Box
+					sx={{
 						position: "sticky",
 						bottom: 0,
 						padding: "1rem",
-						background: "white",
+						backgroundColor: "background.default",
 						verticalAlign: "middle",
 						display: "flex"
 					}}
@@ -117,8 +122,8 @@ const ApprovalMessages = ({ organization, refetch }) => {
 					<Button variant={"contained"} color={"secondary"} onClick={onSubmit}>
 						Send
 					</Button>
-				</div>
-			</div>
+				</Box>
+			</Box>
 		</>
 	);
 };
@@ -379,16 +384,17 @@ const OrgApprovals = ({ match }) => {
 							position: "relative"
 						}}
 					>
-						<h3
-							style={{
+						<Typography
+							variant="h3"
+							sx={{
 								position: "sticky",
 								top: 0,
-								background: "white",
+								backgroundColor: "background.default",
 								zIndex: 100
 							}}
 						>
 							Club Leaders:
-						</h3>
+						</Typography>
 						<List>
 							{data.organization.memberships.map(mem => (
 								<ListItem key={mem.id} button>
@@ -405,16 +411,17 @@ const OrgApprovals = ({ match }) => {
 							))}
 						</List>
 
-						<h3
-							style={{
+						<Typography
+							variant="h3"
+							sx={{
 								position: "sticky",
 								top: 0,
-								background: "white",
+								backgroundColor: "background.default",
 								zIndex: 100
 							}}
 						>
 							Pending Leader Requests:
-						</h3>
+						</Typography>
 						<List>
 							{data.organization.membershipRequests
 								.filter(mem => !mem.userApproval)

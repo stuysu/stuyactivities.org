@@ -12,43 +12,42 @@ import {
 	ListItem,
 	ListItemSecondaryAction,
 	ListItemText,
-	makeStyles,
 	Paper,
 	Snackbar,
 	Typography
-} from "@material-ui/core";
+} from "@mui/material";
 import UnstyledLink from "../../../comps/ui/UnstyledLink";
 import BackButton from "../../../comps/ui/BackButton";
 import { gql, useMutation } from "@apollo/client";
-import { Close, Edit } from "@material-ui/icons";
+import { Close, Edit } from "@mui/icons-material";
 import { OrgContext } from "../index";
 import moment from "moment";
 import { generatePath, Route, Switch } from "react-router-dom";
 import MeetingForm from "../../../comps/pages/organization/MeetingForm";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(1),
+		margin: 1,
 		boxSizing: "border-box"
 	},
 	newMeetingTitle: {
 		textAlign: "center",
-		marginBottom: theme.spacing(2)
+		marginBottom: 2
 	},
 	titleInput: {
 		fontSize: "2em"
 	},
 	backButton: {
-		[theme.breakpoints.up("lg")]: {
-			position: "absolute",
-			marginLeft: theme.spacing(10),
-			marginTop: theme.spacing(3)
+		marginTop: 3,
+		position: {
+			lg: "absolute"
 		},
-		[theme.breakpoints.down("lg")]: {
-			marginTop: theme.spacing(3)
+		marginLeft: {
+			lg: 10
 		}
 	}
-}));
+};
 
 const CREATE_MUTATION = gql`
 	mutation CreateMeeting(
@@ -205,7 +204,6 @@ const EDIT_RECURRING_MUTATION = gql`
 `;
 
 const Main = ({ match }) => {
-	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	let reversedMeetings = org?.meetings?.slice(0);
 	if (reversedMeetings) {
@@ -336,10 +334,10 @@ const Main = ({ match }) => {
 		}
 	});
 	return (
-		<div className={classes.margin}>
+		<Box sx={classes.margin}>
 			<Grid container>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-					<Typography variant={"h4"} className={classes.newMeetingTitle}>
+					<Typography variant={"h4"} sx={classes.newMeetingTitle}>
 						New Meeting
 					</Typography>
 					<MeetingForm
@@ -356,13 +354,13 @@ const Main = ({ match }) => {
 						Existing Meetings
 					</Typography>
 					{org?.recurringMeetings?.length > 0 && (
-						<Typography variant={"h5"} className={classes.margin}>
+						<Typography variant={"h5"} sx={classes.margin}>
 							Recurring Meetings
 						</Typography>
 					)}
 					<List>
 						{org?.recurringMeetings?.map(meeting => (
-							<Paper className={classes.margin}>
+							<Paper sx={classes.margin}>
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
@@ -376,11 +374,11 @@ const Main = ({ match }) => {
 										<UnstyledLink
 											to={generatePath(match.path, match.params) + "/editRecurring/" + meeting.id}
 										>
-											<IconButton>
+											<IconButton size="large">
 												<Edit />
 											</IconButton>
 										</UnstyledLink>
-										<IconButton onClick={() => setRemovingMeeting(meeting)}>
+										<IconButton onClick={() => setRemovingMeeting(meeting)} size="large">
 											<Close />
 										</IconButton>
 									</ListItemSecondaryAction>
@@ -389,13 +387,13 @@ const Main = ({ match }) => {
 						))}
 					</List>
 					{org?.recurringMeetings?.length > 0 && (
-						<Typography variant={"h5"} className={classes.margin}>
+						<Typography variant={"h5"} sx={classes.margin}>
 							Non-Recurring Meetings
 						</Typography>
 					)}
 					<List>
 						{reversedMeetings?.map(meeting => (
-							<Paper className={classes.margin}>
+							<Paper sx={classes.margin}>
 								<ListItem>
 									<ListItemText
 										primary={meeting.title}
@@ -409,11 +407,11 @@ const Main = ({ match }) => {
 										<UnstyledLink
 											to={generatePath(match.path, match.params) + "/edit/" + meeting.id}
 										>
-											<IconButton>
+											<IconButton size="large">
 												<Edit />
 											</IconButton>
 										</UnstyledLink>
-										<IconButton onClick={() => setRemovingMeeting(meeting)}>
+										<IconButton onClick={() => setRemovingMeeting(meeting)} size="large">
 											<Close />
 										</IconButton>
 									</ListItemSecondaryAction>
@@ -454,14 +452,14 @@ const Main = ({ match }) => {
 				open={snackbarOpen}
 				onClose={() => setSnackbarOpen(false)}
 				message={"Meeting Created!"}
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
-		</div>
+		</Box>
 	);
 };
 
 const EditPage = ({ match }) => {
 	const org = React.useContext(OrgContext);
-	const classes = useStyles();
 	//Use snackbar since edit has no other visible effects
 	const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 	const [errorMessage, setErrorMessage] = React.useState("");
@@ -527,13 +525,13 @@ const EditPage = ({ match }) => {
 	return (
 		<div>
 			<BackButton
-				className={classes.backButton}
+				sx={classes.backButton}
 				label={"Back to Meetings"}
 				to={generatePath("/" + match.params.orgUrl + "/admin/meetings")}
 			/>
-			<Grid container justify={"center"} className={classes.margin}>
+			<Grid container justifyContent={"center"} sx={classes.margin}>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-					<Typography variant={"h4"} className={classes.newMeetingTitle}>
+					<Typography variant={"h4"} sx={classes.newMeetingTitle}>
 						{recurring ? "Edit Recurring Meeting" : "Edit Meeting"}
 					</Typography>
 					<MeetingForm
@@ -552,15 +550,15 @@ const EditPage = ({ match }) => {
 				open={snackbarOpen}
 				onClose={() => setSnackbarOpen(false)}
 				message={"Meeting Edited!"}
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 			/>
-			<p>We're currently working on this page but we expect to have it up sometime this week.</p>
 		</div>
 	);
 };
 
 const Meetings = ({ match }) => {
 	return (
-		<Switch>
+		<Switch color="secondary">
 			<Route path={match.path + "/edit/:meetingId"} component={EditPage} />
 			<Route path={match.path + "/editRecurring/:meetingId"} component={EditPage} />
 			<Route path={match.path} component={Main} />

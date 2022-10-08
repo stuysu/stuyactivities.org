@@ -1,7 +1,7 @@
 import React from "react";
 import FlexCenter from "../comps/ui/FlexCenter";
 import UserContext from "../comps/context/UserContext";
-import { Typography, Table, TableHead, TableRow, TableCell, Avatar, TableBody, Switch } from "@material-ui/core";
+import { Typography, Table, TableHead, TableRow, TableCell, Avatar, TableBody, Switch } from "@mui/material";
 
 import { gql, useMutation } from "@apollo/client";
 
@@ -74,6 +74,7 @@ export default function Settings() {
 								</TableCell>
 								<TableCell align={"right"}>
 									<Switch
+										color="secondary"
 										checked={
 											membership.meetingNotification !== null
 												? membership.meetingNotification
@@ -91,6 +92,7 @@ export default function Settings() {
 								</TableCell>
 								<TableCell align={"right"}>
 									<Switch
+										color="secondary"
 										checked={
 											membership.updateNotification !== null
 												? membership.updateNotification

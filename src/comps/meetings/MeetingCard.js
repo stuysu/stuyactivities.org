@@ -1,20 +1,20 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ListItemText from "@material-ui/core/ListItemText";
+import Card from "@mui/material/Card";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemText from "@mui/material/ListItemText";
 import moment from "moment";
 
 import { useHistory } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import smartTimespan from "../../utils/smartTimespan";
 import { triggerMeetingDialog } from "./MeetingPreviewDialog";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles({
+const classes = {
 	card: {
 		position: "relative"
 	},
@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 		height: "50px",
 		bottom: 0
 	}
-});
+};
 
 const MeetingCard = ({
 	id,
@@ -47,7 +47,7 @@ const MeetingCard = ({
 	start,
 	end,
 	organization,
-	className,
+	sx,
 	dayOfWeek,
 	frequency,
 	description,
@@ -55,7 +55,6 @@ const MeetingCard = ({
 	group,
 	rooms
 }) => {
-	const classes = useStyles();
 	const history = useHistory();
 
 	const showOrganization = organization && organization.name && organization.url;
@@ -67,10 +66,10 @@ const MeetingCard = ({
 	};
 
 	return (
-		<Card variant={"outlined"} className={className + " " + classes.card}>
+		<Card variant={"outlined"} sx={[...(Array.isArray(sx) ? sx : [sx]), classes.card]}>
 			{Boolean(showOrganization) && (
 				<List>
-					<ListItem className={classes.orgHeading}>
+					<ListItem sx={classes.orgHeading}>
 						<ListItemAvatar onClick={navigateToOrg}>
 							<Avatar alt={organization?.name} src={organization?.charter?.picture?.thumbnail} />
 						</ListItemAvatar>
@@ -78,8 +77,8 @@ const MeetingCard = ({
 					</ListItem>
 				</List>
 			)}
-			<div className={classes.meetingContent}>
-				<Typography variant={"h5"} className={classes.title}>
+			<Box sx={classes.meetingContent}>
+				<Typography variant={"h5"} sx={classes.title}>
 					{title}
 				</Typography>
 				<Typography paragraph color={"secondary"}>
@@ -99,18 +98,19 @@ const MeetingCard = ({
 					description && (
 						<Typography
 							paragraph
-							className={classes.descriptionContainer + " HtmlContent"}
+							sx={classes.descriptionContainer}
+							className="HtmlContent"
 							dangerouslySetInnerHTML={{ __html: description }}
 						/>
 					)
 				) : (
-					<div className={classes.buttonContainer}>
+					<Box sx={classes.buttonContainer}>
 						<Button variant={"contained"} color={"secondary"} onClick={() => triggerMeetingDialog(id)}>
 							View More
 						</Button>
-					</div>
+					</Box>
 				)}
-			</div>
+			</Box>
 		</Card>
 	);
 };
