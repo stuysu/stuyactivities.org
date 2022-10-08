@@ -6,7 +6,7 @@
 		"@apollo/client": "^3.6.9",
 		"@date-io/date-fns": "^2.15.0",
 		"@emotion/react": "^11.10.0",
-		"@emotion/styled": "^11.10.0",
+		"@emotion/styled": "^11.10.4",
 		"@fullcalendar/daygrid": "^5.11.3",
 		"@fullcalendar/list": "^5.11.3",
 		"@fullcalendar/react": "^5.11.2",
