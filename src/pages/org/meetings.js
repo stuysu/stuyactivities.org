@@ -1,12 +1,9 @@
 import React from "react";
 import { OrgContext } from "./index";
 import { Box, Typography } from "@mui/material";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import listPlugin from "@fullcalendar/list";
 import Grid from "@mui/material/Grid";
 import MeetingCard from "../../comps/meetings/MeetingCard";
-import { triggerMeetingDialog } from "../../comps/meetings/MeetingPreviewDialog";
+import { Calendar } from "../../comps/Calendar";
 
 const classes = {
 	margin: {
@@ -53,23 +50,16 @@ export default function Meetings() {
 			<br />
 			<Typography variant={"h4"}>All Meetings</Typography>
 			<br />
-
-			<Box sx={classes.calendarContainer}>
-				<FullCalendar
-					plugins={[dayGridPlugin, listPlugin]}
-					headerToolbar={{
-						start: "title",
-						end: "dayGridMonth listMonth prev next"
-					}}
-					events={org?.meetings.map(meeting => {
-						const newMeeting = { ...meeting };
-						newMeeting.title +=
-							typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
-						return newMeeting;
-					})}
-					eventClick={ev => triggerMeetingDialog(ev.event.id)}
-				/>
-			</Box>
+			<Calendar
+				meetings={org?.meetings.map(meeting => {
+					const newMeeting = { ...meeting };
+					newMeeting.title +=
+						typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
+					return newMeeting;
+				})}
+				sx={classes.calendarContainer}
+				height={undefined}
+			/>
 		</Box>
 	);
 }

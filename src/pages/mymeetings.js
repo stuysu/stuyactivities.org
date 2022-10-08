@@ -63,6 +63,7 @@ function MyMeetings() {
 						})}
 					setStart={setStart}
 					setEnd={setEnd}
+					height={800}
 				/>
 			</FlexCenter>
 			<br />
