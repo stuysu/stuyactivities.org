@@ -19,6 +19,8 @@ const EditorBase = ({
 	className,
 	disabled,
 	placeholder,
+	initHeight = 350,
+	showMenuBar = false,
 	skin = undefined,
 	content_css = undefined,
 	content_style = undefined
@@ -27,17 +29,17 @@ const EditorBase = ({
 		value={value}
 		apiKey={process.env.NEXT_APP_TINYMCE_APIKEY || "bzg71o9rxjiw3vfmrlmdu07vif9lfs9j50q8h932ajzahz4b"}
 		init={{
-			height: 350,
-			menubar: false,
+			height: initHeight,
+			menubar: showMenuBar,
 			default_link_target: "_blank",
 			plugins: [
 				"advlist autolink lists link image charmap print preview anchor",
 				"searchreplace visualblocks code fullscreen",
 				"insertdatetime media table paste code help wordcount"
 			],
-			toolbar: `formatselect | bold italic forecolor backcolor | 
+			toolbar: `undo redo | formatselect | bold italic forecolor backcolor | 
 			alignleft aligncenter alignright alignjustify | 
-			bullist numlist outdent indent | link image media | removeformat`,
+			bullist numlist outdent indent | link image media | removeformat | help`,
 
 			automatic_uploads: true,
 			browser_spellcheck: true,
@@ -82,7 +84,7 @@ const EditorBase = ({
 	/>
 );
 
-const EditorDark = ({ value, setValue, uploadPicture, className, disabled, placeholder }) => (
+const EditorDark = ({ value, setValue, uploadPicture, className, disabled, placeholder, initHeight = 350, showMenuBar = false }) => (
 	// React won't re-render the Editor component if I only change the props for dark mode, so EditorDark serves as a dummy element
 	<EditorBase
 		value={value}
@@ -91,13 +93,15 @@ const EditorDark = ({ value, setValue, uploadPicture, className, disabled, place
 		disabled={disabled}
 		placeholder={placeholder}
 		uploadPicture={uploadPicture}
+		initHeight={initHeight}
+		showMenuBar={showMenuBar}
 		skin="oxide-dark"
 		content_css="tinymce-5-dark"
 		content_style=".mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before { color: #888; }"
 	/>
 );
 
-const TinyEditor = ({ value, setValue, className, disabled, placeholder }) => {
+const TinyEditor = ({ value, setValue, className, disabled, placeholder, initHeight, showMenuBar }) => {
 	const [uploadPicture] = useMutation(UPLOAD_MUTATION);
 	return (
 		<div className={className}>
@@ -111,6 +115,8 @@ const TinyEditor = ({ value, setValue, className, disabled, placeholder }) => {
 							disabled={disabled}
 							placeholder={placeholder}
 							uploadPicture={uploadPicture}
+							initHeight={initHeight}
+							showMenuBar={showMenuBar}
 						/>
 					) : (
 						<EditorBase
@@ -120,6 +126,8 @@ const TinyEditor = ({ value, setValue, className, disabled, placeholder }) => {
 							disabled={disabled}
 							placeholder={placeholder}
 							uploadPicture={uploadPicture}
+							initHeight={initHeight}
+							showMenuBar={showMenuBar}
 						/>
 					)
 				}
