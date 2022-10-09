@@ -84,7 +84,16 @@ const EditorBase = ({
 	/>
 );
 
-const EditorDark = ({ value, setValue, uploadPicture, className, disabled, placeholder, initHeight = 350, showMenuBar = false }) => (
+const EditorDark = ({
+	value,
+	setValue,
+	uploadPicture,
+	className,
+	disabled,
+	placeholder,
+	initHeight = 350,
+	showMenuBar = false
+}) => (
 	// React won't re-render the Editor component if I only change the props for dark mode, so EditorDark serves as a dummy element
 	<EditorBase
 		value={value}

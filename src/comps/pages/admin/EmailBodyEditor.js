@@ -10,9 +10,7 @@ const PageBodyEditor = ({ value, setValue, className, disabled }) => {
 				setValue={setValue}
 				initHeight={500}
 				showMenuBar={true}
-				placeholder={
-					"This is an update email to all club leaders."
-				}
+				placeholder={"This is an update email to all club leaders."}
 			/>
 		</div>
 	);
