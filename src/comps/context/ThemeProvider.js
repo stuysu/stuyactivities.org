@@ -40,6 +40,10 @@ const ThemeProvider = props => {
 					button: {
 						main: prefersDarkMode ? "rgba(255, 255, 255, 0.87)" : "rgba(0, 0, 0, 0.87)"
 					},
+					background: {
+						default: prefersDarkMode ? "#262630" : "#FFFFFF",
+						paper: prefersDarkMode ? "#262630" : "#FFFFFF"
+					},
 					transparency: prefersDarkMode
 						? {
 								background: "rgba(255, 255, 255, 0.08)",
