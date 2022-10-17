@@ -90,7 +90,7 @@ export default function Boograms() {
 							<TextField
 								label="Purchaser OSIS: (input 0 if N/A)"
 								type="number"
-								onChange={ev => setArgs({ purchaserOsis: Number(ev.target.value), ...args })}
+								onChange={ev => (setArgs({ purchaserOsis: Number(ev.target.value), ...args }); console.log(ev.target.value);)}
 							/>
 							<br />
 							{data?.saleItems.map(item => (
