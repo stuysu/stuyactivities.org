@@ -87,12 +87,12 @@ export default function Boograms() {
 								{args.user.email}
 							</Typography>
 							<br />
-              <TextField
-                label="Purchaser OSIS: (input 0 if N/A)"
-                type="number"
-                onChange={ev => setArgs({purchaserOsis: Number(ev.target.value), ...args})}
-              />
-              <br />
+							<TextField
+								label="Purchaser OSIS: (input 0 if N/A)"
+								type="number"
+								onChange={ev => setArgs({ purchaserOsis: Number(ev.target.value), ...args })}
+							/>
+							<br />
 							{data?.saleItems.map(item => (
 								<>
 									<TextField
