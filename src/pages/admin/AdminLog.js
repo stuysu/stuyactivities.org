@@ -1,29 +1,33 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
-import LazyLoadComponent from "react-lazyload";
+import LazyLoadComponent from "parm-react-lazyload";
 
-const useStyles = makeStyles(() => ({
+const classes = {
 	root: {
 		marginTop: "2rem"
 	},
-	logCard: {
-		margin: "4px",
-		padding: "1rem",
-		"&:hover": {
-			color: "#e66767"
+	logCard: [
+		{
+			margin: "4px",
+			padding: "1rem"
+		},
+		// untested
+		{
+			"&:hover": {
+				color: "primary.main"
+			}
 		}
-	}
-}));
+	]
+};
 
 const QUERY = gql`
 	query Organizations($keyword: String) {
@@ -74,7 +78,6 @@ function a11yProps(index) {
 }
 
 const AdminLog = () => {
-	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
 	const [keyword, setKeyword] = React.useState("");
 
@@ -112,7 +115,7 @@ const AdminLog = () => {
 	});
 
 	return (
-		<div className={classes.root}>
+		<Box sx={classes.root}>
 			<Paper position="static" color="default">
 				<Tabs
 					value={value}
@@ -141,12 +144,12 @@ const AdminLog = () => {
 								};
 								return (
 									<LazyLoadComponent>
-										<div className={classes.logCard}>
+										<Box sx={classes.logCard}>
 											<Typography>{org.name}</Typography>
 											<Typography>Reason: {org.strike.reason}</Typography>
 											<Typography>{date.toLocaleString("en-US", options)}</Typography>
 											<Typography>Weight: {org.strike.weight}</Typography>
-										</div>
+										</Box>
 										<Divider variant="middle" />
 									</LazyLoadComponent>
 								);
@@ -168,17 +171,17 @@ const AdminLog = () => {
 							};
 							return (
 								<LazyLoadComponent>
-									<div className={classes.logCard}>
+									<Box sx={classes.logCard}>
 										<Typography>{org.name}</Typography>
 										<Typography>Last Update: {date.toLocaleString("en-US", options)}</Typography>
-									</div>
+									</Box>
 									<Divider variant="middle" />
 								</LazyLoadComponent>
 							);
 						})}
 				</TabPanel>
 			</Paper>
-		</div>
+		</Box>
 	);
 };
 

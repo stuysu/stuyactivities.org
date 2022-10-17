@@ -1,11 +1,12 @@
 import React from "react";
 import arrayToggle from "../../../../utils/arrayToggle";
-import useFilterStyles from "./useFilterStyles";
+import filterStyles from "./filterStyles";
 import { useQuery } from "@apollo/client";
 import { client } from "../../../context/ApolloProvider";
 import { gql } from "@apollo/client";
-import Chip from "@material-ui/core/Chip";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import Typography from "@mui/material/Typography";
 
 const QUERY = gql`
 	query {
@@ -26,10 +27,10 @@ export default function TagsFilter({ tags, setTags }) {
 		setTags(newTags);
 	};
 
-	const classes = useFilterStyles();
+	const classes = filterStyles();
 
 	return (
-		<div className={classes.tagContainer}>
+		<Box sx={classes.tagContainer}>
 			<Typography variant={"h6"} style={{ padding: "3px" }}>
 				Tags
 			</Typography>
@@ -43,9 +44,9 @@ export default function TagsFilter({ tags, setTags }) {
 					variant={"outlined"}
 					size={"small"}
 					color={tags.includes(tag.id) ? "secondary" : "default"}
-					className={classes.tag}
+					sx={classes.tag}
 				/>
 			))}
-		</div>
+		</Box>
 	);
 }

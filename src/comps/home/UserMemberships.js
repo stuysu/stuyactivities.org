@@ -1,19 +1,21 @@
 import React, { useContext } from "react";
 import UserContext from "../context/UserContext";
 import UnstyledLink from "../ui/UnstyledLink";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import { Avatar } from "@material-ui/core";
-import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
 import ButtonLink from "../ui/ButtonLink";
 
-const useStyles = makeStyles({
+const classes = {
 	fixedSizeList: {
 		height: 250,
-		border: "1px solid rgba(0, 0, 0, 0.1)",
+		borderWidth: 1,
+		borderColor: "transparency.border",
+		borderStyle: "solid",
 		borderRadius: "10px",
 		overflow: "auto",
 		width: "95%"
@@ -22,10 +24,9 @@ const useStyles = makeStyles({
 		textAlign: "center",
 		padding: "1rem"
 	}
-});
+};
 
 const UserMemberships = () => {
-	const classes = useStyles();
 	const user = useContext(UserContext);
 
 	return (
@@ -34,10 +35,10 @@ const UserMemberships = () => {
 				My Memberships:
 			</Typography>
 
-			<List className={classes.fixedSizeList}>
+			<List sx={classes.fixedSizeList}>
 				{user.memberships?.map(membership => (
 					<UnstyledLink key={membership.id} to={`/${membership?.organization?.url}`}>
-						<ListItem button>
+						<ListItemButton>
 							<ListItemAvatar>
 								<Avatar
 									alt={membership?.organization?.name}
@@ -45,12 +46,12 @@ const UserMemberships = () => {
 								/>
 							</ListItemAvatar>
 							<ListItemText primary={membership?.organization?.name} secondary={membership?.role} />
-						</ListItem>
+						</ListItemButton>
 					</UnstyledLink>
 				))}
 
 				{!user.memberships.length && (
-					<div className={classes.noMembershipsMessage}>
+					<Box sx={classes.noMembershipsMessage}>
 						<Typography paragraph color={"secondary"}>
 							You're not a member of any clubs. Check out the catalog to find clubs you might like.
 						</Typography>
@@ -58,7 +59,7 @@ const UserMemberships = () => {
 						<ButtonLink to={"/catalog"} variant={"contained"} color={"secondary"}>
 							Catalog
 						</ButtonLink>
-					</div>
+					</Box>
 				)}
 			</List>
 		</div>

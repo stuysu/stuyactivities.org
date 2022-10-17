@@ -1,13 +1,12 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import { CharterFormContext } from "../../../pages/charter";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	textField: {
-		marginBottom: theme.spacing(2)
+		marginBottom: 2
 	}
-}));
+};
 
 const SmartCharterQuestion = ({
 	name,
@@ -24,7 +23,6 @@ const SmartCharterQuestion = ({
 	label,
 	helperText
 }) => {
-	const classes = useStyles();
 	const form = React.useContext(CharterFormContext);
 
 	const onFocusOut = () => {
@@ -118,7 +116,7 @@ const SmartCharterQuestion = ({
 				onChange={onChange}
 				multiline={multiline}
 				rows={rows}
-				className={classes.textField}
+				sx={classes.textField}
 			/>
 		</div>
 	);

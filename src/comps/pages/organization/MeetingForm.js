@@ -8,21 +8,22 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	makeStyles,
 	TextField,
 	Typography,
 	Select,
 	MenuItem,
 	FormControl,
 	InputLabel
-} from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import Checkbox from "@material-ui/core/Checkbox";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+} from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
+import Checkbox from "@mui/material/Checkbox";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import * as moment from "moment";
-import MomentUtils from "@date-io/moment";
 import { gql, useQuery } from "@apollo/client";
-import { MuiPickersUtilsProvider, DatePicker, TimePicker } from "@material-ui/pickers";
+// use mobile pickers to restore legacy behavior
+import { MobileDatePicker as DatePicker, MobileTimePicker as TimePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import TinyEditor from "../../updates/TinyEditor";
 import { OrgContext } from "../../../pages/org/index";
 
@@ -37,14 +38,14 @@ const AVAILABLE_ROOMS_QUERY = gql`
 	}
 `;
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	marginBottom: {
-		marginBottom: theme.spacing(1)
+		marginBottom: 1
 	},
 	marginBottomBig: {
-		marginBottom: theme.spacing(2)
+		marginBottom: 2
 	}
-}));
+};
 
 //Map number to ordinal, used to format room floors
 //1 -> 1st, 2 -> 2nd, etc...
@@ -70,7 +71,6 @@ const MeetingForm = ({
 	recurring: alreadyRecurring
 }) => {
 	const org = React.useContext(OrgContext);
-	const classes = useStyles();
 	const [title, setTitle] = React.useState(meeting.title || "");
 
 	const publicGroup = { name: "Public", id: 0 };
@@ -118,11 +118,12 @@ const MeetingForm = ({
 	});
 
 	const updateEnd = new_end => {
-		let end = moment(`${time.start.format("MM-DD-YYYY")} ${new_end.format("HH:mm")}`, "MM-DD-YYYY HH:mm");
+		let end = moment(new_end);
 		setTime({ ...time, end });
 	};
 
 	const updateDate = start => {
+		start = moment(start); // Pickers provide a `Date` and not a `moment` now
 		let end = moment(`${start.format("MM-DD-YYYY")} ${time.end.format("HH:mm")}`, "MM-DD-YYYY HH:mm");
 		setTime({ start, end });
 	};
@@ -157,7 +158,7 @@ const MeetingForm = ({
 				</DialogActions>
 			</Dialog>
 			<TextField
-				className={classes.marginBottomBig}
+				sx={classes.marginBottomBig}
 				fullWidth
 				variant="outlined"
 				label="Title"
@@ -166,12 +167,13 @@ const MeetingForm = ({
 				onChange={e => setTitle(e.target.value)}
 			/>
 			<Grid container spacing={1}>
-				<MuiPickersUtilsProvider utils={MomentUtils}>
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						{alreadyRecurring ? (
 							<FormControl variant="outlined" fullWidth>
 								<InputLabel shrink>Day Of Week</InputLabel>
 								<Select
+									variant="standard"
 									value={dayOfWeek}
 									onChange={e => setDayOfWeek(e.target.value)}
 									label="Day Of Week"
@@ -187,37 +189,28 @@ const MeetingForm = ({
 							</FormControl>
 						) : (
 							<DatePicker
-								fullWidth
-								autoOk
 								label="Date"
 								value={time.start}
-								format="MMM DD"
+								inputFormat="MMM dd"
 								onChange={updateDate}
-								animateYearScrolling
-								inputVariant="outlined"
+								renderInput={params => <TextField fullWidth variant="outlined" {...params} />}
 							/>
 						)}
 					</Grid>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						<TimePicker
-							fullWidth
-							autoOk
-							mask="__:__ _M"
 							label="Start Time"
-							inputVariant="outlined"
 							value={time.start}
 							onChange={updateDate}
+							renderInput={params => <TextField fullWidth variant="outlined" {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
 						<TimePicker
-							fullWidth
-							autoOk
-							mask="__:__ _M"
 							label="End Time"
-							inputVariant="outlined"
 							value={time.end}
 							onChange={updateEnd}
+							renderInput={params => <TextField fullWidth variant="outlined" {...params} />}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
@@ -225,21 +218,25 @@ const MeetingForm = ({
 							disableClearable
 							options={availableRooms}
 							getOptionLabel={option => option.name}
-							getOptionSelected={option => option.id === room.id}
+							isOptionEqualToValue={option => option.id === room.id}
 							disabled={loading}
 							error={!roomAvailable}
 							value={room}
 							onChange={(_, r) => setRoom(r)}
-							renderOption={option => (
-								<span>
-									<Typography>{option.name}</Typography>
-									{option.floor && (
-										<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
-									)}
-                  {option.approvalRequired && (
-                    <Typography color="primary" variant="body2">NOTE: Additional permissions / reservations may be required</Typography>
-                  )}
-								</span>
+							renderOption={(props, option) => (
+								<li {...props}>
+									<span>
+										<Typography>{option.name}</Typography>
+										{option.floor && (
+											<Typography color="textSecondary">{ordinal(option.floor)} Floor</Typography>
+										)}
+										{option.approvalRequired && (
+											<Typography color="primary" variant="body2">
+												NOTE: Additional permissions / reservations may be required
+											</Typography>
+										)}
+									</span>
+								</li>
 							)}
 							renderInput={params => <TextField {...params} label="Room" variant="outlined" />}
 						/>
@@ -249,21 +246,23 @@ const MeetingForm = ({
 							disableClearable
 							options={groups}
 							getOptionLabel={option => option.name}
-							getOptionSelected={option => option.id === group.id && option.name === group.name}
+							isOptionEqualToValue={option => option.id === group.id && option.name === group.name}
 							value={group}
 							onChange={(_, g) => {
 								setGroup(g);
 								console.log(g.id);
 							}}
-							renderOption={option => (
-								<span>
-									<Typography>{option.name}</Typography>
-								</span>
+							renderOption={(props, option) => (
+								<li {...props}>
+									<span>
+										<Typography>{option.name}</Typography>
+									</span>
+								</li>
 							)}
 							renderInput={params => <TextField {...params} label="Group" variant="outlined" />}
 						/>
 					</Grid>
-				</MuiPickersUtilsProvider>
+				</LocalizationProvider>
 			</Grid>
 
 			<br />
@@ -278,7 +277,7 @@ const MeetingForm = ({
 			</Typography>
 
 			<FormControlLabel
-				control={<Checkbox checked={checked} onChange={e => setChecked(e.target.checked)} />}
+				control={<Checkbox checked={checked} onChange={e => setChecked(e.target.checked)} color="secondary" />}
 				label={checkboxText}
 			/>
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { Typography, TextField } from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import { Typography, TextField } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
 import { gql, useQuery } from "@apollo/client";
 
 const QUERY = gql`
@@ -28,7 +28,11 @@ const OrganizationPicker = ({ setOrgId }) => {
 						options={options}
 						value={null}
 						getOptionLabel={_ => ""}
-						renderOption={option => <span>{option.name}</span>}
+						renderOption={(props, option) => (
+							<li {...props}>
+								<span>{option.name}</span>
+							</li>
+						)}
 						onChange={(ev, newvalue) => {
 							setOrgName(newvalue.name);
 							setOrgId(newvalue.id);

@@ -1,58 +1,75 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import { triggerLoginDialog } from "../../auth/AuthDialog";
 import UserContext from "../../context/UserContext";
 import NavAvatar from "./NavAvatar";
 import UnstyledLink from "../UnstyledLink";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { BugReport } from "@material-ui/icons";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { BugReport, Brightness4, Brightness7 } from "@mui/icons-material";
 import { triggerReportDialog } from "../../help/ReportDialog";
+import { Box } from "@mui/material";
+import { ThemeContext } from "../../context/ThemeProvider";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	root: {
 		flexGrow: 1
 	},
 	menuButton: {
-		marginRight: theme.spacing(2)
+		marginRight: 2
 	},
 	title: {
 		flexGrow: 1
 	}
-}));
+};
 
 const NavBar = ({ setDrawerOpen }) => {
-	const classes = useStyles();
 	const isMobile = useMediaQuery("(max-width: 800px)");
 	const user = React.useContext(UserContext);
 
 	return (
-		<div className={classes.root}>
-			<AppBar position="static">
+		<Box sx={classes.root}>
+			<AppBar position="static" enableColorOnDark>
 				<Toolbar>
 					<IconButton
 						edge="start"
-						className={classes.menuButton}
+						sx={classes.menuButton}
 						color="inherit"
 						aria-label="menu"
 						onClick={() => setDrawerOpen(true)}
+						size="large"
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h5" className={classes.title}>
+					<Typography variant="h5" sx={classes.title}>
 						<UnstyledLink to={"/"}>StuyActivities</UnstyledLink>
 					</Typography>
 					<div>
+						<ThemeContext.Consumer>
+							{value => (
+								<IconButton
+									edge="start"
+									color="inherit"
+									aria-label="menu"
+									onClick={value.toggleColorMode}
+									size="large"
+									sx={{ marginRight: 1 }}
+								>
+									{value.colorMode ? <Brightness4 /> : <Brightness7 />}
+								</IconButton>
+							)}
+						</ThemeContext.Consumer>
+
 						<IconButton
 							edge="start"
 							color="inherit"
 							aria-label="menu"
 							onClick={() => triggerReportDialog()}
+							size="large"
 						>
 							<BugReport />
 						</IconButton>
@@ -71,7 +88,7 @@ const NavBar = ({ setDrawerOpen }) => {
 					</div>
 				</Toolbar>
 			</AppBar>
-		</div>
+		</Box>
 	);
 };
 

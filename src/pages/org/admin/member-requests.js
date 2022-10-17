@@ -6,32 +6,32 @@ import {
 	DialogTitle,
 	FormControlLabel,
 	Grid,
-	makeStyles,
 	TextField,
 	Avatar,
 	Snackbar,
 	Switch,
 	Typography
-} from "@material-ui/core";
+} from "@mui/material";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
 import RequestList from "../../../comps/pages/organization/RequestList";
 import UserContext from "../../../comps/context/UserContext";
 import UserSelect from "../../../comps/ui/UserSelect";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(2)
+		margin: 2
 	},
 	leftRightMargin: {
-		marginLeft: theme.spacing(1),
-		marginRight: theme.spacing(1)
+		marginLeft: 1,
+		marginRight: 1
 	},
 	topBottomMargin: {
-		marginTop: theme.spacing(1),
-		marginBottom: theme.spacing(1)
+		marginTop: 1,
+		marginBottom: 1
 	}
-}));
+};
 
 const QUERY = gql`
 	query MembershipRequests($orgId: Int!) {
@@ -86,7 +86,6 @@ const OUTGOING_MUTATION = gql`
 `;
 
 export default function MemberRequests({ match }) {
-	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	const { data, refetch } = useQuery(QUERY, {
 		variables: { orgId: org.id }
@@ -151,7 +150,7 @@ export default function MemberRequests({ match }) {
 	const [user, setUser] = React.useState({});
 	const [role, setRole] = React.useState("Member");
 	const [message, setMessage] = React.useState("");
-	const [adminPriveleges, setAdminPriveleges] = React.useState(false);
+	const [adminPrivileges, setAdminPrivileges] = React.useState(false);
 	const [outgoingMutation] = useMutation(OUTGOING_MUTATION, {
 		onCompleted() {
 			setUser({});
@@ -166,9 +165,9 @@ export default function MemberRequests({ match }) {
 	const userContext = React.useContext(UserContext);
 
 	return (
-		<div className={classes.margin}>
+		<Box sx={classes.margin}>
 			<Typography variant="h5">Join Instructions</Typography>
-			<Grid container alignItems={"center"} spacing={2} className={classes.topBottomMargin}>
+			<Grid container alignItems={"center"} spacing={2} sx={classes.topBottomMargin}>
 				<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
 					<TextField
 						fullWidth
@@ -181,7 +180,13 @@ export default function MemberRequests({ match }) {
 				</Grid>
 				<Grid item xs={8} sm={8} md={4} lg={4} xl={4}>
 					<FormControlLabel
-						control={<Switch checked={buttonEnabled} onChange={e => setButtonEnabled(e.target.checked)} />}
+						control={
+							<Switch
+								color="secondary"
+								checked={buttonEnabled}
+								onChange={e => setButtonEnabled(e.target.checked)}
+							/>
+						}
 						label="Allow join through StuyActivities"
 					/>
 				</Grid>
@@ -198,94 +203,97 @@ export default function MemberRequests({ match }) {
 					</Button>
 				</Grid>
 			</Grid>
-      <div>
-        <Typography variant="h5">Send Outgoing Request</Typography>
-        <div className={classes.topBottomMargin}>
-          {!user.id ? (
-            <UserSelect
-              filter={user =>
-                user.id !== userContext.id &&
-                !org.memberships.some(member => member.user.id === user.id) &&
-                data &&
-                !data.membershipRequests.some(request => request.user.id === user.id)
-              }
-              onChange={(_, newUser) => setUser(newUser)}
-              keyword={keyword}
-              setKeyword={setKeyword}
-            />
-          ) : (
-            <Grid container spacing={1} alignItems={"center"}>
-              <Grid item xs={12} sm={6} md={4} lg={4} xl={2} style={{ display: "flex" }}>
-                <Avatar src={user.picture} className={classes.leftRightMargin} />
-                <div>
-                  <Typography>{user.name}</Typography>
-                  <Typography color={"textSecondary"} variant={"subtitle2"}>
-                    {user.email}
-                  </Typography>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
-                <TextField
-                  fullWidth
-                  multiline
-                  label="Role"
-                  value={role}
-                  onChange={e => setRole(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
-                <TextField
-                  fullWidth
-                  multiline
-                  label="Message (optional)"
-                  value={message}
-                  onChange={e => setMessage(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6} xl={2}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={adminPriveleges}
-                      onChange={e => setAdminPriveleges(e.target.checked)}
-                    />
-                  }
-                  label="Give Admin Privileges"
-                />
-              </Grid>
-              <Grid item xs={12} sm={12} md={6} lg={6} xl={2}>
-                <Button
-                  style={{ float: "right" }}
-                  className={classes.leftRightMargin}
-                  variant="contained"
-                  color="primary"
-                  onClick={() =>
-                    outgoingMutation({
-                      variables: {
-                        orgId: org.id,
-                        userId: user.id,
-                        role,
-                        message,
-                        admin: adminPriveleges
-                      }
-                    })
-                  }
-                >
-                  Send
-                </Button>
-                <Button
-                  style={{ float: "right" }}
-                  className={classes.leftRightMargin}
-                  variant="contained"
-                  onClick={() => setUser({})}
-                >
-                  Cancel
-                </Button>
-              </Grid>
-            </Grid>
-          )}
-        </div>
-      </div>
+			<div>
+				<Typography variant="h5">Send Outgoing Request</Typography>
+				<Box sx={classes.topBottomMargin}>
+					{!user.id ? (
+						<UserSelect
+							filter={user =>
+								user.id !== userContext.id &&
+								!org.memberships.some(member => member.user.id === user.id) &&
+								data &&
+								!data.membershipRequests.some(request => request.user.id === user.id)
+							}
+							onChange={(_, newUser) => setUser(newUser)}
+							keyword={keyword}
+							setKeyword={setKeyword}
+						/>
+					) : (
+						<Grid container spacing={1} alignItems={"center"}>
+							<Grid item xs={12} sm={6} md={4} lg={4} xl={2} style={{ display: "flex" }}>
+								<Avatar src={user.picture} sx={classes.leftRightMargin} />
+								<div>
+									<Typography>{user.name}</Typography>
+									<Typography color={"textSecondary"} variant={"subtitle2"}>
+										{user.email}
+									</Typography>
+								</div>
+							</Grid>
+							<Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
+								<TextField
+									variant="standard"
+									fullWidth
+									multiline
+									label="Role"
+									value={role}
+									onChange={e => setRole(e.target.value)}
+								/>
+							</Grid>
+							<Grid item xs={12} sm={6} md={4} lg={4} xl={2}>
+								<TextField
+									variant="standard"
+									fullWidth
+									multiline
+									label="Message (optional)"
+									value={message}
+									onChange={e => setMessage(e.target.value)}
+								/>
+							</Grid>
+							<Grid item xs={12} sm={6} md={6} lg={6} xl={2}>
+								<FormControlLabel
+									control={
+										<Switch
+											color="secondary"
+											checked={adminPrivileges}
+											onChange={e => setAdminPrivileges(e.target.checked)}
+										/>
+									}
+									label="Give Admin Privileges"
+								/>
+							</Grid>
+							<Grid item xs={12} sm={12} md={6} lg={6} xl={2}>
+								<Button
+									style={{ float: "right" }}
+									sx={classes.leftRightMargin}
+									variant="contained"
+									color="primary"
+									onClick={() =>
+										outgoingMutation({
+											variables: {
+												orgId: org.id,
+												userId: user.id,
+												role,
+												message,
+												admin: adminPrivileges
+											}
+										})
+									}
+								>
+									Send
+								</Button>
+								<Button
+									style={{ float: "right" }}
+									sx={classes.leftRightMargin}
+									variant="contained"
+									onClick={() => setUser({})}
+								>
+									Cancel
+								</Button>
+							</Grid>
+						</Grid>
+					)}
+				</Box>
+			</div>
 			{data?.membershipRequests?.filter(request => !request.userApproval || !request.adminApproval)?.length ===
 			0 ? (
 				<Typography variant="h5">No outgoing or incoming requests at this time</Typography>
@@ -335,13 +343,14 @@ export default function MemberRequests({ match }) {
 				autoHideDuration={1000}
 				onClose={() => setSnackbarOpen(false)}
 				message="Set join instructions!"
-			></Snackbar>
+				anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+			/>
 			<Dialog open={dialogError !== ""} onClose={() => setDialogError("")}>
 				<DialogTitle>Error: {dialogError}</DialogTitle>
 				<DialogActions>
 					<Button onClick={() => setDialogError("")}>Close</Button>
 				</DialogActions>
 			</Dialog>
-		</div>
+		</Box>
 	);
 }

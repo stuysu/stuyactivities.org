@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UserContext from "../comps/context/UserContext";
 import { Helmet } from "react-helmet";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { gql, useQuery } from "@apollo/client";
 import FlexCenter from "../comps/ui/FlexCenter";
 import { Calendar, FirstDay, LastDay } from "../comps/Calendar";
@@ -63,6 +63,7 @@ function MyMeetings() {
 						})}
 					setStart={setStart}
 					setEnd={setEnd}
+					height={800}
 				/>
 			</FlexCenter>
 			<br />

@@ -1,6 +1,6 @@
 import React from "react";
-import { ListItemAvatar, makeStyles, TextField, Avatar } from "@material-ui/core";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import { ListItemAvatar, TextField, Avatar, Box } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 const QUERY = gql`
@@ -16,14 +16,13 @@ const QUERY = gql`
 	}
 `;
 
-const useStyles = makeStyles({
+const classes = {
 	smallerText: {
 		scale: 0.8
 	}
-});
+};
 
 const UserSelect = ({ onChange, filter }) => {
-	const classes = useStyles();
 	const [keyword, setKeyword] = React.useState("");
 	const { data, loading } = useQuery(QUERY, { variables: { keyword } });
 	const options = data?.users?.filter(filter || (() => true)) || [];
@@ -33,21 +32,21 @@ const UserSelect = ({ onChange, filter }) => {
 			options={options}
 			value={null}
 			getOptionLabel={_ => ""}
-			renderOption={option => (
-				<>
+			renderOption={(props, option) => (
+				<li {...props}>
 					<ListItemAvatar>
 						<Avatar src={option?.picture} />
 					</ListItemAvatar>
 					<span>
 						<span>{option?.name}</span>
 						<br />
-						<span className={classes.smallerText}>
+						<Box component="span" sx={classes.smallerText}>
 							{option?.email}
 							<br />
 							{option?.isFaculty ? "Faculty" : `Grade ${option?.grade}`}
-						</span>
+						</Box>
 					</span>
-				</>
+				</li>
 			)}
 			onChange={onChange}
 			loading={loading}

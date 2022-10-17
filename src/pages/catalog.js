@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Grid, Typography, useMediaQuery } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 import { gql, useQuery } from "@apollo/client";
 import CatalogCard from "../comps/pages/catalog/CatalogCard";
 import CatalogListCard from "../comps/pages/catalog/CatalogListCard";
 import PromotedClubCard from "../comps/pages/explore/PromotedClubCard";
-import { List as ListIcon, ViewComfy } from "@material-ui/icons";
+import { List as ListIcon, ViewComfy } from "@mui/icons-material";
 import SearchBox from "../comps/pages/catalog/filters/SearchBox";
 import TagsFilter from "../comps/pages/catalog/filters/TagsFilter";
 import CommitmentFilter from "../comps/pages/catalog/filters/CommitmentFilter";
@@ -15,29 +14,30 @@ import { Helmet } from "react-helmet";
 import scubaNotFound from "../img/vectors/scuba-diver-not-found.svg";
 import cherryNotFound from "../img/vectors/cherry-page-not-found.svg";
 
-import Button from "@material-ui/core/Button";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import UnstyledLink from "../comps/ui/UnstyledLink";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import ToggleButton from "@mui/material/ToggleButton";
 import Loading from "../comps/ui/Loading";
-import List from "@material-ui/core/List";
+import List from "@mui/material/List";
 import Masonry from "react-masonry-css";
 import { useHistory } from "react-router-dom";
 
 const errorImages = [scubaNotFound, cherryNotFound];
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	root: {
 		flexGrow: 1
 	},
 	bigChild: {
-		padding: theme.spacing(2)
+		padding: 2
 	},
 	card: {
-		margin: theme.spacing(1)
+		margin: 1
 	},
 	filterHeading: {
-		paddingLeft: theme.spacing(1)
+		paddingLeft: 1
 	},
 	filterContainer: {
 		position: "sticky",
@@ -45,12 +45,12 @@ const useStyles = makeStyles(theme => ({
 	},
 	catalogHeading: {
 		position: "relative",
-		padding: theme.spacing(1)
+		padding: 1
 	},
 	displayTypeIcon: {
 		position: "absolute",
-		right: theme.spacing(1),
-		top: theme.spacing(1)
+		right: 1,
+		top: 1
 	},
 	defaultVector: {
 		width: "400px",
@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
 	notFoundContainer: {
 		textAlign: "center"
 	}
-}));
+};
 
 const QUERY = gql`
 	query Organizations(
@@ -121,7 +121,6 @@ const QUERY = gql`
 `;
 
 const Catalog = () => {
-	const classes = useStyles();
 	const [keyword, setKeyword] = useState("");
 	const [tags, setTags] = useState([]);
 	const [commitmentLevels, setCommitmentLevels] = useState([]);
@@ -220,7 +219,7 @@ const Catalog = () => {
 	}, [data, setOrganizations, offset]);
 
 	return (
-		<div className={classes.root}>
+		<Box sx={classes.root}>
 			<Helmet>
 				<title>Catalog | StuyActivities</title>
 				<meta property="og:title" content="Catalog | StuyActivities" />
@@ -231,8 +230,8 @@ const Catalog = () => {
 			</Helmet>
 
 			<Grid container>
-				<Grid item xs={12} sm={12} md={3} lg={3} xl={2} className={classes.bigChild}>
-					<div className={classes.filterContainer}>
+				<Grid item xs={12} sm={12} md={3} lg={3} xl={2} sx={classes.bigChild}>
+					<Box sx={classes.filterContainer}>
 						<SearchBox setKeyword={setKeyword} keyword={keyword} />
 						<TagsFilter tags={tags} setTags={setTags} />
 						<CommitmentFilter
@@ -240,9 +239,9 @@ const Catalog = () => {
 							setCommitmentLevels={setCommitmentLevels}
 						/>
 						<MeetingDaysFilter meetingDays={meetingDays} setMeetingDays={setMeetingDays} />
-					</div>
+					</Box>
 				</Grid>
-				<Grid item xs={12} sm={12} md={9} lg={9} xl={10} className={classes.bigChild}>
+				<Grid item xs={12} sm={12} md={9} lg={9} xl={10} sx={classes.bigChild}>
 					{data !== undefined && data.promotedClubs.length !== 0 && (
 						<div>
 							<Typography variant={"h4"}>Featured Clubs</Typography>
@@ -253,8 +252,8 @@ const Catalog = () => {
 							</div>
 						</div>
 					)}
-					<div className={classes.catalogHeading}>
-						<Typography variant={"h4"} className={classes.filterChild}>
+					<Box sx={classes.catalogHeading}>
+						<Typography variant={"h4"} sx={classes.filterChild}>
 							Catalog
 						</Typography>
 						<ToggleButtonGroup
@@ -262,7 +261,7 @@ const Catalog = () => {
 							exclusive
 							onChange={() => setListView(!listView)}
 							aria-label={"toggle list view"}
-							className={classes.displayTypeIcon}
+							sx={classes.displayTypeIcon}
 						>
 							<ToggleButton value={false} aria-label="card view">
 								<ViewComfy />
@@ -271,17 +270,18 @@ const Catalog = () => {
 								<ListIcon />
 							</ToggleButton>
 						</ToggleButtonGroup>
-					</div>
+					</Box>
 					{loading && offset === 0 && !organizations ? (
 						<Loading />
 					) : (
 						<>
 							{organizations?.length === 0 && (
-								<div className={classes.notFoundContainer}>
-									<img
+								<Box sx={classes.notFoundContainer}>
+									<Box
+										component="img"
 										src={errorImages[Math.floor(Math.random() * errorImages.length)]}
 										alt={"A Cute Not Found Vector"}
-										className={classes.defaultVector}
+										sx={classes.defaultVector}
 									/>
 									<Typography paragraph>
 										We couldn't find any activities matching that criteria.
@@ -296,7 +296,7 @@ const Catalog = () => {
 											Create Activity
 										</Button>
 									</UnstyledLink>
-								</div>
+								</Box>
 							)}
 							{listView ? (
 								<List>
@@ -333,7 +333,7 @@ const Catalog = () => {
 					)}
 				</Grid>
 			</Grid>
-		</div>
+		</Box>
 	);
 };
 

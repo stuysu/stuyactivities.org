@@ -1,12 +1,11 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import { Helmet } from "react-helmet";
 import BackButton from "../comps/ui/BackButton";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import { Box, Link } from "@material-ui/core/";
+import Paper from "@mui/material/Paper";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { Box, Link } from "@mui/material/";
 import PropTypes from "prop-types";
 import UserContext from "../comps/context/UserContext";
 import SignInRequired from "../comps/ui/SignInRequired";
@@ -44,7 +43,7 @@ function a11yProps(index) {
 	};
 }
 
-const useStyles = makeStyles(() => ({
+const classes = {
 	layout: {
 		display: "flex",
 		justifyContent: "center",
@@ -61,10 +60,9 @@ const useStyles = makeStyles(() => ({
 		textAlign: "center",
 		margin: "1rem"
 	}
-}));
+};
 
 const ClubPubFair = () => {
-	const classes = useStyles();
 	const [tab, setTab] = React.useState(0);
 	const user = React.useContext(UserContext);
 
@@ -86,10 +84,10 @@ const ClubPubFair = () => {
 					content={"A page designed to help students through the Club Pub Fair."}
 				/>
 			</Helmet>
-			<div className={classes.layout}>
+			<Box sx={classes.layout}>
 				<main style={{ width: "100%" }}>
 					<BackButton to={"/"} label={"Back To Home"} />
-					<Typography variant={"h4"} className={classes.title}>
+					<Typography variant={"h4"} sx={classes.title}>
 						Virtual Clubs & Pubs Fair 2020
 					</Typography>
 					<br />
@@ -105,6 +103,7 @@ const ClubPubFair = () => {
 						<Link
 							href="https://docs.google.com/document/d/1xFF6hU_BI_4yJ1o7_S508TqDFxtxD1DSyxumPvsyk9k/edit?usp=sharing"
 							color={"secondary"}
+							underline="hover"
 						>
 							here
 						</Link>
@@ -206,7 +205,7 @@ const ClubPubFair = () => {
 						</TabPanel>
 					</Paper>
 				</main>
-			</div>
+			</Box>
 		</div>
 	);
 };

@@ -1,14 +1,14 @@
 import React from "react";
 import honeybadger from "../../utils/honeybadger";
 import errorImage from "./../../img/vectors/cherry-list-is-empty.svg";
-import { Typography } from "@material-ui/core";
-import Boundary from "@honeybadger-io/react";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import { Typography } from "@mui/material";
+import { HoneybadgerErrorBoundary } from "@honeybadger-io/react";
+import Button from "@mui/material/Button";
 import { triggerReportDialog } from "../help/ReportDialog";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles({
+const classes = {
 	container: {
 		textAlign: "center",
 		paddingTop: "10vh"
@@ -22,13 +22,12 @@ const useStyles = makeStyles({
 		maxWidth: "90%",
 		marginBottom: 50
 	}
-});
+};
 
 const ErrorScreen = ({ error }) => {
-	const classes = useStyles();
 	return (
-		<div className={classes.container}>
-			<img src={errorImage} alt={"Error box"} className={classes.vector} />
+		<Box sx={classes.container}>
+			<Box component="img" src={errorImage} alt={"Error box"} sx={classes.vector} />
 			<Typography variant={"h3"} align={"center"} color={"primary"}>
 				Sorry about that, there was an unexpected error
 			</Typography>
@@ -41,22 +40,22 @@ const ErrorScreen = ({ error }) => {
 			</p>
 			<p>Stack Trace:</p>
 			<TextField
-				className={classes.textField}
+				sx={classes.textField}
 				value={error.stack}
 				variant={"outlined"}
 				disabled
 				multiline
 				rows={error.stack.split("\n").length}
 			/>
-		</div>
+		</Box>
 	);
 };
 
 const ErrorBoundary = ({ children }) => {
 	return (
-		<Boundary honeybadger={honeybadger} ErrorComponent={ErrorScreen}>
+		<HoneybadgerErrorBoundary honeybadger={honeybadger} ErrorComponent={ErrorScreen}>
 			{children}
-		</Boundary>
+		</HoneybadgerErrorBoundary>
 	);
 };
 

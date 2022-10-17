@@ -1,11 +1,12 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import UserContext from "../comps/context/UserContext";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import StepContent from "@material-ui/core/StepContent";
-import Button from "@material-ui/core/Button";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import StepContent from "@mui/material/StepContent";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import BasicInfoForm from "../comps/pages/charter/BasicInfoForm";
 import FlexCenter from "../comps/ui/FlexCenter";
 import CharterQuestions from "../comps/pages/charter/CharterQuestions";
@@ -13,17 +14,14 @@ import AddLeaders from "../comps/pages/charter/AddLeaders";
 import BeforeYouStart from "../comps/pages/charter/BeforeYouStart";
 import Confirm from "../comps/pages/charter/Confirm";
 import BackButton from "../comps/ui/BackButton";
-import Tooltip from "@material-ui/core/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 import SubmitCharter from "../comps/pages/charter/SubmitCharter";
-import { makeStyles } from "@material-ui/core/styles";
 import textValidator from "../utils/textValidator";
 import SignInRequired from "../comps/ui/SignInRequired";
 
-// const numSteps = 3;
-
 export const CharterFormContext = React.createContext({});
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	container: {
 		width: "1200px",
 		maxWidth: "95vw",
@@ -36,22 +34,22 @@ const useStyles = makeStyles(theme => ({
 		paddingBottom: "1rem",
 		position: "sticky",
 		bottom: 0,
-		background: theme.palette.background.default
+		backgroundColor: "background.default"
 	},
 	stepper: {
-		background: theme.palette.background.default
+		backgroundColor: "background.default",
+		padding: "24px"
 	},
 	stepLabel: {
 		cursor: "pointer"
 	},
 	backButton: {
 		marginLeft: "1rem",
-		marginBottom: theme.spacing(2)
+		marginBottom: 2
 	}
-}));
+};
 
 const StylesWrapper = ({ children }) => {
-	const classes = useStyles();
 	return children(classes);
 };
 
@@ -188,20 +186,16 @@ export default class Charter extends React.Component {
 				{classes => (
 					<CharterFormContext.Provider value={this.state}>
 						<FlexCenter>
-							<div className={classes.container}>
-								<BackButton to={"/"} label={"Back To Home"} className={classes.backButton} />
+							<Box sx={classes.container}>
+								<BackButton to={"/"} label={"Back To Home"} sx={classes.backButton} />
 								<Typography variant={"h4"} style={{ textAlign: "center" }}>
 									Chartering A New Activity
 								</Typography>
 
-								<Stepper
-									className={classes.stepper}
-									activeStep={this.state.activeStep}
-									orientation="vertical"
-								>
+								<Stepper sx={classes.stepper} activeStep={this.state.activeStep} orientation="vertical">
 									<Step>
 										<StepLabel
-											className={classes.stepLabel}
+											sx={classes.stepLabel}
 											onClick={() => this.setState({ activeStep: 0 })}
 										>
 											Before you start
@@ -215,7 +209,7 @@ export default class Charter extends React.Component {
 											error={["name", "url", "commitmentLevel", "tags", "keywords"].some(
 												field => this.state.errors[field]
 											)}
-											className={classes.stepLabel}
+											sx={classes.stepLabel}
 											onClick={() => this.setState({ activeStep: 1 })}
 										>
 											Basic Info
@@ -229,7 +223,7 @@ export default class Charter extends React.Component {
 											error={Object.keys(Charter.charterRequirementMap).some(
 												field => this.state.errors[field]
 											)}
-											className={classes.stepLabel}
+											sx={classes.stepLabel}
 											onClick={() => this.setState({ activeStep: 2 })}
 										>
 											Charter Information
@@ -240,7 +234,7 @@ export default class Charter extends React.Component {
 									</Step>
 									<Step>
 										<StepLabel
-											className={classes.stepLabel}
+											sx={classes.stepLabel}
 											onClick={() => this.setState({ activeStep: 3 })}
 										>
 											Leaders
@@ -256,9 +250,10 @@ export default class Charter extends React.Component {
 										</StepContent>
 									</Step>
 								</Stepper>
-								<div className={classes.navigationButtons}>
+								<Box sx={classes.navigationButtons}>
 									{this.state.activeStep < 4 && (
 										<Tooltip
+											disableInteractive
 											disableHoverListener={this.state.activeStep !== 3 || !this.hasErrors()}
 											title={
 												"You need to fix the issues with your submission before you can continue"
@@ -279,8 +274,8 @@ export default class Charter extends React.Component {
 									{this.state.activeStep >= 4 && <SubmitCharter />}
 									&nbsp;
 									<Button onClick={this.previousStep}>Back</Button>
-								</div>
-							</div>
+								</Box>
+							</Box>
 						</FlexCenter>
 					</CharterFormContext.Provider>
 				)}

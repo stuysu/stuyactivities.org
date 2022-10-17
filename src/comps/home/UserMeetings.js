@@ -6,8 +6,7 @@ import Carousel from "react-multi-carousel";
 
 import "react-multi-carousel/lib/styles.css";
 import MeetingCard from "../meetings/MeetingCard";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@mui/material";
 import { client } from "../context/ApolloProvider";
 
 const responsive = {
@@ -62,7 +61,7 @@ const QUERY = gql`
 	}
 `;
 
-const useStyles = makeStyles({
+const classes = {
 	meetingCard: {
 		margin: "0 0.5rem",
 		minHeight: 250
@@ -70,10 +69,9 @@ const useStyles = makeStyles({
 	title: {
 		marginLeft: "0.5rem"
 	}
-});
+};
 
 const UserMeetings = () => {
-	const classes = useStyles();
 	const user = useContext(UserContext);
 	const { data, loading } = useQuery(QUERY, { variables: { userId: user.id }, client });
 
@@ -89,13 +87,13 @@ const UserMeetings = () => {
 	}
 	return (
 		<div>
-			<Typography variant={"h3"} color={"primary"} className={classes.title}>
+			<Typography variant={"h3"} color={"primary"} sx={classes.title}>
 				My Upcoming Meetings:
 			</Typography>
 
 			<Carousel responsive={responsive}>
 				{data.meetings.map(meeting => (
-					<MeetingCard {...meeting} key={meeting.id} className={classes.meetingCard} />
+					<MeetingCard {...meeting} key={meeting.id} sx={classes.meetingCard} />
 				))}
 			</Carousel>
 

@@ -1,9 +1,8 @@
 import React from "react";
-import { Box, Button, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Box, Button, Typography } from "@mui/material";
 import { OrgContext } from "../../../pages/org/index";
 import joinVector from "../../../img/vectors/undraw_join.svg";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import { gql, useMutation } from "@apollo/client";
 import { cache } from "../../context/ApolloProvider";
 
@@ -11,10 +10,7 @@ import moment from "moment-timezone";
 import UserContext from "../../context/UserContext";
 import SignInRequired from "../../ui/SignInRequired";
 
-// import musicBand from "./../../../img/vectors/pablita-music-band.svg";
-
-//styles
-const useStyles = makeStyles(theme => ({
+const classes = {
 	tabName: {
 		textAlign: "center"
 	},
@@ -31,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 		padding: "1rem",
 		textAlign: "center"
 	}
-}));
+};
 
 const CREATE = gql`
 	mutation ($message: String, $orgId: Int!) {
@@ -42,7 +38,6 @@ const CREATE = gql`
 `;
 
 const CreateRequest = () => {
-	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	const [message, setMessage] = React.useState("");
 	const user = React.useContext(UserContext);
@@ -68,7 +63,12 @@ const CreateRequest = () => {
 	return (
 		<>
 			<div>
-				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
+				<Box
+					component="img"
+					src={joinVector}
+					alt={"Friends helping each other up a window."}
+					sx={classes.vector}
+				/>
 			</div>
 
 			<p>
@@ -110,7 +110,6 @@ const DELETE = gql`
 
 const ExistingRequest = () => {
 	const org = React.useContext(OrgContext);
-	const classes = useStyles();
 
 	const [deleteRequest, { error }] = useMutation(DELETE, {
 		variables: { requestId: org.membershipRequest.id },
@@ -122,7 +121,12 @@ const ExistingRequest = () => {
 	return (
 		<>
 			<div>
-				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
+				<Box
+					component="img"
+					src={joinVector}
+					alt={"Friends helping each other up a window."}
+					sx={classes.vector}
+				/>
 			</div>
 
 			<p>
@@ -161,7 +165,6 @@ const ACCEPT = gql`
 
 const AcceptRequest = () => {
 	const org = React.useContext(OrgContext);
-	const classes = useStyles();
 
 	const [acceptRequest, { error, loading: loadingAccept }] = useMutation(ACCEPT, {
 		variables: { requestId: org.membershipRequest.id },
@@ -180,7 +183,12 @@ const AcceptRequest = () => {
 	return (
 		<>
 			<div>
-				<img src={joinVector} alt={"Friends helping each other up a window."} className={classes.vector} />
+				<Box
+					component="img"
+					src={joinVector}
+					alt={"Friends helping each other up a window."}
+					sx={classes.vector}
+				/>
 			</div>
 			<p>You've been invited to join this club as a {org.membershipRequest.role}</p>
 			<Button
@@ -205,21 +213,20 @@ const AcceptRequest = () => {
 };
 
 const Join = ({ match }) => {
-	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 
 	return (
 		<div border="1">
-			<Typography variant={"h4"} className={classes.tabName}>
+			<Typography variant={"h4"} sx={classes.tabName}>
 				Join Activity
 			</Typography>
 
-			<div className={classes.tabContainer}>
+			<Box sx={classes.tabContainer}>
 				{!org.membership && !org.membershipRequest && <CreateRequest />}
 				{!org.membership && org.membershipRequest && org.membershipRequest.userApproval && <ExistingRequest />}
 				{!org.membership && org.membershipRequest && org.membershipRequest.adminApproval && <AcceptRequest />}
 				{org.membership && <p>You're a member of this activity :)</p>}
-			</div>
+			</Box>
 		</div>
 	);
 };

@@ -7,13 +7,13 @@ import RouteTabs from "../../../comps/ui/RouteTabs";
 import UserContext from "../../../comps/context/UserContext";
 import SignInRequired from "../../../comps/ui/SignInRequired";
 import CharterEdits from "./charter-edits";
-import { Person, PersonAdd, Group, GroupWork, ListAlt, SmsFailed, PostAdd } from "@material-ui/icons";
+import { Person, PersonAdd, Group, GroupWork, ListAlt, SmsFailed, PostAdd } from "@mui/icons-material";
 import Meetings from "./meetings";
 import Groups from "./groups";
 import Strikes from "./Strikes";
 import Updates from "./updates";
 import { OrgContext } from "../index";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 export default function OrgAdminRouter({ match }) {
 	const actualMatch = generatePath(match.path, match.params);
@@ -67,7 +67,7 @@ export default function OrgAdminRouter({ match }) {
 			{org?.membership?.adminPrivileges ? (
 				<div>
 					<RouteTabs tabs={tabs} />
-					<Switch>
+					<Switch color="secondary">
 						<Route path={match.path + "/members"} component={Members} />
 						<Route path={match.path + "/member-requests"} component={Requests} />
 						<Route path={match.path + "/meetings"} component={Meetings} />

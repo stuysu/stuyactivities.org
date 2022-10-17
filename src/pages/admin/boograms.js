@@ -9,7 +9,7 @@ import {
 	Snackbar,
 	Typography,
 	TextField
-} from "@material-ui/core";
+} from "@mui/material";
 import { gql, useQuery, useMutation } from "@apollo/client";
 
 const ITEMS = gql`
@@ -96,6 +96,7 @@ export default function Boograms() {
 							{data?.saleItems.map(item => (
 								<>
 									<TextField
+										variant="standard"
 										label={`${item.item} - $${item.price}`}
 										type="number"
 										onChange={ev => setCount(item.id - 1, Number(ev.target.value))}
@@ -136,6 +137,7 @@ export default function Boograms() {
 					open={snackbarOpen}
 					onClose={() => setSnackbarOpen(false)}
 					message={"Success!"}
+					anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 				/>
 			</div>
 		</div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { GOOGLE_CLIENT_ID } from "../../constants";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import AuthContext from "./AuthContext";
 import useScript from "../../utils/useScript";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const LOGIN_WITH_GOOGLE = gql`
 	mutation loginWithGoogle($token: String!) {
@@ -12,7 +12,7 @@ const LOGIN_WITH_GOOGLE = gql`
 	}
 `;
 
-const GoogleLoginButton = ({ className }) => {
+const GoogleLoginButton = () => {
 	const [loginWithGoogle, { error, loading }] = useMutation(LOGIN_WITH_GOOGLE);
 	const scriptStatus = useScript("https://accounts.google.com/gsi/client");
 	const ref = useRef(null);

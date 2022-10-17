@@ -1,32 +1,28 @@
 import React, { useContext, useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import { Button, Grid } from "@material-ui/core";
+import TextField from "@mui/material/TextField";
+import { Box, Button, Grid } from "@mui/material";
 
 import layout from "./../../../styles/Layout.module.css";
-import Card from "@material-ui/core/Card";
-import { makeStyles } from "@material-ui/core/styles";
+import Card from "@mui/material/Card";
 import { OrgContext } from "../index";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemText from "@mui/material/ListItemText";
+import List from "@mui/material/List";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { gql, useMutation } from "@apollo/client";
 import UpdateCard from "../../../comps/updates/UpdateCard";
 import moment from "moment-timezone";
 import TinyEditor from "../../../comps/updates/TinyEditor";
 
-const useStyles = makeStyles({
+const classes = {
 	cardContent: {
 		padding: "1rem"
-	},
-	picCarousel: {
-		marginTop: "1rem"
 	}
-});
+};
 
 const CREATE_UPDATE = gql`
 	mutation (
@@ -53,7 +49,6 @@ const CREATE_UPDATE = gql`
 
 const Updates = () => {
 	const org = useContext(OrgContext);
-	const classes = useStyles();
 
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
@@ -99,7 +94,7 @@ const Updates = () => {
 							</ListItem>
 						</List>
 						<input style={{ display: "none" }} />
-						<div className={classes.cardContent}>
+						<Box sx={classes.cardContent}>
 							<TextField
 								fullWidth
 								variant={"outlined"}
@@ -124,7 +119,11 @@ const Updates = () => {
 							<Grid component="label" container alignItems="center" spacing={1}>
 								<Grid item>Members Only</Grid>
 								<Grid item>
-									<Switch checked={isPublic} onChange={() => setIsPublic(!isPublic)} />
+									<Switch
+										color="secondary"
+										checked={isPublic}
+										onChange={() => setIsPublic(!isPublic)}
+									/>
 								</Grid>
 								<Grid item>Public</Grid>
 							</Grid>
@@ -136,6 +135,7 @@ const Updates = () => {
 											<Checkbox
 												checked={notifyMembers}
 												onChange={() => setNotifyMembers(!notifyMembers)}
+												color="secondary"
 											/>
 										}
 										label="Notify Members"
@@ -147,6 +147,7 @@ const Updates = () => {
 											<Checkbox
 												checked={notifyFaculty}
 												onChange={() => setNotifyFaculty(!notifyFaculty)}
+												color="secondary"
 											/>
 										}
 										label="Notify Faculty Advisors"
@@ -157,7 +158,7 @@ const Updates = () => {
 							<Button color={"primary"} variant={"contained"} disabled={loading} onClick={submit}>
 								Submit
 							</Button>
-						</div>
+						</Box>
 					</Card>
 				</Grid>
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>

@@ -1,28 +1,24 @@
 import React from "react";
 import { OrgContext } from "./index";
-import { makeStyles, Typography } from "@material-ui/core";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import listPlugin from "@fullcalendar/list";
-import Grid from "@material-ui/core/Grid";
+import { Box, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import MeetingCard from "../../comps/meetings/MeetingCard";
-import { triggerMeetingDialog } from "../../comps/meetings/MeetingPreviewDialog";
+import { Calendar } from "../../comps/Calendar";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	margin: {
-		margin: theme.spacing(1)
+		margin: 1
 	},
 	calendarContainer: {
 		width: 850,
 		maxWidth: "100%"
 	}
-}));
+};
 
 export default function Meetings() {
-	const classes = useStyles();
 	const org = React.useContext(OrgContext);
 	return (
-		<div className={classes.margin}>
+		<Box sx={classes.margin}>
 			<Typography variant={"h2"} align={"center"}>
 				Meetings
 			</Typography>
@@ -54,23 +50,16 @@ export default function Meetings() {
 			<br />
 			<Typography variant={"h4"}>All Meetings</Typography>
 			<br />
-
-			<div className={classes.calendarContainer}>
-				<FullCalendar
-					plugins={[dayGridPlugin, listPlugin]}
-					headerToolbar={{
-						start: "title",
-						end: "dayGridMonth listMonth prev next"
-					}}
-					events={org?.meetings.map(meeting => {
-						const newMeeting = { ...meeting };
-						newMeeting.title +=
-							typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
-						return newMeeting;
-					})}
-					eventClick={ev => triggerMeetingDialog(ev.event.id)}
-				/>
-			</div>
-		</div>
+			<Calendar
+				meetings={org?.meetings.map(meeting => {
+					const newMeeting = { ...meeting };
+					newMeeting.title +=
+						typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
+					return newMeeting;
+				})}
+				sx={classes.calendarContainer}
+				height={undefined}
+			/>
+		</Box>
 	);
 }

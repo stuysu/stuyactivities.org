@@ -1,5 +1,5 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import { CharterFormContext } from "../../../pages/charter";
 import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
@@ -14,7 +14,7 @@ const QUERY = gql`
 
 const urlRegex = new RegExp(/^[a-zA-Z0-9-]+$/);
 
-const UrlSelection = ({ className }) => {
+const UrlSelection = () => {
 	const form = React.useContext(CharterFormContext);
 
 	const { data } = useQuery(QUERY, { variables: { url: form?.url || "" } });
@@ -25,7 +25,7 @@ const UrlSelection = ({ className }) => {
 	}, [data, form.errors]);
 
 	return (
-		<div className={className}>
+		<div>
 			<TextField
 				variant={"outlined"}
 				fullWidth

@@ -1,21 +1,21 @@
 import React from "react";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { OrgContext } from "../index";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Card from "@material-ui/core/Card";
-import { Avatar, Button } from "@material-ui/core";
-// import { makeStyles } from "@material-ui/core/styles";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Card from "@mui/material/Card";
+import { Avatar, Button } from "@mui/material";
 import capitalizeString from "../../../utils/capitalizeString";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import { CharterFormContext } from "../../charter";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import SmartCharterQuestion from "../../../comps/pages/charter/SmartCharterQuestion";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@mui/material/TextField";
 import arrayToggle from "../../../utils/arrayToggle";
 import { cache } from "../../../comps/context/ApolloProvider";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 import LinkifyText from "../../../comps/ui/LinkifyText";
+import Box from "@mui/material/Box";
 
 // THIS FILE IS UNCOMFORTABLY HUGE
 // TODO WHEN WE HAVE MORE TIME: EXPORT CODE INTO SEPARATE COMPONENTS
@@ -497,11 +497,13 @@ const ApprovalMessages = () => {
 	return (
 		<>
 			<Typography variant={"h3"}>Comments With The ClubPub Department: </Typography>
-			<div
-				style={{
+			<Box
+				sx={{
 					width: "100%",
 					borderRadius: "10px",
-					border: "solid 2px black",
+					borderStyle: "solid",
+					borderWidth: "2px",
+					borderColor: "transparency.text",
 					maxHeight: "500px",
 					position: "relative",
 					overflow: "auto"
@@ -516,9 +518,10 @@ const ApprovalMessages = () => {
 									<Avatar src={message?.user?.picture} />
 								</ListItemAvatar>
 								<div>
-									<p
-										style={{
-											color: message?.auto ? "grey" : "black"
+									<Box
+										component="p"
+										sx={{
+											color: message?.auto ? "transparency.textLighter" : "transparency.text"
 										}}
 									>
 										{message?.user?.name} -{" "}
@@ -527,27 +530,28 @@ const ApprovalMessages = () => {
 											: message?.user?.adminRoles?.length
 											? "ClubPub Team"
 											: "Organization Admin"}
-									</p>
-									<p
-										style={{
+									</Box>
+									<Box
+										component="p"
+										sx={{
 											fontStyle: message?.auto ? "italic" : "normal",
-											color: message?.auto ? "grey" : "black",
+											color: message?.auto ? "transparency.textLighter" : "transparency.text",
 											overflowWrap: "anywhere"
 										}}
 									>
 										<LinkifyText color={"primary"}>{message?.message}</LinkifyText>
-									</p>
+									</Box>
 								</div>
 							</ListItem>
 						);
 					})}
 				</List>
-				<div
-					style={{
+				<Box
+					sx={{
 						position: "sticky",
 						bottom: 0,
 						padding: "1rem",
-						background: "white",
+						backgroundColor: "background.default",
 						verticalAlign: "middle",
 						display: "flex"
 					}}
@@ -563,8 +567,8 @@ const ApprovalMessages = () => {
 					<Button variant={"contained"} color={"secondary"} onClick={onSubmit}>
 						Send
 					</Button>
-				</div>
-			</div>
+				</Box>
+			</Box>
 		</>
 	);
 };

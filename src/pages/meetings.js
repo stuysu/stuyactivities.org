@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import FlexCenter from "../comps/ui/FlexCenter";
 import UserContext from "../comps/context/UserContext";
 import { Calendar, FirstDay, LastDay } from "../comps/Calendar";
@@ -48,7 +48,7 @@ const Meetings = () => {
 						.map(meeting => {
 							const newMeeting = { ...meeting };
 							const meetingRoom =
-									typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
+								typeof meeting.rooms[0] === "undefined" ? "" : `: Room ${meeting.rooms[0].name}`;
 							newMeeting.title = meeting.organization.name + " - " + meeting.title + meetingRoom;
 							newMeeting.color = meeting.privacy === "private" ? "#e17055" : "#00b894";
 							return newMeeting;
@@ -57,6 +57,7 @@ const Meetings = () => {
 					// full control on how the meetings are sourced
 					setStart={setStart}
 					setEnd={setEnd}
+					height={800}
 				/>
 			</FlexCenter>
 			<br />

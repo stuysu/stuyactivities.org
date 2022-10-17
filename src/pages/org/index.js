@@ -10,9 +10,8 @@ import Overview from "./overview";
 import Meetings from "./meetings";
 import Groups from "./groups";
 import { Helmet } from "react-helmet";
-import { makeStyles } from "@material-ui/core/styles";
 
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 
 import OrgNavPanel from "../../comps/pages/organization/OrgNavPanel";
 import BackButton from "../../comps/ui/BackButton";
@@ -23,11 +22,11 @@ import UserContext from "../../comps/context/UserContext";
 
 import styles from "./../../Globals.module.css";
 
-const useStyles = makeStyles(theme => ({
+const classes = {
 	backButton: {
-		marginBottom: theme.spacing(5)
+		marginBottom: 5
 	}
-}));
+};
 
 export const OrgContext = React.createContext({});
 
@@ -153,7 +152,6 @@ const QUERY = gql`
 const OrgRouter = ({ match, history }) => {
 	const user = React.useContext(UserContext);
 
-	const classes = useStyles();
 	const url = match.params.orgUrl;
 
 	const { data, loading, refetch } = useQuery(QUERY, {
@@ -200,7 +198,7 @@ const OrgRouter = ({ match, history }) => {
 				</Helmet>
 
 				<div className={styles.contentContainer}>
-					<BackButton className={classes.backButton} label={"Back to Catalog"} to={"/catalog"} />
+					<BackButton sx={classes.backButton} label={"Back to Catalog"} to={"/catalog"} />
 
 					<Grid container spacing={1}>
 						<Grid item xs={12} sm={12} xl={2} md={3} lg={2}>
@@ -208,8 +206,8 @@ const OrgRouter = ({ match, history }) => {
 						</Grid>
 
 						<Grid item lg={10} md={9} xl={10} sm={12} xs={12}>
-							<div className={classes.contentContainer}>
-								<Switch>
+							<div>
+								<Switch color="secondary">
 									<Route path={match.path} component={Overview} exact />
 									<Route path={match.path + "/charter"} component={Charter} />
 									<Route path={match.path + "/members"} component={Members} />

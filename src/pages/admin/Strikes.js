@@ -1,7 +1,7 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import SearchBox from "../../comps/pages/catalog/filters/SearchBox";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import StrikeCard from "../../comps/pages/admin/StrikeCard";
 import { client } from "../../comps/context/ApolloProvider";
 import UserContext from "../../comps/context/UserContext";
