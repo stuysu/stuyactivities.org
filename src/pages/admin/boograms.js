@@ -23,8 +23,8 @@ const ITEMS = gql`
 `;
 
 const RECORD = gql`
-	mutation ($userId: Int!, $purchases: [Int!]!, $counts: [Int!]!) {
-		recordSales(userId: $userId, purchases: $purchases, counts: $counts)
+	mutation ($userId: Int!, $purchaserOsis: Int!, $purchases: [Int!]!, $counts: [Int!]!) {
+		recordSales(userId: $userId, purchaserOsis: $purchaserOsis, purchases: $purchases, counts: $counts)
 	}
 `;
 
@@ -67,7 +67,7 @@ export default function Boograms() {
 		}
 	});
 
-	const isValid = ({ userId, counts }) => userId && counts.some(c => c > 0);
+	const isValid = ({ userId, counts, purchaserOsis }) => userId && purchaserOsis && counts.some(c => c > 0);
 
 	return (
 		<div style={{ width: 1200, maxWidth: "90vw", margin: "auto" }}>
@@ -87,6 +87,12 @@ export default function Boograms() {
 								{args.user.email}
 							</Typography>
 							<br />
+              <TextField
+                label="Purchaser OSIS: (input 0 if N/A)"
+                type="number"
+                onChange={ev => setArgs({purchaserOsis: Number(ev.target.value), ...args})}
+              />
+              <br />
 							{data?.saleItems.map(item => (
 								<>
 									<TextField

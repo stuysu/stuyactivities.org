@@ -41,7 +41,7 @@ export default function AdminRouter({ match }) {
 	const tabs = [
 		{
 			label: "Boograms",
-			role: "records",
+			role: "boograms2022",
 			path: actualPath + "/boograms",
 			icon: <AttachMoney />
 		},
