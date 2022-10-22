@@ -156,7 +156,7 @@ const REMOVE_RECURRING_MUTATION = gql`
 		deleteRecurringMeeting(recurringMeetingId: $id)
 	}
 `;
-
+/*	TEMPORARILY DISABLED TO FIX OVERBOOKING BUG
 const REPLACE_ROOM_MUTATION = gql`
 	mutation ($id: Int!, $oldRoom: Int!, $roomId: Int!) {
 		removeRoomFromMeeting(meetingId: $id, roomId: $oldRoom) {
@@ -167,7 +167,7 @@ const REPLACE_ROOM_MUTATION = gql`
 		}
 	}
 `;
-
+*/
 const EDIT_RECURRING_MUTATION = gql`
 	mutation AlterRecurringMeeting(
 		$id: Int!
@@ -481,7 +481,9 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
+/*	TEMPORARILY DISABLED TO FIX OVERBOOKING BUG
 	const [replaceRoomMutation] = useMutation(REPLACE_ROOM_MUTATION);
+*/
 	const edit = ({
 		title,
 		description,
