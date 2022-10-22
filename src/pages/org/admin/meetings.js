@@ -510,6 +510,7 @@ const EditPage = ({ match }) => {
 				groupId
 			}
 		});
+/*	TEMPORARILY DISABLED TO FIX OVERBOOKING BUG
 		if (oldRoom !== roomId) {
 			replaceRoomMutation({
 				variables: {
@@ -519,6 +520,7 @@ const EditPage = ({ match }) => {
 				}
 			});
 		}
+*/
 	};
 
 	//Grid isn't really necessary here but we use it to make the edit menu similar in shape to the main page halves
@@ -533,6 +535,9 @@ const EditPage = ({ match }) => {
 				<Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
 					<Typography variant={"h4"} sx={classes.newMeetingTitle}>
 						{recurring ? "Edit Recurring Meeting" : "Edit Meeting"}
+					</Typography>
+					<Typography variant={"h6"} color={"primary"}>
+						Due to a current critical bug involving the overbooking of clubs, you cannot update the date, time, or room a meeting takes place in. Any changes you make here to those values will not actually save. If you must modify these values, please remove and create a new meeting.
 					</Typography>
 					<MeetingForm
 						submit={edit}
