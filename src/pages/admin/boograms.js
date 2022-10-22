@@ -67,7 +67,7 @@ export default function Boograms() {
 		}
 	});
 
-	const isValid = ({ userId, counts, purchaserOsis }) => userId && purchaserOsis && counts.some(c => c > 0);
+	const isValid = ({ userId, counts, purchaserOsis }) => userId && purchaserOsis >= 0 && counts.some(c => c > 0);
 
 	return (
 		<div style={{ width: 1200, maxWidth: "90vw", margin: "auto" }}>
