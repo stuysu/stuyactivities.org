@@ -10,6 +10,12 @@ import capitalizeString from "../../../utils/capitalizeString";
 
 const CharterQuestions = () => {
 	const form = React.useContext(CharterFormContext);
+	if (form?.returning === undefined) {
+		if (form) {
+			form.set({ returning: false });
+			form.set({ returningInfo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+		}
+	}
 
 	return (
 		<div>
@@ -125,8 +131,14 @@ const CharterQuestions = () => {
 					<Checkbox
 						checked={form?.returning}
 						onChange={() => {
+							if (!form.returning) {
+								form.set({ returningInfo: ""});
+							} else {
+								form.set({ returningInfo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" });
+							}
+
 							form.set({
-								returning: !form?.returning
+								returning: !form.returning
 							});
 						}}
 						color="secondary"
@@ -134,6 +146,7 @@ const CharterQuestions = () => {
 				}
 				label={"Yes"}
 			/>
+
 			{
 				form?.returning && 
 				<SmartCharterQuestion
