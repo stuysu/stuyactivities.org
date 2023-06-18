@@ -266,8 +266,14 @@ const OrgApprovals = ({ match }) => {
 							if (edit.extra) {
 								let tempSplit = edit.extra.split("<RETURNING_CHARTER>");
 								edit.extra = tempSplit[0];
-								edit.returning = tempSplit[1];
-								edit.alteredFields.push("returning");
+								if (tempSplit.length > 0) {
+									edit.returning = tempSplit[1];
+									edit.alteredFields.push("returning");
+								} else {
+									edit.returning = "This club is not a returning activity.";
+									edit.alteredFields.push("returning");
+								}
+								
 							}
 							return (
 								<Card
