@@ -280,7 +280,7 @@ const OrgApprovals = ({ match }) => {
 									}
 								} else {
 									edit.extra = null;
-									edit.alteredFields = edit.alteredFields.filter(f => f != "extra");
+									edit.alteredFields = edit.alteredFields.filter(f => f !== "extra");
 									edit.returning = tempSplit[1];
 									edit.alteredFields.push("returning");
 								}
@@ -318,7 +318,7 @@ const OrgApprovals = ({ match }) => {
 												onClick={() =>
 													window.confirm("Are you sure you want to approve all changes") &&
 													approve({
-														variables: { fields: edit.alteredFields.filter(f => f != "returning"), editId: edit.id }
+														variables: { fields: edit.alteredFields.filter(f => f !== "returning"), editId: edit.id }
 													})
 												}
 											>
@@ -356,7 +356,7 @@ const OrgApprovals = ({ match }) => {
 																<p>{value}</p>
 															)}
 														</div>
-														{field != "returning" &&
+														{field !== "returning" &&
 														<ListItemSecondaryAction>
 															<Button
 																variant={"outlined"}
