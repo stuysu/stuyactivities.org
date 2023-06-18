@@ -78,6 +78,7 @@ const LEAVE_MUTATION = gql`
 `;
 
 const OrgNavPanel = ({ match }) => {
+	// TODO
 	const org = React.useContext(OrgContext);
 	const user = React.useContext(UserContext);
 

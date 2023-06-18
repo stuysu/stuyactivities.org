@@ -220,9 +220,10 @@ const OrgRouter = ({ match, history }) => {
 									<Route path={match.path + "/groups"}>
 										<Groups />
 									</Route>
-									<Route path={match.path + "/admin"}>
-										<OrgAdminRouter />
-									</Route>
+									<Route
+										path={match.path + "/admin"}
+										children={({ match }) => <OrgAdminRouter match={match} />}
+									/>
 									<Route path={match.path + "/meetings"}>
 										<Meetings />
 									</Route>

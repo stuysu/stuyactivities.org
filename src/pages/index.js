@@ -75,9 +75,7 @@ const Pages = () => {
 						<Route exact path="/token/:token">
 							<TokenLogin />
 						</Route>
-						<Route path="/admin">
-							<AdminRouter />
-						</Route>
+						<Route path="/admin" children={({ match }) => <AdminRouter match={match} />} />
 						<Route path="/rules">
 							<Rules />
 						</Route>
@@ -97,12 +95,13 @@ const Pages = () => {
 							<Settings />
 						</Route>
 						<Route
-							path="/organizations/:orgUrl"
+							path={"/organizations/:orgUrl"}
 							render={() => <Redirect to={window.location.pathname.replace("/organizations/", "/")} />}
 						/>
-						<Route path={"/:orgUrl"}>
-							<OrgRouter />
-						</Route>
+						<Route
+							path={"/:orgUrl"}
+							children={({ match, history }) => <OrgRouter match={match} history={history} />}
+						/>
 					</Switch>
 				</Suspense>
 			</ErrorBoundary>

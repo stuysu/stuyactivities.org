@@ -68,24 +68,16 @@ export default function OrgAdminRouter({ match }) {
 				<div>
 					<RouteTabs tabs={tabs} />
 					<Switch color="secondary">
-						<Route path={match.path + "/members"}>
-							<Members />
-						</Route>
+						<Route path={match.path + "/members"} children={({ match }) => <Members match={match} />} />
 						<Route path={match.path + "/member-requests"}>
 							<Requests />
 						</Route>
-						<Route path={match.path + "/meetings"}>
-							<Meetings />
-						</Route>
+						<Route path={match.path + "/meetings"} children={({ match }) => <Meetings match={match} />} />
 						<Route path={match.path + "/posts"}>
 							<Updates />
 						</Route>
-						<Route path={match.path + "/groups"}>
-							<Groups />
-						</Route>
-						<Route path={match.path + "/strikes"}>
-							<Strikes />
-						</Route>
+						<Route path={match.path + "/groups"} children={({ match }) => <Groups match={match} />} />
+						<Route path={match.path + "/strikes"} children={({ match }) => <Strikes match={match} />} />
 						<Route path={match.path + "/charter-edits"}>
 							<CharterEdits />
 						</Route>

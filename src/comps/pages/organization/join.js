@@ -212,7 +212,7 @@ const AcceptRequest = () => {
 	);
 };
 
-const Join = ({ match }) => {
+const Join = () => {
 	const org = React.useContext(OrgContext);
 
 	return (

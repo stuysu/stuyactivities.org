@@ -93,9 +93,7 @@ export default function AdminRouter({ match }) {
 				<Route exact path={match.path + "/approvals"}>
 					<Approvals />
 				</Route>
-				<Route path={match.path + "/approvals/:url"}>
-					<OrgApprovals />
-				</Route>
+				<Route path={match.path + "/approvals/:url"} children={({ match }) => <OrgApprovals match={match} />} />
 				<Route path={match.path + "/strikes"}>
 					<Strikes />
 				</Route>

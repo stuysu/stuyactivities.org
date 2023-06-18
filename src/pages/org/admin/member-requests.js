@@ -85,7 +85,7 @@ const OUTGOING_MUTATION = gql`
 	}
 `;
 
-export default function MemberRequests({ match }) {
+export default function MemberRequests() {
 	const org = React.useContext(OrgContext);
 	const { data, refetch } = useQuery(QUERY, {
 		variables: { orgId: org.id }

@@ -568,15 +568,12 @@ const EditPage = ({ match }) => {
 const Meetings = ({ match }) => {
 	return (
 		<Switch color="secondary">
-			<Route path={match.path + "/edit/:meetingId"}>
-				<EditPage />
-			</Route>
-			<Route path={match.path + "/editRecurring/:meetingId"}>
-				<EditPage />
-			</Route>
-			<Route path={match.path}>
-				<Main />
-			</Route>
+			<Route path={match.path + "/edit/:meetingId"} children={({ match }) => <EditPage match={match} />} />
+			<Route
+				path={match.path + "/editRecurring/:meetingId"}
+				children={({ match }) => <EditPage match={match} />}
+			/>
+			<Route path={match.path} children={({ match }) => <Main match={match} />} />
 		</Switch>
 	);
 };
