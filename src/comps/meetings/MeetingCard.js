@@ -55,6 +55,7 @@ const MeetingCard = ({
 	group,
 	rooms
 }) => {
+	// TODO: Convert to useNavigate() in react-router-dom v6
 	const history = useHistory();
 
 	const showOrganization = organization && organization.name && organization.url;

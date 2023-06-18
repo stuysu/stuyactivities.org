@@ -136,6 +136,7 @@ export default class Charter extends React.Component {
 
 		this.nextStep = () => {
 			this.beforeStepChange();
+			console.log(this.state);
 			if (this.state.activeStep + 1 < Charter.numSteps) {
 				this.setState(state => {
 					return { activeStep: state.activeStep + 1 };

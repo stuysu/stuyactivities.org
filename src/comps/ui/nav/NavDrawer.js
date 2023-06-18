@@ -56,7 +56,7 @@ const gradeLabels = {
 
 const NavDrawer = ({ drawerOpen, setDrawerOpen }) => {
 	const user = useContext(UserContext);
-	const location = useLocation();
+	const location = useLocation(); // TODO CONVERT
 
 	React.useEffect(() => {
 		// Close the drawer if the user uses it to navigate

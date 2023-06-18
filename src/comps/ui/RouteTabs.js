@@ -5,7 +5,7 @@ import { Tab, Tabs } from "@mui/material";
 const RouteTabs = ({ tabs }) => {
 	const [selectedTabIndex, setSelectedTabIndex] = React.useState(0);
 	const location = useLocation();
-	const history = useHistory();
+	const history = useHistory(); // TODO CONVERT IN V6
 
 	React.useEffect(() => {
 		const isCorrectIndex = location.pathname.startsWith(tabs[selectedTabIndex]?.path);

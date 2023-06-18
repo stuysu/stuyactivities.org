@@ -208,12 +208,24 @@ const OrgRouter = ({ match, history }) => {
 						<Grid item lg={10} md={9} xl={10} sm={12} xs={12}>
 							<div>
 								<Switch color="secondary">
-									<Route path={match.path} component={Overview} exact />
-									<Route path={match.path + "/charter"} component={Charter} />
-									<Route path={match.path + "/members"} component={Members} />
-									<Route path={match.path + "/groups"} component={Groups} />
-									<Route path={match.path + "/admin"} component={OrgAdminRouter} />
-									<Route path={match.path + "/meetings"} component={Meetings} />
+									<Route exact path={match.path}>
+										<Overview />
+									</Route>
+									<Route path={match.path + "/charter"}>
+										<Charter />
+									</Route>
+									<Route path={match.path + "/members"}>
+										<Members />
+									</Route>
+									<Route path={match.path + "/groups"}>
+										<Groups />
+									</Route>
+									<Route path={match.path + "/admin"}>
+										<OrgAdminRouter />
+									</Route>
+									<Route path={match.path + "/meetings"}>
+										<Meetings />
+									</Route>
 								</Switch>
 							</div>
 						</Grid>

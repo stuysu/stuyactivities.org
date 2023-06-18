@@ -62,6 +62,7 @@ const classes = {
 
 const DynamicMeetingPreview = ({ meetingId, closeDialog }) => {
 	const { data, loading } = useQuery(QUERY, { variables: { id: Number(meetingId) } });
+	// TODO: Convert to useNavigate() in react-router-dom v6
 	const history = useHistory();
 
 	const user = useContext(UserContext);

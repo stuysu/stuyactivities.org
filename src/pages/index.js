@@ -29,7 +29,7 @@ const MyMeetings = lazy(() => import("./mymeetings"));
 ReactGA.initialize("UA-119929576-2");
 
 const Pages = () => {
-	const location = useLocation();
+	const location = useLocation(); // TODO
 
 	React.useEffect(() => {
 		ReactGA.pageview(location.pathname + location.search);
@@ -57,23 +57,52 @@ const Pages = () => {
 			<ErrorBoundary>
 				<Suspense fallback={<Loading />}>
 					<Switch color="secondary">
-						<Route path={"/"} component={Home} exact />
-						<Route path={"/catalog"} component={Catalog} exact />
-						<Route path={"/charter"} component={Charter} exact />
-						<Route path={"/feedback"} component={FeedbackForm} />
-						<Route path={"/my-meetings"} component={MyMeetings} />
-						<Route path={"/token/:token"} component={TokenLogin} exact />
-						<Route path={"/admin"} component={AdminRouter} />
-						<Route path={"/rules"} component={Rules} />
-						<Route path={"/about"} component={About} />
-						<Route path={"/explore"} component={Explore} />
-						<Route path={"/clubpubfair2020"} component={ClubPubFair2020} />
-						<Route path={"/meetings"} component={Meetings} />
-						<Route path={"/settings"} component={Settings} />
-						<Route path={"/organizations/:orgUrl"}>
-							<Redirect to={window.location.pathname.replace("/organizations/", "/")} />
+						<Route exact path="/">
+							<Home />
 						</Route>
-						<Route path={"/:orgUrl"} component={OrgRouter} />
+						<Route exact path="/catalog">
+							<Catalog />
+						</Route>
+						<Route exact path="/charter">
+							<Charter />
+						</Route>
+						<Route path="/feedback">
+							<FeedbackForm />
+						</Route>
+						<Route path="/my-meetings">
+							<MyMeetings />
+						</Route>
+						<Route exact path="/token/:token">
+							<TokenLogin />
+						</Route>
+						<Route path="/admin">
+							<AdminRouter />
+						</Route>
+						<Route path="/rules">
+							<Rules />
+						</Route>
+						<Route path="/about">
+							<About />
+						</Route>
+						<Route path="/explore">
+							<Explore />
+						</Route>
+						<Route path="/clubpubfair2020">
+							<ClubPubFair2020 />
+						</Route>
+						<Route path="/meetings">
+							<Meetings />
+						</Route>
+						<Route path="/settings">
+							<Settings />
+						</Route>
+						<Route
+							path="/organizations/:orgUrl"
+							render={() => <Redirect to={window.location.pathname.replace("/organizations/", "/")} />}
+						/>
+						<Route path={"/:orgUrl"}>
+							<OrgRouter />
+						</Route>
 					</Switch>
 				</Suspense>
 			</ErrorBoundary>

@@ -87,16 +87,28 @@ export default function AdminRouter({ match }) {
 			<RouteTabs tabs={tabs} />
 
 			<Switch color="secondary">
-				<Route path={match.path + "/boograms"} component={Boograms} exact />
-				<Route path={match.path + "/approvals"} component={Approvals} exact />
-				<Route path={match.path + "/approvals/:url"} component={OrgApprovals} />
-				<Route path={match.path + "/strikes"} component={Strikes} />
-				<Route path={match.path + "/log"} component={AdminLog} />
-				<Route path={match.path + "/email"} component={EmailClubLeaders} />
-				<Route path={match.path + "/promotedclubs"} component={ManagePromotedClubs} />
-				<Route path={match.path}>
-					<Redirect to={tabs[0].path} />
+				<Route exact path={match.path + "/boograms"}>
+					<Boograms />
 				</Route>
+				<Route exact path={match.path + "/approvals"}>
+					<Approvals />
+				</Route>
+				<Route path={match.path + "/approvals/:url"}>
+					<OrgApprovals />
+				</Route>
+				<Route path={match.path + "/strikes"}>
+					<Strikes />
+				</Route>
+				<Route path={match.path + "/log"}>
+					<AdminLog />
+				</Route>
+				<Route path={match.path + "/email"}>
+					<EmailClubLeaders />
+				</Route>
+				<Route path={match.path + "/promotedclubs"}>
+					<ManagePromotedClubs />
+				</Route>
+				<Route path={match.path} render={() => <Redirect to={tabs[0].path} />} />
 			</Switch>
 		</Box>
 	);

@@ -133,7 +133,7 @@ const Catalog = () => {
 
 	const isMobile = useMediaQuery("(max-width: 500px)");
 	const isTablet = useMediaQuery("(max-width: 900px)");
-	const history = useHistory();
+	const history = useHistory(); // TODO CONVERT
 
 	let numColumns = 3;
 
