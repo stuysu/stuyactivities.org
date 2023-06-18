@@ -264,13 +264,24 @@ const OrgApprovals = ({ match }) => {
 						.map(edit => {
 							edit = JSON.parse(JSON.stringify(edit))
 							if (edit.extra) {
+								let noExtra = false;
+								if (edit.extra && edit.extra.startsWith("<RETURNING_CHARTER>")) noExtra = true;
+
 								let tempSplit = edit.extra.split("<RETURNING_CHARTER>");
-								edit.extra = tempSplit[0];
-								if (tempSplit.length > 0) {
-									edit.returning = tempSplit[1];
-									edit.alteredFields.push("returning");
+
+								if (!noExtra) {
+									edit.extra = tempSplit[0];
+									if (tempSplit.length > 0) {
+										edit.returning = tempSplit[1];
+										edit.alteredFields.push("returning");
+									} else {
+										edit.returning = "This club is not a returning activity.";
+										edit.alteredFields.push("returning");
+									}
 								} else {
-									edit.returning = "This club is not a returning activity.";
+									edit.extra = null;
+									edit.alteredFields = edit.alteredFields.filter(f => f != "extra");
+									edit.returning = tempSplit[1];
 									edit.alteredFields.push("returning");
 								}
 								
@@ -307,7 +318,7 @@ const OrgApprovals = ({ match }) => {
 												onClick={() =>
 													window.confirm("Are you sure you want to approve all changes") &&
 													approve({
-														variables: { fields: edit.alteredFields, editId: edit.id }
+														variables: { fields: edit.alteredFields.filter(f => f != "returning"), editId: edit.id }
 													})
 												}
 											>
@@ -345,6 +356,7 @@ const OrgApprovals = ({ match }) => {
 																<p>{value}</p>
 															)}
 														</div>
+														{field != "returning" &&
 														<ListItemSecondaryAction>
 															<Button
 																variant={"outlined"}
@@ -377,6 +389,7 @@ const OrgApprovals = ({ match }) => {
 																Approve
 															</Button>
 														</ListItemSecondaryAction>
+														}
 													</ListItem>
 													{index + 1 < edit.alteredFields.length && <Divider />}
 												</>
