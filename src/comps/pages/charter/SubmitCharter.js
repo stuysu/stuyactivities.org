@@ -74,7 +74,7 @@ const SubmitCharter = () => {
 			meetingDays: form.meetingDays,
 			commitmentLevel: form.commitmentLevel,
 			keywords: (form.keywords || []).filter(Boolean),
-			extra: form.extra,
+			extra: form.extra + "<RETURNING_CHARTER>" + (form.returning ? form.returningInfo : "This activity is not returning."), // temp for returning charter
 			picture: form.picture,
 			socials: form.socials,
 			clubpubParticipant: form.clubpubParticipant

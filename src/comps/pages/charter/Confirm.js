@@ -107,6 +107,12 @@ const Confirm = () => {
 						secondary={form.meetingDays?.map(a => capitalizeString(a)).join(", ")}
 					/>
 				</ListItem>
+				<ListItem>
+					<ListItemText 
+						primary={"Is Returning?"}
+						secondary={form.returning ? form.returningInfo : "This activity is not returning."}
+					/>
+				</ListItem>
 
 				<ListItem>
 					<ListItemText

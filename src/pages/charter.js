@@ -65,7 +65,9 @@ export default class Charter extends React.Component {
 		appointmentProcedures: { minWords: 150 },
 		uniqueness: { minWords: 75 },
 		meetingSchedule: { minChars: 50 },
-		meetingDays: {}
+		meetingDays: {},
+		returning: {},
+		returningInfo: { minChars: 50 }
 	};
 
 	constructor(props, context) {

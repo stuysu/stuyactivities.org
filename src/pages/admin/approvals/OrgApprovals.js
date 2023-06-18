@@ -253,7 +253,7 @@ const OrgApprovals = ({ match }) => {
 			</div>
 		);
 	}
-
+	
 	return (
 		<div>
 			<h2>Charter Approvals For {data.organization.name}</h2>
@@ -262,6 +262,13 @@ const OrgApprovals = ({ match }) => {
 					{data.organization.charterEdits
 						.filter(edit => edit.status === "pending")
 						.map(edit => {
+							edit = JSON.parse(JSON.stringify(edit))
+							if (edit.extra) {
+								let tempSplit = edit.extra.split("<RETURNING_CHARTER>");
+								edit.extra = tempSplit[0];
+								edit.returning = tempSplit[1];
+								edit.alteredFields.push("returning");
+							}
 							return (
 								<Card
 									style={{

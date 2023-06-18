@@ -10,6 +10,12 @@ import capitalizeString from "../../../utils/capitalizeString";
 
 const CharterQuestions = () => {
 	const form = React.useContext(CharterFormContext);
+	if (form?.returning === undefined) {
+		if (form) {
+			form.set({ returning: false });
+			form.set({ returningInfo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+		}
+	}
 
 	return (
 		<div>
@@ -92,7 +98,7 @@ const CharterQuestions = () => {
 				What days do you plan to hold meetings? (select all that apply) *
 			</Typography>
 
-			<Grid container spacing={3}>
+			<Grid container spacing={3} sx={{ marginBottom: "20px"}}>
 				{["monday", "tuesday", "wednesday", "thursday", "friday"].map(day => {
 					return (
 						<Grid item key={day}>
@@ -115,6 +121,45 @@ const CharterQuestions = () => {
 					);
 				})}
 			</Grid>
+
+			<Typography>
+				Are you a returning club?
+			</Typography>
+
+			<FormControlLabel
+				control={
+					<Checkbox
+						checked={form?.returning}
+						onChange={() => {
+							if (!form.returning) {
+								form.set({ returningInfo: ""});
+							} else {
+								form.set({ returningInfo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" });
+							}
+
+							form.set({
+								returning: !form.returning
+							});
+						}}
+						color="secondary"
+					/>
+				}
+				label={"Yes"}
+			/>
+
+			{
+				form?.returning && 
+				<SmartCharterQuestion
+					name={"returningInfo"}
+					label={"Why should we allow your club to be rechartered?"}
+					helperText={`Something like "Last year, we hosted a guest speaker event with this person."`}
+					minChars={50}
+					maxChars={1000}
+					multiline
+					rows={3}
+				/>
+			}
+
 		</div>
 	);
 };
