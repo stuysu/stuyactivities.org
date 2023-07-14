@@ -106,6 +106,19 @@ const About = () => {
 
 					<Grid container style={{ textAlign: "center" }}>
 						<Grid item xs={12} sm={6} md={6}>
+							<h2>SU IT Department Team 23-24:</h2>
+							<p>David Chan, SU IT Co-Director ’23-’24, SU IT ’21-’23</p>
+							<p>Randy Sim, SU IT Co-Director ’23-’24, SU IT ’22-’23</p>
+						</Grid>
+						<Grid item xs={12} sm={6} md={6}>
+							<h2>SU IT Department Team 22-23:</h2>
+							<p>Yuhao “Ben” Pan, SU IT Co-Director ’22-’23, SU IT ’21-’22</p>
+							<p>Chun Yeung “Frank” Wong, SU IT Co-Director ’22-’23, SU IT ’21-’22</p>
+							<p>William Vongphanith, SU IT Assistant Director ’22-’23</p>
+							<p>David Chen, SU IT ’21-’23</p>
+							<p>Randy Sim, SU IT ’22-’23</p>
+						</Grid>
+						<Grid item xs={12} sm={6} md={6}>
 							<h2>The StuyActivities 2.0 Team:</h2>
 							<p>Julian Giordano, SU President ’20-’21</p>
 							<p>Shivali Korgaonkar, SU Vice President ’20-’21</p>
