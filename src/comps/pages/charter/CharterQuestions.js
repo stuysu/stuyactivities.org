@@ -13,7 +13,7 @@ const CharterQuestions = () => {
 	if (form?.returning === undefined) {
 		if (form) {
 			form.set({ returning: false });
-			form.set({ returningInfo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+			form.set({ returningInfo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" });
 		}
 	}
 
@@ -98,7 +98,7 @@ const CharterQuestions = () => {
 				What days do you plan to hold meetings? (select all that apply) *
 			</Typography>
 
-			<Grid container spacing={3} sx={{ marginBottom: "20px"}}>
+			<Grid container spacing={3} sx={{ marginBottom: "20px" }}>
 				{["monday", "tuesday", "wednesday", "thursday", "friday"].map(day => {
 					return (
 						<Grid item key={day}>
@@ -122,9 +122,7 @@ const CharterQuestions = () => {
 				})}
 			</Grid>
 
-			<Typography>
-				Are you a returning club?
-			</Typography>
+			<Typography>Are you a returning club?</Typography>
 
 			<FormControlLabel
 				control={
@@ -132,9 +130,11 @@ const CharterQuestions = () => {
 						checked={form?.returning}
 						onChange={() => {
 							if (!form.returning) {
-								form.set({ returningInfo: ""});
+								form.set({ returningInfo: "" });
 							} else {
-								form.set({ returningInfo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" });
+								form.set({
+									returningInfo: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+								});
 							}
 
 							form.set({
@@ -147,8 +147,7 @@ const CharterQuestions = () => {
 				label={"Yes"}
 			/>
 
-			{
-				form?.returning && 
+			{form?.returning && (
 				<SmartCharterQuestion
 					name={"returningInfo"}
 					label={"Why should we allow your club to be rechartered?"}
@@ -158,8 +157,7 @@ const CharterQuestions = () => {
 					multiline
 					rows={3}
 				/>
-			}
-
+			)}
 		</div>
 	);
 };

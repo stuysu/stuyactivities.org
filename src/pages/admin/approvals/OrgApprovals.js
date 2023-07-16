@@ -253,7 +253,7 @@ const OrgApprovals = ({ match }) => {
 			</div>
 		);
 	}
-	
+
 	return (
 		<div>
 			<h2>Charter Approvals For {data.organization.name}</h2>
@@ -262,7 +262,7 @@ const OrgApprovals = ({ match }) => {
 					{data.organization.charterEdits
 						.filter(edit => edit.status === "pending")
 						.map(edit => {
-							edit = JSON.parse(JSON.stringify(edit))
+							edit = JSON.parse(JSON.stringify(edit));
 							if (edit.extra) {
 								let noExtra = false;
 								if (edit.extra && edit.extra.startsWith("<RETURNING_CHARTER>")) noExtra = true;
@@ -284,7 +284,6 @@ const OrgApprovals = ({ match }) => {
 									edit.returning = tempSplit[1];
 									edit.alteredFields.push("returning");
 								}
-								
 							}
 							return (
 								<Card
@@ -318,7 +317,10 @@ const OrgApprovals = ({ match }) => {
 												onClick={() =>
 													window.confirm("Are you sure you want to approve all changes") &&
 													approve({
-														variables: { fields: edit.alteredFields.filter(f => f !== "returning"), editId: edit.id }
+														variables: {
+															fields: edit.alteredFields.filter(f => f !== "returning"),
+															editId: edit.id
+														}
 													})
 												}
 											>
@@ -356,40 +358,46 @@ const OrgApprovals = ({ match }) => {
 																<p>{value}</p>
 															)}
 														</div>
-														{field !== "returning" &&
-														<ListItemSecondaryAction>
-															<Button
-																variant={"outlined"}
-																color={"secondary"}
-																onClick={() =>
-																	window.confirm(
-																		"Are you sure you want to reject " + field
-																	) &&
-																	reject({
-																		variables: { fields: [field], editId: edit.id }
-																	})
-																}
-															>
-																Reject
-															</Button>
-															<br />
-															<br />
-															<Button
-																variant={"contained"}
-																color={"primary"}
-																onClick={() =>
-																	window.confirm(
-																		"Are you sure you want to approve " + field
-																	) &&
-																	approve({
-																		variables: { fields: [field], editId: edit.id }
-																	})
-																}
-															>
-																Approve
-															</Button>
-														</ListItemSecondaryAction>
-														}
+														{field !== "returning" && (
+															<ListItemSecondaryAction>
+																<Button
+																	variant={"outlined"}
+																	color={"secondary"}
+																	onClick={() =>
+																		window.confirm(
+																			"Are you sure you want to reject " + field
+																		) &&
+																		reject({
+																			variables: {
+																				fields: [field],
+																				editId: edit.id
+																			}
+																		})
+																	}
+																>
+																	Reject
+																</Button>
+																<br />
+																<br />
+																<Button
+																	variant={"contained"}
+																	color={"primary"}
+																	onClick={() =>
+																		window.confirm(
+																			"Are you sure you want to approve " + field
+																		) &&
+																		approve({
+																			variables: {
+																				fields: [field],
+																				editId: edit.id
+																			}
+																		})
+																	}
+																>
+																	Approve
+																</Button>
+															</ListItemSecondaryAction>
+														)}
 													</ListItem>
 													{index + 1 < edit.alteredFields.length && <Divider />}
 												</>

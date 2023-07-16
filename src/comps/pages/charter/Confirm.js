@@ -108,7 +108,7 @@ const Confirm = () => {
 					/>
 				</ListItem>
 				<ListItem>
-					<ListItemText 
+					<ListItemText
 						primary={"Is Returning?"}
 						secondary={form.returning ? form.returningInfo : "This activity is not returning."}
 					/>
