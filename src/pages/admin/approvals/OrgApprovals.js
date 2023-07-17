@@ -146,6 +146,7 @@ const ORG_QUERY = gql`
 				meetingDays
 				commitmentLevel
 				keywords
+				returningInfo
 				extra
 				updatedAt
 				socials
@@ -172,6 +173,7 @@ const ORG_QUERY = gql`
 				meetingDays
 				commitmentLevel
 				extra
+				returningInfo
 				alteredFields
 				keywords
 				socials
@@ -306,6 +308,7 @@ const OrgApprovals = ({ match }) => {
 									<List>
 										{edit.alteredFields.map((field, index) => {
 											let value = edit[field];
+											console.log(edit);
 
 											if (Array.isArray(value)) {
 												value = value.join(", ");
