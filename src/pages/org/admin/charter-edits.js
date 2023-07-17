@@ -591,7 +591,7 @@ const CharterEdits = () => {
 	const org = React.useContext(OrgContext);
 	const { data } = useQuery(QUERY, { variables: { orgId: org.id } });
 	const [latestChanges, setLatestChanges] = React.useState({});
-	
+
 	React.useEffect(() => {
 		const newChanges = {};
 		if (data) {

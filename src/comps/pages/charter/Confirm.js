@@ -109,7 +109,7 @@ const Confirm = () => {
 				</ListItem>
 
 				<ListItem>
-					<ListItemText 
+					<ListItemText
 						primary={"Returning Info"}
 						secondary={form.returning ? form.returningInfo : "This club is not a returning club."}
 					/>
