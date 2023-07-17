@@ -109,6 +109,13 @@ const Confirm = () => {
 				</ListItem>
 
 				<ListItem>
+					<ListItemText 
+						primary={"Returning Info"}
+						secondary={form.returning ? form.returningInfo : "This club is not a returning club."}
+					/>
+				</ListItem>
+
+				<ListItem>
 					<ListItemText
 						primary={"Interested in participating in the Clubs & Pubs fair?"}
 						secondary={form.clubpubParticipant ? "Yes" : "No"}

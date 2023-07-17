@@ -117,7 +117,7 @@ const CharterQuestions = () => {
 			</Grid>
 
 			<Typography>
-				Are you a returning club?
+				Are you chartering a returning club? If you are, you *MUST* check this box.
 			</Typography>
 
 			<FormControlLabel
@@ -134,6 +134,7 @@ const CharterQuestions = () => {
 				}
 				label={"Yes"}
 			/>
+
 			{
 				form?.returning && 
 				<SmartCharterQuestion

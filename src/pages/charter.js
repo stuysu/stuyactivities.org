@@ -68,6 +68,8 @@ export default class Charter extends React.Component {
 		meetingDays: {}
 	};
 
+	static returningInfo = { minChars: 50 }
+
 	constructor(props, context) {
 		super(props, context);
 
@@ -128,6 +130,10 @@ export default class Charter extends React.Component {
 
 				if (!this.state?.meetingDays?.length) {
 					errors.meetingDays = "You must select at least one day.";
+				}
+
+				if (this.state.returning && this.state.returningInfo?.length < Charter.returningInfo.minChars) {
+					errors.returningInfo = "Fails to meet requirements";
 				}
 			}
 
@@ -222,7 +228,7 @@ export default class Charter extends React.Component {
 										<StepLabel
 											error={Object.keys(Charter.charterRequirementMap).some(
 												field => this.state.errors[field]
-											)}
+											) || this.state.errors["returningInfo"]}
 											sx={classes.stepLabel}
 											onClick={() => this.setState({ activeStep: 2 })}
 										>
