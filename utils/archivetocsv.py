@@ -26,12 +26,13 @@ qs = """{
       keywords
       extra
     }
-    memberships(onlyLeaders:true) {
+    memberships {
       user {
         firstName
         lastName
       }
       role
+      adminPrivileges
     }
   }
 }"""
@@ -53,11 +54,13 @@ printed = False
 
 with open(fn, 'w', newline='', encoding="utf-8") as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(["Name", "URL", "Is Active", "Picture", "Mission", "Purpose", "Benefit", "Socials", "Appointment Procedures", "Uniqueness", "Meeting Schedule", "Meeting Days", "Commitment Level", "Keywords", "Extra", "Users with Admin"])
+    writer.writerow(["Name", "URL", "Is Active", "Picture", "Mission", "Purpose", "Benefit", "Socials", "Appointment Procedures", "Uniqueness", "Meeting Schedule", "Meeting Days", "Commitment Level", "Keywords", "Extra", "Users with Admin", "Member Count"])
     for org in data:
-        memberInfo = ""
+        adminInfo = ""
+        memberCount = len(org["memberships"])
         for member in org["memberships"]:
-            memberInfo += member["user"]["firstName"] + " " + member["user"]["lastName"] + " - " + member["role"] + "\n"
+            if member["adminPrivileges"]:
+              adminInfo += member["user"]["firstName"] + " " + member["user"]["lastName"] + " - " + member["role"] + "\n"
         pic = "NONE"
         if org["charter"]["picture"]:
             pic = org["charter"]["picture"]["url"]
@@ -78,6 +81,7 @@ with open(fn, 'w', newline='', encoding="utf-8") as csvfile:
                 org["charter"]["commitmentLevel"], 
                 org["charter"]["keywords"], 
                 org["charter"]["extra"], 
-                memberInfo
+                adminInfo,
+                memberCount
              ]
         )
