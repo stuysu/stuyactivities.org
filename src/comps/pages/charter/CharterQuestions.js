@@ -92,7 +92,7 @@ const CharterQuestions = () => {
 				What days do you plan to hold meetings? (select all that apply) *
 			</Typography>
 
-			<Grid container spacing={3} sx={{ marginBottom: "20px"}}>
+			<Grid container spacing={3} sx={{ marginBottom: "20px" }}>
 				{["monday", "tuesday", "wednesday", "thursday", "friday"].map(day => {
 					return (
 						<Grid item key={day}>
@@ -116,15 +116,16 @@ const CharterQuestions = () => {
 				})}
 			</Grid>
 
-			<Typography>
-				Are you a returning club?
-			</Typography>
+			<Typography>Are you chartering a returning club? If you are, you *MUST* check this box.</Typography>
 
 			<FormControlLabel
 				control={
 					<Checkbox
 						checked={form?.returning}
 						onChange={() => {
+							form.returningInfo = "";
+							form.setError("returningInfo", false);
+
 							form.set({
 								returning: !form?.returning
 							});
@@ -134,8 +135,8 @@ const CharterQuestions = () => {
 				}
 				label={"Yes"}
 			/>
-			{
-				form?.returning && 
+
+			{form?.returning && (
 				<SmartCharterQuestion
 					name={"returningInfo"}
 					label={"Why should we allow your club to be rechartered?"}
@@ -145,8 +146,7 @@ const CharterQuestions = () => {
 					multiline
 					rows={3}
 				/>
-			}
-
+			)}
 		</div>
 	);
 };

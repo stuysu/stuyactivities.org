@@ -146,6 +146,7 @@ const ORG_QUERY = gql`
 				meetingDays
 				commitmentLevel
 				keywords
+				returningInfo
 				extra
 				updatedAt
 				socials
@@ -172,6 +173,7 @@ const ORG_QUERY = gql`
 				meetingDays
 				commitmentLevel
 				extra
+				returningInfo
 				alteredFields
 				keywords
 				socials
@@ -329,7 +331,13 @@ const OrgApprovals = ({ match }) => {
 																	}}
 																/>
 															) : (
-																<p>{value}</p>
+																<p>
+																	{field === "returningInfo"
+																		? value === ""
+																			? "This club is not a returning club."
+																			: value
+																		: value}
+																</p>
 															)}
 														</div>
 														<ListItemSecondaryAction>

@@ -24,6 +24,7 @@ const MUTATION = gql`
 		$extra: String
 		$picture: Upload
 		$socials: String
+		$returningInfo: String
 		$clubpubParticipant: Boolean
 	) {
 		createOrganization(
@@ -44,6 +45,7 @@ const MUTATION = gql`
 				extra: $extra
 				picture: $picture
 				socials: $socials
+				returningInfo: $returningInfo
 				clubpubParticipant: $clubpubParticipant
 			}
 		) {
@@ -77,6 +79,7 @@ const SubmitCharter = () => {
 			extra: form.extra,
 			picture: form.picture,
 			socials: form.socials,
+			returningInfo: form.returning ? form.returningInfo : "",
 			clubpubParticipant: form.clubpubParticipant
 		}
 	});

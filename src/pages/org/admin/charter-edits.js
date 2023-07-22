@@ -35,6 +35,7 @@ const QUERY = gql`
 			meetingSchedule
 			meetingDays
 			commitmentLevel
+			returningInfo
 			extra
 			keywords
 			updatedAt
@@ -54,6 +55,7 @@ const QUERY = gql`
 			meetingSchedule
 			meetingDays
 			commitmentLevel
+			returningInfo
 			extra
 			createdAt
 			keywords
@@ -82,6 +84,7 @@ const SAVE_MUTATION = gql`
 		$meetingDays: [String!]
 		$commitmentLevel: String
 		$keywords: [String!]
+		$returningInfo: String
 		$extra: String
 		$picture: Upload
 		$socials: String
@@ -99,6 +102,7 @@ const SAVE_MUTATION = gql`
 				meetingDays: $meetingDays
 				commitmentLevel: $commitmentLevel
 				keywords: $keywords
+				returningInfo: $returningInfo
 				extra: $extra
 				picture: $picture
 				socials: $socials
@@ -192,6 +196,16 @@ class CharterEditForm extends React.Component {
 			minWords: 75,
 			multiline: true,
 			rows: 8
+		},
+		{
+			name: "returningInfo",
+			required: true,
+			label: "Returning Info",
+			helperText: "Why should your organization be allowed to be rechartered?",
+			minChars: 50,
+			maxChars: 1000,
+			multiline: true,
+			rows: 7
 		},
 		{
 			name: "extra",
