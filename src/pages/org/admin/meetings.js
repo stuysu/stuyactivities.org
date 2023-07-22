@@ -481,7 +481,7 @@ const EditPage = ({ match }) => {
 			setErrorMessage("");
 		}
 	});
-/*	TEMPORARILY DISABLED TO FIX OVERBOOKING BUG
+	/*	TEMPORARILY DISABLED TO FIX OVERBOOKING BUG
 	const [replaceRoomMutation] = useMutation(REPLACE_ROOM_MUTATION);
 */
 	const edit = ({
@@ -512,7 +512,7 @@ const EditPage = ({ match }) => {
 				groupId
 			}
 		});
-/*	TEMPORARILY DISABLED TO FIX OVERBOOKING BUG
+		/*	TEMPORARILY DISABLED TO FIX OVERBOOKING BUG
 		if (oldRoom !== roomId) {
 			replaceRoomMutation({
 				variables: {
@@ -539,7 +539,9 @@ const EditPage = ({ match }) => {
 						{recurring ? "Edit Recurring Meeting" : "Edit Meeting"}
 					</Typography>
 					<Typography variant={"h6"} color={"primary"}>
-						Due to a current critical bug involving the overbooking of clubs, you cannot update the date, time, or room a meeting takes place in. Any changes you make here to those values will not actually save. If you must modify these values, please remove and create a new meeting.
+						Due to a current critical bug involving the overbooking of clubs, you cannot update the date,
+						time, or room a meeting takes place in. Any changes you make here to those values will not
+						actually save. If you must modify these values, please remove and create a new meeting.
 					</Typography>
 					<MeetingForm
 						submit={edit}

@@ -332,7 +332,13 @@ const OrgApprovals = ({ match }) => {
 																	}}
 																/>
 															) : (
-																<p>{value}</p>
+																<p>
+																	{field === "returningInfo"
+																		? value === ""
+																			? "This club is not a returning club."
+																			: value
+																		: value}
+																</p>
 															)}
 														</div>
 														<ListItemSecondaryAction>

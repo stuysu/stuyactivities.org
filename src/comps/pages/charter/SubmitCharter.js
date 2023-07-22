@@ -79,7 +79,7 @@ const SubmitCharter = () => {
 			extra: form.extra,
 			picture: form.picture,
 			socials: form.socials,
-			returningInfo: form.returning ? form.returningInfo : "This club is not a returning club.",
+			returningInfo: form.returning ? form.returningInfo : "",
 			clubpubParticipant: form.clubpubParticipant
 		}
 	});
