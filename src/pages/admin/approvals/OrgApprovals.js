@@ -308,7 +308,6 @@ const OrgApprovals = ({ match }) => {
 									<List>
 										{edit.alteredFields.map((field, index) => {
 											let value = edit[field];
-											console.log(edit);
 
 											if (Array.isArray(value)) {
 												value = value.join(", ");
