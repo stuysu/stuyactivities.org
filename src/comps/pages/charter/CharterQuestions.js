@@ -141,8 +141,8 @@ const CharterQuestions = () => {
 					name={"returningInfo"}
 					label={"Why should we allow your club to be rechartered?"}
 					helperText={`Something like "Last year, we hosted a guest speaker event with this person."`}
-					minChars={50}
-					maxChars={1000}
+					minWords={50}
+					maxWords={500}
 					multiline
 					rows={3}
 				/>
