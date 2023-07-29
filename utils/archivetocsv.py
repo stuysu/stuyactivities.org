@@ -49,7 +49,7 @@ data = data["data"]["organizations"]
 
 fn = input("Output file name: ")
 
-printed = False
+# printed = False <- what is this for?
 
 with open(fn, 'w', newline='', encoding="utf-8") as csvfile:
     writer = csv.writer(csvfile)
