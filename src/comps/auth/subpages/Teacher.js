@@ -6,6 +6,7 @@ import GoogleLoginButton from "../GoogleLoginButton";
 import AuthContext from "../AuthContext";
 import FlexCenter from "../../ui/FlexCenter";
 import Box from "@mui/material/Box";
+import EmailLink from "../../ui/EmailLink";
 
 const classes = {
 	textContainer: {
@@ -73,7 +74,11 @@ const Teacher = () => {
 					<br />
 					<Typography>
 						Send an email from your "@schools.nyc.gov" email to{" "}
-						<Box component="a" sx={classes.code} href={"mailto:app@stuyactivities.org"}>
+						<Box
+							component="a"
+							sx={classes.code}
+							href={"mailto:app@stuyactivities.org?subject=Login%20request"}
+						>
 							app@stuyactivities.org
 						</Box>{" "}
 						with the subject line{" "}
@@ -85,7 +90,7 @@ const Teacher = () => {
 					<br />
 					<Typography>
 						Within a minute or so, you should receive a reply to your email with a link that will log you
-						in. If you face any difficulties, please email us at help@stuyactivities.org.
+						in. If you face any difficulties, please email us at <EmailLink email="IT@stuysu.org" />.
 					</Typography>
 					<br />
 				</Box>

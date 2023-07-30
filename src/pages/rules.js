@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Link, Typography } from "@mui/material";
 import BackButton from "../comps/ui/BackButton";
+import EmailLink from "../comps/ui/EmailLink";
 
 const classes = {
 	main: {
@@ -22,28 +23,20 @@ export default function Rules() {
 			</Typography>
 			<Typography paragraph>
 				If you are experiencing technical issues or difficulties regarding the StuyActivities website, please
-				contact us at{" "}
-				<Link color="secondary" href="mailto:help@stuyactivities.org">
-					help@stuyactivities.org
-				</Link>
-				,{" "}
-				<Link color="secondary" href="mailto:clubpub@stuysu.org">
-					clubpub@stuysu.org
-				</Link>
-				, or an SU representative.
+				contact us at <EmailLink email="IT@stuysu.org" />, <EmailLink email="clubpub@stuysu.org" />, or an SU
+				representative.
 			</Typography>
 			<Typography>
 				<ol>
 					<li>
-						For an Activity to exist and operate, a charter must be submitted and&nbsp;approved by&nbsp;the
-						administrators of the Clubs &amp; Pubs department. Please allow up to 2 weeks for charter
-						approval. When an Activity is fully approved and allowed to operate, its charter will be visible
-						on the online catalog of the StuyActivities website (
+						For an Activity to operate, a charter must be submitted and&nbsp;approved by&nbsp;the Clubs
+						&amp; Pubs administrators. Approval will take place on a set day each week. Once fully approved,
+						the charter will be visible on the&nbsp;
 						<Link color="secondary" href="https://stuyactivities.org/catalog">
-							www.StuyActivities.org
+							StuyActivities website
 						</Link>
-						). All Activity leaders will receive an email when their charter has been fully approved and is
-						in the catalog.
+						. Activity leaders will be notified by email when their charter is in the catalog. Charters will
+						be approved from August 1st to May 31st.
 					</li>
 					<li>
 						All Activities must have at least two leaders (i.e. two co-presidents or a president and a
@@ -52,7 +45,7 @@ export default function Rules() {
 					<li>
 						All Activities must meet in person or online at least once a month by registering an Activity
 						meeting on the StuyActivities website. Any Activity found inactive for more than one month may
-						face suspension and revocation of their charter.
+						face suspension or revocation of their charter.
 					</li>
 					<li>
 						The Student Union reserves the right to facilitate mergers of highly similar Activities that
@@ -60,10 +53,8 @@ export default function Rules() {
 						Coordinator of Student Affairs (COSA).
 					</li>
 					<li>
-						The Student Union reserves the right to suspend any Activity found to have violated the rules of
-						their charter. All Activities MUST abide by what is submitted in their charter. If any changes
-						need to be made, the Activity leader(s) must edit their charter accordingly and have the changes
-						approved.
+						The Student Union may suspend Activities that violate their charter rules. All Activities must
+						adhere to their submitted charter, and any changes must be approved by the ClubPub department.
 					</li>
 					<li>
 						All Activities must adhere to the New York City Department of Education{" "}
@@ -94,8 +85,8 @@ export default function Rules() {
 						suspension and revocation of their charter.
 					</li>
 					<li>
-						All Activities must host at least 1 club meeting in order to have their charter maintained. If a
-						club fails to meet their quota, they will risk their club charter being revoked.
+						All clubs must maintain at least 10 official members after the ClubPub Fair excluding any
+						faculty administrators.
 					</li>
 				</ol>
 			</Typography>
@@ -113,16 +104,14 @@ export default function Rules() {
 						</ul>
 					</li>
 					<li>
-						In the event that an online Activity meeting is bombarded with uninvited guests and/or
-						inappropriate behavior is exhibited (including racist, sexist, homophobic, or otherwise
-						disrespectful comments or statements; bullying (online or in-person); and any violation of the
-						rules of the Student Code of Conduct or the Chancellor’s Regulations), the Activity must end the
-						meeting immediately and email MPolazz@schools.nyc.gov and clubpub@stuysu.org to report the
-						issue.
+						If an online Activity meeting faces uninvited guests or inappropriate behavior, including
+						disrespectful comments, bullying, or code of conduct violations, the meeting must be immediately
+						ended. Report the issue to <EmailLink email="MPolazz@schools.nyc.gov" /> and{" "}
+						<EmailLink email="clubpub@stuysu.org" />.
 					</li>
 					<li>
-						Please email help@stuyactivities.org for support using StuyActivities and IT@stuysu.org for
-						general technical support.
+						Please email <EmailLink email="IT@stuysu.org" /> for general technical support and support using
+						StuyActivities.
 					</li>
 				</ol>
 			</Typography>
@@ -152,11 +141,12 @@ export default function Rules() {
 						<ul>
 							<li>
 								Have the registered Activity faculty advisor (not the student leaders) email{" "}
-								<Link color="secondary" href="mailto:clubpub@stuysu.org">
-									clubpub@stuysu.org
-								</Link>
-								, the COSA (Mr. Polazzo) and the Assistant Principal (Mr. Moran) at least one week in
-								advance with the Subject: “Activity Meeting Outside of School Premises: [ACTIVITY NAME]”
+								<EmailLink email="clubpub@stuysu.org" />, the COSA (Mr. Polazzo) and the Assistant
+								Principal (Mr. Moran) at least one week in advance with the Subject: “Activity Meeting
+								Outside of School Premises: [ACTIVITY NAME]”. Mr. Polazzo can be reached at{" "}
+								<EmailLink email="MPolazz@schools.nyc.gov" /> and can be found in Room 260. Mr. Moran
+								can be reached at <EmailLink email="BMoran@schools.nyc.gov" /> and can be found in Room
+								103.
 							</li>
 							<li>
 								The email should detail the date, location, paperwork, number of people attending,
@@ -170,7 +160,7 @@ export default function Rules() {
 					</li>
 					<li>
 						All Activities must leave the school building no later than 5:00 PM or at the specified time
-						during that day unless the registered Faculty Advisor for the Activity is present.
+						during that day unless a registered Faculty Advisor for the Activity is present.
 					</li>
 					<li>Activities may not use SMARTBoards in the classrooms for their meetings.</li>
 					<li>
@@ -186,7 +176,7 @@ export default function Rules() {
 								Fliers deemed inappropriate by SU members and school staff will be taken down without
 								warning (i.e. Ad Hominems, Hate Speech)
 							</li>
-							<li>Fliers placed in and/or near escalators will be relocated or torn down.</li>
+							<li>Fliers placed in and/or near escalators will be relocated or removed.</li>
 						</ul>
 					</li>
 				</ol>
@@ -210,12 +200,10 @@ export default function Rules() {
 					</li>
 					<li>
 						If an Activity needs a long-term booking of a specific room, its leaders must email{" "}
-						<Link color="secondary" href="mailto:clubpub@stuysu.org">
-							clubpub@stuysu.org
-						</Link>
-						with the Subject: “Long Term Room Reservation: [ACTIVITY NAME]”, detailing the reason(s) for why
-						this reservation is necessary. Long term reservations will be handled by the SU Clubs &amp; Pubs
-						Department and approved on a case-by-case basis.
+						<EmailLink email="clubpub@stuysu.org" /> with the Subject: “Long Term Room Reservation:
+						[ACTIVITY NAME]”, detailing the reason(s) for why this reservation is necessary. Long term
+						reservations will be handled by the SU Clubs &amp; Pubs Department and approved on a
+						case-by-case basis.
 					</li>
 					<li>
 						All rooms used for Activity meetings must be kept clean and sanitary. This means returning all
@@ -226,8 +214,8 @@ export default function Rules() {
 					</li>
 					<li>
 						All Activities must use the room reserved for their activity on the StuyActivities website.
-						Please email clubpub@stuysu.org or contact an SU representative if you are unable to find a
-						room.
+						Please email <EmailLink email="clubpub@stuysu.org" /> or contact an SU representative if you are
+						unable to find a room.
 					</li>
 					<li>
 						All room reservations must be canceled at least 24 hours in advance if the Activity can no
@@ -235,24 +223,16 @@ export default function Rules() {
 					</li>
 					<li>
 						Any Activity that wishes to reserve and use spaces other than school classrooms (i.e. cafeteria,
-						auditorium, lecture halls) for meetings must go through the process below.
+						auditorium, lecture halls) for meetings must go through the process below:
 						<ul>
 							<li>
 								The registered Activity faculty advisor (not the Activity leaders) must email{" "}
-								<Link color="secondary" href="mailto:clubpub@stuysu.org">
-									clubpub@stuysu.org
-								</Link>
-								, the Student Union COSA, Mr. Polazzo, and the Assistant Principal, Mr. Moran, at least
-								one week in advance with the Subject: “[NAME OF FACILITY] Reservation: [ACTIVITY NAME].
-								Mr. Polazzo can be reached at{" "}
-								<Link color="secondary" href="mailto:MPolazz@schools.nyc.gov">
-									MPolazz@schools.nyc.gov
-								</Link>{" "}
-								and can be found in Room, 260. Mr. Moran can be reached at{" "}
-								<Link color="secondary" href="mailto:BMoran@schools.nyc.gov">
-									BMoran@schools.nyc.gov
-								</Link>{" "}
-								and can be found in Room 103.
+								<EmailLink email="clubpub@stuysu.org" />, the Student Union COSA, Mr. Polazzo, and the
+								Assistant Principal, Mr. Moran, at least one week in advance with the Subject: “[NAME OF
+								FACILITY] Reservation: [ACTIVITY NAME].” Mr. Polazzo can be reached at{" "}
+								<EmailLink email="MPolazz@schools.nyc.gov" /> and can be found in Room 260. Mr. Moran
+								can be reached at <EmailLink email="BMoran@schools.nyc.gov" /> and can be found in Room
+								103.
 							</li>
 							<li>
 								The email should detail the reason for reserving the facility, as well as the date,
@@ -273,7 +253,7 @@ export default function Rules() {
 			<Typography>
 				<ol>
 					<li>
-						The Stuyvesant Student Union reserves the right to provide funding to Activities. Activities may
+						The Stuyvesant Student Union reserves the right to manage funding for Activities. Activities may
 						not request money from the Student Union if the money’s intended use is for:
 						<ul>
 							<li>Unapproved trips (all trips must be approved by the administration)</li>
@@ -299,17 +279,10 @@ export default function Rules() {
 						meeting with the Student Union Budget Committee. Failure to attend the meeting will result in an
 						automatic refusal of the Activity’s funding request. If there are extenuating circumstances
 						preventing an Activity’s leader(s) or Faculty Advisor from attending the meeting, an email must
-						be sent to{" "}
-						<Link color="secondary" href="mailto:clubpub@stuysu.org">
-							clubpub@stuysu.org
-						</Link>{" "}
-						and{" "}
-						<Link color="secondary" href="mailto:budget@stuysu.org">
-							budget@stuysu.org
-						</Link>{" "}
-						prior to the scheduled meeting time detailing the excuse. The Student Union will decide upon
-						further action on a case-by-case basis and reserves the right to refuse an additional meeting if
-						the excuse is not valid.
+						be sent to <EmailLink email="clubpub@stuysu.org" /> and <EmailLink email="budget@stuysu.org" />{" "}
+						prior to the scheduled meeting time detailing the circumstance. The Student Union will decide
+						further action based on a case-by-case basis and reserves the right to refuse an additional
+						meeting if the excuse is not valid.
 					</li>
 					<li>
 						When an Activity requests funding from the Student Union, the Activity can request to be given
@@ -319,15 +292,12 @@ export default function Rules() {
 								Grant:&nbsp;Upon receiving a grant, the Activity must spend its own money before
 								receiving reimbursements from the Student Union up to the amount allocated (not
 								including tax). Activities must save all of their receipts and submit original copies to
-								the SU Budget Department (
-								<Link color="secondary" href="mailto:budget@stuysu.org">
-									budget@stuysu.org
-								</Link>
+								the SU Budget Department (<EmailLink email="budget@stuysu.org" />
 								). Two weeks after submission, the Activity should go to Room 103 to pick up the
 								reimbursement check from Ms. Caruzo (the school treasurer). The Budget Department cannot
 								reimburse taxes, so it is suggested that the Activity use the school’s tax-exempt form.
-								If granted money by the SU, the Budget Department will email the Activity the tax-exempt
-								form.
+								If granted money by the SU, the Budget Department will email the Activity leaders the
+								tax-exempt form.
 							</li>
 							<li>
 								Loan:&nbsp;Upon receiving a loan, the Activity has until the end of the current school
@@ -345,11 +315,8 @@ export default function Rules() {
 							<li>
 								If an Activity has received a grant, it must provide proof of purchase of each item (in
 								the form of a receipt) as well as information on the purchase (i.e. expected delivery
-								date) to the Budget Department (
-								<Link color="secondary" href="mailto:budget@stuysu.org">
-									budget@stuysu.org
-								</Link>
-								) within seven days of purchase.
+								date) to the Budget Department (<EmailLink email="budget@stuysu.org" />) within seven
+								days of purchase.
 							</li>
 							<li>Any items purchased must be shown at the advanced request of the Budget Department.</li>
 							<li>
@@ -374,23 +341,6 @@ export default function Rules() {
 					<li>
 						The Funding Rules are subject to change and the Student Union reserves the right to amend them
 						through a majority vote of the Budget Committee.
-					</li>
-					<li>
-						ADDENDUM (2020-2021)
-						<ul>
-							<li>
-								Rule 5 under Budget Rules for Club Pub Allocations is deemed void for the remainder of
-								the 2020-2021 school year.
-							</li>
-							<li>
-								Computer systems and softwares that are strictly related to club activities will be
-								considered in the allocation process, and may include, but are not limited to: (a)
-								Editing softwares for videography and photography, (b) Communication/video platforms
-								(ex. Zoom Pro Plan) , and (c) Online subscription services (excluding streaming services
-								such as Netflix, Spotify, Hulu, etc.){" "}
-							</li>
-							<li>This addendum will go into effect immediately after passage.</li>
-						</ul>
 					</li>
 				</ol>
 			</Typography>
