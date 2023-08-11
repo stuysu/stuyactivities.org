@@ -9,7 +9,7 @@
 		"@emotion/styled": "^11.10.0",
 		"@fullcalendar/daygrid": "^5.11.3",
 		"@fullcalendar/list": "^5.11.3",
-		"@fullcalendar/react": "^5.11.2",
+		"@fullcalendar/react": "^6.1.8",
 		"@honeybadger-io/react": "2.1.0",
 		"@mui/icons-material": "^5.10.2",
 		"@mui/material": "^5.10.8",
