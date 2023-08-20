@@ -94,8 +94,8 @@ const ManagePromotedClubs = () => {
 				{data === undefined || data.promotedClubs.length === 0 ? (
 					<Typography>No featured clubs currently.</Typography>
 				) : (
-					data.promotedClubs.map(promotedClub => (
-						<PromotedClubCard {...promotedClub} showDelete={true} refetch={refetch} />
+					data.promotedClubs.map((promotedClub, i) => (
+						<PromotedClubCard {...promotedClub} showDelete={true} refetch={refetch} key={`p${i}`} />
 					))
 				)}
 			</div>
