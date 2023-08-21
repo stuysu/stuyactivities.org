@@ -1,4 +1,5 @@
 import React from "react";
+import { OrgContext } from "../index";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useSnackbar } from "notistack";
 import {
@@ -89,6 +90,8 @@ const DELETE_GROUP_MUTATION = gql`
 `;
 
 export default function Groups({ match }) {
+	const org = React.useContext(OrgContext);
+
 	const { data, refetch } = useQuery(GROUP_QUERY, {
 		variables: { url: match.params.orgUrl }
 	});
@@ -148,6 +151,14 @@ export default function Groups({ match }) {
 	};
 
 	const { enqueueSnackbar } = useSnackbar();
+
+	if (org.locked) {
+		return (
+			<Typography variant={"h2"} style={{ textAlign: "center" }}>
+				Locked activity may not make groups.
+			</Typography>
+		)
+	}
 
 	return (
 		<Box sx={classes.margin}>

@@ -35,6 +35,7 @@ const QUERY = gql`
 		organizationByUrl(url: $url) {
 			id
 			active
+			locked
 			name
 			url
 			tags {

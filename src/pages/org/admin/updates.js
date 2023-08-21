@@ -4,6 +4,7 @@ import { Box, Button, Grid } from "@mui/material";
 
 import layout from "./../../../styles/Layout.module.css";
 import Card from "@mui/material/Card";
+import { Typography } from "@mui/material";
 import { OrgContext } from "../index";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -76,6 +77,14 @@ const Updates = () => {
 			cache.reset().then(() => org.refetch());
 		}
 	});
+
+	if (org.locked) {
+		return (
+			<Typography variant={"h2"} style={{ textAlign: "center" }}>
+				Locked activity may not make posts.
+			</Typography>
+		)
+	}
 
 	return (
 		<div className={layout.container}>
