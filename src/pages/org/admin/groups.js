@@ -155,7 +155,7 @@ export default function Groups({ match }) {
 	if (org.locked) {
 		return (
 			<Typography variant={"h2"} style={{ textAlign: "center" }}>
-				Locked activity may not make groups.
+				Locked activities may not make groups.
 			</Typography>
 		);
 	}

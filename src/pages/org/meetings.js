@@ -21,7 +21,7 @@ export default function Meetings() {
 	if (org.locked) {
 		return (
 			<Typography variant={"h2"} style={{ textAlign: "center" }}>
-				Locked activity may not schedule meetings.
+				Locked activities may not schedule meetings.
 			</Typography>
 		);
 	}

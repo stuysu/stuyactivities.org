@@ -81,7 +81,7 @@ const Updates = () => {
 	if (org.locked) {
 		return (
 			<Typography variant={"h2"} style={{ textAlign: "center" }}>
-				Locked activity may not make posts.
+				Locked activities may not make posts.
 			</Typography>
 		);
 	}
