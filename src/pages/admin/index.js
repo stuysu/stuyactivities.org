@@ -16,11 +16,11 @@ import {
 	SmsFailed,
 	AttachMoney,
 	FeaturedPlayList,
-	Settings
+	Settings as SettingsIcon
 } from "@mui/icons-material";
 import EmailClubLeaders from "./email";
 import ManagePromotedClubs from "./promotedclub";
-import ManageSettings from "./settings";
+import Settings from "./settings";
 import Box from "@mui/material/Box";
 
 const classes = {
@@ -81,7 +81,7 @@ export default function AdminRouter({ match }) {
 			label: "Update Site Settings",
 			role: "charters",
 			path: actualPath + "/settings",
-			icon: <Settings />
+			icon: <SettingsIcon />
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
@@ -102,7 +102,7 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/log"} component={AdminLog} />
 				<Route path={match.path + "/email"} component={EmailClubLeaders} />
 				<Route path={match.path + "/promotedclubs"} component={ManagePromotedClubs} />
-				<Route path={match.path + "/settings"} component={ManageSettings} />
+				<Route path={match.path + "/settings"} component={Settings} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>
