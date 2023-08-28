@@ -157,7 +157,7 @@ export default function Groups({ match }) {
 			<Typography variant={"h2"} style={{ textAlign: "center" }}>
 				Locked activity may not make groups.
 			</Typography>
-		)
+		);
 	}
 
 	return (

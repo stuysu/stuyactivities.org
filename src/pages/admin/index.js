@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import EmailClubLeaders from "./email";
 import ManagePromotedClubs from "./promotedclub";
-import ManageSettings from "./settings"
+import ManageSettings from "./settings";
 import Box from "@mui/material/Box";
 
 const classes = {

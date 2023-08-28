@@ -339,7 +339,7 @@ const Main = ({ match }) => {
 			<Typography variant={"h2"} style={{ textAlign: "center" }}>
 				Locked activity may not schedule meetings.
 			</Typography>
-		)
+		);
 	}
 
 	return (

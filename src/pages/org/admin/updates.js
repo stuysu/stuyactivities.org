@@ -83,7 +83,7 @@ const Updates = () => {
 			<Typography variant={"h2"} style={{ textAlign: "center" }}>
 				Locked activity may not make posts.
 			</Typography>
-		)
+		);
 	}
 
 	return (
