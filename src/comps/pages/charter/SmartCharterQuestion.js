@@ -48,14 +48,15 @@ const SmartCharterQuestion = ({
 
 	const onChange = ev => {
 		let value = ev.target.value;
-		if (maxChars) {
-			value = value.substr(0, maxChars);
+		if (maxChars && value.length > maxChars) {
+			value = value.slice(0, maxChars);
 		}
 
 		if (maxWords) {
-			let words = value.split(" ");
-			words = words.filter((val, index) => Boolean(val) || index === words.length - 1).slice(0, maxWords);
-			value = words.join(" ");
+			const words = value.split(" ");
+			if (words.length > maxWords) {
+				value = words.slice(0, maxWords).join(" ");
+			}
 		}
 
 		form.setError(name, false);
