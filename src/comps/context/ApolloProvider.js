@@ -17,8 +17,17 @@ const uploadLink = createUploadLink({
 	}
 });
 
+const unknownError =
+	"There was an unknown error on the server. Rest assured it has been reported. Feel free to contact us at it@stuysu.org to provide more information.";
+
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-	if (graphQLErrors) graphQLErrors.forEach(err => honeybadger.notify(err));
+	if (graphQLErrors)
+		graphQLErrors.forEach(err => {
+			if (err.message.includes(unknownError)) {
+				return;
+			}
+			honeybadger.notify(err);
+		});
 	if (networkError) {
 		honeybadger.notify(networkError);
 	}
