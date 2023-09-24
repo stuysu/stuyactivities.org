@@ -152,7 +152,7 @@ export default function Groups({ match }) {
 
 	const { enqueueSnackbar } = useSnackbar();
 
-	if (org.locked) {
+	if (org.locked === "LOCK") {
 		return (
 			<Typography variant={"h2"} style={{ textAlign: "center" }}>
 				Locked activities may not make groups.

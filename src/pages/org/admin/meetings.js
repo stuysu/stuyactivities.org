@@ -334,7 +334,7 @@ const Main = ({ match }) => {
 		}
 	});
 
-	if (org.locked) {
+	if (org.locked === "LOCK") {
 		return (
 			<Typography variant={"h2"} style={{ textAlign: "center" }}>
 				Locked activities may not schedule meetings.
