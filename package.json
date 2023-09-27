@@ -11,7 +11,7 @@
 		"@fullcalendar/list": "^5.11.3",
 		"@fullcalendar/react": "^5.11.2",
 		"@honeybadger-io/react": "2.1.0",
-		"@mui/icons-material": "^5.10.2",
+		"@mui/icons-material": "^5.14.11",
 		"@mui/material": "^5.10.8",
 		"@mui/x-date-pickers": "^5.0.4",
 		"@testing-library/jest-dom": "^5.16.5",
