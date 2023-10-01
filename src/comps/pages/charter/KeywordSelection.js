@@ -11,9 +11,20 @@ const KeywordSelection = ({ sx }) => {
 	const [keyword, setKeyword] = React.useState("");
 	const handleChange = event => {
 		// block text inputs past 3 tags
-		if ((form?.keywords || [])?.filter(Boolean).length < 3) {
-			setKeyword(event.target.value.trim());
+		if (!((form?.keywords || [])?.filter(Boolean).length < 3)) return;
+
+		if (event.nativeEvent.data?.includes(" ") || event.nativeEvent.data?.includes(",")) {
+			const [oldKeywordEnd, newKeyword] = event.nativeEvent.data.split(/[, ]/);
+			value.push(keyword + oldKeywordEnd);
+			form.set({
+				keywords: value
+			});
+			form.errors.keywords = false;
+			setKeyword(newKeyword);
+			return;
 		}
+
+		setKeyword(event.target.value.trim());
 	};
 
 	const handleKey = event => {
@@ -21,26 +32,6 @@ const KeywordSelection = ({ sx }) => {
 			form.set({
 				keywords: value.slice(0, -1)
 			});
-		} else {
-			if (["Enter", "Tab", " ", ","].includes(event.key)) {
-				if (keyword && (form?.keywords || [])?.filter(Boolean).length < 3) {
-					if ((form?.keywords || [])?.indexOf(keyword) === -1) {
-						value.push(keyword);
-						form.set({
-							keywords: value
-						});
-						// manually reset error state since error state doesn't rescan until "Next" button is clicked
-						form.errors.keywords = false;
-					}
-					setKeyword("");
-					event.preventDefault();
-				}
-
-				// unconditionally block all separator inputs except for tab (jumping)
-				if (event.key !== "Tab") {
-					event.preventDefault();
-				}
-			}
 		}
 	};
 

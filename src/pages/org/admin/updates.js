@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Snackbar } from "@mui/material";
 
 import layout from "./../../../styles/Layout.module.css";
 import Card from "@mui/material/Card";
@@ -51,6 +51,8 @@ const CREATE_UPDATE = gql`
 const Updates = () => {
 	const org = useContext(OrgContext);
 
+	const [error, setError] = useState();
+
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 
@@ -85,6 +87,15 @@ const Updates = () => {
 			</Typography>
 		);
 	}
+	const safeSubmit = async () => {
+		if (title === "") {
+			setError("Title cannot be blank!");
+		} else if (content === "") {
+			setError("Post content cannot be blank!");
+		} else {
+			await submit();
+		}
+	};
 
 	return (
 		<div className={layout.container}>
@@ -164,7 +175,7 @@ const Updates = () => {
 								</Grid>
 							</Grid>
 
-							<Button color={"primary"} variant={"contained"} disabled={loading} onClick={submit}>
+							<Button color={"primary"} variant={"contained"} disabled={loading} onClick={safeSubmit}>
 								Submit
 							</Button>
 						</Box>
@@ -180,6 +191,7 @@ const Updates = () => {
 					</Grid>
 				</Grid>
 			</Grid>
+			<Snackbar open={error} autoHideDuration={5000} onClose={() => setError(null)} message={error} />
 		</div>
 	);
 };
