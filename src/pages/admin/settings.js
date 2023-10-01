@@ -159,7 +159,9 @@ const Settings = () => {
 			</Button>
 			<Alert
 				title="Are you sure you want to update these settings?"
-				description="This will automatically lock or unlock clubs, and send all affected club leaders an email."
+				description={`This will automatically lock or unlock clubs${
+					settings.membershipRequirement > 1 ? ", and send all affected club leaders an email" : ""
+				}.`}
 				affirmative="OK"
 				negative="Cancel"
 				affirmativeCallback={saveSettings}
