@@ -81,6 +81,7 @@ const QUERY = gql`
 			limit: $limit
 			randomOrderSeed: $randomOrderSeed
 			active: true
+			locked: false
 			offset: $offset
 		) {
 			id

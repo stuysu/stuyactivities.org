@@ -4,6 +4,7 @@ import { Box, Button, Grid, Snackbar } from "@mui/material";
 
 import layout from "./../../../styles/Layout.module.css";
 import Card from "@mui/material/Card";
+import { Typography } from "@mui/material";
 import { OrgContext } from "../index";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -79,6 +80,13 @@ const Updates = () => {
 		}
 	});
 
+	if (org.locked === "LOCK") {
+		return (
+			<Typography variant={"h2"} style={{ textAlign: "center" }}>
+				Locked activities may not make posts.
+			</Typography>
+		);
+	}
 	const safeSubmit = async () => {
 		if (title === "") {
 			setError("Title cannot be blank!");

@@ -333,6 +333,15 @@ const Main = ({ match }) => {
 			});
 		}
 	});
+
+	if (org.locked === "LOCK") {
+		return (
+			<Typography variant={"h2"} style={{ textAlign: "center" }}>
+				Locked activities may not schedule meetings.
+			</Typography>
+		);
+	}
+
 	return (
 		<Box sx={classes.margin}>
 			<Grid container>

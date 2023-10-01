@@ -79,7 +79,7 @@ const Overview = () => {
 		<FlexCenter>
 			<div style={{ width: "100%" }}>
 				<Typography variant={"h2"} style={{ textAlign: "center" }}>
-					Overview
+					{org.locked === "LOCK" ? "Activity Locked" : "Overview"}
 				</Typography>
 
 				<Typography variant={"h5"} color={"primary"}>

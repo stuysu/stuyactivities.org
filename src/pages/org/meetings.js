@@ -17,6 +17,15 @@ const classes = {
 
 export default function Meetings() {
 	const org = React.useContext(OrgContext);
+
+	if (org.locked === "LOCK") {
+		return (
+			<Typography variant={"h2"} style={{ textAlign: "center" }}>
+				Locked activities may not schedule meetings.
+			</Typography>
+		);
+	}
+
 	return (
 		<Box sx={classes.margin}>
 			<Typography variant={"h2"} align={"center"}>
