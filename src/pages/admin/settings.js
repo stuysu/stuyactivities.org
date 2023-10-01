@@ -127,7 +127,7 @@ const Settings = () => {
 			) : (
 				<TextField
 					inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-					label="Miniumum Club Membership"
+					label="Minimum Club Membership"
 					variant="outlined"
 					value={settings === null ? "" : settings.membershipRequirement}
 					onChange={e => {
@@ -160,7 +160,7 @@ const Settings = () => {
 			<Alert
 				title="Are you sure you want to update these settings?"
 				description={`This will automatically lock or unlock clubs${
-					settings.membershipRequirement > 1 ? ", and send all affected club leaders an email" : ""
+					settings.membershipRequirement > 1 ? ", and send ALL affected club leaders an email" : ""
 				}.`}
 				affirmative="OK"
 				negative="Cancel"
