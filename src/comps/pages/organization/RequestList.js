@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
 	Avatar,
 	Grid,
@@ -13,6 +13,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
 const RequestList = ({ requests, reject, approve }) => {
+	const [refresh, useRefresh] = useState(false);
 	return (
 		<List>
 			{requests?.map(request => (
@@ -38,13 +39,25 @@ const RequestList = ({ requests, reject, approve }) => {
 					</Grid>
 					<ListItemSecondaryAction>
 						{request.userApproval ? (
-							<IconButton onClick={() => approve(request)} size="large">
+							<IconButton
+								onClick={() => {
+									approve(request);
+									setRefresh(!refresh);
+								}}
+								size="large"
+							>
 								<CheckIcon />
 							</IconButton>
 						) : (
 							""
 						)}
-						<IconButton onClick={() => reject(request)} size="large">
+						<IconButton
+							onClick={() => {
+								reject(request);
+								setRefresh(!refresh);
+							}}
+							size="large"
+						>
 							<CloseIcon />
 						</IconButton>
 					</ListItemSecondaryAction>
