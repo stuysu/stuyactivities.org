@@ -25,6 +25,7 @@ const Overview = () => {
 	const relatedQuery = gql`{
 		organizations(tags: ${"[" + ids + "]"}) {
 			name
+			active
 			tags {
 				id
 			}
@@ -170,7 +171,7 @@ const Overview = () => {
 				</Typography>
 				<List>
 					{orgList.map(relatedOrg => {
-						if (relatedOrg[0].name !== org.name) {
+						if (relatedOrg[0].name !== org.name && relatedOrg[0].active) {
 							const url = "/" + relatedOrg[0].url;
 							return (
 								<ListItem key={relatedOrg[0].name} button component="a" href={url}>
