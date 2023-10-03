@@ -13,7 +13,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
 const RequestList = ({ requests, reject, approve }) => {
-	const [refresh, useRefresh] = useState(false);
+	const [refresh, setRefresh] = useState(false);
 	return (
 		<List>
 			{requests?.map(request => (
