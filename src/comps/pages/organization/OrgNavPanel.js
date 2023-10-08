@@ -158,7 +158,13 @@ const OrgNavPanel = ({ match }) => {
 				{org.membership?.adminPrivileges && (
 					<TabItem label={"Admin Panel"} exact={false} to={match.path + "/admin"} icon={<Settings />} />
 				)}
-				<FlexCenter> <Button onClick={CopyOrgId} > <FileCopyOutlinedIcon/> Copy ID </Button> </FlexCenter>
+				{user?.adminRoles?.some(s => s.role === "admin") && (
+					<FlexCenter>
+						<Button onClick={CopyOrgId}>
+						<FileCopyOutlinedIcon /> Copy ID
+						</Button>
+					</FlexCenter>
+				)}
 			</List>
 			<Dialog open={leaveOpen} onClose={() => setLeaveOpen(false)}>
 				<DialogTitle>Are you sure you want to leave {org.name}?</DialogTitle>

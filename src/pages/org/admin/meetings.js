@@ -205,6 +205,7 @@ const EDIT_RECURRING_MUTATION = gql`
 
 const Main = ({ match }) => {
 	const org = React.useContext(OrgContext);
+
 	let reversedMeetings = org?.meetings?.slice(0);
 	if (reversedMeetings) {
 		reversedMeetings.reverse();
@@ -312,7 +313,9 @@ const Main = ({ match }) => {
 					roomId,
 					groupId
 				}
-			});
+			}).then(() => {
+				org.refetch();
+			  });;
 		}
 		setSnackbarOpen(true);
 	};
