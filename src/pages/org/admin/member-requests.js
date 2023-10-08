@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
 	Button,
 	Dialog,
@@ -90,15 +90,20 @@ export default function MemberRequests({ match }) {
 	const { data, refetch } = useQuery(QUERY, {
 		variables: { orgId: org.id }
 	});
+	useEffect(() => {
+		if (data) {
+		  refetch();
+		}
+	  }, [data, refetch]);
 	const [dialogError, setDialogError] = React.useState("");
 	const [approveMutation] = useMutation(APPROVE_MUTATION, {
-		update(cache) {
-			cache.reset().then(() => refetch());
-		}
+		onCompleted() {
+			refetch(); 
+		},
 	});
 	const [deleteMutation] = useMutation(DELETE_MUTATION, {
-		update(cache) {
-			cache.reset().then(() => refetch());
+		onCompleted() {
+			refetch();
 		},
 		onError(err) {
 			setDialogError(err.message);
