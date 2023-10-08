@@ -24,6 +24,7 @@ import { triggerLoginDialog } from "../../auth/AuthDialog";
 import UserContext from "../../context/UserContext";
 import Join from "./join";
 import LinkifyText from "../../ui/LinkifyText";
+import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 
 const classes = {
 	avatar: {
@@ -86,6 +87,10 @@ const OrgNavPanel = ({ match }) => {
 	if (memberStatus === "none" && org.membershipRequest) {
 		memberStatus = org.membershipRequest.adminApproval ? "invited" : "requested";
 	}
+
+	const CopyOrgId = () => {
+		navigator.clipboard.writeText(org.id)
+	  };
 
 	const [leaveOpen, setLeaveOpen] = React.useState(false);
 	const [joinOpen, setJoinOpen] = React.useState(false);
@@ -150,10 +155,10 @@ const OrgNavPanel = ({ match }) => {
 				<TabItem label={"Meetings"} to={match.path + "/meetings"} icon={<GroupWork />} />
 				<TabItem label={"Members"} to={match.path + "/members"} icon={<Person />} />
 				<TabItem label={"Groups"} to={match.path + "/groups"} icon={<Group />} />
-
 				{org.membership?.adminPrivileges && (
 					<TabItem label={"Admin Panel"} exact={false} to={match.path + "/admin"} icon={<Settings />} />
 				)}
+				<FlexCenter> <Button onClick={CopyOrgId} > <FileCopyOutlinedIcon/> Copy ID </Button> </FlexCenter>
 			</List>
 			<Dialog open={leaveOpen} onClose={() => setLeaveOpen(false)}>
 				<DialogTitle>Are you sure you want to leave {org.name}?</DialogTitle>

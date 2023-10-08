@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button"
 import FlexCenter from "../ui/FlexCenter";
 
 const previewEmitter = new EventEmitter();
@@ -34,7 +35,17 @@ const classes = {
 		padding: 3,
 		width: "700px",
 		maxWidth: "90vw"
-	}
+	},
+	button: {
+		backgroundColor: "light-blue",
+		color: "white",
+		border: "none",
+		padding: "8px 20px",
+		cursor: "pointer", 
+		"&:hover": {
+			backgroundColor: "darkblue",
+		},
+	},
 };
 
 const MeetingPreviewDialog = () => {
@@ -58,6 +69,11 @@ const MeetingPreviewDialog = () => {
 		return () => previewEmitter.removeListener("open", callback);
 	});
 
+  const copyMeetingId = () => {
+    navigator.clipboard.writeText(meetingId)
+  };
+
+
 	return (
 		<Dialog fullScreen={isMobile} open={open} onClose={closeDialog} TransitionComponent={Transition}>
 			<AppBar color={"secondary"} sx={classes.appBar} enableColorOnDark>
@@ -65,6 +81,7 @@ const MeetingPreviewDialog = () => {
 					<Typography variant="h6" sx={classes.title}>
 						Meeting Preview:{" "}
 					</Typography>
+					<Button onClick={copyMeetingId} sx={classes.button}> Copy ID </Button>
 					<IconButton edge="end" color="inherit" onClick={closeDialog} aria-label="close" size="large">
 						<CloseIcon />
 					</IconButton>

@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useContext} from "react";
 import {
 	Avatar,
 	Button,
@@ -71,8 +71,8 @@ const REMOVE_MUTATION = gql`
 `;
 
 export default function Members({ match }) {
-	const user = React.useContext(UserContext);
-	const { data } = useQuery(QUERY, {
+	const user = useContext(UserContext);
+	const { data, refetch } = useQuery(QUERY, {
 		variables: { url: match.params.orgUrl }
 	});
 	const [alterMutation] = useMutation(ALTER_MUTATION);
@@ -81,20 +81,20 @@ export default function Members({ match }) {
 			cache.reset();
 		}
 	});
-	const [editingMembership, setEditingMembership] = React.useState({});
-	const [removingMembership, setRemovingMembership] = React.useState({});
-	const [role, setRole] = React.useState("");
-	const [adminPrivileges, setAdminPrivileges] = React.useState(false);
-	const [notify, setNotify] = React.useState(true);
-	const [removeNotify, setRemoveNotify] = React.useState(true);
+	const [editingMembership, setEditingMembership] = useState({});
+	const [removingMembership, setRemovingMembership] = useState({});
+	const [role, setRole] = useState("");
+	const [adminPrivileges, setAdminPrivileges] = useState(false);
+	const [notify, setNotify] = useState(true);
+	const [removeNotify, setRemoveNotify] = useState(true);
 	const openEditDialog = membership => {
 		setEditingMembership(membership);
 		setRole(membership.role);
 		setAdminPrivileges(membership.adminPrivileges);
 	};
-	const edit = membership => {
-		setEditingMembership({});
-		alterMutation({
+	const edit = async (membership) => {
+		try {
+		  await alterMutation({
 			variables: {
 				membershipId: membership.id,
 				adminPrivileges,
@@ -102,26 +102,35 @@ export default function Members({ match }) {
 				notify
 			}
 		});
-		// because graphql cache stores stuff by ID, the new item will show up without a refetch
-	};
+		  await refetch();
+		  setEditingMembership({});
+		} catch (error) {
+		  console.error("Error editing membership:", error);
+		}
+	  };
 	const openRemoveDialog = membership => {
 		setEditingMembership({});
 		setRemovingMembership(membership);
 	};
-	const remove = membership => {
-		setRemovingMembership({});
-		removeMutation({
+	const remove = async (membership) => {
+		try {
+		  await removeMutation({
 			variables: {
 				membershipId: membership.id,
 				notify: removeNotify
 			}
 		});
-	};
+		  await refetch();
+		  setRemovingMembership({});
+		} catch (error) {
+		  console.error("Error removing membership:", error);
+		}
+	};	
 
 	let sortedMemberships = [...(data?.organizationByUrl?.memberships || [])];
 	sortedMemberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));
 
-	const [snackBarOpen, setSnackBarOpen] = React.useState(false);
+	const [snackBarOpen, setSnackBarOpen] = useState(false);
 	const emailList = sortedMemberships.map(membership => membership.user.email).join(", ");
 	const copy = () => {
 		navigator.clipboard.writeText(emailList).then(() => setSnackBarOpen(true));
