@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Avatar,
 	Grid,
@@ -7,12 +7,24 @@ import {
 	ListItem,
 	ListItemAvatar,
 	ListItemSecondaryAction,
-	Typography
+	Typography,
+	CircularProgress,
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
 const RequestList = ({ requests, reject, approve }) => {
+  const [isLoading, setLoading] = useState(false);
+
+  const approveHandle = async (request) => {
+    setLoading(true);
+    try {
+      await approve(request);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 	return (
 		<List>
 			{requests?.map(request => (
@@ -26,7 +38,7 @@ const RequestList = ({ requests, reject, approve }) => {
 							<Typography color={"textSecondary"} variant={"subtitle2"}>
 								{request.user.email}
 							</Typography>
-						</Grid>
+						</Grid> 
 						<Grid item xl={8} lg={8} md={6} sm={6} xs={12}>
 							<Typography>
 								Desired Role: "{request.role}" {request.adminPrivileges ? "(wants admin)" : ""}
@@ -37,20 +49,23 @@ const RequestList = ({ requests, reject, approve }) => {
 						</Grid>
 					</Grid>
 					<ListItemSecondaryAction>
-						{request.userApproval ? (
-							<IconButton onClick={() => approve(request)} size="large">
-								<CheckIcon />
-							</IconButton>
-						) : (
-							""
-						)}
-						<IconButton onClick={() => reject(request)} size="large">
-							<CloseIcon />
+						{isLoading ? ( <CircularProgress size="large"/> ) : ( <>
+					{request.userApproval && (
+						<IconButton
+							onClick={() => approveHandle(request)}
+							size="large">
+						<CheckIcon/>
 						</IconButton>
-					</ListItemSecondaryAction>
-				</ListItem>
-			))}
-		</List>
-	);
+					)}
+					<IconButton onClick={() => reject(request)} size="large">
+					<CloseIcon/>
+					</IconButton>
+              </>
+            )}
+          </ListItemSecondaryAction>
+        </ListItem>
+      ))}
+    </List>
+  );
 };
 export default RequestList;
