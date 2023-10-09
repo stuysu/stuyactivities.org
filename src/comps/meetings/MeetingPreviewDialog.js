@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button"
 import FlexCenter from "../ui/FlexCenter";
+import UserContext from "../../context/UserContext";
 
 const previewEmitter = new EventEmitter();
 
@@ -69,10 +70,10 @@ const MeetingPreviewDialog = () => {
 		return () => previewEmitter.removeListener("open", callback);
 	});
 
-  const copyMeetingId = () => {
-    navigator.clipboard.writeText(meetingId)
-  };
-
+  	const copyMeetingId = () => {
+    	navigator.clipboard.writeText(meetingId)
+  	};
+	const user = React.useContext(UserContext);
 
 	return (
 		<Dialog fullScreen={isMobile} open={open} onClose={closeDialog} TransitionComponent={Transition}>
@@ -81,7 +82,9 @@ const MeetingPreviewDialog = () => {
 					<Typography variant="h6" sx={classes.title}>
 						Meeting Preview:{" "}
 					</Typography>
-					<Button onClick={copyMeetingId} sx={classes.button}> Copy ID </Button>
+					{user?.adminRoles?.some(s => s.role === "admin") && (
+						<Button onClick={copyMeetingId} sx={classes.button}> Copy ID </Button>
+					)}
 					<IconButton edge="end" color="inherit" onClick={closeDialog} aria-label="close" size="large">
 						<CloseIcon />
 					</IconButton>
