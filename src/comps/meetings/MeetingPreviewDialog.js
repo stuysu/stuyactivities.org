@@ -12,7 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button"
 import FlexCenter from "../ui/FlexCenter";
-import UserContext from "../../context/UserContext";
+import UserContext from "../context/UserContext";
 
 const previewEmitter = new EventEmitter();
 
