@@ -1,4 +1,4 @@
-import {useState, useContext} from "react";
+import { useState, useContext } from "react";
 import {
 	Avatar,
 	Button,
@@ -92,40 +92,40 @@ export default function Members({ match }) {
 		setRole(membership.role);
 		setAdminPrivileges(membership.adminPrivileges);
 	};
-	const edit = async (membership) => {
+	const edit = async membership => {
 		try {
-		  await alterMutation({
-			variables: {
-				membershipId: membership.id,
-				adminPrivileges,
-				role,
-				notify
-			}
-		});
-		  await refetch();
-		  setEditingMembership({});
+			await alterMutation({
+				variables: {
+					membershipId: membership.id,
+					adminPrivileges,
+					role,
+					notify
+				}
+			});
+			await refetch();
+			setEditingMembership({});
 		} catch (error) {
-		  console.error("Error editing membership:", error);
+			console.error("Error editing membership:", error);
 		}
-	  };
+	};
 	const openRemoveDialog = membership => {
 		setEditingMembership({});
 		setRemovingMembership(membership);
 	};
-	const remove = async (membership) => {
+	const remove = async membership => {
 		try {
-		  await removeMutation({
-			variables: {
-				membershipId: membership.id,
-				notify: removeNotify
-			}
-		});
-		  await refetch();
-		  setRemovingMembership({});
+			await removeMutation({
+				variables: {
+					membershipId: membership.id,
+					notify: removeNotify
+				}
+			});
+			await refetch();
+			setRemovingMembership({});
 		} catch (error) {
-		  console.error("Error removing membership:", error);
+			console.error("Error removing membership:", error);
 		}
-	};	
+	};
 
 	let sortedMemberships = [...(data?.organizationByUrl?.memberships || [])];
 	sortedMemberships.sort((a, b) => (a.adminPrivileges && !b.adminPrivileges ? -1 : 1));

@@ -89,8 +89,8 @@ const OrgNavPanel = ({ match }) => {
 	}
 
 	const CopyOrgId = () => {
-		navigator.clipboard.writeText(org.id)
-	  };
+		navigator.clipboard.writeText(org.id);
+	};
 
 	const [leaveOpen, setLeaveOpen] = React.useState(false);
 	const [joinOpen, setJoinOpen] = React.useState(false);
@@ -161,7 +161,7 @@ const OrgNavPanel = ({ match }) => {
 				{user?.adminRoles?.some(s => s.role === "admin") && (
 					<FlexCenter>
 						<Button onClick={CopyOrgId}>
-						<FileCopyOutlinedIcon /> Copy ID
+							<FileCopyOutlinedIcon /> Copy ID
 						</Button>
 					</FlexCenter>
 				)}

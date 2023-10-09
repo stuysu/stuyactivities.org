@@ -315,7 +315,7 @@ const Main = ({ match }) => {
 				}
 			}).then(() => {
 				org.refetch();
-			  });;
+			});
 		}
 		setSnackbarOpen(true);
 	};
