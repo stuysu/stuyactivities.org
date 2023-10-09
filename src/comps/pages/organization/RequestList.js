@@ -49,7 +49,7 @@ const RequestList = ({ requests, reject, approve }) => {
 						</Grid>
 					</Grid>
 					<ListItemSecondaryAction>
-						{isLoading ? ( <CircularProgress size="large"/> ) : ( <>
+						{isLoading ? ( <CircularProgress size="24px"/> ) : ( <>
 					{request.userApproval && (
 						<IconButton
 							onClick={() => approveHandle(request)}
