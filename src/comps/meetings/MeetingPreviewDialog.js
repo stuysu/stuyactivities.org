@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button"
+import Button from "@mui/material/Button";
 import FlexCenter from "../ui/FlexCenter";
 import UserContext from "../context/UserContext";
 
@@ -42,11 +42,11 @@ const classes = {
 		color: "white",
 		border: "none",
 		padding: "8px 20px",
-		cursor: "pointer", 
+		cursor: "pointer",
 		"&:hover": {
-			backgroundColor: "darkblue",
-		},
-	},
+			backgroundColor: "darkblue"
+		}
+	}
 };
 
 const MeetingPreviewDialog = () => {
@@ -70,9 +70,9 @@ const MeetingPreviewDialog = () => {
 		return () => previewEmitter.removeListener("open", callback);
 	});
 
-  	const copyMeetingId = () => {
-    	navigator.clipboard.writeText(meetingId)
-  	};
+	const copyMeetingId = () => {
+		navigator.clipboard.writeText(meetingId);
+	};
 	const user = React.useContext(UserContext);
 
 	return (
@@ -83,7 +83,10 @@ const MeetingPreviewDialog = () => {
 						Meeting Preview:{" "}
 					</Typography>
 					{user?.adminRoles?.some(s => s.role === "admin") && (
-						<Button onClick={copyMeetingId} sx={classes.button}> Copy ID </Button>
+						<Button onClick={copyMeetingId} sx={classes.button}>
+							{" "}
+							Copy ID{" "}
+						</Button>
 					)}
 					<IconButton edge="end" color="inherit" onClick={closeDialog} aria-label="close" size="large">
 						<CloseIcon />

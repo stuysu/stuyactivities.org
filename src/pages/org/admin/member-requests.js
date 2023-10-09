@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
 	Button,
 	Dialog,
@@ -92,14 +92,14 @@ export default function MemberRequests({ match }) {
 	});
 	useEffect(() => {
 		if (data) {
-		  refetch();
+			refetch();
 		}
-	  }, [data, refetch]);
+	}, [data, refetch]);
 	const [dialogError, setDialogError] = React.useState("");
 	const [approveMutation] = useMutation(APPROVE_MUTATION, {
 		onCompleted() {
-			refetch(); 
-		},
+			refetch();
+		}
 	});
 	const [deleteMutation] = useMutation(DELETE_MUTATION, {
 		onCompleted() {
