@@ -82,7 +82,7 @@ const MeetingPreviewDialog = () => {
 					<Typography variant="h6" sx={classes.title}>
 						Meeting Preview:{" "}
 					</Typography>
-					{user?.adminRoles?.some(s => s.role === "admin") && (
+					{user?.adminRoles?.some(s => s.role === "meetings") && (
 						<Button onClick={copyMeetingId} sx={classes.button}>
 							{" "}
 							Copy ID{" "}
