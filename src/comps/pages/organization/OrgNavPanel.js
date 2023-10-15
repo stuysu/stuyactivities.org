@@ -158,7 +158,7 @@ const OrgNavPanel = ({ match }) => {
 				{org.membership?.adminPrivileges && (
 					<TabItem label={"Admin Panel"} exact={false} to={match.path + "/admin"} icon={<Settings />} />
 				)}
-				{user?.adminRoles?.some(s => s.role === "admin") && (
+				{user?.adminRoles?.some(s => s.role === "charters" || s.role === "meetings") && (
 					<FlexCenter>
 						<Button onClick={CopyOrgId}>
 							<FileCopyOutlinedIcon /> Copy ID
