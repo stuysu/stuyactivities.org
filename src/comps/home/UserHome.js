@@ -6,7 +6,7 @@ import UserMemberships from "./UserMemberships";
 import UserMeetings from "./UserMeetings";
 import { Typography } from "@mui/material";
 import UserUpdates from "./UserUpdates";
-import Typewriter from 'typewriter-effect'
+import Typewriter from "typewriter-effect";
 
 const classes = {
 	greeting: {
@@ -20,18 +20,14 @@ const UserHome = () => {
 	const user = useContext(UserContext);
 
 	return (
-		<div className={layout.container}> 
-
-	<Typography variant={"h1"} sx={classes.greeting}>
-
-		<Typewriter
-			onInit={(typewriter) => {
-				typewriter
-					.typeString(`Welcome back, ${user.firstName}! 👋`)	
-				.start();
-			}}
-		/>
-		</Typography>
+		<div className={layout.container}>
+			<Typography variant={"h1"} sx={classes.greeting}>
+				<Typewriter
+					onInit={typewriter => {
+						typewriter.typeString(`Welcome back, ${user.firstName}! 👋`).start();
+					}}
+				/>
+			</Typography>
 
 			<Grid container spacing={5}>
 				<Grid item xs={12} sm={5} md={4} lg={4} xl={4}>
