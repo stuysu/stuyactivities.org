@@ -62,14 +62,21 @@ const Teacher = () => {
 			<FlexCenter>
 				<Box sx={classes.textContainer}>
 					<Typography variant={"subtitle1"}>
-						If you think your StuyActivities account is linked to your stuy.edu email or you have linked it
-						to your own Google account you may use the sign in with Google option below. If that fails it's
-						likely that your StuyActivities account is linked to your DOE email.
+						Most StuyActivities accounts are linked to stuy.edu emails, and you may use the "Sign in with
+						Google" option below.
 					</Typography>
 					<br />
 					<Typography variant={"subtitle1"}>
-						For some reason the DOE email addresses completely block any emails we try to send out and so we
-						need you to send us an email first in order for it to go through.
+						Some legacy accounts are linked to a personal or DOE email address.
+						If you believe this is the case,
+						try using the same "Sign in with Google" button below. If that fails, try the DOE email
+						troubleshooting steps below. Otherwise, please get in touch with us at{" "}
+						<EmailLink email="IT@stuysu.org" />.
+					</Typography>
+					<br />
+					<Typography variant={"subtitle1"}>
+						DOE email inboxes automatically block any emails from an unrecognized email address like ours,
+						so unless you send us an email first. Only then will our confirmation link go through.
 					</Typography>
 					<br />
 					<Typography>
