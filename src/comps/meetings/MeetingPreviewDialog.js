@@ -80,12 +80,11 @@ const MeetingPreviewDialog = () => {
 			<AppBar color={"secondary"} sx={classes.appBar} enableColorOnDark>
 				<Toolbar>
 					<Typography variant="h6" sx={classes.title}>
-						Meeting Preview:{" "}
+						Meeting Preview:
 					</Typography>
 					{user?.adminRoles?.some(s => s.role === "meetings") && (
 						<Button onClick={copyMeetingId} sx={classes.button}>
-							{" "}
-							Copy ID{" "}
+							Copy ID
 						</Button>
 					)}
 					<IconButton edge="end" color="inherit" onClick={closeDialog} aria-label="close" size="large">
