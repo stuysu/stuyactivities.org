@@ -107,8 +107,11 @@ const About = () => {
 					<Grid container style={{ textAlign: "center" }}>
 						<Grid item xs={12} sm={6} md={6}>
 							<h2>SU IT Department Team 23-24:</h2>
-							<p>David Chan, SU IT Co-Director ’23-’24, SU IT ’21-’23</p>
+							<p>David Chen, SU IT Co-Director ’23-’24, SU IT ’21-’23</p>
 							<p>Randy Sim, SU IT Co-Director ’23-’24, SU IT ’22-’23</p>
+							<p>Tony Chen, SU IT ’23-’24</p>
+							<p>Adam Choi, SU IT ’23-’24</p>
+							<p>Richard Wan, SU IT ’23-’24</p>
 						</Grid>
 						<Grid item xs={12} sm={6} md={6}>
 							<h2>SU IT Department Team 22-23:</h2>
