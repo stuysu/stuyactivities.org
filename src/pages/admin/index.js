@@ -9,6 +9,7 @@ import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
 import AdminLog from "./AdminLog";
+import ManageContent from "./managecontent.js"
 import {
 	AssignmentTurnedIn,
 	EmailOutlined,
@@ -16,7 +17,8 @@ import {
 	SmsFailed,
 	AttachMoney,
 	FeaturedPlayList,
-	Settings as SettingsIcon
+	Settings as SettingsIcon,
+	Source
 } from "@mui/icons-material";
 import EmailClubLeaders from "./email";
 import ManagePromotedClubs from "./promotedclub";
@@ -82,6 +84,11 @@ export default function AdminRouter({ match }) {
 			role: "charters",
 			path: actualPath + "/settings",
 			icon: <SettingsIcon />
+		}, {
+			label: "Manage Content",
+			role: "charters",
+			path: actualPath + "/managecontent",
+			icon: <Source />
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
@@ -103,6 +110,7 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/email"} component={EmailClubLeaders} />
 				<Route path={match.path + "/promotedclubs"} component={ManagePromotedClubs} />
 				<Route path={match.path + "/settings"} component={Settings} />
+				<Route path={match.path + "/managecontent"} component={ManageContent} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>
