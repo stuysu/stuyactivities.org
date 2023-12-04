@@ -9,7 +9,7 @@ import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
 import AdminLog from "./AdminLog";
-import ManageContent from "./managecontent.js"
+import ManageClubs from "./manageclubs.js"
 import {
 	AssignmentTurnedIn,
 	EmailOutlined,
@@ -85,9 +85,9 @@ export default function AdminRouter({ match }) {
 			path: actualPath + "/settings",
 			icon: <SettingsIcon />
 		}, {
-			label: "Manage Content",
+			label: "Manage Clubs",
 			role: "charters",
-			path: actualPath + "/managecontent",
+			path: actualPath + "/manageclubs",
 			icon: <Source />
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
@@ -110,7 +110,7 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/email"} component={EmailClubLeaders} />
 				<Route path={match.path + "/promotedclubs"} component={ManagePromotedClubs} />
 				<Route path={match.path + "/settings"} component={Settings} />
-				<Route path={match.path + "/managecontent"} component={ManageContent} />
+				<Route path={match.path + "/manageclubs"} component={ManageClubs} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>
