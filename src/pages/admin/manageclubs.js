@@ -17,12 +17,40 @@ query ($id: Int!) {
 	  id
 	  name
 	  url
-	  memberships
-	  updates
-	  groups
-	  meetings
+	  memberships {
+      id
+      user {
+        id
+        name
+        firstName
+        lastName
+        email
+        isFaculty
+        fourDigitId
+      }
+      role
+      adminPrivileges
+    }
+	  updates {
+      title
+      content
+    }
+	  meetings {
+      id
+      title
+      description
+      start
+      end
+      privacy
+      rooms {
+        id
+        name
+        floor
+        approvalRequired
+      }
+    }
 	}
-  }
+}
 `
 
 const ManageClubs = () => {
@@ -33,8 +61,6 @@ const ManageClubs = () => {
 			id: orgId
 		}
 	})
-
-	// console.log(data.organization)
 
 	return (
 		<Box sx={classes.mainDiv}>
