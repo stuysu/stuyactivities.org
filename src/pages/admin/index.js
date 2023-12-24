@@ -9,7 +9,7 @@ import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
 import AdminLog from "./AdminLog";
-import ManageClubs from "./manageclubs.js"
+import ManageClubs from "./manageclubs.js";
 import {
 	AssignmentTurnedIn,
 	EmailOutlined,
@@ -91,7 +91,8 @@ export default function AdminRouter({ match }) {
 			role: "charters",
 			path: actualPath + "/settings",
 			icon: <SettingsIcon />
-		}, {
+		},
+		{
 			label: "Manage Clubs",
 			role: "charters",
 			path: actualPath + "/manageclubs",
