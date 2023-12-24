@@ -3,6 +3,7 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import Alert from "../../comps/ui/Alert";
 import Loading from "../../comps/ui/Loading";
+import NumberInput from "../../comps/ui/NumberInput";
 
 const QUERY = gql`
 	query {
@@ -69,24 +70,12 @@ const Settings = () => {
 			{loading ? (
 				<Loading />
 			) : (
-				<TextField
-					inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+				<NumberInput
 					label="Minimum Club Membership"
-					variant="outlined"
 					value={settings === null ? "" : settings.membershipRequirement}
-					onChange={e => {
-						if (!e.target.value.length) {
-							setSettings({ ...settings, membershipRequirement: "" });
-							setChanged(false);
-							return;
-						}
-
-						let newValue = parseInt(e.target.value);
-
-						if (isNaN(newValue) || newValue < 0) return; // impossible
-
-						setSettings({ ...settings, membershipRequirement: newValue });
-						setChanged(true);
+					setValue={val => {
+						setSettings({ ...settings, membershipRequirement: val });
+						setChanged(val !== "");
 					}}
 				/>
 			)}

@@ -26,6 +26,8 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import TinyEditor from "../../updates/TinyEditor";
 import { OrgContext } from "../../../pages/org/index";
+import UserContext from "../../context/UserContext";
+import NumberInput from "../../ui/NumberInput";
 
 const AVAILABLE_ROOMS_QUERY = gql`
 	query ($start: DateTime!, $end: DateTime!) {
@@ -72,6 +74,10 @@ const MeetingForm = ({
 }) => {
 	const org = React.useContext(OrgContext);
 	const [title, setTitle] = React.useState(meeting.title || "");
+
+	const [weeks, setWeeks] = React.useState(1);
+	const user = React.useContext(UserContext);
+	const meetingAdmin = user?.adminRoles?.some(row => "admin" === row.role);
 
 	const publicGroup = { name: "Public", id: 0 };
 	const privateGroup = { name: "Member-only", id: 0 };
@@ -157,15 +163,27 @@ const MeetingForm = ({
 					</Button>
 				</DialogActions>
 			</Dialog>
-			<TextField
-				sx={classes.marginBottomBig}
-				fullWidth
-				variant="outlined"
-				label="Title"
-				value={title}
-				placeholder={"e.g. Weekly Check In #2"}
-				onChange={e => setTitle(e.target.value)}
-			/>
+			<Grid container spacing={1}>
+				<Grid item xs={12} sm={meetingAdmin ? 8 : 12} lg={meetingAdmin ? 10 : 12}>
+					<TextField
+						sx={classes.marginBottomBig}
+						fullWidth
+						variant="outlined"
+						label="Title"
+						value={title}
+						placeholder={"e.g. Weekly Check In #2"}
+						onChange={e => setTitle(e.target.value)}
+					/>
+				</Grid>
+				{meetingAdmin ? (
+					<Grid item xs={12} sm={4} lg={2}>
+						<NumberInput label="Weeks to Repeat" value={weeks} setValue={setWeeks} fullWidth />
+					</Grid>
+				) : (
+					<></>
+				)}
+			</Grid>
+
 			<Grid container spacing={1}>
 				<LocalizationProvider dateAdapter={AdapterDateFns}>
 					<Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
@@ -300,7 +318,7 @@ const MeetingForm = ({
 						checked,
 						date: time.start,
 						privacy: group.id === 0 && group.name === "Public" ? "public" : "private",
-						frequency: 0,
+						weeks: meetingAdmin && weeks ? weeks : 0,
 						dayOfWeek: alreadyRecurring ? dayOfWeek : time.start.day(),
 						groupId: group.id,
 						oldRoom,
