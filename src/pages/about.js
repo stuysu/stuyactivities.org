@@ -111,6 +111,7 @@ const About = () => {
 							<p>Randy Sim, SU IT Co-Director ’23-’24, SU IT ’22-’23</p>
 							<p>Tony Chen, SU IT ’23-’24</p>
 							<p>Adam Choi, SU IT ’23-’24</p>
+							<p>Rahul Deb, SU IT ’23-’24</p>
 							<p>Richard Wan, SU IT ’23-’24</p>
 						</Grid>
 						<Grid item xs={12} sm={6} md={6}>
