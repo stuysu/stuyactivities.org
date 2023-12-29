@@ -14,7 +14,7 @@ const classes = {
 
 const MUTATION = gql`
 	mutation ($meetingId: Int!) {
-		deleteMeeting(meetingId: $meetingId)
+		adminDeleteMeeting(meetingId: $meetingId)
 	}
 `;
 
