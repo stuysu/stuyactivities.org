@@ -13,7 +13,7 @@ import smartTimespan from "../../../utils/smartTimespan";
 import { triggerMeetingDialog } from "../../meetings/MeetingPreviewDialog";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Alert from "../../ui/Alert"
+import Alert from "../../ui/Alert";
 
 const classes = {
 	card: {
@@ -55,7 +55,7 @@ const AdminMeetingCard = ({
 	privacy,
 	group,
 	rooms,
-    onDelete
+	onDelete
 }) => {
 	const history = useHistory();
 
@@ -67,7 +67,7 @@ const AdminMeetingCard = ({
 		}
 	};
 
-    let [confirmOpen, setConfirmOpen] = useState(false);
+	let [confirmOpen, setConfirmOpen] = useState(false);
 
 	return (
 		<Card variant={"outlined"} sx={[...(Array.isArray(sx) ? sx : [sx]), classes.card]}>
@@ -109,17 +109,22 @@ const AdminMeetingCard = ({
 					)
 				) : (
 					<Box sx={classes.buttonContainer}>
-						<Button variant={"contained"} color={"secondary"} onClick={() => triggerMeetingDialog(id)} sx={{ marginRight: "50px"}}>
+						<Button
+							variant={"contained"}
+							color={"secondary"}
+							onClick={() => triggerMeetingDialog(id)}
+							sx={{ marginRight: "50px" }}
+						>
 							View More
 						</Button>
-                        <Button variant={"contained"} color={"primary"} onClick={() => setConfirmOpen(true)}>
+						<Button variant={"contained"} color={"primary"} onClick={() => setConfirmOpen(true)}>
 							Delete
 						</Button>
 					</Box>
 				)}
 			</Box>
 
-            <Alert
+			<Alert
 				title={`Are you sure you want to delete this meeting?`}
 				description={`Please make sure to email the leaders of the club.`}
 				affirmative="Yes"
@@ -132,4 +137,4 @@ const AdminMeetingCard = ({
 	);
 };
 
-export default AdminMeetingCard
+export default AdminMeetingCard;

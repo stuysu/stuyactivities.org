@@ -18,88 +18,85 @@ const MUTATION = gql`
 	}
 `;
 
-
 const QUERY = gql`
-query ($id: Int!) {
-	organization: organizationById(id: $id) {
-	  id
-	  name
-	  url
-	  memberships {
-      id
-      user {
-        id
-        name
-        firstName
-        lastName
-        email
-        isFaculty
-        fourDigitId
-      }
-      role
-      adminPrivileges
-    }
-	  updates {
-      title
-      content
-    }
-	  meetings {
-      id
-      title
-      description
-      start
-      end
-      privacy
-      rooms {
-        id
-        name
-        floor
-        approvalRequired
-      }
-    }
+	query ($id: Int!) {
+		organization: organizationById(id: $id) {
+			id
+			name
+			url
+			memberships {
+				id
+				user {
+					id
+					name
+					firstName
+					lastName
+					email
+					isFaculty
+					fourDigitId
+				}
+				role
+				adminPrivileges
+			}
+			updates {
+				title
+				content
+			}
+			meetings {
+				id
+				title
+				description
+				start
+				end
+				privacy
+				rooms {
+					id
+					name
+					floor
+					approvalRequired
+				}
+			}
+		}
 	}
-}
-`
+`;
 
 const ManageClubs = () => {
-
-	const [orgId, setOrgId] = useState(0)
+	const [orgId, setOrgId] = useState(0);
 	const { data } = useQuery(QUERY, {
 		variables: {
 			id: orgId
 		}
-	})
+	});
 
-  let [message, setMessage] = useState("");
+	let [message, setMessage] = useState("");
 
-  const [deleteMeeting] = useMutation(MUTATION)
+	const [deleteMeeting] = useMutation(MUTATION);
 
 	return (
 		<Box sx={classes.mainDiv}>
 			<OrganizationPicker setOrgId={setOrgId} />
-      <Grid container>
-        {data && data.organization &&
-          data.organization.meetings.map(
-            (meeting, i) => (
-              <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
-                <AdminMeetingCard 
-                  {...meeting}
-                  onDelete={async () => {
-                    try {
-                      await deleteMeeting({ variables: { meetingId: meeting.id }})
-                      setMessage("Meeting deleted!")
-                    } catch(e) {
-                      setMessage("Failed to delete meeting: " + e.message)
-                    }
-                  }}
-                  key={i}
-                />
-              </Grid>
-            )
-          )}
-      </Grid>
+			<Grid container>
+				{data &&
+					data.organization &&
+					data.organization.meetings.map((meeting, i) => (
+						<Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+							<AdminMeetingCard
+								{...meeting}
+								onDelete={async () => {
+									try {
+										await deleteMeeting({ variables: { meetingId: meeting.id } });
+										setMessage("Meeting deleted!");
+									} catch (e) {
+										setMessage("Failed to delete meeting: " + e.message);
+									}
+								}}
+								key={i}
+							/>
+						</Grid>
+					))}
+			</Grid>
 
-      <Snackbar
+			<Snackbar
 				autoHideDuration={1000}
 				open={message?.length > 0}
 				onClose={() => setMessage("")}
@@ -107,7 +104,7 @@ const ManageClubs = () => {
 				anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
 			/>
 		</Box>
-	)
-}
+	);
+};
 
-export default ManageClubs
+export default ManageClubs;
