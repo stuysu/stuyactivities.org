@@ -1,7 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
-import { Box } from "@mui/material";
+import { gql, useQuery, useMutation } from "@apollo/client";
+import { Box, Grid, Snackbar } from "@mui/material";
 import { useState } from "react";
 import OrganizationPicker from "../../comps/ui/OrganizationPicker";
+import AdminMeetingCard from "../../comps/pages/admin/AdminMeetingCard";
 
 const classes = {
 	mainDiv: {
@@ -10,6 +11,13 @@ const classes = {
 		margin: "auto"
 	}
 };
+
+const MUTATION = gql`
+	mutation ($meetingId: Int!) {
+		deleteMeeting(meetingId: $meetingId)
+	}
+`;
+
 
 const QUERY = gql`
 query ($id: Int!) {
@@ -56,15 +64,48 @@ query ($id: Int!) {
 const ManageClubs = () => {
 
 	const [orgId, setOrgId] = useState(0)
-	const { data, loading } = useQuery(QUERY, {
+	const { data } = useQuery(QUERY, {
 		variables: {
 			id: orgId
 		}
 	})
 
+  let [message, setMessage] = useState("");
+
+  const [deleteMeeting] = useMutation(MUTATION)
+
 	return (
 		<Box sx={classes.mainDiv}>
 			<OrganizationPicker setOrgId={setOrgId} />
+      <Grid container>
+        {data && data.organization &&
+          data.organization.meetings.map(
+            (meeting, i) => (
+              <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+                <AdminMeetingCard 
+                  {...meeting}
+                  onDelete={async () => {
+                    try {
+                      await deleteMeeting({ variables: { meetingId: meeting.id }})
+                      setMessage("Meeting deleted!")
+                    } catch(e) {
+                      setMessage("Failed to delete meeting: " + e.message)
+                    }
+                  }}
+                  key={i}
+                />
+              </Grid>
+            )
+          )}
+      </Grid>
+
+      <Snackbar
+				autoHideDuration={1000}
+				open={message?.length > 0}
+				onClose={() => setMessage("")}
+				message={message}
+				anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+			/>
 		</Box>
 	)
 }
