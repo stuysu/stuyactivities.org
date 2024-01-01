@@ -67,7 +67,13 @@ const AdminMeetingCard = ({
 		}
 	};
 
-	let [confirmOpen, setConfirmOpen] = useState(false);
+	const [deleted, setDeleted] = useState(false);
+	const [confirmOpen, setConfirmOpen] = useState(false);
+
+	const del = async () => {
+		setDeleted(true);
+		await onDelete();
+	};
 
 	return (
 		<Card variant={"outlined"} sx={[...(Array.isArray(sx) ? sx : [sx]), classes.card]}>
@@ -114,10 +120,16 @@ const AdminMeetingCard = ({
 							color={"secondary"}
 							onClick={() => triggerMeetingDialog(id)}
 							sx={{ marginRight: "50px" }}
+							disabled={deleted}
 						>
 							View More
 						</Button>
-						<Button variant={"contained"} color={"primary"} onClick={() => setConfirmOpen(true)}>
+						<Button
+							variant={"contained"}
+							color={"primary"}
+							onClick={() => setConfirmOpen(true)}
+							disabled={deleted}
+						>
 							Delete
 						</Button>
 					</Box>
@@ -129,7 +141,7 @@ const AdminMeetingCard = ({
 				description={`The club members will be emailed.`}
 				affirmative="Yes"
 				negative="No"
-				affirmativeCallback={onDelete}
+				affirmativeCallback={del}
 				open={confirmOpen}
 				setOpen={setConfirmOpen}
 			/>

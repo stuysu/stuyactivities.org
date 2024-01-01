@@ -25,7 +25,7 @@ const OrganizationPicker = ({ setOrgId }) => {
 			<Autocomplete
 				inputValue={keyword}
 				onInputChange={(ev, newValue) => {
-					if (newValue) setKeyword(newValue);
+					if (ev !== null) setKeyword(newValue || "");
 				}}
 				options={options}
 				getOptionLabel={_ => ""}

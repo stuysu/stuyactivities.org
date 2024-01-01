@@ -70,11 +70,7 @@ const ManageClubs = () => {
 
 	let [message, setMessage] = useState("");
 
-	const [deleteMeeting] = useMutation(MUTATION, {
-		update(cache) {
-			cache.reset().then(() => setOrgId(orgId));
-		}
-	});
+	const [deleteMeeting] = useMutation(MUTATION);
 
 	return (
 		<Box sx={classes.mainDiv}>
