@@ -13,8 +13,8 @@ const QUERY = gql`
 `;
 
 const OrganizationPicker = ({ setOrgId }) => {
-	const [orgName, setOrgName] = React.useState("");
 	const [keyword, setKeyword] = React.useState("");
+	console.log(keyword);
 	const { data, loading } = useQuery(QUERY, {
 		variables: { keyword }
 	});
@@ -22,38 +22,28 @@ const OrganizationPicker = ({ setOrgId }) => {
 	return (
 		<div>
 			<Typography variant={"h5"}>Currently Selected Club: </Typography>
-			<div>
-				{orgName === "" ? (
-					<Autocomplete
-						options={options}
-						value={null}
-						getOptionLabel={_ => ""}
-						renderOption={(props, option) => (
-							<li {...props}>
-								<span>{option.name}</span>
-							</li>
-						)}
-						onChange={(ev, newvalue) => {
-							setOrgName(newvalue.name);
-							setOrgId(newvalue.id);
-						}}
-						loading={loading}
-						filterOptions={f => f}
-						renderInput={params => (
-							<TextField
-								{...params}
-								required={true}
-								label="Find Organization"
-								variant="outlined"
-								value={keyword}
-								onChange={ev => setKeyword(ev.target.value)}
-							/>
-						)}
-					/>
-				) : (
-					<Typography variant={"h5"}>{orgName}</Typography>
+			<Autocomplete
+				inputValue={keyword}
+				onInputChange={(ev, newValue) => {
+					if (newValue) setKeyword(newValue);
+				}}
+				options={options}
+				getOptionLabel={_ => ""}
+				renderOption={(props, option) => (
+					<li {...props}>
+						<span>{option.name}</span>
+					</li>
 				)}
-			</div>
+				onChange={(ev, newvalue) => {
+					setKeyword(newvalue.name);
+					setOrgId(newvalue.id);
+				}}
+				loading={loading}
+				filterOptions={f => f}
+				renderInput={params => (
+					<TextField {...params} required={true} label="Find Organization" variant="outlined" />
+				)}
+			/>
 		</div>
 	);
 };

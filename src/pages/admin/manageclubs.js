@@ -1,5 +1,5 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { Box, Grid, Snackbar } from "@mui/material";
+import { Box, Grid, Snackbar, Typography } from "@mui/material";
 import { useState } from "react";
 import OrganizationPicker from "../../comps/ui/OrganizationPicker";
 import AdminMeetingCard from "../../comps/pages/admin/AdminMeetingCard";
@@ -70,14 +70,17 @@ const ManageClubs = () => {
 
 	let [message, setMessage] = useState("");
 
-	const [deleteMeeting] = useMutation(MUTATION);
+	const [deleteMeeting] = useMutation(MUTATION, {
+		update(cache) {
+			cache.reset().then(() => setOrgId(orgId));
+		}
+	});
 
 	return (
 		<Box sx={classes.mainDiv}>
 			<OrganizationPicker setOrgId={setOrgId} />
 			<Grid container>
-				{data &&
-					data.organization &&
+				{data?.organization?.meetings?.length > 0 ? (
 					data.organization.meetings.map((meeting, i) => (
 						<Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
 							<AdminMeetingCard
@@ -93,7 +96,12 @@ const ManageClubs = () => {
 								key={i}
 							/>
 						</Grid>
-					))}
+					))
+				) : orgId === 0 ? (
+					<></>
+				) : (
+					<Typography>No club meetings found.</Typography>
+				)}
 			</Grid>
 
 			<Snackbar

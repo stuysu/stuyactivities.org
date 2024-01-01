@@ -126,7 +126,7 @@ const AdminMeetingCard = ({
 
 			<Alert
 				title={`Are you sure you want to delete this meeting?`}
-				description={`Please make sure to email the leaders of the club.`}
+				description={`The club members will be emailed.`}
 				affirmative="Yes"
 				negative="No"
 				affirmativeCallback={onDelete}
