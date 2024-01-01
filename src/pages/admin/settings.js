@@ -1,18 +1,9 @@
-import {
-	Typography,
-	TextField,
-	Button,
-	Box,
-	Dialog,
-	DialogTitle,
-	DialogContent,
-	DialogContentText,
-	DialogActions,
-	Snackbar
-} from "@mui/material";
+import { Typography, Button, Box, Snackbar } from "@mui/material";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import Alert from "../../comps/ui/Alert";
 import Loading from "../../comps/ui/Loading";
+import NumberInput from "../../comps/ui/NumberInput";
 
 const QUERY = gql`
 	query {
@@ -36,52 +27,6 @@ const classes = {
 		maxWidth: "90%",
 		margin: "auto"
 	}
-};
-
-const dummy = () => 0; // dummy function as default value
-const Alert = ({
-	title,
-	description,
-	affirmative = "",
-	negative = "",
-	affirmativeCallback = dummy,
-	open = false,
-	setOpen = dummy
-}) => {
-	/**
-	 * A basic alert modal.
-	 * @constructor
-	 * @param {string} title - The title of the modal.
-	 * @param {string} description - The description of the modal.
-	 * @param {string} affirmative - The string for the affirmative option (e.g. "OK"). When clicked, calls affirmativeCallback. If empty, not displayed.
-	 * @param {string} negative - The string for the negative option (e.g. "Cancel"). If empty, not displayed.
-	 * @param {function} affirmativeCallback - The function to call when affirmative action button is clicked. Not needed if affirmative is empty.
-	 * @param {boolean} open - Whether the modal is active and displayed, stored in React state.
-	 * @param {boolean} setOpen - The React state edit function, used to close the modal.
-	 */
-	return (
-		<Dialog open={open} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-			<DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-			<DialogContent>
-				<DialogContentText id="alert-dialog-description">{description}</DialogContentText>
-			</DialogContent>
-			<DialogActions>
-				{negative.length > 0 ? <Button onClick={() => setOpen(false)}>{negative}</Button> : <></>}
-				{affirmative.length > 0 ? (
-					<Button
-						onClick={() => {
-							setOpen(false);
-							affirmativeCallback();
-						}}
-					>
-						{affirmative}
-					</Button>
-				) : (
-					<></>
-				)}
-			</DialogActions>
-		</Dialog>
-	);
 };
 
 const Settings = () => {
@@ -125,24 +70,12 @@ const Settings = () => {
 			{loading ? (
 				<Loading />
 			) : (
-				<TextField
-					inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+				<NumberInput
 					label="Minimum Club Membership"
-					variant="outlined"
 					value={settings === null ? "" : settings.membershipRequirement}
-					onChange={e => {
-						if (!e.target.value.length) {
-							setSettings({ ...settings, membershipRequirement: "" });
-							setChanged(false);
-							return;
-						}
-
-						let newValue = parseInt(e.target.value);
-
-						if (isNaN(newValue) || newValue < 0) return; // impossible
-
-						setSettings({ ...settings, membershipRequirement: newValue });
-						setChanged(true);
+					setValue={val => {
+						setSettings({ ...settings, membershipRequirement: val });
+						setChanged(val !== "");
 					}}
 				/>
 			)}

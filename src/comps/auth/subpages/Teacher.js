@@ -67,9 +67,8 @@ const Teacher = () => {
 					</Typography>
 					<br />
 					<Typography variant={"subtitle1"}>
-						Some legacy accounts are linked to a personal or DOE email address.
-						If you believe this is the case,
-						try using the same "Sign in with Google" button below. If that fails, try the DOE email
+						Some legacy accounts are linked to a personal or DOE email address. If you believe this is the
+						case, try using the same "Sign in with Google" button below. If that fails, try the DOE email
 						troubleshooting steps below. Otherwise, please get in touch with us at{" "}
 						<EmailLink email="IT@stuysu.org" />.
 					</Typography>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { generatePath, Redirect, Route, Switch } from "react-router-dom";
 import RouteTabs from "../../comps/ui/RouteTabs";
 import Boograms from "./boograms";
@@ -9,6 +9,7 @@ import SignInRequired from "../../comps/ui/SignInRequired";
 import Strikes from "./Strikes";
 import OrgApprovals from "./approvals/OrgApprovals";
 import AdminLog from "./AdminLog";
+import ManageClubs from "./manageclubs.js";
 import {
 	AssignmentTurnedIn,
 	EmailOutlined,
@@ -16,12 +17,14 @@ import {
 	SmsFailed,
 	AttachMoney,
 	FeaturedPlayList,
-	Settings as SettingsIcon
+	PersonAdd,
+	Settings as SettingsIcon,
+	Source
 } from "@mui/icons-material";
 import EmailClubLeaders from "./email";
 import ManagePromotedClubs from "./promotedclub";
 import Settings from "./settings";
-import Box from "@mui/material/Box";
+import Users from "./Users";
 
 const classes = {
 	root: {
@@ -78,10 +81,22 @@ export default function AdminRouter({ match }) {
 			icon: <FeaturedPlayList />
 		},
 		{
+			label: "Add Users",
+			role: "users",
+			path: actualPath + "/users",
+			icon: <PersonAdd />
+		},
+		{
 			label: "Update Site Settings",
 			role: "charters",
 			path: actualPath + "/settings",
 			icon: <SettingsIcon />
+		},
+		{
+			label: "Manage Clubs",
+			role: "charters",
+			path: actualPath + "/manageclubs",
+			icon: <Source />
 		}
 	].filter(tab => adminRoles.some(row => tab.role === row.role));
 
@@ -102,7 +117,9 @@ export default function AdminRouter({ match }) {
 				<Route path={match.path + "/log"} component={AdminLog} />
 				<Route path={match.path + "/email"} component={EmailClubLeaders} />
 				<Route path={match.path + "/promotedclubs"} component={ManagePromotedClubs} />
+				<Route path={match.path + "/users"} component={Users} />
 				<Route path={match.path + "/settings"} component={Settings} />
+				<Route path={match.path + "/manageclubs"} component={ManageClubs} />
 				<Route path={match.path}>
 					<Redirect to={tabs[0].path} />
 				</Route>

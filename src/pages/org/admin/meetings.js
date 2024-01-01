@@ -118,25 +118,28 @@ const EDIT_MUTATION = gql`
 `;
 
 const CREATE_RECURRING_MUTATION = gql`
-	mutation CreateRecurringMeeting(
+	mutation CreateMeetings(
 		$orgUrl: String
 		$title: String!
 		$description: String!
-		$start: Time!
-		$end: Time!
+		$start: DateTime!
+		$end: DateTime!
+		$weeks: Int!
+		$notifyFaculty: Boolean
 		$privacy: String!
-		$frequency: Int!
-		$dayOfWeek: Int!
+		$roomId: Int
+		$groupId: Int
 	) {
-		createRecurringMeeting(
+		createMeetings(
 			orgUrl: $orgUrl
 			title: $title
 			description: $description
 			start: $start
 			end: $end
+			weeks: $weeks
+			notifyFaculty: $notifyFaculty
 			privacy: $privacy
-			frequency: $frequency
-			dayOfWeek: $dayOfWeek
+			roomId: $roomId
 			groupId: $groupId
 		) {
 			id
@@ -145,8 +148,6 @@ const CREATE_RECURRING_MUTATION = gql`
 			start
 			end
 			privacy
-			frequency
-			dayOfWeek
 		}
 	}
 `;
@@ -216,59 +217,24 @@ const Main = ({ match }) => {
 	//here, we use the key to reset the form when it has been submitted
 	const [formKey, setFormKey] = React.useState(0);
 	const [errorMessage, setErrorMessage] = React.useState("");
+	const onCompleted = () => {
+		setFormKey(formKey + 1);
+		setErrorMessage("");
+		setSnackbarOpen(true);
+	};
+	const onError = error => {
+		console.log({ error });
+		setErrorMessage(error.message);
+	};
+
 	const [createMutation, { loading }] = useMutation(CREATE_MUTATION, {
-		onCompleted() {
-			setFormKey(formKey + 1);
-			setErrorMessage("");
-			setSnackbarOpen(true);
-		},
-		onError(error) {
-			console.log({ error });
-			setErrorMessage(error.message);
-		},
-		update(cache, { data: { createMeeting } }) {
-			cache.modify({
-				id: cache.identify(org),
-				fields: {
-					meetings(existingMeetings = [], { readField }) {
-						const newMeetingRef = cache.writeFragment({
-							data: createMeeting,
-							fragment: gql`
-								fragment NewMeeting on Meeting {
-									id
-									title
-									description
-									start
-									end
-								}
-							`
-						});
-						if (existingMeetings.some(ref => readField("id", ref) === createMeeting.id)) {
-							return existingMeetings;
-						} else {
-							return [...existingMeetings, newMeetingRef];
-						}
-					}
-				}
-			});
-		}
+		onCompleted,
+		onError
 	});
-	// loadingReucrring is quick fix to get around const
-	// also could use let, idk why I went with this option
-	// I feel like both r equally valid
+
 	const [createRecurringMutation, { loadingRecurring }] = useMutation(CREATE_RECURRING_MUTATION, {
-		onCompleted() {
-			setFormKey(formKey + 1);
-			setErrorMessage("");
-		},
-		onError(error) {
-			console.log({ error });
-			setErrorMessage(error.message);
-		},
-		update(cache) {
-			// too many variables involved based on child meetings...
-			cache.reset().then(() => org.refetch());
-		}
+		onCompleted,
+		onError
 	});
 	const [removeRecurringMutation] = useMutation(REMOVE_RECURRING_MUTATION, {
 		onCompleted() {
@@ -281,21 +247,26 @@ const Main = ({ match }) => {
 		}
 	});
 
-	const create = ({ title, description, date, endTime, checked, privacy, frequency, roomId, groupId }) => {
-		if (frequency) {
+	const create = ({ title, description, date, endTime, checked, privacy, weeks, roomId, groupId }) => {
+		if (weeks) {
 			createRecurringMutation({
 				variables: {
 					orgUrl: match.params.orgUrl,
 					title,
 					description: description || "",
-					start: date.format("HH:mm:ss.SSSZ"),
-					end: endTime.format("HH:mm:ss.SSSZ"),
+					start: date.toISOString(),
+					end: moment(
+						`${date.format("MM-DD-YYYY")} ${endTime.format("HH:mm")}`,
+						"MM-DD-YYYY HH:mm"
+					).toISOString(),
+					weeks,
+					notifyFaculty: checked,
 					privacy,
-					frequency,
-					dayOfWeek: date.day(),
 					roomId,
 					groupId
 				}
+			}).then(() => {
+				org.refetch();
 			});
 		} else {
 			createMutation({
