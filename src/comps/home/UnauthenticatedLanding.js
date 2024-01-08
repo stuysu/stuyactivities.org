@@ -36,9 +36,8 @@ const UnauthenticatedLanding = () => {
 
 				<Grid item xl={6} lg={6} md={6} sm={12} xs={12} sx={classes.textCell}>
 					<Typography variant={"h1"}>Welcome to StuyActivities</Typography>
-					<Typography variant={"h2"}>
-						We are currently experiencing a service outage, and hope to have it resolved by Monday
-						afternoon. Thank you for your patience.{" "}
+					<Typography variant={"h4"}>
+						Most service is restored, save for image hosting. We thank you for your patience.
 					</Typography>
 
 					<Typography paragraph>
