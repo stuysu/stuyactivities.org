@@ -36,6 +36,10 @@ const UnauthenticatedLanding = () => {
 
 				<Grid item xl={6} lg={6} md={6} sm={12} xs={12} sx={classes.textCell}>
 					<Typography variant={"h1"}>Welcome to StuyActivities</Typography>
+					<Typography variant={"h2"}>
+						We are currently experiencing a service outage, and hope to have it resolved by Monday
+						afternoon. Thank you for your patience.{" "}
+					</Typography>
 
 					<Typography paragraph>
 						This is an app for students of Stuyvesant High School to create and manage their clubs.
